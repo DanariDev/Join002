@@ -117,10 +117,12 @@ h1 {
     display: flex;
     gap: 16px;
     margin-top: 50px;
+    justify-content: center;
 }
 
 .btn-primary,
-.btn-secondary {
+.btn-secondary,
+.btn-sign-up {
     padding: 12px;
     border-radius: 8px;
     font-size: 16px;
@@ -130,30 +132,22 @@ h1 {
     color: white;
     height: 48px;
     border-radius: 8px;
+    border-color: #2A3647;
+    background-color: #2A3647;
     font-size: 16px;
     width: 318px;
 }
 
-.btn-primary {
-    background-color: #2A3647;
-    color: #ffffff;
-}
-
-
-.btn-secondary {
-    background-color: #2A3647;
-    color: #ffffff;
-    border-color: #2A3647;
-    border-radius: 8px;
-}
-
 .btn-secondary:hover,
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-sign-up:hover {
     background-color: #ffffff;
     color: #2A3647;
     border-color: #2A3647;
     border-radius: 8px;
 }
+
+
 
 .footer-links {
     position: absolute;
@@ -178,4 +172,29 @@ h1 {
     background-image: url("/assets/img/lock.png");
     background-repeat: no-repeat;
     background-position: 600px center;
+}
+
+.name_input {
+    background-image: url("/assets/img/person.png");
+    background-repeat: no-repeat;
+    background-position: 600px center;
+}
+
+.privacy_link {
+    text-decoration: none;
+    color: rgb(58, 120, 255);
+}
+
+.arrow_left {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    object-fit: contain;
+}
+
+.sign {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+
 }
