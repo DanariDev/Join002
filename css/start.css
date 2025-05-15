@@ -1,28 +1,43 @@
 body {
-    background-color: green;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
+      background-color: gray
+}
+
+img {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    top: 40px;
+    left: 80px;
+    animation: moveAndScaleImg 0.5s linear forwards;
 }
 
 div{
-    position: absolute;
     top: 0;
     left: 0;
     height: 100vh;
     width: 100vw;
-    display: flex;
-    align-items: center;
+    position: absolute;
     background-color: #F5F5F5;
-    justify-content: center;
-    animation: move 1.5s linear forwards;
+    animation: moveAndScaleDiv 0.6s linear forwards;
 }
 
-@keyframes move{
+@keyframes moveAndScaleImg {
     0% {
-    transform: translateX(0);
+        transform: scale(2.74) translate3d(14vw, 14vh, 0px);
     }
 
     100% {
-    transform: translateX(-100vw);
+        transform: scale(1) translate3d(0, 0, 0);
+    }
+}
+
+@keyframes moveAndScaleDiv{
+    0% {
+        transform: translate3d(0, 0, 0px);
+    }
+
+    100% {
+        transform: translate3d(-100vw, -100vh, 0);
+        opacity: 0;
     }
 }
