@@ -15,17 +15,29 @@ body {
 
 .top-right {
     position: absolute;
-    top: 24px;
-    right: 40px;
-    font-size: 14px;
+    top: 40px;
+    right: 80px;
+    font-size: 16px;
     color: #2A3647;
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 .sign-up-btn {
-    margin-left: 8px;
+    padding: 8px 16px;
     font-weight: 600;
     text-decoration: none;
-    color: #2A3647;
+    color: white;
+    background-color: #2A3647;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+}
+
+.sign-up-btn:hover {
+    background-color: #1c2b3b;
 }
 
 .logo {
@@ -40,7 +52,6 @@ body {
 .login-box {
     background: white;
     width: 652px;
-    /* vorher 422px */
     padding: 48px 40px;
     border-radius: 12px;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
@@ -76,7 +87,6 @@ h1 {
     margin-bottom: 24px;
 }
 
-
 .input-wrapper input {
     box-sizing: border-box;
     width: 100%;
@@ -92,12 +102,14 @@ h1 {
 .input-icon {
     position: absolute;
     top: 50%;
-    right: 16px;
+    right: 50px;
     transform: translateY(-50%);
     width: 24px;
     height: 24px;
     fill: #A8A8A8;
     background-color: #000000;
+    fill: #000;
+    color: #b91515;
     opacity: 1;
 }
 
@@ -115,7 +127,7 @@ h1 {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    border: none;
+    /* border: none; */
     color: white;
     height: 48px;
     border-radius: 8px;
@@ -127,7 +139,10 @@ h1 {
 }
 
 .btn-secondary {
-    background-color: #A8A8A8;
+    background-color: white;
+    color: #2A3647;
+    border-color: #2A3647;
+    border-radius: 8px;
 }
 
 .footer-links {
