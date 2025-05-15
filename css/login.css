@@ -136,10 +136,20 @@ h1 {
 
 .btn-primary {
     background-color: #2A3647;
+    color: #ffffff;
 }
 
+
 .btn-secondary {
-    background-color: white;
+    background-color: #2A3647;
+    color: #ffffff;
+    border-color: #2A3647;
+    border-radius: 8px;
+}
+
+.btn-secondary:hover,
+.btn-primary:hover {
+    background-color: #ffffff;
     color: #2A3647;
     border-color: #2A3647;
     border-radius: 8px;
