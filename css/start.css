@@ -1,9 +1,28 @@
-body{
-    height: 100vh;
+body {
+    background-color: green;
     margin: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: center;
-    font-family: 'Inter', sans-serif;
     background-color: #F5F5F5;
+    justify-content: center;
+    animation: move 1.5s linear forwards;
+}
+
+@keyframes move{
+    0% {
+    transform: translateX(0);
+    }
+
+    100% {
+    transform: translateX(-100vw);
+    }
 }
