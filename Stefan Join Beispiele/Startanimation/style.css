@@ -1,0 +1,33 @@
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .starting_logo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin: 2%;
+            width: 100vw;
+            height: 100vh;
+            animation: slideToLeftCorner 1s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .starting_logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        @keyframes slideToLeftCorner {
+            to {
+                width: 150px;
+                height: 150px;
+                top: 0;
+                left: 0;
+            }
+        }
