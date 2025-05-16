@@ -198,3 +198,8 @@ h1 {
     width: 60%;
 
 }
+
+.back_to_login{
+    display: flex;
+    align-items: center;
+}
