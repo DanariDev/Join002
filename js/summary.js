@@ -7,12 +7,10 @@ window.addEventListener("load", () => {
     const el = document.querySelector("#summary-greeting");
     const hour = new Date().getHours();
     let text = "Hello";
-  
     if (hour < 12) text = "Good morning";
     else if (hour < 18) text = "Good afternoon";
     else text = "Good evening";
-  
-    const name = "Guest";
+    const name = "Sofia Müller"; // Später dynamisch aus Firebase
     el.textContent = `${text}, ${name}`;
   }
   
