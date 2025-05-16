@@ -11,11 +11,58 @@
 <body>
   <div include-html="sidebar.html"></div>
 
-  <main style="margin-left: 232px; padding: 40px;">
-    <!-- Inhalt der Summary-Seite -->
+  <main class="summary-main">
+    <section class="summary-top">
+      <h1 class="summary-title">Join 360</h1>
+      <div class="summary-greeting">
+        <h2 id="summary-greeting">Good morning</h2>
+        <p id="summary-date"></p>
+      </div>
+    </section>
+
+    <section class="summary-content">
+      <div class="summary-box" id="summary-todo">
+        <div class="summary-icon">📋</div>
+        <div><h2>1</h2><span>To-do</span></div>
+      </div>
+      <div class="summary-box" id="summary-done">
+        <div class="summary-icon">✅</div>
+        <div><h2>2</h2><span>Done</span></div>
+      </div>
+      <div class="summary-box" id="summary-urgent">
+        <div class="summary-icon">⚠️</div>
+        <div><h2>1</h2><span>Urgent</span></div>
+      </div>
+      <div class="summary-box" id="summary-all-tasks">
+        <div class="summary-icon">📂</div>
+        <div><h2>4</h2><span>Tasks</span></div>
+      </div>
+    </section>
+
+    <section class="summary-bottom">
+      <div class="summary-deadline">
+        <p class="summary-deadline-date">October 16, 2022</p>
+        <h3 class="summary-deadline-title">Upcoming Deadline</h3>
+      </div>
+
+      <div class="summary-mini-boxes">
+        <div class="summary-mini-box">
+          <h2>5</h2>
+          <span>Tasks in Board</span>
+        </div>
+        <div class="summary-mini-box">
+          <h2>3</h2>
+          <span>In Progress</span>
+        </div>
+        <div class="summary-mini-box">
+          <h2>2</h2>
+          <span>Awaiting Feedback</span>
+        </div>
+      </div>
+    </section>
   </main>
 
   <script src="js/include-html.js"></script>
+  <script src="js/summary.js"></script>
 </body>
 </html>
-

@@ -1,3 +1,124 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f6f7fb;
+  }
+  
+  .summary-main {
+    margin-left: 232px;
+    padding: 40px;
+  }
+  
+  .summary-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  
+  .summary-title {
+    font-size: 48px;
+    color: #2a3647;
+    margin: 0;
+  }
+  
+  .summary-greeting h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #2a3647;
+  }
+  
+  .summary-greeting p {
+    color: #a0a0a0;
+    margin-top: 4px;
+  }
+  
+  .summary-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .summary-box {
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    padding: 20px;
+    width: 220px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: transform 0.2s;
+  }
+  
+  .summary-box:hover {
+    transform: scale(1.02);
+  }
+  
+  .summary-icon {
+    font-size: 32px;
+  }
+  
+  .summary-box h2 {
+    font-size: 28px;
+    margin: 0;
+  }
+  
+  .summary-box span {
+    color: gray;
+  }
+  
+  .summary-bottom {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  
+  .summary-deadline {
+    background-color: #2a3647;
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .summary-deadline-date {
+    margin: 0;
+    font-size: 18px;
+  }
+  
+  .summary-deadline-title {
+    font-size: 24px;
+    margin: 10px 0 0;
+  }
+  
+  .summary-mini-boxes {
+    display: flex;
+    gap: 20px;
+    flex: 2;
+    flex-wrap: wrap;
+  }
+  
+  .summary-mini-box {
+    background-color: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    width: 180px;
+  }
+  
+  .summary-mini-box h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #2a3647;
+  }
+  
+  .summary-mini-box span {
+    color: gray;
+  }
+  
 .summary-link{
     background-color: #1c2b3b;
 }
