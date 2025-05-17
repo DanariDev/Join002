@@ -1,0 +1,49 @@
+.topbar {
+    height: 72px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 32px;
+    border-bottom: 1px solid #e0e0e0;
+    position: sticky;
+    top: 0;
+    left: 232px;
+    right: 0;
+    z-index: 99;
+  }
+  
+  .topbar-title {
+    font-size: 16px;
+    font-weight: 400;
+    color: #2a3647;
+    padding-left: 350px;
+  }
+  
+  .topbar-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .topbar-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  .topbar-user {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f4f8;
+    color: #29abe2; /* Hellblau */
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000; /* Schwarzer Rand */
+    font-size: 14px;
+  }
+  
+  

@@ -2,143 +2,182 @@ body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, sans-serif;
     background-color: #f6f7fb;
-}
-
-.summary-main {
+  }
+  
+  .summary-main {
     margin-left: 232px;
     padding: 40px;
-}
-
-.summary-top {
+  }
+  
+  .summary-header {
+    margin-bottom: 16px;
+  }
+  
+  .summary-logo {
+    width: 120px;
+  }
+  
+  .summary-top {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
     margin-bottom: 32px;
     flex-wrap: wrap;
-}
-
-.summary-title {
+  }
+  
+  .summary-title {
     font-size: 48px;
     color: #2a3647;
     margin: 0;
     font-weight: bold;
-}
-
-.summary-greeting {
+  }
+  
+  .summary-greeting {
     text-align: right;
     min-width: 250px;
-}
-
-.summary-greeting h2 {
+  }
+  
+  .summary-greeting h2 {
     margin: 0;
     font-size: 24px;
     color: #2a3647;
-}
-
-.summary-greeting p {
+  }
+  
+  .summary-greeting p {
     color: #a0a0a0;
     margin-top: 4px;
     font-size: 16px;
-}
-
-.summary-content {
+  }
+  
+  .metrics-title {
+    font-size: 24px;
+    color: #2a3647;
+    margin-bottom: 16px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .metrics-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 50px;
+    height: 3px;
+    background-color: #29abe2;
+  }
+  
+  .summary-content {
     display: flex;
     flex-wrap: wrap;
     gap: 24px;
     margin-bottom: 32px;
-}
-
-.summary-box {
+  }
+  
+  .summary-box {
     background-color: white;
     border-radius: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    padding: 20px;
-    width: 200px;
+    padding: 24px;
+    width: 240px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 15px;
-    transition: transform 0.2s;
-}
-
-.summary-box:hover {
-    transform: scale(1.02);
-}
-
-.summary-icon {
-    font-size: 32px;
-}
-
-.summary-box h2 {
-    font-size: 28px;
+    justify-content: center;
+    gap: 10px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .summary-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  }
+  
+  .summary-box.urgent .summary-icon {
+    filter: hue-rotate(30deg);
+  }
+  
+  .summary-icon {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .summary-box h2 {
+    font-size: 40px;
     margin: 0;
-}
-
-.summary-box span {
+    color: #2a3647;
+  }
+  
+  .summary-box span {
     color: gray;
-}
-
-.summary-bottom {
+    font-size: 16px;
+  }
+  
+  .summary-bottom {
     display: flex;
     gap: 40px;
     flex-wrap: wrap;
     align-items: stretch;
-}
-
-.summary-deadline {
+  }
+  
+  .summary-deadline {
     background-color: #2a3647;
     color: white;
-    padding: 32px;
+    padding: 40px 32px;
     border-radius: 16px;
     flex: 1;
     min-width: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.summary-deadline-date {
+    text-align: center;
+  }
+  
+  .summary-deadline-date {
     margin: 0;
     font-size: 18px;
     opacity: 0.8;
-}
-
-.summary-deadline-title {
+  }
+  
+  .summary-deadline-title {
     font-size: 28px;
     margin-top: 8px;
     font-weight: bold;
-}
-
-.summary-mini-boxes {
+  }
+  
+  .summary-mini-boxes {
     display: flex;
     gap: 20px;
     flex: 2;
     flex-wrap: wrap;
     align-items: stretch;
-}
-
-.summary-mini-box {
+  }
+  
+  .summary-mini-box {
     background-color: white;
     padding: 24px;
     border-radius: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    width: 180px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-}
-
-.summary-mini-box h2 {
+    text-align: center;
+    height: 100%;
+  }
+  
+  .summary-mini-box h2 {
     margin: 0;
-    font-size: 24px;
+    font-size: 28px;
     color: #2a3647;
-}
-
-.summary-mini-box span {
+  }
+  
+  .summary-mini-box span {
     color: gray;
-}
-
-.summary-link {
+    font-size: 16px;
+  }
+  
+  .summary-link {
     background-color: #1c2b3b;
-}
-
+  }
+  
