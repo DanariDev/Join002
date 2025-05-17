@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,13 +9,97 @@
   <link rel="stylesheet" href="css/login.css" />
   <link rel="stylesheet" href="css/add-task.css">
 </head>
-<body>
-  <div include-html="sidebar.html"></div>
 
-  <main style="margin-left: 232px; padding: 40px;">
-    <!-- Inhalt der Add Task-Seite -->
-  </main>
+<body>
+
+  <div class="page-wrapper">
+
+    <div include-html="sidebar.html"></div>
+
+    <main class="add-task-main">
+
+      <div class="top-line">
+        <span>Kanban Project Management Tool</span>
+        <div class="top-line-links">
+          <a href="help.html"><img src="/assets/img/help.png" alt="Help"></a>
+          <a href="summary.html"><img src="/assets/img/placeholder.png" alt="Summary"></a>
+        </div>
+      </div>
+
+      <div>
+        <h1 class="add-task-title">Add Task</h1>
+
+        <form id="add-task-form">
+
+          <div class="add-task-form-left">
+
+            <label for="title">Title*</label>
+            <input id="title" name="title" class="title-input" type="text" placeholder="Enter a title" required>
+
+            <label for="description">Description</label>
+            <input id="description" name="description" class="description-input" type="text"
+              placeholder="Enter a description">
+
+            <label for="date">Due date*</label>
+            <input id="date" name="date" class="date-input" type="date" required>
+
+          </div>
+
+          <div class="grey-bar"></div>
+
+          <div class="add-task-form-right">
+
+            <span>Priority</span>
+            <div class="btns">
+              <button type="button" class="urgent-btn">Urgent</button>
+              <button type="button" class="medium-btn">Medium</button>
+              <button type="button" class="low-btn">Low</button>
+            </div>
+
+            <label for="contacts">Assigned to</label>
+            <select name="contacts" id="contacts">
+              <optgroup label="A">
+                <option value="Annemarie Jägermeier">Annemarie Jägermeier</option>
+                <option value="Alexander Fuß">Alexander Fuß</option>
+              </optgroup>
+              <optgroup label="B">
+                <option value="Bianca Richter">Bianca Richter</option>
+                <option value="Bernd Johnsen">Bernd Johnsen</option>
+              </optgroup>
+              <optgroup label="C">
+                <option value="Claus Meier">Claus Meier</option>
+                <option value="Carolina Push">Carolina Push</option>
+              </optgroup>
+            </select>
+
+            <label for="category">Category*</label>
+            <select name="category" id="category" required>
+              <option value="technical">Technical Task</option>
+              <option value="user">User Story</option>
+            </select>
+
+            <label for="subtask">Subtasks</label>
+            <div class="subtask-wrapper">
+              <input id="subtask" name="subtask" type="text" placeholder="Enter subtask">
+              <button type="button" class="subtask-button">+</button>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <div class="bottom-line">
+        <span>*This field is required</span>
+        <div class="bottom-line-btns">
+          <button type="button" class="btn-clear">Clear</button>
+          <button type="submit" class="btn-create-task">Create Task</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
 
   <script src="js/include-html.js"></script>
 </body>
+
 </html>

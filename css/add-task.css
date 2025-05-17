@@ -1,3 +1,148 @@
-.add-task-link{
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #F5F5F5;
+}
+
+.page-wrapper {
+
+    height: 100vh;
+}
+
+.add-task-main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 232px;
+    padding: 40px;
+    height: calc(100vh - 80px);
+}
+
+.top-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-line-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.add-task-link {
     background-color: #1c2b3b;
+}
+
+#add-task-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+
+
+.add-task-form-left,
+.add-task-form-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.grey-bar {
+    border: #727272 1px solid;
+    margin: 0 15px;
+
+}
+
+
+.btns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bottom-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-clear,
+.btn-create-task {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    /* border: none; */
+    color: white;
+    height: 48px;
+    border-radius: 8px;
+    border-color: #2A3647;
+    background-color: #2A3647;
+    font-size: 16px;
+    width: 318px;
+}
+
+.btn-clear:hover,
+.btn-create-task:hover {
+    background-color: #ffffff;
+    color: #2A3647;
+    border-color: #2A3647;
+    border-radius: 8px;
+}
+
+.urgent-btn,
+.medium-btn,
+.low-btn {
+    border: none;
+    border-radius: 10px;
+    height: 35px;
+    width: 75px;
+}
+
+
+
+.urgent-btn:hover {
+    box-shadow: 0 3px 3px 3px #525a6465;
+    background-color: rgb(201, 57, 57);
+    color: #ffffff;
+}
+
+.medium-btn:hover {
+    box-shadow: 0 3px 3px 3px #525a6465;
+    background-color: rgb(255, 117, 24);
+    color: #ffffff;
+}
+
+.low-btn:hover {
+    box-shadow: 0 3px 3px 3px #52645665;
+    background-color: rgb(93, 196, 62);
+    color: #ffffff;
+}
+
+.subtask-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
+
+.subtask-button {
+    border: none;
+    color: rgb(0, 0, 0);
+    padding: 0;
+    position: absolute;
+    right: 5px;
+    top: 10px;
+}
+
+input {
+    width: 99%;
+    height: 30px;
+}
+
+.description-input {
+    height: 100px;
 }
