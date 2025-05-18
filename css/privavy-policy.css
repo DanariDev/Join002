@@ -6,7 +6,11 @@ body {
     background-color: #f6f7f8;
     /* color: #000; */
     /* display: flex; */
-  }
+}
+
+.privacy-policy-link{
+  color: white !important;
+}
   
   /* .header {
     position: fixed;
