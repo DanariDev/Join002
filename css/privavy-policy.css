@@ -4,11 +4,11 @@ body {
     margin: 0;
     font-family: Arial, sans-serif;
     background-color: #f6f7f8;
-    color: #000;
-    display: flex;
+    /* color: #000; */
+    /* display: flex; */
   }
   
-  .header {
+  /* .header {
     position: fixed;
     top: 0;
     left: 232px;
@@ -22,9 +22,9 @@ body {
     font-size: 14px;
     font-weight: 400;
     z-index: 10;
-  }
+  } */
   
-  .sidebar {
+  /* .sidebar {
     width: 232px;
     height: 100vh;
     background-color: #2a3647;
@@ -37,32 +37,32 @@ body {
     top: 0;
     left: 0;
     align-items: center;
-  }
+  } */
   
-  .logo-section {
+  /* .logo-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
     margin-bottom: 20px;
-  }
+  } */
   
-  .logo-img {
+  /* .logo-img {
     width: 40px;
     height: 40px;
-  }
+  } */
   
-  .logo-text {
+  /* .logo-text {
     font-size: 14px;
     font-weight: 500;
-  }
+  } */
   
-  .nav-links {
+  /* .nav-links {
     margin-bottom: auto;
     padding-left: 0;
-  }
+  } */
   
-  .nav-link {
+  /* .nav-link {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -70,17 +70,17 @@ body {
     text-decoration: none;
     font-size: 14px;
     padding: 12px;
-  }
+  } */
   
-  .bottom-nav {
+  /* .bottom-nav {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding-left: 24px;
-  }
+  } */
   
-  .nav-item {
+  /* .nav-item {
     color: white;
     text-decoration: none;
     padding: 12px 16px;
@@ -89,34 +89,34 @@ body {
     font-size: 14px;
     border-radius: 8px;
   }
-  
-  .nav-item.active {
+   */
+  /* .nav-item.active {
     background-color: #091931;
-  }
+  } */
   
-  .main-content {
+  /* .main-content {
     margin-left: 232px;
     padding: 100px 60px 40px 60px;
     max-width: 900px;
-  }
+  } */
   
-  .main-content h1 {
+  /* .main-content h1 {
     font-size: 48px;
     font-weight: bold;
     margin-bottom: 30px;
-  }
+  } */
   
-  .main-content h2 {
+  /* .main-content h2 {
     font-size: 20px;
     font-weight: bold;
     margin-top: 40px;
     margin-bottom: 10px;
-  }
+  } */
   
-  .main-content p {
+  /* .main-content p {
     font-size: 14px;
     line-height: 1.6;
     margin-bottom: 20px;
     max-width: 800px;
-  }
+  } */
   
