@@ -11,6 +11,10 @@ body {
 .privacy-policy-link{
   color: white !important;
 }
+
+.icons-display-none{
+  display: none !important;
+}
   
   /* .header {
     position: fixed;
