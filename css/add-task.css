@@ -108,10 +108,73 @@ body {
     margin: 8px 0;
   }
   
-  .contacts-checkboxes label {
-    display: block;
-    margin-bottom: 4px;
+  .contacts-dropdown {
+    position: relative;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 6px;
+    background-color: white;
     font-size: 14px;
+    min-height: 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .contacts-dropdown-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .contact-chip {
+    background-color: #e0e0e0;
+    border-radius: 20px;
+    padding: 4px 10px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .contact-chip span {
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .dropdown-arrow {
+    margin-left: auto;
+    font-size: 16px;
+    color: #555;
+    padding-right: 4px;
+  }
+  
+  .contacts-dropdown-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  .contacts-dropdown-list.show {
+    display: block;
+  }
+  
+  .contacts-dropdown-list div {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .contacts-dropdown-list div:hover {
+    background-color: #f0f0f0;
   }
   
   .bottom-line {
@@ -140,4 +203,3 @@ body {
     background-color: white;
     color: #2a3647;
   }
-  

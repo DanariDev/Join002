@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Add Task</title>
-  <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/login.css">
   <link rel="stylesheet" href="css/add-task.css">
   <link rel="stylesheet" href="css/topbar.css">
-  <script src="../js/topbar.js"></script>
+  <script src="js/topbar.js"></script>
 </head>
 
 <body>
@@ -43,7 +43,11 @@
           </div>
 
           <label>Assigned to</label>
-          <div id="contacts-wrapper" class="contacts-checkboxes"></div>
+          <div class="contacts-dropdown" onclick="toggleDropdown()">
+            <div id="selected-contacts" class="selected-contacts"></div>
+            <div class="dropdown-arrow">▼</div>
+            <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+          </div>
 
           <label>Category*</label>
           <select id="category" required>
