@@ -1,59 +1,169 @@
-.board-container {
+/* ========== Allgemeines Layout für den Main-Container ========== */
+.board-main {
+    margin-left: 232px;
     padding: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    max-width: 1400px;
+    margin-right: auto;
+    margin-left: auto;
   }
   
+  /* ========== Header-Bereich mit Titel, Suche und Button ========== */
   .board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .board-title {
+    font-size: 36px;
+    margin: 0;
+  }
+  
+  .board-tools {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .search-input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    min-width: 200px;
+  }
+  
+  .add-task-button {
+    background-color: #2f3c50;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* ========== Board (4 Spalten) ========== */
+  .board {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  /* ========== Spalten-Design ========== */
+  .board-column {
+    background-color: #f9f9f9;
+    border-radius: 16px;
+    width: 22%;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  }
+  
+  .board-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   
-  .board-header h1 {
-    font-size: 48px;
-    color: #000;
-  }
-  
-  .add-task-btn {
-    padding: 12px 24px;
-    background-color: #2a3647;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
+  .add-task-icon {
+    font-size: 20px;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    color: #555;
   }
   
-  .add-task-btn:hover {
-    background-color: #29abe2;
+  /* ========== Karten / Aufgaben ========== */
+  .task-card {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
   }
   
-  .board-columns {
+  .task-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  /* ========== Labels ========== */
+  .task-label {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  
+  .label-technical {
+    background-color: #00c7a3;
+    color: white;
+  }
+  
+  .label-user-story {
+    background-color: #005eff;
+    color: white;
+  }
+  
+  /* ========== Texte ========== */
+  .task-title {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+  
+  .task-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 10px;
+  }
+  
+  /* ========== Fortschrittsbalken ========== */
+  .progress-bar-container {
+    background-color: #e0e0e0;
+    height: 6px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    background-color: #3b82f6;
+    width: 50%; /* Beispielwert – dynamisch über JS möglich */
+  }
+  
+  /* ========== Avatar + Footer ========== */
+  .task-footer {
     display: flex;
-    gap: 24px;
     justify-content: space-between;
+    align-items: center;
   }
   
-  .board-column {
-    background-color: #f6f7f8;
-    border-radius: 24px;
-    padding: 24px;
-    flex: 1;
-    min-width: 200px;
-  }
-  
-  .column-title {
-    font-size: 24px;
-    color: #2a3647;
-    margin-bottom: 16px;
-  }
-  
-  .task-list {
+  .avatar-group {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+  }
+  
+  .avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    font-size: 12px;
+    background-color: #ccc;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: -6px;
+    border: 2px solid white;
+  }
+  
+  .task-count {
+    font-size: 12px;
+    color: #888;
   }
   
