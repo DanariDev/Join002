@@ -18,17 +18,16 @@ body{
 
 .contacts-div{
     /* width: 30%; */
-    width: 320px;
+    width: 348px;
     background-color: white;
     display: flex;
     align-items: stretch;
     flex-direction: column;
+    max-height: 92vh;
 }
 
 .contacts-div button{
-    margin: 16px;
     border: 0;
-    padding: 12px 48px;
     border-radius: 8px;
     font-size: 16px;
     display: flex;
@@ -40,6 +39,8 @@ body{
     cursor: pointer;
     margin-bottom: 0;
     justify-content: center;
+    margin: 16px 40px 0;
+    padding: 12px 36px;
 }
 
 .contacts-div button img{
@@ -47,9 +48,14 @@ body{
     height: 20px;
 }
 
+.contacts-list-body{
+    overflow: auto;
+}
+
 .contacts-list{
     overflow: auto;
-    margin: 0 40px;
+    /* margin: 0 40px; */
+    margin: 0 25px 0 40px;
 }
 
 .alphabet-div{
@@ -63,11 +69,11 @@ body{
 .separate-contacts-list{
     height: 1px;
     background-color: #dcdcdc;
-    margin: 20px 0;
+    margin: 20px 0 8px 0;
 }
 
 .group-list{
-    margin-left: 24px;
+    /* margin-left: 16px; */
     display: flex;
     gap: 16px;
     flex-direction: column;
@@ -77,6 +83,9 @@ body{
     display: flex;
     align-items: center;
     gap: 32px;
+    cursor: pointer;
+    padding: 12px;
+    border-radius: 12px;
 }
 
 .img-div{
@@ -88,6 +97,7 @@ body{
     justify-content: center;
     font-size: 12px;
     color: white;
+    border: 2px solid white;
 }
 
 .name-email-div{
