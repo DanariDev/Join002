@@ -1,148 +1,143 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background-color: #F5F5F5;
-}
-
-.page-wrapper {
-
+    background-color: #f5f5f5;
+  }
+  
+  .page-wrapper {
     height: 100vh;
-}
-
-.add-task-main {
+  }
+  
+  .add-task-main {
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    gap: 32px;
     margin-left: 232px;
     padding: 40px;
     height: calc(100vh - 80px);
-}
-
-.top-line {
+  }
+  
+  .add-task-title {
+    font-size: 32px;
+    color: #2a3647;
+  }
+  
+  #add-task-form {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.top-line-links {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.add-task-link {
-    background-color: #1c2b3b;
-}
-
-#add-task-form {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-
-
-.add-task-form-left,
-.add-task-form-right {
+    gap: 32px;
+  }
+  
+  .add-task-form-left,
+  .add-task-form-right {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-}
-
-.grey-bar {
-    border: #727272 1px solid;
-    margin: 0 15px;
-
-}
-
-
-.btns {
+    gap: 16px;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    height: 40px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+  }
+  
+  .description-input {
+    height: 100px;
+    resize: none;
+  }
+  
+  .grey-bar {
+    width: 1px;
+    background-color: #ccc;
+  }
+  
+  .btns {
     display: flex;
-    justify-content: space-between;
-}
-
-.bottom-line {
+    gap: 12px;
+  }
+  
+  .urgent-btn,
+  .medium-btn,
+  .low-btn {
+    flex: 1;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  
+  .urgent-btn:hover {
+    background-color: rgb(201, 57, 57);
+    color: white;
+  }
+  
+  .medium-btn:hover {
+    background-color: rgb(255, 117, 24);
+    color: white;
+  }
+  
+  .low-btn:hover {
+    background-color: rgb(93, 196, 62);
+    color: white;
+  }
+  
+  .subtask-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  
+  .subtask-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .subtask-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 8px 0;
+  }
+  
+  .contacts-checkboxes label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  
+  .bottom-line {
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-.btn-clear,
-.btn-create-task {
+    margin-top: 24px;
+  }
+  
+  .btn-clear,
+  .btn-create-task {
     padding: 12px;
+    width: 160px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    /* border: none; */
+    border: 2px solid #2a3647;
+    background-color: #2a3647;
     color: white;
-    height: 48px;
-    border-radius: 8px;
-    border-color: #2A3647;
-    background-color: #2A3647;
-    font-size: 16px;
-    width: 318px;
-}
-
-.btn-clear:hover,
-.btn-create-task:hover {
-    background-color: #ffffff;
-    color: #2A3647;
-    border-color: #2A3647;
-    border-radius: 8px;
-}
-
-.urgent-btn,
-.medium-btn,
-.low-btn {
-    border: none;
-    border-radius: 10px;
-    height: 35px;
-    width: 75px;
-}
-
-
-
-.urgent-btn:hover {
-    box-shadow: 0 3px 3px 3px #525a6465;
-    background-color: rgb(201, 57, 57);
-    color: #ffffff;
-}
-
-.medium-btn:hover {
-    box-shadow: 0 3px 3px 3px #525a6465;
-    background-color: rgb(255, 117, 24);
-    color: #ffffff;
-}
-
-.low-btn:hover {
-    box-shadow: 0 3px 3px 3px #52645665;
-    background-color: rgb(93, 196, 62);
-    color: #ffffff;
-}
-
-.subtask-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-}
-
-
-.subtask-button {
-    border: none;
-    color: rgb(0, 0, 0);
-    padding: 0;
-    position: absolute;
-    right: 5px;
-    top: 10px;
-}
-
-input {
-    width: 99%;
-    height: 30px;
-}
-
-.description-input {
-    height: 100px;
-}
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .btn-clear:hover,
+  .btn-create-task:hover {
+    background-color: white;
+    color: #2a3647;
+  }
+  
