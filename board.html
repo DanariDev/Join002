@@ -16,7 +16,43 @@
   <div include-html="templates/topbar.html"></div>
 
   <main style="margin-left: 232px; padding: 40px;">
-    <!-- Inhalt der Board-Seite -->
+    <main class="board-container">
+      <div class="board-header">
+        <h1>Board</h1>
+        <button class="add-task-btn">+ Add Task</button>
+      </div>
+    
+      <div class="board-columns">
+        <div class="board-column">
+          <h2 class="column-title">To do</h2>
+          <div class="task-list" id="todo-tasks">
+            <!-- Tasks mit Status 'to-do' -->
+          </div>
+        </div>
+    
+        <div class="board-column">
+          <h2 class="column-title">In progress</h2>
+          <div class="task-list" id="in-progress-tasks">
+            <!-- Tasks mit Status 'in-progress' -->
+          </div>
+        </div>
+    
+        <div class="board-column">
+          <h2 class="column-title">Awaiting Feedback</h2>
+          <div class="task-list" id="awaiting-feedback-tasks">
+            <!-- Tasks mit Status 'awaiting-feedback' -->
+          </div>
+        </div>
+    
+        <div class="board-column">
+          <h2 class="column-title">Done</h2>
+          <div class="task-list" id="done-tasks">
+            <!-- Tasks mit Status 'done' -->
+          </div>
+        </div>
+      </div>
+    </main>
+    
   </main>
 
   <script src="js/include-html.js"></script>
