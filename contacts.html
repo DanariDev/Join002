@@ -10,13 +10,27 @@
   <link rel="stylesheet" href="css/topbar.css">
 
   <script src="../js/topbar.js"></script>
+  <script src="./js/contacts.js"></script>
 </head>
-<body>
+<body onload="contactsList()">
   <div include-html="sidebar.html"></div>
   <div include-html="templates/topbar.html"></div>
 
-  <main style="margin-left: 232px; padding: 40px;">
+  <main class="main" style="margin-left: 232px; padding: 40px;">
     <!-- Inhalt der Contacts-Seite -->
+     <div class="contacts-div">
+      <Button>Add new Contact <img src="" alt=""></Button>
+      <div class="contacts-list" id="contacts-listID"></div>
+     </div>
+
+     <div class="contact-details-div">
+      <div class="contact-details-haeder">
+        <h1>Contacts</h1>
+        <div class="separate-contact-details-haeder"></div>
+        <Span>Better with a team</Span>
+      </div>
+      <div id="contacts-details"></div>
+     </div>
   </main>
 
   <script src="js/include-html.js"></script>
