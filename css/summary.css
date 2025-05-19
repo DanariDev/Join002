@@ -1,183 +1,203 @@
 body {
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, sans-serif;
-    background-color: #f6f7fb;
-  }
-  
-  .summary-main {
-    margin-left: 232px;
-    padding: 40px;
-  }
-  
-  .summary-header {
-    margin-bottom: 16px;
-  }
-  
-  .summary-logo {
-    width: 120px;
-  }
-  
-  .summary-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 32px;
-    flex-wrap: wrap;
-  }
-  
-  .summary-title {
-    font-size: 48px;
-    color: #2a3647;
-    margin: 0;
-    font-weight: bold;
-  }
-  
-  .summary-greeting {
-    text-align: right;
-    min-width: 250px;
-  }
-  
-  .summary-greeting h2 {
-    margin: 0;
-    font-size: 24px;
-    color: #2a3647;
-  }
-  
-  .summary-greeting p {
-    color: #a0a0a0;
-    margin-top: 4px;
-    font-size: 16px;
-  }
-  
-  .metrics-title {
-    font-size: 24px;
-    color: #2a3647;
-    margin-bottom: 16px;
-    position: relative;
-    display: inline-block;
-  }
-  
-  .metrics-title::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -4px;
-    width: 50px;
-    height: 3px;
-    background-color: #29abe2;
-  }
-  
-  .summary-content {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-    margin-bottom: 32px;
-  }
-  
-  .summary-box {
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-    padding: 24px;
-    width: 240px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-  
-  .summary-box:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-  }
-  
-  .summary-box.urgent .summary-icon {
-    filter: hue-rotate(30deg);
-  }
-  
-  .summary-icon {
-    width: 48px;
-    height: 48px;
-  }
-  
-  .summary-box h2 {
-    font-size: 40px;
-    margin: 0;
-    color: #2a3647;
-  }
-  
-  .summary-box span {
-    color: gray;
-    font-size: 16px;
-  }
-  
-  .summary-bottom {
-    display: flex;
-    gap: 40px;
-    flex-wrap: wrap;
-    align-items: stretch;
-  }
-  
-  .summary-deadline {
-    background-color: #2a3647;
-    color: white;
-    padding: 40px 32px;
-    border-radius: 16px;
-    flex: 1;
-    min-width: 280px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-  }
-  
-  .summary-deadline-date {
-    margin: 0;
-    font-size: 18px;
-    opacity: 0.8;
-  }
-  
-  .summary-deadline-title {
-    font-size: 28px;
-    margin-top: 8px;
-    font-weight: bold;
-  }
-  
-  .summary-mini-boxes {
-    display: flex;
-    gap: 20px;
-    flex: 2;
-    flex-wrap: wrap;
-    align-items: stretch;
-  }
-  
-  .summary-mini-box {
-    background-color: white;
-    padding: 24px;
-    border-radius: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    width: 200px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    height: 100%;
-  }
-  
-  .summary-mini-box h2 {
-    margin: 0;
-    font-size: 28px;
-    color: #2a3647;
-  }
-  
-  .summary-mini-box span {
-    color: gray;
-    font-size: 16px;
-  }
-  
-  .summary-link {
-    background-color: #1c2b3b;
-  }
-  
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background-color: #f6f7fb;
+}
+
+.summary-main {
+  margin-left: 232px;
+  padding: 40px;
+}
+
+.summary-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.summary-header h1 {
+  font-size: 36px;
+  color: #2a3647;
+  margin: 0;
+}
+
+.metrics-divider {
+  width: 2px;
+  height: 36px;
+  background-color: #29abe2;
+  border-radius: 2px;
+  pointer-events: none;
+  user-select: none;
+  outline: none;
+}
+
+.metrics-title {
+  font-size: 20px;
+  font-weight: 400;
+  color: #647187;
+}
+
+.summary-container {
+  display: flex;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.summary-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.flex-row {
+  display: flex;
+  gap: 16px;
+}
+
+.summary-box {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  box-sizing: border-box;
+  text-align: center;
+  flex-direction: column;
+}
+
+.todo, .done {
+  width: 260px;
+  height: 140px;
+  flex-direction: row;
+  justify-content: center;
+  text-align: left;
+  align-items: center;
+}
+
+.todo img, .done img {
+  margin-right: 12px;
+}
+
+.todo .metric, .done .metric {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.urgent {
+  width: 536px;
+  height: 140px;
+  flex-direction: row;
+  justify-content: space-around;
+  text-align: left;
+  padding-left: 32px;
+  padding-right: 32px;
+  gap: 6px;
+}
+
+.flex-row.mini-row {
+  display: flex;
+  gap: 16px;
+  width: 536px;
+  justify-content: space-between;
+}
+
+.summary-box.mini {
+  flex-direction: column;
+  height: 140px;
+  justify-content: center;
+  width: 160px;
+}
+
+.summary-box.mini h2 {
+  font-size: 50px;
+  margin: 0;
+  color: #2a3647;
+}
+
+.summary-greeting {
+  height: 140px;
+  padding: 0 12px;
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: start;
+  align-self: center;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+#summary-greeting {
+  font-size: 50px;
+  font-weight: bold;
+  color: #2a3647;
+  line-height: 1.2;
+}
+
+#summary-greeting span {
+  color: #29abe2;
+}
+
+.summary-box h2 {
+  font-size: 24px;
+  margin: 0;
+  color: #2a3647;
+}
+
+.summary-box span {
+  font-size: 13px;
+  color: #808080;
+}
+
+.icon-placeholder, .summary-box img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background-color: #2a3647;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+}
+
+.icon-placeholder.red {
+  background-color: #ff3d00;
+}
+
+.urgent-left, .urgent-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.urgent-left {
+  flex-direction: row;
+  align-items: center;
+  gap: 6px;
+}
+
+.divider {
+  width: 1px;
+  height: 100px;
+  background-color: #e0e0e0;
+  margin: 0 16px;
+}
+
+#deadline-date {
+  font-size: 13px;
+  color: #2a3647;
+  font-weight: bold;
+}
+
+.deadline-title {
+  font-size: 11px;
+  color: gray;
+}

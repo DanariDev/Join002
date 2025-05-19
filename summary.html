@@ -5,65 +5,80 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Summary</title>
   <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/login.css" />
-  <link rel="stylesheet" href="css/summary.css">
-  <link rel="stylesheet" href="css/topbar.css">
-
-  <script src="../js/topbar.js"></script>
+  <link rel="stylesheet" href="css/topbar.css" />
+  <link rel="stylesheet" href="css/summary.css" />
 </head>
 <body>
   <div include-html="sidebar.html"></div>
   <div include-html="templates/topbar.html"></div>
 
   <main class="summary-main">
-    <section class="summary-top">
-      <h1 class="summary-title">Join 360</h1>
+    <div class="summary-header">
+      <h1>Join 360</h1>
+      <div class="metrics-divider"></div>
+      <span class="metrics-title">Key Metrics at a Glance</span>
+    </div>
+    
+    
+
+
+    <div class="summary-container">
+      <!-- Linke Seite -->
+      <div class="summary-left">
+        <div class="flex-row">
+          <div class="summary-box todo">
+            <img src="#" alt="">
+            <div class="metric">
+              <h2>1</h2>
+              <span>To-do</span>
+            </div>
+          </div>
+          <div class="summary-box done">
+            <img src="#" alt="">
+            <div class="metric">
+              <h2>1</h2>
+              <span>Done</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-box urgent">
+          <div class="urgent-left">
+            <img src="#" alt="">
+            <div class="metric">
+              <h2>1</h2>
+              <span>Urgent</span>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="urgent-right">
+            <p id="deadline-date">October 16, 2022</p>
+            <span class="deadline-title">Upcoming Deadline</span>
+          </div>
+        </div>
+
+        <div class="flex-row mini-row">
+
+          <div class="summary-box mini">
+            <h2>5</h2>
+            <span>Tasks in Board</span>
+          </div>
+          <div class="summary-box mini">
+            <h2>2</h2>
+            <span>In Progress</span>
+          </div>
+          <div class="summary-box mini">
+            <h2>2</h2>
+            <span>Awaiting Feedback</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rechte Seite -->
       <div class="summary-greeting">
         <h2 id="summary-greeting">Good morning</h2>
-        <p id="summary-date"></p>
       </div>
-    </section>
-
-    <section class="summary-content">
-      <div class="summary-box" id="summary-todo">
-        <div class="summary-icon">📋</div>
-        <div><h2>1</h2><span>To-do</span></div>
-      </div>
-      <div class="summary-box" id="summary-done">
-        <div class="summary-icon">✅</div>
-        <div><h2>2</h2><span>Done</span></div>
-      </div>
-      <div class="summary-box" id="summary-urgent">
-        <div class="summary-icon">⚠️</div>
-        <div><h2>1</h2><span>Urgent</span></div>
-      </div>
-      <div class="summary-box" id="summary-all-tasks">
-        <div class="summary-icon">📂</div>
-        <div><h2>4</h2><span>Tasks</span></div>
-      </div>
-    </section>
-
-    <section class="summary-bottom">
-      <div class="summary-deadline">
-        <p class="summary-deadline-date">October 16, 2022</p>
-        <h3 class="summary-deadline-title">Upcoming Deadline</h3>
-      </div>
-
-      <div class="summary-mini-boxes">
-        <div class="summary-mini-box">
-          <h2>5</h2>
-          <span>Tasks in Board</span>
-        </div>
-        <div class="summary-mini-box">
-          <h2>3</h2>
-          <span>In Progress</span>
-        </div>
-        <div class="summary-mini-box">
-          <h2>2</h2>
-          <span>Awaiting Feedback</span>
-        </div>
-      </div>
-    </section>
+    </div>
   </main>
 
   <script src="js/include-html.js"></script>
