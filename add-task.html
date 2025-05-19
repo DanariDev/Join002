@@ -22,13 +22,13 @@
 
       <form id="add-task-form">
         <div class="add-task-form-left">
-          <label>Title*</label>
+          <label class="required">Title</label>
           <input class="title-input" type="text" id="title" placeholder="Enter a title" required>
 
           <label>Description</label>
           <input class="description-input" type="text" id="description" placeholder="Enter a description">
 
-          <label>Due date*</label>
+          <label class="required">Due date</label>
           <input class="date-input" type="date" id="date" required>
         </div>
 
@@ -37,9 +37,15 @@
         <div class="add-task-form-right">
           <span>Priority</span>
           <div class="btns">
-            <button type="button" class="urgent-btn">Urgent</button>
-            <button type="button" class="medium-btn">Medium</button>
-            <button type="button" class="low-btn">Low</button>
+            <button type="button" class="urgent-btn">Urgent
+              <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon">
+            </button>
+            <button type="button" class="medium-btn">Medium
+              <img src="assets/img/medium-btn-icon.png" alt="medium-icon">
+            </button>
+            <button type="button" class="low-btn">Low
+              <img src="assets/img/low-btn-icon.png" alt="low-icon">
+            </button>
           </div>
 
           <label>Assigned to</label>
@@ -49,8 +55,9 @@
             <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
           </div>
 
-          <label>Category*</label>
+          <label class="required">Category</label>
           <select id="category" required>
+            <option value="" disabled selected>Select task category</option>
             <option value="technical">Technical Task</option>
             <option value="user">User Story</option>
           </select>
@@ -61,16 +68,20 @@
             <button type="button" class="subtask-button" onclick="addSubtask()">+</button>
           </div>
           <ul class="subtask-list"></ul>
+
+          <div class="bottom-line-btns">
+            <button type="button" class="btn-clear">Clear</button>
+            <button type="submit" class="btn-create-task" onclick="createTask()">Create Task</button>
+          </div>
         </div>
+
+
       </form>
 
-      <div class="bottom-line">
-        <span>*This field is required</span>
-        <div class="bottom-line-btns">
-          <button type="button" class="btn-clear">Clear</button>
-          <button type="button" class="btn-create-task" onclick="createTask()">Create Task</button>
-        </div>
-      </div>
+
+      <span class="required-explain">This field is required</span>
+
+
     </main>
   </div>
 
