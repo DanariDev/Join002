@@ -2,10 +2,12 @@ import { auth, db } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
   setDoc,
   doc,
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
 function signup() {
@@ -28,12 +30,13 @@ function signup() {
     .then((cred) => {
       return setDoc(doc(db, "users", cred.user.uid), {
         name,
-        email
+        email,
+      }).then(() => {
+        localStorage.setItem("isGuest", "false");
+        localStorage.setItem("userName", name);
+        alert("Registrierung erfolgreich!");
+        window.location.href = "summary.html";
       });
-    })
-    .then(() => {
-      alert("Registrierung erfolgreich!");
-      window.location.href = "summary.html";
     })
     .catch((e) => alert("Fehler bei Registrierung:\n" + e.message));
 }
@@ -48,8 +51,30 @@ function login() {
   }
 
   signInWithEmailAndPassword(auth, email, pass)
-    .then(() => window.location.href = "summary.html")
-    .catch(e => alert("Login fehlgeschlagen:\n" + e.message));
+    .then(async (cred) => {
+      const userDoc = await getDoc(doc(db, "users", cred.user.uid));
+      const name = userDoc.exists() ? userDoc.data().name : "User";
+      localStorage.setItem("isGuest", "false");
+      localStorage.setItem("userName", name);
+      window.location.href = "summary.html";
+    })
+    .catch((e) => alert("Login fehlgeschlagen:\n" + e.message));
+}
+
+export function loginAsGuest() {
+  localStorage.setItem("isGuest", "true");
+  localStorage.removeItem("userName");
+  window.location.href = "summary.html";
+}
+
+export function logout() {
+  signOut(auth)
+    .then(() => {
+      localStorage.removeItem("isGuest");
+      localStorage.removeItem("userName");
+      window.location.href = "login.html";
+    })
+    .catch((e) => alert("Fehler beim Logout:\n" + e.message));
 }
 
 function init() {
@@ -62,7 +87,13 @@ function init() {
     if (path.includes("register")) signup();
     if (path.includes("login")) login();
     if (path.includes("index")) login();
-  };
+  }
+
+ 
+  const guestBtn = document.getElementById("guestLogin");
+  if (guestBtn) {
+    guestBtn.addEventListener("click", loginAsGuest);
+  }
 }
 
 init();
