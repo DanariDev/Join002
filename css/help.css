@@ -1,3 +1,24 @@
 .help-button{
     display: none;
 }
+
+.list-div{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+    margin: 16px 0;
+}
+
+.listing-point-div{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.description-div h3{
+    margin: 0;
+}
+
+.join-color-span{
+    color: #29abe2;
+}
