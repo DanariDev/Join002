@@ -4,6 +4,10 @@ body {
   background-color: #f6f7fb;
 }
 
+.summary-link{
+    background-color: #1c2b3b;
+}
+
 .summary-main {
   margin-left: 232px;
   padding: 40px;
