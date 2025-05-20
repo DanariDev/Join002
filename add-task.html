@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Add Task</title>
-  <link rel="stylesheet" href="css/sidebar.css">
-  <link rel="stylesheet" href="css/login.css">
-  <link rel="stylesheet" href="css/add-task.css">
-  <link rel="stylesheet" href="css/topbar.css">
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/add-task.css" />
+  <link rel="stylesheet" href="css/topbar.css" />
   <script src="js/topbar.js"></script>
 </head>
 
@@ -22,14 +22,14 @@
 
       <form id="add-task-form">
         <div class="add-task-form-left">
-          <label class="required">Title</label>
-          <input class="title-input" type="text" id="title" placeholder="Enter a title" required>
+          <label class="required" for="title">Title</label>
+          <input class="title-input" type="text" id="title" placeholder="Enter a title" required />
 
-          <label>Description</label>
-          <input class="description-input" type="text" id="description" placeholder="Enter a description">
+          <label for="description">Description</label>
+          <input class="description-input" type="text" id="description" placeholder="Enter a description" />
 
-          <label class="required">Due date</label>
-          <input class="date-input" type="date" id="date" required>
+          <label class="required" for="date">Due date</label>
+          <input class="date-input" type="date" id="date" required />
         </div>
 
         <div class="grey-bar"></div>
@@ -38,49 +38,43 @@
           <span>Priority</span>
           <div class="btns">
             <button type="button" class="urgent-btn">Urgent
-              <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon">
+              <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon" />
             </button>
-            <button type="button" class="medium-btn">Medium
-              <img src="assets/img/medium-btn-icon.png" alt="medium-icon">
+            <button type="button" class="medium-btn active">Medium
+              <img src="assets/img/medium-btn-icon.png" alt="medium-icon" />
             </button>
             <button type="button" class="low-btn">Low
-              <img src="assets/img/low-btn-icon.png" alt="low-icon">
+              <img src="assets/img/low-btn-icon.png" alt="low-icon" />
             </button>
           </div>
 
-          <label>Assigned to</label>
-          <select id="category" required>
-            <option value="" disabled selected>Select contacts to assign</option>
-            <option value="contacts">Contacts</option>
+          <label class="required" for="assigned-to">Assigned to</label>
+          <select id="assigned-to" required>
+            <option value="" disabled selected>Select a contact to assign</option>
           </select>
 
-          <label class="required">Category</label>
+          <label class="required" for="category">Category</label>
           <select id="category" required>
             <option value="" disabled selected>Select task category</option>
             <option value="technical">Technical Task</option>
             <option value="user">User Story</option>
           </select>
 
-          <label>Subtasks</label>
+          <label for="subtask">Subtasks</label>
           <div class="subtask-wrapper">
-            <input type="text" id="subtask" placeholder="Enter subtask">
-            <button type="button" class="subtask-button" onclick="addSubtask()">+</button>
+            <input type="text" id="subtask" placeholder="Enter subtask" autocomplete="off" />
+            <button type="button" class="subtask-button">+</button>
           </div>
           <ul id="subtask-list"></ul>
 
           <div class="bottom-line-btns">
-            <button type="button" class="btn-clear">Clear</button>
-            <button type="submit" class="btn-create-task" onclick="createTask()">Create Task</button>
+            <button type="reset" class="btn-clear">Clear</button>
+            <button type="submit" class="btn-create-task">Create Task</button>
           </div>
         </div>
-
-
       </form>
 
-
       <span class="required-explain">This field is required</span>
-
-
     </main>
   </div>
 
