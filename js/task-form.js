@@ -101,7 +101,7 @@ async function createTask(event) {
     document.getElementById("add-task-form").reset();
     subtasks = [];
     renderSubtasks();
-    updateButtonState(); // Reset Button Zustand
+    updateButtonState();
   } catch (error) {
     console.error("Fehler beim Speichern der Aufgabe:", error);
     alert("Fehler beim Speichern. Bitte versuche es erneut.");
@@ -119,24 +119,42 @@ function updateButtonState() {
   createBtn.classList.toggle("disabled", !allFilled);
 }
 
-// Event Listener
-document.querySelectorAll(".btns button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".btns button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    updateButtonState();
+function updatePriorityButtons() {
+  const buttons = [
+    { id: "urgent-btn", class: "urgent-btn-active" },
+    { id: "medium-btn", class: "medium-btn-active" },
+    { id: "low-btn", class: "low-btn-active" }
+  ];
+
+  buttons.forEach(btn => {
+    const el = document.getElementById(btn.id);
+    el.addEventListener("click", () => {
+      buttons.forEach(b => {
+        document.getElementById(b.id).classList.remove(b.class);
+      });
+      el.classList.add(btn.class);
+    });
   });
-});
+}
+
 
 ["#title", "#date", "#category", "#assigned-to"].forEach(selector => {
   document.querySelector(selector).addEventListener("input", updateButtonState);
 });
 
+
 document.getElementById("add-task-form").addEventListener("submit", createTask);
 document.querySelector(".subtask-button").addEventListener("click", addNewSubtask);
 
-// Initialzustand
+
+document.getElementById("clear-btn").addEventListener("click", () => {
+  createBtn.disabled = true;
+  createBtn.classList.add("disabled");
+});
+
+// Initialisierung
 createBtn.disabled = true;
 createBtn.classList.add("disabled");
 
 loadContacts();
+updatePriorityButtons();
