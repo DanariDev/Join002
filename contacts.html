@@ -18,21 +18,41 @@
 
   <main class="main" style="margin-left: 232px; padding: 40px;">
     <!-- Inhalt der Contacts-Seite -->
-     <div class="contacts-div">
+    <div class="contacts-div">
       <Button>Add new Contact <img src="" alt=""></Button>
       <div class="contacts-list-body">
         <div class="contacts-list" id="contacts-listID"></div>
       </div>
-     </div>
+    </div>
 
-     <div class="contact-details-div">
+    <div class="contact-details-div">
       <div class="contact-details-haeder">
         <h1>Contacts</h1>
         <div class="separate-contact-details-haeder"></div>
         <Span>Better with a team</Span>
       </div>
-      <div id="contacts-details"></div>
-     </div>
+      <div class="contacts-details-contents" id="contacts-details-contentsID">
+        <div class="img-name-div">
+          <div class="img-details-div" id="img-details-divID"></div>
+          <div>
+            <Span id="details-nameID">Name</Span>
+            <div class="edit-delete-div">
+              <a href=""><img src="" alt="">Edit</a>
+              <a href=""><img src="" alt="">Delete</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-information-div">
+          <span>Contact information</span>
+          <div class="email-phone-div">
+            <span class="email-phone-title">Email</span>
+            <span class="email-phone-value email-value" id="details-emailID">Email-address</span>
+            <span class="email-phone-title">Phone</span>
+            <span class="email-phone-value">phone-number</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script src="js/include-html.js"></script>
