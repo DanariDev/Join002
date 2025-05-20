@@ -1,11 +1,7 @@
 // Beispiel-Daten 
 let contacts = [
     "Anton Mayer", "Anja Schulz", "Benedikt Ziegler", "David Eisberg", 
-    "Eva Fischer", "Emanuel Mauer", "Vorname Nachname1","Vorname Nachname2",
-    "Vorname Nachname3","Vorname Nachname4","Vorname Nachname5","Vorname Nachname6",
-    "Vorname Nachname7","Vorname Nachname8","Vorname Nachname9","Vorname Nachname10",
-    "Vorname Nachname11","Vorname Nachname12","Vorname Nachname13","Vorname Nachname14",
-    "Vorname Nachname15","Vorname Nachname16","Vorname Nachname17","Vorname Nachname18"
+    "Eva Fischer", "Emanuel Mauer",
 ];
 
 let groupedContacts = [];
