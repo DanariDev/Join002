@@ -1,60 +1,67 @@
-import { auth } from "./firebase-config.js";
+import { auth, db } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-  signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-
 import {
-  getFirestore,
-  doc,
   setDoc,
+  doc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-const db = getFirestore();
-
 function signup() {
-  let name = document.querySelector(".name_input");
-  let email = document.querySelector(".email_input");
-  let pass = document.querySelectorAll(".password_input")[0];
-  if (!name || !email || !pass) return;
-  createUserWithEmailAndPassword(auth, email.value, pass.value)
+  const name = document.querySelector(".name_input")?.value.trim();
+  const email = document.querySelector(".email_input")?.value.trim();
+  const pass = document.querySelector(".password_input")?.value.trim();
+  const repeat = document.querySelector(".password_repeat_input")?.value.trim();
+
+  if (!name || !email || !pass || !repeat) {
+    alert("Bitte alle Felder ausfüllen!");
+    return;
+  }
+
+  if (pass !== repeat) {
+    alert("Passwörter stimmen nicht überein!");
+    return;
+  }
+
+  createUserWithEmailAndPassword(auth, email, pass)
     .then((cred) => {
       return setDoc(doc(db, "users", cred.user.uid), {
-        name: name.value,
-        email: email.value,
+        name,
+        email
       });
     })
     .then(() => {
       alert("Registrierung erfolgreich!");
-      window.location.href = "index.html";
+      window.location.href = "summary.html";
     })
-    .catch((e) => alert("Fehler:\n" + e.message));
+    .catch((e) => alert("Fehler bei Registrierung:\n" + e.message));
 }
 
 function login() {
-  let email = document.querySelector(".email_input");
-  let pass = document.querySelector(".password_input");
-  if (!email || !pass) return;
-  signInWithEmailAndPassword(auth, email.value, pass.value)
-    .then(() => (window.location.href = "summary.html"))
-    .catch((e) => alert("Login fehlgeschlagen:\n" + e.message));
+  const email = document.querySelector(".email_input")?.value.trim();
+  const pass = document.querySelector(".password_input")?.value.trim();
+
+  if (!email || !pass) {
+    alert("Bitte E-Mail und Passwort eingeben!");
+    return;
+  }
+
+  signInWithEmailAndPassword(auth, email, pass)
+    .then(() => window.location.href = "summary.html")
+    .catch(e => alert("Login fehlgeschlagen:\n" + e.message));
 }
 
 function init() {
-  let pfad = window.location.pathname;
-  let form = document.getElementById("loginForm");
+  const form = document.getElementById("loginForm");
   if (!form) return;
-  if (pfad.includes("register"))
-    form.onsubmit = () => {
-      signup();
-      return false;
-    };
-  if (pfad.includes("login"))
-    form.onsubmit = () => {
-      login();
-      return false;
-    };
+
+  const path = window.location.pathname;
+  form.onsubmit = (e) => {
+    e.preventDefault();
+    if (path.includes("register")) signup();
+    if (path.includes("login")) login();
+  };
 }
 
 init();
