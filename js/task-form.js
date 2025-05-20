@@ -18,6 +18,8 @@ const db = getFirestore(app);
 let subtasks = [];
 let contacts = [];
 
+const createBtn = document.getElementById("create-task-btn");
+
 function getValue(selector) {
   const el = document.querySelector(selector);
   return el ? el.value.trim() : "";
@@ -52,7 +54,13 @@ export function addNewSubtask() {
 
 function populateContactsDropdown() {
   const select = document.getElementById("assigned-to");
-  select.innerHTML = `<option value="" disabled selected>Select a contact to assign</option>`;
+
+  const placeholder = document.createElement("option");
+  placeholder.textContent = "Select contacts to assign";
+  placeholder.disabled = true;
+  placeholder.selected = true;
+  placeholder.hidden = true;
+  select.appendChild(placeholder);
 
   contacts.forEach(c => {
     const option = document.createElement("option");
@@ -93,22 +101,42 @@ async function createTask(event) {
     document.getElementById("add-task-form").reset();
     subtasks = [];
     renderSubtasks();
+    updateButtonState(); // Reset Button Zustand
   } catch (error) {
     console.error("Fehler beim Speichern der Aufgabe:", error);
     alert("Fehler beim Speichern. Bitte versuche es erneut.");
   }
 }
 
+function updateButtonState() {
+  const title = getValue("#title");
+  const date = getValue("#date");
+  const category = getValue("#category");
+  const assignedTo = getValue("#assigned-to");
 
+  const allFilled = title && date && category && assignedTo;
+  createBtn.disabled = !allFilled;
+  createBtn.classList.toggle("disabled", !allFilled);
+}
+
+// Event Listener
 document.querySelectorAll(".btns button").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".btns button").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
+    updateButtonState();
   });
 });
 
-// Event Listener
+["#title", "#date", "#category", "#assigned-to"].forEach(selector => {
+  document.querySelector(selector).addEventListener("input", updateButtonState);
+});
+
 document.getElementById("add-task-form").addEventListener("submit", createTask);
 document.querySelector(".subtask-button").addEventListener("click", addNewSubtask);
+
+// Initialzustand
+createBtn.disabled = true;
+createBtn.classList.add("disabled");
 
 loadContacts();
