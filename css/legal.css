@@ -1,7 +1,11 @@
-.leagl-link{
+.leagl-link {
     color: white !important;
 }
 
-.icons-display-none{
+.icons-display-none {
     display: none !important;
+}
+
+.blue-print {
+    color: #29abe3;
 }
