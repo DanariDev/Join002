@@ -67,9 +67,9 @@ select {
   gap: 12px;
 }
 
-.urgent-btn,
-.medium-btn,
-.low-btn {
+#urgent-btn,
+#medium-btn,
+#low-btn {
   flex: 1;
   height: 35px;
   border: none;
@@ -78,17 +78,32 @@ select {
   font-weight: 600;
 }
 
-.urgent-btn:hover {
+#urgent-btn:hover {
   background-color: rgb(201, 57, 57);
   color: white;
 }
 
-.medium-btn:hover {
+#medium-btn:hover {
   background-color: rgb(255, 117, 24);
   color: white;
 }
 
-.low-btn:hover {
+#low-btn:hover {
+  background-color: rgb(93, 196, 62);
+  color: white;
+}
+
+.urgent-btn-active {
+  background-color: rgb(201, 57, 57);
+  color: white;
+}
+
+.medium-btn-active {
+  background-color: rgb(255, 117, 24);
+  color: white;
+}
+
+.low-btn-active {
   background-color: rgb(93, 196, 62);
   color: white;
 }
@@ -191,7 +206,7 @@ select {
   margin-top: 24px;
 }
 
-.btn-clear,
+#clear-btn,
 .btn-create-task {
   padding: 12px;
   width: 160px;
@@ -202,12 +217,13 @@ select {
   background-color: #ffffff;
   color: rgb(0, 0, 0);
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.btn-clear:hover,
+#clear-btn:hover,
 .btn-create-task:hover {
   background-color: white;
-  cursor: pointer;
+
   color: #ffffff;
   background-color: #2a3647;
 }
