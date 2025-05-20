@@ -49,11 +49,11 @@ body{
 
 .contacts-list-body{
     overflow: auto;
+    padding-bottom: 16px;
 }
 
 .contacts-list{
     overflow: auto;
-    /* margin: 0 40px; */
     margin: 0 25px 0 40px;
 }
 
@@ -72,7 +72,6 @@ body{
 }
 
 .group-list{
-    /* margin-left: 16px; */
     display: flex;
     gap: 16px;
     flex-direction: column;
@@ -121,7 +120,6 @@ body{
 .contact-details-haeder{
     display: flex;
     align-items: stretch;
-    /* margin: 64px; */
     gap: 16px;
 }
 
@@ -153,7 +151,6 @@ body{
 }
 
 .img-name-div{
-    /* margin: 64px; */
     display: flex;
     gap: 40px;
     align-items: center;
