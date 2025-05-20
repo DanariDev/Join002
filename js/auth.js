@@ -61,6 +61,7 @@ function init() {
     e.preventDefault();
     if (path.includes("register")) signup();
     if (path.includes("login")) login();
+    if (path.includes("index")) login();
   };
 }
 
