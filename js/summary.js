@@ -66,15 +66,16 @@ function count(arr, key, val) {
 
 function showDeadline(tasks) {
   const dates = tasks
-    .filter((t) => t.dueDate)
-    .map((t) => new Date(t.dueDate))
-    .filter((d) => d > new Date())
+    .filter(t => t.dueDate)
+    .map(t => new Date(t.dueDate))
+    .filter(d => d > new Date())
     .sort((a, b) => a - b);
-  const date = dates[0];
-  if (date)
-    q("#deadline-date").textContent = date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+
+  const date = dates[0] || new Date();
+  q("#deadline-date").textContent = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
+
