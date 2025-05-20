@@ -1,4 +1,4 @@
-/* ========== Allgemeines Layout für den Main-Container ========== */
+
 .board-main {
     margin-left: 232px;
     padding: 40px;
@@ -10,7 +10,7 @@
     margin-left: auto;
   }
   
-  /* ========== Header-Bereich mit Titel, Suche und Button ========== */
+  
   .board-header {
     display: flex;
     justify-content: space-between;
@@ -45,14 +45,14 @@
     cursor: pointer;
   }
   
-  /* ========== Board (4 Spalten) ========== */
+  
   .board {
     display: flex;
     justify-content: space-between;
     gap: 20px;
   }
   
-  /* ========== Spalten-Design ========== */
+  
   .board-column {
     background-color: #f9f9f9;
     border-radius: 16px;
@@ -75,7 +75,7 @@
     color: #555;
   }
   
-  /* ========== Karten / Aufgaben ========== */
+  
   .task-card {
     background-color: #fff;
     border-radius: 16px;
@@ -89,7 +89,7 @@
     transform: translateY(-2px);
   }
   
-  /* ========== Labels ========== */
+  
   .task-label {
     font-size: 12px;
     font-weight: bold;
@@ -109,7 +109,7 @@
     color: white;
   }
   
-  /* ========== Texte ========== */
+  
   .task-title {
     font-size: 16px;
     font-weight: bold;
@@ -122,7 +122,7 @@
     margin-bottom: 10px;
   }
   
-  /* ========== Fortschrittsbalken ========== */
+
   .progress-bar-container {
     background-color: #e0e0e0;
     height: 6px;
@@ -134,10 +134,10 @@
   .progress-bar {
     height: 100%;
     background-color: #3b82f6;
-    width: 50%; /* Beispielwert – dynamisch über JS möglich */
+    width: 50%; 
   }
   
-  /* ========== Avatar + Footer ========== */
+  
   .task-footer {
     display: flex;
     justify-content: space-between;
