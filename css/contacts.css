@@ -192,10 +192,12 @@ body{
     color: #3f4957;
 }
 
-.edit-delete-div a img{
-    width: 16px;
-    height: 16px;
-    background-color: red;
+.img-edit{
+    height: 17px;
+}
+
+.img-delete{
+    height: 14px;
 }
 
 .contact-information-div{
