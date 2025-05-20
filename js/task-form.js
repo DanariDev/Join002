@@ -121,18 +121,39 @@ function updateButtonState() {
 
 function updatePriorityButtons() {
   const buttons = [
-    { id: "urgent-btn", class: "urgent-btn-active" },
-    { id: "medium-btn", class: "medium-btn-active" },
-    { id: "low-btn", class: "low-btn-active" }
+    {
+      id: "urgent-btn",
+      class: "urgent-btn-active",
+      defaultImg: "assets/img/urgent-btn-icon.png",
+      activeImg: "assets/img/urgent-btn-icon-hover.png"
+    },
+    {
+      id: "medium-btn",
+      class: "medium-btn-active",
+      defaultImg: "assets/img/medium-btn-icon.png",
+      activeImg: "assets/img/medium-btn-icon-hover.png"
+    },
+    {
+      id: "low-btn",
+      class: "low-btn-active",
+      defaultImg: "assets/img/low-btn-icon.png",
+      activeImg: "assets/img/low-btn-icon-hover.png"
+    }
   ];
 
   buttons.forEach(btn => {
     const el = document.getElementById(btn.id);
     el.addEventListener("click", () => {
       buttons.forEach(b => {
-        document.getElementById(b.id).classList.remove(b.class);
+        const otherBtn = document.getElementById(b.id);
+        otherBtn.classList.remove(b.class);
+        const img = otherBtn.querySelector("img");
+        if (img) img.src = b.defaultImg;
       });
+
       el.classList.add(btn.class);
+      const img = el.querySelector("img");
+      if (img) img.src = btn.activeImg;
     });
   });
 }
@@ -158,3 +179,45 @@ createBtn.classList.add("disabled");
 
 loadContacts();
 updatePriorityButtons();
+
+
+// hover
+
+document.getElementById('urgent-btn').addEventListener('mouseover', function () {
+  const img = this.querySelector('img');
+  if (!this.classList.contains('urgent-btn-active')) {
+    img.src = 'assets/img/urgent-btn-icon-hover.png';
+  }
+});
+document.getElementById('urgent-btn').addEventListener('mouseout', function () {
+  const img = this.querySelector('img');
+  if (!this.classList.contains('urgent-btn-active')) {
+    img.src = 'assets/img/urgent-btn-icon.png';
+  }
+});
+
+document.getElementById('medium-btn').addEventListener('mouseover', function () {
+  const img = this.querySelector('img');
+  if (!this.classList.contains('medium-btn-active')) {
+    img.src = 'assets/img/medium-btn-icon-hover.png';
+  }
+});
+document.getElementById('medium-btn').addEventListener('mouseout', function () {
+  const img = this.querySelector('img');
+  if (!this.classList.contains('medium-btn-active')) {
+    img.src = 'assets/img/medium-btn-icon.png';
+  }
+});
+
+document.getElementById('low-btn').addEventListener('mouseover', function () {
+  const img = this.querySelector('img');
+  if (!this.classList.contains('low-btn-active')) {
+    img.src = 'assets/img/low-btn-icon-hover.png';
+  }
+});
+document.getElementById('low-btn').addEventListener('mouseout', function () {
+  const img = this.querySelector('img');
+  if (!this.classList.contains('low-btn-active')) {
+    img.src = 'assets/img/low-btn-icon.png';
+  }
+});

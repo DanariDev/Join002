@@ -4,8 +4,8 @@ body {
   background-color: #f5f5f5;
 }
 
-.add-task-link{
-    background-color: #1c2b3b;
+.add-task-link {
+  background-color: #1c2b3b;
 }
 
 .page-wrapper {
@@ -31,8 +31,7 @@ body {
   gap: 32px;
 }
 
-.add-task-form-left,
-.add-task-form-right {
+.add-task-form-content {
   flex: 1;
   display: flex;
   flex-direction: column;
