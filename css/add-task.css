@@ -4,6 +4,10 @@ body {
   background-color: #f5f5f5;
 }
 
+.add-task-link{
+    background-color: #1c2b3b;
+}
+
 .page-wrapper {
   height: 100vh;
 }
