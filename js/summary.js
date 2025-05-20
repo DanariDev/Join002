@@ -1,17 +1,27 @@
 import { db, auth } from "./firebase-config.js";
 import {
-  collection, getDocs, doc, getDoc
+  collection,
+  getDocs,
+  doc,
+  getDoc,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-onAuthStateChanged(auth, async user => {
+onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "login.html";
     return;
   }
 
-  const userDoc = await getDoc(doc(db, "users", user.uid));
-  const name = userDoc.exists() ? userDoc.data().name : null;
+  const isGuest = localStorage.getItem("isGuest") === "true";
+  let name;
+
+  if (isGuest) {
+    name = "Guest";
+  } else {
+    const userDoc = await getDoc(doc(db, "users", user.uid));
+    name = userDoc.exists() ? userDoc.data().name : "User";
+  }
 
   showGreeting(name);
   const tasks = await loadTasks();
@@ -21,9 +31,9 @@ onAuthStateChanged(auth, async user => {
 function showGreeting(name) {
   const el = q("#summary-greeting");
   if (!el) return;
-  el.innerHTML = name
-    ? `Good morning,<br><span>${name}</span>`
-    : `Good morning`;
+  el.innerHTML = name === "Guest"
+    ? `Good morning Guest`
+    : `Good morning,<br><span>${name}</span>`;
 }
 
 function q(sel) {
@@ -32,7 +42,7 @@ function q(sel) {
 
 async function loadTasks() {
   const snap = await getDocs(collection(db, "Aufgaben"));
-  return snap.docs.map(d => d.data());
+  return snap.docs.map((d) => d.data());
 }
 
 function updateSummary(tasks) {
@@ -51,17 +61,20 @@ function set(sel, val) {
 }
 
 function count(arr, key, val) {
-  return arr.filter(t => t[key]?.toLowerCase() === val).length;
+  return arr.filter((t) => t[key]?.toLowerCase() === val).length;
 }
 
 function showDeadline(tasks) {
   const dates = tasks
-    .filter(t => t.dueDate)
-    .map(t => new Date(t.dueDate))
-    .filter(d => d > new Date())
+    .filter((t) => t.dueDate)
+    .map((t) => new Date(t.dueDate))
+    .filter((d) => d > new Date())
     .sort((a, b) => a - b);
   const date = dates[0];
-  if (date) q("#deadline-date").textContent = date.toLocaleDateString("en-US", {
-    year: "numeric", month: "long", day: "numeric"
-  });
+  if (date)
+    q("#deadline-date").textContent = date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
 }
