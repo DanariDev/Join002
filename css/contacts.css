@@ -17,13 +17,12 @@ body{
 }
 
 .contacts-div{
-    /* width: 30%; */
     width: 348px;
     background-color: white;
     display: flex;
     align-items: stretch;
     flex-direction: column;
-    max-height: 92vh;
+    max-height: 91.25vh;
 }
 
 .contacts-div button{
