@@ -49,11 +49,10 @@
           </div>
 
           <label>Assigned to</label>
-          <div class="contacts-dropdown" onclick="toggleDropdown()">
-            <div id="selected-contacts" class="selected-contacts"></div>
-            <div class="dropdown-arrow">▼</div>
-            <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
-          </div>
+          <select id="category" required>
+            <option value="" disabled selected>Select contacts to assign</option>
+            <option value="contacts">Contacts</option>
+          </select>
 
           <label class="required">Category</label>
           <select id="category" required>
@@ -67,7 +66,7 @@
             <input type="text" id="subtask" placeholder="Enter subtask">
             <button type="button" class="subtask-button" onclick="addSubtask()">+</button>
           </div>
-          <ul class="subtask-list"></ul>
+          <ul id="subtask-list"></ul>
 
           <div class="bottom-line-btns">
             <button type="button" class="btn-clear">Clear</button>
