@@ -13,6 +13,8 @@ export async function loadTasks() {
   }
 }
 
+let groupedContacts = [];
+
 function renderTask(task) {
 
   const subtasksHTML = task.subtasks?.map(s => `<li>${s.text}</li>`).join('') || '';
