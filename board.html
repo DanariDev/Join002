@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,6 +11,7 @@
   <link rel="stylesheet" href="css/topbar.css" />
   <script src="../js/topbar.js"></script>
 </head>
+
 <body>
   <div include-html="sidebar.html"></div>
   <div include-html="templates/topbar.html"></div>
@@ -17,108 +19,46 @@
   <main class="board-main">
     <div class="board-header">
       <h1 class="board-title">Board</h1>
-      <div class="board-tools">
+      <div>
         <input type="text" placeholder="Find Task" class="search-input" />
         <button class="add-task-button">Add task +</button>
       </div>
     </div>
 
     <section class="board">
-      
-      <div class="board-column" data-status="todo">
-        <h3>To do <span class="add-task-icon">＋</span></h3>
-        
-        <div class="task-card">
-          <div class="task-label label-technical">Technical Task</div>
-          <div class="task-title">HTML Base Template</div>
-          <div class="task-desc">Create reusable HTML base templates...</div>
-          <div class="progress-bar-container">
-            <div class="progress-bar progress-100"></div>
-          </div>
-          <div class="task-footer">
-            <div class="avatar-group">
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar">+2</div>
-            </div>
-            <div class="task-count">1/1</div>
-          </div>
-        </div>
+      <!-- Header -->
+      <div class="to-do-field">
+        <h3>To do <button class="add-task-btn">＋</button></h3>
+      </div>
+      <div class="in-progress-field">
+        <h3>In Progress <button class="add-task-btn">＋</button></h3>
+      </div>
+      <div class="await-field">
+        <h3>Await feedback <button class="add-task-btn">＋</button></h3>
+      </div>
+      <div class="done-field">
+        <h3>Done <button class="add-task-btn">＋</button></h3>
       </div>
 
-      
-      <div class="board-column" data-status="inprogress">
-        <h3>In Progress <span class="add-task-icon">＋</span></h3>
-        <div class="task-card">
-          <div class="task-label label-user-story">User Story</div>
-          <div class="task-title">Daily Kochwelt Recipe</div>
-          <div class="task-desc">Implement daily recipe and portion...</div>
-          <div class="progress-bar-container">
-            <div class="progress-bar progress-0"></div>
-          </div>
-          <div class="task-footer">
-            <div class="avatar-group">
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar">+2</div>
-            </div>
-            <div class="task-count">0/3</div>
-          </div>
-        </div>
+      <!-- Task-Spalten -->
+      <div class="to-do-tasks">
+        <!-- Dynamisch generierte To Do Tasks -->
       </div>
-
-      
-      <div class="board-column" data-status="await">
-        <h3>Await feedback <span class="add-task-icon">＋</span></h3>
-        <div class="task-card">
-          <div class="task-label label-user-story">User Story</div>
-          <div class="task-title">Kochwelt Page & Recipe Recommender</div>
-          <div class="task-desc">Build start page with recipe...</div>
-          <div class="progress-bar-container">
-            <div class="progress-bar progress-60"></div>
-          </div>
-          <div class="task-footer">
-            <div class="avatar-group">
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar">+6</div>
-            </div>
-            <div class="task-count">3/5</div>
-          </div>
-        </div>
+      <div class="in-progress-tasks">
+        <!-- Dynamisch generierte In Progress Tasks -->
       </div>
-
-      
-      <div class="board-column" data-status="done">
-        <h3>Done <span class="add-task-icon">＋</span></h3>
-        <div class="task-card">
-          <div class="task-label label-technical">Technical Task</div>
-          <div class="task-title">Final Check Join</div>
-          <div class="task-desc">Check for bugs and test...</div>
-          <div class="progress-bar-container">
-            <div class="progress-bar progress-0"></div>
-          </div>
-          <div class="task-footer">
-            <div class="avatar-group">
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-              <div class="avatar"></div>
-            </div>
-            <div class="task-count">0/2</div>
-          </div>
-        </div>
+      <div class="await-tasks">
+        <!-- Dynamisch generierte Awaiting Feedback Tasks -->
+      </div>
+      <div class="done-tasks">
+        <!-- Dynamisch generierte Done Tasks -->
       </div>
     </section>
+
   </main>
 
   <script src="js/include-html.js"></script>
   <script type="module" src="js/board.js"></script>
 </body>
+
 </html>

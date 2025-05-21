@@ -1,57 +1,59 @@
+import { db } from "./firebase-config.js";
+import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-import { db } from './firebase-config.js';
-import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-
-
-async function loadTasksFromFirestore() {
-    const tasksCol = collection(db, 'Aufgaben');
-    const tasksSnapshot = await getDocs(tasksCol);
-    const tasks = tasksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-    tasks.forEach(renderTaskToColumn);
+export async function loadTasks() {
+  try {
+    const querySnapshot = await getDocs(collection(db, "tasks"));
+    querySnapshot.forEach(doc => {
+      const task = doc.data();
+      renderTask(task);
+    });
+  } catch (error) {
+    console.error("Fehler beim Laden der Aufgaben:", error);
+  }
 }
 
+function renderTask(task) {
 
- * @param { Object } task
-    */
-function renderTaskToColumn(task) {
-    const column = document.querySelector(`[data-status="${task.status}"]`);
-    if (!column) return;
+  const subtasksHTML = task.subtasks?.map(s => `<li>${s.text}</li>`).join('') || '';
+  const doneCount = task.subtasks?.filter(s => s.done === 'true').length || 0;
+  const totalCount = task.subtasks?.length || 0;
+  const progressText = `${doneCount}/${totalCount}`;
 
-    const card = document.createElement('div');
-    card.classList.add('task-card');
+  const containerSelector = {
+    todo: '.to-do-tasks',
+    "in-progress": '.in-progress-tasks',
+    await: '.await-tasks',
+    done: '.done-tasks'
+  }[task.status || 'todo'];
 
-    card.innerHTML = `
-    <div class="task-label ${task.category === 'Technical Task' ? 'label-technical' : 'label-user-story'}">${task.category}</div>
-    <div class="task-title">${task.title}</div>
-    <div class="task-desc">${task.description}</div>
-    <div class="progress-bar-container">
-      <div class="progress-bar progress-${getProgressPercent(task)}"></div>
-    </div>
-    <div class="task-footer">
-      <div class="avatar-group">
-        ${(task.assignedTo || []).map(a => `<div class="avatar">${a}</div>`).join('')}
-      </div>
-      <div class="task-count">${task.doneSubtasks || 0}/${task.totalSubtasks || 0}</div>
-    </div>
+  const column = document.querySelector(containerSelector);
+  if (!column) return;
+
+  const taskCard = document.createElement('div');
+  taskCard.className = 'task-card';
+  console.log(`${task.subtasks}`);
+
+  taskCard.innerHTML = `
+  <div class="task-label label-${task.category}">${task.category}</div>
+    <h4 class="task-title">${task.title}</h4>
+    <p class="task-desc">${task.description}</p>
+
+<div class="progress-bar-container">
+            <div class="progress-bar progress-100"></div>
+          </div>
+
+          <div class="">${task.assignedTo}</div>
+
+    <p class="d-none">Due: ${task.dueDate}</p>
+    <p class="d-none">Priority: ${task.priority}</p>
+     <ul class="d-none">${subtasksHTML}</ul>
+     <div class="task-count">${progressText}</div>
+
   `;
 
-    column.appendChild(card);
+
+  column.appendChild(taskCard);
 }
 
-
- * @param { Object } task
-    * @returns { number }
- */
-function getProgressPercent(task) {
-    if (!task.totalSubtasks || task.totalSubtasks === 0) return 0;
-    const percent = (task.doneSubtasks / task.totalSubtasks) * 100;
-    if (percent === 100) return 100;
-    if (percent >= 75) return 75;
-    if (percent >= 50) return 50;
-    if (percent >= 25) return 25;
-    return 0;
-}
-
-
-window.addEventListener('DOMContentLoaded', loadTasksFromFirestore);
+loadTasks();
