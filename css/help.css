@@ -1,8 +1,8 @@
-.help-button{
+.help-button {
     display: none;
 }
 
-.list-div{
+.list-div {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -10,15 +10,20 @@
     margin: 16px 0;
 }
 
-.listing-point-div{
+.listing-point-div {
     font-size: 24px;
     font-weight: bold;
 }
 
-.description-div h3{
+.description-div h3 {
     margin: 0;
 }
 
-.join-color-span{
+.join-color-span {
     color: #29abe2;
+}
+
+.floating-back-arrow {
+    position: fixed;
+    right: 15px;
 }

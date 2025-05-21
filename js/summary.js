@@ -32,7 +32,7 @@ function showGreeting(name) {
   const el = q("#summary-greeting");
   if (!el) return;
   el.innerHTML = name === "Guest"
-    ? `Good morning Guest`
+    ? `Good morning,<br><span>Guest</span>`
     : `Good morning,<br><span>${name}</span>`;
 }
 
