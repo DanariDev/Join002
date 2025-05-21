@@ -1,59 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join | Board</title>
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/topbar.css" />
+    <link rel="stylesheet" href="css/board.css" />
+    <link rel="stylesheet" href="css/login.css" />
+    <script src="js/include-html.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join | Board</title>
-  <link rel="stylesheet" href="css/sidebar.css">
-  <link rel="stylesheet" href="css/topbar.css">
-  <link rel="stylesheet" href="css/board.css">
-  <link rel="stylesheet" href="css/login.css">
-  <script src="js/include-html.js"></script>
-</head>
+  <body>
+    <div include-html="sidebar.html"></div>
+    <div include-html="templates/topbar.html"></div>
 
-<body>
-  <div include-html="sidebar.html"></div>
-  <div include-html="templates/topbar.html"></div>
-
-  <main class="board-main">
-    <div class="board-header">
-      <h1 class="board-title">Board</h1>
-      <div>
-        <input type="text" placeholder="Find Task" class="search-input">
-        <button class="add-task-button">Add task +</button>
+    <main class="board-main">
+      <div class="board-header">
+        <h1 class="board-title">Board</h1>
+        <div>
+          <input type="text" placeholder="Find Task" class="search-input" />
+          <button class="add-task-button">Add task +</button>
+        </div>
       </div>
-    </div>
 
-    <section class="board">
-      
-      <div class="to-do-field"><h3>To do <button class="add-task-btn">＋</button></h3></div>
-      <div class="in-progress-field"><h3>In Progress <button class="add-task-btn">＋</button></h3></div>
-      <div class="await-field"><h3>Await Feedback <button class="add-task-btn">＋</button></h3></div>
-      <div class="done-field"><h3>Done <button class="add-task-btn">＋</button></h3></div>
+      <section class="board">
+        <div class="to-do-field">
+          <h3>To do <button class="add-task-btn">＋</button></h3>
+        </div>
+        <div class="in-progress-field">
+          <h3>In Progress <button class="add-task-btn">＋</button></h3>
+        </div>
+        <div class="await-field">
+          <h3>Await Feedback <button class="add-task-btn">＋</button></h3>
+        </div>
+        <div class="done-field">
+          <h3>Done <button class="add-task-btn">＋</button></h3>
+        </div>
 
-      
-      <div class="to-do-tasks task-column"></div>
-      <div class="in-progress-tasks task-column"></div>
-      <div class="await-tasks task-column"></div>
-      <div class="done-tasks task-column"></div>
-    </section>
-  </main>
+        <div class="to-do-tasks task-column"></div>
+        <div class="in-progress-tasks task-column"></div>
+        <div class="await-tasks task-column"></div>
+        <div class="done-tasks task-column"></div>
+      </section>
+    </main>
 
-  
-  <template id="task-template">
-    <div class="task-card">
-      <div class="task-label"></div>
-      <h4 class="task-title"></h4>
-      <p class="task-desc"></p>
-      <div class="progress-bar-container">
-        <div class="progress-bar"></div>
+    <template id="task-template">
+      <div class="task-card">
+        <div class="task-label"></div>
+        <h4 class="task-title"></h4>
+        <p class="task-desc"></p>
+        <div class="progress-bar-container">
+          <div class="progress-bar"></div>
+        </div>
+        <div class="task-count"></div>
       </div>
-      <div class="task-count"></div>
-    </div>
-  </template>
-  
-  <script type="module" src="js/board.js"></script>
-</body>
+    </template>
 
+    <script type="module" src="js/board.js"></script>
+    <script src="js/topbar.js"></script>
+  </body>
 </html>
