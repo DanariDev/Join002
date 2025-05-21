@@ -7,11 +7,6 @@ function $(s) {
   return document.querySelector(s);
 }
 
-<<<<<<< HEAD
-let groupedContacts = [];
-
-function renderTask(task) {
-=======
 function loadTasks() {
   getDocs(collection(db, "tasks")).then(snap => {
     snap.forEach(d => {
@@ -22,7 +17,6 @@ function loadTasks() {
     setupDropTargets();
   });
 }
->>>>>>> 8a7f93d905364cec5ebeafa1d310c8b61e5268ee
 
 function renderTask(t) {
   const colMap = {
@@ -92,6 +86,15 @@ function handleDrop(e, col) {
 
   updateDoc(doc(db, "tasks", id), { status: newStatus }).then(() => {
     col.appendChild(card);
+    const bar = card.querySelector('.progress-bar');
+    bar.className = 'progress-bar';
+    const statusClass = {
+      'todo': 'progress-25',
+      'in-progress': 'progress-50',
+      'await': 'progress-75',
+      'done': 'progress-100'
+    }[newStatus];
+    bar.classList.add(statusClass);
   });
 }
 
