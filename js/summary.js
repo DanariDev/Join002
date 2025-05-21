@@ -11,7 +11,7 @@ onAuthStateChanged(auth, async (user) => {
   const isGuest = localStorage.getItem("isGuest") === "true";
   let name;
 
-   if (!user || !isGuest) {
+  if (!user || !isGuest) {
     window.location.href = "login.html";
     return;
   }
