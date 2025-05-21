@@ -2,63 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join | Login</title>
-    <link rel="stylesheet" href="css/login.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join | Sign Up</title>
+  <link rel="stylesheet" href="css/login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-    <div class="login-page">
+  <div class="login-page">
+    <a href="login.html" class="back_to_login">
+      <img class="arrow_left" src="assets/img/arrow-left-line.png" alt="Back">
+    </a>
 
+    <img src="assets/img/logo.svg" alt="Join Logo" class="logo">
 
-        <img src="assets/img/logo.svg" alt="Join Logo" class="logo">
+    <div class="login-box">
+      <h1>Sign Up</h1>
+      <div class="underline"></div>
 
-
-
-        <div class="login-box">
-
-            <div class="sign"><a class="back_to_login" href="./login.html"><img class="arrow_left" src="assets/img/arrow-left-line.png" alt=""></a>
-                <h1>Sign Up</h1>
-            </div>
-            <div class="underline"></div>
-
-            <form id="loginForm">
-                <div class="input-wrapper">
-                    <input class="name_input" type="text" placeholder="Name" required />
-                </div>
-
-                <div class="input-wrapper">
-                    <input class="email_input" type="email" placeholder="Email" required />
-                </div>
-
-
-
-                <div class="input-wrapper">
-                    <input class="password_input" type="password" id="password" placeholder="Password" required>
-                </div>
-
-                <div class="input-wrapper">
-                    <input class="password_input" type="password" id="password" placeholder=" Confirm Password"
-                        required>
-                </div>
-
-                <input type="checkbox" required> I accept the <a class="privacy_link" href="">Privacy policy</a>
-
-                <div class="button-row">
-                    <button type="submit" class="btn-sign-up">Sign Up</button>
-
-                </div>
-
-            </form>
+      <form id="loginForm">
+        <div class="input-wrapper">
+          <input class="name_input" type="text" placeholder="Name" required />
         </div>
 
-        <div class="footer-links">
-            <a href="legal.html#privacy">Privacy Policy</a>
-            <a href="legal.html#imprint">Legal Notice</a>
+        <div class="input-wrapper">
+          <input class="email_input" type="email" placeholder="Email" required />
         </div>
+
+        <div class="input-wrapper">
+          <input class="password_input" type="password" placeholder="Password" required />
+        </div>
+
+        <div class="input-wrapper">
+          <input class="password_repeat_input" type="password" placeholder="Confirm Password" required />
+        </div>
+
+        <label>
+          <input type="checkbox" required />
+          I accept the <a href="legal.html#privacy">Privacy Policy</a>
+        </label>
+
+        <div class="button-row">
+          <button type="submit" class="btn-primary">Sign Up</button>
+        </div>
+      </form>
     </div>
+
+    <div class="footer-links">
+      <a href="legal.html#privacy">Privacy Policy</a>
+      <a href="legal.html#imprint">Legal Notice</a>
+    </div>
+  </div>
+
+  <script type="module" src="js/auth.js"></script>
 </body>
 
 </html>

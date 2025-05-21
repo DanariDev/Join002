@@ -4,6 +4,10 @@ body {
   background-color: #f6f7fb;
 }
 
+.summary-link {
+  background-color: #1c2b3b;
+}
+
 .summary-main {
   margin-left: 232px;
   padding: 40px;
@@ -49,6 +53,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 50%;
 }
 
 .flex-row {
@@ -70,31 +75,26 @@ body {
   flex-direction: column;
 }
 
-.todo, .done {
+.todo,
+.done {
   width: 260px;
   height: 140px;
   flex-direction: row;
   justify-content: center;
-  text-align: left;
   align-items: center;
 }
 
-.todo img, .done img {
-  margin-right: 12px;
-}
-
-.todo .metric, .done .metric {
+.todo .metric,
+.done .metric {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .urgent {
-  width: 536px;
-  height: 140px;
   flex-direction: row;
   justify-content: space-around;
-  text-align: left;
+  text-align: center;
   padding-left: 32px;
   padding-right: 32px;
   gap: 6px;
@@ -103,39 +103,30 @@ body {
 .flex-row.mini-row {
   display: flex;
   gap: 16px;
-  width: 536px;
   justify-content: space-between;
 }
 
 .summary-box.mini {
   flex-direction: column;
-  height: 140px;
   justify-content: center;
-  width: 160px;
 }
 
 .summary-box.mini h2 {
-  font-size: 50px;
+  font-size: 32px;
   margin: 0;
   color: #2a3647;
 }
 
 .summary-greeting {
-  height: 140px;
-  padding: 0 12px;
-  background: none;
-  border-radius: 0;
-  box-shadow: none;
-  text-align: start;
   align-self: center;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 }
 
 #summary-greeting {
-  font-size: 50px;
+  font-size: 36px;
   font-weight: bold;
   color: #2a3647;
   line-height: 1.2;
@@ -146,7 +137,7 @@ body {
 }
 
 .summary-box h2 {
-  font-size: 24px;
+  font-size: 32px;
   margin: 0;
   color: #2a3647;
 }
@@ -156,23 +147,14 @@ body {
   color: #808080;
 }
 
-.icon-placeholder, .summary-box img {
+.summary-box img {
   width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background-color: #2a3647;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   object-fit: contain;
 }
 
-.icon-placeholder.red {
-  background-color: #ff3d00;
-}
-
-.urgent-left, .urgent-right {
+.urgent-left,
+.urgent-right {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -188,11 +170,11 @@ body {
   width: 1px;
   height: 100px;
   background-color: #e0e0e0;
-  margin: 0 16px;
+  margin: 0;
 }
 
 #deadline-date {
-  font-size: 13px;
+  font-size: 20px;
   color: #2a3647;
   font-weight: bold;
 }

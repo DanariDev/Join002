@@ -1,11 +1,7 @@
 // Beispiel-Daten 
 let contacts = [
     "Anton Mayer", "Anja Schulz", "Benedikt Ziegler", "David Eisberg", 
-    "Eva Fischer", "Emanuel Mauer", "Vorname Nachname1","Vorname Nachname2",
-    "Vorname Nachname3","Vorname Nachname4","Vorname Nachname5","Vorname Nachname6",
-    "Vorname Nachname7","Vorname Nachname8","Vorname Nachname9","Vorname Nachname10",
-    "Vorname Nachname11","Vorname Nachname12","Vorname Nachname13","Vorname Nachname14",
-    "Vorname Nachname15","Vorname Nachname16","Vorname Nachname17","Vorname Nachname18"
+    "Eva Fischer", "Emanuel Mauer", "Max Mustermann"
 ];
 
 let groupedContacts = [];
@@ -46,6 +42,20 @@ function createGroupList(indexaAlphabet){
 }
 
 function createImgNameEmailDiv(indexaAlphabet, indexContacs){
-    return `<div class="img-name-email-div"><div class="img-div" id="img-div${indexaAlphabet}${indexContacs}ID">${Object.values(groupedContacts)[indexaAlphabet][indexContacs].slice(0,1) + Object.values(groupedContacts)[indexaAlphabet][indexContacs].split(' ')[1].slice(0,1)}</div><div class="name-email-div"><span>${Object.values(groupedContacts)[indexaAlphabet][indexContacs]}</span><span class="email-span">E-mail<span/></div>`;
+    return `<div class="img-name-email-div" id="img-name-email-div${indexaAlphabet}${indexContacs}ID" onclick="contactDeletesLoad('${indexaAlphabet}${indexContacs}')"><div class="img-div" id="img-div${indexaAlphabet}${indexContacs}ID">${Object.values(groupedContacts)[indexaAlphabet][indexContacs].slice(0,1) + Object.values(groupedContacts)[indexaAlphabet][indexContacs].split(' ')[1].slice(0,1)}</div><div class="name-email-div"><span id=name${indexaAlphabet}${indexContacs}ID>${Object.values(groupedContacts)[indexaAlphabet][indexContacs]}</span><span class="email-span" id="email${indexaAlphabet}${indexContacs}ID">Email-address<span/></div>`;
 }
 
+function contactDeletesLoad(idNumber){
+    document.getElementById('contacts-details-contentsID').classList.add('display-flex');
+    document.getElementById('img-details-divID').style.backgroundColor = document.getElementById(`img-div${idNumber}ID`).style.backgroundColor;
+    document.getElementById('img-details-divID').innerHTML = document.getElementById(`img-div${idNumber}ID`).innerHTML;
+    document.getElementById('details-nameID').innerHTML = document.getElementById(`name${idNumber}ID`).innerHTML;
+    document.getElementById('details-emailID').innerHTML = document.getElementById(`email${idNumber}ID`).innerHTML;
+
+    for (let index = 0; index < document.getElementsByClassName('img-name-email-div').length; index++) {
+        document.getElementsByClassName('img-name-email-div')[index].style ="";
+    }
+    document.getElementById(`img-name-email-div${idNumber}ID`).style.backgroundColor = '#2a3647';
+    document.getElementById(`img-name-email-div${idNumber}ID`).style.color = 'white';
+    
+}

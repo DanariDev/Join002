@@ -4,6 +4,10 @@ body {
   background-color: #f5f5f5;
 }
 
+.add-task-link {
+  background-color: #1c2b3b;
+}
+
 .page-wrapper {
   height: 100vh;
 }
@@ -27,15 +31,14 @@ body {
   gap: 32px;
 }
 
-.add-task-form-left,
-.add-task-form-right {
+.add-task-form-content {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 16px;
 }
 
-.bottom-line-btns {
+.add-task-create-and-clear-btn {
   display: flex;
   justify-content: space-around;
   flex: 1;
@@ -62,14 +65,14 @@ select {
   background-color: #ccc;
 }
 
-.btns {
+#priority-buttons {
   display: flex;
   gap: 12px;
 }
 
-.urgent-btn,
-.medium-btn,
-.low-btn {
+#urgent-btn,
+#medium-btn,
+#low-btn {
   flex: 1;
   height: 35px;
   border: none;
@@ -78,17 +81,20 @@ select {
   font-weight: 600;
 }
 
-.urgent-btn:hover {
+#urgent-btn:hover,
+.urgent-btn-active {
   background-color: rgb(201, 57, 57);
   color: white;
 }
 
-.medium-btn:hover {
+#medium-btn:hover,
+.medium-btn-active {
   background-color: rgb(255, 117, 24);
   color: white;
 }
 
-.low-btn:hover {
+#low-btn:hover,
+.low-btn-active {
   background-color: rgb(93, 196, 62);
   color: white;
 }
@@ -191,24 +197,26 @@ select {
   margin-top: 24px;
 }
 
-.btn-clear,
+#clear-btn,
 .btn-create-task {
   padding: 12px;
   width: 160px;
   border-radius: 8px;
   font-size: 16px;
   font-weight: 600;
-  cursor: pointer;
   border: 2px solid #2a3647;
-  background-color: #2a3647;
-  color: white;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.btn-clear:hover,
+#clear-btn:hover,
 .btn-create-task:hover {
   background-color: white;
-  color: #2a3647;
+
+  color: #ffffff;
+  background-color: #2a3647;
 }
 
 .required:after {
@@ -219,4 +227,9 @@ select {
 .required-explain:before {
   content: " *";
   color: red;
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }

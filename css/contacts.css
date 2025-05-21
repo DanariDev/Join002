@@ -1,14 +1,14 @@
-.contacts-link{
+.contacts-link {
     background-color: #1c2b3b;
 }
 
-body{
+body {
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.main{
+.main {
     margin-left: 232px;
     padding: 0 !important;
     display: flex;
@@ -16,17 +16,16 @@ body{
     flex: 1;
 }
 
-.contacts-div{
-    /* width: 30%; */
+.contacts-div {
     width: 348px;
     background-color: white;
     display: flex;
     align-items: stretch;
     flex-direction: column;
-    max-height: 92vh;
+    max-height: 91.25vh;
 }
 
-.contacts-div button{
+.contacts-div button {
     border: 0;
     border-radius: 8px;
     font-size: 16px;
@@ -43,43 +42,42 @@ body{
     padding: 12px 36px;
 }
 
-.contacts-div button img{
+.contacts-div button img {
     width: 20px;
     height: 20px;
 }
 
-.contacts-list-body{
+.contacts-list-body {
     overflow: auto;
+    padding-bottom: 16px;
 }
 
-.contacts-list{
+.contacts-list {
     overflow: auto;
-    /* margin: 0 40px; */
     margin: 0 25px 0 40px;
 }
 
-.alphabet-div{
+.alphabet-div {
     margin-top: 20px;
 }
 
-.alphabet-div span{
+.alphabet-div span {
     margin-left: 24px;
 }
 
-.separate-contacts-list{
+.separate-contacts-list {
     height: 1px;
     background-color: #dcdcdc;
     margin: 20px 0 8px 0;
 }
 
-.group-list{
-    /* margin-left: 16px; */
+.group-list {
     display: flex;
     gap: 16px;
     flex-direction: column;
 }
 
-.img-name-email-div{
+.img-name-email-div {
     display: flex;
     align-items: center;
     gap: 32px;
@@ -88,7 +86,7 @@ body{
     border-radius: 12px;
 }
 
-.img-div{
+.img-div {
     width: 32px;
     height: 32px;
     border-radius: 100%;
@@ -100,41 +98,125 @@ body{
     border: 2px solid white;
 }
 
-.name-email-div{
+.name-email-div {
     display: flex;
     flex-direction: column;
     gap: 8px;
 }
 
-.email-span{
+.email-span {
     font-size: 12px;
     color: #007cee;
 }
 
-.contact-details-div{
+.contact-details-div {
     flex: 1;
+    margin: 64px 64px 0;
+    display: flex;
+    gap: 32px;
+    flex-direction: column;
 }
 
-.contact-details-haeder{
+.contact-details-haeder {
     display: flex;
     align-items: stretch;
-    margin: 64px;
     gap: 16px;
 }
 
-.contact-details-haeder h1{
+.contact-details-haeder h1 {
     margin: 0;
     font-size: 48px;
 }
 
-.separate-contact-details-haeder{
+.separate-contact-details-header {
     width: 3px;
     background-color: #29abe2;
 }
 
-.contact-details-haeder span{
+.contact-details-haeder span {
     display: flex;
     align-items: center;
     font-size: 24px;
     color: #2a3647;
+}
+
+.contacts-details-contents {
+    flex-direction: column;
+    gap: 32px;
+    display: none;
+}
+
+.display-flex {
+    display: flex;
+}
+
+.img-name-div {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.img-details-div {
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    border-radius: 100%;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: white;
+}
+
+.img-name-div span {
+    font-size: 40px;
+}
+
+.edit-delete-div {
+    display: flex;
+    gap: 16px;
+}
+
+.edit-delete-div a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #3f4957;
+}
+
+.img-edit {
+    height: 17px;
+}
+
+.img-delete {
+    height: 14px;
+}
+
+.contact-information-div {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.email-phone-div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.email-phone-title {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.email-value {
+    color: #3d9bf1;
+}
+
+.email-phone-value {
+    font-size: 13px;
 }

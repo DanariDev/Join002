@@ -2,13 +2,13 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Add Task</title>
-  <link rel="stylesheet" href="css/sidebar.css">
-  <link rel="stylesheet" href="css/login.css">
-  <link rel="stylesheet" href="css/add-task.css">
-  <link rel="stylesheet" href="css/topbar.css">
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/add-task.css" />
+  <link rel="stylesheet" href="css/topbar.css" />
   <script src="js/topbar.js"></script>
 </head>
 
@@ -21,67 +21,63 @@
       <h1 class="add-task-title">Add Task</h1>
 
       <form id="add-task-form">
-        <div class="add-task-form-left">
-          <label class="required">Title</label>
-          <input class="title-input" type="text" id="title" placeholder="Enter a title" required>
+        <div class="add-task-form-content">
+          <label class="required" for="title">Title</label>
+          <input class="title-input" type="text" id="title" placeholder="Enter a title" required />
 
-          <label>Description</label>
-          <input class="description-input" type="text" id="description" placeholder="Enter a description">
+          <label for="description">Description</label>
+          <input class="description-input" type="text" id="description" placeholder="Enter a description" />
 
-          <label class="required">Due date</label>
-          <input class="date-input" type="date" id="date" required>
+          <label class="required" for="date">Due date</label>
+          <input class="date-input" type="date" id="date" required />
         </div>
 
         <div class="grey-bar"></div>
 
-        <div class="add-task-form-right">
+        <div class="add-task-form-content">
           <span>Priority</span>
-          <div class="btns">
-            <button type="button" class="urgent-btn">Urgent
-              <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon">
+          <div id="priority-buttons">
+            <button type="button" id="urgent-btn">Urgent
+              <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon" />
             </button>
-            <button type="button" class="medium-btn">Medium
-              <img src="assets/img/medium-btn-icon.png" alt="medium-icon">
+            <button type="button" id="medium-btn">Medium
+              <img src="assets/img/medium-btn-icon.png" alt="medium-icon" />
             </button>
-            <button type="button" class="low-btn">Low
-              <img src="assets/img/low-btn-icon.png" alt="low-icon">
+            <button type="button" id="low-btn">Low
+              <img src="assets/img/low-btn-icon.png" alt="low-icon" />
             </button>
           </div>
 
-          <label>Assigned to</label>
-          <div class="contacts-dropdown" onclick="toggleDropdown()">
-            <div id="selected-contacts" class="selected-contacts"></div>
-            <div class="dropdown-arrow">▼</div>
-            <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
-          </div>
+          <label class="required" for="assigned-to">Assigned to</label>
+          <select id="assigned-to" required>
+            <option value="" disabled selected>Select a contact to assign</option>
+          </select>
 
-          <label class="required">Category</label>
+          <label class="required" for="category">Category</label>
           <select id="category" required>
             <option value="" disabled selected>Select task category</option>
             <option value="technical">Technical Task</option>
             <option value="user">User Story</option>
           </select>
 
-          <label>Subtasks</label>
+          <label for="subtask">Subtasks</label>
           <div class="subtask-wrapper">
-            <input type="text" id="subtask" placeholder="Enter subtask">
-            <button type="button" class="subtask-button" onclick="addSubtask()">+</button>
+            <input type="text" id="subtask" placeholder="Enter subtask" autocomplete="off" />
+            <button type="button" class="subtask-button">+</button>
           </div>
-          <ul class="subtask-list"></ul>
 
-          <div class="bottom-line-btns">
-            <button type="button" class="btn-clear">Clear</button>
-            <button type="submit" class="btn-create-task" onclick="createTask()">Create Task</button>
+          <ul id="subtask-list"></ul>
+
+          <div class="add-task-create-and-clear-btn">
+            <button type="reset" id="clear-btn">Clear &#10006;</button>
+            <button id="create-task-btn" type="submit" class="btn-create-task disabled" disabled>
+              Create Task &#10004;
+            </button>
           </div>
         </div>
-
-
       </form>
 
-
       <span class="required-explain">This field is required</span>
-
-
     </main>
   </div>
 

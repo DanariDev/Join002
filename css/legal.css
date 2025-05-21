@@ -1,10 +1,11 @@
-.leagl-link{
+.leagl-link {
     color: white !important;
 }
 
-.icons-display-none{
+.icons-display-none {
     display: none !important;
 }
+
 .legal-main {
     margin-left: 232px;
     margin-right: 40px;
@@ -47,3 +48,9 @@
     color: #555;
   }
   
+
+
+.blue-print {
+    color: #29abe3;
+}
+

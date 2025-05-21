@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join | Login</title>
-  <link rel="stylesheet" href="css/login.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/login.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
 <body>
@@ -16,24 +16,27 @@
       <a href="register.html" class="sign-up-btn">Sign up</a>
     </div>
 
-    <img src="assets/img/logo.svg" alt="Join Logo" class="logo">
+    <img src="assets/img/logo.svg" alt="Join Logo" class="logo" />
 
     <div class="login-box">
       <h1>Log in</h1>
       <div class="underline"></div>
 
+
       <form id="loginForm">
         <div class="input-wrapper">
-          <input id="login-email" type="email" placeholder="Email" required />
+          <input type="email" class="email_input" placeholder="Email" required />
         </div>
 
         <div class="input-wrapper">
-          <input id="login-password" type="password" placeholder="Password" required />
+          <input type="password" class="password_input" placeholder="Password" required />
         </div>
 
         <div class="button-row">
           <button type="submit" class="btn-primary">Log in</button>
-          <a href="summary.html"><button type="button" id="guestLogin" class="btn-secondary">Guest Log in</button></a>
+          <button type="button" id="guestLogin" class="btn-secondary">Guest Log in</button>
+
+
         </div>
       </form>
     </div>
@@ -43,8 +46,9 @@
       <a href="legal.html#imprint">Legal Notice</a>
     </div>
   </div>
-  <script type="module" src="js/auth.js"></script>
 
+
+  <script type="module" src="js/auth.js"></script>
 </body>
 
 </html>

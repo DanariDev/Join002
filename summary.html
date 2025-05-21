@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,8 +9,9 @@
   <link rel="stylesheet" href="css/topbar.css" />
   <link rel="stylesheet" href="css/summary.css" />
 
-    <script src="./js/topbar.js"></script>
+  <script src="./js/topbar.js"></script>
 </head>
+
 <body>
   <div include-html="sidebar.html"></div>
   <div include-html="templates/topbar.html"></div>
@@ -20,8 +22,8 @@
       <div class="metrics-divider"></div>
       <span class="metrics-title">Key Metrics at a Glance</span>
     </div>
-    
-    
+
+
 
 
     <div class="summary-container">
@@ -29,14 +31,14 @@
       <div class="summary-left">
         <div class="flex-row">
           <div class="summary-box todo">
-            <img src="#" alt="">
+            <img src="assets/img/pencil-icon.png" alt="pencil-icon">
             <div class="metric">
               <h2>1</h2>
               <span>To-do</span>
             </div>
           </div>
           <div class="summary-box done">
-            <img src="#" alt="">
+            <img src="assets/img/check-icon.png" alt="check-icon">
             <div class="metric">
               <h2>1</h2>
               <span>Done</span>
@@ -46,7 +48,7 @@
 
         <div class="summary-box urgent">
           <div class="urgent-left">
-            <img src="#" alt="">
+            <img src="assets/img/urgent-icon.png" alt="urgent-icon">
             <div class="metric">
               <h2>1</h2>
               <span>Urgent</span>
@@ -67,7 +69,7 @@
           </div>
           <div class="summary-box mini">
             <h2>2</h2>
-            <span>In Progress</span>
+            <span>Task in Progress</span>
           </div>
           <div class="summary-box mini">
             <h2>2</h2>
@@ -78,12 +80,14 @@
 
       <!-- Rechte Seite -->
       <div class="summary-greeting">
-        <h2 id="summary-greeting">Good morning</h2>
+        <h2 id="summary-greeting">Good morning <span></span></h2>
       </div>
     </div>
   </main>
 
   <script src="js/include-html.js"></script>
-  <script src="js/summary.js"></script>
+  <script type="module" src="./js/summary.js"></script>
+
 </body>
+
 </html>

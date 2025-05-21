@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -12,29 +13,51 @@
   <script src="../js/topbar.js"></script>
   <script src="./js/contacts.js"></script>
 </head>
+
 <body onload="contactsList()">
   <div include-html="sidebar.html"></div>
   <div include-html="templates/topbar.html"></div>
 
   <main class="main" style="margin-left: 232px; padding: 40px;">
     <!-- Inhalt der Contacts-Seite -->
-     <div class="contacts-div">
-      <Button>Add new Contact <img src="" alt=""></Button>
+    <div class="contacts-div">
+      <button>Add new Contact <img src="assets/img/person_add.png" alt="Add person"></button>
       <div class="contacts-list-body">
         <div class="contacts-list" id="contacts-listID"></div>
       </div>
-     </div>
+    </div>
 
-     <div class="contact-details-div">
+    <div class="contact-details-div">
       <div class="contact-details-haeder">
         <h1>Contacts</h1>
-        <div class="separate-contact-details-haeder"></div>
-        <Span>Better with a team</Span>
+        <div class="separate-contact-details-header"></div>
+        <span>Better with a team</span>
       </div>
-      <div id="contacts-details"></div>
-     </div>
+      <div class="contacts-details-contents" id="contacts-details-contentsID">
+        <div class="img-name-div">
+          <div class="img-details-div" id="img-details-divID"></div>
+          <div>
+            <span id="details-nameID">Name</span>
+            <div class="edit-delete-div">
+              <a href=""><img src="./assets/img/edit.png" alt="edit" class="img-edit">Edit</a>
+              <a href=""><img src="./assets/img/delete.png" alt="delete" class="img-delete">Delete</a>
+            </div>
+          </div>
+        </div>
+        <div class="contact-information-div">
+          <span>Contact information</span>
+          <div class="email-phone-div">
+            <span class="email-phone-title">Email</span>
+            <span class="email-phone-value email-value" id="details-emailID">Email-address</span>
+            <span class="email-phone-title">Phone</span>
+            <span class="email-phone-value">phone-number</span>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <script src="js/include-html.js"></script>
 </body>
+
 </html>
