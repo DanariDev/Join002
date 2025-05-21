@@ -1,24 +1,96 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+
+import { db, auth } from "./firebase-config.js";
 import {
-  getFirestore,
-  collection,
-  getDocs,
-  addDoc,
-  Timestamp
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  ref,
+  onValue,
+  update,
+  push,
+  get,
+  child,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyC9E1VrPV6Nyo0rmKyBj9SxqH4X0xqEJys",
-  authDomain: "join002-26fa4.firebaseapp.com",
-  projectId: "join002-26fa4"
-};
+function $(s) {
+  return document.querySelector(s);
+}
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// === SUMMARY ===
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = "login.html";
+    return;
+  }
 
+  const isGuest = localStorage.getItem("isGuest") === "true";
+  let name = "User";
+
+  if (isGuest) {
+    name = "Guest";
+  } else {
+    const snap = await get(child(ref(db), `users/${user.uid}`));
+    if (snap.exists()) name = snap.val().name;
+  }
+
+  showGreeting(name);
+  loadTasksForSummary();
+});
+
+function showGreeting(name) {
+  const el = $("#summary-greeting");
+  if (!el) return;
+  el.innerHTML = name === "Guest"
+    ? `Good morning,<br><span>Guest</span>`
+    : `Good morning,<br><span>${name}</span>`;
+}
+
+function loadTasksForSummary() {
+  onValue(ref(db, "tasks"), (snapshot) => {
+    const tasksObj = snapshot.val();
+    if (!tasksObj) return;
+    const tasks = Object.values(tasksObj);
+    updateSummary(tasks);
+  });
+}
+
+function updateSummary(tasks) {
+  set(".todo .metric h2", count(tasks, "status", "todo"));
+  set(".done .metric h2", count(tasks, "status", "done"));
+  set(".mini:nth-child(1) h2", tasks.length);
+  set(".mini:nth-child(2) h2", count(tasks, "status", "in progress"));
+  set(".mini:nth-child(3) h2", count(tasks, "status", "awaiting feedback"));
+  set(".urgent .metric h2", count(tasks, "priority", "urgent"));
+  showDeadline(tasks);
+}
+
+function set(sel, val) {
+  const el = $(sel);
+  if (el) el.textContent = val;
+}
+
+function count(arr, key, val) {
+  return arr.filter((t) => t[key]?.toLowerCase() === val).length;
+}
+
+function showDeadline(tasks) {
+  const dates = tasks
+    .filter(t => t.dueDate)
+    .map(t => new Date(t.dueDate))
+    .filter(d => d > new Date())
+    .sort((a, b) => a - b);
+
+  const date = dates[0] || new Date();
+  $("#deadline-date").textContent = date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+// === SEED TASKS ===
 async function getContacts() {
-  const snap = await getDocs(collection(db, "contacts"));
-  return snap.docs.map(d => d.data().name);
+  const snap = await get(ref(db, "contacts"));
+  const data = snap.val();
+  return data ? Object.values(data).map(d => d.name) : [];
 }
 
 function getRandomFromArray(arr, count = 1) {
@@ -33,7 +105,7 @@ async function seedTasks() {
     {
       title: "Login Seite finalisieren",
       description: "Farbwerte und Layout final abstimmen",
-      dueDate: Timestamp.fromDate(new Date("2025-05-22")),
+      dueDate: "2025-05-22",
       priority: "urgent",
       status: "todo",
       category: "User Story",
@@ -45,7 +117,7 @@ async function seedTasks() {
     {
       title: "Board Ansicht umbauen",
       description: "Drag & Drop mit Animation testen",
-      dueDate: Timestamp.fromDate(new Date("2025-05-24")),
+      dueDate: "2025-05-24",
       priority: "medium",
       status: "in progress",
       category: "Technical Task",
@@ -54,7 +126,7 @@ async function seedTasks() {
     {
       title: "Deadline Visualisierung",
       description: "Deadline dynamisch anzeigen auf Summary",
-      dueDate: Timestamp.fromDate(new Date("2025-05-26")),
+      dueDate: "2025-05-26",
       priority: "low",
       status: "done",
       category: "User Story",
@@ -63,11 +135,11 @@ async function seedTasks() {
   ];
 
   for (let task of exampleTasks) {
-    task.assignedTo = getRandomFromArray(contacts, 2); // max. 2 zufällige Kontakte
-    await addDoc(collection(db, "Aufgaben"), task);
+    task.assignedTo = getRandomFromArray(contacts, 2);
+    await push(ref(db, "tasks"), task);
   }
 
-  alert("Tasks wurden mit echten Firebase-Kontakten gespeichert!");
+  alert("Tasks wurden erfolgreich in Realtime Database gespeichert!");
 }
 
-seedTasks();
+

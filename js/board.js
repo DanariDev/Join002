@@ -1,17 +1,18 @@
+
 import { db } from "./firebase-config.js";
-import {
-  collection, getDocs, doc, updateDoc
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 function $(s) {
   return document.querySelector(s);
 }
 
 function loadTasks() {
-  getDocs(collection(db, "tasks")).then(snap => {
-    snap.forEach(d => {
-      const t = d.data();
-      t.id = d.id;
+  const tasksRef = ref(db, 'tasks');
+  onValue(tasksRef, (snapshot) => {
+    const tasks = snapshot.val();
+    if (!tasks) return;
+    Object.entries(tasks).forEach(([id, t]) => {
+      t.id = id;
       renderTask(t);
     });
     setupDropTargets();
@@ -84,7 +85,7 @@ function handleDrop(e, col) {
   const newStatus = map[col.classList[0]];
   if (!card || !newStatus) return;
 
-  updateDoc(doc(db, "tasks", id), { status: newStatus }).then(() => {
+  update(ref(db, `tasks/${id}`), { status: newStatus }).then(() => {
     col.appendChild(card);
     const bar = card.querySelector('.progress-bar');
     bar.className = 'progress-bar';

@@ -1,3 +1,4 @@
+
 import { auth, db } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
@@ -5,10 +6,11 @@ import {
   signOut,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import {
-  setDoc,
-  doc,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  ref,
+  set,
+  get,
+  child
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 function signup() {
   const name = document.querySelector(".name_input")?.value.trim();
@@ -16,27 +18,18 @@ function signup() {
   const pass = document.querySelector(".password_input")?.value.trim();
   const repeat = document.querySelector(".password_repeat_input")?.value.trim();
 
-  if (!name || !email || !pass || !repeat) {
-    alert("Bitte alle Felder ausfüllen!");
-    return;
-  }
-
-  if (pass !== repeat) {
-    alert("Passwörter stimmen nicht überein!");
-    return;
-  }
+  if (!name || !email || !pass || !repeat) return alert("Bitte alle Felder ausfüllen!");
+  if (pass !== repeat) return alert("Passwörter stimmen nicht überein!");
 
   createUserWithEmailAndPassword(auth, email, pass)
     .then((cred) => {
-      return setDoc(doc(db, "users", cred.user.uid), {
-        name,
-        email,
-      }).then(() => {
-        localStorage.setItem("isGuest", "false");
-        localStorage.setItem("userName", name);
-        alert("Registrierung erfolgreich!");
-        window.location.href = "summary.html";
-      });
+      return set(ref(db, `users/${cred.user.uid}`), { name, email })
+        .then(() => {
+          localStorage.setItem("isGuest", "false");
+          localStorage.setItem("userName", name);
+          alert("Registrierung erfolgreich!");
+          window.location.href = "summary.html";
+        });
     })
     .catch((e) => alert("Fehler bei Registrierung:\n" + e.message));
 }
@@ -45,15 +38,12 @@ function login() {
   const email = document.querySelector(".email_input")?.value.trim();
   const pass = document.querySelector(".password_input")?.value.trim();
 
-  if (!email || !pass) {
-    alert("Bitte E-Mail und Passwort eingeben!");
-    return;
-  }
+  if (!email || !pass) return alert("Bitte E-Mail und Passwort eingeben!");
 
   signInWithEmailAndPassword(auth, email, pass)
     .then(async (cred) => {
-      const userDoc = await getDoc(doc(db, "users", cred.user.uid));
-      const name = userDoc.exists() ? userDoc.data().name : "User";
+      const snap = await get(child(ref(db), `users/${cred.user.uid}`));
+      const name = snap.exists() ? snap.val().name : "User";
       localStorage.setItem("isGuest", "false");
       localStorage.setItem("userName", name);
       window.location.href = "summary.html";
@@ -85,11 +75,9 @@ function init() {
   form.onsubmit = (e) => {
     e.preventDefault();
     if (path.includes("register")) signup();
-    if (path.includes("login")) login();
-    if (path.includes("index")) login();
-  }
+    if (path.includes("login") || path.includes("index")) login();
+  };
 
- 
   const guestBtn = document.getElementById("guestLogin");
   if (guestBtn) {
     guestBtn.addEventListener("click", loginAsGuest);

@@ -1,12 +1,19 @@
 import { db, auth } from "./firebase-config.js";
 import {
-  collection,
-  getDocs,
-  doc,
-  getDoc,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+  ref,
+  onValue,
+  update,
+  push,
+  get,
+  child,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+function $(s) {
+  return document.querySelector(s);
+}
+
+// === SUMMARY ===
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
     window.location.href = "login.html";
@@ -14,36 +21,34 @@ onAuthStateChanged(auth, async (user) => {
   }
 
   const isGuest = localStorage.getItem("isGuest") === "true";
-  let name;
+  let name = "User";
 
   if (isGuest) {
     name = "Guest";
   } else {
-    const userDoc = await getDoc(doc(db, "users", user.uid));
-    name = userDoc.exists() ? userDoc.data().name : "User";
+    const snap = await get(child(ref(db), `users/${user.uid}`));
+    if (snap.exists()) name = snap.val().name;
   }
 
   showGreeting(name);
-  const tasks = await loadTasks();
-  updateSummary(tasks);
+  loadTasksForSummary();
 });
 
-
 function showGreeting(name) {
-  const el = q("#summary-greeting");
+  const el = $("#summary-greeting");
   if (!el) return;
   el.innerHTML = name === "Guest"
     ? `Good morning,<br><span>Guest</span>`
     : `Good morning,<br><span>${name}</span>`;
 }
 
-function q(sel) {
-  return document.querySelector(sel);
-}
-
-async function loadTasks() {
-  const snap = await getDocs(collection(db, "Aufgaben"));
-  return snap.docs.map((d) => d.data());
+function loadTasksForSummary() {
+  onValue(ref(db, "tasks"), (snapshot) => {
+    const tasksObj = snapshot.val();
+    if (!tasksObj) return;
+    const tasks = Object.values(tasksObj);
+    updateSummary(tasks);
+  });
 }
 
 function updateSummary(tasks) {
@@ -57,7 +62,7 @@ function updateSummary(tasks) {
 }
 
 function set(sel, val) {
-  const el = q(sel);
+  const el = $(sel);
   if (el) el.textContent = val;
 }
 
@@ -73,10 +78,9 @@ function showDeadline(tasks) {
     .sort((a, b) => a - b);
 
   const date = dates[0] || new Date();
-  q("#deadline-date").textContent = date.toLocaleDateString("en-US", {
+  $("#deadline-date").textContent = date.toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 }
-
