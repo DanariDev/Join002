@@ -39,6 +39,15 @@ function renderTask(t) {
   c.querySelector('.task-desc').textContent = t.description;
   c.querySelector('.task-count').textContent = `${t.subtasks?.length || 0}/${t.subtasks?.length || 0}`;
 
+  const bar = c.querySelector('.progress-bar');
+  const statusClass = {
+    'todo': 'progress-25',
+    'in-progress': 'progress-50',
+    'await': 'progress-75',
+    'done': 'progress-100'
+  }[t.status || 'todo'];
+  bar.classList.add(statusClass);
+
   c.ondragstart = e => {
     e.dataTransfer.setData("text", t.id);
     c.classList.add('dragging');
