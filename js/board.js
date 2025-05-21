@@ -1,59 +1,83 @@
 import { db } from "./firebase-config.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import {
+  collection, getDocs, doc, updateDoc
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-export async function loadTasks() {
-  try {
-    const querySnapshot = await getDocs(collection(db, "tasks"));
-    querySnapshot.forEach(doc => {
-      const task = doc.data();
-      renderTask(task);
-    });
-  } catch (error) {
-    console.error("Fehler beim Laden der Aufgaben:", error);
-  }
+function $(s) {
+  return document.querySelector(s);
 }
 
-function renderTask(task) {
+function loadTasks() {
+  getDocs(collection(db, "tasks")).then(snap => {
+    snap.forEach(d => {
+      const t = d.data();
+      t.id = d.id;
+      renderTask(t);
+    });
+    setupDropTargets();
+  });
+}
 
-  const subtasksHTML = task.subtasks?.map(s => `<li>${s.text}</li>`).join('') || '';
-  const doneCount = task.subtasks?.filter(s => s.done === 'true').length || 0;
-  const totalCount = task.subtasks?.length || 0;
-  const progressText = `${doneCount}/${totalCount}`;
-
-  const containerSelector = {
+function renderTask(t) {
+  const colMap = {
     todo: '.to-do-tasks',
-    "in-progress": '.in-progress-tasks',
+    'in-progress': '.in-progress-tasks',
     await: '.await-tasks',
     done: '.done-tasks'
-  }[task.status || 'todo'];
+  };
+  const target = $(colMap[t.status || 'todo']);
+  if (!target) return;
 
-  const column = document.querySelector(containerSelector);
-  if (!column) return;
+  const tpl = document.querySelector('#task-template');
+  const c = tpl.content.cloneNode(true).querySelector('.task-card');
 
-  const taskCard = document.createElement('div');
-  taskCard.className = 'task-card';
-  console.log(`${task.subtasks}`);
+  c.dataset.id = t.id;
+  c.draggable = true;
 
-  taskCard.innerHTML = `
-  <div class="task-label label-${task.category}">${task.category}</div>
-    <h4 class="task-title">${task.title}</h4>
-    <p class="task-desc">${task.description}</p>
+  c.querySelector('.task-label').textContent = t.category;
+  c.querySelector('.task-title').textContent = t.title;
+  c.querySelector('.task-desc').textContent = t.description;
+  c.querySelector('.task-count').textContent = `${t.subtasks?.length || 0}/${t.subtasks?.length || 0}`;
 
-<div class="progress-bar-container">
-            <div class="progress-bar progress-100"></div>
-          </div>
+  c.ondragstart = e => {
+    e.dataTransfer.setData("text", t.id);
+    c.classList.add('dragging');
+  };
 
-          <div class="">${task.assignedTo}</div>
+  c.ondragend = () => c.classList.remove('dragging');
 
-    <p class="d-none">Due: ${task.dueDate}</p>
-    <p class="d-none">Priority: ${task.priority}</p>
-     <ul class="d-none">${subtasksHTML}</ul>
-     <div class="task-count">${progressText}</div>
+  target.appendChild(c);
+}
 
-  `;
+function setupDropTargets() {
+  document.querySelectorAll('.board > div').forEach(col => {
+    col.ondragover = e => {
+      e.preventDefault();
+      col.classList.add('drag-over');
+    };
+    col.ondragleave = () => col.classList.remove('drag-over');
+    col.ondrop = e => handleDrop(e, col);
+  });
+}
 
+function handleDrop(e, col) {
+  e.preventDefault();
+  col.classList.remove('drag-over');
 
-  column.appendChild(taskCard);
+  const id = e.dataTransfer.getData('text');
+  const card = document.querySelector(`[data-id="${id}"]`);
+  const map = {
+    'to-do-tasks': 'todo',
+    'in-progress-tasks': 'in-progress',
+    'await-tasks': 'await',
+    'done-tasks': 'done'
+  };
+  const newStatus = map[col.classList[0]];
+  if (!card || !newStatus) return;
+
+  updateDoc(doc(db, "tasks", id), { status: newStatus }).then(() => {
+    col.appendChild(card);
+  });
 }
 
 loadTasks();
