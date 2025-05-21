@@ -17,8 +17,9 @@ function renderTaskToColumn(task) {
     const column = document.querySelector(`[data-status="${task.status}"]`);
     if (!column) return;
 
-    const card = document.createElement('div');
-    card.classList.add('task-card');
+  const taskCard = document.createElement('div');
+  taskCard.className = 'task-card';
+  console.log(`${task.subtasks}`);
 
     card.innerHTML = `
     <div class="task-label ${task.category === 'Technical Task' ? 'label-technical' : 'label-user-story'}">${task.category}</div>
@@ -39,8 +40,9 @@ function renderTaskToColumn(task) {
 }
 
 
- /* @param { Object } task
-    * @returns { number }*/
+ * @param { Object } task
+    * @returns { number }
+ */
 function getProgressPercent(task) {
     if (!task.totalSubtasks || task.totalSubtasks === 0) return 0;
     const percent = (task.doneSubtasks / task.totalSubtasks) * 100;
