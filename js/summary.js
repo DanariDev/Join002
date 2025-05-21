@@ -8,13 +8,13 @@ import {
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 onAuthStateChanged(auth, async (user) => {
-  const isGuest = localStorage.getItem("isGuest") === "true";
-  let name;
-
-  if (!user || !isGuest) {
+  if (!user) {
     window.location.href = "login.html";
     return;
   }
+
+  const isGuest = localStorage.getItem("isGuest") === "true";
+  let name;
 
   if (isGuest) {
     name = "Guest";
@@ -27,6 +27,7 @@ onAuthStateChanged(auth, async (user) => {
   const tasks = await loadTasks();
   updateSummary(tasks);
 });
+
 
 function showGreeting(name) {
   const el = q("#summary-greeting");
