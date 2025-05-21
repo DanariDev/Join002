@@ -36,7 +36,7 @@
 
         <div class="add-task-form-content">
           <span>Priority</span>
-          <div class="btns">
+          <div id="priority-buttons">
             <button type="button" id="urgent-btn">Urgent
               <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon" />
             </button>
@@ -65,9 +65,10 @@
             <input type="text" id="subtask" placeholder="Enter subtask" autocomplete="off" />
             <button type="button" class="subtask-button">+</button>
           </div>
+
           <ul id="subtask-list"></ul>
 
-          <div class="bottom-line-btns">
+          <div class="add-task-create-and-clear-btn">
             <button type="reset" id="clear-btn">Clear &#10006;</button>
             <button id="create-task-btn" type="submit" class="btn-create-task disabled" disabled>
               Create Task &#10004;

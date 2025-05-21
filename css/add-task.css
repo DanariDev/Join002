@@ -38,7 +38,7 @@ body {
   gap: 16px;
 }
 
-.bottom-line-btns {
+.add-task-create-and-clear-btn {
   display: flex;
   justify-content: space-around;
   flex: 1;
@@ -65,7 +65,7 @@ select {
   background-color: #ccc;
 }
 
-.btns {
+#priority-buttons {
   display: flex;
   gap: 12px;
 }
@@ -81,31 +81,19 @@ select {
   font-weight: 600;
 }
 
-#urgent-btn:hover {
-  background-color: rgb(201, 57, 57);
-  color: white;
-}
-
-#medium-btn:hover {
-  background-color: rgb(255, 117, 24);
-  color: white;
-}
-
-#low-btn:hover {
-  background-color: rgb(93, 196, 62);
-  color: white;
-}
-
+#urgent-btn:hover,
 .urgent-btn-active {
   background-color: rgb(201, 57, 57);
   color: white;
 }
 
+#medium-btn:hover,
 .medium-btn-active {
   background-color: rgb(255, 117, 24);
   color: white;
 }
 
+#low-btn:hover,
 .low-btn-active {
   background-color: rgb(93, 196, 62);
   color: white;
