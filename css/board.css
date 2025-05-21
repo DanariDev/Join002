@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 .board-main {
     margin-left: 232px; 
     padding: 40px;
@@ -44,18 +45,38 @@
     cursor: pointer;
   }
   
+=======
+/* board.css */
+
+main {
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    padding-top: 20px;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Board-Container */
+>>>>>>> Stashed changes
   .board {
     display: flex;
     justify-content: space-between;
     gap: 20px;
   }
   
+<<<<<<< Updated upstream
+=======
+  /* Column-Header */
+>>>>>>> Stashed changes
   .board-column {
     background-color: #f9f9f9;
     border-radius: 16px;
     width: 22%;
     padding: 10px;
+<<<<<<< Updated upstream
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+=======
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+>>>>>>> Stashed changes
   }
   
   .board-column h3 {
@@ -72,12 +93,20 @@
     color: #555;
   }
   
+<<<<<<< Updated upstream
+=======
+  /* Task Card */
+>>>>>>> Stashed changes
   .task-card {
     background-color: #fff;
     border-radius: 16px;
     padding: 16px;
     margin-bottom: 20px;
+<<<<<<< Updated upstream
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+=======
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+>>>>>>> Stashed changes
     transition: transform 0.2s ease;
   }
   
@@ -127,6 +156,7 @@
   .progress-bar {
     height: 100%;
     background-color: #3b82f6;
+<<<<<<< Updated upstream
     border-radius: 4px;
     transition: width 0.3s ease;
   }
@@ -139,6 +169,11 @@
   .progress-75  { width: 75%; }
   .progress-100 { width: 100%; }
   
+=======
+    width: 50%; /* Dynamisch per JS setzen */
+  }
+  
+>>>>>>> Stashed changes
   .task-footer {
     display: flex;
     justify-content: space-between;
