@@ -8,10 +8,10 @@ import {
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
 onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.href = "login.html";
-    return;
-  }
+  // if (!user) {
+  //   window.location.href = "login.html";
+  //   return;
+  // }
 
   const isGuest = localStorage.getItem("isGuest") === "true";
   let name;

@@ -12,8 +12,7 @@ async function loadTasksFromFirestore() {
 }
 
 
- * @param { Object } task
-    */
+ /* @param { Object } task*/
 function renderTaskToColumn(task) {
     const column = document.querySelector(`[data-status="${task.status}"]`);
     if (!column) return;
@@ -40,9 +39,8 @@ function renderTaskToColumn(task) {
 }
 
 
- * @param { Object } task
-    * @returns { number }
- */
+ /* @param { Object } task
+    * @returns { number }*/
 function getProgressPercent(task) {
     if (!task.totalSubtasks || task.totalSubtasks === 0) return 0;
     const percent = (task.doneSubtasks / task.totalSubtasks) * 100;
