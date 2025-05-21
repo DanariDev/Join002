@@ -15,26 +15,25 @@
   <div include-html="templates/topbar.html"></div>
 
   <main class="board-main">
-    
     <div class="board-header">
       <h1 class="board-title">Board</h1>
       <div class="board-tools">
-        <input type="text" placeholder="Find Task" class="search-input">
+        <input type="text" placeholder="Find Task" class="search-input" />
         <button class="add-task-button">Add task +</button>
       </div>
     </div>
 
-    
     <section class="board">
-    
-      <div class="board-column">
+      
+      <div class="board-column" data-status="todo">
         <h3>To do <span class="add-task-icon">＋</span></h3>
+        
         <div class="task-card">
           <div class="task-label label-technical">Technical Task</div>
           <div class="task-title">HTML Base Template</div>
           <div class="task-desc">Create reusable HTML base templates...</div>
           <div class="progress-bar-container">
-            <div class="progress-bar" style="width: 100%;"></div>
+            <div class="progress-bar progress-100"></div>
           </div>
           <div class="task-footer">
             <div class="avatar-group">
@@ -50,14 +49,14 @@
       </div>
 
       
-      <div class="board-column">
+      <div class="board-column" data-status="inprogress">
         <h3>In Progress <span class="add-task-icon">＋</span></h3>
         <div class="task-card">
           <div class="task-label label-user-story">User Story</div>
           <div class="task-title">Daily Kochwelt Recipe</div>
           <div class="task-desc">Implement daily recipe and portion...</div>
           <div class="progress-bar-container">
-            <div class="progress-bar" style="width: 0%;"></div>
+            <div class="progress-bar progress-0"></div>
           </div>
           <div class="task-footer">
             <div class="avatar-group">
@@ -73,14 +72,14 @@
       </div>
 
       
-      <div class="board-column">
+      <div class="board-column" data-status="await">
         <h3>Await feedback <span class="add-task-icon">＋</span></h3>
         <div class="task-card">
           <div class="task-label label-user-story">User Story</div>
           <div class="task-title">Kochwelt Page & Recipe Recommender</div>
           <div class="task-desc">Build start page with recipe...</div>
           <div class="progress-bar-container">
-            <div class="progress-bar" style="width: 60%;"></div>
+            <div class="progress-bar progress-60"></div>
           </div>
           <div class="task-footer">
             <div class="avatar-group">
@@ -96,14 +95,14 @@
       </div>
 
       
-      <div class="board-column">
+      <div class="board-column" data-status="done">
         <h3>Done <span class="add-task-icon">＋</span></h3>
         <div class="task-card">
           <div class="task-label label-technical">Technical Task</div>
           <div class="task-title">Final Check Join</div>
           <div class="task-desc">Check for bugs and test...</div>
           <div class="progress-bar-container">
-            <div class="progress-bar" style="width: 0%;"></div>
+            <div class="progress-bar progress-0"></div>
           </div>
           <div class="task-footer">
             <div class="avatar-group">
@@ -120,5 +119,6 @@
   </main>
 
   <script src="js/include-html.js"></script>
+  <script type="module" src="js/board.js"></script>
 </body>
 </html>

@@ -1,13 +1,12 @@
-
 .board-main {
-    margin-left: 232px;
+    margin-left: 232px; 
     padding: 40px;
     background-color: #f5f5f5;
     min-height: 100vh;
     font-family: Arial, sans-serif;
     max-width: 1400px;
     margin-right: auto;
-    margin-left: auto;
+    
   }
   
   
@@ -45,13 +44,11 @@
     cursor: pointer;
   }
   
-  
   .board {
     display: flex;
     justify-content: space-between;
     gap: 20px;
   }
-  
   
   .board-column {
     background-color: #f9f9f9;
@@ -75,7 +72,6 @@
     color: #555;
   }
   
-  
   .task-card {
     background-color: #fff;
     border-radius: 16px;
@@ -88,7 +84,6 @@
   .task-card:hover {
     transform: translateY(-2px);
   }
-  
   
   .task-label {
     font-size: 12px;
@@ -109,7 +104,6 @@
     color: white;
   }
   
-  
   .task-title {
     font-size: 16px;
     font-weight: bold;
@@ -122,7 +116,6 @@
     margin-bottom: 10px;
   }
   
-
   .progress-bar-container {
     background-color: #e0e0e0;
     height: 6px;
@@ -134,9 +127,17 @@
   .progress-bar {
     height: 100%;
     background-color: #3b82f6;
-    width: 50%; 
+    border-radius: 4px;
+    transition: width 0.3s ease;
   }
   
+ 
+  .progress-0   { width: 0%; }
+  .progress-25  { width: 25%; }
+  .progress-50  { width: 50%; }
+  .progress-60  { width: 60%; }
+  .progress-75  { width: 75%; }
+  .progress-100 { width: 100%; }
   
   .task-footer {
     display: flex;
