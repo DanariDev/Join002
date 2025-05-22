@@ -1,57 +1,105 @@
+import { db } from "./firebase-config.js";
+import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { renderPopup } from "./task-overlay.js";
 
-import { db } from './firebase-config.js';
-import { collection, getDocs } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
-
-
-async function loadTasksFromFirestore() {
-  const tasksCol = collection(db, 'Aufgaben');
-  const tasksSnapshot = await getDocs(tasksCol);
-  const tasks = tasksSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-  tasks.forEach(renderTaskToColumn);
+function $(s) {
+    return document.querySelector(s);
 }
 
+function loadTasks() {
+    
+    document.getElementById("task-overlay")?.classList.add("d-none");
+  
+    let tasksRef = ref(db, "tasks");
+    onValue(tasksRef, function(snapshot) {
+      let tasks = snapshot.val();
+      if (!tasks) return;
+      for (let id in tasks) {
+        tasks[id].id = id;
+        renderTask(tasks[id]);
+      }
+      setupDropTargets();
+    }, { onlyOnce: true });
+  }
+  
 
- * @param {Object} task
- */
-function renderTaskToColumn(task) {
-  const column = document.querySelector(`[data-status="${task.status}"]`);
-  if (!column) return;
-
-  const card = document.createElement('div');
-  card.classList.add('task-card');
-
-  card.innerHTML = `
-    <div class="task-label ${task.category === 'Technical Task' ? 'label-technical' : 'label-user-story'}">${task.category}</div>
-    <div class="task-title">${task.title}</div>
-    <div class="task-desc">${task.description}</div>
-    <div class="progress-bar-container">
-      <div class="progress-bar progress-${getProgressPercent(task)}"></div>
-    </div>
-    <div class="task-footer">
-      <div class="avatar-group">
-        ${(task.assignedTo || []).map(a => `<div class="avatar">${a}</div>`).join('')}
-      </div>
-      <div class="task-count">${task.doneSubtasks || 0}/${task.totalSubtasks || 0}</div>
-    </div>
-  `;
-
-  column.appendChild(card);
+function renderTask(t) {
+    let colMap = { todo: ".to-do-tasks", "in-progress": ".in-progress-tasks", await: ".await-tasks", done: ".done-tasks" };
+    let target = $(colMap[t.status] || ".to-do-tasks");
+    if (!target) return;
+    let tpl = document.querySelector("#task-template");
+    let c = tpl.content.cloneNode(true).querySelector(".task-card");
+    c.dataset.id = t.id;
+    c.draggable = true;
+    updateTaskCard(c, t);
+    setupTaskCardEvents(c, t);
+    target.appendChild(c);
 }
 
-
- * @param {Object} task
- * @returns {number}
- */
-function getProgressPercent(task) {
-  if (!task.totalSubtasks || task.totalSubtasks === 0) return 0;
-  const percent = (task.doneSubtasks / task.totalSubtasks) * 100;
-  if (percent === 100) return 100;
-  if (percent >= 75) return 75;
-  if (percent >= 50) return 50;
-  if (percent >= 25) return 25;
-  return 0;
+function updateTaskCard(c, t) {
+    c.querySelector(".task-label").textContent = t.category;
+    c.querySelector(".task-title").textContent = t.title;
+    c.querySelector(".task-desc").textContent = t.description;
+    let totalSubtasks = t.subtasks ? t.subtasks.length : 0;
+    let doneSubtasks = 0;
+    if (t.subtasks) {
+        for (let i = 0; i < t.subtasks.length; i++) {
+            if (t.subtasks[i].done) doneSubtasks++;
+        }
+    }
+    c.querySelector(".task-count").textContent = doneSubtasks + "/" + totalSubtasks;
+    let bar = c.querySelector(".progress-bar");
+    let statusClass = t.status == "todo" ? "progress-25" : t.status == "in-progress" ? "progress-50" : t.status == "await" ? "progress-75" : "progress-100";
+    bar.classList.add(statusClass);
 }
 
+function setupTaskCardEvents(c, t) {
+    c.ondragstart = function(e) {
+      e.dataTransfer.setData("text", t.id);
+      c.classList.add("dragging");
+    };
+    c.ondragend = function() {
+      c.classList.remove("dragging");
+    };
+    c.onclick = () => renderPopup(t); 
+  }
+  
 
-window.addEventListener('DOMContentLoaded', loadTasksFromFirestore);
+function setupDropTargets() {
+    let cols = document.querySelectorAll(".board > div");
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].ondragover = function(e) {
+            e.preventDefault();
+            cols[i].classList.add("drag-over");
+        };
+        cols[i].ondragleave = function() {
+            cols[i].classList.remove("drag-over");
+        };
+        cols[i].ondrop = function(e) {
+            handleDrop(e, cols[i]);
+        };
+    }
+}
+
+function handleDrop(e, col) {
+    e.preventDefault();
+    col.classList.remove("drag-over");
+    let id = e.dataTransfer.getData("text");
+    let card = document.querySelector("[data-id='" + id + "']");
+    let map = { "to-do-tasks": "todo", "in-progress-tasks": "in-progress", "await-tasks": "await", "done-tasks": "done" };
+    let newStatus = map[col.classList[0]];
+    if (!card || !newStatus) return;
+    update(ref(db, "tasks/" + id), { status: newStatus }).then(function() {
+        col.appendChild(card);
+        updateProgressBar(card, newStatus);
+    });
+}
+
+function updateProgressBar(card, newStatus) {
+    let bar = card.querySelector(".progress-bar");
+    bar.className = "progress-bar";
+    let statusClass = newStatus == "todo" ? "progress-25" : newStatus == "in-progress" ? "progress-50" : newStatus == "await" ? "progress-75" : "progress-100";
+    bar.classList.add(statusClass);
+}
+
+loadTasks();
