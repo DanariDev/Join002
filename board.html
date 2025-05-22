@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="css/topbar.css" />
     <link rel="stylesheet" href="css/board.css" />
     <link rel="stylesheet" href="css/login.css" />
-    
   </head>
 
   <body>
@@ -57,9 +56,31 @@
       </div>
     </template>
 
+    <div id="task-overlay" class="overlay d-none">
+      <div class="overlay-content">
+        <button class="overlay-close">×</button>
+        <div class="overlay-section">
+          <h2 id="popup-title">Task Titel</h2>
+          <p id="popup-description">Beschreibung...</p>
+          <p id="popup-due-date">Due: Datum</p>
+          <p id="popup-category">Category: Kategorie</p>
+          <p id="popup-assigned">Assigned to: Name</p>
+          <p id="popup-priority">Priority: Priorität</p>
+        </div>
+        <div class="overlay-section">
+          <h3>Subtasks</h3>
+          <ul id="popup-subtasks"></ul>
+        </div>
+        <div class="overlay-actions">
+          <button id="edit-task-btn">Bearbeiten</button>
+          <button id="delete-task-btn">Löschen</button>
+        </div>
+      </div>
+    </div>
+
     <script src="js/include-html.js"></script>
     <script type="module" src="js/board.js"></script>
     <script type="module" src="js/topbar.js"></script>
-    
+    <script type="module" src="js/task-overlay.js"></script>
   </body>
 </html>

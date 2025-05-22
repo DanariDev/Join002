@@ -1,22 +1,27 @@
 import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { renderPopup } from "./task-overlay.js";
 
 function $(s) {
     return document.querySelector(s);
 }
 
 function loadTasks() {
+    
+    document.getElementById("task-overlay")?.classList.add("d-none");
+  
     let tasksRef = ref(db, "tasks");
     onValue(tasksRef, function(snapshot) {
-        let tasks = snapshot.val();
-        if (!tasks) return;
-        for (let id in tasks) {
-            tasks[id].id = id;
-            renderTask(tasks[id]);
-        }
-        setupDropTargets();
+      let tasks = snapshot.val();
+      if (!tasks) return;
+      for (let id in tasks) {
+        tasks[id].id = id;
+        renderTask(tasks[id]);
+      }
+      setupDropTargets();
     }, { onlyOnce: true });
-}
+  }
+  
 
 function renderTask(t) {
     let colMap = { todo: ".to-do-tasks", "in-progress": ".in-progress-tasks", await: ".await-tasks", done: ".done-tasks" };
@@ -50,13 +55,15 @@ function updateTaskCard(c, t) {
 
 function setupTaskCardEvents(c, t) {
     c.ondragstart = function(e) {
-        e.dataTransfer.setData("text", t.id);
-        c.classList.add("dragging");
+      e.dataTransfer.setData("text", t.id);
+      c.classList.add("dragging");
     };
     c.ondragend = function() {
-        c.classList.remove("dragging");
+      c.classList.remove("dragging");
     };
-}
+    c.onclick = () => renderPopup(t); 
+  }
+  
 
 function setupDropTargets() {
     let cols = document.querySelectorAll(".board > div");

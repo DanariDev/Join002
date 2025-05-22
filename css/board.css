@@ -147,18 +147,6 @@ body {
   color: white;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
 .board-column {
   background-color: #f9f9f9;
   border-radius: 16px;
@@ -279,4 +267,55 @@ body {
 .task-count {
   font-size: 12px;
   color: #888;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+
+
+.overlay-content {
+  background-color: white;
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 600px;
+  width: 90%;
+  position: relative;
+}
+
+.overlay-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.overlay-section {
+  margin-bottom: 20px;
+}
+
+.overlay-actions button {
+  background-color: #2a3647;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.overlay-actions button:hover {
+  background-color: #4a5b72;
 }
