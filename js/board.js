@@ -1,102 +1,98 @@
-
 import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 function $(s) {
-  return document.querySelector(s);
+    return document.querySelector(s);
 }
 
 function loadTasks() {
-  const tasksRef = ref(db, 'tasks');
-  onValue(tasksRef, (snapshot) => {
-    const tasks = snapshot.val();
-    if (!tasks) return;
-    Object.entries(tasks).forEach(([id, t]) => {
-      t.id = id;
-      renderTask(t);
-    });
-    setupDropTargets();
-  });
+    let tasksRef = ref(db, "tasks");
+    onValue(tasksRef, function(snapshot) {
+        let tasks = snapshot.val();
+        if (!tasks) return;
+        for (let id in tasks) {
+            tasks[id].id = id;
+            renderTask(tasks[id]);
+        }
+        setupDropTargets();
+    }, { onlyOnce: true });
 }
 
 function renderTask(t) {
-  const colMap = {
-    todo: '.to-do-tasks',
-    'in-progress': '.in-progress-tasks',
-    await: '.await-tasks',
-    done: '.done-tasks'
-  };
-  const target = $(colMap[t.status || 'todo']);
-  if (!target) return;
+    let colMap = { todo: ".to-do-tasks", "in-progress": ".in-progress-tasks", await: ".await-tasks", done: ".done-tasks" };
+    let target = $(colMap[t.status] || ".to-do-tasks");
+    if (!target) return;
+    let tpl = document.querySelector("#task-template");
+    let c = tpl.content.cloneNode(true).querySelector(".task-card");
+    c.dataset.id = t.id;
+    c.draggable = true;
+    updateTaskCard(c, t);
+    setupTaskCardEvents(c, t);
+    target.appendChild(c);
+}
 
-  const tpl = document.querySelector('#task-template');
-  const c = tpl.content.cloneNode(true).querySelector('.task-card');
+function updateTaskCard(c, t) {
+    c.querySelector(".task-label").textContent = t.category;
+    c.querySelector(".task-title").textContent = t.title;
+    c.querySelector(".task-desc").textContent = t.description;
+    let totalSubtasks = t.subtasks ? t.subtasks.length : 0;
+    let doneSubtasks = 0;
+    if (t.subtasks) {
+        for (let i = 0; i < t.subtasks.length; i++) {
+            if (t.subtasks[i].done) doneSubtasks++;
+        }
+    }
+    c.querySelector(".task-count").textContent = doneSubtasks + "/" + totalSubtasks;
+    let bar = c.querySelector(".progress-bar");
+    let statusClass = t.status == "todo" ? "progress-25" : t.status == "in-progress" ? "progress-50" : t.status == "await" ? "progress-75" : "progress-100";
+    bar.classList.add(statusClass);
+}
 
-  c.dataset.id = t.id;
-  c.draggable = true;
-
-  c.querySelector('.task-label').textContent = t.category;
-  c.querySelector('.task-title').textContent = t.title;
-  c.querySelector('.task-desc').textContent = t.description;
-  c.querySelector('.task-count').textContent = `${t.subtasks?.length || 0}/${t.subtasks?.length || 0}`;
-
-  const bar = c.querySelector('.progress-bar');
-  const statusClass = {
-    'todo': 'progress-25',
-    'in-progress': 'progress-50',
-    'await': 'progress-75',
-    'done': 'progress-100'
-  }[t.status || 'todo'];
-  bar.classList.add(statusClass);
-
-  c.ondragstart = e => {
-    e.dataTransfer.setData("text", t.id);
-    c.classList.add('dragging');
-  };
-
-  c.ondragend = () => c.classList.remove('dragging');
-
-  target.appendChild(c);
+function setupTaskCardEvents(c, t) {
+    c.ondragstart = function(e) {
+        e.dataTransfer.setData("text", t.id);
+        c.classList.add("dragging");
+    };
+    c.ondragend = function() {
+        c.classList.remove("dragging");
+    };
 }
 
 function setupDropTargets() {
-  document.querySelectorAll('.board > div').forEach(col => {
-    col.ondragover = e => {
-      e.preventDefault();
-      col.classList.add('drag-over');
-    };
-    col.ondragleave = () => col.classList.remove('drag-over');
-    col.ondrop = e => handleDrop(e, col);
-  });
+    let cols = document.querySelectorAll(".board > div");
+    for (let i = 0; i < cols.length; i++) {
+        cols[i].ondragover = function(e) {
+            e.preventDefault();
+            cols[i].classList.add("drag-over");
+        };
+        cols[i].ondragleave = function() {
+            cols[i].classList.remove("drag-over");
+        };
+        cols[i].ondrop = function(e) {
+            handleDrop(e, cols[i]);
+        };
+    }
 }
 
 function handleDrop(e, col) {
-  e.preventDefault();
-  col.classList.remove('drag-over');
+    e.preventDefault();
+    col.classList.remove("drag-over");
+    let id = e.dataTransfer.getData("text");
+    let card = document.querySelector("[data-id='" + id + "']");
+    let map = { "to-do-tasks": "todo", "in-progress-tasks": "in-progress", "await-tasks": "await", "done-tasks": "done" };
+    let newStatus = map[col.classList[0]];
+    if (!card || !newStatus) return;
+    update(ref(db, "tasks/" + id), { status: newStatus }).then(function() {
+        col.appendChild(card);
+        updateProgressBar(card, newStatus);
+    });
+}
 
-  const id = e.dataTransfer.getData('text');
-  const card = document.querySelector(`[data-id="${id}"]`);
-  const map = {
-    'to-do-tasks': 'todo',
-    'in-progress-tasks': 'in-progress',
-    'await-tasks': 'await',
-    'done-tasks': 'done'
-  };
-  const newStatus = map[col.classList[0]];
-  if (!card || !newStatus) return;
-
-  update(ref(db, `tasks/${id}`), { status: newStatus }).then(() => {
-    col.appendChild(card);
-    const bar = card.querySelector('.progress-bar');
-    bar.className = 'progress-bar';
-    const statusClass = {
-      'todo': 'progress-25',
-      'in-progress': 'progress-50',
-      'await': 'progress-75',
-      'done': 'progress-100'
-    }[newStatus];
+function updateProgressBar(card, newStatus) {
+    let bar = card.querySelector(".progress-bar");
+    bar.className = "progress-bar";
+    let statusClass = newStatus == "todo" ? "progress-25" : newStatus == "in-progress" ? "progress-50" : newStatus == "await" ? "progress-75" : "progress-100";
     bar.classList.add(statusClass);
-  });
 }
 
 loadTasks();
