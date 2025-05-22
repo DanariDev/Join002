@@ -124,6 +124,7 @@ function saveTaskEdits(taskId) {
   update(ref(db, `tasks/${taskId}`), updatedTask).then(closePopup);
 }
 
+
 function deleteTask(taskId) {
   if (confirm("Do you really want to delete this task?")) {
     remove(ref(db, `tasks/${taskId}`)).then(() => {
