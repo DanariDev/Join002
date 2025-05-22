@@ -1,4 +1,3 @@
-
 import { auth, db } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
@@ -9,35 +8,35 @@ import {
   ref,
   set,
   get,
-  child
+  child,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-function signup() {
+async function signup() {
   const name = document.querySelector(".name_input")?.value.trim();
   const email = document.querySelector(".email_input")?.value.trim();
   const pass = document.querySelector(".password_input")?.value.trim();
   const repeat = document.querySelector(".password_repeat_input")?.value.trim();
-
   if (!name || !email || !pass || !repeat) return alert("Bitte alle Felder ausfüllen!");
   if (pass !== repeat) return alert("Passwörter stimmen nicht überein!");
 
-  createUserWithEmailAndPassword(auth, email, pass)
-    .then((cred) => {
-      return set(ref(db, `users/${cred.user.uid}`), { name, email })
-        .then(() => {
-          localStorage.setItem("isGuest", "false");
-          localStorage.setItem("userName", name);
-          alert("Registrierung erfolgreich!");
-          window.location.href = "summary.html";
-        });
-    })
-    .catch((e) => alert("Fehler bei Registrierung:\n" + e.message));
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, email, pass);
+    await set(ref(db, `users/${cred.user.uid}`), { name, email });
+    const initials = name.split(" ")[0][0].toUpperCase() + name.split(" ")[1][0].toUpperCase();
+    await set(ref(db, `contacts/${email.replace(/\./g, "_")}`), { name, email, initials });
+
+    localStorage.setItem("isGuest", "false");
+    localStorage.setItem("userName", name);
+    alert("Registrierung erfolgreich!");
+    window.location.href = "summary.html";
+  } catch (e) {
+    alert("Fehler bei Registrierung:\n" + e.message);
+  }
 }
 
 function login() {
   const email = document.querySelector(".email_input")?.value.trim();
   const pass = document.querySelector(".password_input")?.value.trim();
-
   if (!email || !pass) return alert("Bitte E-Mail und Passwort eingeben!");
 
   signInWithEmailAndPassword(auth, email, pass)
@@ -79,9 +78,7 @@ function init() {
   };
 
   const guestBtn = document.getElementById("guestLogin");
-  if (guestBtn) {
-    guestBtn.addEventListener("click", loginAsGuest);
-  }
+  if (guestBtn) guestBtn.addEventListener("click", loginAsGuest);
 }
 
 init();

@@ -1,5 +1,7 @@
 import { db, auth } from "./firebase-config.js";
-import { ref, onValue, get, child, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, onValue, get, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
 
 function $(s) {
     return document.querySelector(s);
@@ -27,14 +29,10 @@ function loadUserName(uid, defaultName) {
 }
 
 function showGreeting(name) {
-    let el = $("#summary-greeting");
-    if (!el) return;
-    if (name == "Guest") {
-        el.innerHTML = "Good morning,<br><span>Guest</span>";
-    } else {
-        el.innerHTML = "Good morning,<br><span>" + name + "</span>";
-    }
-}
+    let el = document.getElementById("summary-name");
+    if (el) el.textContent = name;
+  }
+  
 
 function loadTasksForSummary() {
     onValue(ref(db, "tasks"), function(snapshot) {

@@ -77,7 +77,7 @@ function generateSortedContacts() {
 
 function appendContactDiv(letter, indexB) {
     let groupList = document.getElementById("group-list" + letter + "ID");
-    let indexA = letter.charCodeAt(0) - 65; // Einfache Umwandlung von Buchstabe zu Index
+    let indexA = letter.charCodeAt(0) - 65; 
     groupList.innerHTML += createImgNameEmailDiv(indexA, indexB);
     let imgDiv = document.getElementById("img-div" + indexA + indexB + "ID");
     let hue = Math.random() * 360;
