@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/login.css" />
     <link rel="stylesheet" href="./css/contacts.css" />
     <link rel="stylesheet" href="css/topbar.css" />
+    <link rel="stylesheet" href="./css/add-edit-contact.css">
   </head>
 
   <body>
@@ -16,7 +17,7 @@
 
     <main class="main" style="margin-left: 232px; padding: 40px">
       <div class="contacts-div">
-        <button>
+        <button onclick="addContactOpenClose()">
           Add new Contact
           <img src="assets/img/person_add.png" alt="Add person" />
         </button>
@@ -69,8 +70,62 @@
       </div>
     </main>
 
+    <div class="add-edit-body display-none" id="add-edit-bodyID">
+    <div class="add-contact-div display-none" id="add-contact-divID">
+      <div class="add-contact-right">
+        <img src="./assets/img/logo-sidebar.png" alt="">
+        <h1>Add contact</h1>
+        <span>Tasks are better with a team!</span>
+        <div class="separate-add-contact"></div>
+      </div>
+      <div class="add-contact-left">
+        <div class="add-contact-img-div">
+          <div class="add-contact-img"></div>
+        </div>
+        <form class="add-contact-form">
+          <div class="name-email-phone-div">
+            <input required class="name-email-phone-input" type="text" placeholder="Name"id="add-nameID">
+            <input required class="name-email-phone-input" type="email" placeholder="Email"id="add-emailID">
+            <input class="name-email-phone-input" type="tel" placeholder="Phone" id="add-phoneID">
+          </div>
+          <div class="buttons-div-form">
+            <button type="button" onclick="addContactOpenClose()" class="button-cansel">Canselt <span>X</span></button>
+            <button class="button-create-contact">Create Contact<img src="./assets/img/check.png" alt=""></button>
+          </div>
+        </form>
+      </div>
+      <button onclick="addContactOpenClose()" class="close-button">X</button>
+    </div>
+
+    <div class="edit-contact-div display-none" id="edit-contact-divID">
+      <div class="edit-contact-right">
+        <img src="./assets/img/logo-sidebar.png" alt="">
+        <h1>Edit contact</h1>
+        <div class="separate-edit-contact"></div>
+      </div>
+      <div class="edit-contact-left">
+        <div class="edit-contact-img-div">
+          <div class="edit-contact-img"></div>
+        </div>
+        <form class="edit-contact-form">
+          <div class="name-email-phone-div">
+            <input required class="name-email-phone-input" type="text" placeholder="Name" id="edit-nameID">
+            <input required class="name-email-phone-input" type="email" placeholder="Email" id="edit-emailID">
+            <input class="name-email-phone-input" type="tel" placeholder="Phone" id="edit-phoneID">
+          </div>
+          <div class="buttons-div-form">
+            <button type="button" onclick="contactDelete()" class="button-delete">Delete</button>
+            <button class="button-save">Save<img src="./assets/img/check.png" alt=""></button>
+          </div>
+        </form>
+      </div>
+      <button onclick="editContactOpenClose()" class="close-button">X</button>
+    </div>
+    </div>
+
     <script src="js/include-html.js"></script>
     <script src="js/topbar.js"></script>
+    <script src="js/add-edit-contact.js"></script>
 
     <script src="js/include-html.js"></script>
     <script type="module">
