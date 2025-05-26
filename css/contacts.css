@@ -186,6 +186,7 @@ body {
     font-size: 14px;
     text-decoration: none;
     color: #3f4957;
+    cursor: pointer;
 }
 
 .img-edit {

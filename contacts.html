@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="./css/contacts.css" />
     <link rel="stylesheet" href="css/topbar.css" />
     <link rel="stylesheet" href="./css/add-edit-contact.css">
+
+    <script src="./js/loadSidbarTopbar.js"></script>
+    <script src="./js/contacts(new).js"></script>
+    <script src="js/add-edit-contact.js"></script>
   </head>
 
-  <body>
-    <div include-html="sidebar.html"></div>
-    <div include-html="templates/topbar.html"></div>
+  <body onload="initSidbarTopbar(), initContactsList()">
+    <div id="sidebarID"></div>
+    <div id="topbarID"></div>
 
     <main class="main" style="margin-left: 232px; padding: 40px">
       <div class="contacts-div">
@@ -38,7 +42,7 @@
             <div>
               <span id="details-nameID">Name</span>
               <div class="edit-delete-div">
-                <a href="#"
+                <a onclick="editContactOpenClose()"
                   ><img
                     src="./assets/img/edit.png"
                     alt="edit"
@@ -63,7 +67,7 @@
                 >Email-address</span
               >
               <span class="email-phone-title">Phone</span>
-              <span class="email-phone-value">phone-number</span>
+              <span class="email-phone-value" id="details-phoneID">phone-number</span>
             </div>
           </div>
         </div>
@@ -82,7 +86,7 @@
         <div class="add-contact-img-div">
           <div class="add-contact-img"></div>
         </div>
-        <form class="add-contact-form">
+        <form onsubmit="handleSubmit(event)" class="add-contact-form"> <!--onsubmit="saveContact()"-->
           <div class="name-email-phone-div">
             <input required class="name-email-phone-input" type="text" placeholder="Name"id="add-nameID">
             <input required class="name-email-phone-input" type="email" placeholder="Email"id="add-emailID">
@@ -90,7 +94,7 @@
           </div>
           <div class="buttons-div-form">
             <button type="button" onclick="addContactOpenClose()" class="button-cansel">Canselt <span>X</span></button>
-            <button class="button-create-contact">Create Contact<img src="./assets/img/check.png" alt=""></button>
+            <button type="submit" id="button-new-contact-saveID" class="button-create-contact">Create Contact<img src="./assets/img/check.png" alt=""></button>
           </div>
         </form>
       </div>
@@ -105,7 +109,7 @@
       </div>
       <div class="edit-contact-left">
         <div class="edit-contact-img-div">
-          <div class="edit-contact-img"></div>
+          <div class="edit-contact-img" id="img-edit-divID"></div>
         </div>
         <form class="edit-contact-form">
           <div class="name-email-phone-div">
@@ -114,7 +118,7 @@
             <input class="name-email-phone-input" type="tel" placeholder="Phone" id="edit-phoneID">
           </div>
           <div class="buttons-div-form">
-            <button type="button" onclick="contactDelete()" class="button-delete">Delete</button>
+            <button type="button" class="button-delete">Delete</button>
             <button class="button-save">Save<img src="./assets/img/check.png" alt=""></button>
           </div>
         </form>
@@ -123,16 +127,16 @@
     </div>
     </div>
 
-    <script src="js/include-html.js"></script>
-    <script src="js/topbar.js"></script>
-    <script src="js/add-edit-contact.js"></script>
+    <!-- <script src="js/include-html.js"></script> -->
+    <!-- <script src="js/topbar.js"></script> -->
+    
 
-    <script src="js/include-html.js"></script>
-    <script type="module">
-      import { contactsList } from "./js/contacts.js";
-      import "./js/firebase-config.js";
+    <!-- <script src="js/include-html.js"></script> -->
+    <!-- <script type="module"> -->
+      <!-- import { contactsList } from "./js/contacts.js"; -->
+      <!-- import "./js/firebase-config.js"; -->
 
-      includeHTML().then(() => contactsList());
+      <!-- includeHTML().then(() => contactsList()); -->
     </script>
   </body>
 </html>

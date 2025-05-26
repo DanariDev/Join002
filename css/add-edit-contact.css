@@ -67,9 +67,20 @@
 .add-contact-img, .edit-contact-img{
     height: 90px;
     width: 90px;
-    background-color: lightgray;;
+    background-color: #d1d1d1;;
     border-radius: 100%;
     border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: white;
+}
+
+.add-contact-img{
+    background-image: url('../assets/img/contact-add-icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .add-contact-form ,.edit-contact-form{
