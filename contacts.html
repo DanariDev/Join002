@@ -1,80 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacts</title>
-    <link rel="stylesheet" href="css/sidebar.css" />
-    <link rel="stylesheet" href="css/login.css" />
-    <link rel="stylesheet" href="./css/contacts.css" />
-    <link rel="stylesheet" href="css/topbar.css" />
-    <link rel="stylesheet" href="./css/add-edit-contact.css">
 
-    <script src="./js/loadSidbarTopbar.js"></script>
-    <script src="./js/contacts(new).js"></script>
-    <script src="js/add-edit-contact.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacts</title>
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="./css/contacts.css" />
+  <link rel="stylesheet" href="css/topbar.css" />
+  <link rel="stylesheet" href="./css/add-edit-contact.css">
+  <link rel="stylesheet" href="css/topbar-responsive.css">
+  <link rel="stylesheet" href="css/sidebar-responsive.css">
+  <script src="./js/loadSidbarTopbar.js"></script>
+  <script src="./js/contacts(new).js"></script>
+  <script src="js/add-edit-contact.js"></script>
+</head>
 
-  <body onload="initSidbarTopbar(), initContactsList()">
-    <div id="sidebarID"></div>
-    <div id="topbarID"></div>
+<body onload="initSidbarTopbar(), initContactsList()">
+  <div id="sidebarID"></div>
+  <div id="topbarID"></div>
 
-    <main class="main" style="margin-left: 232px; padding: 40px">
-      <div class="contacts-div">
-        <button onclick="addContactOpenClose()">
-          Add new Contact
-          <img src="assets/img/person_add.png" alt="Add person" />
-        </button>
-        <div class="contacts-list-body">
-          <div class="contacts-list" id="contacts-listID"></div>
-        </div>
+  <main class="main" style="margin-left: 232px; padding: 40px">
+    <div class="contacts-div">
+      <button onclick="addContactOpenClose()">
+        Add new Contact
+        <img src="assets/img/person_add.png" alt="Add person" />
+      </button>
+      <div class="contacts-list-body">
+        <div class="contacts-list" id="contacts-listID"></div>
       </div>
+    </div>
 
-      <div class="contact-details-div">
-        <div class="contact-details-haeder">
-          <h1>Contacts</h1>
-          <div class="separate-contact-details-header"></div>
-          <span>Better with a team</span>
-        </div>
-        <div class="contacts-details-contents" id="contacts-details-contentsID">
-          <div class="img-name-div">
-            <div class="img-details-div" id="img-details-divID"></div>
-            <div>
-              <span id="details-nameID">Name</span>
-              <div class="edit-delete-div">
-                <a onclick="editContactOpenClose()"
-                  ><img
-                    src="./assets/img/edit.png"
-                    alt="edit"
-                    class="img-edit"
-                  />Edit</a
-                >
-                <a href="#"
-                  ><img
-                    src="./assets/img/delete.png"
-                    alt="delete"
-                    class="img-delete"
-                  />Delete</a
-                >
-              </div>
-            </div>
-          </div>
-          <div class="contact-information-div">
-            <span>Contact information</span>
-            <div class="email-phone-div">
-              <span class="email-phone-title">Email</span>
-              <span class="email-phone-value email-value" id="details-emailID"
-                >Email-address</span
-              >
-              <span class="email-phone-title">Phone</span>
-              <span class="email-phone-value" id="details-phoneID">phone-number</span>
+    <div class="contact-details-div">
+      <div class="contact-details-haeder">
+        <h1>Contacts</h1>
+        <div class="separate-contact-details-header"></div>
+        <span>Better with a team</span>
+      </div>
+      <div class="contacts-details-contents" id="contacts-details-contentsID">
+        <div class="img-name-div">
+          <div class="img-details-div" id="img-details-divID"></div>
+          <div>
+            <span id="details-nameID">Name</span>
+            <div class="edit-delete-div">
+              <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit"
+                  class="img-edit" />Edit</a>
+              <a href="#"><img src="./assets/img/delete.png" alt="delete" class="img-delete" />Delete</a>
             </div>
           </div>
         </div>
+        <div class="contact-information-div">
+          <span>Contact information</span>
+          <div class="email-phone-div">
+            <span class="email-phone-title">Email</span>
+            <span class="email-phone-value email-value" id="details-emailID">Email-address</span>
+            <span class="email-phone-title">Phone</span>
+            <span class="email-phone-value" id="details-phoneID">phone-number</span>
+          </div>
+        </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <div class="add-edit-body display-none" id="add-edit-bodyID">
+  <div class="add-edit-body display-none" id="add-edit-bodyID">
     <div class="add-contact-div display-none" id="add-contact-divID">
       <div class="add-contact-left">
         <img src="./assets/img/logo-sidebar.png" alt="">
@@ -88,13 +77,14 @@
         </div>
         <form onsubmit="handleSubmit(event)" class="add-contact-form">
           <div class="name-email-phone-div">
-            <input required class="name-email-phone-input" type="text" placeholder="Name"id="add-nameID">
-            <input required class="name-email-phone-input" type="email" placeholder="Email"id="add-emailID">
+            <input required class="name-email-phone-input" type="text" placeholder="Name" id="add-nameID">
+            <input required class="name-email-phone-input" type="email" placeholder="Email" id="add-emailID">
             <input class="name-email-phone-input" type="tel" placeholder="Phone" id="add-phoneID">
           </div>
           <div class="buttons-div-form">
             <button type="button" onclick="addContactOpenClose()" class="button-cansel">Canselt <span>X</span></button>
-            <button type="submit" id="button-new-contact-saveID" class="button-create-contact">Create Contact<img src="./assets/img/check.png" alt=""></button>
+            <button type="submit" id="button-new-contact-saveID" class="button-create-contact">Create Contact<img
+                src="./assets/img/check.png" alt=""></button>
           </div>
         </form>
       </div>
@@ -125,18 +115,19 @@
       </div>
       <button onclick="editContactOpenClose()" class="close-button">X</button>
     </div>
-    </div>
+  </div>
 
-    <!-- <script src="js/include-html.js"></script> -->
-    <!-- <script src="js/topbar.js"></script> -->
-    
+  <!-- <script src="js/include-html.js"></script> -->
+  <!-- <script src="js/topbar.js"></script> -->
 
-    <!-- <script src="js/include-html.js"></script> -->
-    <!-- <script type="module"> -->
-      <!-- import { contactsList } from "./js/contacts.js"; -->
-      <!-- import "./js/firebase-config.js"; -->
 
-      <!-- includeHTML().then(() => contactsList()); -->
-    </script>
-  </body>
+  <!-- <script src="js/include-html.js"></script> -->
+  <!-- <script type="module"> -->
+  <!-- import { contactsList } from "./js/contacts.js"; -->
+  <!-- import "./js/firebase-config.js"; -->
+
+  <!-- includeHTML().then(() => contactsList()); -->
+  </script>
+</body>
+
 </html>
