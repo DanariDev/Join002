@@ -14,6 +14,10 @@
         margin-left: 0;
         padding: 0;
     }
+
+    .contact-details-div {
+        display: none;
+    }
 }
 
 
