@@ -49,7 +49,7 @@ body {
 
 .contacts-list-body {
     overflow: auto;
-    padding-bottom: 16px;
+    padding-bottom: 8vh;
 }
 
 .contacts-list {
