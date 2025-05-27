@@ -19,26 +19,34 @@
   <div include-html="templates/topbar.html"></div>
 
   <main class="board-main">
+
+
     <div class="board-header">
-      <h1 class="board-title">Board</h1>
-      <div>
-        <input type="text" placeholder="Find Task" class="search-input" />
-        <button class="add-task-button">Add task +</button>
+
+      <div class="responsive-space-between">
+        <h1 class="board-title">Board</h1><a href="add-task.html"><button
+            class="add-task-button responsive-show">+</button></a>
       </div>
+
+      <div class="search-task-field">
+        <input type="text" placeholder="Find Task" class="search-input" />
+        <button class="add-task-button responsive-d-none">Add task +</button>
+      </div>
+
     </div>
 
     <section class="board">
       <div class="to-do-field">
-        <h3>To do <button class="add-task-btn">＋</button></h3>
+        <h3>To do</h3> <button class="add-task-btn">＋</button>
       </div>
       <div class="in-progress-field">
-        <h3>In Progress <button class="add-task-btn">＋</button></h3>
+        <h3>In Progress</h3> <button class="add-task-btn">＋</button>
       </div>
       <div class="await-field">
-        <h3>Await Feedback <button class="add-task-btn">＋</button></h3>
+        <h3>Await Feedback</h3> <button class="add-task-btn">＋</button>
       </div>
       <div class="done-field">
-        <h3>Done <button class="add-task-btn">＋</button></h3>
+        <h3>Done</h3> <button class="add-task-btn">＋</button>
       </div>
 
       <div class="to-do-tasks task-column"></div>

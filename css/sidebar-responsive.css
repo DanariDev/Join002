@@ -17,6 +17,7 @@
 
     .sidebar {
         width: 100vw;
+        max-width: none;
         height: 8vh;
         background-color: #2A3647;
         display: flex;
@@ -54,7 +55,7 @@
 
     .nav-link.active {
         background-color: #091931;
-        border-radius: 32px;
+        border-radius: 20px;
     }
 
     .nav-link img {
@@ -64,6 +65,13 @@
 
     .sidebar-footer {
         display: none;
+    }
+
+    .add-task-link,
+    .board-link,
+    .contacts-link,
+    .summary-link {
+        border-radius: 20px;
     }
 }
 

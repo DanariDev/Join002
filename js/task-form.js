@@ -94,6 +94,7 @@ function validateAndSaveTask(task) {
     push(ref(db, 'tasks'), task).then(function () {
         alert("Aufgabe erfolgreich gespeichert!");
         resetForm();
+        window.location.href = "board.html";
     });
 };
 

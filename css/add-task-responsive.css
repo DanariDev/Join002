@@ -12,11 +12,23 @@
 
     .add-task-main {
         margin-left: 0;
-        padding: 0;
+        padding: 10px 10px 8vh 10px;
+    }
+
+    #add-task-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        box-sizing: border-box;
+    }
+
+    .add-task-create-and-clear-btn {
+        padding: 10px;
+        gap: 5px;
     }
 }
-
-
 
 @media (max-width: 490px) {}
 
