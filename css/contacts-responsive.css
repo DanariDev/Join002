@@ -1,0 +1,23 @@
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 620px) {
+
+    .contacts-main {
+        margin-left: 0;
+        padding: 0;
+    }
+}
+
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
