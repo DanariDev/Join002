@@ -319,3 +319,7 @@ body {
 .overlay-actions button:hover {
   background-color: #4a5b72;
 }
+
+.board-link{
+  background-color: #1c2b3b;
+}
