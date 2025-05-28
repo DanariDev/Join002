@@ -153,7 +153,7 @@ function togglePriorityBtnMedium() {
         const urgentBtn = document.getElementById('urgent-btn');
         const lowBtn = document.getElementById('low-btn');
         urgentBtn.classList.remove(urgentBtn.id + '-active');
-        lowBtn.classList.remove(lowBtn.id + 'active');
+        lowBtn.classList.remove(lowBtn.id + '-active');
         img.src = isActive ? 'assets/img/medium-btn-icon-hover.png' : 'assets/img/medium-btn-icon.png';
         urgentBtn.querySelector('img').src = 'assets/img/urgent-btn-icon.png';
         lowBtn.querySelector('img').src = 'assets/img/low-btn-icon.png';
