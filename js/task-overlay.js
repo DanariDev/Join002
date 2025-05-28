@@ -50,18 +50,28 @@ function loadContactOptions(selected) {
 export function renderPopup(task) {
   const overlay = $("#task-overlay");
   const content = $(".overlay-content");
+  const selectedCategory = task.category;
+  const formattedDate = task.dueDate.split("-").reverse().join("/");
 
   overlay.dataset.taskId = task.id;
 
-  $("#popup-title").innerHTML = `<input id="edit-title" class="title-input" value="${task.title}" />`;
-  $("#popup-description").innerHTML = `<textarea id="edit-description" class="description-input">${task.description}</textarea>`;
-  $("#popup-due-date").innerHTML = `Due: <input type="date" id="edit-due-date" class="date-input" value="${task.dueDate}" />`;
-  $("#popup-category").innerHTML = `Category: ${categoryOptions}`;
+  $("#popup-title").innerHTML = `<h3 id="edit-title" class="title-input">${task.title} </h3>`;
+  $("#popup-description").innerHTML = `<p id="edit-description" class="description-input">${task.description}</p>`;
+  $("#popup-due-date").innerHTML = `<p id="edit-due-date" class="date-input">Due date: ${formattedDate}</p>`;
+  $("#popup-category").innerHTML = `<p class="task-label"> ${selectedCategory}</p>`;
   loadContactOptions(task.assignedTo);
   $("#popup-priority").innerHTML = `Priority: ${priorityOptions}`;
 
-  $("#edit-category").value = task.category;
+
   $("#edit-priority").value = task.priority;
+
+  const label = document.querySelector('.task-label');
+  const text = label.textContent.trim();
+  if (text === "Technical Task") {
+    label.classList.add('green-background');
+  } else if (text === "User Story") {
+    label.classList.add('blue-background');
+  }
 
   const subtaskList = $("#popup-subtasks");
   subtaskList.innerHTML = "";
