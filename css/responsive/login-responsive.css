@@ -38,6 +38,7 @@
     .btn-secondary {
         padding: 7px;
         font-size: 12px;
+
     }
 
     .underline:after {
@@ -54,6 +55,11 @@
         display: flex;
         align-items: center;
         gap: 8px;
+    }
+
+    .button-row {
+        flex-direction: column;
+        margin: 0;
     }
 }
 
