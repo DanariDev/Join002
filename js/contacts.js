@@ -64,7 +64,7 @@ function createGroupList(indexaAlphabet){
 }
 
 function createImgNameEmailDiv(indexaAlphabet, indexContacs){
-    return `<div class="img-name-email-div" id="img-name-email-div${indexaAlphabet}${indexContacs}ID" onclick="contactDeletesLoad('${indexaAlphabet}${indexContacs}','${indexaAlphabet}','${indexContacs}')"><div class="img-div" id="img-div${indexaAlphabet}${indexContacs}ID">${Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.initials}</div><div class="name-email-div"><span id=name${indexaAlphabet}${indexContacs}ID>${Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.name}</span><span class="email-span" id="email${indexaAlphabet}${indexContacs}ID">${Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.email}<span/></div>`;
+    return `<div class="img-name-email-div" id="img-name-email-div${indexaAlphabet}${indexContacs}ID" onclick="contactDeletesLoad('${indexaAlphabet}${indexContacs}','${indexaAlphabet}','${indexContacs}'), toContactDeletes()"><div class="img-div" id="img-div${indexaAlphabet}${indexContacs}ID">${Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.initials}</div><div class="name-email-div"><span id=name${indexaAlphabet}${indexContacs}ID>${Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.name}</span><span class="email-span" id="email${indexaAlphabet}${indexContacs}ID">${Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.email}<span/></div>`;
 }
 
 function contactDeletesLoad(idNumber, indexaAlphabet, indexContacs){
@@ -82,4 +82,16 @@ function contactDeletesLoad(idNumber, indexaAlphabet, indexContacs){
     document.getElementById(`img-name-email-div${idNumber}ID`).style.backgroundColor = '#2a3647';
     document.getElementById(`img-name-email-div${idNumber}ID`).style.color = 'white';
     
+}
+
+function backToContactsList(){
+    document.getElementById('contact-details-divID').classList.remove('display-flex');
+    document.querySelectorAll('.img-name-email-div').forEach(element => {
+        element.style = "";
+    });
+    document.getElementById('contacts-details-contentsID').classList.remove('display-flex');
+}
+
+function toContactDeletes(){
+    document.getElementById('contact-details-divID').classList.add('display-flex');
 }

@@ -7,7 +7,7 @@
   <title>Contacts</title>
   <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
   <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/login.css" />
+  <!-- <link rel="stylesheet" href="css/login.css" /> -->
   <link rel="stylesheet" href="./css/contacts.css" />
   <link rel="stylesheet" href="css/topbar.css" />
   <link rel="stylesheet" href="./css/add-edit-contact.css">
@@ -34,7 +34,7 @@
       </div>
     </div>
 
-    <div class="contact-details-div">
+    <div onclick="editDeleteMenuClose()" class="contact-details-div" id="contact-details-divID">
       <div class="contact-details-haeder">
         <h1>Contacts</h1>
         <div class="separate-contact-details-header"></div>
@@ -45,7 +45,7 @@
           <div class="img-details-div" id="img-details-divID"></div>
           <div>
             <span id="details-nameID">Name</span>
-            <div class="edit-delete-div">
+            <div class="edit-delete-div" id="edit-delete-divID">
               <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit"
                   class="img-edit" />Edit</a>
               <a href="#"><img src="./assets/img/delete.png" alt="delete" class="img-delete" />Delete</a>
@@ -62,6 +62,8 @@
           </div>
         </div>
       </div>
+      <button class="back-arrow" id="back-arrowID" onclick="backToContactsList()"><img src="./assets/img/arrow_left.png" alt=""></button>
+      <button class="edit-delete-responsive-button" onclick="editDeleteMenuOpen(event)"><img src="./assets/img/responsive-delete-edit.png" alt=""></button>
     </div>
   </main>
 

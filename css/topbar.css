@@ -1,23 +1,23 @@
 .topbar {
-  height: 72px;
   background-color: #ffffff;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 32px;
+  padding: 14px 32px;
+  margin-left: 210px;
   border-bottom: 1px solid #e0e0e0;
-  position: sticky;
-  top: 0;
-  left: 232px;
-  right: 0;
-  z-index: 99;
+  /* position: sticky; */
+  /* top: 0; */
+  /* left: 232px; */
+  /* right: 0; */
+  /* z-index: 99; */
 }
 
 .topbar-title {
   font-size: 16px;
   font-weight: 400;
   color: #2a3647;
-  padding-left: 350px;
+  padding-left: 64px;
 }
 
 .topbar-logo {
@@ -62,6 +62,7 @@
   padding: 24px;
   border-radius: 16px 0px 16px 16px;
   gap: 8px;
+  z-index: 1;
 }
 
 .menu a {

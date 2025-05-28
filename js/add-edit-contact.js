@@ -9,6 +9,25 @@ function editContactOpenClose(){
     editLoadContact();
 }
 
+function editDeleteMenuOpen(event){
+    document.getElementById('edit-delete-divID').classList.add("display-flex");
+    event.stopPropagation();
+}
+
+function editDeleteMenuClose(){
+    let isClassDisplayFlex = false; 
+    
+    document.getElementById('edit-delete-divID').classList.forEach(element => {
+        if (element == 'display-flex') {
+            isClassDisplayFlex = true;
+        };
+    });
+
+    if (window.innerWidth <= 620 && isClassDisplayFlex) {
+        document.getElementById('edit-delete-divID').classList.remove("display-flex");
+    }
+}
+
 function editLoadContact(){
     document.getElementById('edit-nameID').value = document.getElementById('details-nameID').innerText;
     document.getElementById('edit-emailID').value = document.getElementById('details-emailID').innerText;
