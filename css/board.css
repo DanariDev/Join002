@@ -91,7 +91,7 @@ body {
   gap: 3px;
 }
 
-/* TASK CONTAINERS */
+
 .to-do-tasks {
   grid-area: to-do-tasks;
   display: flex;
