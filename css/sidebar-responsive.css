@@ -1,0 +1,81 @@
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 620px) {
+
+    .legal-main {
+        padding-bottom: 10vh;
+        margin: 0;
+    }
+
+    .sidebar {
+        width: 100vw;
+        max-width: none;
+        height: 8vh;
+        background-color: #2A3647;
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        top: auto;
+        left: 0;
+        bottom: 0;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 0px;
+    }
+
+    .responsive-font {
+        font-size: 14px;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-link:hover {
+        background-color: #1c2b3b;
+        border-radius: 20px;
+    }
+
+    .nav-link.active {
+        background-color: #091931;
+        border-radius: 20px;
+    }
+
+    .nav-link img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sidebar-footer {
+        display: none;
+    }
+
+    .add-task-link,
+    .board-link,
+    .contacts-link,
+    .summary-link {
+        border-radius: 20px;
+    }
+}
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}

@@ -12,10 +12,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 async function signup() {
-  const name = document.querySelector(".name_input")?.value.trim();
-  const email = document.querySelector(".email_input")?.value.trim();
-  const pass = document.querySelector(".password_input")?.value.trim();
-  const repeat = document.querySelector(".password_repeat_input")?.value.trim();
+  const name = document.querySelector(".name-input")?.value.trim();
+  const email = document.querySelector(".email-input")?.value.trim();
+  const pass = document.querySelector(".password-input")?.value.trim();
+  const repeat = document.querySelector(".password-repeat_input")?.value.trim();
   if (!name || !email || !pass || !repeat) return alert("Bitte alle Felder ausfüllen!");
   if (pass !== repeat) return alert("Passwörter stimmen nicht überein!");
 
@@ -35,8 +35,8 @@ async function signup() {
 }
 
 function login() {
-  const email = document.querySelector(".email_input")?.value.trim();
-  const pass = document.querySelector(".password_input")?.value.trim();
+  const email = document.querySelector(".email-input")?.value.trim();
+  const pass = document.querySelector(".password-input")?.value.trim();
   if (!email || !pass) return alert("Bitte E-Mail und Passwort eingeben!");
 
   signInWithEmailAndPassword(auth, email, pass)

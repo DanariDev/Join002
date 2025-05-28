@@ -137,6 +137,20 @@ body {
   text-align: center;
 }
 
+.responsive-show {
+  display: none;
+}
+
+.green-background {
+  background-color: #00c7a3;
+  color: white;
+}
+
+.blue-background {
+  background-color: #005eff;
+  color: white;
+}
+
 .label-technical {
   background-color: #00c7a3;
   color: white;
@@ -318,4 +332,8 @@ body {
 
 .overlay-actions button:hover {
   background-color: #4a5b72;
+}
+
+.board-link {
+  background-color: #1c2b3b;
 }

@@ -15,7 +15,7 @@
     margin-left: 232px;
 }
 
-.add-contact-right, .edit-contact-right{
+.add-contact-left, .edit-contact-left{
     display: flex;
     flex-direction: column;
     padding: 40px;
@@ -24,24 +24,24 @@
     width: 256px;
 }
 
-.add-contact-right img, .edit-contact-right img{
+.add-contact-left img, .edit-contact-left img{
     height: 40px;
     width: 40px;
     margin-top: 72px;
 }
 
-.add-contact-right h1, .edit-contact-right h1{
+.add-contact-left h1, .edit-contact-left h1{
     margin: 12px 0 8px 0;
     font-weight: bold;
     font-size: 43px;
     color: white;
 }
 
-.edit-contact-right h1{
+.edit-contact-left h1{
     margin: 20px 0 8px 0;
 }
 
-.add-contact-right span, .edit-contact-right span{
+.add-contact-left span, .edit-contact-left span{
     color: white;
     font-size: 20px;
 }
@@ -53,7 +53,7 @@
     margin-top: 8px;
 }
 
-.add-contact-left, .edit-contact-left{
+.add-contact-right, .edit-contact-right{
     display: flex;
     flex-direction: row;
     padding: 100px 40px;
@@ -67,9 +67,20 @@
 .add-contact-img, .edit-contact-img{
     height: 90px;
     width: 90px;
-    background-color: lightgray;;
+    background-color: #d1d1d1;;
     border-radius: 100%;
     border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: white;
+}
+
+.add-contact-img{
+    background-image: url('../assets/img/contact-add-icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .add-contact-form ,.edit-contact-form{
@@ -161,5 +172,3 @@
 .display-none{
     display: none;
 }
-
-
