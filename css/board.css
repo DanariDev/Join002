@@ -91,7 +91,6 @@ body {
   gap: 3px;
 }
 
-
 .to-do-tasks {
   grid-area: to-do-tasks;
   display: flex;

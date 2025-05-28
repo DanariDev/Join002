@@ -35,10 +35,10 @@ function renderTask(t) {
     setupTaskCardEvents(c, t);
     target.appendChild(c);
     const label = c.querySelector('.task-label');
-    const text = label.textContent.trim().toLowerCase();
-    if (text === "technical") {
+    const text = label.textContent.trim();
+    if (text === "Technical Task") {
         label.classList.add('green-background');
-    } else if (text === "user") {
+    } else if (text === "User Story") {
         label.classList.add('blue-background');
     }
 }
