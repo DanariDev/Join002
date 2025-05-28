@@ -147,11 +147,17 @@ body {
 .green-background {
   background-color: #00c7a3;
   color: white;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 8px;
 }
 
 .blue-background {
   background-color: #005eff;
   color: white;
+  width: fit-content;
+  padding: 2px 8px;
+  border-radius: 8px;
 }
 
 .label-technical {
@@ -341,4 +347,30 @@ body {
 
 .board-link {
   background-color: #1c2b3b;
+}
+
+#popup-subtasks {
+  list-style: none;
+  padding: 0;
+}
+
+.assigned-list {
+  margin-top: 0.5rem;
+}
+
+.assigned-item {
+  padding: 2px 6px;
+  margin: 2px 0;
+  background-color: #eee;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.overlay-key {
+  font-size: 16px;
+  color: #666;
+}
+
+.tab-size {
+  tab-size: 15px;
 }
