@@ -92,8 +92,11 @@ function validateAndSaveTask(task) {
         return;
     };
     push(ref(db, 'tasks'), task).then(function () {
+        console.log(" title: " + task.title + " description: " + task.description + " Date: " + task.dueDate + " category: " + task.category +
+            " assingned: " + task.assignedTo + " priority: " + task.priority + " Subtask: " + task.subtasks);
         alert("Aufgabe erfolgreich gespeichert!");
         resetForm();
+
         window.location.href = "board.html";
     });
 };

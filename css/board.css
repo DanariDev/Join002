@@ -61,6 +61,7 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  gap: 3px;
 }
 
 .in-progress-field {
@@ -69,6 +70,7 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  gap: 3px;
 }
 
 .await-field {
@@ -77,6 +79,7 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  gap: 3px;
 }
 
 .done-field {
@@ -85,6 +88,7 @@ body {
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  gap: 3px;
 }
 
 /* TASK CONTAINERS */
