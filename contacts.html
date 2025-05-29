@@ -1,125 +1,201 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contacts</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <!-- <link rel="stylesheet" href="css/login.css" /> -->
+    <link rel="stylesheet" href="./css/contacts.css" />
+    <link rel="stylesheet" href="css/topbar.css" />
+    <link rel="stylesheet" href="./css/add-edit-contact.css" />
+    <link rel="stylesheet" href="css/responsive/topbar-responsive.css" />
+    <link rel="stylesheet" href="css/responsive/sidebar-responsive.css" />
+    <link rel="stylesheet" href="css/responsive/contacts-responsive.css" />
+    <script src="./js/loadSidbarTopbar.js"></script>
+    <script src="./js/contacts.js"></script>
+    <script src="js/add-edit-contact.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contacts</title>
-  <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
-  <link rel="stylesheet" href="css/sidebar.css" />
-  <!-- <link rel="stylesheet" href="css/login.css" /> -->
-  <link rel="stylesheet" href="./css/contacts.css" />
-  <link rel="stylesheet" href="css/topbar.css" />
-  <link rel="stylesheet" href="./css/add-edit-contact.css">
-  <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
-  <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
-  <link rel="stylesheet" href="css/responsive/contacts-responsive.css">
-  <script src="./js/loadSidbarTopbar.js"></script>
-  <script src="./js/contacts.js"></script>
-  <script src="js/add-edit-contact.js"></script>
-</head>
+  <body onload="initSidbarTopbar(), initContactsList()">
+    <div id="sidebarID"></div>
+    <div id="topbarID"></div>
 
-<body onload="initSidbarTopbar(), initContactsList()">
-  <div id="sidebarID"></div>
-  <div id="topbarID"></div>
-
-  <main class="contacts-main">
-    <div class="contacts-div">
-      <button onclick="addContactOpenClose()">
-        Add new Contact
-        <img src="assets/img/person_add.png" alt="Add person" />
-      </button>
-      <div class="contacts-list-body">
-        <div class="contacts-list" id="contacts-listID"></div>
+    <main class="contacts-main">
+      <div class="contacts-div">
+        <button onclick="addContactOpenClose()">
+          Add new Contact
+          <img src="assets/img/person_add.png" alt="Add person" />
+        </button>
+        <div class="contacts-list-body">
+          <div class="contacts-list" id="contacts-listID"></div>
+        </div>
       </div>
-    </div>
 
-    <div onclick="editDeleteMenuClose()" class="contact-details-div" id="contact-details-divID">
-      <div class="contact-details-haeder">
-        <h1>Contacts</h1>
-        <div class="separate-contact-details-header"></div>
-        <span>Better with a team</span>
-      </div>
-      <div class="contacts-details-contents" id="contacts-details-contentsID">
-        <div class="img-name-div">
-          <div class="img-details-div" id="img-details-divID"></div>
-          <div>
-            <span id="details-nameID">Name</span>
-            <div class="edit-delete-div" id="edit-delete-divID">
-              <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit"
-                  class="img-edit" />Edit</a>
-              <a href="#"><img src="./assets/img/delete.png" alt="delete" class="img-delete" />Delete</a>
+      <div
+        onclick="editDeleteMenuClose()"
+        class="contact-details-div"
+        id="contact-details-divID"
+      >
+        <div class="contact-details-haeder">
+          <h1>Contacts</h1>
+          <div class="separate-contact-details-header"></div>
+          <span>Better with a team</span>
+        </div>
+        <div class="contacts-details-contents" id="contacts-details-contentsID">
+          <div class="img-name-div">
+            <div class="img-details-div" id="img-details-divID"></div>
+            <div>
+              <span id="details-nameID">Name</span>
+              <div class="edit-delete-div" id="edit-delete-divID">
+                <a onclick="editContactOpenClose()"
+                  ><img
+                    src="./assets/img/edit.png"
+                    alt="edit"
+                    class="img-edit"
+                  />Edit</a
+                >
+                <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete" class="img-delete" />Delete</a>
+
+              </div>
+            </div>
+          </div>
+          <div class="contact-information-div">
+            <span>Contact information</span>
+            <div class="email-phone-div">
+              <span class="email-phone-title">Email</span>
+              <span class="email-phone-value email-value" id="details-emailID"
+                >Email-address</span
+              >
+              <span class="email-phone-title">Phone</span>
+              <span class="email-phone-value" id="details-phoneID"
+                >phone-number</span
+              >
             </div>
           </div>
         </div>
-        <div class="contact-information-div">
-          <span>Contact information</span>
-          <div class="email-phone-div">
-            <span class="email-phone-title">Email</span>
-            <span class="email-phone-value email-value" id="details-emailID">Email-address</span>
-            <span class="email-phone-title">Phone</span>
-            <span class="email-phone-value" id="details-phoneID">phone-number</span>
-          </div>
-        </div>
+        <button
+          class="back-arrow"
+          id="back-arrowID"
+          onclick="backToContactsList()"
+        >
+          <img src="./assets/img/arrow_left.png" alt="" />
+        </button>
+        <button
+          class="edit-delete-responsive-button"
+          onclick="editDeleteMenuOpen(event)"
+        >
+          <img src="./assets/img/responsive-delete-edit.png" alt="" />
+        </button>
       </div>
-      <button class="back-arrow" id="back-arrowID" onclick="backToContactsList()"><img src="./assets/img/arrow_left.png" alt=""></button>
-      <button class="edit-delete-responsive-button" onclick="editDeleteMenuOpen(event)"><img src="./assets/img/responsive-delete-edit.png" alt=""></button>
-    </div>
-  </main>
+    </main>
 
-  <div class="add-edit-body display-none" id="add-edit-bodyID">
-    <div class="add-contact-div display-none" id="add-contact-divID">
-      <div class="add-contact-left">
-        <img src="./assets/img/logo-sidebar.png" alt="">
-        <h1>Add contact</h1>
-        <span>Tasks are better with a team!</span>
-        <div class="separate-add-contact"></div>
-      </div>
-      <div class="add-contact-right">
-        <div class="add-contact-img-div">
-          <div class="add-contact-img"></div>
+    <div class="add-edit-body display-none" id="add-edit-bodyID">
+      <div class="add-contact-div display-none" id="add-contact-divID">
+        <div class="add-contact-left">
+          <img src="./assets/img/logo-sidebar.png" alt="" />
+          <h1>Add contact</h1>
+          <span>Tasks are better with a team!</span>
+          <div class="separate-add-contact"></div>
         </div>
-        <form onsubmit="handleSubmit(event)" class="add-contact-form">
-          <div class="name-email-phone-div">
-            <input required class="name-email-phone-input" type="text" placeholder="Name" id="add-nameID">
-            <input required class="name-email-phone-input" type="email" placeholder="Email" id="add-emailID">
-            <input class="name-email-phone-input" type="tel" placeholder="Phone" id="add-phoneID">
+        <div class="add-contact-right">
+          <div class="add-contact-img-div">
+            <div class="add-contact-img"></div>
           </div>
-          <div class="buttons-div-form">
-            <button type="button" onclick="addContactOpenClose()" class="button-cansel">Canselt <span>X</span></button>
-            <button type="submit" id="button-new-contact-saveID" class="button-create-contact">Create Contact<img
-                src="./assets/img/check.png" alt=""></button>
-          </div>
-        </form>
-      </div>
-      <button onclick="addContactOpenClose()" class="close-button">X</button>
-    </div>
-
-    <div class="edit-contact-div display-none" id="edit-contact-divID">
-      <div class="edit-contact-left">
-        <img src="./assets/img/logo-sidebar.png" alt="">
-        <h1>Edit contact</h1>
-        <div class="separate-edit-contact"></div>
-      </div>
-      <div class="edit-contact-right">
-        <div class="edit-contact-img-div">
-          <div class="edit-contact-img" id="img-edit-divID"></div>
+          <form onsubmit="handleSubmit(event)" class="add-contact-form">
+            <div class="name-email-phone-div">
+              <input
+                required
+                class="name-email-phone-input"
+                type="text"
+                placeholder="Name"
+                id="add-nameID"
+              />
+              <input
+                required
+                class="name-email-phone-input"
+                type="email"
+                placeholder="Email"
+                id="add-emailID"
+              />
+              <input
+                class="name-email-phone-input"
+                type="tel"
+                placeholder="Phone"
+                id="add-phoneID"
+              />
+            </div>
+            <div class="buttons-div-form">
+              <button
+                type="button"
+                onclick="addContactOpenClose()"
+                class="button-cansel"
+              >
+                Canselt <span>X</span>
+              </button>
+              <button
+                type="submit"
+                id="button-new-contact-saveID"
+                class="button-create-contact"
+              >
+                Create Contact<img src="./assets/img/check.png" alt="" />
+              </button>
+            </div>
+          </form>
         </div>
-        <form class="edit-contact-form">
-          <div class="name-email-phone-div">
-            <input required class="name-email-phone-input" type="text" placeholder="Name" id="edit-nameID">
-            <input required class="name-email-phone-input" type="email" placeholder="Email" id="edit-emailID">
-            <input class="name-email-phone-input" type="tel" placeholder="Phone" id="edit-phoneID">
-          </div>
-          <div class="buttons-div-form">
-            <button type="button" class="button-delete">Delete</button>
-            <button class="button-save">Save<img src="./assets/img/check.png" alt=""></button>
-          </div>
-        </form>
+        <button onclick="addContactOpenClose()" class="close-button">X</button>
       </div>
-      <button onclick="editContactOpenClose()" class="close-button">X</button>
-    </div>
-  </div>
-</body>
 
+      <div class="edit-contact-div display-none" id="edit-contact-divID">
+        <div class="edit-contact-left">
+          <img src="./assets/img/logo-sidebar.png" alt="" />
+          <h1>Edit contact</h1>
+          <div class="separate-edit-contact"></div>
+        </div>
+        <div class="edit-contact-right">
+          <div class="edit-contact-img-div">
+            <div class="edit-contact-img" id="img-edit-divID"></div>
+          </div>
+          <form class="edit-contact-form">
+            <div class="name-email-phone-div">
+              <input
+                required
+                class="name-email-phone-input"
+                type="text"
+                placeholder="Name"
+                id="edit-nameID"
+              />
+              <input
+                required
+                class="name-email-phone-input"
+                type="email"
+                placeholder="Email"
+                id="edit-emailID"
+              />
+              <input
+                class="name-email-phone-input"
+                type="tel"
+                placeholder="Phone"
+                id="edit-phoneID"
+              />
+            </div>
+            <div class="buttons-div-form">
+              <button
+                type="button"
+                class="button-delete"
+                onclick="deleteCurrentContact()"
+              >
+                Delete
+              </button>
+              <button class="button-save" onclick="saveEditedContact(event)">
+                Save<img src="./assets/img/check.png" alt="" />
+              </button>
+            </div>
+          </form>
+        </div>
+        <button onclick="editContactOpenClose()" class="close-button">X</button>
+      </div>
+    </div>
+  </body>
 </html>
