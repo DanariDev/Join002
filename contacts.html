@@ -56,8 +56,13 @@
                     class="img-edit"
                   />Edit</a
                 >
-                <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete" class="img-delete" />Delete</a>
-
+                <a onclick="deleteCurrentContact()"
+                  ><img
+                    src="./assets/img/delete.png"
+                    alt="delete"
+                    class="img-delete"
+                  />Delete</a
+                >
               </div>
             </div>
           </div>
@@ -122,6 +127,8 @@
               <input
                 class="name-email-phone-input"
                 type="tel"
+                inputmode="numeric"
+                pattern="[+]*[0-9]+"
                 placeholder="Phone"
                 id="add-phoneID"
               />
@@ -144,7 +151,8 @@
             </div>
           </form>
         </div>
-        <button onclick="addContactOpenClose()" class="close-button">X</button>
+        <button onclick="editContactOpenClose()" data-edit-contact>Bearbeiten</button>
+
       </div>
 
       <div class="edit-contact-div display-none" id="edit-contact-divID">
@@ -176,6 +184,8 @@
               <input
                 class="name-email-phone-input"
                 type="tel"
+                inputmode="numeric"
+                pattern="[+]*[0-9]+"
                 placeholder="Phone"
                 id="edit-phoneID"
               />
