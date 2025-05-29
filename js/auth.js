@@ -15,7 +15,7 @@ async function signup() {
   const name = document.querySelector(".name-input")?.value.trim();
   const email = document.querySelector(".email-input")?.value.trim();
   const pass = document.querySelector(".password-input")?.value.trim();
-  const repeat = document.querySelector(".password-repeat_input")?.value.trim();
+  const repeat = document.getElementById("password-repeat-input")?.value.trim();
   if (!name || !email || !pass || !repeat) return alert("Bitte alle Felder ausfüllen!");
   if (pass !== repeat) return alert("Passwörter stimmen nicht überein!");
 
