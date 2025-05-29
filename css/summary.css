@@ -75,8 +75,8 @@ body {
   flex-direction: column;
 }
 
-.todo,
-.done {
+#todo,
+#done {
   width: 260px;
   height: 140px;
   flex-direction: row;
@@ -144,7 +144,7 @@ body {
 
 .summary-box span {
   font-size: 13px;
-  color: #808080;
+  color: #2a3647;
 }
 
 .summary-box img {
@@ -182,4 +182,18 @@ body {
 .deadline-title {
   font-size: 11px;
   color: gray;
+}
+
+
+.summary-box:hover {
+  background-color: #1c2b3b;
+  scale: 110%;
+  transition: 0.2s ease-in-out;
+
+  h2,
+  #deadline-date,
+  span {
+    color: #e0e0e0;
+  }
+
 }
