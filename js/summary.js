@@ -47,8 +47,8 @@ function loadTasksForSummary() {
 }
 
 function updateSummary(tasks) {
-    set(".todo .metric h2", count(tasks, "status", "todo"));
-    set(".done .metric h2", count(tasks, "status", "done"));
+    set("#todo .metric h2", count(tasks, "status", "todo"));
+    set("#done .metric h2", count(tasks, "status", "done"));
     set(".mini:nth-child(1) h2", tasks.length);
     set(".mini:nth-child(2) h2", count(tasks, "status", "in-progress"));
     set(".mini:nth-child(3) h2", count(tasks, "status", "await"));
