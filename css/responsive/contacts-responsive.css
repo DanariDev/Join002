@@ -124,6 +124,10 @@
         padding: 0;
     }
 
+    .add-contact-button {
+        display: none;
+    }
+
     .contacts-div {
         flex: 1;
         max-height: 83.7124vh;
@@ -170,6 +174,10 @@
 
     .edit-delete-div a {
         font-size: 16px;
+    }
+
+    .add-contact-responsive-button{
+        display: flex;
     }
 }
 
