@@ -54,6 +54,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 .description-input {
@@ -122,6 +123,62 @@ select {
   margin: 8px 0;
 }
 
+
+.contact-chip {
+  background-color: #e0e0e0;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* NEW */
+
+.form-selected-contact {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-selected-contact input {
+  width: 20px;
+  height: 30px;
+}
+
+#contacts-selected {
+  min-height: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 6px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.contact-chip {
+  background-color: #d1e7dd;
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.contact-chip span {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.dropdown-arrow {
+  margin-left: auto;
+  font-size: 16px;
+  color: #555;
+  padding-right: 4px;
+}
+
 .contacts-dropdown {
   position: relative;
   border: 1px solid #ccc;
@@ -140,28 +197,7 @@ select {
   flex-wrap: wrap;
   align-items: center;
   gap: 6px;
-}
-
-.contact-chip {
-  background-color: #e0e0e0;
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.contact-chip span {
-  cursor: pointer;
-  font-weight: bold;
-}
-
-.dropdown-arrow {
-  margin-left: auto;
-  font-size: 16px;
-  color: #555;
-  padding-right: 4px;
+  border: none;
 }
 
 .contacts-dropdown-list {

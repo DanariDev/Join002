@@ -10,13 +10,13 @@ function getValue(selector) {
 };
 
 function getPriority() {
-    if (document.getElementById('urgent-btn').classList.contains('active')) {
+    if (document.getElementById('urgent-btn').classList.contains('urgent-btn-active')) {
         return 'urgent';
     };
-    if (document.getElementById('medium-btn').classList.contains('active')) {
+    if (document.getElementById('medium-btn').classList.contains('medium-btn-active')) {
         return 'medium';
     };
-    if (document.getElementById('low-btn').classList.contains('active')) {
+    if (document.getElementById('low-btn').classList.contains('low-btn-active')) {
         return 'low';
     };
     return 'medium';
@@ -42,24 +42,54 @@ function addNewSubtask() {
     };
 };
 
+let assignedTo = [];
+
 function populateContactsDropdown() {
-    const select = document.getElementById('assigned-to');
-    const placeholder = document.createElement('option');
-    placeholder.textContent = 'Select contacts to assign';
-    placeholder.disabled = true;
-    placeholder.selected = true;
-    placeholder.hidden = true;
-    select.appendChild(placeholder);
-    addContactOptions(select);
+    const dropdownList = document.getElementById('contacts-dropdown-list');
+    dropdownList.innerHTML = "";
+
+    for (let contact of contacts) {
+        const item = document.createElement('div');
+        item.innerHTML = `
+            <label class="form-selected-contact">
+                <input type="checkbox" value="${contact.email}" data-name="${contact.name}" />
+                ${contact.name}
+            </label>
+        `;
+        dropdownList.appendChild(item);
+    }
+
+    dropdownList.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', function () {
+            const email = this.value;
+            const name = this.dataset.name;
+
+            if (this.checked) {
+                assignedTo.push({ email, name });
+            } else {
+                assignedTo = assignedTo.filter(c => c.email !== email);
+            }
+
+            updateAssignedToUI();
+            updateCreateTaskBtn();
+        });
+    });
 };
 
-function addContactOptions(select) {
-    for (let i = 0; i < contacts.length; i++) {
-        const option = document.createElement('option');
-        option.value = contacts[i].email;
-        option.textContent = contacts[i].name;
-        select.appendChild(option);
-    };
+function updateAssignedToUI() {
+    const selectedDiv = document.getElementById('contacts-selected');
+    if (assignedTo.length === 0) {
+        selectedDiv.textContent = 'Select contact(s)';
+        return;
+    }
+
+    selectedDiv.innerHTML = '';
+    assignedTo.forEach(contact => {
+        const chip = document.createElement('div');
+        chip.classList.add('contact-chip');
+        chip.textContent = contact.name;
+        selectedDiv.appendChild(chip);
+    });
 };
 
 function loadContacts() {
@@ -78,7 +108,7 @@ function createTask(event) {
         description: getValue('#description'),
         dueDate: getValue('#date'),
         category: getValue('#category'),
-        assignedTo: getValue('#assigned-to'),
+        assignedTo: assignedTo.map(c => c.name),
         priority: getPriority(),
         subtasks: subtasks,
         status: 'todo'
@@ -92,8 +122,6 @@ function validateAndSaveTask(task) {
         return;
     };
     push(ref(db, 'tasks'), task).then(function () {
-        console.log(" title: " + task.title + " description: " + task.description + " Date: " + task.dueDate + " category: " + task.category +
-            " assingned: " + task.assignedTo + " priority: " + task.priority + " Subtask: " + task.subtasks);
         alert("Aufgabe erfolgreich gespeichert!");
         resetForm();
 
@@ -113,8 +141,9 @@ function updateCreateTaskBtn() {
     const title = getValue('#title');
     const date = getValue('#date');
     const category = getValue('#category');
-    const assignedTo = getValue('#assigned-to');
-    const allFilled = title && date && category && assignedTo;
+    const hasContacts = assignedTo.length > 0;
+
+    const allFilled = title && date && category && hasContacts;
     const createBtn = document.getElementById('create-task-btn');
     createBtn.disabled = !allFilled;
     createBtn.classList.toggle('disabled', !allFilled);
@@ -203,21 +232,46 @@ function init() {
     document.getElementById('add-task-form').onsubmit = createTask;
     document.querySelector('.subtask-button').onclick = addNewSubtask;
     document.getElementById('clear-btn').onclick = clearForm;
+    document.getElementById('contacts-selected').addEventListener('click', () => {
+        document.getElementById('contacts-dropdown-list').classList.toggle('show');
+    });
+    document.addEventListener('click', function (event) {
+        const dropdown = document.getElementById('contacts-dropdown-list');
+        const toggle = document.getElementById('contacts-selected');
+        if (!dropdown.contains(event.target) && !toggle.contains(event.target)) {
+            dropdown.classList.remove('show');
+        }
+    });
     updateInputs();
 };
 
 function clearForm() {
     const createBtn = document.getElementById('create-task-btn');
+    const priorityBtns = document.querySelectorAll('.all-priority-btns');
     createBtn.disabled = true;
     createBtn.classList.add('disabled');
+    priorityBtns.forEach(btn => {
+        btn.classList.remove('urgent-btn-active', 'medium-btn-active', 'low-btn-active');
+        const img = btn.querySelector('img');
+        if (btn.id === 'urgent-btn') img.src = 'assets/img/urgent-btn-icon.png';
+        if (btn.id === 'medium-btn') img.src = 'assets/img/medium-btn-icon.png';
+        if (btn.id === 'low-btn') img.src = 'assets/img/low-btn-icon.png';
+    });
+    assignedTo = [];
+    updateAssignedToUI();
+    const checkboxes = document.querySelectorAll('#contacts-dropdown-list input[type="checkbox"]');
+    checkboxes.forEach(checkBox => checkBox.checked = false);
+    subtasks = [];
+    renderSubtasks();
 };
 
+
 function updateInputs() {
-    const inputs = ['#title', '#date', '#category', '#assigned-to'];
+    const inputs = ['#title', '#date', '#category'];
     for (let i = 0; i < inputs.length; i++) {
         const input = document.querySelector(inputs[i]);
-        input.oninput = updateCreateTaskBtn;
-    };
+        if (input) input.oninput = updateCreateTaskBtn;
+    }
 };
 
 init();
