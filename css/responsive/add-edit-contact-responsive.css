@@ -1,0 +1,106 @@
+@media (max-width: 1120px) {
+    .add-contact-left,
+    .edit-contact-left {
+        width: 192px;
+    }
+
+    .add-contact-left h1,
+    .edit-contact-left h1 {
+        font-size: 32.25px;
+    }
+
+    .add-contact-left span,
+    .edit-contact-left span {
+        font-size: 15px;
+    }
+
+    /* .add-contact-img,
+    .edit-contact-img {
+        font-size: 30px;
+        height: 70px;
+        width: 70px;
+    } */
+
+    /* .add-contact-img {
+        background-size: 33px;
+    } */
+
+    .name-email-phone-input {
+        width: 225px;
+    }
+
+    .button-cansel, .button-delete {
+        font-size: 12px;
+        padding: 9px 15px;
+    }
+
+    .button-create-contact,
+    .button-save {
+        font-size: 12px;
+        padding: 9px 15px;
+    }
+
+    .buttons-div-form span{
+        font-size: 9px;
+    }
+
+    .buttons-div-form img {
+        width: 9px;
+        height: 9px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .add-contact-div,
+    .edit-contact-div {
+        flex-direction: column;
+    }
+
+    .add-contact-left,
+    .edit-contact-left{
+        width: auto;
+        align-items: center;
+        border-radius: 16px 16px 0px 0px;
+    }
+
+    .add-contact-left img,
+    .edit-contact-left img {
+        margin-top: 0;
+    }
+
+    .add-contact-right,
+    .edit-contact-right {
+        flex-direction: column;
+        padding-top: 16px;
+        gap: 16px;
+        padding-bottom: 16px;
+    }
+
+    .add-contact-img-div,
+    .edit-contact-img-div {
+        margin-top: 0; 
+        display: flex;
+        justify-content: center;
+    }
+
+    .buttons-div-form{
+        display: flex;
+        justify-content: center;
+    }
+
+    .separate-add-contact,
+    .separate-edit-contact {
+        margin-right: 121px;
+    }
+
+    .close-button {
+        color: white;
+    }
+}
+
+@media (max-width: 620px) {
+    .add-contact-div
+    .edit-contact-div {
+        margin-left: 0;
+    }
+}

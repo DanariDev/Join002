@@ -8,28 +8,29 @@
 .add-contact-div,
 .edit-contact-div {
     display: flex;
+    flex-direction: row;
     position: fixed;
     border-radius: 16px;
     background-color: white;
     position-area: center;
     margin-left: 210px;
-    min-height: 350px;
 }
 
 .add-contact-left,
 .edit-contact-left {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 20px;
+    padding: 40px;
     background-color: #2a3647;
     border-radius: 16px 0px 0px 16px;
-    width: 100%;
+    width: 256px;
 }
 
 .add-contact-left img,
 .edit-contact-left img {
+    height: 40px;
     width: 40px;
+    margin-top: 72px;
 }
 
 .add-contact-left h1,
@@ -61,9 +62,8 @@
 .add-contact-right,
 .edit-contact-right {
     display: flex;
-    padding: 20px;
-    justify-content: center;
-    align-items: center;
+    flex-direction: row;
+    padding: 100px 40px;
     gap: 64px;
 }
 
@@ -76,7 +76,7 @@
 .edit-contact-img {
     height: 90px;
     width: 90px;
-    background-color: #d1d1d1;
+    background-color: lightgray;;
     border-radius: 100%;
     border: 2px solid white;
     display: flex;
@@ -107,8 +107,8 @@
 
 .name-email-phone-input {
     height: 32px;
-    width: 100%;
-    box-sizing: border-box;
+
+    width: 300px;
     padding-left: 16px;
     border-radius: 8px;
     border: 1px solid gray;
@@ -128,8 +128,8 @@
     font-size: 16px;
     border-radius: 8px;
     cursor: pointer;
-
     display: flex;
+    flex-direction: row;
     align-items: center;
     gap: 8px;
 }
