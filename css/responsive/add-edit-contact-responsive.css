@@ -142,3 +142,10 @@
         right: 24px;
     }
 }
+
+@media (max-height: 667px) {
+    .add-contact-div,
+    .edit-contact-div {
+        margin-bottom: 73px;
+    }
+}
