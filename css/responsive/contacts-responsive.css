@@ -223,3 +223,9 @@
 }
 
 @media (max-width: 320px) {}
+
+@media (max-height: 667px) {
+    .contacts-list-body { 
+        margin-bottom: 46px;
+    }
+}
