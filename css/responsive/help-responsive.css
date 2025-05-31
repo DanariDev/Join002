@@ -1,5 +1,10 @@
 @media (max-width: 620px) {
     .help-main {
         margin: 0;
+        padding: 10px 10px 8vh 10px;
+    }
+
+    .floating-back-arrow {
+        top: 100px;
     }
 }
