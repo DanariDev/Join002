@@ -274,6 +274,18 @@ function updateInputs() {
     }
 };
 
+function stopEnterKeySubmit() {
+    document.removeEventListener('keypress', handleEnterKey);
+    document.addEventListener('keypress', handleEnterKey);
+}
+
+function handleEnterKey(evt) {
+    const node = evt.target;
+    if (evt.key === 'Enter' && node.type === 'text') {
+        evt.preventDefault();
+    }
+}
+
 init();
 loadContacts();
 updatePriorityButtons();
@@ -282,3 +294,4 @@ togglePriorityBtnMedium();
 togglePriorityBtnLow();
 hoverPriorityBtns();
 updateInputs();
+stopEnterKeySubmit();
