@@ -1,12 +1,8 @@
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f6f7fb;
-}
+@import url("global.css");
 
 .summary-link,
 .summary-link:hover {
-  background-color: #091930;
+  background-color: var(--clr-900);
 }
 
 .summary-main {
@@ -24,14 +20,14 @@ body {
 
 .summary-header h1 {
   font-size: 36px;
-  color: #2a3647;
+  color: var(--clr-700);
   margin: 0;
 }
 
 .metrics-divider {
   width: 2px;
   height: 36px;
-  background-color: #29abe2;
+  background-color: var(--clr-500);
   border-radius: 2px;
   pointer-events: none;
   user-select: none;
@@ -41,7 +37,7 @@ body {
 .metrics-title {
   font-size: 20px;
   font-weight: 400;
-  color: #647187;
+  color: var(--clr-300)
 }
 
 .summary-container {
@@ -63,9 +59,9 @@ body {
 }
 
 .summary-box {
-  background-color: white;
+  background-color: var(--clr-200);
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   padding: 20px;
   display: flex;
   align-items: center;
@@ -115,7 +111,7 @@ body {
 .summary-box.mini h2 {
   font-size: 32px;
   margin: 0;
-  color: #2a3647;
+  color: var(--clr-700);
 }
 
 .summary-greeting {
@@ -129,23 +125,23 @@ body {
 #summary-greeting {
   font-size: 36px;
   font-weight: bold;
-  color: #2a3647;
+  color: var(--clr-700);
   line-height: 1.2;
 }
 
 #summary-greeting span {
-  color: #29abe2;
+  color: var(--clr-500);
 }
 
 .summary-box h2 {
   font-size: 32px;
   margin: 0;
-  color: #2a3647;
+  color: var(--clr-700);
 }
 
 .summary-box span {
   font-size: 13px;
-  color: #2a3647;
+  color: var(--clr-700);
 }
 
 .summary-box img {
@@ -170,31 +166,31 @@ body {
 .divider {
   width: 1px;
   height: 100px;
-  background-color: #e0e0e0;
+  background-color: var(--clr-200);
   margin: 0;
 }
 
 #deadline-date {
   font-size: 20px;
-  color: #2a3647;
+  color: var(--clr-700);
   font-weight: bold;
 }
 
 .deadline-title {
   font-size: 11px;
-  color: gray;
+  color: var(--clr-700);
 }
 
 
 .summary-box:hover {
-  background-color: #1c2b3b;
+  background-color: var(--clr-900);
   scale: 110%;
   transition: 0.2s ease-in-out;
 
   h2,
   #deadline-date,
   span {
-    color: #e0e0e0;
+    color: var(--clr-200);
   }
 
 }

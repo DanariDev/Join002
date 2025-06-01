@@ -1,15 +1,8 @@
+@import url("global.css");
+
 .contacts-link,
 .contacts-link:hover {
-    background-color: #091930;
-}
-
-body {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: #F5F5F5;
+    background-color: var(--clr-900);
 }
 
 .contacts-main {
@@ -22,7 +15,7 @@ body {
 
 .contacts-div {
     width: 348px;
-    background-color: white;
+    background-color: var(--clr-200);
     display: flex;
     align-items: stretch;
     flex-direction: column;
@@ -35,8 +28,8 @@ body {
     font-size: 16px;
     display: flex;
     gap: 16px;
-    background-color: #2a3647;
-    color: white;
+    background-color: var(--clr-700);
+    color: var(--clr-200);
     font-weight: bold;
     align-items: center;
     cursor: pointer;
@@ -70,7 +63,7 @@ body {
 
 .separate-contacts-list {
     height: 1px;
-    background-color: #dcdcdc;
+    background-color: var(--clr-200);
     margin: 20px 0 8px 0;
 }
 
@@ -97,8 +90,8 @@ body {
     align-items: center;
     justify-content: center;
     font-size: 12px;
-    color: white;
-    border: 2px solid white;
+    color: var(--clr-bgr-200);
+    border: 2px solid var(--clr-200);
 }
 
 .name-email-div {
@@ -109,7 +102,7 @@ body {
 
 .email-span {
     font-size: 12px;
-    color: #007cee;
+    color: var(--clr-500);
 }
 
 .contact-details-div {
@@ -133,24 +126,20 @@ body {
 
 .separate-contact-details-header {
     width: 3px;
-    background-color: #29abe2;
+    background-color: var(--clr-500);
 }
 
 .contact-details-haeder span {
     display: flex;
     align-items: center;
     font-size: 24px;
-    color: #2a3647;
+    color: var(--clr-700);
 }
 
 .contacts-details-contents {
     flex-direction: column;
     gap: 32px;
     display: none;
-}
-
-.display-flex {
-    display: flex !important;
 }
 
 .img-name-div {
@@ -164,12 +153,12 @@ body {
     width: 100px;
     background-color: black;
     border-radius: 100%;
-    border: 4px solid white;
+    border: 4px solid var(--clr-200);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 40px;
-    color: white;
+    color: var(--clr-200);
 }
 
 .img-name-div span {
@@ -188,7 +177,7 @@ body {
     gap: 8px;
     font-size: 14px;
     text-decoration: none;
-    color: #3f4957;
+    color: var(--clr-700);
     cursor: pointer;
 }
 
@@ -218,7 +207,7 @@ body {
 }
 
 .email-value {
-    color: #3d9bf1;
+    color: var(--clr-500);
 }
 
 .email-phone-value {
@@ -238,7 +227,7 @@ body {
     position: absolute;
     bottom: 32px;
     right: 32px;
-    background-color: rgb(42, 54, 71);
+    background-color: var(--clr-700);
     border: 0;
     padding: 12px 20px;
     border-radius: 100%;
@@ -253,7 +242,7 @@ body {
     right: 32px;
     border: 0;
     padding: 15px 10.93px;
-    background-color: #2a3647;
+    background-color: var(--clr-700);
     border-radius: 100%;
     display: none;
     margin: 0;

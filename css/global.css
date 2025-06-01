@@ -1,0 +1,44 @@
+/* Einheitliche Farbenpalette um gleiche Farben über das gesamte Projekt zu Gewährleisten */
+
+:root {
+    --clr-200: #f5f6f7;
+    /* für Body und Backgrounds */
+
+    --clr-300: #d1d1d1;
+    /* für Border */
+
+    --clr-400: #a8a8a8;
+    /* für helle Font */
+
+    --clr-500: #29abe3;
+    /* für blaue Font und Balken */
+
+    --clr-600: #3c516f;
+    /* für sidebar Hover */
+
+    --clr-700: #2A3647;
+    /* für Sidebar */
+
+    --clr-900: #091930;
+    /* für Buttons */
+}
+
+
+/* Einheitliche Body Struktur */
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--clr-200)
+}
+
+/* Andere allgemeine Klassen zur Mehrfach nutzung */
+
+.display-flex {
+    display: flex;
+}
+
+
+.d-none {
+    display: none;
+}

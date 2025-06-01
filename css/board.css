@@ -1,15 +1,7 @@
-body {
-  margin: 0;
-  font-family: 'Inter', sans-serif;
-  background-color: #f5f5f5;
-}
-
-.d-none {
-  display: none;
-}
+@import url("global.css");
 
 .board-main {
-  margin-left: 232px;
+  margin-left: 210px;
   padding: 40px;
 }
 
@@ -22,19 +14,19 @@ body {
 
 .board-title {
   font-size: 36px;
-  color: #2a3647;
+  color: var(--clr-700);
   margin: 0;
 }
 
 .search-input {
   padding: 8px 12px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--clr-300);
   border-radius: 8px;
 }
 
 .add-task-button {
-  background-color: #2f3c50;
-  color: white;
+  background-color: var(--clr-700);
+  color: var(--clr-200);
   flex: 1;
   height: 35px;
   border: none;
@@ -54,7 +46,7 @@ body {
   gap: 10px;
 }
 
-/* HEADERS */
+/* GRID HEADERS */
 .to-do-field {
   grid-area: to-do;
   display: flex;
@@ -121,21 +113,21 @@ body {
 
 /* Task Card Beispiel */
 .task-card {
-  background-color: white;
+  background-color: var(--clr-200);
   border-radius: 8px;
   padding: 12px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .board>div.drag-over {
-  outline: 2px dashed #007bff;
-  background-color: #eef7ff;
+  outline: 2px dashed var(--clr-500);
+  background-color: var(--clr-200);
 }
 
 /* Add Task Button */
 .add-task-btn {
   cursor: pointer;
-  color: #555;
+  color: var(--clr-700);
   border-radius: 25px;
   text-align: center;
 }
@@ -144,34 +136,27 @@ body {
   display: none;
 }
 
-.green-background {
-  background-color: #00c7a3;
-  color: white;
-  width: fit-content;
-  padding: 2px 8px;
-  border-radius: 8px;
-}
-
+.green-background,
 .blue-background {
-  background-color: #005eff;
-  color: white;
   width: fit-content;
   padding: 2px 8px;
   border-radius: 8px;
 }
 
+.green-background,
 .label-technical {
   background-color: #00c7a3;
-  color: white;
+  color: var(--clr-200);
 }
 
+.blue-background,
 .label-user {
   background-color: #005eff;
-  color: white;
+  color: var(--clr-200);
 }
 
 .board-column {
-  background-color: #f9f9f9;
+  background-color: var(--clr-200);
   border-radius: 16px;
   padding: 10px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
@@ -188,7 +173,7 @@ body {
 
 
 .task-card {
-  background-color: #fff;
+  background-color: var(--clr-200);
   border-radius: 16px;
   padding: 16px;
   margin-bottom: 20px;
@@ -219,12 +204,12 @@ body {
 
 .task-desc {
   font-size: 14px;
-  color: #666;
+  color: var(--clr-400);
   margin-bottom: 10px;
 }
 
 .progress-bar-container {
-  background-color: #e0e0e0;
+  background-color: var(--clr-200);
   height: 6px;
   border-radius: 4px;
   margin-bottom: 10px;
@@ -233,7 +218,7 @@ body {
 
 .progress-bar {
   height: 100%;
-  background-color: #3b82f6;
+  background-color: var(--clr-500);
   border-radius: 4px;
   transition: width 0.3s ease;
 }
@@ -278,18 +263,19 @@ body {
   height: 24px;
   border-radius: 50%;
   font-size: 12px;
-  background-color: #ccc;
-  color: white;
+  background-color: var(--clr-200);
+  color: var(--clr-200);
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: -6px;
-  border: 2px solid white;
+  border: 2px solid var(--clr-300);
+  ;
 }
 
 .task-count {
   font-size: 12px;
-  color: #888;
+  color: var(--clr-400);
 }
 
 /*overlay*/
@@ -309,7 +295,7 @@ body {
 
 
 .overlay-content {
-  background-color: white;
+  background-color: var(--clr-200);
   border-radius: 16px;
   padding: 30px;
   max-width: 600px;
@@ -332,8 +318,8 @@ body {
 }
 
 .overlay-actions button {
-  background-color: #2a3647;
-  color: white;
+  background-color: var(--clr-700);
+  color: var(--clr-200);
   padding: 10px 20px;
   border: none;
   border-radius: 8px;
@@ -342,13 +328,13 @@ body {
 }
 
 .overlay-actions button:hover {
-  background-color: #4a5b72;
+  background-color: var(--clr-300);
 }
 
 
 .board-link,
 .board-link:hover {
-  background-color: #091930;
+  background-color: var(--clr-900);
 }
 
 #popup-subtasks {
@@ -363,14 +349,14 @@ body {
 .assigned-item {
   padding: 2px 6px;
   margin: 2px 0;
-  background-color: #eee;
+  background-color: var(--clr-200);
   border-radius: 4px;
   display: inline-block;
 }
 
 .overlay-key {
   font-size: 16px;
-  color: #666;
+  color: var(--clr-400);
 }
 
 .tab-size {

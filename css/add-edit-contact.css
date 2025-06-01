@@ -1,3 +1,5 @@
+@import url("global.css");
+
 .add-edit-body {
     position: fixed;
     height: 100vh;
@@ -11,7 +13,7 @@
     flex-direction: row;
     position: fixed;
     border-radius: 16px;
-    background-color: white;
+    background-color: var(--clr-200);
     position-area: center;
     margin-left: 210px;
 }
@@ -21,7 +23,7 @@
     display: flex;
     flex-direction: column;
     padding: 40px;
-    background-color: #2a3647;
+    background-color: var(--clr-700);
     border-radius: 16px 0px 0px 16px;
     width: 256px;
 }
@@ -38,7 +40,7 @@
     margin: 12px 0 8px 0;
     font-weight: bold;
     font-size: 43px;
-    color: white;
+    color: var(--clr-200);
 }
 
 .edit-contact-left h1 {
@@ -55,7 +57,7 @@
 .separate-edit-contact {
     height: 2px;
     width: 64px;
-    background-color: #29abe2;
+    background-color: var(--clr-500);
     margin-top: 8px;
 }
 
@@ -76,14 +78,14 @@
 .edit-contact-img {
     height: 90px;
     width: 90px;
-    background-color: lightgray;;
+    background-color: lightgray;
     border-radius: 100%;
-    border: 2px solid white;
+    border: 2px solid var(--clr-200);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 40px;
-    color: white;
+    color: var(--clr-200);
 }
 
 .add-contact-img {
@@ -111,7 +113,7 @@
     width: 300px;
     padding-left: 16px;
     border-radius: 8px;
-    border: 1px solid gray;
+    border: 1px solid var(--clr-300);
 }
 
 .buttons-div-form {
@@ -136,28 +138,27 @@
 
 .button-cansel,
 .button-delete {
-    background-color: white;
-
+    background-color: var(--clr-200)
 }
 
 .button-create-contact,
 .button-save {
-    border: 1px solid #2a3647;
-    background-color: #2a3647;
-    color: white;
+    border: 1px solid var(--clr-300);
+    background-color: var(--clr-700);
+    color: var(--clr-200);
 }
 
 .button-cansel:hover,
 .button-delete:hover {
-    border: 1px solid #29abe2;
-    color: #29abe2;
+    border: 1px solid var(--clr-500);
+    color: var(--clr-500);
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
 }
 
 .button-create-contact:hover,
 .button-save:hover {
-    border: 1px solid #29abe2;
-    background-color: #29abe2;
+    border: 1px solid var(--clr-500);
+    background-color: var(--clr-500);
     box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
 }
 

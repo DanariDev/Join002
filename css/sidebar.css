@@ -1,7 +1,9 @@
+@import url("global.css");
+
 .sidebar {
   width: 210px;
   height: 100vh;
-  background-color: #2A3647;
+  background-color: var(--clr-700);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -27,7 +29,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  color: #cccccc;
+  color: var(--clr-200);
   text-decoration: none;
   font-size: 18px;
   font-weight: 400;
@@ -40,13 +42,13 @@
 .contacts-link:hover,
 .summary-link:hover,
 .log-in-link:hover {
-  background-color: #1c2b3b;
+  background-color: var(--clr-600);
 }
 
 .privacy-policy-link:hover,
 .legal-link:hover {
   background-color: none;
-  color: #007bff;
+  color: var(--clr-500);
 }
 
 .nav-link img {

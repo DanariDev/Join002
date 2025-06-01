@@ -1,9 +1,11 @@
+@import url("global.css");
+
 .legal-main {
-  margin-left: 232px;
+  margin-left: 210px;
   margin-right: 40px;
   padding: 60px 40px;
   max-width: 900px;
-  background-color: #f5f5f5;
+  background-color: var(--clr-200);
   font-family: Arial, sans-serif;
   min-height: 100vh;
 }
@@ -22,11 +24,11 @@
 .legal-main p {
   font-size: 15px;
   line-height: 1.6;
-  color: #333;
+  color: var(--clr-700);
 }
 
 .legal-main a {
-  color: #007BFF;
+  color: var(--clr-500);
   text-decoration: none;
 }
 
@@ -37,15 +39,15 @@
 .legal-main .date {
   margin-top: 60px;
   font-weight: bold;
-  color: #555;
+  color: var(--clr-700);
 }
 
 .legal-link,
 .legal-link:hover {
-  background-color: #091930;
-  color: #007bff;
+  background-color: var(--clr-900);
+  color: var(--clr-500);
 }
 
 .blue-print {
-  color: #007BFF;
+  color: var(--clr-500);
 }

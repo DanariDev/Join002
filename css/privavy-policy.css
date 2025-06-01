@@ -1,8 +1,4 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f6f7f8;
-}
+@import url("global.css");
 
 .privacy-main {
   margin-left: 210px;
@@ -12,12 +8,8 @@ body {
   flex: 1;
 }
 
-.icons-display-none {
-  display: none !important;
-}
-
 .privacy-policy-link,
 .privacy-policy-link:hover {
-  background-color: #091930;
-  color: #007bff;
+  background-color: var(--clr-900);
+  color: var(--clr-500);
 }
