@@ -17,6 +17,7 @@
     color: var(--clr-700);
     display: flex;
     align-items: center;
+    padding: 20px;
     gap: 8px;
 }
 

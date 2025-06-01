@@ -3,7 +3,6 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
         }
 
         .starting_logo {
@@ -13,7 +12,7 @@
             margin: 2%;
             width: 100vw;
             height: 100vh;
-            animation: slideToLeftCorner 1s ease forwards;
+            animation: slideToLeftCorner 1.25s ease forwards;
             animation-delay: 1s;
         }
 

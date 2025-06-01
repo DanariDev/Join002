@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join | Login</title>
   <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
+  <link rel="stylesheet" href="css/intro.css">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/start.css" />
   <link rel="stylesheet" href="css/login.css" />
@@ -13,17 +14,18 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
-<body onload="startIntro()">
+<body>
 
   <div class="login-page-wrapper">
 
+    <div class="starting-logo">
+      <img src="assets/img/logo-start.png" alt="Join Logo">
+    </div>
 
     <div class="sign-up-wrapper">
       <span>Not a Join user?</span>
       <a href="register.html" class="sign-up-btn">Sign up</a>
     </div>
-
-    <img src="assets/img/logo.svg" alt="Join Logo" class="logo" />
 
     <div class="login-box">
 
@@ -56,6 +58,7 @@
   </footer>
 
   <script type="module" src="js/auth.js"></script>
+  <script src="js/intro.js"></script>
 </body>
 
 </html>

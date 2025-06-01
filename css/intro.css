@@ -1,0 +1,32 @@
+@import url("global.css");
+
+.starting-logo {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    margin: 2%;
+    width: 100vw;
+    height: 100vh;
+    animation: slideToLeftCorner 1.25s ease forwards;
+    animation-delay: 0.75s;
+    z-index: 1000;
+
+}
+
+.starting-logo img {
+    width: 90%;
+    height: 90%;
+    object-fit: contain;
+    background-color: var(--clr-200);
+}
+
+@keyframes slideToLeftCorner {
+    to {
+        width: 150px;
+        height: 150px;
+        top: 0;
+        left: 0;
+    }
+}
