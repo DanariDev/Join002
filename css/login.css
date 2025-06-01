@@ -154,3 +154,26 @@
     display: flex;
     align-items: center;
 }
+
+footer {
+    display: flex;
+    justify-content: center;
+
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    width: 320px;
+    gap: 20px;
+}
+
+footer a {
+    text-decoration: none;
+    color: var(--clr-900);
+    gap: 12px;
+}
+
+footer a:hover {
+    color: var(--clr-500);
+}
