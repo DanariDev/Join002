@@ -7,7 +7,7 @@
   align-items: center;
   padding: 14px 32px;
   margin-left: 210px;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--clr-300);
 }
 
 .topbar-title {

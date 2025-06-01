@@ -55,7 +55,7 @@
     max-width: 900px;
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
     text-align: center;
 }
 
@@ -85,7 +85,7 @@
     width: 90%;
     min-height: 48px;
     padding: 12px;
-    border: 1px solid var(--clr-200);
+    border: 1px solid var(--clr-300);
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
