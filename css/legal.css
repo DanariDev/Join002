@@ -40,7 +40,11 @@
   color: #555;
 }
 
-
+.legal-link,
+.legal-link:hover {
+  background-color: #091930;
+  color: #007bff;
+}
 
 .blue-print {
   color: #007BFF;

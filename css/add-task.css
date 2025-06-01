@@ -4,8 +4,9 @@ body {
   background-color: #f5f5f5;
 }
 
-.add-task-link {
-  background-color: #1c2b3b;
+.add-task-link,
+.add-task-link:hover {
+  background-color: #091930;
 }
 
 .page-wrapper {

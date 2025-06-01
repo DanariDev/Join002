@@ -27,7 +27,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  color: white;
+  color: #cccccc;
   text-decoration: none;
   font-size: 18px;
   font-weight: 400;
@@ -35,12 +35,18 @@
   padding: 8px 48px;
 }
 
-.nav-link:hover {
+.add-task-link:hover,
+.board-link:hover,
+.contacts-link:hover,
+.summary-link:hover,
+.log-in-link:hover {
   background-color: #1c2b3b;
 }
 
-.nav-link.active {
-  background-color: #091931;
+.privacy-policy-link:hover,
+.legal-link:hover {
+  background-color: none;
+  color: #007bff;
 }
 
 .nav-link img {
@@ -48,23 +54,22 @@
   height: 24px;
 }
 
-.sidebar-footer {
+#sidebar-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 0 24px 40px 24px;
+  padding: 40px 0;
   font-size: 13px;
   font-weight: 400;
   font-family: 'Inter', sans-serif;
 }
 
-.sidebar-footer a {
-  color: #AAB8C2;
-  text-decoration: none;
-  transition: color 0.2s ease;
+.sidebar-footer-links {
+  gap: 6px;
 }
 
-.sidebar-footer a:hover {
-  color: white;
+.sidebar-footer-links a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin: 6px 0;
 }

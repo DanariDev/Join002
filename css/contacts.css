@@ -1,5 +1,6 @@
-.contacts-link {
-    background-color: #1c2b3b;
+.contacts-link,
+.contacts-link:hover {
+    background-color: #091930;
 }
 
 body {
@@ -224,7 +225,7 @@ body {
     font-size: 13px;
 }
 
-.back-arrow{
+.back-arrow {
     position: absolute;
     background-color: transparent;
     border: 0;
@@ -233,7 +234,7 @@ body {
     display: none;
 }
 
-.edit-delete-responsive-button{
+.edit-delete-responsive-button {
     position: absolute;
     bottom: 32px;
     right: 32px;
@@ -246,7 +247,7 @@ body {
     display: none;
 }
 
-.add-contact-responsive-button{
+.add-contact-responsive-button {
     position: absolute;
     bottom: 104px;
     right: 32px;
@@ -259,6 +260,6 @@ body {
     cursor: pointer;
 }
 
-.add-contact-responsive-button img{
+.add-contact-responsive-button img {
     height: 20px;
 }

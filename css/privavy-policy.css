@@ -12,10 +12,12 @@ body {
   flex: 1;
 }
 
-.privacy-policy-link {
-  color: white !important;
-}
-
 .icons-display-none {
   display: none !important;
+}
+
+.privacy-policy-link,
+.privacy-policy-link:hover {
+  background-color: #091930;
+  color: #007bff;
 }

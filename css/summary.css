@@ -1,11 +1,12 @@
 body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, sans-serif;
+  font-family: 'Inter', sans-serif;
   background-color: #f6f7fb;
 }
 
-.summary-link {
-  background-color: #1c2b3b;
+.summary-link,
+.summary-link:hover {
+  background-color: #091930;
 }
 
 .summary-main {

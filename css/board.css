@@ -345,8 +345,10 @@ body {
   background-color: #4a5b72;
 }
 
-.board-link {
-  background-color: #1c2b3b;
+
+.board-link,
+.board-link:hover {
+  background-color: #091930;
 }
 
 #popup-subtasks {

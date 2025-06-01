@@ -129,17 +129,6 @@ body {
     border-radius: 8px;
 }
 
-.footer-links {
-    display: flex;
-    gap: 24px;
-    font-size: 14px;
-}
-
-.footer-links a {
-    color: #2A3647;
-    text-decoration: none;
-}
-
 .email-input {
     background-image: url("/assets/img/mail.svg");
     background-repeat: no-repeat;
@@ -168,11 +157,4 @@ body {
 .back_to_login {
     display: flex;
     align-items: center;
-}
-
-footer {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    min-height: 20px;
 }
