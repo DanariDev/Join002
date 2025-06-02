@@ -135,7 +135,7 @@ function addContactOpenClose() {
     editContactOpenClose(false);
     initContactsList();
     setTimeout(() => {
-      contactDeletesLoad('', '', contacts.indexOf(c));
+      contactDetailsLoad('', '', contacts.indexOf(c));
     }, 100);
   }
   
