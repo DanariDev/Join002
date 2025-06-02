@@ -10,6 +10,10 @@
 
 @media (max-width: 620px) {
 
+    #sidebar-footer {
+        display: none;
+    }
+
     .summary-main {
         margin: 0;
         padding: 10px;

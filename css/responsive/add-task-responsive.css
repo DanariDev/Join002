@@ -9,6 +9,9 @@
 
 
 @media (max-width: 620px) {
+    #sidebar-footer {
+        display: none;
+    }
 
     .add-task-main {
         margin-left: 0;

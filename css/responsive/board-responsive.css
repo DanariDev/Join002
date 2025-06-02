@@ -9,6 +9,10 @@
 
 
 @media (max-width: 620px) {
+    #sidebar-footer {
+        display: none;
+    }
+
     .board-main {
         margin-left: 0;
         padding: 10px 10px 8vh 10px;

@@ -20,6 +20,10 @@
 
 
 @media (max-width: 620px) {
+    #sidebar-footer {
+        display: none;
+    }
+
     .underline:after {
         left: 38%;
         right: 38%;

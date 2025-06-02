@@ -1,4 +1,5 @@
 @media (max-width: 1120px) {
+
     .add-contact-left,
     .edit-contact-left {
         width: 192px;
@@ -16,14 +17,15 @@
 
     .add-contact-right,
     .edit-contact-right {
-        padding: 80px 40px; 
+        padding: 80px 40px;
     }
 
     .name-email-phone-input {
         width: 225px;
     }
 
-    .button-cansel, .button-delete {
+    .button-cansel,
+    .button-delete {
         font-size: 12px;
         padding: 9px 15px;
     }
@@ -34,7 +36,7 @@
         padding: 9px 15px;
     }
 
-    .buttons-div-form span{
+    .buttons-div-form span {
         font-size: 9px;
     }
 
@@ -45,13 +47,14 @@
 }
 
 @media (max-width: 1000px) {
+
     .add-contact-div,
     .edit-contact-div {
         flex-direction: column;
     }
 
     .add-contact-left,
-    .edit-contact-left{
+    .edit-contact-left {
         width: auto;
         align-items: center;
         border-radius: 16px 16px 0px 0px;
@@ -72,12 +75,12 @@
 
     .add-contact-img-div,
     .edit-contact-img-div {
-        margin-top: 0; 
+        margin-top: 0;
         display: flex;
         justify-content: center;
     }
 
-    .buttons-div-form{
+    .buttons-div-form {
         display: flex;
         justify-content: center;
     }
@@ -93,48 +96,53 @@
 }
 
 @media (max-width: 620px) {
+
+    #sidebar-footer {
+        display: none;
+    }
+
     .add-contact-div,
     .edit-contact-div {
         margin-left: 0;
     }
 
     .add-contact-left,
-    .edit-contact-left { 
-        padding: 80px 16px; 
+    .edit-contact-left {
+        padding: 80px 16px;
         align-items: flex-start;
-    } 
+    }
 
     .add-contact-left img,
     .edit-contact-left img {
         display: none;
-    } 
+    }
 
     .separate-add-contact,
     .separate-edit-contact {
         margin-left: 0;
-    } 
+    }
 
     .add-contact-right,
     .edit-contact-right {
         padding: 64px 16px 56px 16px;
-    } 
+    }
 
     .add-contact-img,
     .edit-contact-img {
-        position: absolute; 
+        position: absolute;
         top: 200px;
-    } 
+    }
 
     .name-email-phone-input {
         width: 256px;
-    } 
+    }
 
     .button-cansel {
-        display: none; 
-    } 
+        display: none;
+    }
 
     .button-create-contact,
-    .button-save { 
+    .button-save {
         font-size: 16px;
     }
 
@@ -144,6 +152,7 @@
 }
 
 @media (max-height: 667px) {
+
     .add-contact-div,
     .edit-contact-div {
         margin-bottom: 73px;
