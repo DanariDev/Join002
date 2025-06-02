@@ -1,6 +1,6 @@
 @import url("global.css");
 
-.summary-link,
+Add commentMore actions .summary-link,
 .summary-link:hover {
   background-color: var(--clr-900);
 }
@@ -37,7 +37,7 @@
 .metrics-title {
   font-size: 20px;
   font-weight: 400;
-  color: var(--clr-300)
+  color: var(--clr-700)
 }
 
 .summary-container {
@@ -61,7 +61,7 @@
 .summary-box {
   background-color: var(--clr-200);
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   padding: 20px;
   display: flex;
   align-items: center;
