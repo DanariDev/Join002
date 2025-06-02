@@ -118,6 +118,11 @@
 }
 
 @media (max-width: 620px) {
+
+    #sidebar-footer {
+        display: none;
+    }
+
     .contacts-main {
         margin-left: 0;
         padding: 0;
@@ -222,7 +227,7 @@
 @media (max-width: 320px) {}
 
 @media (max-height: 667px) {
-    .contacts-list-body { 
+    .contacts-list-body {
         margin-bottom: 46px;
     }
 }
