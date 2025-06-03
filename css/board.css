@@ -18,10 +18,13 @@
   margin: 0;
 }
 
-.search-input {
+#search-input {
   padding: 8px 12px;
   border: 1px solid var(--clr-300);
   border-radius: 8px;
+  background-image: url("/assets/img/search.png");
+  background-repeat: no-repeat;
+  background-position: right 24px center;
 }
 
 .add-task-button {
