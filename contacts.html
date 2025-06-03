@@ -108,22 +108,27 @@
     </div>
 
     <div class="edit-contact-div display-none" id="edit-contact-divID">
+
       <div class="edit-contact-left">
         <img src="./assets/img/logo-sidebar.png" alt="" />
         <h1>Edit contact</h1>
         <div class="separate-edit-contact"></div>
       </div>
+
       <div class="edit-contact-right">
         <div class="edit-contact-img-div">
           <div class="edit-contact-img" id="img-edit-divID"></div>
         </div>
+
         <form class="edit-contact-form">
+
           <div class="name-email-phone-div">
             <input required class="name-email-phone-input" type="text" placeholder="Name" id="edit-nameID" />
             <input required class="name-email-phone-input" type="email" placeholder="Email" id="edit-emailID" />
             <input class="name-email-phone-input" type="text" inputmode="numeric" pattern="^\+?[0-9]{7,15}$"
               placeholder="Phone" id="edit-phoneID" />
           </div>
+
           <div class="buttons-div-form">
             <button type="button" class="button-delete" onclick="deleteCurrentContact()">
               Delete
@@ -132,7 +137,9 @@
               Save<img src="./assets/img/check.png" alt="" />
             </button>
           </div>
+
         </form>
+
       </div>
       <button onclick="editContactOpenClose()" class="close-button">X</button>
     </div>
