@@ -103,17 +103,17 @@ function setupTaskCardEvents(card, task) {
 
 
 function setupDropTargets() {
-  let cols = document.querySelectorAll('.board > div');
-  for (let i = 0; i < cols.length; i++) {
-    cols[i].ondragover = function (e) {
-      e.preventDefault();
-      cols[i].classList.add('drag-over');
+  const columns = document.querySelectorAll('#board .task-column');
+  for (let col of columns) {
+    col.ondragover = function (element) {
+      element.preventDefault();
+      col.classList.add('drag-over');
     };
-    cols[i].ondragleave = function () {
-      cols[i].classList.remove('drag-over');
+    col.ondragleave = function () {
+      col.classList.remove('drag-over');
     };
-    cols[i].ondrop = function (e) {
-      handleDrop(e, cols[i]);
+    col.ondrop = function (element) {
+      handleDrop(element, col);
     };
   };
 };

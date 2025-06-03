@@ -39,7 +39,7 @@
 }
 
 /* GRID LAYOUT */
-.board {
+#board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto 1fr;
@@ -122,7 +122,7 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.board>div.drag-over {
+#board .task-column.drag-over {
   outline: 2px dashed var(--clr-500);
   background-color: var(--clr-200);
 }
@@ -393,8 +393,4 @@
 .overlay-key {
   font-size: 16px;
   color: var(--clr-400);
-}
-
-.tab-size {
-  tab-size: 15px;
 }

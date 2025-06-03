@@ -60,7 +60,7 @@
         padding: 5px;
     }
 
-    .board {
+    #board {
         grid-template-columns: 1fr;
         grid-template-areas:
             "to-do"
