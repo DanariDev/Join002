@@ -101,16 +101,19 @@ function createImgNameEmailDiv(indexaAlphabet, indexContacs) {
 
 
 function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
-    document.getElementById('contacts-details-contentsID').classList.add('display-flex');
-    document.getElementById('img-details-divID').innerHTML = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.initials;
-    document.getElementById('details-nameID').innerHTML = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.name;
-    document.getElementById('details-emailID').innerHTML = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.email;
-    document.getElementById('details-phoneID').innerHTML = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact.phone;
+    const nameElement = document.getElementById('details-nameID');
+    const icon = document.getElementById('img-details-divID');
+    const detailDiv = document.getElementById('contacts-details-contentsID');
+    const eMail = document.getElementById('details-emailID');
+    const phone = document.getElementById('details-phoneID');
+    const contact = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact;
 
-    for (let index = 0; index < document.getElementsByClassName('img-name-email-div').length; index++) {
-        document.getElementsByClassName('img-name-email-div')[index].style = "";
-    }
-
+    nameElement.innerHTML = contact.name;
+    icon.innerHTML = contact.initials;
+    icon.style.backgroundColor = getColorForName(contact.name);
+    detailDiv.classList.add('display-flex');
+    eMail.innerHTML = contact.email;
+    phone.innerHTML = contact.phone;
 };
 
 
