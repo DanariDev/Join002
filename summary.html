@@ -20,63 +20,62 @@
   <div include-html="sidebar.html"></div>
   <div include-html="templates/topbar.html"></div>
 
-
+  <div class="summary-header">
+    <h1>Join 360</h1>
+    <div class="summary-divider"></div>
+    <span class="summary-title">Key Metrics at a Glance</span>
+  </div>
 
   <main class="summary-main">
 
-    <div class="summary-header">
-      <h1>Join 360</h1>
-      <div class="metrics-divider"></div>
-      <span class="metrics-title">Key Metrics at a Glance</span>
-    </div>
 
-    <div class="summary-container">
+    <div class="summary-content-wrapper">
 
       <!-- Linke Seite -->
 
       <div class="summary-left">
-        <div class="flex-row">
+        <div class="display-flex">
           <div id="todo" class="summary-box" onclick="window.location.href='board.html'">
             <img src="assets/img/pencil-icon.png" alt="pencil-icon" />
-            <div class="metric">
+            <div class="flex-column">
               <h2>0</h2>
               <span>To-do</span>
             </div>
           </div>
-          <div id="done" class="summary-box done" onclick="window.location.href='board.html'">
+          <div id="done" class="summary-box " onclick="window.location.href='board.html'">
             <img src="assets/img/check-icon.png" alt="check-icon" />
-            <div class="metric">
+            <div class="flex-column">
               <h2>0</h2>
               <span>Done</span>
             </div>
           </div>
         </div>
 
-        <div class="summary-box urgent" onclick="window.location.href='board.html'">
-          <div class="urgent-left">
+        <div class="urgent-wrapper summary-box " onclick="window.location.href='board.html'">
+          <div id="urgent" class="flex-column">
             <img src="assets/img/urgent-icon.png" alt="urgent-icon" />
-            <div class="metric">
+            <div class="flex-column">
               <h2>0</h2>
               <span>Urgent</span>
             </div>
           </div>
           <div class="divider"></div>
-          <div class="urgent-right">
+          <div class="flex-column">
             <p id="deadline-date">October 16, 2022</p>
-            <span class="deadline-title">Upcoming Deadline</span>
+            <span id="deadline-title">Upcoming Deadline</span>
           </div>
         </div>
 
-        <div class="flex-row mini-row" onclick="window.location.href='board.html'">
-          <div class="summary-box mini">
+        <div class="display-flex" onclick="window.location.href='board.html'">
+          <div id="atBoard" class="summary-box">
             <h2>0</h2>
             <span>Tasks in Board</span>
           </div>
-          <div class="summary-box mini">
+          <div id="onProgress" class="summary-box">
             <h2>0</h2>
             <span>Task in Progress</span>
           </div>
-          <div class="summary-box mini">
+          <div id="awaitFeedback" class="summary-box">
             <h2>0</h2>
             <span>Awaiting Feedback</span>
           </div>
@@ -85,8 +84,8 @@
 
       <!-- Rechte Seite -->
 
-      <div class="summary-greeting">
-        <h2 id="summary-greeting">Good morning,<br><span id="summary-name">Guest</span></h2>
+      <div id="summary-greeting-wrapper">
+        <h2 id="summary-greeting-time">Good morning</h2><br><span id="summary-greeting-name"></span>
 
       </div>
     </div>

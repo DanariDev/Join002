@@ -6,12 +6,12 @@
   justify-content: space-between;
   align-items: center;
   padding: 14px 32px;
-  margin-left: 210px;
+  margin-left: 14.5rem;
   border-bottom: 1px solid var(--clr-300);
 }
 
 .topbar-title {
-  font-size: 16px;
+  font-size: calc(0.8985rem + 0.390625vw);
   font-weight: 400;
   color: var(--clr-700);
   padding-left: 64px;
@@ -28,23 +28,27 @@
 }
 
 .topbar-icon {
-  width: 20px;
-  height: 20px;
+  width: 32px;
   cursor: pointer;
 }
 
+.topbar-icon:hover {
+  scale: 120%;
+  transition: 0.2s ease-in-out;
+}
+
 .topbar-user {
-  width: 40px;
-  height: 40px;
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background-color: var(--clr-200);
-  color: var(--clr-500);
+  color: #29abe2;
   font-weight: bold;
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid #000;
-  font-size: 14px;
+  font-size: calc(0.8985rem + 0.390625vw);
   cursor: pointer;
 }
 

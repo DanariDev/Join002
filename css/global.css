@@ -1,5 +1,18 @@
-/* Einheitliche Farbenpalette um gleiche Farben über das gesamte Projekt zu Gewährleisten */
+/* Einheitliche HTML und Body Struktur */
+html {
+    font-size: 65, 5%;
+    /* Festsetzung der Font size. 1rem = 16px */
+}
 
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--clr-200);
+}
+
+
+/* Einheitliche Farben und Font Size über das gesamte Projekt */
 :root {
     --clr-200: #f5f6f7;
     /* für Body und Backgrounds */
@@ -21,24 +34,54 @@
 
     --clr-900: #091930;
     /* für Buttons */
+
+    --fs-16: calc(0.6485rem + 0.390625vw);
+    /* Dynamische Font Size von 16px */
+
+    --fs-20: calc(0.8985rem + 0.390625vw);
+    /* Dynamische Font Size von 20px */
+
+    --fs-21: calc(0.961rem + 0.390625vw);
+    /* Dynamische Font Size von 21px */
+
+    --fs-27: calc(1.336rem + 0.390625vw);
+    /* Dynamische Font Size von 27px */
+
+    --fs-36: calc(1.8985rem + 0.390625vw);
+    /* Dynamische Font Size von 36px */
+
+    --fs-47: calc(2.586rem + 0.390625vw);
+    /* Dynamische Font Size von 36px */
+
+    --fs-61: calc(3.461rem + 0.390625vw);
+    /* Dynamische Font Size von 61px */
+
+    --fs-64: calc(3.6485rem + 0.390625vw);
+    /* Dynamische Font Size von 64px */
 }
 
-
-/* Einheitliche Body Struktur */
-
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: var(--clr-200);
-}
 
 /* Andere allgemeine Klassen zur Mehrfach nutzung */
-
 .display-flex {
     display: flex;
+    justify-content: space-between;
+}
+
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 
 .d-none {
     display: none;
+}
+
+
+h1 {
+    font-size: calc(3.461rem + 0.390625vw);
+    color: var(--clr-700);
+    margin: 0;
 }

@@ -1,7 +1,7 @@
 @import url("global.css");
 
 .sidebar {
-  width: 210px;
+  width: 14.5rem;
   height: 100vh;
   background-color: var(--clr-700);
   display: flex;
@@ -13,29 +13,32 @@
   z-index: 100;
 }
 
+
 .sidebar-logo {
-  width: 100px;
-  margin: 50px auto 32px auto;
-  display: block;
+  align-self: center;
+  margin: 2rem;
 }
+
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 }
+
 
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 15px;
   color: var(--clr-200);
   text-decoration: none;
-  font-size: 18px;
+  font-size: var(--fs-16);
   font-weight: 400;
   transition: background-color 0.2s ease;
   padding: 8px 48px;
 }
+
 
 .add-task-link:hover,
 .board-link:hover,
@@ -45,33 +48,36 @@
   background-color: var(--clr-600);
 }
 
+
 .privacy-policy-link:hover,
 .legal-link:hover {
   background-color: none;
   color: var(--clr-500);
 }
 
+
 .nav-link img {
   width: 24px;
   height: 24px;
 }
 
+
 #sidebar-footer {
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 40px 0;
-  font-size: 13px;
-  font-weight: 400;
   font-family: 'Inter', sans-serif;
 }
+
 
 .sidebar-footer-links {
   gap: 6px;
 }
 
+
 .sidebar-footer-links a {
   text-decoration: none;
   transition: color 0.2s ease;
   margin: 6px 0;
+  justify-content: center;
 }

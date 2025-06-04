@@ -5,33 +5,41 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/f
 
 function $(s) {
     return document.querySelector(s);
-}
+};
+
 
 function handleAuthState() {
     onAuthStateChanged(auth, function (user) {
         if (!user) {
-            window.location.href = "login.html";
+            window.location.href = 'login.html';
             return;
         }
-        let isGuest = localStorage.getItem("isGuest") == "true";
-        let name = isGuest ? "Guest" : "User";
-        if (!isGuest) loadUserName(user.uid, name);
-        else showGreeting(name);
+        let name = localStorage.getItem('userName');
+        showGreetingTime()
+        showGreetingUser(name);
         loadTasksForSummary();
     });
-}
+};
 
-function loadUserName(uid, defaultName) {
-    get(child(ref(db), "users/" + uid)).then(function (snap) {
-        let name = snap.exists() ? snap.val().name : defaultName;
-        showGreeting(name);
-    });
-}
 
-function showGreeting(name) {
-    let el = document.getElementById("summary-name");
-    if (el) el.textContent = name;
-}
+function showGreetingTime() {
+    const greetingTime = document.getElementById('summary-greeting-time');
+    const currentHour = new Date().getHours();
+
+    if (currentHour >= 18) {
+        greetingTime.textContent = 'Good evening';
+    } else if (currentHour >= 12) {
+        greetingTime.textContent = 'Good afternoon';
+    } else {
+        greetingTime.textContent = 'Good morning';
+    }
+};
+
+
+function showGreetingUser(name) {
+    let element = document.getElementById('summary-greeting-name');
+    if (element) element.textContent = name;
+};
 
 
 function loadTasksForSummary() {
@@ -44,15 +52,15 @@ function loadTasksForSummary() {
         }
         updateSummary(tasks);
     }, { onlyOnce: true });
-}
+};
 
 function updateSummary(tasks) {
-    set("#todo .metric h2", count(tasks, "status", "todo"));
-    set("#done .metric h2", count(tasks, "status", "done"));
-    set(".mini:nth-child(1) h2", tasks.length);
-    set(".mini:nth-child(2) h2", count(tasks, "status", "in-progress"));
-    set(".mini:nth-child(3) h2", count(tasks, "status", "await"));
-    set(".urgent .metric h2", count(tasks, "priority", "urgent"));
+    set("#todo .flex-column h2", count(tasks, "status", "todo"));
+    set("#done .flex-column h2", count(tasks, "status", "done"));
+    set("#atBoard h2", tasks.length);
+    set("#onProgress h2", count(tasks, "status", "in-progress"));
+    set("#awaitFeedback h2", count(tasks, "status", "await"));
+    set("#urgent h2", count(tasks, "priority", "urgent"));
     showDeadline(tasks);
 }
 
