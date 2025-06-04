@@ -1,14 +1,19 @@
 @import url("global.css");
 
+
+/* Sidebar */
 .add-task-link,
 .add-task-link:hover {
   background-color: var(--clr-900)
 }
 
+/* Wrapper */
 .page-wrapper {
   height: 100vh;
 }
 
+
+/* Content Box */
 .add-task-main {
   display: flex;
   flex-direction: column;
@@ -17,6 +22,8 @@
   padding: 2rem;
 }
 
+
+/* Formular */
 #add-task-form {
   display: flex;
   gap: 32px;
@@ -28,7 +35,6 @@
   flex-direction: column;
   gap: 16px;
 }
-
 
 
 label,
@@ -51,6 +57,7 @@ select {
   height: 100px;
   resize: none;
 }
+
 
 .grey-bar {
   width: 1px;
@@ -120,14 +127,36 @@ li {
 }
 
 
-
-
+/* Selected Contacts on Form */
 .form-selected-contact {
   display: flex;
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
+  border-radius: 20px;
+  padding: 0 10px;
 }
+
+.form-selected-contact-active,
+.form-selected-contact:hover {
+  background-color: var(--clr-700);
+  color: var(--clr-200);
+  cursor: pointer;
+}
+
+.assigned-initials {
+  width: 20px;
+  height: 20px;
+  margin: 4px;
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-200);
+  border: 2px solid var(--clr-200);
+}
+
+
 
 .form-selected-contact input {
   width: 20px;
@@ -148,7 +177,7 @@ li {
 }
 
 .contact-chip {
-  background-color: var(--clr-200);
+  background-color: var(--clr-300);
   border-radius: 20px;
   padding: 4px 10px;
   font-size: var(--fs-20);
@@ -262,6 +291,10 @@ option {
 .required:after {
   content: " *";
   color: red;
+}
+
+.required-explain {
+  font-size: var(--fs-20);
 }
 
 .required-explain:before {

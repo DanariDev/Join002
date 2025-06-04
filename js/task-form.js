@@ -9,6 +9,18 @@ function getValue(selector) {
     return element ? element.value.trim() : "";
 };
 
+function getColorForName(name) {
+    const colors = [
+        '#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20',
+        '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'
+    ];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    };
+    return colors[Math.abs(hash) % colors.length];
+};
+
 function getPriority() {
     if (document.getElementById('urgent-btn').classList.contains('urgent-btn-active')) {
         return 'urgent';
@@ -49,11 +61,20 @@ function populateContactsDropdown() {
     dropdownList.innerHTML = "";
 
     for (let contact of contacts) {
+        const initials = contact.name
+            .split(" ")
+            .map(part => part[0]?.toUpperCase())
+            .join("");
+
+        const color = getColorForName(contact.name);
+
         const item = document.createElement('div');
         item.innerHTML = `
+        
             <label class="form-selected-contact">
                 <input type="checkbox" value="${contact.email}" data-name="${contact.name}" />
-                ${contact.name}
+                
+                ${contact.name}<div class="assigned-initials" style="background-color: ${color};">${initials}</div>
             </label>
         `;
         dropdownList.appendChild(item);
@@ -74,7 +95,7 @@ function populateContactsDropdown() {
             updateCreateTaskBtn();
         });
     });
-};
+}
 
 function updateAssignedToUI() {
     const selectedDiv = document.getElementById('contacts-selected');
