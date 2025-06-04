@@ -12,30 +12,34 @@
   margin: 10px 0;
 }
 
-.board-title {
-  font-size: 36px;
-  color: var(--clr-700);
-  margin: 0;
-}
 
 #search-input {
-  padding: 8px 12px;
+  height: 48px;
+  padding: 0px 12px;
   border: 1px solid var(--clr-300);
-  border-radius: 8px;
+  border-radius: 10px;
   background-image: url("/assets/img/search.png");
   background-repeat: no-repeat;
   background-position: right 24px center;
+}
+
+.search-task-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
 }
 
 .add-task-button {
   background-color: var(--clr-700);
   color: var(--clr-200);
   flex: 1;
-  height: 35px;
+  height: 48px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
+  font-size: var(--fs-21);
 }
 
 /* GRID LAYOUT */
@@ -53,7 +57,7 @@
 .to-do-field {
   grid-area: to-do;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-weight: bold;
   gap: 3px;
@@ -62,7 +66,7 @@
 .in-progress-field {
   grid-area: in-progress;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-weight: bold;
   gap: 3px;
@@ -71,7 +75,7 @@
 .await-field {
   grid-area: await;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   font-weight: bold;
   gap: 3px;
@@ -80,7 +84,7 @@
 .done-field {
   grid-area: done;
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   font-weight: bold;
   gap: 3px;
@@ -189,7 +193,7 @@
 }
 
 .task-label {
-  font-size: 12px;
+  font-size: var(--fs-16);
   font-weight: bold;
   padding: 2px 8px;
   border-radius: 8px;
@@ -200,13 +204,13 @@
 
 
 .task-title {
-  font-size: 16px;
+  font-size: var(--fs-16);
   font-weight: bold;
   margin-bottom: 4px;
 }
 
 .task-desc {
-  font-size: 14px;
+  font-size: var(--fs-16);
   color: var(--clr-400);
   margin-bottom: 10px;
 }

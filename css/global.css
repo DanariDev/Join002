@@ -44,6 +44,9 @@ body {
     --fs-21: calc(0.961rem + 0.390625vw);
     /* Dynamische Font Size von 21px */
 
+    --fs-24: calc(1.1485rem + 0.390625vw);
+    /* Dynamische Font Size von 21px */
+
     --fs-27: calc(1.336rem + 0.390625vw);
     /* Dynamische Font Size von 27px */
 
@@ -85,6 +88,12 @@ p {
 
 h1 {
     font-size: calc(3.461rem + 0.390625vw);
+    color: var(--clr-700);
+    margin: 0;
+}
+
+h3 {
+    font-size: calc(1.1485rem + 0.390625vw);
     color: var(--clr-700);
     margin: 0;
 }
