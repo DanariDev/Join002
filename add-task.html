@@ -4,11 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Add Task</title>
+  <title>Join | Add Task</title>
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
+  <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="css/login.css" />
   <link rel="stylesheet" href="css/add-task.css" />
+  <link rel="stylesheet" href="css/responsive/add-task-responsive.css" />
   <link rel="stylesheet" href="css/topbar.css" />
+  <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
+  <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
   <script src="js/topbar.js"></script>
 </head>
 
@@ -37,27 +41,29 @@
         <div class="add-task-form-content">
           <span>Priority</span>
           <div id="priority-buttons">
-            <button type="button" id="urgent-btn">Urgent
+            <button type="button" id="urgent-btn" class="all-priority-btns">Urgent
               <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon" />
             </button>
-            <button type="button" id="medium-btn">Medium
+            <button type="button" id="medium-btn" class="all-priority-btns">Medium
               <img src="assets/img/medium-btn-icon.png" alt="medium-icon" />
             </button>
-            <button type="button" id="low-btn">Low
+            <button type="button" id="low-btn" class="all-priority-btns">Low
               <img src="assets/img/low-btn-icon.png" alt="low-icon" />
             </button>
+
           </div>
 
-          <label class="required" for="assigned-to">Assigned to</label>
-          <select id="assigned-to" required>
-            <option value="" disabled selected>Select a contact to assign</option>
-          </select>
+          <label class="required">Assigned to</label>
+          <div class="contacts-dropdown" id="contacts-dropdown">
+            <div class="contacts-dropdown-inner" id="contacts-selected">Select contact(s)</div>
+            <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+          </div>
 
           <label class="required" for="category">Category</label>
           <select id="category" required>
             <option value="" disabled selected>Select task category</option>
-            <option value="technical">Technical Task</option>
-            <option value="user">User Story</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="User Story">User Story</option>
           </select>
 
           <label for="subtask">Subtasks</label>
@@ -82,7 +88,7 @@
   </div>
 
   <script src="js/include-html.js"></script>
-<script type="module" src="js/task-form.js"></script>
+  <script type="module" src="js/task-form.js"></script>
 
 </body>
 

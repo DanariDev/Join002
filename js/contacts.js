@@ -1,143 +1,131 @@
-import { ref, set, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { db } from "./firebase-config.js";
-
+const BASE_URL = "https://join002-26fa4-default-rtdb.firebaseio.com/";
+let contacts = [];
 let groupedContacts = [];
 
-function contactsList() {
-    let contactsRef = ref(db, "contacts");
-    onValue(contactsRef, function(snapshot) {
-        let contacts = [];
-        let data = snapshot.val();
-        if (data) {
-            for (let key in data) {
-                let contact = data[key];
-                if (contact.name && contact.email) {
-                    contacts.push({ name: contact.name, email: contact.email, initials: contact.initials });
-                }
-            }
-        }
-        loadUsers(contacts);
-    }, { onlyOnce: true });
-}
 
-function loadUsers(contacts) {
-    let usersRef = ref(db, "users");
-    onValue(usersRef, function(snapshot) {
-        let usersData = snapshot.val();
-        if (usersData) {
-            for (let key in usersData) {
-                let user = usersData[key];
-                if (user.name && user.email) {
-                    let initials = user.name.split(" ")[0][0] + user.name.split(" ")[1][0];
-                    contacts.push({ name: user.name, email: user.email, initials: initials.toUpperCase() });
-                }
-            }
-        }
-        filterAndSortContacts(contacts);
-    }, { onlyOnce: true });
-}
+function getColorForName(name) {
+    const colors = [
+        '#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20',
+        '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'
+    ];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    };
+    return colors[Math.abs(hash) % colors.length];
+};
 
-function filterAndSortContacts(contacts) {
-    let uniqueContacts = [];
-    for (let i = 0; i < contacts.length; i++) {
-        let isDuplicate = false;
-        for (let j = 0; j < uniqueContacts.length; j++) {
-            if (contacts[i].name == uniqueContacts[j].name && contacts[i].email == uniqueContacts[j].email) {
-                isDuplicate = true;
-            }
-        }
-        if (!isDuplicate) uniqueContacts.push(contacts[i]);
-    }
-    sortContacts(uniqueContacts);
+
+async function initContactsList() {
+    await onLoadContacts();
+    sortContacts();
     generateSortedContacts();
-}
+};
 
-function sortContacts(contacts) {
-    groupedContacts = {};
-    for (let i = 0; i < contacts.length; i++) {
-        let firstLetter = contacts[i].name[0].toUpperCase();
+
+async function onLoadContacts() {
+    document.getElementById('contacts-listID').innerHTML = "";
+    contacts = [];
+    groupedContacts = [];
+
+    let contactResponse = await getAllContacts("contacts")
+    let ContactKeysArray = Object.keys(contactResponse)
+
+    for (let index = 0; index < ContactKeysArray.length; index++) {
+        contacts.push(
+            {
+                id: ContactKeysArray[index],
+                contact: contactResponse[ContactKeysArray[index]],
+            }
+        );
+    };
+};
+
+
+async function getAllContacts(path) {
+    let response = await fetch(BASE_URL + path + ".json");
+    return responseToJson = await response.json();
+};
+
+
+function sortContacts() {
+    contacts.sort((a, b) => a.contact.name.localeCompare(b.contact.name));
+    contacts.forEach(element => {
+        let firstLetter = element.contact.name.charAt(0).toUpperCase();
         if (!groupedContacts[firstLetter]) {
             groupedContacts[firstLetter] = [];
-        }
-        groupedContacts[firstLetter].push(contacts[i]);
-    }
-}
+        };
+        groupedContacts[firstLetter].push(element);
+    });
+};
+
 
 function generateSortedContacts() {
-    let listContainer = document.getElementById("contacts-listID");
-    listContainer.innerHTML = "";
-    for (let letter in groupedContacts) {
-        listContainer.innerHTML += createAlphabetDiv(letter);
-        listContainer.innerHTML += createGroupList(letter);
-        for (let i = 0; i < groupedContacts[letter].length; i++) {
-            appendContactDiv(letter, i);
-        }
-    }
-}
+    for (let indexaAlphabet = 0; indexaAlphabet < Object.keys(groupedContacts).length; indexaAlphabet++) {
+        document.getElementById('contacts-listID').innerHTML += createAlphabetDiv(indexaAlphabet);
+        document.getElementById('contacts-listID').innerHTML += createGroupList(indexaAlphabet);
 
-function appendContactDiv(letter, indexB) {
-    let groupList = document.getElementById("group-list" + letter + "ID");
-    let indexA = letter.charCodeAt(0) - 65; 
-    groupList.innerHTML += createImgNameEmailDiv(indexA, indexB);
-    let imgDiv = document.getElementById("img-div" + indexA + indexB + "ID");
-    let hue = Math.random() * 360;
-    imgDiv.style.backgroundColor = "hsl(" + hue + ", 50%, 50%)";
-}
+        for (let indexContacs = 0; indexContacs < Object.values(groupedContacts)[indexaAlphabet].length; indexContacs++) {
+            document.getElementById(`group-list${indexaAlphabet}ID`).innerHTML += createImgNameEmailDiv(indexaAlphabet, indexContacs)
+        };
+    };
+};
 
-function createAlphabetDiv(letter) {
-    let html = "<div class='alphabet-div'><span>" + letter + "</span>";
-    html += "<div class='separate-contacts-list'></div></div>";
-    return html;
-}
 
-function createGroupList(letter) {
-    return "<div class='group-list' id='group-list" + letter + "ID'></div>";
-}
+function createAlphabetDiv(indexaAlphabet) {
+    return `<div class="alphabet-div"><span>${Object.keys(groupedContacts)[indexaAlphabet]}</span><div class="separate-contacts-list"></div></div>`;
+};
 
-function createImgNameEmailDiv(indexA, indexB) {
-    let letter = String.fromCharCode(65 + indexA);
-    let contact = groupedContacts[letter][indexB];
-    let html = "<div class='img-name-email-div' id='img-name-email-div" + indexA + indexB + "ID'";
-    html += " onclick=\"contactDeletesLoad('" + indexA + indexB + "')\">";
-    html += "<div class='img-div' id='img-div" + indexA + indexB + "ID'>" + contact.initials + "</div>";
-    html += "<div class='name-email-div'>";
-    html += "<span id='name" + indexA + indexB + "ID'>" + contact.name + "</span>";
-    html += "<span class='email-span' id='email" + indexA + indexB + "ID'>" + contact.email + "</span>";
-    html += "</div></div>";
-    return html;
-}
 
-function contactDeletesLoad(idNumber) {
-    let details = document.getElementById("contacts-details-contentsID");
-    details.classList.add("display-flex");
-    let imgDetails = document.getElementById("img-details-divID");
-    imgDetails.style.backgroundColor = document.getElementById("img-div" + idNumber + "ID").style.backgroundColor;
-    imgDetails.innerHTML = document.getElementById("img-div" + idNumber + "ID").innerHTML;
-    document.getElementById("details-nameID").innerHTML = document.getElementById("name" + idNumber + "ID").innerHTML;
-    document.getElementById("details-emailID").innerHTML = document.getElementById("email" + idNumber + "ID").innerHTML;
-    updateContactDivStyles(idNumber);
-}
+function createGroupList(indexaAlphabet) {
+    return `<div class="group-list" id="group-list${indexaAlphabet}ID"></div>`
+};
 
-function updateContactDivStyles(idNumber) {
-    let divs = document.getElementsByClassName("img-name-email-div");
-    for (let i = 0; i < divs.length; i++) {
-        divs[i].style = "";
-    }
-    let selectedDiv = document.getElementById("img-name-email-div" + idNumber + "ID");
-    selectedDiv.style.backgroundColor = "#2a3647";
-    selectedDiv.style.color = "white";
-}
 
-function addNewContact(name, email) {
-    let initials = name.split(" ")[0][0] + name.split(" ")[1][0];
-    initials = initials.toUpperCase();
-    let contactsRef = ref(db, "contacts/" + email.replace(".", "_"));
-    set(contactsRef, {
-        name: name,
-        email: email,
-        initials: initials
+function createImgNameEmailDiv(indexaAlphabet, indexContacs) {
+    const contact = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact;
+    const initials = contact.initials;
+    const name = contact.name;
+    const email = contact.email;
+    const bgColor = getColorForName(name);
+    return `
+    <div class="img-name-email-div" id="img-name-email-div${indexaAlphabet}${indexContacs}ID" 
+         onclick="contactDetailsLoad('${indexaAlphabet}${indexContacs}','${indexaAlphabet}','${indexContacs}'), toContactDetails()">
+        <div class="img-div" id="img-div${indexaAlphabet}${indexContacs}ID" style="background-color: ${bgColor};">${initials}</div>
+        <div class="name-email-div">
+            <span id="name${indexaAlphabet}${indexContacs}ID">${name}</span>
+            <span class="email-span" id="email${indexaAlphabet}${indexContacs}ID">${email}</span>
+        </div>
+    </div>`;
+};
+
+
+function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
+    const nameElement = document.getElementById('details-nameID');
+    const icon = document.getElementById('img-details-divID');
+    const detailDiv = document.getElementById('contacts-details-contentsID');
+    const eMail = document.getElementById('details-emailID');
+    const phone = document.getElementById('details-phoneID');
+    const contact = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact;
+
+    nameElement.innerHTML = contact.name;
+    icon.innerHTML = contact.initials;
+    icon.style.backgroundColor = getColorForName(contact.name);
+    detailDiv.classList.add('display-flex');
+    eMail.innerHTML = contact.email;
+    phone.innerHTML = contact.phone;
+};
+
+
+function backToContactsList() {
+    document.getElementById('contact-details-divID').classList.remove('display-flex');
+    document.querySelectorAll('.img-name-email-div').forEach(element => {
+        element.style = "";
     });
-    console.log("Kontakt " + name + " wurde hinzugefügt.");
-}
+    document.getElementById('contacts-details-contentsID').classList.remove('display-flex');
+};
 
-export { contactsList, addNewContact };
+
+function toContactDetails() {
+    document.getElementById('contact-details-divID').classList.add('display-flex');
+};

@@ -5,42 +5,44 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Join | Sign Up</title>
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
+  <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/responsive/login-responsive.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <div class="login-page">
-    <a href="login.html" class="back_to_login">
-      <img class="arrow_left" src="assets/img/arrow-left-line.png" alt="Back">
-    </a>
+  <div class="login-page-wrapper">
 
     <img src="assets/img/logo.svg" alt="Join Logo" class="logo">
 
     <div class="login-box">
-      <h1>Sign Up</h1>
-      <div class="underline"></div>
+      <a href="index.html" class="back_to_login">
+        <img class="back-icon" src="assets/img/arrow-left-line.png" alt="Back">
+      </a>
+      <h1 class="underline">Sign Up</h1>
 
       <form id="loginForm">
         <div class="input-wrapper">
-          <input class="name_input" type="text" placeholder="Name" required />
+          <input class="name-input" type="text" placeholder="Name" required />
         </div>
 
         <div class="input-wrapper">
-          <input class="email_input" type="email" placeholder="Email" required />
+          <input class="email-input" type="email" placeholder="Email" required />
         </div>
 
         <div class="input-wrapper">
-          <input class="password_input" type="password" placeholder="Password" required />
+          <input id="password-repeat-input" class="password-input" type="password" placeholder="Password" required />
         </div>
 
         <div class="input-wrapper">
-          <input class="password_repeat_input" type="password" placeholder="Confirm Password" required />
+          <input class="password-input" type="password" placeholder="Confirm Password" required />
         </div>
 
         <label>
           <input type="checkbox" required />
-          I accept the <a href="legal.html#privacy">Privacy Policy</a>
+          I accept the <a href="privacy-policy.html">Privacy Policy</a>
         </label>
 
         <div class="button-row">
@@ -49,11 +51,14 @@
       </form>
     </div>
 
-    <div class="footer-links">
-      <a href="legal.html#privacy">Privacy Policy</a>
-      <a href="legal.html#imprint">Legal Notice</a>
-    </div>
   </div>
+
+  <footer id="login-footer">
+    <div class="footer-links">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="legal.html">Legal Notice</a>
+    </div>
+  </footer>
 
   <script type="module" src="js/auth.js"></script>
 </body>

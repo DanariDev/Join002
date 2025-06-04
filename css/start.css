@@ -1,42 +1,37 @@
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background-color: #F5F5F5;
-    overflow: hidden;
+@import url("global.css");
+
+.intro-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background-color: var(--clr-200);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#intro-logo {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: logoFly 2s forwards ease-in-out;
+  z-index: 1000;
+}
+
+@keyframes logoFly {
+  0% {
+    transform: translate(-50%, -50%) scale(2.5);
   }
-  
-  .intro-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    width: 100vw;
-    background-color: #F5F5F5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
+
+  100% {
+    top: 40px;
+    left: 80px;
+    transform: translate(0, 0) scale(1);
   }
-  
-  #intro-logo {
-    width: 100px;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    animation: logoFly 2s forwards ease-in-out;
-    z-index: 1000;
-  }
-  
-  @keyframes logoFly {
-    0% {
-      transform: translate(-50%, -50%) scale(2.5);
-    }
-    100% {
-      top: 40px;
-      left: 80px;
-      transform: translate(0, 0) scale(1);
-    }
-  }
-  
+}

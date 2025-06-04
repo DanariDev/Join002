@@ -1,130 +1,15 @@
+@import url("global.css");
 
-
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f6f7f8;
-    /* color: #000; */
-    /* display: flex; */
+.privacy-main {
+  margin-left: 210px;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
-.privacy-policy-link{
-  color: white !important;
+.privacy-policy-link,
+.privacy-policy-link:hover {
+  background-color: var(--clr-900);
+  color: var(--clr-500);
 }
-
-.icons-display-none{
-  display: none !important;
-}
-  
-  /* .header {
-    position: fixed;
-    top: 0;
-    left: 232px;
-    right: 0;
-    height: 64px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    padding-left: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 14px;
-    font-weight: 400;
-    z-index: 10;
-  } */
-  
-  /* .sidebar {
-    width: 232px;
-    height: 100vh;
-    background-color: #2a3647;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 30px 0 20px 0;
-    position: fixed;
-    top: 0;
-    left: 0;
-    align-items: center;
-  } */
-  
-  /* .logo-section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-  } */
-  
-  /* .logo-img {
-    width: 40px;
-    height: 40px;
-  } */
-  
-  /* .logo-text {
-    font-size: 14px;
-    font-weight: 500;
-  } */
-  
-  /* .nav-links {
-    margin-bottom: auto;
-    padding-left: 0;
-  } */
-  
-  /* .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 12px;
-  } */
-  
-  /* .bottom-nav {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    padding-left: 24px;
-  } */
-  
-  /* .nav-item {
-    color: white;
-    text-decoration: none;
-    padding: 12px 16px;
-    width: 100%;
-    box-sizing: border-box;
-    font-size: 14px;
-    border-radius: 8px;
-  }
-   */
-  /* .nav-item.active {
-    background-color: #091931;
-  } */
-  
-  /* .main-content {
-    margin-left: 232px;
-    padding: 100px 60px 40px 60px;
-    max-width: 900px;
-  } */
-  
-  /* .main-content h1 {
-    font-size: 48px;
-    font-weight: bold;
-    margin-bottom: 30px;
-  } */
-  
-  /* .main-content h2 {
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 40px;
-    margin-bottom: 10px;
-  } */
-  
-  /* .main-content p {
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 20px;
-    max-width: 800px;
-  } */
-  

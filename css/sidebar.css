@@ -1,15 +1,16 @@
+@import url("global.css");
+
 .sidebar {
-  width: 232px;
+  width: 210px;
   height: 100vh;
-  background-color: #2A3647;
+  background-color: var(--clr-700);
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* NEU: sorgt für oben & unten */
+  justify-content: space-between;
   position: fixed;
   left: 0;
   top: 0;
   z-index: 100;
-  /* padding: 32px 0; */
 }
 
 .sidebar-logo {
@@ -22,29 +23,32 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  /* padding: 0 24px; */
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   gap: 16px;
-  color: white;
+  color: var(--clr-200);
   text-decoration: none;
   font-size: 18px;
   font-weight: 400;
-  /* padding: 8px 12px; */
-  /* border-radius: 8px; */
   transition: background-color 0.2s ease;
   padding: 8px 48px;
 }
 
-.nav-link:hover {
-  background-color: #1c2b3b;
+.add-task-link:hover,
+.board-link:hover,
+.contacts-link:hover,
+.summary-link:hover,
+.log-in-link:hover {
+  background-color: var(--clr-600);
 }
 
-.nav-link.active {
-  background-color: #091931;
+.privacy-policy-link:hover,
+.legal-link:hover {
+  background-color: none;
+  color: var(--clr-500);
 }
 
 .nav-link img {
@@ -52,23 +56,22 @@
   height: 24px;
 }
 
-.sidebar-footer {
+#sidebar-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
-  padding: 0 24px 40px 24px;
+  padding: 40px 0;
   font-size: 13px;
   font-weight: 400;
   font-family: 'Inter', sans-serif;
 }
 
-.sidebar-footer a {
-  color: #AAB8C2;
-  text-decoration: none;
-  transition: color 0.2s ease;
+.sidebar-footer-links {
+  gap: 6px;
 }
 
-.sidebar-footer a:hover {
-  color: white;
+.sidebar-footer-links a {
+  text-decoration: none;
+  transition: color 0.2s ease;
+  margin: 6px 0;
 }

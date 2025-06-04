@@ -4,57 +4,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join</title>
+  <title>Join | Login</title>
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
+  <link rel="stylesheet" href="css/intro.css">
+  <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/start.css" />
   <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/responsive/login-responsive.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 
-<body onload="startIntro()">
+<body>
 
+  <div class="login-page-wrapper">
 
- 
-  <div class="intro-wrapper">
-    <img src="./assets/img/logo-start.png" id="intro-logo" alt="Join Logo" />
-  </div>
+    <div class="starting-logo">
+      <img src="assets/img/logo-start.png" alt="Join Logo">
+    </div>
 
-  
-  <div class="login-page" id="loginContainer" style="display: none;">
-    <div class="top-right">
+    <div class="sign-up-wrapper">
       <span>Not a Join user?</span>
       <a href="register.html" class="sign-up-btn">Sign up</a>
     </div>
 
-    
-    <img src="assets/img/logo-start.png" alt="Join Logo" class="logo" style="display: none;" />
-
     <div class="login-box">
-      <h1>Log in</h1>
-      <div class="underline"></div>
+
+      <h1 class="underline">Log in</h1>
 
       <form id="loginForm">
+
         <div class="input-wrapper">
-          <input class="email_input" type="email" placeholder="Email" required />
+          <input type="email" class="email-input" placeholder="Email" required />
         </div>
+
         <div class="input-wrapper">
-          <input class="password_input" type="password" placeholder="Password" required />
+          <input type="password" class="password-input" placeholder="Password" required />
         </div>
 
         <div class="button-row">
           <button type="submit" class="btn-primary">Log in</button>
-          <a href="summary.html"><button type="button" id="guestLogin" class="btn-secondary">Guest Log in</button></a>
+          <button type="button" id="guestLogin" class="btn-secondary">Guest Log in</button>
         </div>
+
       </form>
     </div>
 
+  </div>
+  <footer id="login-footer">
     <div class="footer-links">
-      <a href="./privacy-policy.html">Privacy Policy</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
       <a href="legal.html">Legal Notice</a>
     </div>
-  </div>
+  </footer>
 
-  <script src="js/intro.js"></script>
   <script type="module" src="js/auth.js"></script>
+  <script src="js/intro.js"></script>
 </body>
 
 </html>

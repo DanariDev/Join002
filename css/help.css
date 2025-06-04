@@ -1,3 +1,10 @@
+@import url("global.css");
+
+.help-main {
+    margin-left: 210px;
+    padding: 40px;
+}
+
 .help-button {
     display: none;
 }
@@ -20,7 +27,7 @@
 }
 
 .join-color-span {
-    color: #29abe2;
+    color: var(--clr-500);
 }
 
 .floating-back-arrow {

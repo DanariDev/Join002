@@ -1,0 +1,38 @@
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 620px) {
+    #sidebar-footer {
+        display: none;
+    }
+
+    .add-task-main {
+        margin-left: 0;
+        padding: 10px 10px 8vh 10px;
+    }
+
+    #add-task-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    input {
+        box-sizing: border-box;
+    }
+
+    .add-task-create-and-clear-btn {
+        padding: 10px;
+        gap: 5px;
+    }
+}
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}

@@ -1,86 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Join | Board</title>
-    <link rel="stylesheet" href="css/sidebar.css" />
-    <link rel="stylesheet" href="css/topbar.css" />
-    <link rel="stylesheet" href="css/board.css" />
-    <link rel="stylesheet" href="css/login.css" />
-  </head>
 
-  <body>
-    <div include-html="sidebar.html"></div>
-    <div include-html="templates/topbar.html"></div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join | Board</title>
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/topbar.css" />
+  <link rel="stylesheet" href="css/board.css" />
+  <link rel="stylesheet" href="css/responsive/board-responsive.css">
+  <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
+  <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
+  <script src="js/topbar.js"></script>
+</head>
 
-    <main class="board-main">
-      <div class="board-header">
-        <h1 class="board-title">Board</h1>
-        <div>
-          <input type="text" placeholder="Find Task" class="search-input" />
-          <button class="add-task-button">Add task +</button>
-        </div>
+<body>
+  <div include-html="sidebar.html"></div>
+  <div include-html="templates/topbar.html"></div>
+
+
+  <main class="board-main">
+
+
+    <div class="board-header">
+
+      <div class="responsive-space-between">
+        <h1 class="board-title">Board</h1><a href="add-task.html"><button
+            class="add-task-button responsive-show">+</button></a>
       </div>
 
-      <section class="board">
-        <div class="to-do-field">
-          <h3>To do <button class="add-task-btn">＋</button></h3>
-        </div>
-        <div class="in-progress-field">
-          <h3>In Progress <button class="add-task-btn">＋</button></h3>
-        </div>
-        <div class="await-field">
-          <h3>Await Feedback <button class="add-task-btn">＋</button></h3>
-        </div>
-        <div class="done-field">
-          <h3>Done <button class="add-task-btn">＋</button></h3>
-        </div>
-
-        <div class="to-do-tasks task-column"></div>
-        <div class="in-progress-tasks task-column"></div>
-        <div class="await-tasks task-column"></div>
-        <div class="done-tasks task-column"></div>
-      </section>
-    </main>
-
-    <template id="task-template">
-      <div class="task-card">
-        <div class="task-label"></div>
-        <h4 class="task-title"></h4>
-        <p class="task-desc"></p>
-        <div class="progress-bar-container">
-          <div class="progress-bar"></div>
-        </div>
-        <div class="task-count"></div>
+      <div class="search-task-field">
+        <input type="text" placeholder="Find Task" id="search-input" />
+        <button class="add-task-button responsive-d-none">Add task +</button>
       </div>
-    </template>
 
-    <div id="task-overlay" class="overlay d-none">
-      <div class="overlay-content">
-        <button class="overlay-close">×</button>
-        <div class="overlay-section">
-          <h2 id="popup-title">Task Titel</h2>
-          <p id="popup-description">Beschreibung...</p>
-          <p id="popup-due-date">Due: Datum</p>
-          <p id="popup-category">Category: Kategorie</p>
-          <p id="popup-assigned">Assigned to: Name</p>
-          <p id="popup-priority">Priority: Priorität</p>
-        </div>
-        <div class="overlay-section">
-          <h3>Subtasks</h3>
-          <ul id="popup-subtasks"></ul>
-        </div>
-        <div class="overlay-actions">
-          <button id="edit-task-btn">Bearbeiten</button>
-          <button id="delete-task-btn">Löschen</button>
-        </div>
-      </div>
     </div>
 
-    <script src="js/include-html.js"></script>
-    <script type="module" src="js/board.js"></script>
-    <script type="module" src="js/topbar.js"></script>
-    <script type="module" src="js/task-overlay.js"></script>
-  </body>
+    <section id="board">
+      <div class="to-do-field">
+        <h3>To do</h3> <button class="add-task-btn">＋</button>
+      </div>
+      <div class="in-progress-field">
+        <h3>In Progress</h3> <button class="add-task-btn">＋</button>
+      </div>
+      <div class="await-field">
+        <h3>Await Feedback</h3> <button class="add-task-btn">＋</button>
+      </div>
+      <div class="done-field">
+        <h3>Done</h3>
+      </div>
+
+      <div class="to-do-tasks task-column"></div>
+      <div class="in-progress-tasks task-column"></div>
+      <div class="await-tasks task-column"></div>
+      <div class="done-tasks task-column"></div>
+    </section>
+  </main>
+
+  <template id="task-template">
+    <div class="task-card">
+      <div class="task-label"></div>
+      <h4 class="task-title"></h4>
+      <p class="task-desc"></p>
+      <div class="progress-bar-container">
+        <div class="progress-bar"></div>
+      </div>
+      <div class="task-count"></div>
+      <div class="assigned-initials"></div>
+    </div>
+  </template>
+
+  <div id="task-overlay" class="overlay d-none">
+    <div class="overlay-content">
+      <button class="overlay-close">×</button>
+      <div class="overlay-section">
+        <p id="popup-category"></p>
+        <h2 id="popup-title"></h2>
+        <p id="popup-description"></p>
+        <p id="popup-due-date"></p>
+        <p id="popup-priority"></p>
+        <p id="popup-assigned"></p>
+
+      </div>
+      <div class="overlay-section">
+        <span class="overlay-key">Subtasks</span>
+        <ul id="popup-subtasks"></ul>
+      </div>
+      <div class="overlay-actions">
+        <button id="edit-task-btn">Bearbeiten</button>
+        <button id="delete-task-btn">Löschen</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/include-html.js"></script>
+  <script type="module" src="js/board.js"></script>
+  <script type="module" src="js/topbar.js"></script>
+  <script type="module" src="js/task-overlay.js"></script>
+  <script src="js/search-task.js"></script>
+</body>
+
 </html>

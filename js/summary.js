@@ -8,7 +8,7 @@ function $(s) {
 }
 
 function handleAuthState() {
-    onAuthStateChanged(auth, function(user) {
+    onAuthStateChanged(auth, function (user) {
         if (!user) {
             window.location.href = "login.html";
             return;
@@ -22,7 +22,7 @@ function handleAuthState() {
 }
 
 function loadUserName(uid, defaultName) {
-    get(child(ref(db), "users/" + uid)).then(function(snap) {
+    get(child(ref(db), "users/" + uid)).then(function (snap) {
         let name = snap.exists() ? snap.val().name : defaultName;
         showGreeting(name);
     });
@@ -31,11 +31,11 @@ function loadUserName(uid, defaultName) {
 function showGreeting(name) {
     let el = document.getElementById("summary-name");
     if (el) el.textContent = name;
-  }
-  
+}
+
 
 function loadTasksForSummary() {
-    onValue(ref(db, "tasks"), function(snapshot) {
+    onValue(ref(db, "tasks"), function (snapshot) {
         let tasksObj = snapshot.val();
         if (!tasksObj) return;
         let tasks = [];
@@ -47,8 +47,8 @@ function loadTasksForSummary() {
 }
 
 function updateSummary(tasks) {
-    set(".todo .metric h2", count(tasks, "status", "todo"));
-    set(".done .metric h2", count(tasks, "status", "done"));
+    set("#todo .metric h2", count(tasks, "status", "todo"));
+    set("#done .metric h2", count(tasks, "status", "done"));
     set(".mini:nth-child(1) h2", tasks.length);
     set(".mini:nth-child(2) h2", count(tasks, "status", "in-progress"));
     set(".mini:nth-child(3) h2", count(tasks, "status", "await"));
@@ -79,9 +79,29 @@ function showDeadline(tasks) {
             if (d > new Date()) dates.push(d);
         }
     }
-    dates.sort(function(a, b) { return a - b; });
+    dates.sort(function (a, b) { return a - b; });
     let date = dates[0] || new Date();
     $("#deadline-date").textContent = date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
 
+function summaryImgHover() {
+    const todo = document.getElementById('todo');
+    const done = document.getElementById('done');
+    const todoImg = todo.querySelector('img');
+    const doneImg = done.querySelector('img');
+    todo.addEventListener('mouseover', () => {
+        todoImg.src = 'assets/img/pencil-icon-hover.png';
+    });
+    todo.addEventListener('mouseout', () => {
+        todoImg.src = 'assets/img/pencil-icon.png';
+    });
+    done.addEventListener('mouseover', () => {
+        doneImg.src = 'assets/img/check-icon-hover.png';
+    });
+    done.addEventListener('mouseout', () => {
+        doneImg.src = 'assets/img/check-icon.png';
+    });
+}
+
 handleAuthState();
+summaryImgHover()

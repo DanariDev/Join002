@@ -1,0 +1,193 @@
+@import url("global.css");
+
+.add-edit-body {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgb(0, 0, 0, 0.3);
+}
+
+.add-contact-div,
+.edit-contact-div {
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    border-radius: 16px;
+    background-color: var(--clr-200);
+    position-area: center;
+    margin-left: 210px;
+}
+
+.add-contact-left,
+.edit-contact-left {
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    background-color: var(--clr-700);
+    border-radius: 16px 0px 0px 16px;
+    width: 256px;
+}
+
+.add-contact-left img,
+.edit-contact-left img {
+    height: 40px;
+    width: 40px;
+    margin-top: 72px;
+}
+
+.add-contact-left h1,
+.edit-contact-left h1 {
+    margin: 12px 0 8px 0;
+    font-weight: bold;
+    font-size: 43px;
+    color: var(--clr-200);
+}
+
+.edit-contact-left h1 {
+    margin: 20px 0 8px 0;
+}
+
+.add-contact-left span,
+.edit-contact-left span {
+    color: white;
+    font-size: 20px;
+}
+
+.separate-add-contact,
+.separate-edit-contact {
+    height: 2px;
+    width: 64px;
+    background-color: var(--clr-500);
+    margin-top: 8px;
+}
+
+.add-contact-right,
+.edit-contact-right {
+    display: flex;
+    flex-direction: row;
+    padding: 100px 40px;
+    gap: 64px;
+}
+
+.add-contact-img-div,
+.edit-contact-img-div {
+    margin-top: 32px;
+}
+
+.add-contact-img,
+.edit-contact-img {
+    height: 90px;
+    width: 90px;
+    background-color: lightgray;
+    border-radius: 100%;
+    border: 2px solid var(--clr-200);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: var(--clr-200);
+}
+
+.add-contact-img {
+    background-image: url('../assets/img/contact-add-icon.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.add-contact-form,
+.edit-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.name-email-phone-div {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.name-email-phone-input {
+    height: 32px;
+
+    width: 300px;
+    padding-left: 16px;
+    border-radius: 8px;
+    border: 1px solid var(--clr-300);
+}
+
+.buttons-div-form {
+    display: flex;
+    gap: 16px;
+}
+
+.button-cansel,
+.button-create-contact,
+.button-delete,
+.button-save {
+    border: 1px solid;
+    padding: 12px 20px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.button-cansel,
+.button-delete {
+    background-color: var(--clr-200)
+}
+
+.button-create-contact,
+.button-save {
+    border: 1px solid var(--clr-300);
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+}
+
+.button-cansel:hover,
+.button-delete:hover {
+    border: 1px solid var(--clr-500);
+    color: var(--clr-500);
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+}
+
+.button-create-contact:hover,
+.button-save:hover {
+    border: 1px solid var(--clr-500);
+    background-color: var(--clr-500);
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+}
+
+
+.buttons-div-form img {
+    width: 12px;
+    height: 12px;
+    cursor: pointer;
+}
+
+.close-button {
+    position: absolute;
+    border: 0;
+    background-color: transparent;
+    right: 32px;
+    top: 32px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 100%;
+    width: 23px;
+    height: 23px;
+    padding: 3.5px;
+}
+
+.close-button:hover {
+    color: red;
+    background: rgb(0, 0, 0, 0.1);
+}
+
+.display-none {
+    display: none;
+}

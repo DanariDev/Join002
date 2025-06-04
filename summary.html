@@ -1,87 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Summary</title>
-    <link rel="stylesheet" href="css/sidebar.css" />
-    <link rel="stylesheet" href="css/topbar.css" />
-    <link rel="stylesheet" href="css/summary.css" />
 
-    <script src="./js/topbar.js"></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join | Summary</title>
+  <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/topbar.css" />
+  <link rel="stylesheet" href="css/summary.css" />
+  <link rel="stylesheet" href="css/responsive/summary-responsive.css">
+  <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
+  <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
+  <script src="./js/topbar.js"></script>
+</head>
 
-  <body>
-    <div include-html="sidebar.html"></div>
-    <div include-html="templates/topbar.html"></div>
+<body>
+  <div include-html="sidebar.html"></div>
+  <div include-html="templates/topbar.html"></div>
 
-    <main class="summary-main">
-      <div class="summary-header">
-        <h1>Join 360</h1>
-        <div class="metrics-divider"></div>
-        <span class="metrics-title">Key Metrics at a Glance</span>
-      </div>
 
-      <div class="summary-container">
-        <!-- Linke Seite -->
-        <div class="summary-left">
-          <div class="flex-row">
-            <div class="summary-box todo">
-              <img src="assets/img/pencil-icon.png" alt="pencil-icon" />
-              <div class="metric">
-                <h2>1</h2>
-                <span>To-do</span>
-              </div>
-            </div>
-            <div class="summary-box done">
-              <img src="assets/img/check-icon.png" alt="check-icon" />
-              <div class="metric">
-                <h2>1</h2>
-                <span>Done</span>
-              </div>
-            </div>
-          </div>
 
-          <div class="summary-box urgent">
-            <div class="urgent-left">
-              <img src="assets/img/urgent-icon.png" alt="urgent-icon" />
-              <div class="metric">
-                <h2>1</h2>
-                <span>Urgent</span>
-              </div>
-            </div>
-            <div class="divider"></div>
-            <div class="urgent-right">
-              <p id="deadline-date">October 16, 2022</p>
-              <span class="deadline-title">Upcoming Deadline</span>
+  <main class="summary-main">
+
+    <div class="summary-header">
+      <h1>Join 360</h1>
+      <div class="metrics-divider"></div>
+      <span class="metrics-title">Key Metrics at a Glance</span>
+    </div>
+
+    <div class="summary-container">
+
+      <!-- Linke Seite -->
+
+      <div class="summary-left">
+        <div class="flex-row">
+          <div id="todo" class="summary-box" onclick="window.location.href='board.html'">
+            <img src="assets/img/pencil-icon.png" alt="pencil-icon" />
+            <div class="metric">
+              <h2>0</h2>
+              <span>To-do</span>
             </div>
           </div>
-
-          <div class="flex-row mini-row">
-            <div class="summary-box mini">
-              <h2>5</h2>
-              <span>Tasks in Board</span>
-            </div>
-            <div class="summary-box mini">
-              <h2>2</h2>
-              <span>Task in Progress</span>
-            </div>
-            <div class="summary-box mini">
-              <h2>2</h2>
-              <span>Awaiting Feedback</span>
+          <div id="done" class="summary-box done" onclick="window.location.href='board.html'">
+            <img src="assets/img/check-icon.png" alt="check-icon" />
+            <div class="metric">
+              <h2>0</h2>
+              <span>Done</span>
             </div>
           </div>
         </div>
 
-        <!-- Rechte Seite -->
-        <div class="summary-greeting">
-          <h2 id="summary-greeting">Good morning,<br><span id="summary-name">Guest</span></h2>
+        <div class="summary-box urgent" onclick="window.location.href='board.html'">
+          <div class="urgent-left">
+            <img src="assets/img/urgent-icon.png" alt="urgent-icon" />
+            <div class="metric">
+              <h2>0</h2>
+              <span>Urgent</span>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="urgent-right">
+            <p id="deadline-date">October 16, 2022</p>
+            <span class="deadline-title">Upcoming Deadline</span>
+          </div>
+        </div>
 
+        <div class="flex-row mini-row" onclick="window.location.href='board.html'">
+          <div class="summary-box mini">
+            <h2>0</h2>
+            <span>Tasks in Board</span>
+          </div>
+          <div class="summary-box mini">
+            <h2>0</h2>
+            <span>Task in Progress</span>
+          </div>
+          <div class="summary-box mini">
+            <h2>0</h2>
+            <span>Awaiting Feedback</span>
+          </div>
         </div>
       </div>
-    </main>
 
-    <script src="js/include-html.js"></script>
-    <script type="module" src="./js/summary.js"></script>
-  </body>
+      <!-- Rechte Seite -->
+
+      <div class="summary-greeting">
+        <h2 id="summary-greeting">Good morning,<br><span id="summary-name">Guest</span></h2>
+
+      </div>
+    </div>
+  </main>
+
+  <script src="js/include-html.js"></script>
+  <script type="module" src="./js/summary.js"></script>
+</body>
+
 </html>
