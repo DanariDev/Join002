@@ -13,14 +13,8 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-left: 210px;
-  padding: 40px;
-}
-
-.add-task-title {
-  font-size: 36px;
-  color: #2a3647;
-  margin: 0;
+  margin-left: 14.5rem;
+  padding: 2rem;
 }
 
 #add-task-form {
@@ -35,12 +29,11 @@
   gap: 16px;
 }
 
-.add-task-create-and-clear-btn {
-  display: flex;
-  justify-content: space-around;
-  flex: 1;
-  padding: 32px 16px;
-  gap: 10px;
+
+
+label,
+::placeholder {
+  font-size: var(--fs-20);
 }
 
 input,
@@ -49,8 +42,8 @@ select {
   height: 40px;
   padding: 8px;
   border: 1px solid var(--clr-300);
-  border-radius: 6px;
-  font-size: 14px;
+  border-radius: 10px;
+  font-size: var(--fs-20);
   box-sizing: border-box;
 }
 
@@ -66,7 +59,7 @@ select {
 
 #priority-buttons {
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
 }
 
 #urgent-btn,
@@ -78,6 +71,7 @@ select {
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
+  font-size: var(--fs-20);
 }
 
 #urgent-btn:hover,
@@ -110,7 +104,7 @@ select {
   transform: translateY(-50%);
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: var(--fs-20);
   cursor: pointer;
 }
 
@@ -120,17 +114,13 @@ select {
   margin: 8px 0;
 }
 
-
-.contact-chip {
-  background-color: var(--clr-200);
-  ;
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-size: 12px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+li {
+  font-size: var(--fs-20);
+  margin: 6px 0 6px 0;
 }
+
+
+
 
 .form-selected-contact {
   display: flex;
@@ -154,13 +144,17 @@ select {
   background-color: var(--clr-200);
   border: none;
   cursor: pointer;
+  font-size: var(--fs-20);
 }
 
 .contact-chip {
   background-color: var(--clr-200);
   border-radius: 20px;
   padding: 4px 10px;
-  font-size: 12px;
+  font-size: var(--fs-20);
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .contact-chip span {
@@ -170,7 +164,7 @@ select {
 
 .dropdown-arrow {
   margin-left: auto;
-  font-size: 16px;
+  font-size: var(--fs-16);
   color: var(--clr-700);
   padding-right: 4px;
 }
@@ -223,6 +217,11 @@ select {
   background-color: var(--clr-200);
 }
 
+option {
+  font-size: var(--fs-16);
+  overflow: hidden;
+}
+
 .bottom-line {
   display: flex;
   justify-content: space-between;
@@ -230,12 +229,20 @@ select {
   margin-top: 24px;
 }
 
+.add-task-create-and-clear-btn {
+  display: flex;
+  justify-content: space-around;
+  flex: 1;
+  padding: 1rem;
+  gap: 10px;
+}
+
 #clear-btn,
 .btn-create-task {
-  padding: 12px;
   width: 160px;
-  border-radius: 8px;
-  font-size: 16px;
+  padding: 0.5rem;
+  border-radius: 10px;
+  font-size: var(--fs-20);
   font-weight: 600;
   border: 2px solid var(--clr-700);
   background-color: var(--clr-200);

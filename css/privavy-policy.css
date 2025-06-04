@@ -1,8 +1,8 @@
 @import url("global.css");
 
 .privacy-main {
-  margin-left: 210px;
-  padding: 60px 40px;
+  margin-left: 14.5rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -12,4 +12,9 @@
 .privacy-policy-link:hover {
   background-color: var(--clr-900);
   color: var(--clr-500);
+}
+
+h2 {
+  font-size: var(--fs-27);
+  margin: 32px 0 10px 0;
 }

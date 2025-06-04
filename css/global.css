@@ -79,6 +79,9 @@ body {
     display: none;
 }
 
+p {
+    font-size: var(--fs-16);
+}
 
 h1 {
     font-size: calc(3.461rem + 0.390625vw);
