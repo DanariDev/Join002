@@ -13,42 +13,36 @@
   <link rel="stylesheet" href="css/responsive/board-responsive.css">
   <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
   <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
-  <script src="js/topbar.js"></script>
 </head>
 
 <body>
   <div include-html="sidebar.html"></div>
   <div include-html="templates/topbar.html"></div>
 
-
   <main class="board-main">
-
-
     <div class="board-header">
-
       <div class="responsive-space-between">
-        <h1>Board</h1><a href="add-task.html"><button class="add-task-button responsive-show">+</button></a>
+        <h1>Board</h1>
+        <a href="add-task.html"><button class="add-task-button responsive-show">+</button></a>
       </div>
-
       <div class="search-task-field">
         <input type="text" placeholder="Find Task" id="search-input" />
         <button class="add-task-button responsive-d-none">Add task +</button>
       </div>
-
     </div>
 
     <section id="board">
       <div class="to-do-field">
-        <h3>To do</h3> <button class="add-task-btn">＋</button>
+        <h3>To do</h3> <button class="add-task-btn" data-status="todo">＋</button>
       </div>
       <div class="in-progress-field">
-        <h3>In Progress</h3> <button class="add-task-btn">＋</button>
+        <h3>In Progress</h3> <button class="add-task-btn" data-status="in-progress">＋</button>
       </div>
       <div class="await-field">
-        <h3>Await Feedback</h3> <button class="add-task-btn">＋</button>
+        <h3>Await Feedback</h3> <button class="add-task-btn" data-status="await">＋</button>
       </div>
       <div class="done-field">
-        <h3>Done</h3>
+        <h3>Done</h3> <button class="add-task-btn" data-status="done">＋</button>
       </div>
 
       <div class="to-do-tasks task-column"></div>
@@ -81,7 +75,6 @@
         <p id="popup-due-date"></p>
         <p id="popup-priority"></p>
         <p id="popup-assigned"></p>
-
       </div>
       <div class="overlay-section">
         <span class="overlay-key">Subtasks</span>
@@ -94,10 +87,68 @@
     </div>
   </div>
 
+ 
+  <div id="add-task-overlay" class="overlay d-none" data-overlay="add-task">
+    <div class="overlay-content">
+      <button class="overlay-close">×</button> 
+      <h2>Add Task</h2>
+      <form id="add-task-form">
+        <div class="form-section">
+          <label for="task-title">Title <span class="required">*</span></label>
+          <input type="text" id="task-title" name="title" placeholder="Enter a title" required>
+        </div>
+        <div class="form-section">
+          <label for="task-description">Description</label>
+          <textarea id="task-description" name="description" placeholder="Enter a Description"></textarea>
+        </div>
+        <div class="form-section">
+          <label for="task-assigned">Assigned to</label>
+          <select id="task-assigned" name="assigned" multiple>
+            <option value="" disabled selected>Select contacts to assign</option>
+          </select>
+        </div>
+        <div class="form-section">
+          <label for="task-due-date">Due Date <span class="required">*</span></label>
+          <input type="date" id="task-due-date" name="dueDate" placeholder="dd/mm/yyyy" required>
+        </div>
+        <div class="form-section">
+          <label>Prio</label>
+          <div class="prio-buttons">
+            <button type="button" class="prio-btn" data-prio="urgent">Urgent</button>
+            <button type="button" class="prio-btn active" data-prio="medium">Medium</button>
+            <button type="button" class="prio-btn" data-prio="low">Low</button>
+          </div>
+          <input type="hidden" id="task-priority" name="priority" value="medium">
+        </div>
+        <div class="form-section">
+          <label for="task-category">Category <span class="required">*</span></label>
+          <select id="task-category" name="category" required>
+            <option value="" disabled selected>Select task category</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="User Story">User Story</option>
+          </select>
+        </div>
+        <div class="form-section">
+          <label for="task-subtask">Subtasks</label>
+          <div class="subtask-input">
+            <input type="text" id="task-subtask" name="subtask" placeholder="Add new subtask">
+            <button type="button" class="add-subtask-btn">＋</button>
+          </div>
+          <ul id="subtask-list"></ul>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="cancel-btn">Cancel</button>
+          <button type="submit" class="create-btn" disabled>Create Task</button>
+        </div>
+        <input type="hidden" id="task-status" name="status" value="">
+      </form>
+    </div>
+  </div>
+
   <script src="js/include-html.js"></script>
   <script type="module" src="js/board.js"></script>
-  <script type="module" src="js/topbar.js"></script>
   <script type="module" src="js/task-overlay.js"></script>
+  <script type="module" src="js/topbar.js"></script>
   <script src="js/search-task.js"></script>
 </body>
 
