@@ -149,7 +149,7 @@
     padding: 2rem;
 }
 
-.img-name-div {
+.showed-contact-header {
     font-size: var(--fs-47);
     display: flex;
     gap: 40px;
@@ -170,12 +170,12 @@
 }
 
 
-.edit-delete-div {
+.edit-showed-contact {
     display: flex;
     gap: 16px;
 }
 
-.edit-delete-div a {
+.edit-showed-contact a {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -187,13 +187,12 @@
     cursor: pointer;
 }
 
-.img-delete,
-.img-edit {
+.edit-showed-contact img {
     height: 24px;
     width: 24px;
 }
 
-.contact-information-div {
+.showed-contact-information {
     display: flex;
     flex-direction: column;
     gap: 32px;
