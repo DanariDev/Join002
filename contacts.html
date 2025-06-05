@@ -21,33 +21,49 @@
 </head>
 
 <body onload="initSidbarTopbar(), initContactsList()">
+
   <div id="sidebarID"></div>
   <div id="topbarID"></div>
 
   <main class="contacts-main">
-    <div class="contacts-div">
-      <button class="add-contact-button" onclick="addContactOpenClose()">
+
+
+
+
+
+
+
+    <div class="left-section-wrapper">
+      <button class="add-contact-btn" onclick="addContactOpenClose()">
         Add new Contact
-        <img src="assets/img/person_add.png" alt="Add person" />
+        <img src="assets/img/person_add.png" alt="person-icon" />
       </button>
-      <div class="contacts-list-body">
-        <div class="contacts-list" id="contacts-listID"></div>
+      <div class="list-wrapper">
+        <div class="showed-list" id="contacts-list"></div>
         <button class="add-contact-responsive-button" onclick="addContactOpenClose()"><img
             src="./assets/img/person_add.png" alt=""></button>
       </div>
     </div>
 
-    <div onclick="editDeleteMenuClose()" class="contact-details-div" id="contact-details-divID">
+
+
+
+
+
+
+    <div onclick="editDeleteMenuClose()" class="right-section-wrapper" id="right-section">
+
       <div class="contact-details-haeder">
         <h1>Contacts</h1>
-        <div class="separate-contact-details-header"></div>
+        <div class="split-contact-header"></div>
         <span>Better with a team</span>
       </div>
-      <div class="contacts-details-contents" id="contacts-details-contentsID">
+
+      <div id="showed-contact">
         <div class="img-name-div">
-          <div class="img-details-div" id="img-details-divID"></div>
+          <div class="popout-icon" id="popout-icon"></div>
           <div>
-            <span id="details-nameID">Name</span>
+            <span id="popout-name">Name</span>
             <div class="edit-delete-div" id="edit-delete-divID">
               <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit"
                   class="img-edit" />Edit</a>
@@ -56,16 +72,18 @@
             </div>
           </div>
         </div>
+
         <div class="contact-information-div">
           <span>Contact information</span>
           <div class="email-phone-div">
             <span class="email-phone-title">Email</span>
-            <span class="email-phone-value email-value" id="details-emailID">Email-address</span>
+            <span class="email-phone-value email-value" id="popout-email">Email-address</span>
             <span class="email-phone-title">Phone</span>
-            <span class="email-phone-value" id="details-phoneID">phone-number</span>
+            <span class="email-phone-value" id="popout-phone">phone-number</span>
           </div>
         </div>
       </div>
+
       <button class="back-arrow" id="back-arrowID" onclick="backToContactsList()">
         <img src="./assets/img/arrow_left.png" alt="" />
       </button>
@@ -76,7 +94,7 @@
   </main>
 
   <div class="add-edit-body display-none" id="add-edit-bodyID">
-    <div class="add-contact-div display-none" id="add-contact-divID">
+    <div class="add-contact-div" id="add-contact-divID">
       <div class="add-contact-left">
         <img src="./assets/img/logo-sidebar.png" alt="" />
         <h1>Add contact</h1>
@@ -95,8 +113,8 @@
               placeholder="Phone" id="add-phoneID" />
           </div>
           <div class="buttons-div-form">
-            <button type="button" onclick="addContactOpenClose()" class="button-cansel">
-              Canselt <span>X</span>
+            <button type="button" onclick="addContactOpenClose()" class="button-cancel">
+              Cancel <span>X</span>
             </button>
             <button type="submit" id="button-new-contact-saveID" class="button-create-contact">
               Create Contact<img src="./assets/img/check.png" alt="" />
