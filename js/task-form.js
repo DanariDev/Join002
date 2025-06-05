@@ -60,7 +60,7 @@ function populateContactsDropdown() {
     const dropdownList = document.getElementById('contacts-dropdown-list');
     dropdownList.innerHTML = "";
 
-    for (let contact of contacts) {
+    for (let contact of contacts.sort((a, b) => a.name.localeCompare(b.name))) {
         const initials = contact.name
             .split(" ")
             .map(part => part[0]?.toUpperCase())
