@@ -70,6 +70,10 @@ body {
     justify-content: space-between;
 }
 
+.ju-co-normal{
+    justify-content: normal;
+}
+
 
 .flex-column {
     display: flex;
