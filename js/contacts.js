@@ -49,7 +49,7 @@ async function getAllContacts(path) {
 
 
 function sortContacts() {
-    contacts.sort((a, b) => a.contact.name.localeCompare(b.contact.name));
+    contacts.sort((selected, compare) => selected.contact.name.localeCompare(compare.contact.name));
     contacts.forEach(element => {
         let firstLetter = element.contact.name.charAt(0).toUpperCase();
         if (!groupedContacts[firstLetter]) {
