@@ -52,46 +52,46 @@
 
 
 
-    <div onclick="editDeleteMenuClose()" class="right-section-wrapper" id="right-section">
+      <div onclick="editDeleteMenuClose()" class="right-section-wrapper" id="right-section">
 
-      <div class="contact-details-haeder">
-        <h1>Contacts</h1>
-        <div class="split-contact-header"></div>
-        <span>Better with a team</span>
-      </div>
+        <div class="contact-details-haeder">
+          <h1>Contacts</h1>
+          <div class="split-contact-header"></div>
+          <span>Better with a team</span>
+        </div>
 
-      <div id="showed-contact" class="d-none">
-        <div class="img-name-div">
-          <div class="popout-icon" id="popout-icon"></div>
-          <div>
-            <span id="popout-name">Name</span>
-            <div class="edit-delete-div" id="edit-delete-divID">
-              <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit"
-                  class="img-edit" />Edit</a>
-              <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete"
-                  class="img-delete" />Delete</a>
+        <div id="showed-contact" class="d-none">
+          <div class="img-name-div">
+            <div class="popout-icon" id="popout-icon"></div>
+            <div>
+              <span id="popout-name">Name</span>
+              <div class="edit-delete-div" id="edit-delete-divID">
+                <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit"
+                    class="img-edit" />Edit</a>
+                <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete"
+                    class="img-delete" />Delete</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-information-div">
+            <span class="contact-information">Contact information</span>
+            <div class="email-phone-div">
+              <span class="email-phone-title">Email</span>
+              <a class="email-phone-value email-value" id="popout-email" href="#">Email-address</a>
+              <span class="email-phone-title">Phone</span>
+              <a class="email-phone-value" id="popout-phone" href="#">phone-number</a>
             </div>
           </div>
         </div>
 
-        <div class="contact-information-div">
-          <span>Contact information</span>
-          <div class="email-phone-div">
-            <span class="email-phone-title">Email</span>
-            <a class="email-phone-value email-value" id="popout-email" href="#">Email-address</a>
-            <span class="email-phone-title">Phone</span>
-            <a class="email-phone-value" id="popout-phone" href="#">phone-number</a>
-          </div>
-        </div>
+        <button class="back-arrow" id="back-arrowID" onclick="backToContactsList()">
+          <img src="./assets/img/arrow_left.png" alt="" />
+        </button>
+        <button class="edit-delete-responsive-button" onclick="editDeleteMenuOpen(event)">
+          <img src="./assets/img/responsive-delete-edit.png" alt="" />
+        </button>
       </div>
-
-      <button class="back-arrow" id="back-arrowID" onclick="backToContactsList()">
-        <img src="./assets/img/arrow_left.png" alt="" />
-      </button>
-      <button class="edit-delete-responsive-button" onclick="editDeleteMenuOpen(event)">
-        <img src="./assets/img/responsive-delete-edit.png" alt="" />
-      </button>
-    </div>
   </main>
 
   <div class="add-edit-body display-none" id="add-edit-bodyID">
@@ -156,7 +156,7 @@
             <button type="submit" class="button-save">
               Save <img src="./assets/img/check.png" alt="" />
             </button>
-            
+
           </div>
 
         </form>
