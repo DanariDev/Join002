@@ -116,7 +116,7 @@ function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
     nameElement.innerHTML = contact.name;
     icon.innerHTML = contact.initials;
     icon.style.backgroundColor = getColorForName(contact.name);
-    detailDiv.classList.add('display-flex');
+    detailDiv.classList.remove('d-none');
     eMail.innerHTML = contact.email;
     phone.innerHTML = contact.phone;
 };
