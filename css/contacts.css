@@ -199,6 +199,15 @@
     gap: 32px;
 }
 
+.edit-contact-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+}
+
 .email-phone-div {
     display: flex;
     flex-direction: column;

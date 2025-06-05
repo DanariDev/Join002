@@ -78,9 +78,9 @@
           <span>Contact information</span>
           <div class="email-phone-div">
             <span class="email-phone-title">Email</span>
-            <span class="email-phone-value email-value" id="popout-email">Email-address</span>
+            <a class="email-phone-value email-value" id="popout-email" href="#">Email-address</a>
             <span class="email-phone-title">Phone</span>
-            <span class="email-phone-value" id="popout-phone">phone-number</span>
+            <a class="email-phone-value" id="popout-phone" href="#">phone-number</a>
           </div>
         </div>
       </div>
@@ -139,7 +139,8 @@
           <div class="edit-contact-img" id="img-edit-divID"></div>
         </div>
 
-        <form class="edit-contact-form">
+        <form onsubmit="saveEditedContact(event)" class="edit-contact-form">
+
 
           <div class="name-email-phone-div">
             <input required class="name-email-phone-input" type="text" placeholder="Name" id="edit-nameID" />
@@ -152,9 +153,10 @@
             <button type="button" class="button-delete" onclick="deleteCurrentContact()">
               Delete
             </button>
-            <button class="button-save" onclick="saveEditedContact(event)">
-              Save<img src="./assets/img/check.png" alt="" />
+            <button type="submit" class="button-save">
+              Save <img src="./assets/img/check.png" alt="" />
             </button>
+            
           </div>
 
         </form>
