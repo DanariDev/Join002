@@ -54,6 +54,11 @@
         width: 10%;
     }
 
+    .topbar-user {
+        width: 40px;
+        height: 40px;
+    }
+
     .topbar-icons a {
         display: none;
         /* justify-content: space-between; */

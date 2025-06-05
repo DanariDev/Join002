@@ -16,36 +16,44 @@
 
     .summary-main {
         margin: 0;
-        padding: 10px;
+        padding: 0.9rem;
     }
 
-    .summary-greeting {
+    #summary-greeting-wrapper {
         display: none;
     }
 
     .summary-left {
         display: flex;
         flex-direction: column;
-        gap: 16px;
-        width: 100%;
+        margin-bottom: 71px;
+        max-width: 320px;
+    }
+
+    .summary-content-wrapper {
+        max-width: 320px;
+        gap: 0;
     }
 
     .summary-header {
         flex-direction: column;
         align-items: start;
+        margin: 0;
+        gap: 0;
+        padding: 2rem 0.9rem;
     }
 
-    .metrics-divider {
+    .summary-divider {
         display: none;
     }
 
-    .metrics-title {
+    .summary-title {
         font-size: 20px;
         font-weight: 400;
         color: #647187;
     }
 
-    .metrics-title:after {
+    .summary-title:after {
         content: "";
         position: absolute;
         left: 3%;
@@ -58,7 +66,14 @@
 
     .summary-box,
     .urgent {
-        padding: 10px;
+        padding: 0.9rem;
+        margin: 0.6rem;
+        min-width: 90px;
+        min-height: 116px;
+    }
+
+    .summary-box img {
+        width: 55px;
     }
 }
 
