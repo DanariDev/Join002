@@ -24,11 +24,11 @@ async function initContactsList() {
 
 
 async function onLoadContacts() {
-    document.getElementById('contacts-listID').innerHTML = "";
+    document.getElementById('contacts-list').innerHTML = "";
     contacts = [];
     groupedContacts = [];
 
-    let contactResponse = await getAllContacts("contacts")
+    let contactResponse = await getAllContacts('contacts')
     let ContactKeysArray = Object.keys(contactResponse)
 
     for (let index = 0; index < ContactKeysArray.length; index++) {
@@ -43,7 +43,7 @@ async function onLoadContacts() {
 
 
 async function getAllContacts(path) {
-    let response = await fetch(BASE_URL + path + ".json");
+    let response = await fetch(BASE_URL + path + '.json');
     return responseToJson = await response.json();
 };
 
@@ -62,8 +62,8 @@ function sortContacts() {
 
 function generateSortedContacts() {
     for (let indexaAlphabet = 0; indexaAlphabet < Object.keys(groupedContacts).length; indexaAlphabet++) {
-        document.getElementById('contacts-listID').innerHTML += createAlphabetDiv(indexaAlphabet);
-        document.getElementById('contacts-listID').innerHTML += createGroupList(indexaAlphabet);
+        document.getElementById('contacts-list').innerHTML += createAlphabetDiv(indexaAlphabet);
+        document.getElementById('contacts-list').innerHTML += createGroupList(indexaAlphabet);
 
         for (let indexContacs = 0; indexContacs < Object.values(groupedContacts)[indexaAlphabet].length; indexContacs++) {
             document.getElementById(`group-list${indexaAlphabet}ID`).innerHTML += createImgNameEmailDiv(indexaAlphabet, indexContacs)
@@ -73,7 +73,12 @@ function generateSortedContacts() {
 
 
 function createAlphabetDiv(indexaAlphabet) {
-    return `<div class="alphabet-div"><span>${Object.keys(groupedContacts)[indexaAlphabet]}</span><div class="separate-contacts-list"></div></div>`;
+    return `
+    <div class="list-alphabet">
+    <span>${Object.keys(groupedContacts)[indexaAlphabet]}</span>
+    <div class="split-list-line">
+    </div>
+    </div>`;
 };
 
 
@@ -89,23 +94,23 @@ function createImgNameEmailDiv(indexaAlphabet, indexContacs) {
     const email = contact.email;
     const bgColor = getColorForName(name);
     return `
-    <div class="img-name-email-div" id="img-name-email-div${indexaAlphabet}${indexContacs}ID" 
+    <div class="contact-wrapper" id="contact${indexaAlphabet}${indexContacs}" 
          onclick="contactDetailsLoad('${indexaAlphabet}${indexContacs}','${indexaAlphabet}','${indexContacs}'), toContactDetails()">
-        <div class="img-div" id="img-div${indexaAlphabet}${indexContacs}ID" style="background-color: ${bgColor};">${initials}</div>
-        <div class="name-email-div">
-            <span id="name${indexaAlphabet}${indexContacs}ID">${name}</span>
-            <span class="email-span" id="email${indexaAlphabet}${indexContacs}ID">${email}</span>
+        <div class="initial-icon" style="background-color: ${bgColor};">${initials}</div>
+        <div class="contact-details">
+            <span class="list-showed-name">${name}</span>
+            <span class="list-showed-email" id="email${indexaAlphabet}${indexContacs}">${email}</span>
         </div>
     </div>`;
 };
 
 
 function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
-    const nameElement = document.getElementById('details-nameID');
-    const icon = document.getElementById('img-details-divID');
-    const detailDiv = document.getElementById('contacts-details-contentsID');
-    const eMail = document.getElementById('details-emailID');
-    const phone = document.getElementById('details-phoneID');
+    const nameElement = document.getElementById('popout-name');
+    const icon = document.getElementById('popout-icon');
+    const detailDiv = document.getElementById('showed-contact');
+    const eMail = document.getElementById('popout-email');
+    const phone = document.getElementById('popout-phone');
     const contact = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact;
 
     nameElement.innerHTML = contact.name;
@@ -118,8 +123,8 @@ function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
 
 
 function backToContactsList() {
-    document.getElementById('contact-details-divID').classList.remove('display-flex');
-    document.querySelectorAll('.img-name-email-div').forEach(element => {
+    document.getElementById('right-section').classList.remove('display-flex');
+    document.querySelectorAll('.contact-wrapper').forEach(element => {
         element.style = "";
     });
     document.getElementById('contacts-details-contentsID').classList.remove('display-flex');
@@ -127,5 +132,5 @@ function backToContactsList() {
 
 
 function toContactDetails() {
-    document.getElementById('contact-details-divID').classList.add('display-flex');
+    document.getElementById('right-section').classList.add('display-flex');
 };

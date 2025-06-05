@@ -1,7 +1,7 @@
 /* Einheitliche HTML und Body Struktur */
 html {
-    font-size: 65, 5%;
-    /* Festsetzung der Font size. 1rem = 16px */
+    font-size: 65.5%;
+    /* Festsetzung der Font size. 1rem = 10px */
 }
 
 
@@ -35,31 +35,34 @@ body {
     --clr-900: #091930;
     /* für Buttons */
 
-    --fs-16: calc(0.6485rem + 0.390625vw);
+
+    /* Font size ausgehend von 1440 x 1024 wie im Mockup */
+
+    --fs-16: calc(0.98998rem + 0.390625vw);
     /* Dynamische Font Size von 16px */
 
-    --fs-20: calc(0.8985rem + 0.390625vw);
+    --fs-20: calc(1.37166rem + 0.390625vw);
     /* Dynamische Font Size von 20px */
 
-    --fs-21: calc(0.961rem + 0.390625vw);
+    --fs-21: calc(1.46708rem + 0.390625vw);
     /* Dynamische Font Size von 21px */
 
-    --fs-24: calc(1.1485rem + 0.390625vw);
+    --fs-24: calc(1.75334rem + 0.390625vw);
     /* Dynamische Font Size von 21px */
 
-    --fs-27: calc(1.336rem + 0.390625vw);
+    --fs-27: calc(2.0396rem + 0.390625vw);
     /* Dynamische Font Size von 27px */
 
-    --fs-36: calc(1.8985rem + 0.390625vw);
+    --fs-36: calc(2.89838rem + 0.390625vw);
     /* Dynamische Font Size von 36px */
 
-    --fs-47: calc(2.586rem + 0.390625vw);
+    --fs-47: calc(3.948rem + 0.390625vw);
     /* Dynamische Font Size von 36px */
 
-    --fs-61: calc(3.461rem + 0.390625vw);
+    --fs-61: calc(5.28387rem + 0.390625vw);
     /* Dynamische Font Size von 61px */
 
-    --fs-64: calc(3.6485rem + 0.390625vw);
+    --fs-64: calc(5.57013rem + 0.390625vw);
     /* Dynamische Font Size von 64px */
 }
 
@@ -91,7 +94,7 @@ p {
 }
 
 h1 {
-    font-size: calc(3.461rem + 0.390625vw);
+    font-size: var(--fs-61);
     color: var(--clr-700);
     margin: 0;
 }
