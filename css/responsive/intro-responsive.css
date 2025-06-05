@@ -1,31 +1,31 @@
 @media (min-width: 621px) {
-    .starting-logo-responsive{
+    .starting-logo-responsive {
         display: none;
     }
 }
 
 @media (max-width: 620px) {
-    .starting-logo-responsive{
+    .starting-logo-responsive {
         animation: slideToLeftCornerResponsive 1.25s ease forwards;
         animation-delay: 0.75s;
-        width: 120vw;
-        height: 112vh;
-        left: -50px;
-        top: -12px;
+        background-color: var(--clr-700);
+        /* background im Container statt Img */
     }
 
     .starting-logo-responsive img {
-        object-fit: none;
-        background-color: var(--clr-700);
+        object-fit: contain;
     }
 
     @keyframes slideToLeftCornerResponsive {
         to {
-            width: 150px;
-            height: 150px;
+            width: 100px;
+            height: 100px;
             top: 20px;
             left: 0;
-            display: none;
+            opacity: 0;
+            /* statt display: none */
+            transform: scale(0.9);
+            /* für mehr Weichheit */
         }
     }
 }
