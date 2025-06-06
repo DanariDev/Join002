@@ -52,7 +52,8 @@
 
 
 
-      <div onclick="editDeleteMenuClose()" class="right-section-wrapper" id="right-section">
+      <div class="right-section-wrapper" id="right-section">
+
 
         <div class="contact-details-haeder">
           <h1>Contacts</h1>
@@ -62,16 +63,15 @@
 
         <div id="showed-contact" class="d-none">
 
-          <div class="showed-contact-header-row">
+          <div class="showed-contact-header-row new-header-row">
             <div class="popout-icon" id="popout-icon"></div>
-            <div class="name-and-buttons">
-              <span id="popout-name">Name</span>
-              <div class="edit-showed-contact">
-                <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit-icon">Edit</a>
-                <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete-icon" />Delete</a>
-              </div>
+            <span id="popout-name" class="popout-name-inline">Name</span>
+            <div class="edit-showed-contact inline-buttons">
+              <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit-icon">Edit</a>
+              <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete-icon" />Delete</a>
             </div>
           </div>
+          
           
 
           <div class="showed-contact-information">
@@ -114,9 +114,10 @@
               placeholder="Phone" id="add-phoneID" />
           </div>
           <div class="buttons-div-form">
-            <button type="button" onclick="addContactOpenClose()" class="button-cancel">
+            <button type="button" onclick="addContactOpenClose()" class="button-cansel">
               Cancel <span>X</span>
             </button>
+            
             <button type="submit" id="button-new-contact-saveID" class="button-create-contact">
               Create Contact<img src="./assets/img/check.png" alt="" />
             </button>

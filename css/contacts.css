@@ -19,13 +19,10 @@
     flex-direction: column;
 }
 
-.add-contact-div {
-    display: none;
-}
 
-.add-contact-div {
-    display: none;
-}
+
+
+  
 
 .add-contact-btn {
     display: flex;
@@ -262,99 +259,87 @@
     width: fit-content;
 }
 
-.email-phone-value:hover {
-    background-color: var(--clr-500);
-    color: var(--clr-200);
-    text-decoration: none;
-    cursor: pointer;
+.new-header-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-<<<<<<< Updated upstream
-.add-contact-responsive-button img {
-    height: 20px;
+.popout-icon {
+    flex-shrink: 0;
+}
+
+.popout-name-inline {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--clr-700);
+    margin-right: 16px;
+}
+
+.inline-buttons {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.inline-buttons a {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--clr-700);
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.inline-buttons a:hover {
+    color: var(--clr-500);
+}
+
+.inline-buttons img {
+    height: 16px;
+}
+
+.email-phone-value {
+    font-size: var(--fs-14);
+    color: var(--clr-700);
+    text-decoration: underline;
+    background: none;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: inline;
+}
+
+.email-phone-value:hover {
+    color: var(--clr-700);
+    /* Kein Hover-Farbwechsel */
+    text-decoration: underline;
 }
 .email-phone-value {
-    display: inline-block;
     font-size: var(--fs-14);
-    font-weight: bold;
-    color: white;
-    padding: 8px 14px;
-    border-radius: 12px;
-    text-decoration: none;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    transition: 0.3s ease;
-    max-width: 300px;
-    width: fit-content;
-    background: linear-gradient(135deg, #ccc, #2A3647); 
+    color: #007bff; /* Klassisches Link-Blau */
+    text-decoration: underline;
+    background: none;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    display: inline;
   }
   
   .email-phone-value:hover {
-    filter: brightness(1.1);
-    transform: scale(1.05);
+    color: #0056b3; /* dunkleres Blau beim Hover */
+    text-decoration: underline;
   }
-  .edit-showed-contact {
-    display: flex;
-    gap: 16px;
-    margin-top: 8px;
+  .add-contact-div.display-none {
+    display: none;
   }
   
-  .edit-showed-contact a {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--clr-700);
-    cursor: pointer;
+  .add-edit-body.display-none {
+    display: none;
   }
   
-  .edit-showed-contact a:hover {
-    color: var(--clr-500);
-  }
-  
-  .edit-showed-contact img {
-    height: 14px;
-  }
-  .showed-contact-header-row {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .name-and-buttons {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .edit-showed-contact {
-    display: flex;
-    gap: 12px;
-  }
-  
-  .edit-showed-contact a {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-    color: var(--clr-700);
-    cursor: pointer;
-  }
-  
-  .edit-showed-contact a:hover {
-    color: var(--clr-500);
-  }
-  
-  .edit-showed-contact img {
-    height: 14px;
-  }
-  
-  
-  
-  
-=======
->>>>>>> Stashed changes

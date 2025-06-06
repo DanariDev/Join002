@@ -5,16 +5,8 @@ let selectedContactId = null;
 
 function getColorForName(name) {
   const colors = [
-    "#FF5733",
-    "#33B5FF",
-    "#33FF99",
-    "#FF33EC",
-    "#ffcb20",
-    "#9D33FF",
-    "#33FFDA",
-    "#FF8C33",
-    "#3385FF",
-    "#FF3333",
+    "#FF5733", "#33B5FF", "#33FF99", "#FF33EC", "#ffcb20",
+    "#9D33FF", "#33FFDA", "#FF8C33", "#3385FF", "#FF3333"
   ];
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
@@ -40,7 +32,7 @@ async function onLoadContacts() {
   for (let index = 0; index < ContactKeysArray.length; index++) {
     contacts.push({
       id: ContactKeysArray[index],
-      contact: contactResponse[ContactKeysArray[index]],
+      contact: contactResponse[ContactKeysArray[index]]
     });
   }
 }
@@ -64,33 +56,21 @@ function sortContacts() {
 }
 
 function generateSortedContacts() {
-  for (
-    let indexaAlphabet = 0;
-    indexaAlphabet < Object.keys(groupedContacts).length;
-    indexaAlphabet++
-  ) {
-    document.getElementById("contacts-list").innerHTML +=
-      createAlphabetDiv(indexaAlphabet);
-    document.getElementById("contacts-list").innerHTML +=
-      createGroupList(indexaAlphabet);
+  for (let indexaAlphabet = 0; indexaAlphabet < Object.keys(groupedContacts).length; indexaAlphabet++) {
+    document.getElementById("contacts-list").innerHTML += createAlphabetDiv(indexaAlphabet);
+    document.getElementById("contacts-list").innerHTML += createGroupList(indexaAlphabet);
 
-    for (
-      let indexContacs = 0;
-      indexContacs < Object.values(groupedContacts)[indexaAlphabet].length;
-      indexContacs++
-    ) {
-      document.getElementById(`group-list${indexaAlphabet}ID`).innerHTML +=
-        createImgNameEmailDiv(indexaAlphabet, indexContacs);
+    for (let indexContacs = 0; indexContacs < Object.values(groupedContacts)[indexaAlphabet].length; indexContacs++) {
+      document.getElementById(`group-list${indexaAlphabet}ID`).innerHTML += createImgNameEmailDiv(indexaAlphabet, indexContacs);
     }
   }
 }
 
 function createAlphabetDiv(indexaAlphabet) {
   return `
-    <div class="list-alphabet">
-    <span>${Object.keys(groupedContacts)[indexaAlphabet]}</span>
-    <div class="split-list-line">
-    </div>
+    <div class="list -alphabet">
+      <span>${Object.keys(groupedContacts)[indexaAlphabet]}</span>
+      <div class="split-list-line"></div>
     </div>`;
 }
 
@@ -99,14 +79,13 @@ function createGroupList(indexaAlphabet) {
 }
 
 function createImgNameEmailDiv(indexaAlphabet, indexContacs) {
-  const contact =
-    Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact;
+  const contact = Object.values(groupedContacts)[indexaAlphabet][indexContacs].contact;
   const initials = contact.initials;
   const name = contact.name;
   const email = contact.email;
   const bgColor = getColorForName(name);
   return `
-    <div class="contact-wrapper" id="contact${indexaAlphabet}${indexContacs}" 
+    <div class="contact-wrapper" id="contact${indexaAlphabet}${indexContacs}"
          onclick="contactDetailsLoad('${indexaAlphabet}${indexContacs}','${indexaAlphabet}','${indexContacs}'), toContactDetails()">
         <div class="initial-icon" style="background-color: ${bgColor};">${initials}</div>
         <div class="contact-details">
@@ -117,9 +96,7 @@ function createImgNameEmailDiv(indexaAlphabet, indexContacs) {
 }
 
 function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
-  const contactEntry =
-    Object.values(groupedContacts)[indexaAlphabet][indexContacs];
-
+  const contactEntry = Object.values(groupedContacts)[indexaAlphabet][indexContacs];
   const contact = contactEntry.contact;
   selectedContactId = contactEntry.id;
 
@@ -130,19 +107,6 @@ function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
   setAttr("popout-phone", "href", `tel:${contact.phone}`);
   setText("popout-icon", contact.initials);
   setStyle("popout-icon", "backgroundColor", getColorForName(contact.name));
-  const bgColor = getColorForName(contact.name);
-  setStyle(
-    "popout-email",
-    "background",
-    `linear-gradient(135deg, ${bgColor}, #2A3647)`
-  );
-  setStyle(
-    "popout-phone",
-    "background",
-    `linear-gradient(135deg, ${bgColor}, #2A3647)`
-  );
-  setStyle("popout-email", "color", "white");
-  setStyle("popout-phone", "color", "white");
 
   document.getElementById("showed-contact").classList.remove("d-none");
 }
@@ -152,14 +116,13 @@ function backToContactsList() {
   document.querySelectorAll(".contact-wrapper").forEach((element) => {
     element.style = "";
   });
-  document
-    .getElementById("contacts-details-contentsID")
-    .classList.remove("display-flex");
+  document.getElementById("contacts-details-contentsID").classList.remove("display-flex");
 }
 
 function toContactDetails() {
   document.getElementById("right-section").classList.add("display-flex");
 }
+
 function saveEditedContact(e) {
   e.preventDefault();
   let name = getValue("edit-nameID");
@@ -169,9 +132,10 @@ function saveEditedContact(e) {
   let contact = { name, email, phone, initials: getInitials(name) };
   fetch(BASE_URL + "contacts/" + id + ".json", {
     method: "PUT",
-    body: JSON.stringify(contact),
+    body: JSON.stringify(contact)
   }).then(() => applyEdit(contact, id));
 }
+
 function applyEdit(contact, id) {
   const index = contacts.findIndex((c) => c.id === id);
   contacts[index].contact = contact;
@@ -179,11 +143,9 @@ function applyEdit(contact, id) {
   rerenderContacts();
   loadDetails(contact, id);
 
-  // Fenster richtig schließen (nur das Edit-Fenster!)
   document.getElementById("edit-contact-divID").classList.add("display-none");
   document.getElementById("add-edit-bodyID").classList.add("display-none");
 
-  // Eingaben leeren
   setInput("edit-nameID", "");
   setInput("edit-emailID", "");
   setInput("edit-phoneID", "");
@@ -193,13 +155,11 @@ function applyEdit(contact, id) {
 function getValue(id) {
   return document.getElementById(id).value;
 }
+
 function getInitials(name) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .join("")
-    .toUpperCase();
+  return name.split(" ").map((w) => w[0]).join("").toUpperCase();
 }
+
 function currentContactId() {
   return selectedContactId;
 }
@@ -212,11 +172,13 @@ function regroupContacts() {
     groupedContacts[letter].push(c);
   });
 }
+
 function rerenderContacts() {
   document.getElementById("contacts-list").innerHTML = "";
   sortContacts();
   generateSortedContacts();
 }
+
 function loadDetails(c, id) {
   setText("popout-name", c.name);
   setText("popout-email", c.email);
@@ -228,18 +190,23 @@ function loadDetails(c, id) {
   document.getElementById("edit-contact-divID").classList.add("display-none");
   document.getElementById("showed-contact").classList.remove("d-none");
 }
+
 function setText(id, val) {
   document.getElementById(id).innerHTML = val;
 }
+
 function setAttr(id, attr, val) {
   document.getElementById(id).setAttribute(attr, val);
 }
+
 function setStyle(id, prop, val) {
   document.getElementById(id).style[prop] = val;
 }
+
 function setInput(id, val) {
   document.getElementById(id).value = val;
 }
+
 function prefillEditForm() {
   if (!selectedContactId) return;
   let c = contacts.find((c) => c.id === selectedContactId).contact;
@@ -247,15 +214,15 @@ function prefillEditForm() {
   setInput("edit-emailID", c.email);
   setInput("edit-phoneID", c.phone);
 
-  // NEU:
   setText("img-edit-divID", c.initials);
   setStyle("img-edit-divID", "backgroundColor", getColorForName(c.name));
 }
 
 function editContactOpenClose() {
-  document
-    .getElementById("edit-contact-divID")
-    .classList.toggle("display-none");
-  document.getElementById("add-edit-bodyID").classList.toggle("display-none"); // <- wichtig!
+  const editDiv = document.getElementById("edit-contact-divID");
+  const bodyDiv = document.getElementById("add-edit-bodyID");
+  if (!editDiv || !bodyDiv) return; // Sicherheitsprüfung
+  editDiv.classList.toggle("display-none");
+  bodyDiv.classList.toggle("display-none");
   prefillEditForm();
 }
