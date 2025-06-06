@@ -2,6 +2,11 @@
 
 .sign-up-wrapper-responsive {
     display: none;
+    font-size: var(--fs-16);
+    color: var(--clr-700);
+    align-items: center;
+    padding: 2rem;
+    gap: 8px;
 }
 
 .login-page-wrapper {
