@@ -61,7 +61,6 @@ export function logout() {
     .then(() => {
       localStorage.removeItem("isGuest");
       localStorage.removeItem("userName");
-      window.location.href = "login.html";
     })
     .catch((e) => alert("Fehler beim Logout:\n" + e.message));
 }
