@@ -2,8 +2,24 @@
 @media (min-width: 1200px) {}
 
 /* Media Querry Small Displays */
-@media (max-width: 900px) {}
+@media (max-width: 900px) {
 
+    .summary-header {
+        gap: 15px;
+        margin-left: 22.138rem;
+        padding: 1.5rem;
+    }
+
+    #summary-greeting-wrapper span {
+        color: var(--clr-500);
+        font-size: var(--fs-47);
+        font-weight: 700;
+    }
+}
+
+.summary-content-wrapper {
+    gap: 15px;
+}
 
 @media (max-width: 800px) {}
 
