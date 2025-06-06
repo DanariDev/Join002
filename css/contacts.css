@@ -250,16 +250,22 @@
     display: none;
 }
 
-.add-contact-responsive-button {
-    position: absolute;
-    bottom: 104px;
-    right: 32px;
-    border: 0;
-    padding: 15px 10.93px;
-    background-color: var(--clr-700);
-    border-radius: 100%;
-    display: none;
-    margin: 0;
+.email-phone-value {
+    display: inline-block;
+    font-size: var(--fs-14);
+    padding: 6px 12px;
+    background-color: var(--clr-300);
+    color: var(--clr-700);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    width: fit-content;
+}
+
+.email-phone-value:hover {
+    background-color: var(--clr-500);
+    color: var(--clr-200);
+    text-decoration: none;
     cursor: pointer;
 }
 
