@@ -11,6 +11,26 @@
 
 
 @media (max-width: 800px) {
+
+    .login-page-wrapper {
+        height: auto;
+        padding: 16rem 4rem 4rem 4rem;
+        justify-content: space-between;
+    }
+
+    .sign-up-wrapper-responsive {
+        font-size: var(--fs-16);
+        color: var(--clr-700);
+        display: flex;
+        align-items: center;
+        padding: 2rem;
+        gap: 8px;
+    }
+
+    .sign-up-wrapper {
+        display: none;
+    }
+
     #sidebar-footer {
         display: none;
     }
@@ -24,11 +44,6 @@
 
 @media (max-width: 490px) {
 
-    .login-page-wrapper {
-        height: calc(100vh - 40px);
-        padding: 10px;
-    }
-
     .btn-primary,
     .btn-secondary {
         padding: 7px;
@@ -39,17 +54,6 @@
     .underline:after {
         left: 36.5%;
         right: 36.5%;
-    }
-
-    .sign-up-wrapper {
-        position: absolute;
-        top: 875px;
-        right: 30px;
-        font-size: 16px;
-        color: #2A3647;
-        display: flex;
-        align-items: center;
-        gap: 8px;
     }
 
     .button-row {
