@@ -11,15 +11,6 @@
 
 
 @media (max-width: 800px) {
-
-    .underline:after {
-        left: 41.5%;
-        right: 41.5%;
-    }
-}
-
-
-@media (max-width: 620px) {
     #sidebar-footer {
         display: none;
     }
