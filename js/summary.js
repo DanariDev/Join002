@@ -11,7 +11,6 @@ function $(s) {
 function handleAuthState() {
     onAuthStateChanged(auth, function (user) {
         if (!user) {
-            window.location.href = 'login.html';
             return;
         }
         let name = localStorage.getItem('userName');

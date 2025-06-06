@@ -8,18 +8,58 @@
   <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
   <link rel="stylesheet" href="css/global.css">
   <link rel="stylesheet" href="css/sidebar.css" />
+  <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
   <link rel="stylesheet" href="css/add-task.css" />
   <link rel="stylesheet" href="css/responsive/add-task-responsive.css" />
   <link rel="stylesheet" href="css/topbar.css" />
   <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
-  <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
   <script src="js/topbar.js"></script>
 </head>
 
 <body>
+
+  <div class="sidebar">
+
+    <img src="assets/img/logo_dark.png" alt="Join Logo" class="sidebar-logo" />
+
+    <nav class="sidebar-nav">
+      <a href="summary.html" class="nav-link summary-link">
+        <img src="assets/img/summary.png" alt="Summary Icon" />
+        <span class="responsive-font">Summary</span>
+      </a>
+      <a href="add-task.html" class="nav-link add-task-link">
+        <img src="assets/img/add-task.png" alt="Add Task Icon" />
+        <span class="responsive-font">Add Task</span>
+      </a>
+      <a href="board.html" class="nav-link board-link">
+        <img src="assets/img/board.png" alt="Board Icon" />
+        <span class="responsive-font">Board</span>
+      </a>
+      <a href="contacts.html" class="nav-link contacts-link">
+        <img src="assets/img/contacts.png" alt="Contacts Icon" />
+        <span class="responsive-font">Contacts</span>
+      </a>
+    </nav>
+
+    <footer id="sidebar-footer">
+      <div class="sidebar-footer-links responsive-hide-on-mobile">
+        <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
+        <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="topbar">
+    <span class="topbar-title">Kanban Project Management Tool</span>
+
+    <img class="topbar-logo" src="/assets/img/logo-start.png" alt="">
+    <div class="topbar-icons icons-display-none">
+      <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
+      <div onclick="openMenu()" class="topbar-user"></div>
+    </div>
+  </div>
+
   <div class="page-wrapper">
-    <div include-html="sidebar.html"></div>
-    <div include-html="templates/topbar.html"></div>
 
     <main class="add-task-main">
       <h1>Add Task</h1>
@@ -73,6 +113,8 @@
           </div>
 
           <ul id="subtask-list"></ul>
+
+          <span class="required-explain-responsive">This field is required</span>
 
           <div class="add-task-create-and-clear-btn">
             <button type="reset" id="clear-btn">Clear &#10006;</button>

@@ -1,10 +1,10 @@
-@media (min-width: 621px) {
+@media (min-width: 801px) {
     .starting-logo-responsive {
         display: none;
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 800px) {
     .starting-logo-responsive {
         animation: slideToLeftCornerResponsive 1.25s ease forwards;
         animation-delay: 0.75s;
