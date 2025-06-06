@@ -119,6 +119,7 @@ function createImgNameEmailDiv(indexaAlphabet, indexContacs) {
 function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
   const contactEntry =
     Object.values(groupedContacts)[indexaAlphabet][indexContacs];
+
   const contact = contactEntry.contact;
   selectedContactId = contactEntry.id;
 
@@ -129,23 +130,21 @@ function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
   setAttr("popout-phone", "href", `tel:${contact.phone}`);
   setText("popout-icon", contact.initials);
   setStyle("popout-icon", "backgroundColor", getColorForName(contact.name));
-  styleContactLinks(contact);
-  document.getElementById("showed-contact").classList.remove("d-none");
-}
-function styleContactLinks(contact) {
-  const color = getColorForName(contact.name);
+  const bgColor = getColorForName(contact.name);
   setStyle(
     "popout-email",
     "background",
-    `linear-gradient(135deg, ${color}, #2A3647)`
+    `linear-gradient(135deg, ${bgColor}, #2A3647)`
   );
   setStyle(
     "popout-phone",
     "background",
-    `linear-gradient(135deg, ${color}, #2A3647)`
+    `linear-gradient(135deg, ${bgColor}, #2A3647)`
   );
   setStyle("popout-email", "color", "white");
   setStyle("popout-phone", "color", "white");
+
+  document.getElementById("showed-contact").classList.remove("d-none");
 }
 
 function backToContactsList() {
