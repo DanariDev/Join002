@@ -19,8 +19,9 @@
     }
 
     .add-task-main {
-        margin-left: 0;
-        padding: 10px 10px 8vh 10px;
+        margin: 0;
+        padding: 1rem;
+        padding-bottom: 71px;
     }
 
     input {
@@ -31,6 +32,18 @@
         padding: 10px;
         gap: 5px;
     }
+
+    .required-explain {
+        display: none;
+        font-size: var(--fs-20);
+    }
+
+
+    .required-explain-responsive {
+        font-size: var(--fs-20);
+        display: block;
+    }
+
 }
 
 @media (max-width: 490px) {}

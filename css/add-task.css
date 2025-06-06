@@ -9,7 +9,7 @@
 
 /* Wrapper */
 .page-wrapper {
-  height: 100vh;
+  height: calc(100vh - 103px);
 }
 
 
@@ -298,6 +298,16 @@ option {
 }
 
 .required-explain:before {
+  content: " *";
+  color: red;
+}
+
+.required-explain-responsive {
+  font-size: var(--fs-20);
+  display: none;
+}
+
+.required-explain-responsive:before {
   content: " *";
   color: red;
 }
