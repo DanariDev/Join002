@@ -116,7 +116,7 @@
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 800px) {
 
     #sidebar-footer {
         display: none;
