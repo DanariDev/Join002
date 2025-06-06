@@ -118,10 +118,9 @@ function createImgNameEmailDiv(indexaAlphabet, indexContacs) {
 
 function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
   const contactEntry =
-    Object.values(groupedContacts)[indexaAlphabet][indexContacs]; 
-
+    Object.values(groupedContacts)[indexaAlphabet][indexContacs];
   const contact = contactEntry.contact;
-  selectedContactId = contactEntry.id; 
+  selectedContactId = contactEntry.id;
 
   setText("popout-name", contact.name);
   setText("popout-email", contact.email);
@@ -130,7 +129,23 @@ function contactDetailsLoad(idNumber, indexaAlphabet, indexContacs) {
   setAttr("popout-phone", "href", `tel:${contact.phone}`);
   setText("popout-icon", contact.initials);
   setStyle("popout-icon", "backgroundColor", getColorForName(contact.name));
+  styleContactLinks(contact);
   document.getElementById("showed-contact").classList.remove("d-none");
+}
+function styleContactLinks(contact) {
+  const color = getColorForName(contact.name);
+  setStyle(
+    "popout-email",
+    "background",
+    `linear-gradient(135deg, ${color}, #2A3647)`
+  );
+  setStyle(
+    "popout-phone",
+    "background",
+    `linear-gradient(135deg, ${color}, #2A3647)`
+  );
+  setStyle("popout-email", "color", "white");
+  setStyle("popout-phone", "color", "white");
 }
 
 function backToContactsList() {
@@ -159,24 +174,23 @@ function saveEditedContact(e) {
   }).then(() => applyEdit(contact, id));
 }
 function applyEdit(contact, id) {
-    const index = contacts.findIndex(c => c.id === id);
-    contacts[index].contact = contact;
-    regroupContacts();
-    rerenderContacts();
-    loadDetails(contact, id);
-  
-    // Fenster richtig schließen (nur das Edit-Fenster!)
-    document.getElementById("edit-contact-divID").classList.add("display-none");
-    document.getElementById("add-edit-bodyID").classList.add("display-none");
-  
-    // Eingaben leeren
-    setInput("edit-nameID", "");
-    setInput("edit-emailID", "");
-    setInput("edit-phoneID", "");
-    setText("img-edit-divID", "");
-  }
-  
-  
+  const index = contacts.findIndex((c) => c.id === id);
+  contacts[index].contact = contact;
+  regroupContacts();
+  rerenderContacts();
+  loadDetails(contact, id);
+
+  // Fenster richtig schließen (nur das Edit-Fenster!)
+  document.getElementById("edit-contact-divID").classList.add("display-none");
+  document.getElementById("add-edit-bodyID").classList.add("display-none");
+
+  // Eingaben leeren
+  setInput("edit-nameID", "");
+  setInput("edit-emailID", "");
+  setInput("edit-phoneID", "");
+  setText("img-edit-divID", "");
+}
+
 function getValue(id) {
   return document.getElementById(id).value;
 }
@@ -228,21 +242,21 @@ function setInput(id, val) {
   document.getElementById(id).value = val;
 }
 function prefillEditForm() {
-    if (!selectedContactId) return;
-    let c = contacts.find((c) => c.id === selectedContactId).contact;
-    setInput("edit-nameID", c.name);
-    setInput("edit-emailID", c.email);
-    setInput("edit-phoneID", c.phone);
-  
-    // NEU:
-    setText("img-edit-divID", c.initials);
-    setStyle("img-edit-divID", "backgroundColor", getColorForName(c.name));
-  }
-  
+  if (!selectedContactId) return;
+  let c = contacts.find((c) => c.id === selectedContactId).contact;
+  setInput("edit-nameID", c.name);
+  setInput("edit-emailID", c.email);
+  setInput("edit-phoneID", c.phone);
+
+  // NEU:
+  setText("img-edit-divID", c.initials);
+  setStyle("img-edit-divID", "backgroundColor", getColorForName(c.name));
+}
 
 function editContactOpenClose() {
-    document.getElementById('edit-contact-divID').classList.toggle('display-none');
-    document.getElementById('add-edit-bodyID').classList.toggle('display-none'); // <- wichtig!
-    prefillEditForm();
-  }
-  
+  document
+    .getElementById("edit-contact-divID")
+    .classList.toggle("display-none");
+  document.getElementById("add-edit-bodyID").classList.toggle("display-none"); // <- wichtig!
+  prefillEditForm();
+}
