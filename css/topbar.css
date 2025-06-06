@@ -67,6 +67,7 @@
 .menu a {
   text-decoration: none;
   color: var(--clr-200);
+  font-size: var(--fs-16);
 }
 
 .display-none {

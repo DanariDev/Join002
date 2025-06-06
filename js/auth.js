@@ -73,7 +73,7 @@ function init() {
   form.onsubmit = (e) => {
     e.preventDefault();
     if (path.includes("register")) signup();
-    if (path.includes("login") || path.includes("index")) login();
+    if (path.includes("index")) login();
   };
 
   const guestBtn = document.getElementById("guestLogin");
