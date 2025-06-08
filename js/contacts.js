@@ -139,8 +139,9 @@ function saveEditedContact(e) {
 function applyEdit(contact, id) {
   const index = contacts.findIndex((c) => c.id === id);
   contacts[index].contact = contact;
-  regroupContacts();
-  rerenderContacts();
+
+  initContactsList(); 
+
   loadDetails(contact, id);
 
   document.getElementById("edit-contact-divID").classList.add("display-none");
@@ -151,6 +152,7 @@ function applyEdit(contact, id) {
   setInput("edit-phoneID", "");
   setText("img-edit-divID", "");
 }
+
 
 function getValue(id) {
   return document.getElementById(id).value;
