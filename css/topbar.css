@@ -48,7 +48,7 @@
   align-items: center;
   justify-content: center;
   border: 2px solid #000;
-  font-size: calc(0.8985rem + 0.390625vw);
+  font-size: var(--fs-27);
   cursor: pointer;
 }
 
@@ -67,6 +67,7 @@
 .menu a {
   text-decoration: none;
   color: var(--clr-200);
+  font-size: var(--fs-16);
 }
 
 .display-none {

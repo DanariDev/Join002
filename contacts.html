@@ -22,8 +22,46 @@
 
 <body onload="initSidbarTopbar(), initContactsList()">
 
-  <div id="sidebarID"></div>
-  <div id="topbarID"></div>
+  <div class="sidebar">
+
+    <img src="assets/img/logo_dark.png" alt="Join Logo" class="sidebar-logo" />
+
+    <nav class="sidebar-nav">
+      <a href="summary.html" class="nav-link summary-link">
+        <img src="assets/img/summary.png" alt="Summary Icon" />
+        <span class="responsive-font">Summary</span>
+      </a>
+      <a href="add-task.html" class="nav-link add-task-link">
+        <img src="assets/img/add-task.png" alt="Add Task Icon" />
+        <span class="responsive-font">Add Task</span>
+      </a>
+      <a href="board.html" class="nav-link board-link">
+        <img src="assets/img/board.png" alt="Board Icon" />
+        <span class="responsive-font">Board</span>
+      </a>
+      <a href="contacts.html" class="nav-link contacts-link">
+        <img src="assets/img/contacts.png" alt="Contacts Icon" />
+        <span class="responsive-font">Contacts</span>
+      </a>
+    </nav>
+
+    <footer id="sidebar-footer">
+      <div class="sidebar-footer-links responsive-hide-on-mobile">
+        <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
+        <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="topbar">
+    <span class="topbar-title">Kanban Project Management Tool</span>
+
+    <img class="topbar-logo" src="/assets/img/logo-start.png" alt="">
+    <div class="topbar-icons icons-display-none">
+      <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
+      <div onclick="openMenu()" class="topbar-user"></div>
+    </div>
+  </div>
 
   <main class="contacts-main">
 
@@ -52,7 +90,8 @@
 
 
 
-      <div onclick="editDeleteMenuClose()" class="right-section-wrapper" id="right-section">
+      <div class="right-section-wrapper" id="right-section">
+
 
         <div class="contact-details-haeder">
           <h1>Contacts</h1>
@@ -62,17 +101,15 @@
 
         <div id="showed-contact" class="d-none">
 
-          <div class="showed-contact-header">
+          <div class="showed-contact-header-row new-header-row">
             <div class="popout-icon" id="popout-icon"></div>
-
-            <div>
-              <span id="popout-name">Name</span>
-              <div class="edit-showed-contact">
-                <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit-icon">Edit</a>
-                <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete-icon" />Delete</a>
-              </div>
+            <span id="popout-name" class="popout-name-inline">Name</span>
+            <div class="edit-showed-contact inline-buttons">
+              <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit-icon">Edit</a>
+              <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete-icon" />Delete</a>
             </div>
           </div>
+
 
           <div class="showed-contact-information">
             <span class="contact-information">Contact information</span>
@@ -114,9 +151,10 @@
               placeholder="Phone" id="add-phoneID" />
           </div>
           <div class="buttons-div-form">
-            <button type="button" onclick="addContactOpenClose()" class="button-cancel">
+            <button type="button" onclick="addContactOpenClose()" class="button-cansel">
               Cancel <span>X</span>
             </button>
+            
             <button type="submit" id="button-new-contact-saveID" class="button-create-contact">
               Create Contact<img src="./assets/img/check.png" alt="" />
             </button>

@@ -1,0 +1,31 @@
+@media (min-width: 801px) {
+    .starting-logo-responsive {
+        display: none;
+    }
+}
+
+@media (max-width: 800px) {
+    .starting-logo-responsive {
+        animation: slideToLeftCornerResponsive 1.25s ease forwards;
+        animation-delay: 0.75s;
+        background-color: var(--clr-700);
+        /* background im Container statt Img */
+    }
+
+    .starting-logo-responsive img {
+        object-fit: contain;
+    }
+
+    @keyframes slideToLeftCornerResponsive {
+        to {
+            width: 100px;
+            height: 100px;
+            top: 20px;
+            left: 0;
+            opacity: 0;
+            /* statt display: none */
+            transform: scale(0.9);
+            /* für mehr Weichheit */
+        }
+    }
+}

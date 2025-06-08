@@ -7,11 +7,11 @@
         gap: 8px;
     }
 
-    .separate-contact-details-header {
+    .split-contact-header {
         position: absolute;
         width: 100px;
         top: 256px;
-        height: 3px;
+        height: 0px;
     }
 
     .contact-details-div {
@@ -21,7 +21,7 @@
 }
 
 @media (max-width: 1063px) {
-    .img-name-div {
+    .showed-contact-header {
         gap: 16px;
     }
 
@@ -35,7 +35,7 @@
         font-size: 32px;
     }
 
-    .img-name-div span {
+    .showed-contact-header span {
         font-size: 32px;
     }
 }
@@ -64,9 +64,8 @@
         gap: 16px;
     }
 
-    .separate-contact-details-header {
+    .split-contact-header {
         width: 3px;
-        height: auto;
         position: static;
     }
 
@@ -76,7 +75,7 @@
         font-size: 40px;
     }
 
-    .img-name-div span {
+    .showed-contact-header span {
         font-size: 40px;
     }
 
@@ -93,7 +92,7 @@
         gap: 8px;
     }
 
-    .separate-contact-details-header {
+    .split-contact-header {
         position: absolute;
         width: 100px;
         top: 168px;
@@ -112,12 +111,12 @@
         font-size: 32px;
     }
 
-    .img-name-div span {
+    .showed-contact-header span {
         font-size: 32px;
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 800px) {
 
     #sidebar-footer {
         display: none;
@@ -128,7 +127,7 @@
         padding: 0;
     }
 
-    .add-contact-button {
+    .add-contact-btn {
         display: none;
     }
 
@@ -144,12 +143,12 @@
         padding: 32px 16px;
     }
 
-    .separate-contact-details-header {
+    .split-contact-header {
         top: 136px;
         width: 96px;
     }
 
-    .edit-delete-div {
+    .edit-showed-contact {
         padding: 16px;
         display: none;
         position: absolute;
@@ -162,11 +161,11 @@
         gap: 24px;
     }
 
-    .img-edit {
+    .edit-showed-contact img {
         height: 24px;
     }
 
-    .img-delete {
+    .edit-showed-contact img {
         height: 20px;
         width: 24px;
         object-fit: contain;
@@ -176,7 +175,7 @@
         display: flex;
     }
 
-    .edit-delete-div a {
+    .edit-showed-contact a {
         font-size: 16px;
     }
 
@@ -196,7 +195,7 @@
         font-size: 40px;
     }
 
-    .separate-contact-details-header {
+    .split-contact-header {
         top: 120px;
         width: 72px;
     }
@@ -215,7 +214,7 @@
         font-size: 24px;
     }
 
-    .img-name-div span {
+    .showed-contact-header span {
         font-size: 24px;
     }
 

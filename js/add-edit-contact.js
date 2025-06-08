@@ -15,14 +15,17 @@ function getColorForName(name) {
 function addContactOpenClose() {
   const a = document.getElementById('add-contact-divID');
   const b = document.getElementById('add-edit-bodyID');
+  if (!a || !b) return; // Sicherheitsprüfung
   a.classList.toggle('display-none');
   b.classList.toggle('display-none');
+  console.log("Add Contact toggled");
+
 }
 
 function outsideClickCloseEdit(e) {
   const d = document.getElementById('edit-contact-divID');
   const ignore = e.target.closest('[onclick="editContactOpenClose()"]');
-  const open = !d.classList.contains('display-none');
+  const open = d && !d.classList.contains('display-none');
   if (open && !d.contains(e.target) && !ignore) editContactOpenClose(false);
 }
 
@@ -43,12 +46,13 @@ restrictToNumbers('edit-phoneID');
 
 function editDeleteMenuOpen(e) {
   const m = document.getElementById('edit-delete-divID');
-  m.classList.add('display-flex');
+  if (m) m.classList.add('display-flex');
   e.stopPropagation();
 }
 
 function editDeleteMenuClose() {
   const m = document.getElementById('edit-delete-divID');
+  if (!m) return; // Sicherheitsprüfung: Wenn das Element nicht existiert, abbrechen
   const open = [...m.classList].includes('display-flex');
   if (window.innerWidth <= 620 && open) m.classList.remove('display-flex');
 }
@@ -92,7 +96,6 @@ function emptyInputReloadList() {
   initContactsList();
   document.getElementById('button-new-contact-saveID').disabled = false;
 
-  // Auch das Edit-Fenster nach Änderung schließen
   const editDiv = document.getElementById('edit-contact-divID');
   if (editDiv && !editDiv.classList.contains('display-none')) {
     editContactOpenClose();
