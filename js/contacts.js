@@ -144,8 +144,8 @@ function applyEdit(contact, id) {
 
   loadDetails(contact, id);
 
-  document.getElementById("edit-contact-divID").classList.add("display-none");
-  document.getElementById("add-edit-bodyID").classList.add("display-none");
+  document.getElementById("edit-contact-divID").classList.add("d-none");
+  document.getElementById("add-edit-bodyID").classList.add("d-none");
 
   setInput("edit-nameID", "");
   setInput("edit-emailID", "");
@@ -189,7 +189,7 @@ function loadDetails(c, id) {
   setAttr("popout-phone", "href", `tel:${c.phone}`);
   setText("popout-icon", c.initials);
   setStyle("popout-icon", "backgroundColor", getColorForName(c.name));
-  document.getElementById("edit-contact-divID").classList.add("display-none");
+  document.getElementById("edit-contact-divID").classList.add("d-none");
   document.getElementById("showed-contact").classList.remove("d-none");
 }
 
@@ -224,7 +224,7 @@ function editContactOpenClose() {
   const editDiv = document.getElementById("edit-contact-divID");
   const bodyDiv = document.getElementById("add-edit-bodyID");
   if (!editDiv || !bodyDiv) return; // Sicherheitsprüfung
-  editDiv.classList.toggle("display-none");
-  bodyDiv.classList.toggle("display-none");
+  editDiv.classList.toggle("d-none");
+  bodyDiv.classList.toggle("d-none");
   prefillEditForm();
 }

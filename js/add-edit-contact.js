@@ -25,7 +25,7 @@ function addContactOpenClose() {
 function outsideClickCloseEdit(e) {
   const d = document.getElementById('edit-contact-divID');
   const ignore = e.target.closest('[onclick="editContactOpenClose()"]');
-  const open = d && !d.classList.contains('display-none');
+  const open = d && !d.classList.contains('d-none');
   if (open && !d.contains(e.target) && !ignore) editContactOpenClose(false);
 }
 
@@ -46,7 +46,7 @@ restrictToNumbers('edit-phoneID');
 
 function editDeleteMenuOpen(e) {
   const m = document.getElementById('edit-delete-divID');
-  if (m) m.classList.add('display-flex');
+  if (m) m.classList.add('dispaly-flex');
   e.stopPropagation();
 }
 
@@ -97,7 +97,7 @@ function emptyInputReloadList() {
   document.getElementById('button-new-contact-saveID').disabled = false;
 
   const editDiv = document.getElementById('edit-contact-divID');
-  if (editDiv && !editDiv.classList.contains('display-none')) {
+  if (editDiv && !editDiv.classList.contains('d-none')) {
     editContactOpenClose();
   }
 }
