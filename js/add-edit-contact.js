@@ -16,8 +16,8 @@ function addContactOpenClose() {
   const a = document.getElementById('add-contact-divID');
   const b = document.getElementById('add-edit-bodyID');
   if (!a || !b) return; // Sicherheitsprüfung
-  a.classList.toggle('display-none');
-  b.classList.toggle('display-none');
+  a.classList.toggle('d-none');
+  b.classList.toggle('d-none');
   console.log("Add Contact toggled");
 
 }
