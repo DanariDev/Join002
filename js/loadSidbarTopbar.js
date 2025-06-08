@@ -1,29 +1,5 @@
 async function initSidbarTopbar(){
-    // await loadSidbar();
-    // await loadTopbar();
     generateInitialsTopBarMenu()
-}
-
-async function loadSidbar(){
-    try{
-        const reponse = await fetch('../sidebar.html');
-        const html = await reponse.text();
-        document.getElementById('sidebarID').innerHTML = html;
-    }
-    catch (error) {
-        console.error('Fehler beim Laden des Headers:', error );
-    }
-}
-
-async function loadTopbar(){
-    try{
-        const reponse = await fetch('../templates/topbar.html');
-        const html = await reponse.text();
-        document.getElementById('topbarID').innerHTML = html;
-    }
-    catch (error) {
-        console.error('Fehler beim Laden des Headers:', error );
-    }
 }
 
 function generateInitialsTopBarMenu(){
@@ -44,9 +20,6 @@ function NoOrMoreSpaces(){
     }
 }
 
-function openMenu() {
-    document.getElementById('menuID').classList.toggle('display-none');
-}
 
 
 
