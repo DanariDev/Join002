@@ -1,39 +1,11 @@
-function loadSidebar() {
-    const isGuest = localStorage.getItem('isGuest') === 'true';
-    const sidebarDiv = document.getElementById('change-sidebar');
-    const file = isGuest ? 'sidebar-guest.html' : 'sidebar.html';
-
-    fetch(file)
-        .then(response => {
-            if (!response.ok) throw new Error(`Fehler beim Laden der Sidebar: ${response.status}`);
-            return response.text();
-        })
-        .then(html => {
-            sidebarDiv.innerHTML = html;
-            includeNestedHTML();
-        })
-        .catch(err => {
-            sidebarDiv.innerHTML = '<p>Sidebar konnte nicht geladen werden.</p>';
-            console.error(err);
+function init(){
+    if(localStorage.getItem('unregistered') == 'true'){
+        document.querySelectorAll(".nav-link-hide").forEach((element) => {
+            element.classList.add('d-none');
         });
-}
+        document.getElementById('topbar-iconsID').classList.add('d-none')
+        document.getElementById('nav-link-unregisteredID').classList.remove('d-none');
 
-function includeNestedHTML() {
-    const elements = document.querySelectorAll('[include-html]');
-    elements.forEach(el => {
-        const file = el.getAttribute('include-html');
-        fetch(file)
-            .then(response => response.text())
-            .then(data => {
-                el.innerHTML = data;
-                el.removeAttribute('include-html');
-                includeNestedHTML();
-            })
-            .catch(err => {
-                el.innerHTML = '<p>Sidebar konnte nicht geladen werden.</p>';
-                console.error(err);
-            });
-    });
+        document.getElementById('sidebar-footer-linksID').classList.add('unregistered-sidebar')
+    }
 }
-
-window.addEventListener('DOMContentLoaded', loadSidebar);

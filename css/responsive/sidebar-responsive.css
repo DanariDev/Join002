@@ -57,10 +57,11 @@
 
     #sidebar-footer {
         padding: 0;
+        display: none;
     }
 
     .responsive-hide-on-mobile {
-        display: none !important;
+        display: none;
     }
 
     .responsive-show-on-mobile {
@@ -89,7 +90,10 @@
         margin: 0;
     }
 
-
+    .unregistered-sidebar{
+        display: flex;
+        flex-direction: row;
+    }
 }
 
 

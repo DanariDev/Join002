@@ -12,35 +12,42 @@
   <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
   <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
   <link rel="stylesheet" href="css/global.css">
+  <script src="./js/loadSidbarTopbar.js"></script>
+  <script src="js/changeSidebar.js"></script>
   <script src="../js/topbar.js"></script>
 </head>
 
-<body>
+<body onload="init(), initSidbarTopbar()" onclick="closeTopbarMenu()">
   <div class="sidebar">
 
     <img src="assets/img/logo_dark.png" alt="Join Logo" class="sidebar-logo" />
 
     <nav class="sidebar-nav">
-      <a href="summary.html" class="nav-link summary-link">
+      <a href="summary.html" class="nav-link nav-link-hide summary-link">
         <img src="assets/img/summary.png" alt="Summary Icon" />
         <span class="responsive-font">Summary</span>
       </a>
-      <a href="add-task.html" class="nav-link add-task-link">
+      <a href="add-task.html" class="nav-link nav-link-hide add-task-link">
         <img src="assets/img/add-task.png" alt="Add Task Icon" />
         <span class="responsive-font">Add Task</span>
       </a>
-      <a href="board.html" class="nav-link board-link">
+      <a href="board.html" class="nav-link nav-link-hide board-link">
         <img src="assets/img/board.png" alt="Board Icon" />
         <span class="responsive-font">Board</span>
       </a>
-      <a href="contacts.html" class="nav-link contacts-link">
+      <a href="contacts.html" class="nav-link nav-link-hide contacts-link">
         <img src="assets/img/contacts.png" alt="Contacts Icon" />
         <span class="responsive-font">Contacts</span>
       </a>
+
+      <a href="index.html" class="nav-link log-in-link d-none" id="nav-link-unregisteredID">
+            <img src="assets/img/login.png" alt="Contacts Icon" />
+            <span class="responsive-font">Log In</span>
+        </a>
     </nav>
 
     <footer id="sidebar-footer">
-      <div class="sidebar-footer-links responsive-hide-on-mobile">
+      <div class="sidebar-footer-links responsive-hide-on-mobile" id="sidebar-footer-linksID">
         <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
         <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
       </div>
@@ -51,7 +58,7 @@
     <span class="topbar-title">Kanban Project Management Tool</span>
 
     <img class="topbar-logo" src="/assets/img/logo-start.png" alt="">
-    <div class="topbar-icons">
+    <div class="topbar-icons" id="topbar-iconsID">
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
       <div onclick="openMenu(event)" class="topbar-user"></div>
     </div>
@@ -172,8 +179,7 @@
     </section>
   </main>
 
-  <!-- <script src="js/changeSidebar.js"></script> -->
-  <script src="js/include-html.js"></script>
+  <!-- <script src="js/include-html.js"></script> -->
 </body>
 
 </html>
