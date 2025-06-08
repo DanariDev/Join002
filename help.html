@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Join | Help</title>
     <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png">
-    <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/sidebar.css" />
     <link rel="stylesheet" href="./css/help.css">
     <link rel="stylesheet" href="css/topbar.css">
     <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
     <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
     <link rel="stylesheet" href="css/responsive/help-responsive.css">
+    <link rel="stylesheet" href="css/global.css">
 
     <script src="../js/topbar.js"></script>
 </head>
@@ -53,12 +53,19 @@
         <span class="topbar-title">Kanban Project Management Tool</span>
 
         <img class="topbar-logo" src="/assets/img/logo-start.png" alt="">
-        <div class="topbar-icons icons-display-none">
+        <div class="topbar-icons">
             <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon"
                     class="topbar-icon" /></a>
             <div onclick="openMenu()" class="topbar-user"></div>
         </div>
     </div>
+
+    <div id="menuID" class="menu d-none">
+    <a class="d-none" href="../help.html">Help</a>
+    <a href="../legal.html">Legal Notice</a>
+    <a href="../privacy-policy.html">Privacy Policy</a>
+    <a href="../index.html">Log out</a>
+  </div>
 
     <main class="help-main">
         <!-- Inhalt der Legal-Seite (Privacy, Imprint, etc.) -->

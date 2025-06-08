@@ -1,6 +1,6 @@
 async function initSidbarTopbar(){
-    await loadSidbar();
-    await loadTopbar();
+    // await loadSidbar();
+    // await loadTopbar();
     generateInitialsTopBarMenu()
 }
 

@@ -1,6 +1,6 @@
 function openMenu() {
   const menu = document.getElementById('menuID');
-  if (menu) menu.classList.toggle('display-none');
+  if (menu) menu.classList.toggle('d-none');
 }
 
 function getInitials(name) {
@@ -22,9 +22,9 @@ function updateTopbarUser() {
 function closeMenuIfOutsideClick(e) {
   const menu = document.getElementById('menuID');
   const button = document.querySelector('.topbar-user');
-  if (!menu || menu.classList.contains('display-none')) return;
+  if (!menu || menu.classList.contains('d-none')) return;
   if (!menu.contains(e.target) && !button.contains(e.target)) {
-    menu.classList.add('display-none');
+    menu.classList.add('d-none');
   }
 }
 
