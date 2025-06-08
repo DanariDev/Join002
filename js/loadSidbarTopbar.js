@@ -1,4 +1,4 @@
-async function initSidbarTopbar(){
+function initSidbarTopbar(){
     generateInitialsTopBarMenu()
 }
 
@@ -20,6 +20,9 @@ function NoOrMoreSpaces(){
     }
 }
 
-
-
-
+function closeTopbarMenu(){
+    const menu = document.getElementById('menuID');
+    if (!menu.classList.contains('d-none')) {
+        menu.classList.add('d-none');
+    }
+}

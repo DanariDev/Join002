@@ -21,7 +21,7 @@
   <script src="./js/topbar.js"></script>
 </head>
 
-<body onload="initSidbarTopbar(), initContactsList()">
+<body onload="initSidbarTopbar(), initContactsList()" onclick="closeTopbarMenu()">
 
   <div class="sidebar">
 
@@ -60,7 +60,7 @@
     <img class="topbar-logo" src="/assets/img/logo-start.png" alt="">
     <div class="topbar-icons">
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
-      <div onclick="openMenu()" class="topbar-user"></div>
+      <div onclick="openMenu(event)" class="topbar-user"></div>
     </div>
   </div>
 

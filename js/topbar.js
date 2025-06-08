@@ -1,4 +1,5 @@
-function openMenu() {
+function openMenu(event) {
+  event.stopPropagation();
   const menu = document.getElementById('menuID');
   if (menu) menu.classList.toggle('d-none');
 }
