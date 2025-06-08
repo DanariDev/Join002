@@ -7,5 +7,6 @@ function init(){
         document.getElementById('nav-link-unregisteredID').classList.remove('d-none');
 
         document.getElementById('sidebar-footer-linksID').classList.add('unregistered-sidebar')
+        document.getElementById('sidebar-footer').classList.add('d-flex');
     }
 }

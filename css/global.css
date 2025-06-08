@@ -89,6 +89,11 @@ body {
     display: none;
 }
 
+
+.d-flex{
+    display: flex;
+}
+
 p {
     font-size: var(--fs-16);
 }
