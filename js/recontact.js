@@ -181,11 +181,15 @@ function renderLeftAdding() {
     leftSide.classList.add('lightbox-left');
 
     const img = document.createElement('img');
+    img.classList.add('join-logo-left');
     img.src = '../assets/img/logo_dark.png';
     img.alt = 'Bild';
 
     const h2 = document.createElement('h2');
     h2.textContent = 'Add Contact';
+
+    const sublineWrapper = document.createElement('div');
+    sublineWrapper.classList.add('lightbox-subline');
 
     const span = document.createElement('span');
     span.textContent = 'Tasks are better with a team!';
@@ -195,8 +199,9 @@ function renderLeftAdding() {
 
     leftSide.appendChild(img);
     leftSide.appendChild(h2);
-    leftSide.appendChild(span);
-    leftSide.appendChild(balken);
+    sublineWrapper.appendChild(span);
+    sublineWrapper.appendChild(balken);
+    leftSide.appendChild(sublineWrapper);
 
     return leftSide;
 }
@@ -205,31 +210,57 @@ function renderRightAdding() {
     const rightSide = document.createElement('div');
     rightSide.classList.add('lightbox-right');
 
-    const iconLightbox = document.createElement('div');
-    iconLightbox.classList.add('icon');
+
+    const iconLightbox = document.createElement('img');
+    iconLightbox.src = '../assets/img/person.png';
+    iconLightbox.classList.add('current-icon');
+
+
+    const column = document.createElement('div');
+    column.classList.add('editing-lighbox');
+
+    const btns = document.createElement('div');
+    btns.classList.add('btn-lighbox');
 
     const nameInput = document.createElement('input');
+    nameInput.classList.add('edit-name');
     nameInput.placeholder = 'Name';
 
     const emailInput = document.createElement('input');
+    emailInput.classList.add('edit-mail');
     emailInput.placeholder = 'Email';
 
     const phoneInput = document.createElement('input');
+    phoneInput.classList.add('edit-phone');
     phoneInput.placeholder = 'Phone';
 
+
     const cancelBtn = document.createElement('button');
+    cancelBtn.id = 'cancel-btn';
     cancelBtn.textContent = 'Cancel';
 
+    const cancelBtnSpan = document.createElement('span');
+    cancelBtnSpan.textContent = 'X';
+
     const createBtn = document.createElement('button');
+    createBtn.id = 'create-btn';
     createBtn.textContent = 'Create Contact';
 
-    rightSide.appendChild(iconLightbox);
-    rightSide.appendChild(nameInput);
-    rightSide.appendChild(emailInput);
-    rightSide.appendChild(phoneInput);
-    rightSide.appendChild(cancelBtn);
-    rightSide.appendChild(createBtn);
+    const btnImgcheck = document.createElement('img');
+    btnImgcheck.src = '../assets/img/check.png';
 
+    createBtn.appendChild(btnImgcheck);
+    cancelBtn.appendChild(cancelBtnSpan);
+
+
+    rightSide.appendChild(iconLightbox);
+    column.appendChild(nameInput);
+    column.appendChild(emailInput);
+    column.appendChild(phoneInput);
+    btns.appendChild(cancelBtn);
+    btns.appendChild(createBtn);
+    column.appendChild(btns);
+    rightSide.appendChild(column);
     return rightSide;
 }
 
@@ -258,19 +289,26 @@ function renderRightEditing() {
     const rightSide = document.createElement('div');
     rightSide.classList.add('lightbox-right');
 
-    const flex = document.createElement('div');
-    flex.classList.add('d-flex');
+    const iconLightbox = document.createElement('img');
+    iconLightbox.src = '../assets/img/person.png';
+    iconLightbox.classList.add('current-icon');
 
-    const iconLightbox = document.createElement('div');
-    iconLightbox.classList.add('icon');
+    const column = document.createElement('div');
+    column.classList.add('editing-lighbox');
+
+    const btns = document.createElement('div');
+    btns.classList.add('btn-lighbox');
 
     const nameInput = document.createElement('input');
+    nameInput.classList.add('edit-name');
     nameInput.placeholder = 'Name';
 
     const emailInput = document.createElement('input');
+    emailInput.classList.add('edit-mail');
     emailInput.placeholder = 'Email';
 
     const phoneInput = document.createElement('input');
+    phoneInput.classList.add('edit-phone');
     phoneInput.placeholder = 'Phone';
 
     const deleteBtn = document.createElement('button');
@@ -281,13 +319,19 @@ function renderRightEditing() {
     saveBtn.id = 'saveBtn'
     saveBtn.textContent = 'Save';
 
-    flex.appendChild(iconLightbox);
-    flex.appendChild(nameInput);
-    flex.appendChild(emailInput);
-    flex.appendChild(phoneInput);
-    flex.appendChild(deleteBtn);
-    flex.appendChild(saveBtn);
-    rightSide.appendChild(flex);
+    const btnImgcheck = document.createElement('img');
+    btnImgcheck.src = '../assets/img/check.png';
+
+    saveBtn.appendChild(btnImgcheck);
+
+    rightSide.appendChild(iconLightbox);
+    column.appendChild(nameInput);
+    column.appendChild(emailInput);
+    column.appendChild(phoneInput);
+    btns.appendChild(deleteBtn);
+    btns.appendChild(saveBtn);
+    column.appendChild(btns);
+    rightSide.appendChild(column);
 
     return rightSide;
 }
