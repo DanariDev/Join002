@@ -1,0 +1,257 @@
+@import url("global.css");
+
+
+.contacts-link,
+.contacts-link:hover {
+    background-color: var(--clr-900);
+}
+
+/* Left Section */
+#recontacts-main {
+    height: calc(100vh - 153px);
+    padding: 4rem;
+    margin-left: 22.138rem;
+    display: flex;
+
+
+}
+
+
+#left-section {
+    flex: 1;
+}
+
+#add-recontact-btn-big {
+    flex: 1;
+    text-wrap: nowrap;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: var(--fs-21);
+    font-weight: 700;
+    color: var(--clr-200);
+    background-color: var(--clr-700);
+    cursor: pointer;
+}
+
+#add-recontact-btn-big:hover {
+    background-color: var(--clr-500);
+}
+
+/* Contact List */
+#recontacts-list-wrapper {
+    overflow: scroll;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+.list-alphabet {
+    font-size: var(--fs-20);
+    font-weight: 400;
+    padding: 1rem;
+    height: min-content;
+}
+
+.split-list-line {
+    padding: 0;
+    margin: 4px;
+    border: 1px solid var(--clr-300);
+}
+
+.list-contact-wrapper {
+    padding: 1rem;
+    display: flex;
+    gap: 35px;
+}
+
+.list-contact-wrapper:hover {
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    border-radius: 10px;
+}
+
+.initial-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: var(--fs-12);
+    color: var(--clr-200);
+    border: 2px solid var(--clr-200);
+}
+
+.list-contact-information {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+}
+
+.list-name {
+    font-size: var(--fs-20);
+}
+
+.list-email {
+    font-size: var(--fs-16);
+    font-weight: 400;
+    color: var(--clr-500);
+}
+
+/* Right Section */
+#right-section {
+    padding: 2rem;
+    width: auto;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.recontact-details-haeder {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.recontact-details-haeder span {
+    font-size: var(--fs-27);
+
+}
+
+.split-contact-header {
+    height: 59px;
+    border: 3px solid var(--clr-500);
+    border-radius: 2px;
+}
+
+
+/* Main Shown */
+#showed-current-contact {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: start;
+}
+
+/* Shown Head */
+.current-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 54px;
+}
+
+#current-icon {
+    font-size: var(--fs-47);
+}
+
+.current-btns {
+    display: flex;
+    justify-content: start;
+    gap: 13px;
+}
+
+#current-edit,
+#current-delete {
+    width: 120px;
+    min-height: 64px;
+    border: none;
+    cursor: pointer;
+    font-size: var(--fs-16);
+}
+
+#current-edit:hover,
+#current-delete:hover {
+    color: var(--clr-500);
+}
+
+#current-icon {
+    height: 120px;
+    width: 120px;
+    color: var(--clr-200);
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#current-name {
+    font-size: var(--fs-47);
+    text-wrap: nowrap;
+}
+
+/* Shown bottom */
+
+.current-information {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.current-information a,
+.current-information a:visited {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.current-bottom p {
+    font-size: var(--fs-20);
+}
+
+.current-bottom span {
+    font-size: var(--fs-16);
+    font-weight: 700;
+}
+
+#current-mail {
+    font-size: var(--fs-16);
+    font-weight: 400;
+    color: var(--clr-500);
+}
+
+#current-phone {
+    font-size: var(--fs-16);
+    font-weight: 400;
+}
+
+/* Lightbox */
+#lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+#lightbox {
+    height: 50vh;
+    display: flex;
+    border-radius: 10px;
+}
+
+.lightbox-left {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+}
+
+.lightbox-right {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    background-color: var(--clr-200);
+}
