@@ -12,8 +12,6 @@
     padding: 4rem;
     margin-left: 22.138rem;
     display: flex;
-
-
 }
 
 
@@ -141,6 +139,12 @@
     padding: 1rem;
     flex-direction: column;
     align-items: start;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+#showed-current-contact.show {
+    transform: translateX(0);
 }
 
 /* Shown Head */
@@ -151,7 +155,8 @@
     gap: 54px;
 }
 
-#current-icon {
+#current-icon,
+#edit-icon {
     font-size: var(--fs-47);
 }
 
@@ -176,7 +181,8 @@
 }
 
 .current-icon,
-#current-icon {
+#current-icon,
+#edit-icon {
     height: 120px;
     width: 120px;
     color: var(--clr-200);
@@ -237,22 +243,27 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
     justify-content: center;
     align-items: center;
-    overflow: hidden;
     z-index: 9999;
 }
 
 #lightbox {
     height: 50vh;
     width: 90%;
-    display: flex;
     border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
 }
 
+#lightbox.show {
+    transform: translateX(0);
+}
 
 /* Lightbox left */
 .lightbox-left {
@@ -315,26 +326,26 @@ h2 {
     min-width: 300px;
 }
 
-.edit-name {
+#edit-name {
     background-image: url("/assets/img/person.png");
     background-repeat: no-repeat;
     background-position: right 24px center;
 }
 
 
-.edit-mail {
+#edit-mail {
     background-image: url("/assets/img/mail.svg");
     background-repeat: no-repeat;
     background-position: right 24px center;
 }
 
-.edit-phone {
+#edit-phone {
     background-image: url("/assets/img/phone.png");
     background-repeat: no-repeat;
     background-position: right 24px center;
 }
 
-.btn-lighbox {
+.btns-lighbox {
     display: flex;
     gap: 24px;
 }

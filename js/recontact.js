@@ -1,7 +1,10 @@
+import { ref, set, push, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { db } from './firebase-config.js';
+
 const BASE_URL = "https://join002-26fa4-default-rtdb.firebaseio.com/";
 let contacts = [];
 let groupedContacts = [];
-let selectedContactId = null;
+let selectedContact = null;
 
 
 // Colors
@@ -25,10 +28,13 @@ async function initContactsList() {
     generateSortedContacts();
 };
 
+
 async function getAllContacts(path) {
-    let response = await fetch(BASE_URL + path + ".json");
-    return (responseToJson = await response.json());
+    const response = await fetch(BASE_URL + path + ".json");
+    const data = await response.json();
+    return data;
 };
+
 
 async function createList() {
     document.getElementById('recontacts-list-wrapper').innerHTML = "";
@@ -44,7 +50,8 @@ async function createList() {
             contact: contactResponse[ContactKeysArray[index]]
         });
     };
-}
+};
+
 
 // Sort List
 function sortList() {
@@ -79,7 +86,15 @@ function generateSortedContacts() {
             document.getElementById(`list-group-${letter}`).innerHTML += getInformationTemplate(letter, x);
         };
     };
+    document.querySelectorAll(".list-contact-wrapper").forEach(el => {
+        const letter = el.dataset.letter;
+        const index = parseInt(el.dataset.index);
+        el.addEventListener('click', () => {
+            showContact(`${letter}${index}`, letter, index);
+        });
+    });
 };
+
 
 function createAlphabetTemplate(letter) {
     return `
@@ -88,6 +103,7 @@ function createAlphabetTemplate(letter) {
       <div class="split-list-line"></div>
     </div>`;
 };
+
 
 function createGroupTemplate(letter) {
     return `<div class="group-list" id="list-group-${letter}"></div>`;
@@ -100,10 +116,11 @@ function getInformationTemplate(letter, index) {
     const name = contact.name;
     const email = contact.email;
     const bgColor = getColorForName(name);
-
     return `
-    <div class="list-contact-wrapper" id="contact${letter}-${index}"
-onclick="showContact('${letter}${index}','${letter}', ${index})">
+    <div class="list-contact-wrapper"
+         id="contact${letter}-${index}"
+         data-letter="${letter}"
+         data-index="${index}">
         <div class="initial-icon" style="background-color: ${bgColor};">${initials}</div>
         <div class="list-contact-information">
             <span class="list-name">${name}</span>
@@ -130,33 +147,50 @@ function showContact(idNumber, letter, index) {
     icon.style.backgroundColor = getColorForName(contact.name);
     card.classList.remove('d-none');
     card.classList.add('d-flex');
+
+    selectedContact = {
+        id: groupedContacts[letter][index].id,
+        name: contact.name,
+        email: contact.email,
+        phone: contact.phone,
+        icon: contact.initials
+    };
+    setTimeout(() => {
+        card.classList.add('show');
+    }, 10);
 };
 
 
-
-document.addEventListener("DOMContentLoaded", function () {
-    initContactsList();
-});
-
-
-
-
-
-
-//  Unfertig
-
-// lightbox
+// Lightbox
 function openLightboxAdd() {
     document.getElementById('lightbox-overlay').classList.remove('d-none');
     document.getElementById('lightbox-overlay').classList.add('d-flex');
     document.body.style.overflow = 'hidden';
     const lightbox = document.getElementById('lightbox');
     lightbox.innerHTML = '';
-    const leftSide = renderLeftAdding();
-    const rightSide = renderRightAdding();
+    const tempLeft = document.createElement('div');
+    tempLeft.innerHTML = leftAddingTemplate();
+    const leftSide = tempLeft.firstElementChild;
+    const tempRight = document.createElement('div');
+    tempRight.innerHTML = rightAddingTemplate();
+    const rightSide = tempRight.firstElementChild;
     lightbox.appendChild(leftSide);
     lightbox.appendChild(rightSide);
-}
+
+    setTimeout(() => {
+        lightbox.classList.add('show');
+
+        document.getElementById('create-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            addContact();
+        });
+        document.getElementById('cancel-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            closeLightbox();
+        });
+    }, 10);
+};
+
 
 function openLightboxEdit() {
     document.getElementById('lightbox-overlay').classList.remove('d-none');
@@ -164,174 +198,192 @@ function openLightboxEdit() {
     document.body.style.overflow = 'hidden';
     const lightbox = document.getElementById('lightbox');
     lightbox.innerHTML = '';
-    const leftSide = renderLeftEditing();
-    const rightSide = renderRightEditing();
+    const tempLeft = document.createElement('div');
+    tempLeft.innerHTML = leftEditingTemplate();
+    const leftSide = tempLeft.firstElementChild;
+    const tempRight = document.createElement('div');
+    tempRight.innerHTML = rightEditingTemplate();
+    const rightSide = tempRight.firstElementChild;
     lightbox.appendChild(leftSide);
     lightbox.appendChild(rightSide);
-}
+
+    setTimeout(() => {
+        lightbox.classList.add('show');
+    }, 10);
+
+    const icon = document.getElementById('edit-icon');
+    icon.innerText = selectedContact.icon || '';
+    icon.style.backgroundColor = getColorForName(selectedContact.name);
+    document.getElementById('edit-name').value = selectedContact.name || '';
+    document.getElementById('edit-mail').value = selectedContact.email || '';
+    document.getElementById('edit-phone').value = selectedContact.phone || '';
+    document.getElementById('saveBtn').addEventListener('click', () => {
+        if (selectedContact && selectedContact.id) {
+            saveContactEdits(selectedContact.id);
+        } else {
+            alert('no contact found!');
+        }
+    });
+    document.getElementById('deleteBtn').addEventListener('click', () => {
+        if (selectedContact && selectedContact.id) {
+            deleteContact(selectedContact.id);
+        } else {
+            alert('no contact found!');
+        }
+    });
+};
+
 
 function closeLightbox() {
-    document.getElementById('lightbox-overlay').classList.remove('d-flex');
-    document.getElementById('lightbox-overlay').classList.add('d-none');
-    document.body.style.overflow = 'auto';
-}
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('show');
 
-function renderLeftAdding() {
-    const leftSide = document.createElement('div');
-    leftSide.classList.add('lightbox-left');
-
-    const img = document.createElement('img');
-    img.classList.add('join-logo-left');
-    img.src = '../assets/img/logo_dark.png';
-    img.alt = 'Bild';
-
-    const h2 = document.createElement('h2');
-    h2.textContent = 'Add Contact';
-
-    const sublineWrapper = document.createElement('div');
-    sublineWrapper.classList.add('lightbox-subline');
-
-    const span = document.createElement('span');
-    span.textContent = 'Tasks are better with a team!';
-
-    const balken = document.createElement('div');
-    balken.classList.add('blue-line');
-
-    leftSide.appendChild(img);
-    leftSide.appendChild(h2);
-    sublineWrapper.appendChild(span);
-    sublineWrapper.appendChild(balken);
-    leftSide.appendChild(sublineWrapper);
-
-    return leftSide;
-}
-
-function renderRightAdding() {
-    const rightSide = document.createElement('div');
-    rightSide.classList.add('lightbox-right');
+    setTimeout(() => {
+        document.getElementById('lightbox-overlay').classList.remove('d-flex');
+        document.getElementById('lightbox-overlay').classList.add('d-none');
+        document.body.style.overflow = 'auto';
+    }, 400);
+};
 
 
-    const iconLightbox = document.createElement('img');
-    iconLightbox.src = '../assets/img/person.png';
-    iconLightbox.classList.add('current-icon');
+function leftAddingTemplate() {
+    return `<div class="lightbox-left">
+    <img class="join-logo-left" src="../assets/img/logo_dark.png" alt="Join Logo">
+    <h2>Add Contact</h2>
+    <div class="lightbox-subline">
+        <span>Tasks are better with a team!</span>
+        <div class="blue-line"></div>
+    </div>
+</div>`
+};
 
 
-    const column = document.createElement('div');
-    column.classList.add('editing-lighbox');
-
-    const btns = document.createElement('div');
-    btns.classList.add('btn-lighbox');
-
-    const nameInput = document.createElement('input');
-    nameInput.classList.add('edit-name');
-    nameInput.placeholder = 'Name';
-
-    const emailInput = document.createElement('input');
-    emailInput.classList.add('edit-mail');
-    emailInput.placeholder = 'Email';
-
-    const phoneInput = document.createElement('input');
-    phoneInput.classList.add('edit-phone');
-    phoneInput.placeholder = 'Phone';
+function rightAddingTemplate() {
+    return `<div class="lightbox-right">
+    <img class="current-icon" src="../assets/img/person.png" alt="Person Icon">
+<div class="editing-lighbox">
+    <input id="edit-name" type="text" placeholder="Name">
+    <input id="edit-mail" type="text" placeholder="Email">
+    <input id="edit-phone" type="text" placeholder="Phone">
+<div class="btns-lighbox">
+<button id="cancel-btn">Cancel <span>X</span></button>
+<button id="create-btn">Create Contact <img src="../assets/img/check.png" alt="check"></button>
+</div>
+</div>
+</div>`
+};
 
 
-    const cancelBtn = document.createElement('button');
-    cancelBtn.id = 'cancel-btn';
-    cancelBtn.textContent = 'Cancel';
-
-    const cancelBtnSpan = document.createElement('span');
-    cancelBtnSpan.textContent = 'X';
-
-    const createBtn = document.createElement('button');
-    createBtn.id = 'create-btn';
-    createBtn.textContent = 'Create Contact';
-
-    const btnImgcheck = document.createElement('img');
-    btnImgcheck.src = '../assets/img/check.png';
-
-    createBtn.appendChild(btnImgcheck);
-    cancelBtn.appendChild(cancelBtnSpan);
+function leftEditingTemplate() {
+    return `<div class="lightbox-left">
+    <img class="join-logo-left" src="../assets/img/logo_dark.png" alt="Join Logo">
+    <div class="lightbox-subline">
+    <h2>Edit Contact</h2>
+        <div class="blue-line"></div>
+    </div>
+</div>`
+};
 
 
-    rightSide.appendChild(iconLightbox);
-    column.appendChild(nameInput);
-    column.appendChild(emailInput);
-    column.appendChild(phoneInput);
-    btns.appendChild(cancelBtn);
-    btns.appendChild(createBtn);
-    column.appendChild(btns);
-    rightSide.appendChild(column);
-    return rightSide;
-}
+function rightEditingTemplate() {
+    return `<div class="lightbox-right">
+    <div id="edit-icon"></div>
+    <div class="editing-lighbox">
+        <input id="edit-name" type="text" placeholder="Name">
+        <input id="edit-mail" type="text" placeholder="Email">
+        <input id="edit-phone" type="text" placeholder="Phone">
+        <div class="btns-lighbox">
+            <button id="deleteBtn">Delete</button>
+            <button id="saveBtn">Save<img src="../assets/img/check.png" alt="check"></button>
+        </div>
+    </div>
+</div>`
+};
 
-function renderLeftEditing() {
-    const leftSide = document.createElement('div');
-    leftSide.classList.add('lightbox-left');
 
-    const img = document.createElement('img');
-    img.src = '../assets/img/logo_dark.png';
-    img.alt = 'Bild';
+// Kontakte abändern
+async function saveContactEdits(contactId) {
+    const name = document.getElementById('edit-name').value.trim();
+    const email = document.getElementById('edit-mail').value.trim();
+    const phone = document.getElementById('edit-phone').value.trim();
+    if (!name || !email || !phone) {
+        alert('All Fields required!');
+        return;
+    }
+    try {
+        const contactRef = ref(db, 'contacts/' + contactId);
+        await update(contactRef, {
+            name: name,
+            email: email,
+            phone: phone
+        });
+        closeLightbox();
+    } catch (error) {
+        alert('failure on saving');
+    }
+    const card = document.getElementById('showed-current-contact');
+    card.classList.add('d-none');
+    card.classList.remove('d-flex');
+    closeLightbox();
+    initContactsList()
+};
 
-    const h2 = document.createElement('h2');
-    h2.textContent = 'Edit Contact';
 
-    const balken = document.createElement('div');
-    balken.classList.add('blue-line');
+async function deleteContact(contactId) {
+    if (!contactId) {
+        alert('No contact found!');
+        return;
+    }
+    const confirmed = confirm('Do you really want to Delete this contact?');
+    if (!confirmed) return;
+    try {
+        const contactRef = ref(db, 'contacts/' + contactId);
+        await remove(contactRef);
+        closeLightbox();
+        await initContactsList();
+    } catch (error) {
+        alert('failure on saving');
+    }
+    const card = document.getElementById('showed-current-contact');
+    card.classList.add('d-none');
+    card.classList.remove('d-flex');
+};
 
-    leftSide.appendChild(img);
-    leftSide.appendChild(h2);
-    leftSide.appendChild(balken);
+async function addContact() {
+    const name = document.getElementById('edit-name').value.trim();
+    const email = document.getElementById('edit-mail').value.trim();
+    const phone = document.getElementById('edit-phone').value.trim();
+    if (!name || !email || !phone) {
+        alert('All Fields required!');
+        return;
+    }
+    try {
+        const contactsRef = ref(db, 'contacts');
+        const newContactRef = push(contactsRef);
+        await set(newContactRef, {
+            name: name,
+            email: email,
+            phone: phone,
+            initials: name.split(' ').map(n => n[0]).join('').toUpperCase()
+        });
+        closeLightbox();
+        await initContactsList();
+    } catch (error) {
+        alert('failed to Set New contact!');
+    }
+};
 
-    return leftSide;
-}
 
-function renderRightEditing() {
-    const rightSide = document.createElement('div');
-    rightSide.classList.add('lightbox-right');
-
-    const iconLightbox = document.createElement('img');
-    iconLightbox.src = '../assets/img/person.png';
-    iconLightbox.classList.add('current-icon');
-
-    const column = document.createElement('div');
-    column.classList.add('editing-lighbox');
-
-    const btns = document.createElement('div');
-    btns.classList.add('btn-lighbox');
-
-    const nameInput = document.createElement('input');
-    nameInput.classList.add('edit-name');
-    nameInput.placeholder = 'Name';
-
-    const emailInput = document.createElement('input');
-    emailInput.classList.add('edit-mail');
-    emailInput.placeholder = 'Email';
-
-    const phoneInput = document.createElement('input');
-    phoneInput.classList.add('edit-phone');
-    phoneInput.placeholder = 'Phone';
-
-    const deleteBtn = document.createElement('button');
-    deleteBtn.id = 'deleteBtn'
-    deleteBtn.textContent = 'Delete';
-
-    const saveBtn = document.createElement('button');
-    saveBtn.id = 'saveBtn'
-    saveBtn.textContent = 'Save';
-
-    const btnImgcheck = document.createElement('img');
-    btnImgcheck.src = '../assets/img/check.png';
-
-    saveBtn.appendChild(btnImgcheck);
-
-    rightSide.appendChild(iconLightbox);
-    column.appendChild(nameInput);
-    column.appendChild(emailInput);
-    column.appendChild(phoneInput);
-    btns.appendChild(deleteBtn);
-    btns.appendChild(saveBtn);
-    column.appendChild(btns);
-    rightSide.appendChild(column);
-
-    return rightSide;
-}
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('add-recontact-btn-big').addEventListener('click', openLightboxAdd);
+    document.getElementById('current-edit').addEventListener('click', openLightboxEdit);
+    document.getElementById('lightbox-overlay').addEventListener('click', closeLightbox);
+    document.getElementById('current-delete').addEventListener('click', () => {
+        if (selectedContact && selectedContact.id) {
+            deleteContact(selectedContact.id);
+        } else {
+            alert('No contact found!');
+        }
+    });
+    initContactsList();
+});
