@@ -9,7 +9,7 @@
 /* Left Section */
 #recontacts-main {
     height: calc(100vh - 187px);
-    padding: 4rem;
+    padding: 2rem;
     margin-left: 22.138rem;
     display: flex;
 }
@@ -18,7 +18,8 @@
 #left-section {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 280px);
+    flex: 1;
+    max-width: 320px;
 }
 
 #add-recontact-btn-big {
@@ -70,6 +71,7 @@
     gap: 35px;
 }
 
+.choosen,
 .list-contact-wrapper:hover {
     background-color: var(--clr-700);
     color: var(--clr-200);
@@ -108,11 +110,11 @@
 
 /* Right Section */
 #right-section {
-    padding: 2rem;
+    padding: 2rem 0 0 2rem;
     width: auto;
-    display: flex;
-    flex: 1;
+    /* display: flex; */
     flex-direction: column;
+    z-index: 900;
 }
 
 .recontact-details-haeder {
@@ -120,6 +122,11 @@
     display: flex;
     align-items: center;
     gap: 30px;
+}
+
+#back-icon {
+    display: none;
+    border: none;
 }
 
 .recontact-details-haeder span {
@@ -153,6 +160,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 54px;
+    flex-wrap: wrap;
 }
 
 #current-icon,
@@ -183,8 +191,8 @@
 .current-icon,
 #current-icon,
 #edit-icon {
-    height: 120px;
-    width: 120px;
+    height: 100px;
+    width: 100px;
     color: var(--clr-200);
     border-radius: 100%;
     display: flex;
@@ -193,14 +201,10 @@
     background-color: var(--clr-300);
 }
 
-.current-icon img {
-    height: 120px;
-    width: 120px;
-}
-
 #current-name {
     font-size: var(--fs-47);
-    text-wrap: nowrap;
+    text-align: center;
+    text-wrap: wrap;
 }
 
 /* Shown bottom */

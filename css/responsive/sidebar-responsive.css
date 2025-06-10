@@ -55,7 +55,7 @@
         height: 20px;
     }
 
-    .sidebar-footer {
+    #sidebar-footer {
         padding: 0;
         display: none;
     }
@@ -90,7 +90,7 @@
         margin: 0;
     }
 
-    .unregistered-sidebar{
+    .unregistered-sidebar {
         display: flex;
         flex-direction: row;
     }

@@ -5,6 +5,7 @@ const BASE_URL = "https://join002-26fa4-default-rtdb.firebaseio.com/";
 let contacts = [];
 let groupedContacts = [];
 let selectedContact = null;
+const mediaQuery = window.matchMedia("(max-width: 800px)");
 
 
 // Colors
@@ -90,9 +91,11 @@ function generateSortedContacts() {
         const letter = el.dataset.letter;
         const index = parseInt(el.dataset.index);
         el.addEventListener('click', () => {
-            showContact(`${letter}${index}`, letter, index);
+            showContact(`contact${letter}-${index}`, letter, index);
         });
     });
+
+    handleMediaQueryChange(mediaQuery);
 };
 
 
@@ -140,6 +143,10 @@ function showContact(idNumber, letter, index) {
     const phone = document.getElementById('current-phone');
     const icon = document.getElementById('current-icon');
 
+    const choosenContact = document.getElementById(idNumber);
+    document.querySelectorAll('.choosen').forEach(el => el.classList.remove('choosen'));
+    choosenContact.classList.add('choosen')
+
     name.innerHTML = contact.name;
     mail.innerHTML = contact.email;
     phone.innerHTML = contact.phone;
@@ -147,6 +154,8 @@ function showContact(idNumber, letter, index) {
     icon.style.backgroundColor = getColorForName(contact.name);
     card.classList.remove('d-none');
     card.classList.add('d-flex');
+
+    document.getElementById('right-section').classList.remove('d-none');
 
     selectedContact = {
         id: groupedContacts[letter][index].id,
@@ -373,11 +382,17 @@ async function addContact() {
     }
 };
 
+function closeShownContact() {
+    document.getElementById('right-section').classList.add('d-none');
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
+    mediaQuery.addEventListener("change", handleMediaQueryChange);
     document.getElementById('add-recontact-btn-big').addEventListener('click', openLightboxAdd);
     document.getElementById('current-edit').addEventListener('click', openLightboxEdit);
     document.getElementById('lightbox-overlay').addEventListener('click', closeLightbox);
+    document.getElementById('back-icon').addEventListener('click', closeShownContact);
     document.getElementById('current-delete').addEventListener('click', () => {
         if (selectedContact && selectedContact.id) {
             deleteContact(selectedContact.id);
@@ -387,3 +402,17 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     initContactsList();
 });
+
+
+// Media quarry
+
+function handleMediaQueryChange(e) {
+    if (e.matches) {
+        document.getElementById('right-section').classList.add('d-none');
+    } else {
+        document.getElementById('right-section').classList.remove('d-none');
+    }
+}
+
+handleMediaQueryChange(mediaQuery);
+
