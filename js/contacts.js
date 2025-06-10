@@ -303,7 +303,7 @@ function rightEditingTemplate() {
     <input id="edit-phone" type="tel" placeholder="Phone" required>
         <div class="btns-lighbox">
             <button id="deleteBtn">Delete</button>
-            <button id="saveBtn">Save<img src="../assets/img/check.png" alt="check"></button>
+            <button id="saveBtn">Save<img src="/assets/img/check.png" alt="check"></button>
         </div>
     </div>
 </div>`

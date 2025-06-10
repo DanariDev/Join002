@@ -37,7 +37,8 @@
         background-color: var(--clr-200);
         height: calc(100vh - 185px);
         width: 100vw;
-        overflow: hidden;
+        overflow-x: hidden;
+        overflow-y: scroll;
     }
 
 
@@ -78,10 +79,10 @@
 
     #lightbox {
         flex-direction: column;
-        height: 65vh;
+        height: 90vh;
     }
 
-    #lightbox img {
+    .join-logo-left {
         display: none;
     }
 
@@ -92,7 +93,7 @@
 
     #edit-icon {
         position: absolute;
-        top: 30.5%;
+        top: 22%;
         border: 2px solid var(--clr-200);
     }
 
@@ -108,6 +109,10 @@
     .lightbox-left {
         border-radius: 20px 20px 0 0;
         padding: 8rem 0;
+    }
+
+    .current-icon {
+        display: none;
     }
 }
 
