@@ -55,7 +55,7 @@
         height: 20px;
     }
 
-    #sidebar-footer {
+    .sidebar-footer {
         padding: 0;
         display: none;
     }
