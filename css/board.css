@@ -87,7 +87,8 @@
 .done-field {
   grid-area: done;
   display: flex;
-  justify-content: space-around; /* Anpassung für Konsistenz */
+  justify-content: space-around;
+  /* Anpassung für Konsistenz */
   align-items: center;
   font-weight: bold;
   gap: 3px;
@@ -271,7 +272,8 @@
   justify-content: center;
   z-index: 9999;
   opacity: 0;
-  transition: opacity 0.1s ease; /* Schnellere Einblende-Animation */
+  transition: opacity 0.1s ease;
+  /* Schnellere Einblende-Animation */
 }
 
 .overlay:not(.d-none) {
@@ -282,16 +284,20 @@
   background-color: var(--clr-200);
   border-radius: 16px;
   padding: 16px;
-  max-width: 600px; /* Breiter gemacht */
+  max-width: 600px;
+  /* Breiter gemacht */
   width: 90%;
   position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transform: translateX(100%); /* Startet rechts außerhalb des Bildschirms */
-  transition: transform 0.1s ease; /* Sehr schnelle Animation (100ms) */
+  transform: translateX(100%);
+  /* Startet rechts außerhalb des Bildschirms */
+  transition: transform 0.1s ease;
+  /* Sehr schnelle Animation (100ms) */
 }
 
 .overlay:not(.d-none) .overlay-content {
-  transform: translateX(0); /* Kommt von rechts ins Bild */
+  transform: translateX(0);
+  /* Kommt von rechts ins Bild */
 }
 
 .overlay-close {
@@ -396,7 +402,8 @@
 #add-task-overlay .overlay-content {
   background-color: var(--clr-200);
   padding: 16px;
-  max-width: 600px; /* Breiter gemacht */
+  max-width: 600px;
+  /* Breiter gemacht */
   width: 90%;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -526,7 +533,7 @@
 
 #add-task-form #subtask-list {
   list-style: disc;
-  padding-left: 10px; 
+  padding-left: 10px;
   margin: 4px 0;
 }
 

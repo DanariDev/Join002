@@ -2,215 +2,160 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join | Contacts</title>
-  <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png" />
-  <link rel="stylesheet" href="css/sidebar.css" />
-  <link rel="stylesheet" href="./css/contacts.css" />
-  <link rel="stylesheet" href="css/topbar.css" />
-  <link rel="stylesheet" href="./css/add-edit-contact.css" />
-  <link rel="stylesheet" href="css/responsive/topbar-responsive.css" />
-  <link rel="stylesheet" href="css/responsive/sidebar-responsive.css" />
-  <link rel="stylesheet" href="css/responsive/contacts-responsive.css" />
-  <link rel="stylesheet" href="css/responsive/add-edit-contact-responsive.css">
-  <link rel="stylesheet" href="css/global.css">
-  <script src="./js/loadSidbarTopbar.js"></script>
-  <script src="./js/contacts.js"></script>
-  <script src="js/add-edit-contact.js"></script>
-  <script src="./js/topbar.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Join | Contacts</title>
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon-32x32.png" />
+    <link rel="stylesheet" href="css/sidebar.css" />
+    <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
+    <link rel="stylesheet" href="css/topbar.css" />
+    <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/contacts.css">
+    <link rel="stylesheet" href="css/responsive/contacts-responsive.css">
+    <script src="./js/loadSidbarTopbar.js"></script>
+    <script src="./js/topbar.js"></script>
 </head>
 
-<body onload="initSidbarTopbar(), initContactsList()" onclick="closeTopbarMenu()">
 
-  <div class="sidebar">
+<title>Document</title>
+</head>
 
-    <img src="assets/img/logo_dark.png" alt="Join Logo" class="sidebar-logo" />
+<body>
 
-    <nav class="sidebar-nav">
-      <a href="summary.html" class="nav-link summary-link">
-        <img src="assets/img/summary.png" alt="Summary Icon" />
-        <span class="responsive-font">Summary</span>
-      </a>
-      <a href="add-task.html" class="nav-link add-task-link">
-        <img src="assets/img/add-task.png" alt="Add Task Icon" />
-        <span class="responsive-font">Add Task</span>
-      </a>
-      <a href="board.html" class="nav-link board-link">
-        <img src="assets/img/board.png" alt="Board Icon" />
-        <span class="responsive-font">Board</span>
-      </a>
-      <a href="contacts.html" class="nav-link contacts-link">
-        <img src="assets/img/contacts.png" alt="Contacts Icon" />
-        <span class="responsive-font">Contacts</span>
-      </a>
-    </nav>
+    <div class="sidebar">
 
-    <footer class="sidebar-footer" id="sidebar-footer">
-      <div class="sidebar-footer-links responsive-hide-on-mobile">
-        <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
-        <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
-      </div>
-    </footer>
-  </div>
+        <img src="assets/img/logo_dark.png" alt="Join Logo" class="sidebar-logo" />
 
-  <div class="topbar">
-    <span class="topbar-title">Kanban Project Management Tool</span>
+        <nav class="sidebar-nav">
+            <a href="summary.html" class="nav-link summary-link">
+                <img src="assets/img/summary.png" alt="Summary Icon" />
+                <span class="responsive-font">Summary</span>
+            </a>
+            <a href="add-task.html" class="nav-link add-task-link">
+                <img src="assets/img/add-task.png" alt="Add Task Icon" />
+                <span class="responsive-font">Add Task</span>
+            </a>
+            <a href="board.html" class="nav-link board-link">
+                <img src="assets/img/board.png" alt="Board Icon" />
+                <span class="responsive-font">Board</span>
+            </a>
+            <a href="contacts.html" class="nav-link contacts-link">
+                <img src="assets/img/contacts.png" alt="Contacts Icon" />
+                <span class="responsive-font">Contacts</span>
+            </a>
+        </nav>
 
-    <img class="topbar-logo" src="/assets/img/logo-start.png" alt="">
-    <div class="topbar-icons">
-      <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
-      <div onclick="openMenu(event)" class="topbar-user"></div>
-    </div>
-  </div>
-
-  <div id="menuID" class="menu d-none">
-    <a class="d-none" href="../help.html">Help</a>
-    <a href="../legal.html">Legal Notice</a>
-    <a href="../privacy-policy.html">Privacy Policy</a>
-    <a href="../index.html">Log out</a>
-  </div>
-
-  <main class="contacts-main">
-
-
-
-
-
-
-
-    <div class="left-section-wrapper">
-      <button class="add-contact-btn" onclick="addContactOpenClose()">
-        Add new Contact
-        <img src="assets/img/person_add.png" alt="person-icon" />
-      </button>
-      <div class="list-wrapper">
-        <div class="showed-list" id="contacts-list"></div>
-        <button class="add-contact-responsive-button" onclick="addContactOpenClose()"><img
-            src="./assets/img/person_add.png" alt=""></button>
-      </div>
-    </div>
-
-    <div onclick="editDeleteMenuClose()" class="contact-details-div ju-co-normal" id="contact-details-divID">
-
-
-
-
-
-
-      <div class="right-section-wrapper" id="right-section">
-
-
-        <div class="contact-details-haeder">
-          <h1>Contacts</h1>
-          <div class="split-contact-header"></div>
-          <span>Better with a team</span>
-        </div>
-
-        <div id="showed-contact" class="d-none">
-
-          <div class="showed-contact-header-row new-header-row">
-            <div class="popout-icon" id="popout-icon"></div>
-            <span id="popout-name" class="popout-name-inline">Name</span>
-            <div class="edit-showed-contact inline-buttons">
-              <a onclick="editContactOpenClose()"><img src="./assets/img/edit.png" alt="edit-icon">Edit</a>
-              <a onclick="deleteCurrentContact()"><img src="./assets/img/delete.png" alt="delete-icon" />Delete</a>
+        <footer id="sidebar-footer">
+            <div class="sidebar-footer-links responsive-hide-on-mobile">
+                <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
+                <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
             </div>
-          </div>
+        </footer>
+    </div>
+
+    <div class="topbar">
+        <span class="topbar-title">Kanban Project Management Tool</span>
+
+        <img class="topbar-logo" src="/assets/img/logo-start.png" alt="">
+        <div class="topbar-icons">
+            <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon"
+                    class="topbar-icon" /></a>
+            <div onclick="openMenu(event)" class="topbar-user"></div>
+        </div>
+    </div>
+
+    <div id="menuID" class="menu d-none">
+        <a class="d-none" href="../help.html">Help</a>
+        <a href="../legal.html">Legal Notice</a>
+        <a href="../privacy-policy.html">Privacy Policy</a>
+        <a href="../index.html">Log out</a>
+    </div>
 
 
-          <div class="showed-contact-information">
-            <span class="contact-information">Contact information</span>
-            <div class="email-phone-div">
-              <span class="email-phone-title">Email</span>
-              <a class="email-phone-value email-value" id="popout-email" href="#">Email-address</a>
-              <span class="email-phone-title">Phone</span>
-              <a class="email-phone-value" id="popout-phone" href="#">phone-number</a>
+    <main id="contacts-main">
+
+        <div id="left-section">
+
+            <button id="add-contact-btn-big">
+                <span>Add new Contact</span>
+                <img src="assets/img/person_add.png" alt="person-icon" />
+            </button>
+
+            <div id="contacts-list-wrapper"></div>
+
+        </div>
+
+
+
+
+        <div id="right-section" class="d-none">
+
+            <div class="contact-details-haeder">
+                <div class="responsive-wrapper">
+                    <h1>Contacts</h1>
+                    <button id="back-icon"><img src="assets/img/arrow_left.png" alt="back-icon"></button>
+                </div>
+                <div class="split-contact-header"></div>
+                <span>Better with a team</span>
             </div>
-          </div>
+
+
+            <div id="showed-current-contact" class="d-none">
+
+                <div class="current-top">
+
+                    <div id="current-icon">AM</div>
+
+
+                    <div class="flex-column">
+
+                        <div id="current-name">Dieter Murr</div>
+
+                        <div class="current-btns">
+                            <button id="current-edit"">
+                                <img src=" ./assets/img/edit.png" alt="edit-icon">
+                                Edit
+                            </button>
+
+                            <button id="current-delete">
+                                <img src="./assets/img/delete.png" alt="delete-icon" />
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="current-bottom">
+                    <p>Contact information</p>
+
+                    <div class="current-information">
+
+                        <span>Email</span>
+                        <a id="current-mail"><span>Test@mail.de</span></a>
+
+                        <span>Phone</span>
+                        <a id="current-phone"><span>+49xxxxxxxxx0235</span></a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <button class="back-arrow" id="back-arrowID" onclick="backToContactsList()">
-          <img src="./assets/img/arrow_left.png" alt="" />
-        </button>
-        <button class="edit-delete-responsive-button" onclick="editDeleteMenuOpen(event)">
-          <img src="./assets/img/responsive-delete-edit.png" alt="" />
-        </button>
-      </div>
-  </main>
 
-  <div class="add-edit-body d-none" id="add-edit-bodyID">
-    <div class="add-contact-div d-none" id="add-contact-divID">
-      <div class="add-contact-left">
-        <img src="./assets/img/logo-sidebar.png" alt="" />
-        <h1>Add contact</h1>
-        <span>Tasks are better with a team!</span>
-        <div class="separate-add-contact"></div>
-      </div>
-      <div class="add-contact-right">
-        <div class="add-contact-img-div">
-          <div class="add-contact-img"></div>
         </div>
-        <form onsubmit="handleSubmit(event)" class="add-contact-form">
-          <div class="name-email-phone-div">
-            <input required class="name-email-phone-input" type="text" placeholder="Name" id="add-nameID" />
-            <input required class="name-email-phone-input" type="email" placeholder="Email" id="add-emailID" />
-            <input class="name-email-phone-input" type="text" inputmode="numeric" pattern="^\+?[0-9]{7,15}$"
-              placeholder="Phone" id="add-phoneID" />
-          </div>
-          <div class="buttons-div-form">
-            <button type="button" onclick="addContactOpenClose()" class="button-cansel">
-              Cancel <span>X</span>
-            </button>
-            
-            <button type="submit" id="button-new-contact-saveID" class="button-create-contact">
-              Create Contact<img src="./assets/img/check.png" alt="" />
-            </button>
-          </div>
-        </form>
-      </div>
-      <button onclick="addContactOpenClose()" class="close-button">X</button>
-    </div>
-
-    <div class="edit-contact-div d-none" id="edit-contact-divID">
-
-      <div class="edit-contact-left">
-        <img src="./assets/img/logo-sidebar.png" alt="" />
-        <h1>Edit contact</h1>
-        <div class="separate-edit-contact"></div>
-      </div>
-
-      <div class="edit-contact-right">
-        <div class="edit-contact-img-div">
-          <div class="edit-contact-img" id="img-edit-divID"></div>
         </div>
 
-        <form onsubmit="saveEditedContact(event)" class="edit-contact-form">
 
-
-          <div class="name-email-phone-div">
-            <input required class="name-email-phone-input" type="text" placeholder="Name" id="edit-nameID" />
-            <input required class="name-email-phone-input" type="email" placeholder="Email" id="edit-emailID" />
-            <input class="name-email-phone-input" type="text" inputmode="numeric" pattern="^\+?[0-9]{7,15}$"
-              placeholder="Phone" id="edit-phoneID" />
-          </div>
-
-          <div class="buttons-div-form">
-            <button type="button" class="button-delete" onclick="deleteCurrentContact()">
-              Delete
-            </button>
-            <button type="submit" class="button-save">
-              Save <img src="./assets/img/check.png" alt="" />
-            </button>
-
-          </div>
-
-        </form>
-
-      </div>
-      <button onclick="editContactOpenClose()" class="close-button">X</button>
-    </div>
-  </div>
+        <div id="lightbox-overlay" class="d-none">
+            <div id="lightbox" onclick="event.stopPropagation()"></div>
+        </div>
+    </main>
+    <script src="./js/topbar.js"></script>
+    <script type="module" src="./js/contacts.js"></script>
 </body>
 
 </html>

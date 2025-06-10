@@ -1,58 +1,56 @@
 @import url("global.css");
 
+
 .contacts-link,
 .contacts-link:hover {
     background-color: var(--clr-900);
 }
 
-.contacts-main {
-    display: flex;
+/* Left Section */
+#contacts-main {
+    height: calc(100vh - 187px);
+    padding: 2rem;
     margin-left: 22.138rem;
-    padding: 4rem;
-    height: calc(100vh - 153px);
+    display: flex;
 }
 
-.left-section-wrapper {
+
+#left-section {
     display: flex;
-    max-width: 1000px;
-    background-color: var(--clr-200);
     flex-direction: column;
+    flex: 1;
+    max-width: 320px;
 }
 
-
-
-
-
-
-.add-contact-btn {
+#add-contact-btn-big {
+    max-height: 50px;
+    width: 100%;
+    flex: 1;
+    text-wrap: nowrap;
+    padding: 1rem;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    font-size: var(--fs-16);
-    font-weight: 700;
-    border: 1px solid var(--clr-700);
-    border-radius: 10px;
-    background-color: var(--clr-700);
-    color: var(--clr-200);
     gap: 16px;
-    margin: 1rem;
-    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: var(--fs-21);
+    font-weight: 700;
+    color: var(--clr-200);
+    background-color: var(--clr-700);
+    cursor: pointer;
 }
 
-.add-contact-btn:hover {
-    cursor: pointer;
+#add-contact-btn-big:hover {
     background-color: var(--clr-500);
 }
 
-.add-contact-btn img {
-    height: 18px;
+/* Contact List */
+#contacts-list-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
-
-.list-wrapper {
-    overflow: scroll;
-    height: 100vh;
-}
-
 
 .list-alphabet {
     font-size: var(--fs-20);
@@ -63,23 +61,21 @@
 
 .split-list-line {
     padding: 0;
-    margin: 4px 1rem;
+    margin: 4px;
     border: 1px solid var(--clr-300);
 }
 
-.group-list {
+.list-contact-wrapper {
+    padding: 1rem;
     display: flex;
-    gap: 16px;
-    flex-direction: column;
+    gap: 35px;
 }
 
-.contact-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-    cursor: pointer;
-    padding: 12px;
-    border-radius: 12px;
+.choosen,
+.list-contact-wrapper:hover {
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    border-radius: 10px;
 }
 
 .initial-icon {
@@ -89,42 +85,53 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
     font-size: var(--fs-12);
     color: var(--clr-200);
     border: 2px solid var(--clr-200);
 }
 
-.contact-details {
+.list-contact-information {
     display: flex;
     flex-direction: column;
+    flex: 1;
     gap: 8px;
 }
 
-.list-showed-name {
-    font-size: var(--fs-16);
-    color: var(--clr-700);
+.list-name {
+    font-size: var(--fs-20);
 }
 
-.list-showed-email {
+.list-email {
     font-size: var(--fs-16);
+    font-weight: 400;
     color: var(--clr-500);
 }
 
-.right-section-wrapper {
-    padding: 2rem;
-    display: flex;
+/* Right Section */
+#right-section {
+    padding: 2rem 0 0 2rem;
+    width: auto;
+    /* display: flex; */
     flex-direction: column;
-}
-
-.toggle-flex {
-    display: flex;
+    z-index: 900;
 }
 
 .contact-details-haeder {
+    padding: 1rem;
     display: flex;
-    justify-content: center;
     align-items: center;
     gap: 30px;
+}
+
+#back-icon {
+    display: none;
+    border: none;
+}
+
+.contact-details-haeder span {
+    font-size: var(--fs-27);
+
 }
 
 .split-contact-header {
@@ -133,135 +140,263 @@
     border-radius: 2px;
 }
 
-.contact-details-haeder span {
-    display: flex;
-    font-size: var(--fs-27);
-    color: var(--clr-700);
-}
 
-#showed-contact {
+/* Main Shown */
+#showed-current-contact {
+    padding: 1rem;
     flex-direction: column;
-    gap: 32px;
+    align-items: start;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
 }
 
-.img-name-div {
+#showed-current-contact.show {
+    transform: translateX(0);
+}
+
+/* Shown Head */
+.current-top {
     display: flex;
-    gap: 40px;
+    justify-content: space-between;
     align-items: center;
+    gap: 54px;
+    flex-wrap: wrap;
 }
 
-.popout-icon {
-    height: 100px;
-    width: 100px;
-    border-radius: 100%;
-    border: 4px solid var(--clr-200);
+#current-icon,
+#edit-icon {
+    font-size: var(--fs-47);
+}
+
+.current-btns {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    color: var(--clr-200);
+    justify-content: start;
+    gap: 13px;
 }
 
-.img-name-div span {
-    font-size: 40px;
-}
-
-.edit-delete-div {
-    display: flex;
-    gap: 16px;
-}
-
-.edit-delete-div a {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    text-decoration: none;
-    color: var(--clr-700);
+#current-edit,
+#current-delete {
+    width: 120px;
+    min-height: 64px;
+    border: none;
     cursor: pointer;
+    font-size: var(--fs-16);
 }
 
-.img-edit {
-    height: 17px;
-}
-
-.img-delete {
-    height: 14px;
-}
-
-.contact-information-div {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-}
-
-.edit-contact-img {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 40px;
-}
-
-.email-phone-div {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.email-phone-title {
-    font-size: 14px;
-    font-weight: bold;
-    margin-top: 30px;
-}
-
-.email-value {
+#current-edit:hover,
+#current-delete:hover {
     color: var(--clr-500);
 }
 
-.email-phone-value {
-    font-size: 13px;
-}
-
-.back-arrow {
-    position: absolute;
-    background-color: transparent;
-    border: 0;
-    right: 32px;
-    cursor: pointer;
-    display: none;
-}
-
-.edit-delete-responsive-button {
-    position: absolute;
-    bottom: 32px;
-    right: 32px;
-    background-color: var(--clr-700);
-    border: 0;
-    padding: 12px 20px;
+.current-icon,
+#current-icon,
+#edit-icon {
+    height: 100px;
+    width: 100px;
+    color: var(--clr-200);
     border-radius: 100%;
     display: flex;
-    cursor: pointer;
-    display: none;
-}
-
-.email-phone-value {
-    display: inline-block;
-    font-size: var(--fs-14);
-    padding: 6px 12px;
-    background-color: var(--clr-300);
-    color: var(--clr-700);
-    border-radius: 8px;
-    text-decoration: none;
-    transition: all 0.2s ease-in-out;
-    width: fit-content;
-}
-
-.new-header-row {
-    display: flex;
+    justify-content: center;
     align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
+    background-color: var(--clr-300);
+}
+
+#current-name {
+    font-size: var(--fs-47);
+    text-align: center;
+    text-wrap: wrap;
+}
+
+/* Shown bottom */
+
+.current-information {
+    padding: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.current-information a,
+.current-information a:visited {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.current-bottom p {
+    font-size: var(--fs-20);
+}
+
+.current-bottom span {
+    font-size: var(--fs-16);
+    font-weight: 700;
+}
+
+#current-mail {
+    font-size: var(--fs-16);
+    font-weight: 400;
+    color: var(--clr-500);
+}
+
+#current-phone {
+    font-size: var(--fs-16);
+    font-weight: 400;
+}
+
+/* Lightbox */
+#lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#lightbox {
+    height: 50vh;
+    width: 90%;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+}
+
+#lightbox.show {
+    transform: translateX(0);
+}
+
+/* Lightbox left */
+.lightbox-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    border-radius: 20px 0 0 20px;
+}
+
+.join-logo-left {
+    width: 55px;
+}
+
+h2 {
+    margin: 2rem;
+    font-size: var(--fs-61);
+    font-weight: 700;
+}
+
+.lightbox-left span {
+    font-size: var(--fs-27);
+}
+
+.blue-line {
+    width: 80px;
+    margin: 10px;
+    border: 3px solid var(--clr-500);
+    border-radius: 2px;
+    align-self: start;
+}
+
+
+
+/* Lightbox right */
+.lightbox-right {
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--clr-200);
+    border-radius: 0 20px 20px 0;
+}
+
+.editing-lighbox {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+#lightbox input {
+    box-sizing: border-box;
+    height: 50px;
+    border: 1px solid var(--clr-300);
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    min-width: 300px;
+}
+
+#edit-name {
+    background-image: url("/assets/img/person.png");
+    background-repeat: no-repeat;
+    background-position: right 24px center;
+}
+
+
+#edit-mail {
+    background-image: url("/assets/img/mail.svg");
+    background-repeat: no-repeat;
+    background-position: right 24px center;
+}
+
+#edit-phone {
+    background-image: url("/assets/img/phone.png");
+    background-repeat: no-repeat;
+    background-position: right 24px center;
+}
+
+.btns-lighbox {
+    display: flex;
+    gap: 24px;
+}
+
+#create-btn,
+#saveBtn {
+    display: flex;
+    padding: 1rem;
+    font-size: var(--fs-21);
+    font-weight: 700;
+    background-color: var(--clr-700);
+    border: 1px solid var(--clr-700);
+    border-radius: 10px;
+    color: var(--clr-200);
+    gap: 4px;
+}
+
+#create-btn img,
+#saveBtn img {
+    height: 20px;
+    width: 20px;
+    align-self: center;
+}
+
+#create-btn:hover,
+#saveBtn:hover {
+    background-color: var(--clr-500);
+    border: 1px solid var(--clr-500);
+    cursor: pointer;
+}
+
+#cancel-btn,
+#deleteBtn {
+    display: flex;
+    padding: 1rem;
+    font-size: var(--fs-21);
+    font-weight: 700;
+    background-color: var(--clr-200);
+    border: 1px solid var(--clr-700);
+    border-radius: 10px;
+    color: var(--clr-700);
+    gap: 4px;
+}
+
+#cancel-btn:hover,
+#deleteBtn:hover {
+    background-color: var(--clr-200);
+    border: 1px solid var(--clr-500);
+    color: var(--clr-500);
 }
