@@ -8,8 +8,8 @@
 
 /* Left Section */
 #contacts-main {
-    height: calc(100vh - 187px);
-    padding: 2rem;
+    height: calc(100vh - 124px);
+    padding: 2rem 2rem 0 2rem;
     margin-left: 22.138rem;
     display: flex;
 }
@@ -127,6 +127,7 @@
 #back-icon {
     display: none;
     border: none;
+    background: none;
 }
 
 .contact-details-haeder span {
@@ -179,8 +180,10 @@
     width: 120px;
     min-height: 64px;
     border: none;
+    background: none;
     cursor: pointer;
     font-size: var(--fs-16);
+    border-radius: 25px;
 }
 
 #current-edit:hover,

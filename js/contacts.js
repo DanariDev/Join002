@@ -145,7 +145,7 @@ function showContact(idNumber, letter, index) {
 
     const choosenContact = document.getElementById(idNumber);
     document.querySelectorAll('.choosen').forEach(el => el.classList.remove('choosen'));
-    choosenContact.classList.add('choosen')
+    choosenContact.classList.add('choosen');
 
     name.innerHTML = contact.name;
     mail.innerHTML = contact.email;
@@ -156,6 +156,9 @@ function showContact(idNumber, letter, index) {
     card.classList.add('d-flex');
 
     document.getElementById('right-section').classList.remove('d-none');
+    document.getElementById('responsive-small-edit').classList.remove('d-none');
+    document.getElementById('responsive-small-add').classList.add('d-none');
+
 
     selectedContact = {
         id: groupedContacts[letter][index].id,
@@ -269,7 +272,7 @@ function leftAddingTemplate() {
 
 function rightAddingTemplate() {
     return `<div class="lightbox-right">
-    <img class="current-icon" src="../assets/img/person.png" alt="Person Icon">
+    <img class="current-icon" src="../assets/img/person_add.png" alt="Person Icon">
 <div class="editing-lighbox">
     <input id="edit-name" type="text" placeholder="Name" required>
     <input id="edit-mail" type="email" placeholder="Email" required>
@@ -384,15 +387,31 @@ async function addContact() {
 
 function closeShownContact() {
     document.getElementById('right-section').classList.add('d-none');
+    document.getElementById('responsive-small-edit').classList.add('d-none');
+    document.getElementById('responsive-small-add').classList.remove('d-none');
 };
 
+function openEditResponsive() {
+    document.getElementById('current-btns').classList.add('show');
+    document.getElementById('responsive-small-edit').classList.add('d-none');
+
+}
+
+function closeEditResponsive() {
+    document.getElementById('current-btns').classList.remove('show');
+    document.getElementById('responsive-small-edit').classList.remove('d-none');
+}
 
 // Media quarry
 function handleMediaQueryChange(e) {
     if (e.matches) {
         document.getElementById('right-section').classList.add('d-none');
+        document.getElementById('responsive-small-add').classList.remove('d-none');
+        document.getElementById('current-btns').classList.remove('show');
     } else {
         document.getElementById('right-section').classList.remove('d-none');
+        document.getElementById('responsive-small-add').classList.add('d-none');
+        document.getElementById('responsive-small-edit').classList.add('d-none');
     }
 };
 
@@ -402,9 +421,12 @@ handleMediaQueryChange(mediaQuery);
 document.addEventListener('DOMContentLoaded', () => {
     mediaQuery.addEventListener("change", handleMediaQueryChange);
     document.getElementById('add-contact-btn-big').addEventListener('click', openLightboxAdd);
+    document.getElementById('responsive-small-add').addEventListener('click', openLightboxAdd);
+    document.getElementById('responsive-small-edit').addEventListener('click', openEditResponsive);
     document.getElementById('current-edit').addEventListener('click', openLightboxEdit);
     document.getElementById('lightbox-overlay').addEventListener('click', closeLightbox);
     document.getElementById('back-icon').addEventListener('click', closeShownContact);
+    document.getElementById('right-section').addEventListener('click', closeEditResponsive);
     document.getElementById('current-delete').addEventListener('click', () => {
         if (selectedContact && selectedContact.id) {
             deleteContact(selectedContact.id);

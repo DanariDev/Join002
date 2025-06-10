@@ -1,5 +1,12 @@
 /* Media Querry Big Displays */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    #lightbox {
+        max-height: 65vh;
+        max-width: 1200px;
+
+    }
+
+}
 
 /* Media Querry Small Displays */
 @media (max-width: 954px) {
@@ -26,17 +33,64 @@
 @media (max-width: 850px) {}
 
 @media (max-width: 800px) {
+
+    #add-contact-btn-big {
+        display: none;
+    }
+
+    #current-btns {
+        gap: 0;
+        flex-direction: column;
+        position: absolute;
+        top: 127%;
+        right: 0%;
+        transform: translateX(200%);
+        transition: transform 0.5s ease-in-out;
+        background-color: var(--clr-200);
+        z-index: 9999;
+    }
+
+    #current-btns.show {
+        transform: translateX(0);
+    }
+
+    #current-edit:hover {
+        box-shadow: -7px -5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    #current-delete:hover {
+        box-shadow: -7px 5px 10px rgba(0, 0, 0, 0.5);
+    }
+
+
+
+    #responsive-small-edit,
+    #responsive-small-add {
+        position: absolute;
+        top: 85%;
+        right: 10%;
+        background-color: var(--clr-700);
+        height: 56px;
+        width: 56px;
+        border: 2px solid var(--clr-200);
+        border-radius: 75px;
+        z-index: 1000;
+    }
+
+
+
     #contacts-main {
         margin: 0;
-        padding: 1rem 0;
+        height: calc(100vh - 169px);
+        padding: 2rem 2rem 0 2rem;
     }
 
     #right-section {
         padding: 0;
         position: absolute;
         background-color: var(--clr-200);
-        height: calc(100vh - 185px);
-        width: 100vw;
+        height: calc(100vh - 169px);
+        width: calc(100vw - 40px);
         overflow-x: hidden;
         overflow-y: scroll;
     }
@@ -57,6 +111,7 @@
 
     .current-top {
         flex-direction: column;
+        align-items: start;
     }
 
 
