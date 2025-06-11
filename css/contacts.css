@@ -204,6 +204,16 @@
     background-color: var(--clr-300);
 }
 
+.current-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    object-fit: contain;
+    width: 70px;
+    height: 70px;
+    padding: 1rem;
+}
+
 #current-name {
     font-size: var(--fs-47);
     text-align: center;
@@ -402,4 +412,10 @@ h2 {
     background-color: var(--clr-200);
     border: 1px solid var(--clr-500);
     color: var(--clr-500);
+}
+
+#responsive-small-edit,
+#responsive-small-add {
+    position: absolute;
+    top: -100px;
 }

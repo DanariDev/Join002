@@ -167,6 +167,9 @@ function showContact(idNumber, letter, index) {
         phone: contact.phone,
         icon: contact.initials
     };
+
+    openPhoneOrMail(contact.phone, contact.email);
+
     setTimeout(() => {
         card.classList.add('show');
     }, 10);
@@ -272,7 +275,7 @@ function leftAddingTemplate() {
 
 function rightAddingTemplate() {
     return `<div class="lightbox-right">
-    <img class="current-icon" src="../assets/img/person_add.png" alt="Person Icon">
+    <img class="current-icon" src="../assets/img/person.png" alt="Person Icon">
 <div class="editing-lighbox">
     <input id="edit-name" type="text" placeholder="Name" required>
     <input id="edit-mail" type="email" placeholder="Email" required>
@@ -391,16 +394,33 @@ function closeShownContact() {
     document.getElementById('responsive-small-add').classList.remove('d-none');
 };
 
+function openPhoneOrMail(newPhone, newMail) {
+    const phoneLink = document.getElementById('current-phone');
+    const mailLink = document.getElementById('current-mail');
+
+    // Telefonnummer aktualisieren
+    if (newPhone) {
+        phoneLink.href = 'tel:' + newPhone;
+        phoneLink.innerHTML = '<span>' + newPhone + '</span>';
+    }
+
+    // E-Mail-Adresse aktualisieren
+    if (newMail) {
+        mailLink.href = 'mailto:' + newMail;
+        mailLink.innerHTML = '<span>' + newMail + '</span>';
+    }
+}
+
 function openEditResponsive() {
     document.getElementById('current-btns').classList.add('show');
     document.getElementById('responsive-small-edit').classList.add('d-none');
 
-}
+};
 
 function closeEditResponsive() {
     document.getElementById('current-btns').classList.remove('show');
     document.getElementById('responsive-small-edit').classList.remove('d-none');
-}
+};
 
 // Media quarry
 function handleMediaQueryChange(e) {
