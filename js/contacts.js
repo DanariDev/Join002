@@ -398,18 +398,16 @@ function openPhoneOrMail(newPhone, newMail) {
     const phoneLink = document.getElementById('current-phone');
     const mailLink = document.getElementById('current-mail');
 
-    // Telefonnummer aktualisieren
     if (newPhone) {
-        phoneLink.href = 'tel:' + newPhone;
-        phoneLink.innerHTML = '<span>' + newPhone + '</span>';
+        phoneLink.setAttribute('href', 'tel:' + newPhone);
+        phoneLink.textContent = newPhone;
     }
 
-    // E-Mail-Adresse aktualisieren
     if (newMail) {
-        mailLink.href = 'mailto:' + newMail;
-        mailLink.innerHTML = '<span>' + newMail + '</span>';
+        mailLink.setAttribute('href', 'mailto:' + newMail);
+        mailLink.textContent = newMail;
     }
-}
+};
 
 function openEditResponsive() {
     document.getElementById('current-btns').classList.add('show');
