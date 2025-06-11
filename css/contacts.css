@@ -178,7 +178,7 @@
 #current-edit,
 #current-delete {
     width: 120px;
-    min-height: 64px;
+    height: 64px;
     border: none;
     background: none;
     cursor: pointer;
@@ -216,6 +216,7 @@
 
 #current-name {
     font-size: var(--fs-47);
+    font-weight: 700;
     text-align: center;
     text-wrap: wrap;
 }
@@ -309,7 +310,7 @@ h2 {
 
 .blue-line {
     width: 80px;
-    margin: 10px;
+    margin: 10px 0;
     border: 3px solid var(--clr-500);
     border-radius: 2px;
     align-self: start;

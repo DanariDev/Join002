@@ -1,9 +1,26 @@
 /* Media Querry Big Displays */
 @media (min-width: 1200px) {
-    #lightbox {
-        max-height: 65vh;
-        max-width: 1200px;
 
+    #contacts-main {
+        height: calc(100vh - 124px);
+        padding: 2rem 2rem 0 2rem;
+        margin-left: 22.138rem;
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+    #left-section {
+        max-width: 800px;
+    }
+
+    #add-contact-btn-big {
+        max-width: 450px;
+        align-self: center;
+    }
+
+    #lightbox {
+        max-height: 60vh;
+        max-width: 1400px;
     }
 
 }
@@ -14,6 +31,7 @@
         flex-wrap: wrap;
         flex-direction: column;
         align-items: start;
+        gap: 8px;
     }
 
     .split-contact-header {
@@ -42,24 +60,28 @@
         gap: 0;
         flex-direction: column;
         position: absolute;
-        top: 127%;
+        top: 85%;
         right: 0%;
         transform: translateX(200%);
         transition: transform 0.5s ease-in-out;
         background-color: var(--clr-200);
         z-index: 9999;
+        box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
+        border-radius: 25px;
     }
 
     #current-btns.show {
         transform: translateX(0);
     }
 
-    #current-edit:hover {
-        box-shadow: -7px -5px 10px rgba(0, 0, 0, 0.5);
+    #current-edit {
+        height: 50px;
+        border-radius: 25px 25px 0 0;
     }
 
-    #current-delete:hover {
-        box-shadow: -7px 5px 10px rgba(0, 0, 0, 0.5);
+    #current-delete {
+        height: 50px;
+        border-radius: 0 0 0 25px;
     }
 
 
@@ -67,7 +89,7 @@
     #responsive-small-edit,
     #responsive-small-add {
         position: absolute;
-        top: 85%;
+        top: 77%;
         right: 10%;
         background-color: var(--clr-700);
         height: 56px;
@@ -82,7 +104,7 @@
     #contacts-main {
         margin: 0;
         height: calc(100vh - 169px);
-        padding: 2rem 2rem 0 2rem;
+        padding: 1rem 1rem 0 1rem;
     }
 
     #right-section {
@@ -90,7 +112,7 @@
         position: absolute;
         background-color: var(--clr-200);
         height: calc(100vh - 169px);
-        width: calc(100vw - 40px);
+        width: 95%;
         overflow-x: hidden;
         overflow-y: scroll;
     }
@@ -100,7 +122,7 @@
     .split-contact-header {
         position: absolute;
         rotate: 90deg;
-        top: 90px;
+        top: 70px;
         left: 55px;
         height: 90px;
     }
@@ -110,8 +132,7 @@
     }
 
     .current-top {
-        flex-direction: column;
-        align-items: start;
+        gap: 21px;
     }
 
 
@@ -134,7 +155,8 @@
 
     #lightbox {
         flex-direction: column;
-        height: 90vh;
+        height: 100%;
+        transform: translatey(100%);
     }
 
     .join-logo-left {
@@ -148,7 +170,7 @@
 
     #edit-icon {
         position: absolute;
-        top: 22%;
+        top: 24%;
         border: 2px solid var(--clr-200);
     }
 
@@ -158,12 +180,26 @@
 
     .lightbox-right {
         border-radius: 0 0 20px 20px;
-        padding: 50px 0;
+        padding: 1rem 0;
     }
 
     .lightbox-left {
         border-radius: 20px 20px 0 0;
-        padding: 8rem 0;
+        padding: 4rem 0;
+    }
+
+    .lightbox-left span {
+        font-size: 20px;
+    }
+
+    #current-name {
+        font-size: 25px;
+    }
+
+    #current-icon {
+        height: 80px;
+        width: 80px;
+        font-size: 25px;
     }
 
     .current-icon {
