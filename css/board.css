@@ -1,4 +1,5 @@
 @import url("global.css");
+@import url("board-overlay.css");
 
 .d-none {
   display: none;
@@ -45,7 +46,7 @@
   font-size: var(--fs-21);
 }
 
-
+/* GRID LAYOUT */
 #board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -87,9 +88,8 @@
 .done-field {
   grid-area: done;
   display: flex;
-  justify-content: space-around; 
   justify-content: space-around;
- 
+  /* Anpassung für Konsistenz */
   align-items: center;
   font-weight: bold;
   gap: 3px;
@@ -273,7 +273,8 @@
   justify-content: center;
   z-index: 9999;
   opacity: 0;
-  transition: opacity 0.1s ease; 
+  transition: opacity 0.1s ease;
+  /* Schnellere Einblende-Animation */
 }
 
 .overlay:not(.d-none) {
@@ -285,15 +286,19 @@
   border-radius: 16px;
   padding: 16px;
   max-width: 600px;
+  /* Breiter gemacht */
   width: 90%;
   position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  transform: translateX(100%); 
-  transition: transform 0.1s ease; 
+  transform: translateX(100%);
+  /* Startet rechts außerhalb des Bildschirms */
+  transition: transform 0.1s ease;
+  /* Sehr schnelle Animation (100ms) */
 }
 
 .overlay:not(.d-none) .overlay-content {
   transform: translateX(0);
+  /* Kommt von rechts ins Bild */
 }
 
 .overlay-close {
@@ -392,180 +397,4 @@
 .overlay-key {
   font-size: 16px;
   color: var(--clr-400);
-}
-
-
-#add-task-overlay .overlay-content {
-  background-color: var(--clr-200);
-  padding: 16px;
-  max-width: 600px; 
-  width: 90%;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-}
-
-
-#add-task-overlay h2 {
-  font-size: var(--fs-20);
-  color: #000000;
-  margin-bottom: 8px;
-  font-weight: 700;
-}
-
-#add-task-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-#add-task-form .form-section {
-  margin-bottom: 0;
-}
-
-#add-task-form .form-section:not(:last-child)::after {
-  display: none;
-}
-
-#add-task-form .form-section label {
-  display: block;
-  font-size: var(--fs-20);
-  margin-bottom: 4px;
-  color: #000000;
-}
-
-#add-task-form .form-section input,
-#add-task-form .form-section textarea,
-#add-task-form .form-section select {
-  width: 100%;
-  height: 36px;
-  padding: 6px;
-  border: 1px solid var(--clr-300);
-  border-radius: 8px;
-  font-size: var(--fs-20);
-  box-sizing: border-box;
-  outline: none;
-  background-color: var(--clr-200);
-  font-family: 'Inter', sans-serif;
-}
-
-#add-task-form .form-section input::placeholder,
-#add-task-form .form-section textarea::placeholder,
-#add-task-form .form-section select:invalid {
-  font-size: var(--fs-20);
-  color: #b0b0b0;
-}
-
-#add-task-form .form-section textarea {
-  resize: none;
-  height: 60px;
-}
-
-#add-task-form .form-section select[multiple] {
-  height: 50px;
-}
-
-#add-task-form .required {
-  color: red;
-}
-
-#add-task-form .required:after {
-  content: " *";
-  color: red;
-}
-
-#add-task-form .prio-buttons {
-  display: flex;
-  justify-content: space-between;
-  gap: 6px;
-}
-
-#add-task-form .prio-btn {
-  flex: 1;
-  height: 30px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: var(--fs-20);
-  background-color: #ffffff;
-  color: #000000;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-#add-task-form .prio-btn[data-prio="urgent"].active,
-#add-task-form .prio-btn[data-prio="urgent"]:hover {
-  background-color: #c93939;
-  color: var(--clr-200);
-}
-
-#add-task-form .prio-btn[data-prio="medium"].active,
-#add-task-form .prio-btn[data-prio="medium"]:hover {
-  background-color: #ffaa00;
-  color: var(--clr-200);
-}
-
-#add-task-form .prio-btn[data-prio="low"].active,
-#add-task-form .prio-btn[data-prio="low"]:hover {
-  background-color: #5dc43e;
-  color: var(--clr-200);
-}
-
-#add-task-form .subtask-input {
-  position: relative;
-  width: 100%;
-}
-
-#add-task-form .add-subtask-btn {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: var(--fs-20);
-  cursor: pointer;
-}
-
-#add-task-form #subtask-list {
-  list-style: disc;
-  padding-left: 10px;
-  margin: 4px 0;
-}
-
-#add-task-form #subtask-list li {
-  font-size: var(--fs-20);
-  margin: 2px 0;
-  color: #000000;
-}
-
-#add-task-form .form-actions {
-  display: flex;
-  justify-content: space-around;
-  gap: 8px;
-  margin-top: 12px;
-}
-
-#add-task-form .cancel-btn,
-#add-task-form .create-btn {
-  width: 140px;
-  padding: 0.4rem;
-  border-radius: 8px;
-  font-size: var(--fs-20);
-  font-weight: 600;
-  border: 2px solid var(--clr-700);
-  background-color: var(--clr-200);
-  color: var(--clr-900);
-  transition: all 0.2s ease-in-out;
-  cursor: pointer;
-}
-
-#add-task-form .cancel-btn:hover,
-#add-task-form .create-btn:hover {
-  background-color: var(--clr-700);
-  color: #ffffff;
-}
-
-#add-task-form .create-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
 }

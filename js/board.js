@@ -109,10 +109,10 @@ function updateTaskCard(card, task) {
     task.status == "todo"
       ? "progress-25"
       : task.status == "in-progress"
-      ? "progress-50"
-      : task.status == "await"
-      ? "progress-75"
-      : "progress-100";
+        ? "progress-50"
+        : task.status == "await"
+          ? "progress-75"
+          : "progress-100";
   bar.classList.add(statusClass);
 }
 
@@ -175,10 +175,10 @@ function updateProgressBar(card, newStatus) {
     newStatus == "todo"
       ? "progress-25"
       : newStatus == "in-progress"
-      ? "progress-50"
-      : newStatus == "await"
-      ? "progress-75"
-      : "progress-100";
+        ? "progress-50"
+        : newStatus == "await"
+          ? "progress-75"
+          : "progress-100";
   bar.classList.add(statusClass);
 }
 
