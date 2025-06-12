@@ -1,5 +1,13 @@
 /* Media Querry Big Displays */
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+
+    .summary-content-wrapper {
+        display: flex;
+        justify-content: space-evenly;
+    }
+
+
+}
 
 /* Media Querry Small Displays */
 @media (max-width: 900px) {

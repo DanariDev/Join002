@@ -88,6 +88,8 @@
   grid-area: done;
   display: flex;
   justify-content: space-around; 
+  justify-content: space-around;
+ 
   align-items: center;
   font-weight: bold;
   gap: 3px;
@@ -282,16 +284,16 @@
   background-color: var(--clr-200);
   border-radius: 16px;
   padding: 16px;
-  max-width: 600px; 
+  max-width: 600px;
   width: 90%;
   position: relative;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
   transform: translateX(100%); 
-  transition: transform 0.1s ease;
+  transition: transform 0.1s ease; 
 }
 
 .overlay:not(.d-none) .overlay-content {
-  transform: translateX(0); 
+  transform: translateX(0);
 }
 
 .overlay-close {
@@ -396,7 +398,7 @@
 #add-task-overlay .overlay-content {
   background-color: var(--clr-200);
   padding: 16px;
-  max-width: 600px;
+  max-width: 600px; 
   width: 90%;
   border-radius: 16px;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -526,7 +528,7 @@
 
 #add-task-form #subtask-list {
   list-style: disc;
-  padding-left: 10px; 
+  padding-left: 10px;
   margin: 4px 0;
 }
 
