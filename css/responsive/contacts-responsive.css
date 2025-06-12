@@ -48,7 +48,11 @@
 }
 
 
-@media (max-width: 850px) {}
+@media (max-width: 954px) {
+    #showed-current-contact {
+        padding: 5rem 0;
+    }
+}
 
 @media (max-width: 800px) {
 
@@ -61,22 +65,21 @@
     }
 
     #current-btns-responsive {
-        display: flex;
         gap: 0;
         flex-direction: column;
         position: absolute;
         top: 68%;
-        right: 0%;
-        transform: translateX(200%);
+        right: 1%;
+        transform: translateY(230%);
         transition: transform 0.5s ease-in-out;
         background-color: var(--clr-200);
         z-index: 9999;
         box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
-        border-radius: 25px;
+        border-radius: 25px 25px 0 25px;
     }
 
     #current-btns-responsive.show {
-        transform: translateX(0);
+        transform: translateY(0);
     }
 
     #current-edit {
@@ -108,7 +111,7 @@
 
     #contacts-main {
         margin: 0;
-        height: calc(100vh - 169px);
+        height: calc(100vh - 170px);
         padding: 1rem 1rem 0 1rem;
     }
 
@@ -117,7 +120,7 @@
         position: absolute;
         background-color: var(--clr-200);
         height: calc(100vh - 169px);
-        width: 95%;
+        width: 97%;
         overflow-x: hidden;
         overflow-y: scroll;
     }

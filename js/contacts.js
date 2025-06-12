@@ -410,14 +410,25 @@ function openPhoneOrMail(newPhone, newMail) {
 };
 
 function openEditResponsive() {
-    document.getElementById('current-btns-responsive').classList.add('show');
+
+    document.getElementById('current-btns-responsive').classList.remove('d-none');
+    document.getElementById('current-btns-responsive').classList.add('d-flex');
     document.getElementById('responsive-small-edit').classList.add('d-none');
+
+    setTimeout(() => {
+        document.getElementById('current-btns-responsive').classList.add('show');
+    }, 200);
 
 };
 
 function closeEditResponsive() {
     document.getElementById('current-btns-responsive').classList.remove('show');
     document.getElementById('responsive-small-edit').classList.remove('d-none');
+
+    setTimeout(() => {
+        document.getElementById('current-btns-responsive').classList.add('d-none');
+        document.getElementById('current-btns-responsive').classList.remove('d-flex');
+    }, 200);
 };
 
 // Media quarry
@@ -425,7 +436,7 @@ function handleMediaQueryChange(e) {
     if (e.matches) {
         document.getElementById('right-section').classList.add('d-none');
         document.getElementById('responsive-small-add').classList.remove('d-none');
-        document.getElementById('current-btns-responsive').classList.remove('d-none');
+        document.getElementById('current-btns-responsive').classList.add('d-none');
     } else {
         document.getElementById('right-section').classList.remove('d-none');
         document.getElementById('responsive-small-add').classList.add('d-none');
