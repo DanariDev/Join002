@@ -434,6 +434,6 @@ li {
   align-items: center;
 }
 
-input {
+.overlay-section input {
   max-width: 25px;
 }
