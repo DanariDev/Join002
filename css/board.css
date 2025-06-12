@@ -4,7 +4,7 @@
 
 .add-task-link,
 .add-task-link:hover {
-  background-color: var(--clr-900)
+  background: none;
 }
 
 .board-main {
@@ -40,7 +40,6 @@
 .add-task-button {
   background-color: var(--clr-700);
   color: var(--clr-200);
-  flex: 1;
   height: 48px;
   border: none;
   border-radius: 10px;
@@ -352,13 +351,13 @@
 }
 
 .initials-task {
-  width: 32px;
-  height: 32px;
-  border-radius: 100%;
+  height: auto;
+  padding: 0.7rem;
+  border-radius: 75px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 16px;
+  font-size: var(--fs-16);
   color: var(--clr-200);
   border: 2px solid var(--clr-200);
   margin-top: 5px;
