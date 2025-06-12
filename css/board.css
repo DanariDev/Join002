@@ -427,3 +427,13 @@
 #formModal h1 {
   padding: 2rem 0;
 }
+
+li {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+
+input {
+  max-width: 25px;
+}
