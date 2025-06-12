@@ -135,9 +135,16 @@ function handleDrop(task, column) {
 
 
 function updateProgressBar(card, newStatus) {
-  let bar = card.querySelector('.progress-bar');
-  bar.className = 'progress-bar';
-  let statusClass = newStatus == 'todo' ? 'progress-25' : newStatus == 'in-progress' ? 'progress-50' : newStatus == 'await' ? 'progress-75' : 'progress-100';
+  var bar = card.querySelector(".progress-bar");
+  bar.className = "progress-bar";
+  var statusClass =
+    newStatus == "todo"
+      ? "progress-25"
+      : newStatus == "in-progress"
+        ? "progress-50"
+        : newStatus == "await"
+          ? "progress-75"
+          : "progress-100";
   bar.classList.add(statusClass);
 };
 

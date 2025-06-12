@@ -1,4 +1,5 @@
 @import url("global.css");
+@import url("board-overlay.css");
 
 @import url("add-task.css");
 
@@ -308,6 +309,7 @@
   border-radius: 16px;
   padding: 30px;
   max-width: 600px;
+  /* Breiter gemacht */
   width: 90%;
   position: relative;
 }
