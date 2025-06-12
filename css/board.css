@@ -1,7 +1,11 @@
 @import url("global.css");
-@import url("board-overlay.css");
-
 @import url("add-task.css");
+
+
+.add-task-link,
+.add-task-link:hover {
+  background-color: var(--clr-900)
+}
 
 .board-main {
   margin-left: 22.138rem;
