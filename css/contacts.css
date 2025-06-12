@@ -175,6 +175,8 @@
     gap: 13px;
 }
 
+#current-edit-responsive,
+#current-delete-responsive,
 #current-edit,
 #current-delete {
     width: 120px;
@@ -186,6 +188,8 @@
     border-radius: 25px;
 }
 
+#current-edit-responsive:hover,
+#current-delete-responsive:hover,
 #current-edit:hover,
 #current-delete:hover {
     color: var(--clr-500);
