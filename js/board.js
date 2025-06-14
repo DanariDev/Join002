@@ -183,4 +183,9 @@ document.getElementById('formModal').addEventListener('click', function (event) 
   }
 });
 
+document.getElementById('closeFormModal').addEventListener('click', () => {
+    closeForm();
+  });
+  
+
 

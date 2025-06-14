@@ -59,7 +59,7 @@
   gap: 10px;
 }
 
-/* GRID HEADERS */
+
 .to-do-field {
   grid-area: to-do;
   display: flex;
@@ -124,7 +124,7 @@
   gap: 10px;
 }
 
-/* Task Card Beispiel */
+
 .task-card {
   background-color: var(--clr-200);
   border-radius: 8px;
@@ -137,7 +137,7 @@
   background-color: var(--clr-200);
 }
 
-/* Add Task Button */
+
 .add-task-btn {
   cursor: pointer;
   color: var(--clr-700);
@@ -291,7 +291,7 @@
   color: var(--clr-400);
 }
 
-/*overlay*/
+
 
 .overlay {
   position: fixed;
@@ -312,7 +312,6 @@
   border-radius: 16px;
   padding: 30px;
   max-width: 600px;
-  /* Breiter gemacht */
   width: 90%;
   position: relative;
 }
@@ -413,20 +412,40 @@
 #formModal {
   display: none;
   position: fixed;
-  padding: 2rem;
-  border-radius: 25px;
-  top: 30%;
-  left: 30%;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
   width: auto;
   height: min-content;
+  padding: 2rem;
+  border-radius: 25px;
   background: white;
   border: 1px solid #ccc;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
   z-index: 1000;
 }
+.close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
 
 #formModal h1 {
   padding: 2rem 0;
 }
+
+
 
 li {
   display: flex;
