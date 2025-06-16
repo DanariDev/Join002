@@ -287,47 +287,30 @@ async function saveContactEdits(contactId) {
     const name = document.getElementById('edit-name').value.trim();
     const email = document.getElementById('edit-email').value.trim();
     const phone = document.getElementById('edit-phone').value.trim();
-    if (!name || !email || !phone) {
-        alert('All Fields required!');
-        return;
-    }
+
+    if (!name || !email || !phone) return alert('All Fields required!');
     try {
-        const contactRef = ref(db, 'contacts/' + contactId);
-        await update(contactRef, {
-            name: name,
-            email: email,
-            phone: phone
-        });
-        closeLightbox();
+        await update(ref(db, 'contacts/' + contactId), { name, email, phone });
     } catch (error) {
-        alert('failure on saving');
+        return alert('failure on saving');
     }
-    const card = document.getElementById('showed-current-contact');
-    card.classList.add('d-none');
-    card.classList.remove('d-flex');
+    document.getElementById('showed-current-contact').classList.replace('d-flex', 'd-none');
     closeLightbox();
     initContactsList()
 };
 
 
 async function deleteContact(contactId) {
-    if (!contactId) {
-        alert('No contact found!');
-        return;
-    }
-    const confirmed = confirm('Do you really want to Delete this contact?');
-    if (!confirmed) return;
+    if (!contactId) return alert('No contact found!');
+    if (!confirm('Do you really want to Delete this contact?')) return;
     try {
-        const contactRef = ref(db, 'contacts/' + contactId);
-        await remove(contactRef);
+        await remove(ref(db, 'contacts/' + contactId));
         closeLightbox();
         await initContactsList();
-    } catch (error) {
-        alert('failure on saving');
+    } catch (e) {
+        return alert('failure on saving');
     }
-    const card = document.getElementById('showed-current-contact');
-    card.classList.add('d-none');
-    card.classList.remove('d-flex');
+    document.getElementById('showed-current-contact').classList.replace('d-flex', 'd-none');
 };
 
 
@@ -335,13 +318,10 @@ async function addContact() {
     const name = document.getElementById('edit-name').value.trim();
     const email = document.getElementById('edit-email').value.trim();
     const phone = document.getElementById('edit-phone').value.trim();
-    if (!name || !email || !phone) {
-        alert('All Fields required!');
-        return;
-    }
+
+    if (!name || !email || !phone) return alert('All Fields required!');
     try {
-        const contactsRef = ref(db, 'contacts');
-        const newContactRef = push(contactsRef);
+        const newContactRef = push(ref(db, 'contacts'));
         await set(newContactRef, {
             name: name,
             email: email,
