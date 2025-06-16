@@ -74,7 +74,6 @@
 
 
     <main id="contacts-main">
-
         <button id="responsive-small-edit" class="d-none">
             <img src="assets/img/responsive-delete-edit.png" alt="">
         </button>
@@ -97,18 +96,13 @@
 
 
         <div id="left-section">
-
             <button id="add-contact-btn-big">
                 <span>Add new Contact</span>
                 <img src="assets/img/person_add.png" alt="person-icon" />
             </button>
 
             <div id="contacts-list-wrapper"></div>
-
         </div>
-
-
-
 
         <div id="right-section" class="d-none">
 
@@ -123,24 +117,20 @@
 
 
             <div id="showed-current-contact" class="d-none">
-
                 <div class="current-top">
-
                     <div id="current-icon">AM</div>
 
-
                     <div class="flex-column">
-
                         <div id="current-name">Dieter Murr</div>
 
                         <div id="current-btns" class="current-btns">
                             <button id="current-edit">
-                                <img src=" ./assets/img/edit.png" alt="edit-icon">
+                                <img src=" ../assets/img/edit.png" alt="edit-icon">
                                 Edit
                             </button>
 
                             <button id="current-delete">
-                                <img src="./assets/img/delete.png" alt="delete-icon" />
+                                <img src="../assets/img/delete.png" alt="delete-icon" />
                                 Delete
                             </button>
                         </div>
@@ -151,32 +141,25 @@
                     <p>Contact information</p>
 
                     <div class="current-information">
-
                         <span>Email</span>
                         <a id="current-mail"><span>Test@mail.de</span></a>
 
                         <span>Phone</span>
                         <a id="current-phone"><span>+49xxxxxxxxx0235</span></a>
-
                     </div>
-
                 </div>
-
             </div>
 
-        </div>
 
 
-        </div>
-        </div>
-
-
-        <div id="lightbox-overlay" class="d-none">
-            <div id="lightbox" onclick="event.stopPropagation()"></div>
-        </div>
+            <div id="lightbox-overlay" class="d-none">
+                <div id="lightbox" onclick="event.stopPropagation()"></div>
+            </div>
     </main>
+
     <script src="./js/topbar.js"></script>
     <script type="module" src="./js/contacts.js"></script>
+
 </body>
 
 </html>

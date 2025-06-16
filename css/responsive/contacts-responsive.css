@@ -1,5 +1,5 @@
 /* Media Querry Big Displays */
-@media (min-width: 1200px) {
+@media (min-width: 1450px) {
 
     #contacts-main {
         height: calc(100vh - 124px);
@@ -22,11 +22,11 @@
         max-height: 60vh;
         max-width: 1400px;
     }
-
 }
 
 /* Media Querry Small Displays */
 @media (max-width: 954px) {
+
     .contact-details-haeder {
         flex-wrap: wrap;
         flex-direction: column;
@@ -92,8 +92,6 @@
         border-radius: 0 0 0 25px;
     }
 
-
-
     #responsive-small-edit,
     #responsive-small-add {
         position: absolute;
@@ -106,8 +104,6 @@
         border-radius: 75px;
         z-index: 1000;
     }
-
-
 
     #contacts-main {
         margin: 0;
@@ -125,8 +121,6 @@
         overflow-y: scroll;
     }
 
-
-
     .split-contact-header {
         position: absolute;
         rotate: 90deg;
@@ -143,11 +137,9 @@
         gap: 21px;
     }
 
-
     #left-section {
         max-width: none;
     }
-
 
     .responsive-wrapper {
         display: flex;
@@ -159,7 +151,6 @@
         padding: 0;
         display: block;
     }
-
 
     #lightbox {
         flex-direction: column;
@@ -194,6 +185,10 @@
     .lightbox-left {
         border-radius: 20px 20px 0 0;
         padding: 4rem 0;
+    }
+
+    .blue-line {
+        margin: 10px 1rem;
     }
 
     .lightbox-left span {

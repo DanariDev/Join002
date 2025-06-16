@@ -1,6 +1,5 @@
 @import url("global.css");
 
-
 .contacts-link,
 .contacts-link:hover {
     background-color: var(--clr-900);
@@ -8,12 +7,11 @@
 
 /* Left Section */
 #contacts-main {
+    display: flex;
     height: calc(100vh - 124px);
     padding: 2rem 2rem 0 2rem;
     margin-left: 22.138rem;
-    display: flex;
 }
-
 
 #left-section {
     display: flex;
@@ -23,21 +21,21 @@
 }
 
 #add-contact-btn-big {
-    max-height: 50px;
-    width: 100%;
-    flex: 1;
-    text-wrap: nowrap;
-    padding: 1rem;
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     gap: 16px;
+    flex: 1;
+    max-height: 50px;
+    width: 100%;
+    padding: 1rem;
     border: none;
     border-radius: 10px;
     font-size: var(--fs-21);
     font-weight: 700;
     color: var(--clr-200);
     background-color: var(--clr-700);
+    text-wrap: nowrap;
     cursor: pointer;
 }
 
@@ -53,10 +51,9 @@
 }
 
 .list-alphabet {
-    font-size: var(--fs-20);
-    font-weight: 400;
-    padding: 1rem;
     height: min-content;
+    padding: 1rem;
+    font-size: var(--fs-20);
 }
 
 .split-list-line {
@@ -66,26 +63,26 @@
 }
 
 .list-contact-wrapper {
-    padding: 1rem;
     display: flex;
     gap: 35px;
+    padding: 1rem;
 }
 
 .choosen,
 .list-contact-wrapper:hover {
+    border-radius: 10px;
     background-color: var(--clr-700);
     color: var(--clr-200);
-    border-radius: 10px;
 }
 
 .initial-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    height: 42px;
+    width: 42px;
     flex-shrink: 0;
+    border-radius: 100%;
     font-size: var(--fs-12);
     color: var(--clr-200);
     border: 2px solid var(--clr-200);
@@ -104,35 +101,28 @@
 
 .list-email {
     font-size: var(--fs-16);
-    font-weight: 400;
     color: var(--clr-500);
 }
 
 /* Right Section */
 #right-section {
-    padding: 2rem 0 0 2rem;
     width: auto;
-    /* display: flex; */
-    flex-direction: column;
+    padding: 2rem 0 0 2rem;
     z-index: 900;
 }
 
 .contact-details-haeder {
-    padding: 1rem;
     display: flex;
     align-items: center;
+    padding: 1rem;
     gap: 30px;
+    font-size: var(--fs-27);
 }
 
 #back-icon {
     display: none;
     border: none;
     background: none;
-}
-
-.contact-details-haeder span {
-    font-size: var(--fs-27);
-
 }
 
 .split-contact-header {
@@ -144,15 +134,10 @@
 
 /* Main Shown */
 #showed-current-contact {
-    padding: 1rem;
     flex-direction: column;
-    align-items: start;
+    padding: 1rem;
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out;
-}
-
-#showed-current-contact.show {
-    transform: translateX(0);
 }
 
 /* Shown Head */
@@ -160,13 +145,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 54px;
     flex-wrap: wrap;
-}
-
-#current-icon,
-#edit-icon {
-    font-size: var(--fs-47);
+    gap: 54px;
 }
 
 .current-btns {
@@ -179,13 +159,13 @@
 #current-delete-responsive,
 #current-edit,
 #current-delete {
-    width: 120px;
     height: 64px;
+    width: 120px;
     border: none;
+    border-radius: 25px;
+    font-size: var(--fs-16);
     background: none;
     cursor: pointer;
-    font-size: var(--fs-16);
-    border-radius: 25px;
 }
 
 #current-edit-responsive:hover,
@@ -198,44 +178,39 @@
 .current-icon,
 #current-icon,
 #edit-icon {
-    height: 100px;
-    width: 100px;
-    color: var(--clr-200);
-    border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    font-size: var(--fs-47);
+    color: var(--clr-200);
     background-color: var(--clr-300);
 }
 
 .current-icon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    object-fit: contain;
-    width: 70px;
     height: 70px;
+    width: 70px;
     padding: 1rem;
 }
 
 #current-name {
     font-size: var(--fs-47);
     font-weight: 700;
-    text-align: center;
-    text-wrap: wrap;
 }
 
 /* Shown bottom */
-
 .current-information {
-    padding: 1rem 0;
     display: flex;
     flex-direction: column;
     gap: 22px;
+    padding: 1rem 0;
 }
 
 .current-information a,
 .current-information a:visited {
+    font-size: var(--fs-16);
     text-decoration: none;
     cursor: pointer;
 }
@@ -250,49 +225,38 @@
 }
 
 #current-mail {
-    font-size: var(--fs-16);
-    font-weight: 400;
     color: var(--clr-500);
-}
-
-#current-phone {
-    font-size: var(--fs-16);
-    font-weight: 400;
 }
 
 /* Lightbox */
 #lightbox-overlay {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    justify-content: center;
-    align-items: center;
+    background-color: #0000004d;
     z-index: 9999;
 }
 
 #lightbox {
+    display: flex;
+    flex-direction: row;
     height: 50vh;
     width: 90%;
     border-radius: 10px;
-    display: flex;
-    flex-direction: row;
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out;
-}
-
-#lightbox.show {
-    transform: translateX(0);
 }
 
 /* Lightbox left */
 .lightbox-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     background-color: var(--clr-700);
     color: var(--clr-200);
     border-radius: 20px 0 0 20px;
@@ -314,57 +278,48 @@ h2 {
 
 .blue-line {
     width: 80px;
-    margin: 10px 0;
+    margin: 10px 2rem;
     border: 3px solid var(--clr-500);
     border-radius: 2px;
     align-self: start;
 }
 
-
-
 /* Lightbox right */
 .lightbox-right {
     display: flex;
-    flex: 1;
     justify-content: space-evenly;
     align-items: center;
+    flex: 1;
     background-color: var(--clr-200);
     border-radius: 0 20px 20px 0;
 }
 
 .editing-lighbox {
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 32px;
+    padding: 2rem;
 }
 
 #lightbox input {
-    box-sizing: border-box;
     height: 50px;
+    min-width: 300px;
+    box-sizing: border-box;
     border: 1px solid var(--clr-300);
     border-radius: 10px;
     font-size: var(--fs-20);
-    min-width: 300px;
 }
 
 #edit-name {
-    background-image: url("/assets/img/person.png");
-    background-repeat: no-repeat;
-    background-position: right 24px center;
+    background: url("../assets/img/person.png") no-repeat right 24px center;
 }
 
-
-#edit-mail {
-    background-image: url("/assets/img/mail.svg");
-    background-repeat: no-repeat;
-    background-position: right 24px center;
+#edit-email {
+    background: url("../assets/img/mail.svg") no-repeat right 24px center;
 }
 
 #edit-phone {
-    background-image: url("/assets/img/phone.png");
-    background-repeat: no-repeat;
-    background-position: right 24px center;
+    background: url("../assets/img/phone.png") no-repeat right 24px center;
 }
 
 .btns-lighbox {
@@ -373,16 +328,25 @@ h2 {
 }
 
 #create-btn,
-#saveBtn {
+#saveBtn,
+#cancel-btn,
+#deleteBtn {
     display: flex;
+    gap: 4px;
     padding: 1rem;
-    font-size: var(--fs-21);
-    font-weight: 700;
-    background-color: var(--clr-700);
     border: 1px solid var(--clr-700);
     border-radius: 10px;
+    font-size: var(--fs-21);
+    font-weight: 700;
     color: var(--clr-200);
-    gap: 4px;
+    background-color: var(--clr-700);
+    cursor: pointer;
+}
+
+#create-btn:hover,
+#saveBtn:hover {
+    background-color: var(--clr-500);
+    border: 1px solid var(--clr-500);
 }
 
 #create-btn img,
@@ -392,29 +356,14 @@ h2 {
     align-self: center;
 }
 
-#create-btn:hover,
-#saveBtn:hover {
-    background-color: var(--clr-500);
-    border: 1px solid var(--clr-500);
-    cursor: pointer;
-}
-
 #cancel-btn,
 #deleteBtn {
-    display: flex;
-    padding: 1rem;
-    font-size: var(--fs-21);
-    font-weight: 700;
-    background-color: var(--clr-200);
-    border: 1px solid var(--clr-700);
-    border-radius: 10px;
     color: var(--clr-700);
-    gap: 4px;
+    background-color: var(--clr-200);
 }
 
 #cancel-btn:hover,
 #deleteBtn:hover {
-    background-color: var(--clr-200);
     border: 1px solid var(--clr-500);
     color: var(--clr-500);
 }
@@ -423,4 +372,9 @@ h2 {
 #responsive-small-add {
     position: absolute;
     top: -100px;
+}
+
+#lightbox.show,
+#showed-current-contact.show {
+    transform: translateX(0);
 }

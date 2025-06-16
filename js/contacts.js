@@ -8,7 +8,6 @@ let selectedContact = null;
 const mediaQuery = window.matchMedia("(max-width: 800px)");
 
 
-// Colors
 function getColorForName(name) {
     const colors = [
         "#FF5733", "#33B5FF", "#33FF99", "#FF33EC", "#ffcb20",
@@ -22,7 +21,6 @@ function getColorForName(name) {
 };
 
 
-// Load List
 async function initContactsList() {
     await createList();
     sortList();
@@ -54,7 +52,6 @@ async function createList() {
 };
 
 
-// Sort List
 function sortList() {
     contacts.sort((a, b) =>
         a.contact.name.localeCompare(b.contact.name)
@@ -64,61 +61,62 @@ function sortList() {
 
     contacts.forEach((element) => {
         let firstLetter = element.contact.name.charAt(0).toUpperCase();
-
         if (!groupedContacts[firstLetter]) {
             groupedContacts[firstLetter] = [];
         };
-
         groupedContacts[firstLetter].push(element);
     });
 };
 
 
-// Render List
 function generateSortedContacts() {
     const sortedLetters = Object.keys(groupedContacts).sort();
 
     for (let i = 0; i < sortedLetters.length; i++) {
         const letter = sortedLetters[i];
-        document.getElementById('contacts-list-wrapper').innerHTML += createAlphabetTemplate(letter);
-        document.getElementById('contacts-list-wrapper').innerHTML += createGroupTemplate(letter);
+        document.getElementById('contacts-list-wrapper').innerHTML += createAlphabetAndGroupTemplate(letter);
 
         for (let x = 0; x < groupedContacts[letter].length; x++) {
-            document.getElementById(`list-group-${letter}`).innerHTML += getInformationTemplate(letter, x);
+            document.getElementById(`list-group-${letter}`).innerHTML += getInformation(letter, x);
         };
     };
-    document.querySelectorAll(".list-contact-wrapper").forEach(el => {
-        const letter = el.dataset.letter;
-        const index = parseInt(el.dataset.index);
-        el.addEventListener('click', () => {
-            showContact(`contact${letter}-${index}`, letter, index);
-        });
-    });
-
+    addContactOpenenigEvent()
     handleMediaQueryChange(mediaQuery);
 };
 
 
-function createAlphabetTemplate(letter) {
+function addContactOpenenigEvent() {
+    document.querySelectorAll(".list-contact-wrapper").forEach(el => {
+        const letter = el.dataset.letter;
+        const index = parseInt(el.dataset.index);
+        el.addEventListener('click', () => {
+            findCurrentContact(`contact${letter}-${index}`, letter, index);
+        });
+    });
+};
+
+
+function createAlphabetAndGroupTemplate(letter) {
     return `
     <div class="list-alphabet">
       <span>${letter}</span>
       <div class="split-list-line"></div>
-    </div>`;
+    </div>
+    <div class="group-list" id="list-group-${letter}"></div>`;
 };
 
 
-function createGroupTemplate(letter) {
-    return `<div class="group-list" id="list-group-${letter}"></div>`;
-};
-
-
-function getInformationTemplate(letter, index) {
+function getInformation(letter, index) {
     const contact = groupedContacts[letter][index].contact;
     const initials = contact.initials;
     const name = contact.name;
     const email = contact.email;
     const bgColor = getColorForName(name);
+    return informationTemplate(name, letter, index, bgColor, email, initials);
+};
+
+
+function informationTemplate(name, letter, index, bgColor, email, initials) {
     return `
     <div class="list-contact-wrapper"
          id="contact${letter}-${index}"
@@ -129,122 +127,91 @@ function getInformationTemplate(letter, index) {
             <span class="list-name">${name}</span>
             <span class="list-email" id="email${letter}${index}">${email}</span>
         </div>
-    </div>`;
+    </div>`
 };
 
 
-// Open Contact
-function showContact(idNumber, letter, index) {
-    const contactEntry = groupedContacts[letter][index];
-    const contact = contactEntry.contact;
+function findCurrentContact(idNumber, letter, index) {
+    const currentContact = groupedContacts[letter][index].contact;
     const card = document.getElementById('showed-current-contact');
-    const name = document.getElementById('current-name');
-    const mail = document.getElementById('current-mail');
-    const phone = document.getElementById('current-phone');
+    card.classList.replace('d-none', 'd-flex');
     const icon = document.getElementById('current-icon');
+    icon.innerHTML = currentContact.initials;
+    icon.style.backgroundColor = getColorForName(currentContact.name);
+    fillCurrentContact(currentContact)
+    showCurrentContact(idNumber)
 
-    const choosenContact = document.getElementById(idNumber);
-    document.querySelectorAll('.choosen').forEach(el => el.classList.remove('choosen'));
-    choosenContact.classList.add('choosen');
+    selectedContact = { id: groupedContacts[letter][index].id, name: currentContact.name, email: currentContact.email, phone: currentContact.phone, icon: currentContact.initials };
 
-    name.innerHTML = contact.name;
-    mail.innerHTML = contact.email;
-    phone.innerHTML = contact.phone;
-    icon.innerHTML = contact.initials;
-    icon.style.backgroundColor = getColorForName(contact.name);
-    card.classList.remove('d-none');
-    card.classList.add('d-flex');
+    setTimeout(() => card.classList.add('show'), 10);
+};
 
+
+function fillCurrentContact(currentContact) {
+    document.getElementById('current-name').innerHTML = currentContact.name;
+
+    const currentMail = document.getElementById('current-mail');
+    currentMail.setAttribute('href', 'mailto:' + currentContact.email);
+    currentMail.textContent = currentContact.email;
+
+    const currentPhone = document.getElementById('current-phone');
+    currentPhone.setAttribute('href', 'tel:' + currentContact.phone);
+    currentPhone.textContent = currentContact.phone;
+};
+
+
+function showCurrentContact(idNumber) {
     document.getElementById('right-section').classList.remove('d-none');
     document.getElementById('responsive-small-edit').classList.remove('d-none');
     document.getElementById('responsive-small-add').classList.add('d-none');
-
-
-    selectedContact = {
-        id: groupedContacts[letter][index].id,
-        name: contact.name,
-        email: contact.email,
-        phone: contact.phone,
-        icon: contact.initials
-    };
-
-    openPhoneOrMail(contact.phone, contact.email);
-
-    setTimeout(() => {
-        card.classList.add('show');
-    }, 10);
+    document.querySelectorAll('.choosen').forEach(el => el.classList.remove('choosen'));
+    document.getElementById(idNumber).classList.add('choosen');
 };
 
 
-// Lightbox
 function openLightboxAdd() {
-    document.getElementById('lightbox-overlay').classList.remove('d-none');
-    document.getElementById('lightbox-overlay').classList.add('d-flex');
+    document.getElementById('lightbox-overlay').classList.replace('d-none', 'd-flex');
     document.body.style.overflow = 'hidden';
     const lightbox = document.getElementById('lightbox');
     lightbox.innerHTML = '';
-    const tempLeft = document.createElement('div');
-    tempLeft.innerHTML = leftAddingTemplate();
-    const leftSide = tempLeft.firstElementChild;
-    const tempRight = document.createElement('div');
-    tempRight.innerHTML = rightAddingTemplate();
-    const rightSide = tempRight.firstElementChild;
-    lightbox.appendChild(leftSide);
-    lightbox.appendChild(rightSide);
+    lightbox.appendChild(document.createRange().createContextualFragment(leftAddingTemplate()));
+    lightbox.appendChild(document.createRange().createContextualFragment(rightAddingTemplate()));
 
     setTimeout(() => {
         lightbox.classList.add('show');
-
-        document.getElementById('create-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            addContact();
-        });
-        document.getElementById('cancel-btn').addEventListener('click', (e) => {
-            e.preventDefault();
-            closeLightbox();
-        });
+        document.getElementById('create-btn').onclick = e => { e.preventDefault(); addContact(); };
+        document.getElementById('cancel-btn').onclick = e => { e.preventDefault(); closeLightbox(); };
     }, 10);
 };
 
 
 function openLightboxEdit() {
-    document.getElementById('lightbox-overlay').classList.remove('d-none');
-    document.getElementById('lightbox-overlay').classList.add('d-flex');
     document.body.style.overflow = 'hidden';
+    document.getElementById('lightbox-overlay').classList.replace('d-none', 'd-flex');
     const lightbox = document.getElementById('lightbox');
     lightbox.innerHTML = '';
-    const tempLeft = document.createElement('div');
-    tempLeft.innerHTML = leftEditingTemplate();
-    const leftSide = tempLeft.firstElementChild;
-    const tempRight = document.createElement('div');
-    tempRight.innerHTML = rightEditingTemplate();
-    const rightSide = tempRight.firstElementChild;
-    lightbox.appendChild(leftSide);
-    lightbox.appendChild(rightSide);
-
-    setTimeout(() => {
-        lightbox.classList.add('show');
-    }, 10);
-
+    lightbox.appendChild(document.createRange().createContextualFragment(leftEditingTemplate()));
+    lightbox.appendChild(document.createRange().createContextualFragment(rightEditingTemplate()));
     const icon = document.getElementById('edit-icon');
     icon.innerText = selectedContact.icon || '';
     icon.style.backgroundColor = getColorForName(selectedContact.name);
     document.getElementById('edit-name').value = selectedContact.name || '';
-    document.getElementById('edit-mail').value = selectedContact.email || '';
+    document.getElementById('edit-email').value = selectedContact.email || '';
     document.getElementById('edit-phone').value = selectedContact.phone || '';
-    document.getElementById('saveBtn').addEventListener('click', () => {
-        if (selectedContact && selectedContact.id) {
-            saveContactEdits(selectedContact.id);
-        } else {
-            alert('no contact found!');
-        }
-    });
-    document.getElementById('deleteBtn').addEventListener('click', () => {
-        if (selectedContact && selectedContact.id) {
-            deleteContact(selectedContact.id);
-        } else {
-            alert('no contact found!');
-        }
+    addSaveAndDeleteEvent()
+    setTimeout(() => lightbox.classList.add('show'), 10);
+};
+
+
+function addSaveAndDeleteEvent() {
+    ['saveBtn', 'deleteBtn'].forEach(id => {
+        document.getElementById(id).onclick = () => {
+            if (selectedContact?.id) {
+                id === 'saveBtn' ? saveContactEdits(selectedContact.id) : deleteContact(selectedContact.id);
+            } else {
+                alert('no contact found!');
+            }
+        };
     });
 };
 
@@ -278,7 +245,7 @@ function rightAddingTemplate() {
     <img class="current-icon" src="../assets/img/person.png" alt="Person Icon">
 <div class="editing-lighbox">
     <input id="edit-name" type="text" placeholder="Name" required>
-    <input id="edit-mail" type="email" placeholder="Email" required>
+    <input id="edit-email" type="email" placeholder="Email" required>
     <input id="edit-phone" type="tel" placeholder="Phone" required>
 <div class="btns-lighbox">
 <button id="cancel-btn">Cancel <span>X</span></button>
@@ -305,7 +272,7 @@ function rightEditingTemplate() {
     <div id="edit-icon"></div>
     <div class="editing-lighbox">
    <input id="edit-name" type="text" placeholder="Name" required>
-    <input id="edit-mail" type="email" placeholder="Email" required>
+    <input id="edit-email" type="email" placeholder="Email" required>
     <input id="edit-phone" type="tel" placeholder="Phone" required>
         <div class="btns-lighbox">
             <button id="deleteBtn">Delete</button>
@@ -316,10 +283,9 @@ function rightEditingTemplate() {
 };
 
 
-// Kontakte abändern
 async function saveContactEdits(contactId) {
     const name = document.getElementById('edit-name').value.trim();
-    const email = document.getElementById('edit-mail').value.trim();
+    const email = document.getElementById('edit-email').value.trim();
     const phone = document.getElementById('edit-phone').value.trim();
     if (!name || !email || !phone) {
         alert('All Fields required!');
@@ -364,9 +330,10 @@ async function deleteContact(contactId) {
     card.classList.remove('d-flex');
 };
 
+
 async function addContact() {
     const name = document.getElementById('edit-name').value.trim();
-    const email = document.getElementById('edit-mail').value.trim();
+    const email = document.getElementById('edit-email').value.trim();
     const phone = document.getElementById('edit-phone').value.trim();
     if (!name || !email || !phone) {
         alert('All Fields required!');
@@ -388,26 +355,13 @@ async function addContact() {
     }
 };
 
+
 function closeShownContact() {
     document.getElementById('right-section').classList.add('d-none');
     document.getElementById('responsive-small-edit').classList.add('d-none');
     document.getElementById('responsive-small-add').classList.remove('d-none');
 };
 
-function openPhoneOrMail(newPhone, newMail) {
-    const phoneLink = document.getElementById('current-phone');
-    const mailLink = document.getElementById('current-mail');
-
-    if (newPhone) {
-        phoneLink.setAttribute('href', 'tel:' + newPhone);
-        phoneLink.textContent = newPhone;
-    }
-
-    if (newMail) {
-        mailLink.setAttribute('href', 'mailto:' + newMail);
-        mailLink.textContent = newMail;
-    }
-};
 
 function openEditResponsive() {
 
@@ -421,6 +375,7 @@ function openEditResponsive() {
 
 };
 
+
 function closeEditResponsive() {
     document.getElementById('current-btns-responsive').classList.remove('show');
     document.getElementById('responsive-small-edit').classList.remove('d-none');
@@ -431,7 +386,7 @@ function closeEditResponsive() {
     }, 200);
 };
 
-// Media quarry
+
 function handleMediaQueryChange(e) {
     if (e.matches) {
         document.getElementById('right-section').classList.add('d-none');
@@ -445,10 +400,8 @@ function handleMediaQueryChange(e) {
 };
 
 
-handleMediaQueryChange(mediaQuery);
-
 document.addEventListener('DOMContentLoaded', () => {
-    mediaQuery.addEventListener("change", handleMediaQueryChange);
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
     document.getElementById('add-contact-btn-big').addEventListener('click', openLightboxAdd);
     document.getElementById('responsive-small-add').addEventListener('click', openLightboxAdd);
     document.getElementById('responsive-small-edit').addEventListener('click', openEditResponsive);
