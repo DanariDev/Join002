@@ -1,3 +1,8 @@
+/**
+ * This function exchanges the links in the sidebar when you go on legal or privacy policy via the start/index page
+ * 
+ * 
+ */
 function init() {
     const { navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter } = initDomElements();
 
@@ -13,6 +18,11 @@ function init() {
     }
 }
 
+/**
+ * This function hands over Dom Elements of variables
+ * 
+ * @returns -The variables
+ */
 function initDomElements(){
     const navLinkHideAllClass = document.querySelectorAll(".nav-link-hide");
     const topbarIcons = document.getElementById('topbar-iconsID');
