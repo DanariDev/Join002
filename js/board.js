@@ -2,12 +2,21 @@ import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { renderPopup } from "./task-overlay.js";
 
-
+/**
+ * This function creates a Dom element
+ * 
+ * @param {Object} s -Information of the Dom element
+ */
 function $(s) {
   return document.querySelector(s);
 };
 
-
+/**
+ * This function is intended to create the background color for the initials
+ * 
+ * @param {string} name -The name of the contact
+ * @returns 
+ */
 function getColorForName(name) {
   const colors = [
     '#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20',
@@ -20,7 +29,11 @@ function getColorForName(name) {
   return colors[Math.abs(hash) % colors.length];
 };
 
-
+/**
+ * This function invites the tasks into the board
+ * 
+ * 
+ */
 function loadTasks() {
   document.getElementById('task-overlay')?.classList.add('d-none');
   const tasksRef = ref(db, 'tasks');
@@ -35,7 +48,12 @@ function loadTasks() {
   }, { onlyOnce: true });
 };
 
-
+/**
+ * This function gets the information for the Firebase tasks
+ * 
+ * @param {Object} task -Hands over the information of a task
+ * @returns 
+ */
 function renderTask(task) {
   const colMap = { todo: '.to-do-tasks', 'in-progress': '.in-progress-tasks', await: '.await-tasks', done: '.done-tasks' };
   const target = $(colMap[task.status] || '.to-do-tasks');
@@ -56,7 +74,12 @@ function renderTask(task) {
   };
 };
 
-
+/**
+ * This function updates the boards with the tasks
+ * 
+ * @param {Object} card -Hands over the information of the card
+ * @param {Object} task -Hands over the information of a task
+ */
 function updateTaskCard(card, task) {
   card.querySelector('.task-label').textContent = task.category;
   card.querySelector('.task-title').textContent = task.title;
@@ -89,7 +112,12 @@ function updateTaskCard(card, task) {
   bar.classList.add(statusClass);
 };
 
-
+/**
+ * This function opens an overlay and hands over the information of the task that you pressed on
+ * 
+ * @param {Object} card -Hands over the information of the card
+ * @param {Object} task -Hands over the information of a task
+ */
 function setupTaskCardEvents(card, task) {
   card.ondragstart = function (e) {
     e.dataTransfer.setData('text', task.id);
@@ -101,7 +129,11 @@ function setupTaskCardEvents(card, task) {
   card.onclick = () => renderPopup(task);
 };
 
-
+/**
+ * This function ensures that you can move cards
+ * 
+ * 
+ */
 function setupDropTargets() {
   const columns = document.querySelectorAll('#board .task-column');
   for (let col of columns) {
@@ -118,7 +150,14 @@ function setupDropTargets() {
   };
 };
 
-
+/**
+ * With this function you can move the cards to other areas. 
+ * In addition, information is handed over to Firebase in which area the card is.
+ * 
+ * @param {Object} task -Hands over the information of a task
+ * @param {Object} column -Hands over the information of the column
+ * @returns 
+ */
 function handleDrop(task, column) {
   task.preventDefault();
   column.classList.remove('drag-over');
@@ -133,7 +172,12 @@ function handleDrop(task, column) {
   });
 };
 
-
+/**
+ * This function updates the progress bar in the cards
+ * 
+ * @param {Object} card -Hands over the information of the card
+ * @param {string} newStatus -Hands over the status name
+ */
 function updateProgressBar(card, newStatus) {
   var bar = card.querySelector(".progress-bar");
   bar.className = "progress-bar";
@@ -158,6 +202,11 @@ document.querySelectorAll('.add-task-btn').forEach(btn => {
   btn.addEventListener('click', openForm);
 });
 
+/**
+ * This function opens the Add-Tasks-Overlay to add new tasks
+ * 
+ * 
+ */
 async function openForm() {
   const response = await fetch('add-task.html');
   const html = await response.text();
@@ -171,6 +220,11 @@ async function openForm() {
   document.getElementById('formModal').style.display = 'block';
 }
 
+/**
+ * This function closes the add-tasks-overlay
+ * 
+ * 
+ */
 function closeForm() {
   document.getElementById('formModal').style.display = 'none';
 }

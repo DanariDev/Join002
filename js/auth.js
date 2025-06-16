@@ -1,3 +1,4 @@
+
 import { auth, db } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
@@ -11,6 +12,11 @@ import {
   child,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+/**
+ * With this function, a new user is registered and stored on the Firebase
+ * 
+ * @returns 
+ */
 async function signup() {
   const name = document.querySelector(".name-input")?.value.trim();
   const email = document.querySelector(".email-input")?.value.trim();
@@ -34,6 +40,11 @@ async function signup() {
   }
 }
 
+/**
+ * With this function a user logged in. It is checked whether email and password fit a user
+ * 
+ * @returns 
+ */
 function login() {
   const email = document.querySelector(".email-input")?.value.trim();
   const pass = document.querySelector(".password-input")?.value.trim();
@@ -50,12 +61,22 @@ function login() {
     .catch((e) => alert("Login fehlgeschlagen:\n" + e.message));
 }
 
+/**
+ * This function can be registered with a guest login
+ * 
+ * 
+ */
 export function loginAsGuest() {
   localStorage.setItem("isGuest", "true");
   localStorage.removeItem("userName");
   window.location.href = "summary.html";
 }
 
+/**
+ * This function logs off a user
+ * 
+ * 
+ */
 export function logout() {
   signOut(auth)
     .then(() => {
@@ -65,6 +86,11 @@ export function logout() {
     .catch((e) => alert("Fehler beim Logout:\n" + e.message));
 }
 
+/**
+ * This function ensures that the buttons have a click event
+ * 
+ * @returns
+ */
 function init() {
   const form = document.getElementById("loginForm");
   if (!form) return;
