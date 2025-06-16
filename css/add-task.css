@@ -18,8 +18,8 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-  margin-left: 22.138rem;
   padding: 4rem;
+  margin-left: 22.138rem;
 }
 
 
@@ -30,9 +30,9 @@
 }
 
 .add-task-form-content {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 16px;
 }
 
@@ -44,8 +44,8 @@ label,
 
 input,
 select {
-  width: 100%;
   height: 40px;
+  width: 100%;
   padding: 8px;
   border: 1px solid var(--clr-300);
   border-radius: 10px;
@@ -76,9 +76,9 @@ select {
   height: 35px;
   border: none;
   border-radius: 10px;
-  cursor: pointer;
-  font-weight: 600;
   font-size: var(--fs-20);
+  font-weight: 600;
+  cursor: pointer;
 }
 
 #urgent-btn:hover,
@@ -106,12 +106,12 @@ select {
 
 .subtask-button {
   position: absolute;
-  right: 10px;
   top: 50%;
+  right: 10px;
   transform: translateY(-50%);
-  background: none;
-  border: none;
   font-size: var(--fs-20);
+  border: none;
+  background: none;
   cursor: pointer;
 }
 
@@ -133,8 +133,8 @@ li {
   flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
-  border-radius: 20px;
   padding: 0 10px;
+  border-radius: 20px;
 }
 
 .form-selected-contact-active,
@@ -145,29 +145,29 @@ li {
 }
 
 .assigned-initials {
-  width: 20px;
-  height: 20px;
-  margin: 4px;
-  border-radius: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: var(--clr-200);
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  margin: 4px;
   border: 2px solid var(--clr-200);
+  border-radius: 100%;
+  color: var(--clr-200);
 }
 
 
 
 .form-selected-contact input {
-  width: 20px;
   height: 30px;
+  width: 20px;
 }
 
 #contacts-selected {
-  min-height: 40px;
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  flex-wrap: wrap;
+  min-height: 40px;
   gap: 6px;
   padding: 6px;
   background-color: var(--clr-200);
@@ -176,45 +176,45 @@ li {
   font-size: var(--fs-20);
 }
 
-.contact-chip {
-  background-color: var(--clr-300);
-  border-radius: 20px;
-  padding: 4px 10px;
-  font-size: var(--fs-20);
+.contact-selected {
   display: flex;
   align-items: center;
   gap: 6px;
+  padding: 4px 10px;
+  background-color: var(--clr-300);
+  border-radius: 20px;
+  font-size: var(--fs-20);
 }
 
-.contact-chip span {
-  cursor: pointer;
+.contact-selected span {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .dropdown-arrow {
+  padding-right: 4px;
   margin-left: auto;
   font-size: var(--fs-16);
   color: var(--clr-700);
-  padding-right: 4px;
 }
 
 .contacts-dropdown {
   position: relative;
-  border: 1px solid var(--clr-300);
-  border-radius: 6px;
-  padding: 6px;
-  background-color: var(--clr-200);
-  font-size: 14px;
-  min-height: 40px;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  min-height: 40px;
+  padding: 6px;
+  border: 1px solid var(--clr-300);
+  border-radius: 6px;
+  background-color: var(--clr-200);
+  font-size: 14px;
 }
 
 .contacts-dropdown-inner {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
+  flex-wrap: wrap;
   gap: 6px;
   border: none;
 }
@@ -225,10 +225,10 @@ li {
   top: 100%;
   left: 0;
   right: 0;
+  max-height: 150px;
   background-color: var(--clr-200);
   border: 1px solid var(--clr-300);
   border-top: none;
-  max-height: 150px;
   overflow-y: auto;
   z-index: 1000;
 }
@@ -262,28 +262,26 @@ option {
   display: flex;
   justify-content: space-around;
   flex: 1;
-  padding: 1rem;
   gap: 10px;
+  padding: 1rem;
 }
 
 #clear-btn,
 .btn-create-task {
   width: 160px;
   padding: 0.5rem;
+  border: 2px solid var(--clr-700);
   border-radius: 10px;
   font-size: var(--fs-20);
   font-weight: 600;
-  border: 2px solid var(--clr-700);
-  background-color: var(--clr-200);
   color: var(--clr-900);
+  background-color: var(--clr-200);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
 #clear-btn:hover,
 .btn-create-task:hover {
-  background-color: var(--clr-200);
-
   color: #ffffff;
   background-color: var(--clr-700);
 }
@@ -303,8 +301,8 @@ option {
 }
 
 .required-explain-responsive {
-  font-size: var(--fs-20);
   display: none;
+  font-size: var(--fs-20);
 }
 
 .required-explain-responsive:before {

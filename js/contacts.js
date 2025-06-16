@@ -318,7 +318,6 @@ async function addContact() {
     const name = document.getElementById('edit-name').value.trim();
     const email = document.getElementById('edit-email').value.trim();
     const phone = document.getElementById('edit-phone').value.trim();
-
     if (!name || !email || !phone) return alert('All Fields required!');
     try {
         const newContactRef = push(ref(db, 'contacts'));
@@ -398,4 +397,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     initContactsList();
 });
-

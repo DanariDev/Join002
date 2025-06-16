@@ -3,11 +3,13 @@ import { ref, onValue, update, push, get } from "https://www.gstatic.com/firebas
 
 let subtasks = [];
 let contacts = [];
+let assignedTo = [];
 
 function getValue(selector) {
     const element = document.querySelector(selector);
     return element ? element.value.trim() : "";
 };
+
 
 function getColorForName(name) {
     const colors = [
@@ -20,6 +22,7 @@ function getColorForName(name) {
     };
     return colors[Math.abs(hash) % colors.length];
 };
+
 
 function getPriority() {
     if (document.getElementById('urgent-btn').classList.contains('urgent-btn-active')) {
@@ -34,6 +37,7 @@ function getPriority() {
     return 'medium';
 };
 
+
 function renderSubtasks() {
     const list = document.getElementById('subtask-list');
     list.innerHTML = "";
@@ -43,6 +47,7 @@ function renderSubtasks() {
         list.appendChild(li);
     };
 };
+
 
 function addNewSubtask() {
     const input = document.getElementById('subtask');
@@ -54,48 +59,39 @@ function addNewSubtask() {
     };
 };
 
-let assignedTo = [];
+
+function createDropdownItem(contact) {
+    const initials = contact.name.split(" ").map(p => p[0]?.toUpperCase()).join("");
+    const color = getColorForName(contact.name);
+    const item = document.createElement('div');
+    item.innerHTML = `
+        <label class="form-selected-contact">
+            <input type="checkbox" value="${contact.email}" data-name="${contact.name}" />
+            ${contact.name}
+            <div class="assigned-initials" style="background-color:${color};">${initials}</div>
+        </label>`;
+    return item;
+};
+
 
 function populateContactsDropdown() {
-    const dropdownList = document.getElementById('contacts-dropdown-list');
-    dropdownList.innerHTML = "";
-
-    for (let contact of contacts.sort((selected, compare) => selected.name.localeCompare(compare.name))) {
-        const initials = contact.name
-            .split(" ")
-            .map(part => part[0]?.toUpperCase())
-            .join("");
-
-        const color = getColorForName(contact.name);
-
-        const item = document.createElement('div');
-        item.innerHTML = `
-        
-            <label class="form-selected-contact">
-                <input type="checkbox" value="${contact.email}" data-name="${contact.name}" />
-                
-                ${contact.name}<div class="assigned-initials" style="background-color: ${color};">${initials}</div>
-            </label>
-        `;
-        dropdownList.appendChild(item);
-    }
-
-    dropdownList.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-        cb.addEventListener('change', function () {
-            const email = this.value;
-            const name = this.dataset.name;
-
-            if (this.checked) {
-                assignedTo.push({ email, name });
-            } else {
-                assignedTo = assignedTo.filter(c => c.email !== email);
-            }
-
+    const list = document.getElementById('contacts-dropdown-list');
+    list.innerHTML = "";
+    contacts.sort((a, b) => a.name.localeCompare(b.name)).forEach(c => {
+        list.appendChild(createDropdownItem(c));
+    });
+    list.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const { value: email, dataset: { name }, checked } = checkbox;
+            assignedTo = checked
+                ? [...assignedTo, { email, name }]
+                : assignedTo.filter(c => c.email !== email);
             updateAssignedToUI();
             updateCreateTaskBtn();
         });
     });
-}
+};
+
 
 function updateAssignedToUI() {
     const selectedDiv = document.getElementById('contacts-selected');
@@ -106,12 +102,13 @@ function updateAssignedToUI() {
 
     selectedDiv.innerHTML = '';
     assignedTo.forEach(contact => {
-        const chip = document.createElement('div');
-        chip.classList.add('contact-chip');
-        chip.textContent = contact.name;
-        selectedDiv.appendChild(chip);
+        const selectedContact = document.createElement('div');
+        selectedContact.classList.add('contact-selected');
+        selectedContact.textContent = contact.name;
+        selectedDiv.appendChild(selectedContact);
     });
 };
+
 
 function loadContacts() {
     const snapshot = get(ref(db, 'contacts'));
@@ -121,6 +118,7 @@ function loadContacts() {
         populateContactsDropdown();
     });
 };
+
 
 function createTask(event) {
     event.preventDefault();
@@ -137,6 +135,7 @@ function createTask(event) {
     validateAndSaveTask(task);
 };
 
+
 function validateAndSaveTask(task) {
     if (!task.title || !task.dueDate || !task.category || !task.assignedTo) {
         alert("Bitte fülle alle Pflichtfelder aus!");
@@ -150,6 +149,7 @@ function validateAndSaveTask(task) {
     });
 };
 
+
 function resetForm() {
     document.getElementById('add-task-form').reset();
     subtasks = [];
@@ -157,6 +157,7 @@ function resetForm() {
     updateCreateTaskBtn();
     updatePriorityButtons();
 };
+
 
 function updateCreateTaskBtn() {
     const title = getValue('#title');
@@ -170,6 +171,7 @@ function updateCreateTaskBtn() {
     createBtn.classList.toggle('disabled', !allFilled);
 };
 
+
 function updatePriorityButtons() {
     const buttons = document.querySelectorAll('.urgent-btn, .medium-btn, .low-btn');
     for (let i = 0; i < buttons.length; i++) {
@@ -179,6 +181,7 @@ function updatePriorityButtons() {
     const activeBtn = document.querySelector("." + priority + "-btn");
     if (activeBtn) activeBtn.classList.add('active');
 };
+
 
 function togglePriorityBtnUrgent() {
     const btn = document.getElementById('urgent-btn');
@@ -195,6 +198,7 @@ function togglePriorityBtnUrgent() {
     };
 };
 
+
 function togglePriorityBtnMedium() {
     const btn = document.getElementById('medium-btn');
     const img = btn.querySelector('img');
@@ -209,6 +213,7 @@ function togglePriorityBtnMedium() {
         lowBtn.querySelector('img').src = 'assets/img/low-btn-icon.png';
     };
 };
+
 
 function togglePriorityBtnLow() {
     const btn = document.getElementById('low-btn');
@@ -225,26 +230,24 @@ function togglePriorityBtnLow() {
     };
 };
 
+
 function hoverPriorityBtns() {
     const btns = [
         { id: 'urgent-btn', icon: 'urgent-btn-icon' },
         { id: 'medium-btn', icon: 'medium-btn-icon' },
         { id: 'low-btn', icon: 'low-btn-icon' }
     ];
-
     btns.forEach(({ id, icon }) => {
         const btn = document.getElementById(id);
         const img = btn.querySelector('img');
-        btn.addEventListener("mouseover", () => {
-            img.src = `assets/img/${icon}-hover.png`;
-        });
-        btn.addEventListener("mouseout", () => {
-            if (!btn.classList.contains(`${id}-active`)) {
+        btn.onmouseover = () => img.src = `assets/img/${icon}-hover.png`;
+        btn.onmouseout = () => {
+            if (!btn.classList.contains(`${id}-active`))
                 img.src = `assets/img/${icon}.png`;
-            };
-        });
+        };
     });
 };
+
 
 function init() {
     const createBtn = document.getElementById('create-task-btn');
@@ -253,42 +256,39 @@ function init() {
     document.getElementById('add-task-form').onsubmit = createTask;
     document.querySelector('.subtask-button').onclick = addNewSubtask;
     document.getElementById('clear-btn').onclick = clearForm;
-    document.getElementById('contacts-selected').addEventListener('click', () => {
-        document.getElementById('contacts-dropdown-list').classList.toggle('show');
+    initDropdownHandling();
+    document.getElementById('subtask').addEventListener('keypress', e => {
+        if (e.key === 'Enter') e.preventDefault(), addNewSubtask();
     });
-    document.addEventListener('click', function (event) {
-        const dropdown = document.getElementById('contacts-dropdown-list');
-        const toggle = document.getElementById('contacts-selected');
-        if (!dropdown.contains(event.target) && !toggle.contains(event.target)) {
-            dropdown.classList.remove('show');
-        }
-    });
-    document.getElementById('subtask').addEventListener('keypress', function (evt) {
-        if (evt.key === 'Enter') {
-            evt.preventDefault();
-            addNewSubtask();
-        }
-    });
-
     updateInputs();
 };
 
+
+function initDropdownHandling() {
+    const dropdown = document.getElementById('contacts-dropdown-list');
+    const toggle = document.getElementById('contacts-selected');
+
+    toggle.addEventListener('click', () => dropdown.classList.toggle('show'));
+
+    document.addEventListener('click', e => {
+        if (!dropdown.contains(e.target) && !toggle.contains(e.target)) {
+            dropdown.classList.remove('show');
+        }
+    });
+};
+
+
 function clearForm() {
     const createBtn = document.getElementById('create-task-btn');
-    const priorityBtns = document.querySelectorAll('.all-priority-btns');
     createBtn.disabled = true;
     createBtn.classList.add('disabled');
-    priorityBtns.forEach(btn => {
+    document.querySelectorAll('.all-priority-btns').forEach(btn => {
         btn.classList.remove('urgent-btn-active', 'medium-btn-active', 'low-btn-active');
-        const img = btn.querySelector('img');
-        if (btn.id === 'urgent-btn') img.src = 'assets/img/urgent-btn-icon.png';
-        if (btn.id === 'medium-btn') img.src = 'assets/img/medium-btn-icon.png';
-        if (btn.id === 'low-btn') img.src = 'assets/img/low-btn-icon.png';
+        btn.querySelector('img').src = `assets/img/${btn.id}-icon.png`;
     });
     assignedTo = [];
     updateAssignedToUI();
-    const checkboxes = document.querySelectorAll('#contacts-dropdown-list input[type="checkbox"]');
-    checkboxes.forEach(checkBox => checkBox.checked = false);
+    document.querySelectorAll('#contacts-dropdown-list input[type="checkbox"]').forEach(checkBox => checkBox.checked = false);
     subtasks = [];
     renderSubtasks();
 };
@@ -302,10 +302,12 @@ function updateInputs() {
     }
 };
 
+
 function stopEnterKeySubmit() {
     document.removeEventListener('keypress', handleEnterKey);
     document.addEventListener('keypress', handleEnterKey);
 };
+
 
 function handleEnterKey(evt) {
     const node = evt.target;
@@ -313,6 +315,7 @@ function handleEnterKey(evt) {
         evt.preventDefault();
     }
 };
+
 
 init();
 loadContacts();
