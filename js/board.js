@@ -15,7 +15,7 @@ function $(s) {
  * This function is intended to create the background color for the initials
  * 
  * @param {string} name -The name of the contact
- * @returns 
+ * @returns -Gives back a color value
  */
 function getColorForName(name) {
   const colors = [
@@ -52,7 +52,7 @@ function loadTasks() {
  * This function gets the information for the Firebase tasks
  * 
  * @param {Object} task -Hands over the information of a task
- * @returns 
+ * @returns -stop
  */
 function renderTask(task) {
   const colMap = { todo: '.to-do-tasks', 'in-progress': '.in-progress-tasks', await: '.await-tasks', done: '.done-tasks' };
@@ -156,7 +156,7 @@ function setupDropTargets() {
  * 
  * @param {Object} task -Hands over the information of a task
  * @param {Object} column -Hands over the information of the column
- * @returns 
+ * @returns -stop
  */
 function handleDrop(task, column) {
   task.preventDefault();

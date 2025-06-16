@@ -15,7 +15,7 @@ import {
 /**
  * With this function, a new user is registered and stored on the Firebase
  * 
- * @returns 
+ * @returns -return alert("Passwörter stimmen nicht überein!");
  */
 async function signup() {
   const name = document.querySelector(".name-input")?.value.trim();
@@ -43,7 +43,7 @@ async function signup() {
 /**
  * With this function a user logged in. It is checked whether email and password fit a user
  * 
- * @returns 
+ * @returns -alert("Bitte E-Mail und Passwort eingeben!");
  */
 function login() {
   const email = document.querySelector(".email-input")?.value.trim();
@@ -89,7 +89,7 @@ export function logout() {
 /**
  * This function ensures that the buttons have a click event
  * 
- * @returns
+ * @returns -stop
  */
 function init() {
   const form = document.getElementById("loginForm");
