@@ -52,6 +52,7 @@
   cursor: pointer;
   font-weight: 600;
   font-size: var(--fs-21);
+  white-space: nowrap;
 }
 
 /* GRID LAYOUT */
