@@ -264,8 +264,8 @@ async function loadTaskForm() {
  * 
  * 
  */
-function openForm() {
-  loadTaskForm()
+export async function openForm() {
+  await loadTaskForm()
   document.getElementById('form-add-task').style.display = 'block';
   document.getElementById('add-task-overlay').style.display = 'block';
 }

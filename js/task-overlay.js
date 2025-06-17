@@ -7,6 +7,8 @@ import {
   child,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+import { openForm } from "./board.js";
+
 
 function getColorForName(name) {
   const colors = [
@@ -32,7 +34,7 @@ function $(s) {
 };
 
 
-function loadContactOptions(assignedTo) {
+async function loadContactOptions(assignedTo) {
   const container = document.createElement('div');
   container.id = 'edit-assigned';
   container.className = 'assigned-list';
@@ -151,6 +153,68 @@ function deleteTask(taskId) {
   };
 };
 
-function editTask(taskId) {
 
+
+
+
+
+
+async function editTask(taskId) {
+    document.getElementById('task-overlay').classList.add('d-none');
+    await openForm();
+    document.getElementById('task-overlay').classList.remove('d-flex');
+
+    const title = document.getElementById('edit-title').innerHTML.trim();
+    const description = document.getElementById('edit-description').innerHTML.trim();
+
+    const dueDate = document.getElementById('edit-due-date').textContent;
+    const dateText = dueDate.replace('Due date:', '').trim();
+    const [day, month, year] = dateText.split('/');
+    const isoDate = `${year}-${month}-${day}`;
+
+    const priority = document.getElementById('popup-priority').textContent;
+    const priorityText = priority.replace('Priority:', '').trim();
+
+    document.getElementById('title').value = title;
+    document.getElementById('description').value = description;
+    document.getElementById('date').value = isoDate;
+
+    switch (priorityText) {
+        case 'Urgent':
+            document.getElementById('urgent-btn').classList.add('urgent-btn-active');
+            break;
+        case 'Medium':
+            document.getElementById('medium-btn').classList.add('medium-btn-active');
+            break;
+        case 'Low':
+            document.getElementById('low-btn').classList.add('low-btn-active');
+            break;
+        default:
+            break;
+    }
+
+    const nameElements = document.querySelectorAll('.full-name');
+    const selectedNames = Array.from(nameElements).map(el => el.textContent.trim());
+
+    document.getElementById('contacts-selected').innerHTML = '';
+    for (let index = 0; index < selectedNames.length; index++) {
+        document.getElementById('contacts-selected').innerHTML += `
+      <div class="contact-selected">${selectedNames[index]}</div>`;
+    }
+
+    await loadContactOptions();
+
+    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-name]');
+    checkboxes.forEach(checkbox => {
+        const contactName = checkbox.dataset.name.trim();
+        console.log(contactName);
+        checkbox.checked = selectedNames.includes(contactName);
+    });
+
+    console.log("TITLE:", title,
+        "DESC:", description,
+        "DATE:", dateText,
+        "PRIO:", priorityText,
+        "ISO.DATE:", isoDate,
+        "SELECTED.NAMES:", selectedNames);
 };
