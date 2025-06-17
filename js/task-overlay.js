@@ -8,11 +8,6 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 
-function $(s) {
-  return document.querySelector(s);
-};
-
-
 function getColorForName(name) {
   const colors = [
     '#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20',
@@ -23,6 +18,17 @@ function getColorForName(name) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   };
   return colors[Math.abs(hash) % colors.length];
+};
+
+
+
+
+
+
+
+
+function $(s) {
+  return document.querySelector(s);
 };
 
 
@@ -58,32 +64,32 @@ function loadContactOptions(assignedTo) {
   wrapper.appendChild(container);
 };
 
+function taskPopupHtmlTemplate(task) {
 
-
-export function renderPopup(task) {
-  const overlay = $('#task-overlay');
-  const content = $('.overlay-content');
   const selectedCategory = task.category;
   const formattedDate = task.dueDate.split('-').reverse().join('/');
   const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
-  overlay.dataset.taskId = task.id;
-  $('#popup-title').innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
-  $('#popup-description').innerHTML = `<p id="edit-description" class="description-input">${task.description}</p>`;
-  $('#popup-due-date').innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
-  $('#popup-category').innerHTML = `<p class="task-label-overlay">${selectedCategory}</p>`;
+  document.getElementById('popup-title').innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
+  document.getElementById('popup-description').innerHTML = `<p id="edit-description" class="description-input">${task.description}</p>`;
+  document.getElementById('popup-due-date').innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
+  document.getElementById('popup-category').innerHTML = `<p class="task-label-overlay">${selectedCategory}</p>`;
   loadContactOptions(task.assignedTo || []);
-  $('#popup-priority').innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
-  const subtaskList = $('#popup-subtasks');
+  document.getElementById('popup-priority').innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
+
+}
+
+function createPopupSubtask(task) {
+  const subtaskList = document.getElementById('popup-subtasks');
   subtaskList.innerHTML = "";
   if (task.subtasks && task.subtasks.length > 0) {
-    task.subtasks.forEach((s, i) => {
+    task.subtasks.forEach((subtask, i) => {
       const li = document.createElement('li');
       const checkbox = document.createElement('input');
       checkbox.type = 'checkbox';
-      checkbox.checked = s.done;
+      checkbox.checked = subtask.done;
       checkbox.onchange = () => toggleSubtask(task.id, i, checkbox.checked);
       const span = document.createElement('span');
-      span.textContent = s.text;
+      span.textContent = subtask.text;
       span.classList.add('subtask-overlay-list');
       li.appendChild(checkbox);
       li.append(" ");
@@ -91,15 +97,25 @@ export function renderPopup(task) {
       subtaskList.appendChild(li);
     });
   };
-  overlay.classList.remove('d-none');
-  overlay.style.display = 'flex';
-  $('.overlay-close').onclick = () => closePopup();
-  overlay.onclick = (e) => {
-    if (e.target === overlay) closePopup();
-  };
-  $('#delete-task-btn').onclick = () => deleteTask(task.id);
-  $('#edit-task-btn').textContent = 'Save';
-  $('#edit-task-btn').onclick = () => saveTaskEdits(task.id);
+}
+
+export function renderPopup(task) {
+  const overlay = document.getElementById('task-overlay');
+  overlay.classList.replace('d-none', 'd-flex');
+  overlay.dataset.taskId = task.id;
+
+  taskPopupHtmlTemplate(task)
+  createPopupSubtask(task)
+  getLabelColor()
+
+  document.getElementById('overlay-close').addEventListener('click', closePopup);
+  document.getElementById('delete-task-btn').onclick = () => deleteTask(task.id);
+
+  document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
+  document.getElementById('edit-task-btn').textContent = 'Edit';
+};
+
+function getLabelColor() {
   const label = document.querySelector('.task-label-overlay');
   const text = label.textContent.trim();
   if (text === 'Technical Task') {
@@ -107,13 +123,11 @@ export function renderPopup(task) {
   } else if (text === 'User Story') {
     label.classList.add('blue-background');
   };
-};
-
+}
 
 function closePopup() {
-  const overlay = $('#task-overlay');
-  overlay.classList.add('d-none');
-  overlay.style.display = 'none';
+  const overlay = document.getElementById('task-overlay');
+  overlay.classList.replace('d-flex', 'd-none');
 };
 
 
@@ -137,6 +151,6 @@ function deleteTask(taskId) {
   };
 };
 
-function saveTaskEdits(taskId) {
+function editTask(taskId) {
 
 };

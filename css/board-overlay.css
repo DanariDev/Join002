@@ -23,7 +23,7 @@
 }
 
 /* Close Button Task lightbox Content */
-.overlay-close {
+#overlay-close {
     position: absolute;
     top: 15px;
     right: 15px;
