@@ -99,6 +99,7 @@ function updateTaskCard(card, task) {
       initialsContainer.appendChild(initialsDiv);
     });
   };
+  
   const totalSubtasks = task.subtasks ? task.subtasks.length : 0;
   let doneSubtasks = 0;
   if (task.subtasks) {
