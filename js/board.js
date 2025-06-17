@@ -197,17 +197,53 @@ loadTasks();
 
 
 
-// ADD TASK OVERLAY
-document.querySelectorAll('.add-task-btn').forEach(btn => {
-  btn.addEventListener('click', openForm);
-});
 
-/**
- * This function opens the Add-Tasks-Overlay to add new tasks
- * 
- * 
- */
-async function openForm() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ADD TASK OVERLAY
+
+
+function loadScript() {
+  const addTaskScript = document.createElement('script');
+  addTaskScript.type = 'module';
+  addTaskScript.src = 'js/task-form.js';
+  document.head.appendChild(addTaskScript);
+};
+
+
+function loadEventListeners() {
+  document.getElementById('form-add-task').addEventListener('click', function (event) {
+    const form = document.getElementById('formContainer');
+    if (!form.contains(event.target)) {
+      closeForm();
+    }
+  });
+
+  document.getElementById('closeFormModal').addEventListener('click', () => {
+    closeForm();
+  });
+
+}
+
+async function loadTaskForm() {
   const response = await fetch('add-task.html');
   const html = await response.text();
 
@@ -217,7 +253,20 @@ async function openForm() {
 
   document.getElementById('formContainer').innerHTML = '';
   document.getElementById('formContainer').appendChild(form);
-  document.getElementById('formModal').style.display = 'block';
+  loadScript()
+  loadEventListeners()
+}
+
+
+/**
+ * This function opens the Add-Tasks-Overlay to add new tasks
+ * 
+ * 
+ */
+function openForm() {
+  loadTaskForm()
+  document.getElementById('form-add-task').style.display = 'block';
+  document.getElementById('add-task-overlay').style.display = 'block';
 }
 
 /**
@@ -226,20 +275,17 @@ async function openForm() {
  * 
  */
 function closeForm() {
-  document.getElementById('formModal').style.display = 'none';
+  document.getElementById('form-add-task').style.display = 'none';
+  document.getElementById('add-task-overlay').style.display = 'none';
+
 }
 
 
-document.getElementById('formModal').addEventListener('click', function (event) {
-  const form = document.getElementById('formContainer');
-  if (!form.contains(event.target)) {
-    closeForm();
-  }
+
+
+
+document.getElementById('add-task-button').addEventListener('click', openForm);
+
+document.querySelectorAll('.add-task-btn').forEach(btn => {
+  btn.addEventListener('click', openForm);
 });
-
-document.getElementById('closeFormModal').addEventListener('click', () => {
-    closeForm();
-  });
-  
-
-

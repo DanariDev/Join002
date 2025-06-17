@@ -1,0 +1,139 @@
+/* Opened Task background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+
+/* Opened Task lightbox Content */
+.overlay-content {
+    background-color: var(--clr-200);
+    border-radius: 16px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+}
+
+/* Close Button Task lightbox Content */
+.overlay-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.overlay-section {
+    margin-bottom: 20px;
+}
+
+/* Save and Close button on opened Task */
+.overlay-actions button {
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.overlay-actions button:hover {
+    background-color: var(--clr-300);
+}
+
+
+
+.initials-task-overlay,
+.initials-task {
+    height: auto;
+    padding: 0.7rem;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-16);
+    color: var(--clr-200);
+    border: 2px solid var(--clr-200);
+    margin-top: 5px;
+    margin-left: -8px;
+
+}
+
+.initials-task-overlay {
+    margin: 5px;
+}
+
+
+#popup-subtasks {
+    list-style: none;
+    padding: 0;
+}
+
+.assigned-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.assigned-initials {
+    justify-content: start;
+}
+
+.overlay-key {
+    font-size: var(--fs-16);
+    color: var(--clr-400);
+}
+
+#form-add-task {
+    display: none;
+    position: fixed;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    width: auto;
+    height: min-content;
+    padding: 2rem;
+    border-radius: 25px;
+    background: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #333;
+}
+
+.close-btn:hover {
+    background-color: var(--clr-300);
+    border-radius: 100%;
+}
+
+li {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.overlay-section input {
+    max-width: 25px;
+}

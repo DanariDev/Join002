@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="css/sidebar.css" />
   <link rel="stylesheet" href="css/topbar.css" />
   <link rel="stylesheet" href="css/board.css" />
+  <link rel="stylesheet" href="css/board-overlay.css">
   <link rel="stylesheet" href="css/responsive/board-responsive.css">
   <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
   <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
@@ -64,12 +65,13 @@
     <div class="board-header">
 
       <div class="responsive-space-between">
-        <h1>Board</h1><a href="add-task.html"><button class="add-task-button responsive-show">+</button></a>
+        <h1>Board</h1><a href="add-task.html"><button id="add-task-button-responsive"
+            class="responsive-show">+</button></a>
       </div>
 
       <div class="search-task-field">
         <input type="text" placeholder="Find Task" id="search-input" />
-        <button class="add-task-button responsive-d-none">Add task +</button>
+        <button id="add-task-button" class="responsive-d-none">Add task +</button>
       </div>
 
     </div>
@@ -131,19 +133,20 @@
     </div>
   </div>
 
-
-  <div id="formModal">
-    <button id="closeFormModal" class="close-btn">×</button>
-    <h1>Add Task</h1>
-    <div id="formContainer"></div>
+  <div id="add-task-overlay" class="overlay d-none">
+    <div id="form-add-task">
+      <button id="closeFormModal" class="close-btn">×</button>
+      <h1>Add Task</h1>
+      <div id="formContainer"></div>
+    </div>
   </div>
-
 
 
   <script type="module" src="js/board.js"></script>
   <script type="module" src="js/topbar.js"></script>
-  <script type="module" src="js/task-overlay.js"></script>
+  <!-- <script type="module" src="js/task-overlay.js"></script> -->
   <script src="js/search-task.js"></script>
+  <!-- <script type="module" src="js/task-form.js"></script> -->
 </body>
 
 </html>
