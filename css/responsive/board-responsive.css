@@ -80,7 +80,19 @@
     .done-field {
         justify-content: space-between;
     }
+
+    #form-add-task {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #add-task-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
 }
+
 
 
 

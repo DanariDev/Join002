@@ -194,7 +194,7 @@ function updateProgressBar(card, newStatus) {
 };
 
 loadTasks();
-
+loadEventListeners()
 
 
 
@@ -254,7 +254,7 @@ async function loadTaskForm() {
 export async function openForm() {
   await loadTaskForm()
   document.getElementById('form-add-task').style.display = 'block';
-  document.getElementById('add-task-overlay').style.display = 'block';
+  document.getElementById('add-task-overlay').style.display = 'flex';
 }
 
 /**
@@ -270,7 +270,7 @@ function closeForm() {
     taskOverlay.classList.replace('d-flex', 'd-none');
   }
 
-  if (addTaskOverlay?.style.display === 'block') {
+  if (addTaskOverlay?.style.display === 'flex') {
     addTaskOverlay.style.display = 'none';
     document.getElementById('form-add-task').style.display = 'none';
   }

@@ -43,7 +43,8 @@ label,
 }
 
 input,
-select {
+select,
+textarea {
   height: 40px;
   width: 100%;
   padding: 8px;
@@ -51,6 +52,7 @@ select {
   border-radius: 10px;
   font-size: var(--fs-20);
   box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
 }
 
 .description-input {

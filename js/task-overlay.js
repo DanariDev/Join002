@@ -60,7 +60,7 @@ function taskPopupHtmlTemplate(task) {
   const formattedDate = task.dueDate.split('-').reverse().join('/');
   const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
   document.getElementById('popup-title').innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
-  document.getElementById('popup-description').innerHTML = `<p id="edit-description" class="description-input">${task.description}</p>`;
+  document.getElementById('popup-description').innerHTML = `<p id="edit-description">${task.description}</p>`;
   document.getElementById('popup-due-date').innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
   document.getElementById('popup-category').innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
   loadContactOptions(task.assignedTo || []);
@@ -102,7 +102,6 @@ export function renderPopup(task) {
   document.getElementById('delete-task-btn').onclick = () => deleteTask(task.id);
 
   document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
-  document.getElementById('edit-task-btn').textContent = 'Edit';
 };
 
 function getLabelColor() {
@@ -123,7 +122,7 @@ function closePopup() {
     taskOverlay.classList.replace('d-flex', 'd-none');
   }
 
-  if (addTaskOverlay?.style.display === 'block') {
+  if (addTaskOverlay?.style.display === 'flex') {
     addTaskOverlay.style.display = 'none';
     document.getElementById('form-add-task').style.display = 'none';
   }
@@ -145,7 +144,7 @@ function initOverlayCloseHandler() {
     }
 
     if (
-      addTaskOverlay?.style.display === 'block' &&
+      addTaskOverlay?.style.display === 'flex' &&
       !formContent?.contains(event.target) &&
       addTaskOverlay.contains(event.target)
     ) {

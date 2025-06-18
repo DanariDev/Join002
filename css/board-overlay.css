@@ -15,22 +15,31 @@
 /* Opened Task lightbox Content */
 .overlay-content {
     background-color: var(--clr-200);
-    border-radius: 16px;
-    padding: 30px;
-    max-width: 600px;
-    width: 90%;
+    border-radius: 25px;
+    padding: 2rem;
+    max-width: 800px;
     position: relative;
 }
 
 /* Close Button Task lightbox Content */
-#overlay-close {
+#overlay-close,
+.close-btn {
     position: absolute;
-    top: 15px;
-    right: 15px;
+    top: 16px;
+    right: 16px;
     background: none;
     border: none;
     font-size: 24px;
+    font-weight: bold;
     cursor: pointer;
+    color: var(--clr-700);
+}
+
+#overlay-close:hover,
+.close-btn:hover {
+    background-color: var(--clr-300);
+    color: red;
+    border-radius: 100%;
 }
 
 .overlay-section {
@@ -38,18 +47,29 @@
 }
 
 /* Save and Close button on opened Task */
+
+
+.overlay-actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
 .overlay-actions button {
-    background-color: var(--clr-700);
-    color: var(--clr-200);
-    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-200);
+    gap: 6px;
+    color: var(--clr-700);
+    padding: 1rem;
     border: none;
-    border-radius: 8px;
-    margin-right: 10px;
+    border-radius: 25px;
     cursor: pointer;
 }
 
 .overlay-actions button:hover {
-    background-color: var(--clr-300);
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
 }
 
 
@@ -101,31 +121,13 @@
     top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
-    width: auto;
     height: min-content;
+    width: 80%;
+    max-width: 1600px;
     padding: 2rem;
     border-radius: 25px;
-    background: white;
-    border: 1px solid #ccc;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    background: var(--clr-200);
     z-index: 1000;
-}
-
-.close-btn {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    font-weight: bold;
-    cursor: pointer;
-    color: #333;
-}
-
-.close-btn:hover {
-    background-color: var(--clr-300);
-    border-radius: 100%;
 }
 
 li {
