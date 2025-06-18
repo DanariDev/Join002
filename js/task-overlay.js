@@ -194,6 +194,8 @@ async function editTask(taskId) {
   const priority = document.getElementById('popup-priority').textContent;
   const priorityText = priority.replace('Priority:', '').trim();
 
+  const category = document.getElementById("category");
+
   document.getElementById('title').value = title;
   document.getElementById('description').value = description;
   document.getElementById('date').value = isoDate;
@@ -211,6 +213,20 @@ async function editTask(taskId) {
     default:
       break;
   }
+
+  category.value = document.getElementById('popup-category').children[0].innerHTML;
+
+  const subtaskList = document.querySelectorAll('.subtask-overlay-list')
+  Array.from(subtaskList).map(el => { document.getElementById("subtask-list").innerHTML += `<li>${el.textContent.trim()}</li>`});
+
+
+
+
+
+
+  
+
+
 
   const nameElements = document.querySelectorAll('.full-name');
   const selectedNames = Array.from(nameElements).map(el => el.textContent.trim());
