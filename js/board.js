@@ -99,7 +99,7 @@ function updateTaskCard(card, task) {
       initialsContainer.appendChild(initialsDiv);
     });
   };
-  
+
   const totalSubtasks = task.subtasks ? task.subtasks.length : 0;
   let doneSubtasks = 0;
   if (task.subtasks) {
@@ -230,19 +230,6 @@ function loadScript() {
 };
 
 
-function loadEventListeners() {
-  document.getElementById('form-add-task').addEventListener('click', function (event) {
-    const form = document.getElementById('formContainer');
-    if (!form.contains(event.target)) {
-      closeForm();
-    }
-  });
-
-  document.getElementById('closeFormModal').addEventListener('click', () => {
-    closeForm();
-  });
-
-}
 
 async function loadTaskForm() {
   const response = await fetch('add-task.html');
@@ -263,7 +250,7 @@ async function loadTaskForm() {
  * This function opens the Add-Tasks-Overlay to add new tasks
  * 
  * 
- */
+*/
 export async function openForm() {
   await loadTaskForm()
   document.getElementById('form-add-task').style.display = 'block';
@@ -274,19 +261,31 @@ export async function openForm() {
  * This function closes the add-tasks-overlay
  * 
  * 
- */
+*/
 function closeForm() {
-  document.getElementById('form-add-task').style.display = 'none';
-  document.getElementById('add-task-overlay').style.display = 'none';
+  const taskOverlay = document.getElementById('task-overlay');
+  const addTaskOverlay = document.getElementById('add-task-overlay');
 
-}
+  if (taskOverlay?.classList.contains('d-flex')) {
+    taskOverlay.classList.replace('d-flex', 'd-none');
+  }
+
+  if (addTaskOverlay?.style.display === 'block') {
+    addTaskOverlay.style.display = 'none';
+    document.getElementById('form-add-task').style.display = 'none';
+  }
+};
 
 
+function loadEventListeners() {
+  document.getElementById('closeFormModal').addEventListener('click', () => {
+    closeForm();
+  });
 
+  document.getElementById('add-task-button').addEventListener('click', openForm);
 
+  document.querySelectorAll('.add-task-btn').forEach(btn => {
+    btn.addEventListener('click', openForm);
+  });
+};
 
-document.getElementById('add-task-button').addEventListener('click', openForm);
-
-document.querySelectorAll('.add-task-btn').forEach(btn => {
-  btn.addEventListener('click', openForm);
-});

@@ -9,6 +9,7 @@ import {
 
 import { openForm } from "./board.js";
 
+initOverlayCloseHandler();
 
 function getColorForName(name) {
   const colors = [
@@ -20,17 +21,6 @@ function getColorForName(name) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
   };
   return colors[Math.abs(hash) % colors.length];
-};
-
-
-
-
-
-
-
-
-function $(s) {
-  return document.querySelector(s);
 };
 
 
@@ -61,20 +51,18 @@ async function loadContactOptions(assignedTo) {
     container.appendChild(item);
   });
 
-  const wrapper = $('#popup-assigned');
+  const wrapper = document.getElementById('popup-assigned');
   wrapper.innerHTML = `<p><span class="overlay-key">Assigned to:</span></p>`;
   wrapper.appendChild(container);
 };
 
 function taskPopupHtmlTemplate(task) {
-
-  const selectedCategory = task.category;
   const formattedDate = task.dueDate.split('-').reverse().join('/');
   const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
   document.getElementById('popup-title').innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
   document.getElementById('popup-description').innerHTML = `<p id="edit-description" class="description-input">${task.description}</p>`;
   document.getElementById('popup-due-date').innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
-  document.getElementById('popup-category').innerHTML = `<p class="task-label-overlay">${selectedCategory}</p>`;
+  document.getElementById('popup-category').innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
   loadContactOptions(task.assignedTo || []);
   document.getElementById('popup-priority').innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
 
@@ -125,13 +113,46 @@ function getLabelColor() {
   } else if (text === 'User Story') {
     label.classList.add('blue-background');
   };
-}
-
-function closePopup() {
-  const overlay = document.getElementById('task-overlay');
-  overlay.classList.replace('d-flex', 'd-none');
 };
 
+function closePopup() {
+  const taskOverlay = document.getElementById('task-overlay');
+  const addTaskOverlay = document.getElementById('add-task-overlay');
+
+  if (taskOverlay?.classList.contains('d-flex')) {
+    taskOverlay.classList.replace('d-flex', 'd-none');
+  }
+
+  if (addTaskOverlay?.style.display === 'block') {
+    addTaskOverlay.style.display = 'none';
+    document.getElementById('form-add-task').style.display = 'none';
+  }
+};
+
+function initOverlayCloseHandler() {
+  document.addEventListener('click', function (event) {
+    const taskOverlay = document.getElementById('task-overlay');
+    const addTaskOverlay = document.getElementById('add-task-overlay');
+    const taskContent = document.querySelector('#task-overlay .overlay-content');
+    const formContent = document.querySelector('#add-task-overlay #form-add-task');
+
+    if (
+      taskOverlay?.classList.contains('d-flex') &&
+      !taskContent?.contains(event.target) &&
+      taskOverlay.contains(event.target)
+    ) {
+      closePopup();
+    }
+
+    if (
+      addTaskOverlay?.style.display === 'block' &&
+      !formContent?.contains(event.target) &&
+      addTaskOverlay.contains(event.target)
+    ) {
+      closePopup();
+    }
+  });
+};
 
 function toggleSubtask(taskId, index, checked) {
   const taskRef = ref(db, `tasks/${taskId}/subtasks/${index}`);
@@ -160,61 +181,60 @@ function deleteTask(taskId) {
 
 
 async function editTask(taskId) {
-    document.getElementById('task-overlay').classList.add('d-none');
-    await openForm();
-    document.getElementById('task-overlay').classList.remove('d-flex');
+  document.getElementById('task-overlay').classList.replace('d-none', 'd-flex');
+  await openForm();
 
-    const title = document.getElementById('edit-title').innerHTML.trim();
-    const description = document.getElementById('edit-description').innerHTML.trim();
+  const title = document.getElementById('edit-title').innerHTML.trim();
+  const description = document.getElementById('edit-description').innerHTML.trim();
 
-    const dueDate = document.getElementById('edit-due-date').textContent;
-    const dateText = dueDate.replace('Due date:', '').trim();
-    const [day, month, year] = dateText.split('/');
-    const isoDate = `${year}-${month}-${day}`;
+  const dueDate = document.getElementById('edit-due-date').textContent;
+  const dateText = dueDate.replace('Due date:', '').trim();
+  const [day, month, year] = dateText.split('/');
+  const isoDate = `${year}-${month}-${day}`;
 
-    const priority = document.getElementById('popup-priority').textContent;
-    const priorityText = priority.replace('Priority:', '').trim();
+  const priority = document.getElementById('popup-priority').textContent;
+  const priorityText = priority.replace('Priority:', '').trim();
 
-    document.getElementById('title').value = title;
-    document.getElementById('description').value = description;
-    document.getElementById('date').value = isoDate;
+  document.getElementById('title').value = title;
+  document.getElementById('description').value = description;
+  document.getElementById('date').value = isoDate;
 
-    switch (priorityText) {
-        case 'Urgent':
-            document.getElementById('urgent-btn').classList.add('urgent-btn-active');
-            break;
-        case 'Medium':
-            document.getElementById('medium-btn').classList.add('medium-btn-active');
-            break;
-        case 'Low':
-            document.getElementById('low-btn').classList.add('low-btn-active');
-            break;
-        default:
-            break;
-    }
+  switch (priorityText) {
+    case 'Urgent':
+      document.getElementById('urgent-btn').classList.add('urgent-btn-active');
+      break;
+    case 'Medium':
+      document.getElementById('medium-btn').classList.add('medium-btn-active');
+      break;
+    case 'Low':
+      document.getElementById('low-btn').classList.add('low-btn-active');
+      break;
+    default:
+      break;
+  }
 
-    const nameElements = document.querySelectorAll('.full-name');
-    const selectedNames = Array.from(nameElements).map(el => el.textContent.trim());
+  const nameElements = document.querySelectorAll('.full-name');
+  const selectedNames = Array.from(nameElements).map(el => el.textContent.trim());
 
-    document.getElementById('contacts-selected').innerHTML = '';
-    for (let index = 0; index < selectedNames.length; index++) {
-        document.getElementById('contacts-selected').innerHTML += `
+  document.getElementById('contacts-selected').innerHTML = '';
+  for (let index = 0; index < selectedNames.length; index++) {
+    document.getElementById('contacts-selected').innerHTML += `
       <div class="contact-selected">${selectedNames[index]}</div>`;
-    }
+  }
 
-    await loadContactOptions();
+  await loadContactOptions();
 
-    const checkboxes = document.querySelectorAll('input[type="checkbox"][data-name]');
-    checkboxes.forEach(checkbox => {
-        const contactName = checkbox.dataset.name.trim();
-        console.log(contactName);
-        checkbox.checked = selectedNames.includes(contactName);
-    });
+  const checkboxes = document.querySelectorAll('input[type="checkbox"][data-name]');
+  checkboxes.forEach(checkbox => {
+    const contactName = checkbox.dataset.name.trim();
+    console.log(contactName);
+    checkbox.checked = selectedNames.includes(contactName);
+  });
 
-    console.log("TITLE:", title,
-        "DESC:", description,
-        "DATE:", dateText,
-        "PRIO:", priorityText,
-        "ISO.DATE:", isoDate,
-        "SELECTED.NAMES:", selectedNames);
+  console.log("TITLE:", title,
+    "DESC:", description,
+    "DATE:", dateText,
+    "PRIO:", priorityText,
+    "ISO.DATE:", isoDate,
+    "SELECTED.NAMES:", selectedNames);
 };
