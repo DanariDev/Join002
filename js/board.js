@@ -3,7 +3,7 @@ import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0
 import { renderPopup } from "./task-overlay.js";
 
 /**
- * This function creates a Dom element
+ * This function hands over a Dom element
  * 
  * @param {Object} s -Information of the Dom element
  */
