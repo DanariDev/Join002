@@ -1,3 +1,9 @@
+/**
+ * This function creates a template for the alphabet and group
+ * 
+ * @param {string} letter -hands over the letters of the alphabet
+ * @returns -return the HTML template for the alphabet and the group 
+ */
 function createAlphabetAndGroupTemplate(letter) {
     return `
     <div class="list-alphabet">
@@ -7,7 +13,17 @@ function createAlphabetAndGroupTemplate(letter) {
     <div class="group-list" id="list-group-${letter}"></div>`;
 };
 
-
+/**
+ * This function creates a template contact information
+ * 
+ * @param {string} name -hands over the name of the contact
+ * @param {string} letter -hands over the first letter of contact
+ * @param {number} index -hands over the index of the contact
+ * @param {string} bgColor -hands over the background color of the contact
+ * @param {string} email -hands over the email of the contact
+ * @param {string} initials -hands over the initials of the contact
+ * @returns -return the HTML template for the contact information
+ */
 function informationTemplate(name, letter, index, bgColor, email, initials) {
     return `
     <div class="list-contact-wrapper"
@@ -22,7 +38,11 @@ function informationTemplate(name, letter, index, bgColor, email, initials) {
     </div>`
 };
 
-
+/**
+ * This function creates a template for the left site of the contact-adding-overlay
+ * 
+ * @returns -return the HTML template for the left site of the contact-adding-overlay
+ */
 function leftAddingTemplate() {
     return `<div class="lightbox-left">
     <img class="join-logo-left" src="../assets/img/logo_dark.png" alt="Join Logo">
@@ -34,7 +54,11 @@ function leftAddingTemplate() {
 </div>`
 };
 
-
+/**
+ * This function creates a template for the right site of the contact-adding-overlay
+ * 
+ * @returns return the HTML template for the right site of the contact-adding-overlay
+ */
 function rightAddingTemplate() {
     return `<div class="lightbox-right">
     <img class="current-icon" src="../assets/img/person.png" alt="Person Icon">
@@ -50,7 +74,11 @@ function rightAddingTemplate() {
 </div>`
 };
 
-
+/**
+ * This function creates a template for the left site of the contact-editing-overlay
+ * 
+ * @returns -return the HTML template for the left site of the contact-editing-overlay
+ */
 function leftEditingTemplate() {
     return `<div class="lightbox-left">
     <img class="join-logo-left" src="../assets/img/logo_dark.png" alt="Join Logo">
@@ -61,7 +89,11 @@ function leftEditingTemplate() {
 </div>`
 };
 
-
+/**
+ * This function creates a template for the right site of the contact-editing-overlay
+ * 
+ * @returns return the HTML template for the right site of the contact-editing-overlay
+ */
 function rightEditingTemplate() {
     return `<div class="lightbox-right">
     <div id="edit-icon"></div>
