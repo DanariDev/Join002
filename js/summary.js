@@ -2,25 +2,33 @@ import { db, auth } from "./firebase-config.js";
 import { ref, onValue, get, child } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 
-
+/**
+ * Shorthand function to query a single DOM element
+ * @param {string} s - CSS selector for the element
+ * @returns {Element|null} - The first element matching the selector
+ */
 function $(s) {
     return document.querySelector(s);
 };
 
-
+/**
+ * Handles authentication state changes and initializes summary data
+ */
 function handleAuthState() {
     onAuthStateChanged(auth, function (user) {
         if (!user) {
             return;
         }
         let name = localStorage.getItem('userName');
-        showGreetingTime()
+        showGreetingTime();
         showGreetingUser(name);
         loadTasksForSummary();
     });
 };
 
-
+/**
+ * Displays a time-based greeting (morning, afternoon, or evening)
+ */
 function showGreetingTime() {
     const greetingTime = document.getElementById('summary-greeting-time');
     const currentHour = new Date().getHours();
@@ -34,13 +42,18 @@ function showGreetingTime() {
     }
 };
 
-
+/**
+ * Displays the user's name in the greeting
+ * @param {string} name - The user's name
+ */
 function showGreetingUser(name) {
     let element = document.getElementById('summary-greeting-name');
     if (element) element.textContent = name;
 };
 
-
+/**
+ * Loads tasks from Firebase for the summary view
+ */
 function loadTasksForSummary() {
     onValue(ref(db, "tasks"), function (snapshot) {
         let tasksObj = snapshot.val();
@@ -53,6 +66,10 @@ function loadTasksForSummary() {
     }, { onlyOnce: true });
 };
 
+/**
+ * Updates the summary with task counts and deadline
+ * @param {Array<Object>} tasks - Array of task objects
+ */
 function updateSummary(tasks) {
     set("#todo .flex-column h2", count(tasks, "status", "todo"));
     set("#done .flex-column h2", count(tasks, "status", "done"));
@@ -63,11 +80,23 @@ function updateSummary(tasks) {
     showDeadline(tasks);
 }
 
+/**
+ * Sets the text content of an element selected by CSS selector
+ * @param {string} sel - CSS selector for the element
+ * @param {string|number} val - Value to set as text content
+ */
 function set(sel, val) {
     let el = $(sel);
     if (el) el.textContent = val;
 }
 
+/**
+ * Counts tasks matching a specific key-value pair
+ * @param {Array<Object>} arr - Array of task objects
+ * @param {string} key - Property to check (e.g., 'status', 'priority')
+ * @param {string} val - Value to match
+ * @returns {number} - Number of tasks matching the criteria
+ */
 function count(arr, key, val) {
     let count = 0;
     for (let i = 0; i < arr.length; i++) {
@@ -78,6 +107,10 @@ function count(arr, key, val) {
     return count;
 }
 
+/**
+ * Displays the earliest future deadline from tasks
+ * @param {Array<Object>} tasks - Array of task objects
+ */
 function showDeadline(tasks) {
     let dates = [];
     for (let i = 0; i < tasks.length; i++) {
@@ -91,6 +124,9 @@ function showDeadline(tasks) {
     $("#deadline-date").textContent = date.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
 }
 
+/**
+ * Adds hover effects to todo and done section images
+ */
 function summaryImgHover() {
     const todo = document.getElementById('todo');
     const done = document.getElementById('done');
@@ -110,5 +146,8 @@ function summaryImgHover() {
     });
 }
 
+/**
+ * Initializes authentication state handling and hover effects
+ */
 handleAuthState();
-summaryImgHover()
+summaryImgHover();
