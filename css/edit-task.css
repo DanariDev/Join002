@@ -1,0 +1,316 @@
+@import url("global.css");
+
+#edit-task-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Content Box */
+.edit-task-main {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 4rem;
+    background-color: var(--clr-200);
+    max-width: 800px;
+    height: min-content;
+    border-radius: 25px;
+}
+
+
+/* Formular */
+#edit-task-form {
+    display: flex;
+    gap: 32px;
+}
+
+.edit-task-form-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+}
+
+
+label,
+::placeholder {
+    font-size: var(--fs-20);
+}
+
+input,
+select,
+textarea {
+    height: 40px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid var(--clr-300);
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+.description-input {
+    height: 100px;
+    resize: none;
+}
+
+
+.grey-bar {
+    width: 1px;
+    background-color: var(--clr-300);
+}
+
+#editing-priority-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#editing-urgent-btn,
+#editing-medium-btn,
+#editing-low-btn {
+    flex: 1;
+    height: 35px;
+    border: none;
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#editing-urgent-btn:hover,
+.urgent-btn-active {
+    background-color: #c93939;
+    color: var(--clr-200);
+}
+
+#editing-medium-btn:hover,
+.medium-btn-active {
+    background-color: #ffaa00;
+    color: var(--clr-200);
+}
+
+#editing-low-btn:hover,
+.low-btn-active {
+    background-color: #5dc43e;
+    color: var(--clr-200);
+}
+
+.subtask-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.subtask-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: var(--fs-20);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.subtask-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+li {
+    font-size: var(--fs-20);
+    margin: 6px 0 6px 0;
+}
+
+#editing-subtask-list li {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* Selected Contacts on Form */
+.form-selected-contact {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 20px;
+}
+
+.form-selected-contact-active,
+.form-selected-contact:hover {
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    cursor: pointer;
+}
+
+.overlay-content {
+    min-width: 400px;
+}
+
+
+.form-selected-contact input {
+    height: 30px;
+    width: 20px;
+}
+
+#editing-contacts-selected {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 40px;
+    gap: 6px;
+    padding: 6px;
+    background-color: var(--clr-200);
+    border: none;
+    cursor: pointer;
+    font-size: var(--fs-20);
+}
+
+.contact-selected {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background-color: var(--clr-300);
+    border-radius: 20px;
+    font-size: var(--fs-20);
+}
+
+.contact-selected span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dropdown-arrow {
+    padding-right: 4px;
+    margin-left: auto;
+    font-size: var(--fs-16);
+    color: var(--clr-700);
+}
+
+.contacts-dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 40px;
+    padding: 6px;
+    border: 1px solid var(--clr-300);
+    border-radius: 6px;
+    background-color: var(--clr-200);
+    font-size: 14px;
+}
+
+.contacts-dropdown-inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    border: none;
+}
+
+.contacts-dropdown-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 150px;
+    background-color: var(--clr-200);
+    border: 1px solid var(--clr-300);
+    border-top: none;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.contacts-dropdown-list.show {
+    display: block;
+}
+
+.contacts-dropdown-list div {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.contacts-dropdown-list div:hover {
+    background-color: var(--clr-200);
+}
+
+option {
+    font-size: var(--fs-16);
+    overflow: hidden;
+}
+
+.bottom-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.edit-task-cancel-and-save-btn {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+    gap: 10px;
+    padding: 1rem;
+}
+
+#editing-cancel-btn,
+.btn-edit-save {
+    width: 160px;
+    padding: 0.5rem;
+    border: 2px solid var(--clr-700);
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    font-weight: 600;
+    color: var(--clr-900);
+    background-color: var(--clr-200);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+#editing-cancel-btn,
+.btn-edit-save:hover {
+    color: #ffffff;
+    background-color: var(--clr-700);
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}
+
+.required-explain {
+    font-size: var(--fs-20);
+}
+
+.required-explain:before {
+    content: " *";
+    color: red;
+}
+
+.required-explain-responsive {
+    display: none;
+    font-size: var(--fs-20);
+}
+
+.required-explain-responsive:before {
+    content: " *";
+    color: red;
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
