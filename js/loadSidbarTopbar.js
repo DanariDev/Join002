@@ -22,7 +22,7 @@ function generateInitialsTopBarMenu(){
  * 
  */
 function NoOrMoreSpaces(){
-    if(document.getElementById('add-nameID').value.split(' ').length > 1) {
+    if(localStorage.getItem('userName').split(' ').length > 1) {
         document.getElementsByClassName('topbar-user')[0].innerText = localStorage.getItem('userName').slice(0,1) + localStorage.getItem('userName').split(' ')[1].slice(0,1);
     }
     else{
