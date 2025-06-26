@@ -20,9 +20,7 @@ function handleAuthState() {
             return;
         }
         let name = localStorage.getItem('userName');
-        showGreetingTime();
         showGreetingUser(name);
-        loadTasksForSummary();
     });
 };
 
@@ -151,3 +149,5 @@ function summaryImgHover() {
  */
 handleAuthState();
 summaryImgHover();
+showGreetingTime();
+loadTasksForSummary();
