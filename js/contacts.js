@@ -373,6 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('responsive-small-add').addEventListener('click', openLightboxAdd);
     document.getElementById('responsive-small-edit').addEventListener('click', openEditResponsive);
     document.getElementById('current-edit').addEventListener('click', openLightboxEdit);
+    document.getElementById('current-edit-responsive').addEventListener('click', openLightboxEdit);
     document.getElementById('lightbox-overlay').addEventListener('click', closeLightbox);
     document.getElementById('back-icon').addEventListener('click', closeShownContact);
     document.getElementById('right-section').addEventListener('click', closeEditResponsive);
@@ -383,5 +384,16 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('No contact found!');
         }
     });
+
+    document.getElementById('current-delete-responsive').addEventListener('click', () => {
+        if (selectedContact && selectedContact.id) {
+            deleteContact(selectedContact.id);
+        } else {
+            alert('No contact found!');
+        }
+        document.getElementById('current-btns-responsive').classList.replace('d-flex', 'd-none');
+        document.getElementById('current-btns-responsive').classList.remove('show');
+    });
+    
     initContactsList();
 });
