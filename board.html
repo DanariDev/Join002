@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="css/topbar.css" />
   <link rel="stylesheet" href="css/board.css" />
   <link rel="stylesheet" href="css/board-overlay.css">
+  <link rel="stylesheet" href="css/edit-task.css" />
   <link rel="stylesheet" href="css/responsive/board-responsive.css">
   <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
   <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
@@ -114,12 +115,12 @@
     <div class="overlay-content">
       <button id="overlay-close">×</button>
       <div class="overlay-section">
-        <p id="popup-category"></p>
-        <h2 id="popup-title"></h2>
-        <p id="popup-description"></p>
-        <p id="popup-due-date"></p>
-        <p id="popup-priority"></p>
-        <p id="popup-assigned"></p>
+        <div id="popup-category"></div>
+        <div id="popup-title"></div>
+        <div id="popup-description"></div>
+        <div id="popup-due-date"></div>
+        <div id="popup-priority"></div>
+        <div id="popup-assigned"></div>
 
       </div>
       <div class="overlay-section">
@@ -141,12 +142,86 @@
     </div>
   </div>
 
+  <div id="edit-task-overlay" class="overlay d-none">
+
+
+    <main class="edit-task-main">
+
+      <h1>Edit Task</h1>
+
+      <form id="edit-task-form">
+        <div class="edit-task-form-content">
+          <label class="required" for="title">Title</label>
+          <input class="title-input" type="text" id="editing-title" placeholder="Enter a title" required />
+
+          <label for="description">Description</label>
+          <textarea rows="4" cols="50" class="description-input" id="editing-description"
+            placeholder="Enter a description"></textarea>
+
+          <label class="required" for="date">Due date</label>
+          <input class="date-input" type="date" id="editing-date" required />
+        </div>
+
+        <div class="grey-bar"></div>
+
+        <div class="edit-task-form-content">
+          <label>Priority</label>
+          <div id="editing-priority-buttons">
+            <button type="button" id="editing-urgent-btn" class="all-priority-btns">Urgent
+              <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon" />
+            </button>
+            <button type="button" id="editing-medium-btn" class="all-priority-btns">Medium
+              <img src="assets/img/medium-btn-icon.png" alt="medium-icon" />
+            </button>
+            <button type="button" id="editing-low-btn" class="all-priority-btns">Low
+              <img src="assets/img/low-btn-icon.png" alt="low-icon" />
+            </button>
+
+          </div>
+
+          <label class="required">Assigned to</label>
+          <div class="contacts-dropdown" id="editing-contacts-dropdown">
+            <div class="contacts-dropdown-inner" id="editing-contacts-selected">Select contact(s)</div>
+            <div class="contacts-dropdown-list" id="editing-contacts-dropdown-list"></div>
+          </div>
+
+          <label class="required" for="category">Category</label>
+          <select id="editing-category" required>
+            <option value="" disabled selected>Select task category</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="User Story">User Story</option>
+          </select>
+
+          <label for="subtask">Subtasks</label>
+          <div class="subtask-wrapper">
+            <input type="text" id="editing-subtask" placeholder="Enter subtask" autocomplete="off" />
+            <button type="button" class="subtask-button">+</button>
+          </div>
+
+          <ul id="editing-subtask-list"></ul>
+
+          <span class="required-explain-responsive">This field is required</span>
+
+          <div class="edit-task-cancel-and-save-btn">
+            <button type="reset" id="editing-cancel-btn">Cancel &#10006;</button>
+            <button id="editing-save-btn" type="submit" class="btn-edit-save disabled" disabled>
+              Save Edit &#10004;
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <span class="required-explain">This field is required</span>
+    </main>
+  </div>
+
 
   <script type="module" src="js/board.js"></script>
   <script type="module" src="js/topbar.js"></script>
-  <script type="module" src="js/task-overlay.js"></script>
   <script src="js/search-task.js"></script>
+  <!-- <script type="module" src="js/task-overlay.js"></script> -->
   <!-- <script type="module" src="js/task-form.js"></script> -->
+  <script type="module" src="js/new-task-overlay.js"></script>
 </body>
 
 </html>
