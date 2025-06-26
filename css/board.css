@@ -272,3 +272,8 @@
   font-size: 12px;
   color: var(--clr-400);
 }
+
+.full-name {
+  font-size: var(--fs-16);
+  font-weight: 500;
+}
