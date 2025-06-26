@@ -86,7 +86,7 @@ function updateTaskCard(card, task) {
   card.querySelector('.task-title').textContent = task.title;
   card.querySelector('.task-desc').textContent = task.description;
   const initialsContainer = card.querySelector('.assigned-initials');
-  initialsContainer.classList.add('display-flex');
+  initialsContainer.classList.add('d-flex');
   if (Array.isArray(task.assignedTo.sort((selected, compare) => selected.localeCompare(compare)))) {
     task.assignedTo.forEach(name => {
       const initials = name

@@ -107,7 +107,10 @@
 }
 
 .assigned-initials {
-    justify-content: start;
+    width: auto;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: flex-start;
 }
 
 .overlay-key {
