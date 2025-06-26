@@ -25,7 +25,7 @@
 }
 
 /* Media Querry Small Displays */
-@media (max-width: 954px) {
+@media (max-width: 970px) {
 
     .contact-details-haeder {
         flex-wrap: wrap;
