@@ -1,9 +1,10 @@
 import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { renderPopup } from "./task-overlay.js";
+// import { renderPopup } from "./task-overlay.js";
+import { renderPopup } from "./new-task-overlay.js";
 
 /**
- * This function hands over a Dom element
+ * This function creates a Dom element
  * 
  * @param {Object} s -Information of the Dom element
  */
@@ -226,6 +227,7 @@ function loadScript() {
   const addTaskScript = document.createElement('script');
   addTaskScript.type = 'module';
   addTaskScript.src = 'js/task-form.js';
+  addTaskScript.id = 'taskFormScript';
   document.head.appendChild(addTaskScript);
 };
 
