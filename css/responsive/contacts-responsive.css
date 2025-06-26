@@ -213,3 +213,9 @@
 @media (max-width: 490px) {}
 
 @media (max-width: 320px) {}
+
+@media (min-width: 801px) and (max-width: 806px) {
+    h1{
+        font-size: 57.2px;
+    }
+}
