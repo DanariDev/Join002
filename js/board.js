@@ -291,3 +291,34 @@ function loadEventListeners() {
   });
 };
 
+/**
+ * This function prevents a link (a-tag) can be opened
+ * 
+ * @param {object} event -PointerEvent gives back
+ */
+function handleClick(event) {
+  event.preventDefault();
+}
+
+/**
+ * This function activates or deactivates the HTML-A-Tag for Add-Task. 
+ * With at least 801px width, the A-tag is deactivated and if it is underneath, it is activated
+ * 
+ * @param {object} event -MediaQueryList gives back
+ */
+function handleMediaQueryChange(event) { 
+  const responsiveLinkElements = document.querySelectorAll("#responsive-link-add-task"); 
+
+  responsiveLinkElements.forEach(element => {
+    if (event.matches) {
+      element.addEventListener("click", handleClick);
+    } else {
+      element.removeEventListener("click", handleClick);
+    }
+  });
+
+  window.matchMedia("(min-width: 801px)").addEventListener("change", handleMediaQueryChange);
+}
+
+handleMediaQueryChange(window.matchMedia("(min-width: 801px)"));
+
