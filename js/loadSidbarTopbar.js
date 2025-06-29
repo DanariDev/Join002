@@ -4,7 +4,7 @@
  * 
  */
 function initSidbarTopbar(){
-    generateInitialsTopBarMenu()
+    generateInitialsTopBarMenu();
 }
 
 /**
@@ -57,3 +57,8 @@ function closeTopbarMenu(){
         menu.classList.add('d-none');
     }
 }
+
+window.addEventListener("load", function() {
+    initSidbarTopbar();
+    document.body.addEventListener("click", closeTopbarMenu);
+});
