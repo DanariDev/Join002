@@ -37,7 +37,7 @@ function NoOrMoreSpaces(){
 function openMenu(event) {
   event.stopPropagation(); // Prevent click from bubbling up to body
   const menu = document.getElementById('menuID');
-  if (menu) menu.classList.toggle('d-none'); // Show/hide the menu
+  menu.classList.toggle('d-none'); // Show/hide the menu
 }
 
 /**
