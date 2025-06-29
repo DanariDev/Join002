@@ -8,3 +8,8 @@ localStorage.setItem('unregistered', 'false')
 function switchLinks(){
     localStorage.setItem('unregistered', 'true');
 }
+
+window.addEventListener("load", function() {
+    document.getElementById('privacyPolicyID').addEventListener("click", switchLinks);
+    document.getElementById('legalID').addEventListener("click", switchLinks);
+});

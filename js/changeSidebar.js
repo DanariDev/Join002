@@ -32,3 +32,7 @@ function initDomElements(){
 
     return {navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter}
 }
+
+window.addEventListener("load", function() {
+    init();
+});
