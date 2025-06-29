@@ -83,7 +83,7 @@
     width: 42px;
     flex-shrink: 0;
     border-radius: 100%;
-    font-size: var(--fs-12);
+    font-size: var(--fs-16);
     color: var(--clr-200);
     border: 2px solid var(--clr-200);
 }

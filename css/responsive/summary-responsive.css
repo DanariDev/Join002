@@ -44,7 +44,25 @@
     }
 
     #summary-greeting-wrapper {
-        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: white;
+        align-items: center;
+        z-index: 999;
+        animation: fadeOut .75s ease forwards 1s;
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+            display: none;
+        }
     }
 
     .summary-left {
@@ -99,6 +117,13 @@
 
     .summary-box img {
         width: 55px;
+    }
+}
+
+@media (min-width: 356px) and (max-width: 601px) {
+    .summary-main {
+        margin: 0;
+        padding: 2rem;
     }
 }
 
