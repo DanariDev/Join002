@@ -1,7 +1,6 @@
 import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { renderPopup } from "./task-overlay.js";
-import { loadContacts, init } from "./add-task.js"; // Importiere die Funktionen direkt
 
 /**
  * This function creates a Dom element
@@ -193,8 +192,12 @@ loadEventListeners();
  * Loads the add task script
  */
 function loadScript() {
-  // Nicht mehr benötigt, da direkt importiert
-}
+  const addTaskScript = document.createElement('script');
+  addTaskScript.type = 'module';
+  addTaskScript.src = 'js/add-task.js';
+  addTaskScript.id = 'taskFormScript';
+  document.head.appendChild(addTaskScript);
+};
 
 /**
  * Loads the task form HTML
@@ -207,15 +210,9 @@ async function loadTaskForm() {
   const form = doc.getElementById('add-task-form');
   document.getElementById('formContainer').innerHTML = '';
   document.getElementById('formContainer').appendChild(form);
+  loadScript();
+  loadEventListeners();
 };
-
-/**
- * Initializes the Add Task form with contacts
- */
-function initializeAddTaskForm() {
-  loadContacts(); // Lädt die Kontakte
-  init(); // Initialisiert das Formular
-}
 
 /**
  * Opens the Add-Tasks-Overlay
@@ -224,7 +221,6 @@ export async function openForm() {
   await loadTaskForm();
   document.getElementById('form-add-task').style.display = 'block';
   document.getElementById('add-task-overlay').style.display = 'flex';
-  initializeAddTaskForm(); // Initialisiert das Formular nach dem Laden
 };
 
 /**

@@ -7,16 +7,16 @@ import {
   get,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-export let subtasks = [];
-export let contacts = [];
-export let assignedTo = [];
+let subtasks = [];
+let contacts = [];
+let assignedTo = [];
 
 /**
  * Retrieves the trimmed value of an element by CSS selector
  * @param {string} selector - CSS selector for the input element
  * @returns {string} - Trimmed value of the element or empty string if not found
  */
-export function getValue(selector) {
+function getValue(selector) {
   const element = document.querySelector(selector);
   return element ? element.value.trim() : "";
 }
@@ -26,7 +26,7 @@ export function getValue(selector) {
  * @param {string} name - The name to generate a color for
  * @returns {string} - A hex color code
  */
-export function getColorForName(name) {
+function getColorForName(name) {
   const colors = [
     "#FF5733",
     "#33B5FF",
@@ -50,17 +50,31 @@ export function getColorForName(name) {
  * Determines the selected priority of the task
  * @returns {string} - Priority level ('urgent', 'medium', or 'low')
  */
-export function getPriority() {
-  if (document.getElementById("urgent-btn").classList.contains("urgent-btn-active")) return "urgent";
-  if (document.getElementById("medium-btn").classList.contains("medium-btn-active")) return "medium";
-  if (document.getElementById("low-btn").classList.contains("low-btn-active")) return "low";
+function getPriority() {
+  if (
+    document
+      .getElementById("urgent-btn")
+      .classList.contains("urgent-btn-active")
+  ) {
+    return "urgent";
+  }
+  if (
+    document
+      .getElementById("medium-btn")
+      .classList.contains("medium-btn-active")
+  ) {
+    return "medium";
+  }
+  if (document.getElementById("low-btn").classList.contains("low-btn-active")) {
+    return "low";
+  }
   return "medium";
 }
 
 /**
  * Renders the list of subtasks in the UI
  */
-export function renderSubtasks() {
+function renderSubtasks() {
   const list = document.getElementById("subtask-list");
   list.innerHTML = "";
   for (let i = 0; i < subtasks.length; i++) {
@@ -73,7 +87,7 @@ export function renderSubtasks() {
 /**
  * Adds a new subtask from the input field
  */
-export function addNewSubtask() {
+function addNewSubtask() {
   const input = document.getElementById("subtask");
   const text = input.value.trim();
   if (text) {
@@ -89,7 +103,10 @@ export function addNewSubtask() {
  * @returns {HTMLElement} - Dropdown item element
  */
 function createDropdownItem(contact) {
-  const initials = contact.name.split(" ").map(p => p[0]?.toUpperCase()).join("");
+  const initials = contact.name
+    .split(" ")
+    .map((p) => p[0]?.toUpperCase())
+    .join("");
   const color = getColorForName(contact.name);
   const item = document.createElement("div");
   item.innerHTML = `
@@ -104,14 +121,24 @@ function createDropdownItem(contact) {
 /**
  * Populates the contacts dropdown with sorted contacts
  */
-export function populateContactsDropdown() {
+function populateContactsDropdown() {
   const list = document.getElementById("contacts-dropdown-list");
   list.innerHTML = "";
-  contacts.sort((a, b) => a.name.localeCompare(b.name)).forEach(c => list.appendChild(createDropdownItem(c)));
-  list.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+  contacts
+    .sort((a, b) => a.name.localeCompare(b.name))
+    .forEach((c) => {
+      list.appendChild(createDropdownItem(c));
+    });
+  list.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
-      const { value: email, dataset: { name }, checked } = checkbox;
-      assignedTo = checked ? [...assignedTo, { email, name }] : assignedTo.filter(c => c.email !== email);
+      const {
+        value: email,
+        dataset: { name },
+        checked,
+      } = checkbox;
+      assignedTo = checked
+        ? [...assignedTo, { email, name }]
+        : assignedTo.filter((c) => c.email !== email);
       updateAssignedToUI();
       updateCreateTaskBtn();
     });
@@ -121,14 +148,15 @@ export function populateContactsDropdown() {
 /**
  * Updates the UI to reflect selected contacts
  */
-export function updateAssignedToUI() {
+function updateAssignedToUI() {
   const selectedDiv = document.getElementById("contacts-selected");
   if (assignedTo.length === 0) {
     selectedDiv.textContent = "Select contact(s)";
     return;
   }
+
   selectedDiv.innerHTML = "";
-  assignedTo.forEach(contact => {
+  assignedTo.forEach((contact) => {
     const selectedContact = document.createElement("div");
     selectedContact.classList.add("contact-selected");
     selectedContact.textContent = contact.name;
@@ -137,10 +165,11 @@ export function updateAssignedToUI() {
 }
 
 /**
- * Loads contacts from Firebase and populates the dropdown (globale Funktion)
+ * Loads contacts from Firebase and populates the dropdown
  */
-export function loadContacts() {
-  return get(ref(db, "contacts")).then(snap => {
+function loadContacts() {
+  const snapshot = get(ref(db, "contacts"));
+  snapshot.then(function (snap) {
     const data = snap.val();
     contacts = data ? Object.values(data) : [];
     populateContactsDropdown();
@@ -151,14 +180,14 @@ export function loadContacts() {
  * Creates a new task and submits it to Firebase
  * @param {Event} event - Form submission event
  */
-export function createTask(event) {
+function createTask(event) {
   event.preventDefault();
   const task = {
     title: getValue("#title"),
     description: getValue("#description"),
     dueDate: getValue("#date"),
     category: getValue("#category"),
-    assignedTo: assignedTo.map(c => c.name),
+    assignedTo: assignedTo.map((c) => c.name),
     priority: getPriority(),
     subtasks: subtasks,
     status: "todo",
@@ -170,14 +199,15 @@ export function createTask(event) {
  * Validates task data and saves it to Firebase
  * @param {Object} task - Task object to validate and save
  */
-export function validateAndSaveTask(task) {
+function validateAndSaveTask(task) {
   if (!task.title || !task.dueDate || !task.category || !task.assignedTo) {
     alert("Bitte fülle alle Pflichtfelder aus!");
     return;
   }
-  push(ref(db, "tasks"), task).then(() => {
+  push(ref(db, "tasks"), task).then(function () {
     alert("Aufgabe erfolgreich gespeichert!");
     resetForm();
+
     window.location.href = "board.html";
   });
 }
@@ -185,7 +215,7 @@ export function validateAndSaveTask(task) {
 /**
  * Resets the task form to its initial state
  */
-export function resetForm() {
+function resetForm() {
   document.getElementById("add-task-form").reset();
   subtasks = [];
   renderSubtasks();
@@ -196,11 +226,12 @@ export function resetForm() {
 /**
  * Updates the create task button's enabled state based on form completion
  */
-export function updateCreateTaskBtn() {
+function updateCreateTaskBtn() {
   const title = getValue("#title");
   const date = getValue("#date");
   const category = getValue("#category");
   const hasContacts = assignedTo.length > 0;
+
   const allFilled = title && date && category && hasContacts;
   const createBtn = document.getElementById("create-task-btn");
   createBtn.disabled = !allFilled;
@@ -210,8 +241,10 @@ export function updateCreateTaskBtn() {
 /**
  * Updates the priority buttons' active state in the UI
  */
-export function updatePriorityButtons() {
-  const buttons = document.querySelectorAll(".urgent-btn, .medium-btn, .low-btn");
+function updatePriorityButtons() {
+  const buttons = document.querySelectorAll(
+    ".urgent-btn, .medium-btn, .low-btn"
+  );
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].classList.remove("active");
   }
@@ -223,7 +256,7 @@ export function updatePriorityButtons() {
 /**
  * Toggles the urgent priority button and updates its icon
  */
-export function togglePriorityBtnUrgent() {
+function togglePriorityBtnUrgent() {
   const btn = document.getElementById("urgent-btn");
   const img = btn.querySelector("img");
   btn.onclick = function () {
@@ -232,7 +265,9 @@ export function togglePriorityBtnUrgent() {
     const lowBtn = document.getElementById("low-btn");
     mediumBtn.classList.remove(mediumBtn.id + "-active");
     lowBtn.classList.remove(lowBtn.id + "-active");
-    img.src = isActive ? "assets/img/urgent-btn-icon-hover.png" : "assets/img/urgent-btn-icon.png";
+    img.src = isActive
+      ? "assets/img/urgent-btn-icon-hover.png"
+      : "assets/img/urgent-btn-icon.png";
     mediumBtn.querySelector("img").src = "assets/img/medium-btn-icon.png";
     lowBtn.querySelector("img").src = "assets/img/low-btn-icon.png";
   };
@@ -241,7 +276,7 @@ export function togglePriorityBtnUrgent() {
 /**
  * Toggles the medium priority button and updates its icon
  */
-export function togglePriorityBtnMedium() {
+function togglePriorityBtnMedium() {
   const btn = document.getElementById("medium-btn");
   const img = btn.querySelector("img");
   btn.onclick = function () {
@@ -250,7 +285,9 @@ export function togglePriorityBtnMedium() {
     const lowBtn = document.getElementById("low-btn");
     urgentBtn.classList.remove(urgentBtn.id + "-active");
     lowBtn.classList.remove(lowBtn.id + "-active");
-    img.src = isActive ? "assets/img/medium-btn-icon-hover.png" : "assets/img/medium-btn-icon.png";
+    img.src = isActive
+      ? "assets/img/medium-btn-icon-hover.png"
+      : "assets/img/medium-btn-icon.png";
     urgentBtn.querySelector("img").src = "assets/img/urgent-btn-icon.png";
     lowBtn.querySelector("img").src = "assets/img/low-btn-icon.png";
   };
@@ -259,7 +296,7 @@ export function togglePriorityBtnMedium() {
 /**
  * Toggles the low priority button and updates its icon
  */
-export function togglePriorityBtnLow() {
+function togglePriorityBtnLow() {
   const btn = document.getElementById("low-btn");
   const img = btn.querySelector("img");
   btn.onclick = function () {
@@ -268,7 +305,9 @@ export function togglePriorityBtnLow() {
     const mediumBtn = document.getElementById("medium-btn");
     urgentBtn.classList.remove(urgentBtn.id + "-active");
     mediumBtn.classList.remove(mediumBtn.id + "-active");
-    img.src = isActive ? "assets/img/low-btn-icon-hover.png" : "assets/img/low-btn-icon.png";
+    img.src = isActive
+      ? "assets/img/low-btn-icon-hover.png"
+      : "assets/img/low-btn-icon.png";
     urgentBtn.querySelector("img").src = "assets/img/urgent-btn-icon.png";
     mediumBtn.querySelector("img").src = "assets/img/medium-btn-icon.png";
   };
@@ -277,7 +316,7 @@ export function togglePriorityBtnLow() {
 /**
  * Adds hover effects to priority buttons
  */
-export function hoverPriorityBtns() {
+function hoverPriorityBtns() {
   const btns = [
     { id: "urgent-btn", icon: "urgent-btn-icon" },
     { id: "medium-btn", icon: "medium-btn-icon" },
@@ -288,7 +327,8 @@ export function hoverPriorityBtns() {
     const img = btn.querySelector("img");
     btn.onmouseover = () => (img.src = `assets/img/${icon}-hover.png`);
     btn.onmouseout = () => {
-      if (!btn.classList.contains(`${id}-active`)) img.src = `assets/img/${icon}.png`;
+      if (!btn.classList.contains(`${id}-active`))
+        img.src = `assets/img/${icon}.png`;
     };
   });
 }
@@ -296,7 +336,7 @@ export function hoverPriorityBtns() {
 /**
  * Initializes event listeners and form state
  */
-export function init() {
+function init() {
   const createBtn = document.getElementById("create-task-btn");
   createBtn.disabled = true;
   createBtn.classList.add("disabled");
@@ -313,10 +353,12 @@ export function init() {
 /**
  * Initializes dropdown toggle behavior for contacts selection
  */
-export function initDropdownHandling() {
+function initDropdownHandling() {
   const dropdown = document.getElementById("contacts-dropdown-list");
   const toggle = document.getElementById("contacts-selected");
+
   toggle.addEventListener("click", () => dropdown.classList.toggle("show"));
+
   document.addEventListener("click", (e) => {
     if (!dropdown.contains(e.target) && !toggle.contains(e.target)) {
       dropdown.classList.remove("show");
@@ -327,17 +369,23 @@ export function initDropdownHandling() {
 /**
  * Clears the form and resets all fields
  */
-export function clearForm() {
+function clearForm() {
   const createBtn = document.getElementById("create-task-btn");
   createBtn.disabled = true;
   createBtn.classList.add("disabled");
-  document.querySelectorAll(".all-priority-btns").forEach(btn => {
-    btn.classList.remove("urgent-btn-active", "medium-btn-active", "low-btn-active");
+  document.querySelectorAll(".all-priority-btns").forEach((btn) => {
+    btn.classList.remove(
+      "urgent-btn-active",
+      "medium-btn-active",
+      "low-btn-active"
+    );
     btn.querySelector("img").src = `assets/img/${btn.id}-icon.png`;
   });
   assignedTo = [];
   updateAssignedToUI();
-  document.querySelectorAll('#contacts-dropdown-list input[type="checkbox"]').forEach(checkBox => checkBox.checked = false);
+  document
+    .querySelectorAll('#contacts-dropdown-list input[type="checkbox"]')
+    .forEach((checkBox) => (checkBox.checked = false));
   subtasks = [];
   renderSubtasks();
 }
@@ -345,7 +393,7 @@ export function clearForm() {
 /**
  * Adds input event listeners to form fields to update the create button
  */
-export function updateInputs() {
+function updateInputs() {
   const inputs = ["#title", "#date", "#category"];
   for (let i = 0; i < inputs.length; i++) {
     const input = document.querySelector(inputs[i]);
@@ -356,7 +404,7 @@ export function updateInputs() {
 /**
  * Prevents form submission on Enter key for text inputs
  */
-export function stopEnterKeySubmit() {
+function stopEnterKeySubmit() {
   document.removeEventListener("keypress", handleEnterKey);
   document.addEventListener("keypress", handleEnterKey);
 }
@@ -365,17 +413,22 @@ export function stopEnterKeySubmit() {
  * Handles Enter key press to prevent form submission
  * @param {KeyboardEvent} evt - Keypress event
  */
-export function handleEnterKey(evt) {
+function handleEnterKey(evt) {
   const node = evt.target;
   if (evt.key === "Enter" && node.type === "text") {
     evt.preventDefault();
   }
 }
 
-// Initialisierung beim ersten Laden (optional, wird durch board.js übernommen)
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    loadContacts();
-    init();
-  });
-}
+/**
+ * Initializes all components and event listeners
+ */
+init();
+loadContacts();
+updatePriorityButtons();
+togglePriorityBtnUrgent();
+togglePriorityBtnMedium();
+togglePriorityBtnLow();
+hoverPriorityBtns();
+updateInputs();
+stopEnterKeySubmit();
