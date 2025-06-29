@@ -226,7 +226,7 @@ loadEventListeners()
 function loadScript() {
   const addTaskScript = document.createElement('script');
   addTaskScript.type = 'module';
-  addTaskScript.src = 'js/task-form.js';
+  addTaskScript.src = 'js/add-task.js';
   addTaskScript.id = 'taskFormScript';
   document.head.appendChild(addTaskScript);
 };
