@@ -1,3 +1,8 @@
+/**
+ * This function initializes the function generateInitialsTopBarMenu()
+ * 
+ * 
+ */
 function initSidbarTopbar(){
     generateInitialsTopBarMenu()
 }
@@ -31,8 +36,9 @@ function NoOrMoreSpaces(){
 }
 
 /**
- * Opens or closes the topbar user menu when the user icon is clicked
- * @param {Event} event - Click event
+ * This function opens the topbar user menu when the user icon is clicked
+ * 
+ * @param {object} event - Click event
  */
 function openMenu(event) {
   event.stopPropagation(); // Prevent click from bubbling up to body
