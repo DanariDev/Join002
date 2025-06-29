@@ -30,6 +30,15 @@ function NoOrMoreSpaces(){
     }
 }
 
+/**
+ * Opens or closes the topbar user menu when the user icon is clicked
+ * @param {Event} event - Click event
+ */
+function openMenu(event) {
+  event.stopPropagation(); // Prevent click from bubbling up to body
+  const menu = document.getElementById('menuID');
+  if (menu) menu.classList.toggle('d-none'); // Show/hide the menu
+}
 
 /**
  * This function closes the topbar menu when you press the body
