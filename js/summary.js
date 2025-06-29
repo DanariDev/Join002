@@ -15,14 +15,14 @@ function $(s) {
  * Handles authentication state changes and initializes summary data
  */
 function handleAuthState() {
-    onAuthStateChanged(auth, function (user) {
-        if (!user) {
-            return;
-        }
-        let name = localStorage.getItem('userName');
-        showGreetingUser(name);
-    });
-};
+    if(!localStorage.getItem("isGuest") && !localStorage.getItem("userName")){
+        window.location.replace("./index.html");
+        return;
+    }
+
+    let name = localStorage.getItem('userName');
+    showGreetingUser(name);
+}
 
 /**
  * Displays a time-based greeting (morning, afternoon, or evening)
