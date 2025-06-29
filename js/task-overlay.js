@@ -1,281 +1,471 @@
-// Import Firebase Database and project config
 import { db } from "./firebase-config.js";
 import {
-  ref,
-  update,
-  remove,
-  get,
-  child,
+    ref,
+    update,
+    remove,
+    get,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-// Import form open handler from board.js
-import { openForm } from "./board.js";
+let editingSubtasks = [];
+let assignedTo = [];
 
-// Initial click-away listener for overlay closing
-initOverlayCloseHandler();
 
-/**
- * Generates a color based on the name string, used for contact bubbles
- * @param {string} name - Contact's full name
- * @returns {string} - A consistent color for each unique name
- */
 function getColorForName(name) {
-  const colors = ['#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20', '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'];
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  };
-  return colors[Math.abs(hash) % colors.length];
+    const colors = [
+        '#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20',
+        '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'
+    ];
+    let hash = 0;
+    for (let i = 0; i < name.length; i++) {
+        hash = name.charCodeAt(i) + ((hash << 5) - hash);
+    };
+    return colors[Math.abs(hash) % colors.length];
 };
 
-/**
- * Loads and renders contact assignments for a task into the overlay
- * @param {Array|string} assignedTo - List of assigned contact names
- */
-async function loadContactOptions(assignedTo) {
-  const container = document.createElement('div');
-  container.id = 'edit-assigned';
-  container.className = 'assigned-list';
 
-  const assignedList = Array.isArray(assignedTo)
-    ? assignedTo
-    : typeof assignedTo === 'string' && assignedTo.trim()
-      ? [assignedTo.trim()] : [];
+function createCard(assignedList) {
+    const card = document.createElement('div');
+    card.id = 'edit-assigned';
+    card.className = 'assigned-list';
+    assignedList.forEach(name => card.appendChild(createAssignedItem(name)));
+    return card;
+};
 
-  assignedList.forEach((name) => {
-    const initials = name.split(" ").map(part => part[0]?.toUpperCase()).join("");
+
+function createAssignedItem(name) {
     const item = document.createElement('div');
-    item.classList.add('assigned-item', 'display-flex');
-
-    const initialsDiv = document.createElement('div');
-    initialsDiv.classList.add('initials-task-overlay');
-    initialsDiv.style.backgroundColor = getColorForName(name);
-    initialsDiv.textContent = initials;
-
-    const nameDiv = document.createElement('div');
-    nameDiv.textContent = name;
-    nameDiv.classList.add('full-name');
-
-    item.appendChild(initialsDiv);
-    item.appendChild(nameDiv);
-    container.appendChild(item);
-  });
-
-  const wrapper = document.getElementById('popup-assigned');
-  wrapper.innerHTML = `<p><span class="overlay-key">Assigned to:</span></p>`;
-  wrapper.appendChild(container);
+    item.classList.add('assigned-item', 'd-flex');
+    item.appendChild(createInitialsDiv(name));
+    item.appendChild(createNameDiv(name));
+    return item;
 };
 
-/**
- * Populates the HTML content of the overlay popup with task data
- * @param {Object} task - Task object from the database
- */
+
+function createInitialsDiv(name) {
+    const div = document.createElement('div');
+    div.classList.add('initials-task-overlay');
+    div.style.backgroundColor = getColorForName(name);
+    div.textContent = name
+        .split(" ")
+        .map(part => part[0]?.toUpperCase())
+        .join("");
+    return div;
+};
+
+
+function createNameDiv(name) {
+    const div = document.createElement('div');
+    div.classList.add('full-name');
+    div.textContent = name;
+    return div;
+};
+
+
+async function loadContactOptions(assignedTo) {
+    const assignedList = Array.isArray(assignedTo)
+        ? assignedTo
+        : (typeof assignedTo === 'string' && assignedTo.trim())
+            ? [assignedTo.trim()] : [];
+
+    const wrapper = document.getElementById('popup-assigned');
+    wrapper.innerHTML = `<span class="overlay-key">Assigned to:</span>`;
+    wrapper.appendChild(createCard(assignedList));
+};
+
+
 function taskPopupHtmlTemplate(task) {
-  const formattedDate = task.dueDate.split('-').reverse().join('/');
-  const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
+    const formattedDate = task.dueDate.split('-').reverse().join('/');
+    const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
+    document.getElementById('popup-title').innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
+    document.getElementById('popup-description').innerHTML = `<p id="edit-description">${task.description}</p>`;
+    document.getElementById('popup-due-date').innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
+    document.getElementById('popup-category').innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
+    loadContactOptions(task.assignedTo || []);
+    document.getElementById('popup-priority').innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
 
-  document.getElementById('popup-title').innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
-  document.getElementById('popup-description').innerHTML = `<p id="edit-description">${task.description}</p>`;
-  document.getElementById('popup-due-date').innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
-  document.getElementById('popup-category').innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
-  loadContactOptions(task.assignedTo || []);
-  document.getElementById('popup-priority').innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
-}
+};
 
-/**
- * Creates and renders the subtask list inside the popup
- * @param {Object} task - Task object with subtasks array
- */
+
+function createSubtaskItem(task, subtask, index) {
+    const li = document.createElement('li');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.checked = subtask.done;
+    checkbox.onchange = () => toggleSubtask(task.id, index, checkbox.checked);
+    const span = document.createElement('span');
+    span.textContent = subtask.text;
+    span.classList.add('subtask-overlay-list');
+    li.appendChild(checkbox);
+    li.append(" ");
+    li.appendChild(span);
+    return li;
+};
+
+
 function createPopupSubtask(task) {
-  const subtaskList = document.getElementById('popup-subtasks');
-  subtaskList.innerHTML = "";
-
-  if (task.subtasks && task.subtasks.length > 0) {
+    const subtaskList = document.getElementById('popup-subtasks');
+    subtaskList.innerHTML = "";
+    if (!task.subtasks || task.subtasks.length === 0) return;
     task.subtasks.forEach((subtask, i) => {
-      const li = document.createElement('li');
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.checked = subtask.done;
-      checkbox.onchange = () => toggleSubtask(task.id, i, checkbox.checked);
-
-      const span = document.createElement('span');
-      span.textContent = subtask.text;
-      span.classList.add('subtask-overlay-list');
-
-      li.appendChild(checkbox);
-      li.append(" ");
-      li.appendChild(span);
-      subtaskList.appendChild(li);
+        const li = createSubtaskItem(task, subtask, i);
+        subtaskList.appendChild(li);
     });
-  };
-}
+};
 
-/**
- * Shows the task overlay and fills it with task content
- * @param {Object} task - Task object from database
- */
+
 export function renderPopup(task) {
-  const overlay = document.getElementById('task-overlay');
-  overlay.classList.replace('d-none', 'd-flex');
-  overlay.dataset.taskId = task.id;
+    const overlay = document.getElementById('task-overlay');
+    overlay.classList.replace('d-none', 'd-flex');
+    overlay.dataset.taskId = task.id;
 
-  taskPopupHtmlTemplate(task);
-  createPopupSubtask(task);
-  getLabelColor();
+    taskPopupHtmlTemplate(task)
+    createPopupSubtask(task)
+    getLabelColor()
 
-  document.getElementById('overlay-close').addEventListener('click', closePopup);
-  document.getElementById('delete-task-btn').onclick = () => deleteTask(task.id);
-  document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
+    document.getElementById('overlay-close').addEventListener('click', closePopup);
+    document.getElementById('delete-task-btn').onclick = () => deleteTask(task.id);
+    document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
 };
 
-/**
- * Changes the label background color depending on category
- */
+
 function getLabelColor() {
-  const label = document.querySelector('.task-label-overlay');
-  const text = label.textContent.trim();
-  if (text === 'Technical Task') label.classList.add('green-background');
-  else if (text === 'User Story') label.classList.add('blue-background');
+    const label = document.querySelector('.task-label-overlay');
+    const text = label.textContent.trim();
+    if (text === 'Technical Task') {
+        label.classList.add('green-background');
+    } else if (text === 'User Story') {
+        label.classList.add('blue-background');
+    };
 };
 
-/**
- * Closes task or add-task overlay if open
- */
+
 function closePopup() {
-  const taskOverlay = document.getElementById('task-overlay');
-  const addTaskOverlay = document.getElementById('add-task-overlay');
-
-  if (taskOverlay?.classList.contains('d-flex')) {
-    taskOverlay.classList.replace('d-flex', 'd-none');
-  }
-
-  if (addTaskOverlay?.style.display === 'flex') {
-    addTaskOverlay.style.display = 'none';
-    document.getElementById('form-add-task').style.display = 'none';
-  }
-};
-
-/**
- * Initializes click-away behavior for closing overlays
- */
-function initOverlayCloseHandler() {
-  document.addEventListener('click', function (event) {
     const taskOverlay = document.getElementById('task-overlay');
     const addTaskOverlay = document.getElementById('add-task-overlay');
-    const taskContent = document.querySelector('#task-overlay .overlay-content');
-    const formContent = document.querySelector('#add-task-overlay #form-add-task');
-
-    if (
-      taskOverlay?.classList.contains('d-flex') &&
-      !taskContent?.contains(event.target) &&
-      taskOverlay.contains(event.target)
-    ) {
-      closePopup();
+    const editTaskOverlay = document.getElementById('edit-task-overlay');
+    document.getElementById('formContainer').innerHTML = '';
+    if (taskOverlay?.classList.contains('d-flex')) {
+        taskOverlay.classList.replace('d-flex', 'd-none');
     }
-
-    if (
-      addTaskOverlay?.style.display === 'flex' &&
-      !formContent?.contains(event.target) &&
-      addTaskOverlay.contains(event.target)
-    ) {
-      closePopup();
+    if (addTaskOverlay?.style.display === 'flex') {
+        addTaskOverlay.style.display = 'none';
+        document.getElementById('form-add-task').style.display = 'none';
     }
-  });
+    if (editTaskOverlay?.classList.contains('d-flex')) {
+        editTaskOverlay.classList.replace('d-flex', 'd-none');
+    }
 };
 
-/**
- * Toggles the done state of a subtask in Firebase
- * @param {string} taskId - Task ID in DB
- * @param {number} index - Subtask index in list
- * @param {boolean} checked - Whether the checkbox is checked
- */
-function toggleSubtask(taskId, index, checked) {
-  const taskRef = ref(db, `tasks/${taskId}/subtasks/${index}`);
-  update(taskRef, { done: checked });
-};
 
-/**
- * Updates the text of a subtask in Firebase
- * @param {string} taskId - Task ID
- * @param {number} index - Index of subtask
- * @param {string} text - New text
- */
-function updateSubtaskText(taskId, index, text) {
-  const taskRef = ref(db, `tasks/${taskId}/subtasks/${index}`);
-  update(taskRef, { text: text });
-};
-
-/**
- * Deletes a task from Firebase after user confirms
- * @param {string} taskId 
- */
-function deleteTask(taskId) {
-  if (confirm('Do you really want to delete this task?')) {
-    remove(ref(db, `tasks/${taskId}`)).then(() => {
-      closePopup();
-      document.querySelector(`[data-id='${taskId}']`)?.remove();
+function initOverlayCloseHandler() {
+    document.addEventListener('click', function (event) {
+        const configs = [
+            {
+                overlay: document.getElementById('task-overlay'),
+                content: document.querySelector('#task-overlay .overlay-content'),
+                isVisible: el => el?.classList.contains('d-flex')
+            },
+            {
+                overlay: document.getElementById('add-task-overlay'),
+                content: document.querySelector('#add-task-overlay #form-add-task'),
+                isVisible: el => el?.style.display === 'flex'
+            },
+            {
+                overlay: document.getElementById('edit-task-overlay'),
+                content: document.querySelector('#edit-task-overlay .edit-task-main'),
+                isVisible: el => el?.classList.contains('d-flex')
+            }
+        ];
+        for (const { overlay, content, isVisible } of configs) {
+            if (isVisible(overlay) && !content?.contains(event.target) && overlay.contains(event.target)) {
+                closePopup();
+                break;
+            }
+        }
     });
-  };
 };
 
-/**
- * Opens the edit form and fills it with current task data
- * @param {string} taskId - Task ID to edit
- */
+
+function toggleSubtask(taskId, index, checked) {
+    const taskRef = ref(db, `tasks/${taskId}/subtasks/${index}`);
+    update(taskRef, { done: checked });
+};
+
+
+function deleteTask(taskId) {
+    if (confirm('Do you really want to delete this task?')) {
+        remove(ref(db, `tasks/${taskId}`)).then(() => {
+            closePopup();
+            document.querySelector(`[data-id='${taskId}']`)?.remove();
+        });
+    };
+};
+
+
+async function loadContacts() {
+    const snapshot = await get(ref(db, 'contacts'));
+    const data = snapshot.val();
+    return data ? Object.values(data) : [];
+};
+
+
+function updateAssignedToUI() {
+    const selectedDiv = document.getElementById('editing-contacts-selected');
+    if (assignedTo.length === 0) {
+        selectedDiv.textContent = 'Select contact(s)';
+        return;
+    }
+
+    selectedDiv.innerHTML = '';
+    assignedTo.forEach(contact => {
+        const selectedContact = document.createElement('div');
+        selectedContact.classList.add('contact-selected');
+        selectedContact.textContent = contact.name;
+        selectedDiv.appendChild(selectedContact);
+    });
+};
+
+
 async function editTask(taskId) {
-  document.getElementById('task-overlay').classList.replace('d-none', 'd-flex');
-  await openForm();
+    const taskData = getCurrentValues();
 
-  const title = document.getElementById('edit-title').innerHTML.trim();
-  const description = document.getElementById('edit-description').innerHTML.trim();
-  const dueDate = document.getElementById('edit-due-date').textContent;
-  const dateText = dueDate.replace('Due date:', '').trim();
-  const [day, month, year] = dateText.split('/');
-  const isoDate = `${year}-${month}-${day}`;
-  const priority = document.getElementById('popup-priority').textContent;
-  const priorityText = priority.replace('Priority:', '').trim();
-  const category = document.getElementById("category");
+    openEditOverlay();
+    fillTaskForm(taskData);
+    prepareSubtasks(taskData.subtasks);
+    setupPriorityButtons(taskData.priority);
+    await setupContactsDropdown(taskData.assignedTo);
 
-  // Fill form fields with task data
-  document.getElementById('title').value = title;
-  document.getElementById('description').value = description;
-  document.getElementById('date').value = isoDate;
-
-  switch (priorityText) {
-    case 'Urgent':
-      document.getElementById('urgent-btn').classList.add('urgent-btn-active');
-      break;
-    case 'Medium':
-      document.getElementById('medium-btn').classList.add('medium-btn-active');
-      break;
-    case 'Low':
-      document.getElementById('low-btn').classList.add('low-btn-active');
-      break;
-  }
-
-  category.value = document.getElementById('popup-category').children[0].innerHTML;
-
-  const subtaskList = document.querySelectorAll('.subtask-overlay-list');
-  Array.from(subtaskList).map(el => {
-    document.getElementById("subtask-list").innerHTML += `<li>${el.textContent.trim()}</li>`;
-  });
-
-  const nameElements = document.querySelectorAll('.full-name');
-  const selectedNames = Array.from(nameElements).map(el => el.textContent.trim());
-
-  document.getElementById('contacts-selected').innerHTML = '';
-  for (let index = 0; index < selectedNames.length; index++) {
-    document.getElementById('contacts-selected').innerHTML += `
-      <div class="contact-selected">${selectedNames[index]}</div>`;
-  }
-
-  await loadContactOptions();
-
-  const checkboxes = document.querySelectorAll('input[type="checkbox"][data-name]');
-  checkboxes.forEach(checkbox => {
-    const contactName = checkbox.dataset.name.trim();
-    checkbox.checked = selectedNames.includes(contactName);
-  });
-
-  console.log("TITLE:", title, "DESC:", description, "DATE:", dateText, "PRIO:", priorityText, "ISO.DATE:", isoDate, "SELECTED.NAMES:", selectedNames);
+    updateSaveEditBtn();
 };
+
+
+function openEditOverlay() {
+    const overlay = document.getElementById('edit-task-overlay');
+    overlay.classList.replace('d-none', 'd-flex');
+};
+
+
+function fillTaskForm(task) {
+    document.getElementById('editing-title').value = task.title;
+    document.getElementById('editing-description').value = task.description;
+    document.getElementById('editing-date').value = formatDateToInput(task.dueDate);
+    document.getElementById('editing-category').value = task.category;
+};
+
+
+function prepareSubtasks(subtasks) {
+    editingSubtasks = (Array.isArray(subtasks) ? subtasks : []).map(sub => ({
+        text: typeof sub === 'string' ? sub : (sub?.text || ''),
+        done: !!sub?.done
+    }));
+    renderEditingSubtasks();
+};
+
+
+function setupPriorityButtons(priorityValue) {
+    const priorities = ['urgent', 'medium', 'low'];
+    const current = priorityValue?.toLowerCase();
+    priorities.forEach(prio => {
+        const btn = document.getElementById(`editing-${prio}-btn`);
+        btn.classList.remove(`${prio}-btn-active`);
+        btn.onclick = () => {
+            priorities.forEach(other =>
+                document.getElementById(`editing-${other}-btn`).classList.remove(`${other}-btn-active`)
+            );
+            btn.classList.add(`${prio}-btn-active`);
+            updateSaveEditBtn();
+        };
+        if (prio === current) btn.classList.add(`${prio}-btn-active`);
+    });
+};
+
+
+async function setupContactsDropdown(assignedNames) {
+    const allContacts = await loadContacts();
+    const dropdownList = document.getElementById('editing-contacts-dropdown-list');
+    const dropdownSelected = document.getElementById('editing-contacts-selected');
+
+    assignedTo = [];
+    dropdownList.innerHTML = '';
+    dropdownSelected.innerHTML = '';
+    dropdownList.classList.remove('show');
+
+    allContacts.forEach(contact => {
+        const entry = createContactEntry(contact, assignedNames);
+        dropdownList.appendChild(entry.wrapper);
+        if (entry.checked) assignedTo.push({ name: contact.name, email: contact.email });
+    });
+
+    updateAssignedToUI();
+
+    dropdownSelected.onclick = (e) => {
+        e.stopPropagation();
+        dropdownList.classList.toggle('show');
+    };
+
+    window.addEventListener('click', (event) => {
+        if (
+            !dropdownList.contains(event.target) &&
+            !dropdownSelected.contains(event.target)
+        ) {
+            dropdownList.classList.remove('show');
+        }
+    });
+};
+
+
+function createContactEntry(contact, assignedNames) {
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = contact.email;
+    checkbox.dataset.name = contact.name;
+    checkbox.checked = assignedNames.includes(contact.name);
+    checkbox.onclick = e => e.stopPropagation();
+
+    checkbox.onchange = () => {
+        if (checkbox.checked) {
+            assignedTo.push({ name: contact.name, email: contact.email });
+        } else {
+            assignedTo = assignedTo.filter(c => c.email !== contact.email);
+        }
+        updateAssignedToUI();
+        updateSaveEditBtn();
+    };
+
+    const initials = contact.name
+        .split(' ')
+        .map(part => part[0]?.toUpperCase())
+        .join('')
+        .slice(0, 2);
+
+    const editInitials = document.createElement('div');
+    editInitials.classList.add('assigned-initials');
+    editInitials.textContent = initials;
+    editInitials.style.backgroundColor = getColorForName(contact.name);
+
+    const label = document.createElement('label');
+    label.textContent = contact.name;
+    label.classList.add('form-selected-contact');
+    label.prepend(checkbox);
+    label.appendChild(editInitials);
+
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('contact-entry');
+    wrapper.appendChild(label);
+
+    return { wrapper, checked: checkbox.checked };
+};
+
+
+function updateSaveEditBtn() {
+    const title = document.getElementById('editing-title').value.trim();
+    const description = document.getElementById('editing-description').value.trim();
+    const date = document.getElementById('editing-date').value;
+    const category = document.getElementById('editing-category').value;
+
+    const saveBtn = document.getElementById('editing-save-btn');
+    const allFilled = title && description && date && category && assignedTo.length > 0;
+
+    saveBtn.disabled = !allFilled;
+    saveBtn.classList.toggle('disabled', !allFilled);
+};
+
+
+function formatDateToInput(dateStr) {
+    const [day, month, year] = dateStr.split('/');
+    return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+};
+
+
+function getCurrentValues() {
+    const category = document.querySelector('.task-label-overlay').textContent;
+    const title = document.getElementById('edit-title').innerHTML.trim();
+    const description = document.getElementById('edit-description').innerHTML.trim();
+    const dueDate = document.getElementById('edit-due-date').textContent.replace('Due date:', '').trim();
+    const priority = document.getElementById('popup-priority').textContent.replace('Priority:', '').trim();
+    const names = document.querySelectorAll('#edit-assigned .full-name');
+    const assignedTo = Array.from(names).map(el => el.textContent.trim());
+    const subtaskElements = document.querySelectorAll('#popup-subtasks .subtask-overlay-list');
+    const subtasks = Array.from(subtaskElements).map(el => el.textContent.trim());
+    return { category, title, description, dueDate, priority, assignedTo, subtasks };
+};
+
+
+function addSubtaskFromInput() {
+    const input = document.getElementById('editing-subtask');
+    const text = input.value.trim();
+
+    if (!text) return;
+
+    editingSubtasks.push({ text, done: false });
+    renderEditingSubtasks();
+    input.value = '';
+    updateSaveEditBtn?.(); // Optional – falls du den Save-Button dynamisch prüfen willst
+};
+
+
+function renderEditingSubtasks() {
+    const ul = document.getElementById('editing-subtask-list');
+    ul.innerHTML = '';
+    editingSubtasks.forEach((sub, index) => {
+        const image = document.createElement('img');
+        image.src = './assets/img/delete.png';
+        const li = document.createElement('li');
+        li.textContent = sub.text;
+        li.dataset.index = index;
+        li.appendChild(image);
+        image.addEventListener('click', () => {
+            editingSubtasks.splice(index, 1);
+            renderEditingSubtasks();
+            updateSaveEditBtn?.();
+        });
+        ul.appendChild(li);
+    });
+};
+
+
+async function handleSaveEditTask() {
+    const taskId = document.getElementById('task-overlay').dataset.taskId;
+    if (!taskId) return;
+    const title = document.getElementById('editing-title').value.trim();
+    const description = document.getElementById('editing-description').value.trim();
+    const dueDate = document.getElementById('editing-date').value;
+    const category = document.getElementById('editing-category').value;
+    const priority = ['urgent', 'medium', 'low'].find(prio =>
+        document.getElementById(`editing-${prio}-btn`).classList.contains(`${prio}-btn-active`)
+    );
+    const fullTask = {
+        id: taskId,
+        title,
+        description,
+        dueDate,
+        category,
+        priority,
+        assignedTo: assignedTo.map(a => a.name),
+        subtasks: editingSubtasks
+    };
+    await update(ref(db, `tasks/${taskId}`), fullTask);
+    closePopup();
+};
+
+
+function initSubtaskInputAndSaveListener() {
+    document.getElementById('editing-subtask').addEventListener('keydown', e => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            addSubtaskFromInput();
+        }
+    });
+
+    document.querySelector('.subtask-button').addEventListener('click', addSubtaskFromInput);
+    document.getElementById('editing-save-btn').addEventListener('click', handleSaveEditTask);
+};
+
+
+function init() {
+    initOverlayCloseHandler();
+    initSubtaskInputAndSaveListener()
+};
+
+
+init()

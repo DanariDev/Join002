@@ -1,7 +1,7 @@
 import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 // import { renderPopup } from "./task-overlay.js";
-import { renderPopup } from "./new-task-overlay.js";
+import { renderPopup } from "./task-overlay.js";
 
 /**
  * This function creates a Dom element
@@ -306,8 +306,8 @@ function handleClick(event) {
  * 
  * @param {object} event -MediaQueryList gives back
  */
-function handleMediaQueryChange(event) { 
-  const responsiveLinkElements = document.querySelectorAll("#responsive-link-add-task"); 
+function handleMediaQueryChange(event) {
+  const responsiveLinkElements = document.querySelectorAll("#responsive-link-add-task");
 
   responsiveLinkElements.forEach(element => {
     if (event.matches) {
