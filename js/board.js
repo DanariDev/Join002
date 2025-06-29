@@ -1,11 +1,9 @@
 import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-// import { renderPopup } from "./task-overlay.js";
 import { renderPopup } from "./task-overlay.js";
 
 /**
  * This function creates a Dom element
- * 
  * @param {Object} s -Information of the Dom element
  */
 function $(s) {
@@ -13,47 +11,39 @@ function $(s) {
 };
 
 /**
- * This function is intended to create the background color for the initials
- * 
+ * This function creates background color for initials
  * @param {string} name -The name of the contact
  * @returns -Gives back a color value
  */
 function getColorForName(name) {
-  const colors = [
-    '#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20',
-    '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'
-  ];
+  const colors = ['#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20', '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'];
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
     hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  };
+  }
   return colors[Math.abs(hash) % colors.length];
 };
 
 /**
- * This function invites the tasks into the board
- * 
- * 
+ * Loads tasks into the board
  */
 function loadTasks() {
   document.getElementById('task-overlay')?.classList.add('d-none');
   const tasksRef = ref(db, 'tasks');
-  onValue(tasksRef, function (snapshot) {
+  onValue(tasksRef, (snapshot) => {
     const tasks = snapshot.val();
     if (!tasks) return;
     for (let id in tasks) {
       tasks[id].id = id;
       renderTask(tasks[id]);
-    };
+    }
     setupDropTargets();
   }, { onlyOnce: true });
 };
 
 /**
- * This function gets the information for the Firebase tasks
- * 
+ * Renders a single task
  * @param {Object} task -Hands over the information of a task
- * @returns -stop
  */
 function renderTask(task) {
   const colMap = { todo: '.to-do-tasks', 'in-progress': '.in-progress-tasks', await: '.await-tasks', done: '.done-tasks' };
@@ -66,18 +56,26 @@ function renderTask(task) {
   updateTaskCard(card, task);
   setupTaskCardEvents(card, task);
   target.appendChild(card);
+  updateTaskLabel(card, task);
+};
+
+/**
+ * Updates task label based on category
+ * @param {Object} card -Hands over the information of the card
+ * @param {Object} task -Hands over the information of a task
+ */
+function updateTaskLabel(card, task) {
   const label = card.querySelector('.task-label');
   const text = label.textContent.trim();
   if (text === 'Technical Task') {
     label.classList.add('green-background');
   } else if (text === 'User Story') {
     label.classList.add('blue-background');
-  };
+  }
 };
 
 /**
- * This function updates the boards with the tasks
- * 
+ * Updates the task card with task data
  * @param {Object} card -Hands over the information of the card
  * @param {Object} task -Hands over the information of a task
  */
@@ -87,142 +85,112 @@ function updateTaskCard(card, task) {
   card.querySelector('.task-desc').textContent = task.description;
   const initialsContainer = card.querySelector('.assigned-initials');
   initialsContainer.classList.add('d-flex');
-  if (Array.isArray(task.assignedTo.sort((selected, compare) => selected.localeCompare(compare)))) {
-    task.assignedTo.forEach(name => {
-      const initials = name
-        .split(" ")
-        .map(part => part[0]?.toUpperCase())
-        .join("");
+  updateInitials(initialsContainer, task.assignedTo);
+  updateSubtaskCount(card, task.subtasks);
+  updateProgressBar(card, task.status);
+};
+
+/**
+ * Updates initials for assigned contacts
+ * @param {Object} initialsContainer -Container for initials
+ * @param {Array} assignedTo -Array of assigned names
+ */
+function updateInitials(initialsContainer, assignedTo) {
+  if (Array.isArray(assignedTo.sort((a, b) => a.localeCompare(b)))) {
+    assignedTo.forEach(name => {
+      const initials = name.split(" ").map(part => part[0]?.toUpperCase()).join("");
       const initialsDiv = document.createElement('div');
       initialsDiv.classList.add('initials-task');
       initialsDiv.textContent = initials;
       initialsDiv.style.backgroundColor = getColorForName(name);
       initialsContainer.appendChild(initialsDiv);
     });
-  };
-
-  const totalSubtasks = task.subtasks ? task.subtasks.length : 0;
-  let doneSubtasks = 0;
-  if (task.subtasks) {
-    for (let i = 0; i < task.subtasks.length; i++) {
-      if (task.subtasks[i].done) doneSubtasks++;
-    };
-  };
-  card.querySelector('.task-count').textContent = doneSubtasks + '/' + totalSubtasks;
-  const bar = card.querySelector('.progress-bar');
-  let statusClass = task.status == 'todo' ? 'progress-25' : task.status == 'in-progress' ? 'progress-50' : task.status == 'await' ? 'progress-75' : 'progress-100';
-  bar.classList.add(statusClass);
+  }
 };
 
 /**
- * This function opens an overlay and hands over the information of the task that you pressed on
- * 
+ * Updates subtask count on card
+ * @param {Object} card -Hands over the information of the card
+ * @param {Array} subtasks -Array of subtasks
+ */
+function updateSubtaskCount(card, subtasks) {
+  const totalSubtasks = subtasks ? subtasks.length : 0;
+  let doneSubtasks = 0;
+  if (subtasks) {
+    for (let i = 0; i < subtasks.length; i++) {
+      if (subtasks[i].done) doneSubtasks++;
+    }
+  }
+  card.querySelector('.task-count').textContent = doneSubtasks + '/' + totalSubtasks;
+};
+
+/**
+ * Sets up drag and click events for task card
  * @param {Object} card -Hands over the information of the card
  * @param {Object} task -Hands over the information of a task
  */
 function setupTaskCardEvents(card, task) {
-  card.ondragstart = function (e) {
+  card.ondragstart = (e) => {
     e.dataTransfer.setData('text', task.id);
     card.classList.add('dragging');
   };
-  card.ondragend = function () {
-    card.classList.remove('dragging');
-  };
+  card.ondragend = () => card.classList.remove('dragging');
   card.onclick = () => renderPopup(task);
 };
 
 /**
- * This function ensures that you can move cards
- * 
- * 
+ * Sets up drop targets for columns
  */
 function setupDropTargets() {
   const columns = document.querySelectorAll('#board .task-column');
-  for (let col of columns) {
-    col.ondragover = function (element) {
-      element.preventDefault();
-      col.classList.add('drag-over');
-    };
-    col.ondragleave = function () {
-      col.classList.remove('drag-over');
-    };
-    col.ondrop = function (element) {
-      handleDrop(element, col);
-    };
-  };
+  columns.forEach(col => {
+    col.ondragover = (e) => { e.preventDefault(); col.classList.add('drag-over'); };
+    col.ondragleave = () => col.classList.remove('drag-over');
+    col.ondrop = (e) => handleDrop(e, col);
+  });
 };
 
 /**
- * With this function you can move the cards to other areas. 
- * In addition, information is handed over to Firebase in which area the card is.
- * 
- * @param {Object} task -Hands over the information of a task
+ * Handles dropping a task into a new column
+ * @param {Object} event -Drag event
  * @param {Object} column -Hands over the information of the column
- * @returns -stop
  */
-function handleDrop(task, column) {
-  task.preventDefault();
+function handleDrop(event, column) {
+  event.preventDefault();
   column.classList.remove('drag-over');
-  let id = task.dataTransfer.getData('text');
-  let card = document.querySelector(`[data-id='${id}']`);
-  let map = { 'to-do-tasks': 'todo', 'in-progress-tasks': 'in-progress', 'await-tasks': 'await', 'done-tasks': 'done' };
-  let newStatus = map[column.classList[0]];
+  const id = event.dataTransfer.getData('text');
+  const card = document.querySelector(`[data-id='${id}']`);
+  const map = { 'to-do-tasks': 'todo', 'in-progress-tasks': 'in-progress', 'await-tasks': 'await', 'done-tasks': 'done' };
+  const newStatus = map[column.classList[0]];
   if (!card || !newStatus) return;
-  update(ref(db, 'tasks/' + id), { status: newStatus }).then(function () {
+  update(ref(db, 'tasks/' + id), { status: newStatus }).then(() => {
     column.appendChild(card);
     updateProgressBar(card, newStatus);
   });
 };
 
 /**
- * This function updates the progress bar in the cards
- * 
+ * Updates the progress bar based on status
  * @param {Object} card -Hands over the information of the card
  * @param {string} newStatus -Hands over the status name
  */
 function updateProgressBar(card, newStatus) {
-  var bar = card.querySelector(".progress-bar");
+  const bar = card.querySelector(".progress-bar");
   bar.className = "progress-bar";
-  var statusClass =
-    newStatus == "todo"
-      ? "progress-25"
-      : newStatus == "in-progress"
-        ? "progress-50"
-        : newStatus == "await"
-          ? "progress-75"
-          : "progress-100";
+  const statusClass = newStatus === "todo" ? "progress-25" :
+                     newStatus === "in-progress" ? "progress-50" :
+                     newStatus === "await" ? "progress-75" : "progress-100";
   bar.classList.add(statusClass);
 };
 
 loadTasks();
-loadEventListeners()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+loadEventListeners();
 
 // ADD TASK OVERLAY
 
-
+/**
+ * Loads the add task script
+ */
 function loadScript() {
   const addTaskScript = document.createElement('script');
   addTaskScript.type = 'module';
@@ -231,94 +199,72 @@ function loadScript() {
   document.head.appendChild(addTaskScript);
 };
 
-
-
+/**
+ * Loads the task form HTML
+ */
 async function loadTaskForm() {
   const response = await fetch('add-task.html');
   const html = await response.text();
-
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
   const form = doc.getElementById('add-task-form');
-
   document.getElementById('formContainer').innerHTML = '';
   document.getElementById('formContainer').appendChild(form);
-  loadScript()
-  loadEventListeners()
-}
-
+  loadScript();
+  loadEventListeners();
+};
 
 /**
- * This function opens the Add-Tasks-Overlay to add new tasks
- * 
- * 
-*/
+ * Opens the Add-Tasks-Overlay
+ */
 export async function openForm() {
-  await loadTaskForm()
+  await loadTaskForm();
   document.getElementById('form-add-task').style.display = 'block';
   document.getElementById('add-task-overlay').style.display = 'flex';
-}
+};
 
 /**
- * This function closes the add-tasks-overlay
- * 
- * 
-*/
+ * Closes the add-tasks-overlay
+ */
 function closeForm() {
   const taskOverlay = document.getElementById('task-overlay');
   const addTaskOverlay = document.getElementById('add-task-overlay');
-
   if (taskOverlay?.classList.contains('d-flex')) {
     taskOverlay.classList.replace('d-flex', 'd-none');
   }
-
   if (addTaskOverlay?.style.display === 'flex') {
     addTaskOverlay.style.display = 'none';
     document.getElementById('form-add-task').style.display = 'none';
   }
 };
 
-
+/**
+ * Sets up event listeners for the board
+ */
 function loadEventListeners() {
-  document.getElementById('closeFormModal').addEventListener('click', () => {
-    closeForm();
-  });
-
+  document.getElementById('closeFormModal').addEventListener('click', () => closeForm());
   document.getElementById('add-task-button').addEventListener('click', openForm);
-
-  document.querySelectorAll('.add-task-btn').forEach(btn => {
-    btn.addEventListener('click', openForm);
-  });
+  document.querySelectorAll('.add-task-btn').forEach(btn => btn.addEventListener('click', openForm));
 };
 
 /**
- * This function prevents a link (a-tag) can be opened
- * 
+ * Prevents a link (a-tag) from opening
  * @param {object} event -PointerEvent gives back
  */
 function handleClick(event) {
   event.preventDefault();
-}
+};
 
 /**
- * This function activates or deactivates the HTML-A-Tag for Add-Task. 
- * With at least 801px width, the A-tag is deactivated and if it is underneath, it is activated
- * 
+ * Handles media query changes for Add-Task link
  * @param {object} event -MediaQueryList gives back
  */
 function handleMediaQueryChange(event) {
   const responsiveLinkElements = document.querySelectorAll("#responsive-link-add-task");
-
   responsiveLinkElements.forEach(element => {
-    if (event.matches) {
-      element.addEventListener("click", handleClick);
-    } else {
-      element.removeEventListener("click", handleClick);
-    }
+    if (event.matches) element.addEventListener("click", handleClick);
+    else element.removeEventListener("click", handleClick);
   });
-
-  window.matchMedia("(min-width: 801px)").addEventListener("change", handleMediaQueryChange);
-}
+};
 
 handleMediaQueryChange(window.matchMedia("(min-width: 801px)"));
-
