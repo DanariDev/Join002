@@ -423,15 +423,12 @@ function handleEnterKey(evt) {
 /**
  * Initializes all components and event listeners
  */
-window.startAddTaskForm = function () {
-  init();
-  loadContacts();
-  updatePriorityButtons();
-  togglePriorityBtnUrgent();
-  togglePriorityBtnMedium();
-  togglePriorityBtnLow();
-  hoverPriorityBtns();
-  updateInputs();
-  stopEnterKeySubmit();
-};
-
+init();
+loadContacts();
+updatePriorityButtons();
+togglePriorityBtnUrgent();
+togglePriorityBtnMedium();
+togglePriorityBtnLow();
+hoverPriorityBtns();
+updateInputs();
+stopEnterKeySubmit();

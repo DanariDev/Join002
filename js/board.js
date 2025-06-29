@@ -82,63 +82,37 @@ function renderTask(task) {
  * @param {Object} task -Hands over the information of a task
  */
 function updateTaskCard(card, task) {
-  updateTaskText(card, task);
-  updateAssignedInitials(card, task);
-  updateSubtaskCount(card, task);
-  updateProgressBarByStatus(card, task.status);
-}
-
-function updateTaskText(card, task) {
   card.querySelector('.task-label').textContent = task.category;
   card.querySelector('.task-title').textContent = task.title;
   card.querySelector('.task-desc').textContent = task.description;
-}
+  const initialsContainer = card.querySelector('.assigned-initials');
+  initialsContainer.classList.add('d-flex');
+  if (Array.isArray(task.assignedTo.sort((selected, compare) => selected.localeCompare(compare)))) {
+    task.assignedTo.forEach(name => {
+      const initials = name
+        .split(" ")
+        .map(part => part[0]?.toUpperCase())
+        .join("");
+      const initialsDiv = document.createElement('div');
+      initialsDiv.classList.add('initials-task');
+      initialsDiv.textContent = initials;
+      initialsDiv.style.backgroundColor = getColorForName(name);
+      initialsContainer.appendChild(initialsDiv);
+    });
+  };
 
-function updateAssignedInitials(card, task) {
-  const container = card.querySelector('.assigned-initials');
-  container.innerHTML = '';
-  container.classList.add('d-flex');
-
-  if (!Array.isArray(task.assignedTo)) return;
-
-  task.assignedTo.sort((a, b) => a.localeCompare(b)).forEach(name => {
-    const div = document.createElement('div');
-    div.classList.add('initials-task');
-    div.textContent = getInitials(name);
-    div.style.backgroundColor = getColorForName(name);
-    container.appendChild(div);
-  });
-}
-
-function getInitials(name) {
-  return name
-    .split(" ")
-    .map(part => part[0]?.toUpperCase())
-    .join("");
-}
-
-function updateSubtaskCount(card, task) {
-  const total = task.subtasks ? task.subtasks.length : 0;
-  const done = task.subtasks?.filter(st => st.done).length || 0;
-  card.querySelector('.task-count').textContent = `${done}/${total}`;
-}
-
-function updateProgressBarByStatus(card, status) {
+  const totalSubtasks = task.subtasks ? task.subtasks.length : 0;
+  let doneSubtasks = 0;
+  if (task.subtasks) {
+    for (let i = 0; i < task.subtasks.length; i++) {
+      if (task.subtasks[i].done) doneSubtasks++;
+    };
+  };
+  card.querySelector('.task-count').textContent = doneSubtasks + '/' + totalSubtasks;
   const bar = card.querySelector('.progress-bar');
-  bar.classList.remove('progress-0', 'progress-25', 'progress-50', 'progress-75', 'progress-100');
-
-  const statusClass = status === 'in-progress'
-    ? 'progress-50'
-    : status === 'await'
-    ? 'progress-75'
-    : status === 'done'
-    ? 'progress-100'
-    : 'progress-25';
-
+  let statusClass = task.status == 'todo' ? 'progress-25' : task.status == 'in-progress' ? 'progress-50' : task.status == 'await' ? 'progress-75' : 'progress-100';
   bar.classList.add(statusClass);
-}
-
-
+};
 
 /**
  * This function opens an overlay and hands over the information of the task that you pressed on
@@ -223,27 +197,39 @@ function updateProgressBar(card, newStatus) {
 loadTasks();
 loadEventListeners()
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // ADD TASK OVERLAY
 
 
 function loadScript() {
-  const oldScript = document.getElementById('taskFormScript');
-  if (oldScript) oldScript.remove();
-
-  const script = document.createElement('script');
-  script.type = 'module';
-  script.src = 'js/add-task.js';
-  script.id = 'taskFormScript';
-
-  script.onload = () => {
-    if (window.startAddTaskForm) {
-      window.startAddTaskForm();
-    }
-  };
-
-  document.head.appendChild(script);
-}
-
+  const addTaskScript = document.createElement('script');
+  addTaskScript.type = 'module';
+  addTaskScript.src = 'js/add-task.js';
+  addTaskScript.id = 'taskFormScript';
+  document.head.appendChild(addTaskScript);
+};
 
 
 
