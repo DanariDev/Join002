@@ -421,14 +421,34 @@ function handleEnterKey(evt) {
 }
 
 /**
+ * This function loads the add-task-overlay on the board side
+ * 
+ */
+export function addTaskOverlayLoad(){
+  clearForm();
+  init();
+  loadContacts();
+  updatePriorityButtons();     
+  togglePriorityBtnUrgent();       
+  togglePriorityBtnMedium()
+  togglePriorityBtnLow();
+  hoverPriorityBtns();
+  updateInputs();
+  stopEnterKeySubmit();
+}
+
+/**
  * Initializes all components and event listeners
  */
-init();
-loadContacts();
-updatePriorityButtons();
-togglePriorityBtnUrgent();
-togglePriorityBtnMedium();
-togglePriorityBtnLow();
-hoverPriorityBtns();
-updateInputs();
-stopEnterKeySubmit();
+if(window.location.pathname == '/add-task.html'){
+  init();
+  loadContacts();
+  updatePriorityButtons();
+  togglePriorityBtnUrgent();
+  togglePriorityBtnMedium();
+  togglePriorityBtnLow();
+  hoverPriorityBtns();
+  updateInputs();
+  stopEnterKeySubmit();
+}
+

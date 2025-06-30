@@ -1,6 +1,7 @@
 import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { renderPopup } from "./task-overlay.js";
+import { addTaskOverlayLoad } from "./add-task.js";
 
 /**
  * This function creates a Dom element
@@ -189,17 +190,6 @@ loadEventListeners();
 // ADD TASK OVERLAY
 
 /**
- * Loads the add task script
- */
-function loadScript() {
-  const addTaskScript = document.createElement('script');
-  addTaskScript.type = 'module';
-  addTaskScript.src = 'js/add-task.js';
-  addTaskScript.id = 'taskFormScript';
-  document.head.appendChild(addTaskScript);
-};
-
-/**
  * Loads the task form HTML
  */
 async function loadTaskForm() {
@@ -210,7 +200,6 @@ async function loadTaskForm() {
   const form = doc.getElementById('add-task-form');
   document.getElementById('formContainer').innerHTML = '';
   document.getElementById('formContainer').appendChild(form);
-  loadScript();
   loadEventListeners();
 };
 
@@ -221,7 +210,8 @@ export async function openForm() {
   await loadTaskForm();
   document.getElementById('form-add-task').style.display = 'block';
   document.getElementById('add-task-overlay').style.display = 'flex';
-};
+  addTaskOverlayLoad();
+}
 
 /**
  * Closes the add-tasks-overlay
