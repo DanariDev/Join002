@@ -242,6 +242,7 @@ async function editTask(taskId) {
 function openEditOverlay() {
     const overlay = document.getElementById('edit-task-overlay');
     overlay.classList.replace('d-none', 'd-flex');
+    document.getElementById('editing-cancel-btn').addEventListener('click', closePopup);
 };
 
 
