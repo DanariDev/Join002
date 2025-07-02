@@ -45,7 +45,7 @@ function informationTemplate(name, letter, index, bgColor, email, initials) {
  */
 function leftAddingTemplate() {
     return `<div class="lightbox-left">
-    <img class="join-logo-left" src="../assets/img/logo_dark.png" alt="Join Logo">
+    <img class="join-logo-left" src="assets/img/logo_dark.png" alt="Join Logo">
     <h2>Add Contact</h2>
     <div class="lightbox-subline">
         <span>Tasks are better with a team!</span>
@@ -61,14 +61,14 @@ function leftAddingTemplate() {
  */
 function rightAddingTemplate() {
     return `<div class="lightbox-right">
-    <img class="current-icon" src="../assets/img/person.png" alt="Person Icon">
+    <img class="current-icon" src="assets/img/person.png" alt="Person Icon">
 <div class="editing-lighbox">
     <input id="edit-name" type="text" placeholder="Name" required>
     <input id="edit-email" type="email" placeholder="Email" required>
     <input id="edit-phone" type="tel" placeholder="Phone" required>
 <div class="btns-lighbox">
 <button id="cancel-btn">Cancel <span>X</span></button>
-<button id="create-btn">Create Contact <img src="../assets/img/check.png" alt="check"></button>
+<button id="create-btn">Create Contact <img src="assets/img/check.png" alt="check"></button>
 </div>
 </div>
 </div>`
@@ -81,7 +81,7 @@ function rightAddingTemplate() {
  */
 function leftEditingTemplate() {
     return `<div class="lightbox-left">
-    <img class="join-logo-left" src="../assets/img/logo_dark.png" alt="Join Logo">
+    <img class="join-logo-left" src="assets/img/logo_dark.png" alt="Join Logo">
     <div class="lightbox-subline">
     <h2>Edit Contact</h2>
         <div class="blue-line"></div>
@@ -103,7 +103,7 @@ function rightEditingTemplate() {
     <input id="edit-phone" type="tel" placeholder="Phone" required>
         <div class="btns-lighbox">
             <button id="deleteBtn">Delete</button>
-            <button id="saveBtn">Save<img src="/assets/img/check.png" alt="check"></button>
+            <button id="saveBtn">Save<img src="assets/img/check.png" alt="check"></button>
         </div>
     </div>
 </div>`
