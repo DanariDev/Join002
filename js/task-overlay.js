@@ -1,4 +1,5 @@
 import { db } from "./firebase-config.js";
+import { createCard, getColorForName } from "./createContacts.js";
 import {
     ref,
     update,
@@ -9,64 +10,11 @@ import {
 let editingSubtasks = [];
 let assignedTo = [];
 
-
-function getColorForName(name) {
-    const colors = [
-        '#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20',
-        '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'
-    ];
-    let hash = 0;
-    for (let i = 0; i < name.length; i++) {
-        hash = name.charCodeAt(i) + ((hash << 5) - hash);
-    };
-    return colors[Math.abs(hash) % colors.length];
-};
-
-
-function createCard(assignedList) {
-    const card = document.createElement('div');
-    card.id = 'edit-assigned';
-    card.className = 'assigned-list';
-    assignedList.forEach(name => card.appendChild(createAssignedItem(name)));
-    return card;
-};
-
-
-function createAssignedItem(name) {
-    const item = document.createElement('div');
-    item.classList.add('assigned-item', 'd-flex');
-    item.appendChild(createInitialsDiv(name));
-    item.appendChild(createNameDiv(name));
-    return item;
-};
-
-
-function createInitialsDiv(name) {
-    const div = document.createElement('div');
-    div.classList.add('initials-task-overlay');
-    div.style.backgroundColor = getColorForName(name);
-    div.textContent = name
-        .split(" ")
-        .map(part => part[0]?.toUpperCase())
-        .join("");
-    return div;
-};
-
-
-function createNameDiv(name) {
-    const div = document.createElement('div');
-    div.classList.add('full-name');
-    div.textContent = name;
-    return div;
-};
-
-
 async function loadContactOptions(assignedTo) {
     const assignedList = Array.isArray(assignedTo)
         ? assignedTo
         : (typeof assignedTo === 'string' && assignedTo.trim())
             ? [assignedTo.trim()] : [];
-
     const wrapper = document.getElementById('popup-assigned');
     wrapper.innerHTML = `<span class="overlay-key">Assigned to:</span>`;
     wrapper.appendChild(createCard(assignedList));
@@ -82,7 +30,6 @@ function taskPopupHtmlTemplate(task) {
     document.getElementById('popup-category').innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
     loadContactOptions(task.assignedTo || []);
     document.getElementById('popup-priority').innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
-
 };
 
 
@@ -117,11 +64,9 @@ export function renderPopup(task) {
     const overlay = document.getElementById('task-overlay');
     overlay.classList.replace('d-none', 'd-flex');
     overlay.dataset.taskId = task.id;
-
     taskPopupHtmlTemplate(task)
     createPopupSubtask(task)
     getLabelColor()
-
     document.getElementById('overlay-close').addEventListener('click', closePopup);
     document.getElementById('delete-task-btn').onclick = () => deleteTask(task.id);
     document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
@@ -215,7 +160,6 @@ function updateAssignedToUI() {
         selectedDiv.textContent = 'Select contact(s)';
         return;
     }
-
     selectedDiv.innerHTML = '';
     assignedTo.forEach(contact => {
         const selectedContact = document.createElement('div');
@@ -228,13 +172,11 @@ function updateAssignedToUI() {
 
 async function editTask(taskId) {
     const taskData = getCurrentValues();
-
     openEditOverlay();
     fillTaskForm(taskData);
     prepareSubtasks(taskData.subtasks);
     setupPriorityButtons(taskData.priority);
     await setupContactsDropdown(taskData.assignedTo);
-
     updateSaveEditBtn();
 };
 
@@ -285,25 +227,20 @@ async function setupContactsDropdown(assignedNames) {
     const allContacts = await loadContacts();
     const dropdownList = document.getElementById('editing-contacts-dropdown-list');
     const dropdownSelected = document.getElementById('editing-contacts-selected');
-
     assignedTo = [];
     dropdownList.innerHTML = '';
     dropdownSelected.innerHTML = '';
     dropdownList.classList.remove('show');
-
     allContacts.forEach(contact => {
         const entry = createContactEntry(contact, assignedNames);
         dropdownList.appendChild(entry.wrapper);
         if (entry.checked) assignedTo.push({ name: contact.name, email: contact.email });
     });
-
     updateAssignedToUI();
-
     dropdownSelected.onclick = (e) => {
         e.stopPropagation();
         dropdownList.classList.toggle('show');
     };
-
     window.addEventListener('click', (event) => {
         if (
             !dropdownList.contains(event.target) &&
@@ -332,7 +269,6 @@ function createContactEntry(contact, assignedNames) {
         updateAssignedToUI();
         updateSaveEditBtn();
     };
-
     const initials = contact.name
         .split(' ')
         .map(part => part[0]?.toUpperCase())
@@ -343,17 +279,14 @@ function createContactEntry(contact, assignedNames) {
     editInitials.classList.add('assigned-initials');
     editInitials.textContent = initials;
     editInitials.style.backgroundColor = getColorForName(contact.name);
-
     const label = document.createElement('label');
     label.textContent = contact.name;
     label.classList.add('form-selected-contact');
     label.prepend(checkbox);
     label.appendChild(editInitials);
-
     const wrapper = document.createElement('div');
     wrapper.classList.add('contact-entry');
     wrapper.appendChild(label);
-
     return { wrapper, checked: checkbox.checked };
 };
 
@@ -363,10 +296,8 @@ function updateSaveEditBtn() {
     const description = document.getElementById('editing-description').value.trim();
     const date = document.getElementById('editing-date').value;
     const category = document.getElementById('editing-category').value;
-
     const saveBtn = document.getElementById('editing-save-btn');
     const allFilled = title && description && date && category && assignedTo.length > 0;
-
     saveBtn.disabled = !allFilled;
     saveBtn.classList.toggle('disabled', !allFilled);
 };
@@ -395,9 +326,7 @@ function getCurrentValues() {
 function addSubtaskFromInput() {
     const input = document.getElementById('editing-subtask');
     const text = input.value.trim();
-
     if (!text) return;
-
     editingSubtasks.push({ text, done: false });
     renderEditingSubtasks();
     input.value = '';
@@ -457,7 +386,6 @@ function initSubtaskInputAndSaveListener() {
             addSubtaskFromInput();
         }
     });
-
     document.querySelector('.subtask-button').addEventListener('click', addSubtaskFromInput);
     document.getElementById('editing-save-btn').addEventListener('click', handleSaveEditTask);
 };
