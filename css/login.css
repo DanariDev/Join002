@@ -136,19 +136,19 @@
 }
 
 .email-input {
-    background-image: url("/assets/img/mail.svg");
+    background-image: url("../assets/img/mail.svg");
     background-repeat: no-repeat;
     background-position: right 24px center;
 }
 
 .password-input {
-    background-image: url("/assets/img/lock.png");
+    background-image: url("../assets/img/lock.png");
     background-repeat: no-repeat;
     background-position: right 24px center;
 }
 
 .name-input {
-    background-image: url("/assets/img/person.png");
+    background-image: url("../assets/img/person.png");
     background-repeat: no-repeat;
     background-position: right 24px center;
 }
