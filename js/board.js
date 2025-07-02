@@ -166,7 +166,7 @@ function handleDrop(event, column) {
   if (!card || !newStatus) return;
   update(ref(db, 'tasks/' + id), { status: newStatus }).then(() => {
     column.appendChild(card);
-    updateProgressBar(card, subtask);
+    updateProgressBar(card);
   });
 };
 
