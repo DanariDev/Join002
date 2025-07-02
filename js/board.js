@@ -166,9 +166,15 @@ function handleDrop(event, column) {
   if (!card || !newStatus) return;
   update(ref(db, 'tasks/' + id), { status: newStatus }).then(() => {
     column.appendChild(card);
-    updateProgressBar(card);
+    const taskRef = ref(db, 'tasks/' + id);
+    onValue(taskRef, (snapshot) => {
+      const task = snapshot.val();
+      if (task && Array.isArray(task.subtasks)) {
+        updateProgressBar(card, task.subtasks);
+      }
+    }, { onlyOnce: true });
   });
-};
+}
 
 /**
  * Updates the progress bar based on status
