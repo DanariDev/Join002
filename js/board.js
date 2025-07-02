@@ -88,7 +88,7 @@ function updateTaskCard(card, task) {
   initialsContainer.classList.add('d-flex');
   updateInitials(initialsContainer, task.assignedTo);
   updateSubtaskCount(card, task.subtasks);
-  updateProgressBar(card, task.status);
+  updateProgressBar(card, task.subtasks);
 };
 
 /**
@@ -175,13 +175,18 @@ function handleDrop(event, column) {
  * @param {Object} card -Hands over the information of the card
  * @param {string} newStatus -Hands over the status name
  */
-function updateProgressBar(card, newStatus) {
+function updateProgressBar(card, subtasks) {
   const bar = card.querySelector(".progress-bar");
   bar.className = "progress-bar";
-  const statusClass = newStatus === "todo" ? "progress-25" :
-                     newStatus === "in-progress" ? "progress-50" :
-                     newStatus === "await" ? "progress-75" : "progress-100";
-  bar.classList.add(statusClass);
+
+  if (!Array.isArray(subtasks) || subtasks.length === 0) {
+    bar.style.width = '0%';
+    return;
+  }
+  const total = subtasks.length;
+  const done = subtasks.filter(st => st.done).length;
+  const percentage = Math.round((done / total) * 100);
+  bar.style.width = `${percentage}%`;
 };
 
 loadTasks();
