@@ -1,11 +1,6 @@
 import { db } from "./firebase-config.js";
-import {
-  ref,
-  onValue,
-  update,
-  push,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getColorForName } from "./createContacts.js";
+import { ref, push, get, } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 let subtasks = [];
 let contacts = [];
@@ -19,32 +14,7 @@ let assignedTo = [];
 function getValue(selector) {
   const element = document.querySelector(selector);
   return element ? element.value.trim() : "";
-}
-
-/**
- * Generates a color for a given name based on a hash function
- * @param {string} name - The name to generate a color for
- * @returns {string} - A hex color code
- */
-function getColorForName(name) {
-  const colors = [
-    "#FF5733",
-    "#33B5FF",
-    "#33FF99",
-    "#FF33EC",
-    "#ffcb20",
-    "#9D33FF",
-    "#33FFDA",
-    "#FF8C33",
-    "#3385FF",
-    "#FF3333",
-  ];
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return colors[Math.abs(hash) % colors.length];
-}
+};
 
 /**
  * Determines the selected priority of the task
@@ -58,10 +28,7 @@ function getPriority() {
   ) {
     return "urgent";
   }
-  if (
-    document
-      .getElementById("medium-btn")
-      .classList.contains("medium-btn-active")
+  if (document.getElementById("medium-btn").classList.contains("medium-btn-active")
   ) {
     return "medium";
   }
@@ -69,7 +36,7 @@ function getPriority() {
     return "low";
   }
   return "medium";
-}
+};
 
 /**
  * Renders the list of subtasks in the UI
@@ -82,7 +49,7 @@ function renderSubtasks() {
     li.textContent = subtasks[i].text;
     list.appendChild(li);
   }
-}
+};
 
 /**
  * Adds a new subtask from the input field
@@ -95,7 +62,7 @@ function addNewSubtask() {
     input.value = "";
     renderSubtasks();
   }
-}
+};
 
 /**
  * Creates a dropdown item for a contact
@@ -116,7 +83,7 @@ function createDropdownItem(contact) {
             <div class="assigned-initials" style="background-color:${color};">${initials}</div>
         </label>`;
   return item;
-}
+};
 
 /**
  * Populates the contacts dropdown with sorted contacts
@@ -124,11 +91,9 @@ function createDropdownItem(contact) {
 function populateContactsDropdown() {
   const list = document.getElementById("contacts-dropdown-list");
   list.innerHTML = "";
-  contacts
-    .sort((a, b) => a.name.localeCompare(b.name))
-    .forEach((c) => {
-      list.appendChild(createDropdownItem(c));
-    });
+  contacts.sort((a, b) => a.name.localeCompare(b.name)).forEach((c) => {
+    list.appendChild(createDropdownItem(c));
+  });
   list.querySelectorAll('input[type="checkbox"]').forEach((checkbox) => {
     checkbox.addEventListener("change", () => {
       const {
@@ -143,7 +108,7 @@ function populateContactsDropdown() {
       updateCreateTaskBtn();
     });
   });
-}
+};
 
 /**
  * Updates the UI to reflect selected contacts
@@ -154,7 +119,6 @@ function updateAssignedToUI() {
     selectedDiv.textContent = "Select contact(s)";
     return;
   }
-
   selectedDiv.innerHTML = "";
   assignedTo.forEach((contact) => {
     const selectedContact = document.createElement("div");
@@ -162,7 +126,7 @@ function updateAssignedToUI() {
     selectedContact.textContent = contact.name;
     selectedDiv.appendChild(selectedContact);
   });
-}
+};
 
 /**
  * Loads contacts from Firebase and populates the dropdown
@@ -193,7 +157,7 @@ function createTask(event) {
     status: "todo",
   };
   validateAndSaveTask(task);
-}
+};
 
 /**
  * Validates task data and saves it to Firebase
@@ -207,10 +171,9 @@ function validateAndSaveTask(task) {
   push(ref(db, "tasks"), task).then(function () {
     alert("Aufgabe erfolgreich gespeichert!");
     resetForm();
-
     window.location.href = "board.html";
   });
-}
+};
 
 /**
  * Resets the task form to its initial state
@@ -221,7 +184,7 @@ function resetForm() {
   renderSubtasks();
   updateCreateTaskBtn();
   updatePriorityButtons();
-}
+};
 
 /**
  * Updates the create task button's enabled state based on form completion
@@ -231,12 +194,11 @@ function updateCreateTaskBtn() {
   const date = getValue("#date");
   const category = getValue("#category");
   const hasContacts = assignedTo.length > 0;
-
   const allFilled = title && date && category && hasContacts;
   const createBtn = document.getElementById("create-task-btn");
   createBtn.disabled = !allFilled;
   createBtn.classList.toggle("disabled", !allFilled);
-}
+};
 
 /**
  * Updates the priority buttons' active state in the UI
@@ -251,7 +213,7 @@ function updatePriorityButtons() {
   const priority = getPriority();
   const activeBtn = document.querySelector("." + priority + "-btn");
   if (activeBtn) activeBtn.classList.add("active");
-}
+};
 
 /**
  * Toggles the urgent priority button and updates its icon
@@ -271,7 +233,7 @@ function togglePriorityBtnUrgent() {
     mediumBtn.querySelector("img").src = "assets/img/medium-btn-icon.png";
     lowBtn.querySelector("img").src = "assets/img/low-btn-icon.png";
   };
-}
+};
 
 /**
  * Toggles the medium priority button and updates its icon
@@ -291,7 +253,7 @@ function togglePriorityBtnMedium() {
     urgentBtn.querySelector("img").src = "assets/img/urgent-btn-icon.png";
     lowBtn.querySelector("img").src = "assets/img/low-btn-icon.png";
   };
-}
+};
 
 /**
  * Toggles the low priority button and updates its icon
@@ -311,7 +273,7 @@ function togglePriorityBtnLow() {
     urgentBtn.querySelector("img").src = "assets/img/urgent-btn-icon.png";
     mediumBtn.querySelector("img").src = "assets/img/medium-btn-icon.png";
   };
-}
+};
 
 /**
  * Adds hover effects to priority buttons
@@ -331,7 +293,7 @@ function hoverPriorityBtns() {
         img.src = `assets/img/${icon}.png`;
     };
   });
-}
+};
 
 /**
  * Initializes event listeners and form state
@@ -348,7 +310,7 @@ function init() {
     if (e.key === "Enter") e.preventDefault(), addNewSubtask();
   });
   updateInputs();
-}
+};
 
 /**
  * Initializes dropdown toggle behavior for contacts selection
@@ -356,15 +318,13 @@ function init() {
 function initDropdownHandling() {
   const dropdown = document.getElementById("contacts-dropdown-list");
   const toggle = document.getElementById("contacts-selected");
-
   toggle.addEventListener("click", () => dropdown.classList.toggle("show"));
-
   document.addEventListener("click", (e) => {
     if (!dropdown.contains(e.target) && !toggle.contains(e.target)) {
       dropdown.classList.remove("show");
     }
   });
-}
+};
 
 /**
  * Clears the form and resets all fields
@@ -374,11 +334,7 @@ function clearForm() {
   createBtn.disabled = true;
   createBtn.classList.add("disabled");
   document.querySelectorAll(".all-priority-btns").forEach((btn) => {
-    btn.classList.remove(
-      "urgent-btn-active",
-      "medium-btn-active",
-      "low-btn-active"
-    );
+    btn.classList.remove("urgent-btn-active", "medium-btn-active", "low-btn-active");
     btn.querySelector("img").src = `assets/img/${btn.id}-icon.png`;
   });
   assignedTo = [];
@@ -388,7 +344,7 @@ function clearForm() {
     .forEach((checkBox) => (checkBox.checked = false));
   subtasks = [];
   renderSubtasks();
-}
+};
 
 /**
  * Adds input event listeners to form fields to update the create button
@@ -399,7 +355,7 @@ function updateInputs() {
     const input = document.querySelector(inputs[i]);
     if (input) input.oninput = updateCreateTaskBtn;
   }
-}
+};
 
 /**
  * Prevents form submission on Enter key for text inputs
@@ -407,7 +363,7 @@ function updateInputs() {
 function stopEnterKeySubmit() {
   document.removeEventListener("keypress", handleEnterKey);
   document.addEventListener("keypress", handleEnterKey);
-}
+};
 
 /**
  * Handles Enter key press to prevent form submission
@@ -418,37 +374,24 @@ function handleEnterKey(evt) {
   if (evt.key === "Enter" && node.type === "text") {
     evt.preventDefault();
   }
-}
+};
 
 /**
  * This function loads the add-task-overlay on the board side
- * 
  */
-export function addTaskOverlayLoad(){
+export function addTaskOverlayLoad() {
   clearForm();
   init();
   loadContacts();
-  updatePriorityButtons();     
-  togglePriorityBtnUrgent();       
+  updatePriorityButtons();
+  togglePriorityBtnUrgent();
   togglePriorityBtnMedium()
   togglePriorityBtnLow();
   hoverPriorityBtns();
   updateInputs();
   stopEnterKeySubmit();
-}
+};
 
-/**
- * Initializes all components and event listeners
- */
-if(window.location.pathname == '/add-task.html'){
-  init();
-  loadContacts();
-  updatePriorityButtons();
-  togglePriorityBtnUrgent();
-  togglePriorityBtnMedium();
-  togglePriorityBtnLow();
-  hoverPriorityBtns();
-  updateInputs();
-  stopEnterKeySubmit();
-}
-
+if (window.location.pathname == '/add-task.html') {
+  addTaskOverlayLoad()
+};
