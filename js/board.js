@@ -166,7 +166,7 @@ function handleDrop(event, column) {
   if (!card || !newStatus) return;
   update(ref(db, 'tasks/' + id), { status: newStatus }).then(() => {
     column.appendChild(card);
-    updateProgressBar(card, newStatus);
+    updateProgressBar(card, subtask);
   });
 };
 
@@ -232,6 +232,7 @@ function closeForm() {
     document.getElementById('form-add-task').style.display = 'none';
   }
 };
+
 
 /**
  * Sets up event listeners for the board
