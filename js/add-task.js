@@ -392,6 +392,8 @@ export function addTaskOverlayLoad() {
   stopEnterKeySubmit();
 };
 
-if (window.location.pathname == '/add-task.html') {
-  addTaskOverlayLoad()
-};
+window.location.pathname.split('/').forEach(element => { 
+  if(element == 'add-task.html'){
+    addTaskOverlayLoad()
+  }
+});
