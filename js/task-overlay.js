@@ -227,6 +227,7 @@ function setupPriorityButtons(priorityValue) {
 
 async function setupContactsDropdown(assignedNames) {
     const allContacts = await loadContacts();
+    allContacts.sort((a, b) => a.name.localeCompare(b.name))
     const dropdownList = document.getElementById('editing-contacts-dropdown-list');
     const dropdownSelected = document.getElementById('editing-contacts-selected');
     assignedTo = [];
