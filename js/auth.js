@@ -21,26 +21,20 @@ async function signup() {
   const email = document.querySelector(".email-input")?.value.trim();
   const pass = document.querySelector(".password-input")?.value.trim();
   const repeat = document.getElementById("password-repeat-input")?.value.trim();
-  if (!name || !email || !pass || !repeat)
-    return alert("Bitte alle Felder ausfüllen!");
+  if (!name || !email || !pass || !repeat) return alert("Bitte alle Felder ausfüllen!");
+  if (!/^\S+@\S+\.\S+$/.test(email)) return alert("Ungültige E-Mail-Adresse!");
   if (pass !== repeat) return alert("Passwörter stimmen nicht überein!");
 
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, pass);
     await set(ref(db, `users/${cred.user.uid}`), { name, email });
-    const initials =
-      name.split(" ")[0][0].toUpperCase() + name.split(" ")[1][0].toUpperCase();
-    const newContactRef = push(ref(db, "contacts"));
-    await set(newContactRef, { name, email, initials });
-
-    localStorage.setItem("isGuest", "false");
-    localStorage.setItem("userName", name);
-    alert("Registrierung erfolgreich!");
-    window.location.href = "summary.html";
-  } catch (e) {
-    alert("Fehler bei Registrierung:\n" + e.message);
-  }
+    const initials = name.split(" ")[0][0].toUpperCase() + name.split(" ")[1][0].toUpperCase();
+    await set(push(ref(db, "contacts")), { name, email, initials });
+    localStorage.setItem("isGuest", "false"); localStorage.setItem("userName", name);
+    alert("Registrierung erfolgreich!"); window.location.href = "summary.html";
+  } catch (e) { alert("Fehler bei Registrierung:\n" + e.message); }
 }
+
 
 /**
  * With this function a user logged in. It is checked whether email and password fit a user
@@ -50,7 +44,9 @@ async function signup() {
 function login() {
   const email = document.querySelector(".email-input")?.value.trim();
   const pass = document.querySelector(".password-input")?.value.trim();
+
   if (!email || !pass) return alert("Bitte E-Mail und Passwort eingeben!");
+  if (!/^\S+@\S+\.\S+$/.test(email)) return alert("Ungültige E-Mail-Adresse!");
 
   signInWithEmailAndPassword(auth, email, pass)
     .then(async (cred) => {
@@ -62,6 +58,7 @@ function login() {
     })
     .catch((e) => alert("Login fehlgeschlagen:\n" + e.message));
 }
+
 
 /**
  * This function can be registered with a guest login

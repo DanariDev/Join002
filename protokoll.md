@@ -64,7 +64,7 @@ Sicherstellen, dass Registrierung bei ungültigen Daten nicht durchläuft.
 
 
 
-Funktionalität:
+Funktionalität:✅
 Problem: Registrierung funktioniert teilweise trotz Fehlermeldungen (z. B. Login mit test2.com).
 Lösung: Registrierungsprozess überprüfen und sicherstellen, dass er bei ungültigen Daten korrekt abbricht.
 
@@ -72,7 +72,7 @@ Lösung: Registrierungsprozess überprüfen und sicherstellen, dass er bei ungü
 
 4. Kontakte-Seite
 
-Validierung:
+Validierung:✅
 Problem: Eingabe ungültiger E-Mail-Adressen wird nicht abgefangen.
 Lösung: Validierung für E-Mail-Felder implementieren, um ungültige Eingaben zu verhindern.
 
@@ -82,7 +82,7 @@ Problem: Zu wenig Abstand zu den Seitenrändern.
 Lösung: Abstände gemäß Design-Vorlage anpassen.
 
 
-Kontakt-Auswahl:
+Kontakt-Auswahl:✅
 Problem: Nach Aktionen wie Editieren oder Löschen bleibt der Kontakt nicht ausgewählt.
 Lösung: Sicherstellen, dass der Kontakt nach solchen Aktionen ausgewählt bleibt.
 
