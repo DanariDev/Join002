@@ -14,8 +14,12 @@
 
     .login-page-wrapper {
         height: auto;
-        padding: 16rem 4rem 4rem 4rem;
+        padding: 16rem 1rem 1rem 1rem;
         justify-content: space-between;
+    }
+
+    .login-box {
+        width: 90%;
     }
 
     .sign-up-wrapper-responsive {

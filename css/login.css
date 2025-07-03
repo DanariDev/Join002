@@ -43,9 +43,9 @@
 }
 
 .sign-up-btn:hover {
-    background-color: var(--clr-200);
-    border: 1px solid var(--clr-700);
-    color: var(--clr-700);
+    background-color: var(--clr-500);
+    border-color: var(--clr-500);
+    box-shadow: 0px 2px 5px rgb(92, 92, 92);
 }
 
 .logo {
@@ -60,12 +60,12 @@
 .login-box {
     display: flex;
     flex-direction: column;
-    background: #ffffff; /* Weiße Karte */
+    background: #ffffff;
     width: 70%;
-    max-width: 400px; /* Begrenzte Breite für bessere Proportionen */
-    padding: 40px;
+    max-width: 800px;
+    padding: 1rem;
     border-radius: 12px;
-    box-shadow: none; /* Schatten entfernen */
+    box-shadow: none;
     text-align: center;
 }
 
@@ -117,19 +117,30 @@
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    color: var(--clr-700); /* Dunkle Schriftfarbe */
+    color: var(--clr-200);
     height: 48px;
-    background-color: #ffffff; /* Weißer Gasblock */
-    border: 2px solid var(--clr-700); /* Passender Rahmen */
+    background-color: var(--clr-700);
+    border: 1px solid var(--clr-700);
     flex: 1;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.btn-secondary:hover,
+.btn-secondary {
+    color: var(--clr-700);
+    background-color: #ffffff;
+    border: 1px solid var(--clr-700);
+}
+
 .btn-primary:hover {
-    background-color: var(--clr-700); /* Dunkler Hintergrund beim Hover */
-    color: var(--clr-200); /* Helle Schrift beim Hover */
-    border-color: var(--clr-700);
+    background-color: var(--clr-500);
+    border-color: var(--clr-500);
+    box-shadow: 0px 2px 5px rgb(92, 92, 92);
+}
+
+.btn-secondary:hover {
+    border-color: var(--clr-500);
+    color: var(--clr-500);
+    box-shadow: 0px 2px 5px rgb(92, 92, 92);
 }
 
 .email-input {
@@ -174,10 +185,14 @@ footer {
     gap: 20px;
 }
 
+label {
+    font-size: var(--fs-16);
+}
+
 footer a {
     text-decoration: none;
     color: var(--clr-900);
-    font-size: var(--fs-20); /* Erhöhte Schriftgröße */
+    font-size: var(--fs-16);
     gap: 12px;
 }
 
