@@ -288,5 +288,13 @@
   height: 100px;
   justify-content: center;
   align-items: center;
+}
 
+#no-results-message {
+  display: none;
+  color: red;
+  font-size: var(--fs-21);
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
