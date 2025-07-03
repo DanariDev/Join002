@@ -107,7 +107,7 @@ function count(arr, key, val) {
 function showDeadline(tasks) {
     let dates = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].dueDate) {
+        if (tasks[i].priority == "urgent") {
             let d = new Date(tasks[i].dueDate);
             if (d > new Date()) dates.push(d);
         }
