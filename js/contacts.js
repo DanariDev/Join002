@@ -1,495 +1,255 @@
-import {
-  ref,
-  set,
-  push,
-  update,
-  remove,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, set, push, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { db } from "./firebase-config.js";
+import { fetchContacts, addContact, updateContact, removeContact, removeUserByEmail, removeContactFromAllTasks, getInitials, getColorForName } from "./contacts-data.js";
 
-const BASE_URL = "https://join002-26fa4-default-rtdb.firebaseio.com/";
-let contacts = [];
-let groupedContacts = [];
-let selectedContact = null;
 const mediaQuery = window.matchMedia("(max-width: 800px)");
+let contacts = [], groupedContacts = [], selectedContact = null;
 
-/**
- * Generates a color for a given name based on a hash function
- *
- * @param {string} name - The name to generate a color for
- * @returns {string} - A hex color code
- */
-function getColorForName(name) {
-  const colors = [
-    "#FF5733",
-    "#33B5FF",
-    "#33FF99",
-    "#FF33EC",
-    "#ffcb20",
-    "#9D33FF",
-    "#33FFDA",
-    "#FF8C33",
-    "#3385FF",
-    "#FF3333",
-  ];
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return colors[Math.abs(hash) % colors.length];
-}
-
-/**
- * Initializes the contacts list by creating and sorting it
- */
+/** Initializes and displays the contacts list */
 async function initContactsList() {
   await createList();
   sortList();
   generateSortedContacts();
 }
 
-/**
- * Fetches all contacts from Firebase
- *
- * @param {string} path - The Firebase database path
- * @returns {Object} - The contacts data
- */
-async function getAllContacts(path) {
-  const response = await fetch(BASE_URL + path + ".json");
-  const data = await response.json();
-  return data;
-}
-
-/**
- * Creates the contacts list from Firebase data
- */
+/** Fetches contacts from Firebase and builds list */
 async function createList() {
-  document.getElementById("contacts-list-wrapper").innerHTML = "";
+  getElement("contacts-list-wrapper").innerHTML = "";
   contacts = [];
   groupedContacts = [];
-
-  let contactResponse = await getAllContacts("contacts");
-  let ContactKeysArray = Object.keys(contactResponse);
-
-  for (let index = 0; index < ContactKeysArray.length; index++) {
-    contacts.push({
-      id: ContactKeysArray[index],
-      contact: contactResponse[ContactKeysArray[index]],
-    });
-  }
+  const data = await fetchContacts();
+  Object.keys(data).forEach(key => contacts.push({ id: key, contact: data[key] }));
 }
 
-/**
- * Sorts contacts alphabetically and groups them by first letter
- */
+/** Sorts contacts and groups by first letter */
 function sortList() {
   contacts.sort((a, b) => a.contact.name.localeCompare(b.contact.name));
-
   groupedContacts = {};
-
-  contacts.forEach((element) => {
-    let firstLetter = element.contact.name.charAt(0).toUpperCase();
-    if (!groupedContacts[firstLetter]) {
-      groupedContacts[firstLetter] = [];
-    }
-    groupedContacts[firstLetter].push(element);
+  contacts.forEach(el => {
+    let letter = el.contact.name[0].toUpperCase();
+    groupedContacts[letter] = groupedContacts[letter] || [];
+    groupedContacts[letter].push(el);
   });
 }
 
-/**
- * Generates HTML for sorted contacts grouped by first letter
- */
+/** Generates HTML for grouped contacts */
 function generateSortedContacts() {
-  const sortedLetters = Object.keys(groupedContacts).sort();
-
-  for (let i = 0; i < sortedLetters.length; i++) {
-    const letter = sortedLetters[i];
-    document.getElementById("contacts-list-wrapper").innerHTML +=
-      createAlphabetAndGroupTemplate(letter);
-
-    for (let x = 0; x < groupedContacts[letter].length; x++) {
-      document.getElementById(`list-group-${letter}`).innerHTML +=
-        getInformation(letter, x);
-    }
-  }
-  addContactOpenenigEvent();
+  Object.keys(groupedContacts).sort().forEach(letter => {
+    getElement("contacts-list-wrapper").innerHTML += createAlphabetAndGroupTemplate(letter);
+    groupedContacts[letter].forEach((_, x) => {
+      getElement(`list-group-${letter}`).innerHTML += getInformation(letter, x);
+    });
+  });
+  setupContactEvents();
   handleMediaQueryChange(mediaQuery);
 }
 
-/**
- * Adds click event listeners to contact elements
- */
-function addContactOpenenigEvent() {
-  document.querySelectorAll(".list-contact-wrapper").forEach((el) => {
-    const letter = el.dataset.letter;
-    const index = parseInt(el.dataset.index);
-    el.addEventListener("click", () => {
-      findCurrentContact(`contact${letter}-${index}`, letter, index);
-    });
+/** Sets up click events for contact elements */
+function setupContactEvents() {
+  document.querySelectorAll(".list-contact-wrapper").forEach(el => {
+    const letter = el.dataset.letter, index = parseInt(el.dataset.index);
+    el.onclick = () => findCurrentContact(`contact${letter}-${index}`, letter, index);
   });
 }
 
-/**
- * Generates contact information HTML
- *
- * @param {string} letter - The first letter of the contact's name
- * @param {number} index - The index of the contact in the group
- * @returns {string} - HTML template for contact information
- */
+/** Creates HTML for a contact entry */
 function getInformation(letter, index) {
-  const contact = groupedContacts[letter][index].contact;
-  const initials = contact.initials;
-  const name = contact.name;
-  const email = contact.email;
-  const bgColor = getColorForName(name);
-  return informationTemplate(name, letter, index, bgColor, email, initials);
+  const { contact: { initials, name, email } } = groupedContacts[letter][index];
+  return informationTemplate(name, letter, index, getColorForName(name), email, initials);
 }
 
-/**
- * Finds and displays the selected contact
- *
- * @param {string} idNumber - The contact's HTML element ID
- * @param {string} letter - The first letter of the contact's name
- * @param {number} index - The index of the contact in the group
- */
+/** Selects and displays a contact */
 function findCurrentContact(idNumber, letter, index) {
-  const currentContact = groupedContacts[letter][index].contact;
-  const card = document.getElementById("showed-current-contact");
+  const contact = groupedContacts[letter][index].contact;
+  selectedContact = { id: groupedContacts[letter][index].id, ...contact };
+  showContactCard(contact, idNumber);
+  setTimeout(() => getElement("showed-current-contact").classList.add("show"), 10);
+}
+
+/** Shows contact card with details */
+function showContactCard(contact, idNumber) {
+  const card = getElement("showed-current-contact");
   card.classList.replace("d-none", "d-flex");
-  const icon = document.getElementById("current-icon");
-  icon.innerHTML = currentContact.initials;
-  icon.style.backgroundColor = getColorForName(currentContact.name);
-  fillCurrentContact(currentContact);
+  const icon = getElement("current-icon");
+  icon.innerHTML = contact.initials;
+  icon.style.backgroundColor = getColorForName(contact.name);
+  fillCurrentContact(contact);
   showCurrentContact(idNumber);
-
-  selectedContact = {
-    id: groupedContacts[letter][index].id,
-    name: currentContact.name,
-    email: currentContact.email,
-    phone: currentContact.phone,
-    icon: currentContact.initials,
-  };
-
-  setTimeout(() => card.classList.add("show"), 10);
 }
 
-/**
- * Fills the current contact card with information
- *
- * @param {Object} currentContact - The contact object to display
- */
-function fillCurrentContact(currentContact) {
-  document.getElementById("current-name").innerHTML = currentContact.name;
-
-  const currentMail = document.getElementById("current-mail");
-  currentMail.setAttribute("href", "mailto:" + currentContact.email);
-  currentMail.textContent = currentContact.email;
-
-  const currentPhone = document.getElementById("current-phone");
-  currentPhone.setAttribute("href", "tel:" + currentContact.phone);
-  currentPhone.textContent = currentContact.phone;
+/** Fills contact card with data */
+function fillCurrentContact({ name, email, phone }) {
+  getElement("current-name").innerHTML = name;
+  const mail = getElement("current-mail");
+  mail.href = `mailto:${email}`;
+  mail.textContent = email;
+  const phoneEl = getElement("current-phone");
+  phoneEl.href = `tel:${phone}`;
+  phoneEl.textContent = phone;
 }
 
-/**
- * Shows the selected contact's details
- *
- * @param {string} idNumber - The contact's HTML element ID
- */
+/** Highlights selected contact */
 function showCurrentContact(idNumber) {
-  document.getElementById("right-section").classList.remove("d-none");
-  document.getElementById("responsive-small-edit").classList.remove("d-none");
-  document.getElementById("responsive-small-add").classList.add("d-none");
-  document
-    .querySelectorAll(".choosen")
-    .forEach((el) => el.classList.remove("choosen"));
-  document.getElementById(idNumber).classList.add("choosen");
+  toggleElements("right-section", "responsive-small-edit", null, false);
+  getElement("responsive-small-add").classList.add("d-none");
+  document.querySelectorAll(".choosen").forEach(el => el.classList.remove("choosen"));
+  getElement(idNumber).classList.add("choosen");
 }
 
-/**
- * Opens the lightbox for adding a new contact
- */
-function openLightboxAdd() {
-  document
-    .getElementById("lightbox-overlay")
-    .classList.replace("d-none", "d-flex");
+/** Opens lightbox for add/edit contact */
+function openLightbox(mode) {
+  const overlay = getElement("lightbox-overlay");
+  overlay.classList.replace("d-none", "d-flex");
   document.body.style.overflow = "hidden";
-  const lightbox = document.getElementById("lightbox");
+  const lightbox = getElement("lightbox");
   lightbox.innerHTML = "";
-  lightbox.appendChild(
-    document.createRange().createContextualFragment(leftAddingTemplate())
-  );
-  lightbox.appendChild(
-    document.createRange().createContextualFragment(rightAddingTemplate())
-  );
-
-  setTimeout(() => {
-    lightbox.classList.add("show");
-    document.getElementById("create-btn").onclick = (e) => {
-      e.preventDefault();
-      addContact();
-    };
-    document.getElementById("cancel-btn").onclick = (e) => {
-      e.preventDefault();
-      closeLightbox();
-    };
-  }, 10);
+  renderLightboxTemplates(mode, lightbox);
+  setupLightboxEvents(mode);
 }
 
-/**
- * Opens the lightbox for editing an existing contact
- */
-function openLightboxEdit() {
-  document.body.style.overflow = "hidden";
-  document
-    .getElementById("lightbox-overlay")
-    .classList.replace("d-none", "d-flex");
-  const lightbox = document.getElementById("lightbox");
-  lightbox.innerHTML = "";
-  lightbox.appendChild(
-    document.createRange().createContextualFragment(leftEditingTemplate())
-  );
-  lightbox.appendChild(
-    document.createRange().createContextualFragment(rightEditingTemplate())
-  );
-  const icon = document.getElementById("edit-icon");
-  icon.innerText = selectedContact.icon || "";
-  icon.style.backgroundColor = getColorForName(selectedContact.name);
-  document.getElementById("edit-name").value = selectedContact.name || "";
-  document.getElementById("edit-email").value = selectedContact.email || "";
-  document.getElementById("edit-phone").value = selectedContact.phone || "";
-  addSaveAndDeleteEvent();
+/** Renders lightbox templates */
+function renderLightboxTemplates(mode, lightbox) {
+  const left = mode === "add" ? leftAddingTemplate() : leftEditingTemplate();
+  const right = mode === "add" ? rightAddingTemplate() : rightEditingTemplate();
+  lightbox.appendChild(document.createRange().createContextualFragment(left));
+  lightbox.appendChild(document.createRange().createContextualFragment(right));
+  if (mode === "edit") fillEditForm();
   setTimeout(() => lightbox.classList.add("show"), 10);
 }
 
-/**
- * Adds event listeners for save and delete buttons in edit lightbox
- */
-function addSaveAndDeleteEvent() {
-  ["saveBtn", "deleteBtn"].forEach((id) => {
-    document.getElementById(id).onclick = () => {
-      if (selectedContact?.id) {
-        id === "saveBtn"
-          ? saveContactEdits(selectedContact.id)
-          : deleteContact(selectedContact.id);
-      } else {
-        alert("no contact found!");
-      }
-    };
-  });
+/** Fills edit form with contact data */
+function fillEditForm() {
+  if (!selectedContact) return;
+  const icon = getElement("edit-icon");
+  icon.innerText = selectedContact.icon || "";
+  icon.style.backgroundColor = getColorForName(selectedContact.name);
+  getElement("edit-name").value = selectedContact.name || "";
+  getElement("edit-email").value = selectedContact.email || "";
+  getElement("edit-phone").value = selectedContact.phone || "";
 }
 
-/**
- * Closes the lightbox
- */
-function closeLightbox() {
-  const lightbox = document.getElementById("lightbox");
-  lightbox.classList.remove("show");
+/** Sets up lightbox button events */
+function setupLightboxEvents(mode) {
+  if (mode === "add") {
+    getElement("create-btn").onclick = e => { e.preventDefault(); addNewContact(); };
+    getElement("cancel-btn").onclick = e => { e.preventDefault(); closeLightbox(); };
+  } else {
+    getElement("saveBtn").onclick = () => selectedContact?.id ? saveContactEdits(selectedContact.id) : alert("No contact!");
+    getElement("deleteBtn").onclick = () => selectedContact?.id ? deleteContact(selectedContact.id) : alert("No contact!");
+  }
+}
 
+/** Closes the lightbox */
+function closeLightbox() {
+  getElement("lightbox").classList.remove("show");
   setTimeout(() => {
-    document.getElementById("lightbox-overlay").classList.remove("d-flex");
-    document.getElementById("lightbox-overlay").classList.add("d-none");
+    getElement("lightbox-overlay").classList.replace("d-flex", "d-none");
     document.body.style.overflow = "auto";
   }, 400);
 }
 
-/**
- * Saves edits to an existing contact
- *
- * @param {string} contactId - The ID of the contact to update
- */
+/** Saves edited contact data */
 async function saveContactEdits(contactId) {
-  const name = document.getElementById("edit-name").value.trim();
-  const email = document.getElementById("edit-email").value.trim();
-  const phone = document.getElementById("edit-phone").value.trim();
-
-  if (!name || !email || !phone) return alert("All Fields required!");
+  const name = getElement("edit-name").value.trim();
+  const email = getElement("edit-email").value.trim();
+  const phone = getElement("edit-phone").value.trim();
+  if (!name || !email || !phone) return alert("All fields required!");
   try {
-    await update(ref(db, "contacts/" + contactId), { name, email, phone });
+    await updateContact(contactId, { name, email, phone, initials: getInitials(name) });
+    updateUIAfterEdit();
   } catch (error) {
-    return alert("failure on saving");
+    alert("Save failed");
   }
-  document
-    .getElementById("showed-current-contact")
-    .classList.replace("d-flex", "d-none");
+}
+
+/** Updates UI after edit/delete */
+function updateUIAfterEdit() {
+  getElement("showed-current-contact").classList.replace("d-flex", "d-none");
   closeLightbox();
   initContactsList();
 }
 
-/**
- * Deletes a contact
- *
- * @param {string} contactId - The ID of the contact to delete
- */
+/** Deletes a contact */
 async function deleteContact(contactId) {
-  if (!contactId) return alert("No contact found!");
-  if (!confirm("Do you really want to Delete this contact?")) return;
-
-  await removeContactFromFirebase(contactId);
-  await removeContactFromTasks(selectedContact?.name);
-  await updateUIAfterContactDeletion();
-}
-async function removeContactFromFirebase(contactId) {
+  if (!contactId || !confirm("Delete contact?")) return;
   try {
-    await remove(ref(db, "contacts/" + contactId));
+    await removeContact(contactId);
+    await removeContactFromAllTasks(selectedContact?.name);
+    await removeUserByEmail(selectedContact?.email);
+    updateUIAfterEdit();
   } catch (e) {
-    alert("Fehler beim Löschen aus Firebase: " + e.message);
+    alert("Delete failed: " + e.message);
   }
 }
-async function removeContactFromTasks(name) {
-  if (!name) return;
-  const snapshot = await get(ref(db, "tasks"));
-  const tasks = snapshot.val();
-  if (!tasks) return;
 
-  for (let taskId in tasks) {
-    const oldAssigned = tasks[taskId].assignedTo || [];
-    const filtered = oldAssigned.filter((n) => n !== name);
-    if (filtered.length !== oldAssigned.length) {
-      await update(ref(db, "tasks/" + taskId), { assignedTo: filtered });
-    }
-  }
-}
-async function updateUIAfterContactDeletion() {
-  closeLightbox();
-  document
-    .getElementById("showed-current-contact")
-    .classList.replace("d-flex", "d-none");
-  await initContactsList();
-}
-
-/**
- * Adds a new contact to Firebase
- */
-async function addContact() {
-  const name = document.getElementById("edit-name").value.trim();
-  const email = document.getElementById("edit-email").value.trim();
-  const phone = document.getElementById("edit-phone").value.trim();
-  if (!name || !email || !phone) return alert("All Fields required!");
+/** Adds a new contact */
+async function addNewContact() {
+  const name = getElement("edit-name").value.trim();
+  const email = getElement("edit-email").value.trim();
+  const phone = getElement("edit-phone").value.trim();
+  if (!name || !email || !phone) return alert("All fields required!");
   try {
-    const newContactRef = push(ref(db, "contacts"));
-    await set(newContactRef, {
-      name: name,
-      email: email,
-      phone: phone,
-      initials: name
-        .split(" ")
-        .map((n) => n[0])
-        .join("")
-        .toUpperCase(),
-    });
+    await addContact({ name, email, phone, initials: getInitials(name) });
     closeLightbox();
-    await initContactsList();
+    initContactsList();
   } catch (error) {
-    alert("failed to Set New contact!");
+    alert("Add failed!");
   }
 }
 
-/**
- * Closes the shown contact details
- */
+/** Hides contact details */
 function closeShownContact() {
-  document.getElementById("right-section").classList.add("d-none");
-  document.getElementById("responsive-small-edit").classList.add("d-none");
-  document.getElementById("responsive-small-add").classList.remove("d-none");
+  toggleElements("right-section", "responsive-small-edit", "responsive-small-add", true);
 }
 
-/**
- * Opens the responsive edit menu
- */
+/** Opens responsive edit menu */
 function openEditResponsive() {
-  document.getElementById("current-btns-responsive").classList.remove("d-none");
-  document.getElementById("current-btns-responsive").classList.add("d-flex");
-  document.getElementById("responsive-small-edit").classList.add("d-none");
-
-  setTimeout(() => {
-    document.getElementById("current-btns-responsive").classList.add("show");
-  }, 200);
+  toggleElements("current-btns-responsive", "responsive-small-edit", null, false);
+  setTimeout(() => getElement("current-btns-responsive").classList.add("show"), 200);
 }
 
-/**
- * Closes the responsive edit menu
- */
+/** Closes responsive edit menu */
 function closeEditResponsive() {
-  document.getElementById("current-btns-responsive").classList.remove("show");
-  document.getElementById("responsive-small-edit").classList.remove("d-none");
-
-  setTimeout(() => {
-    document.getElementById("current-btns-responsive").classList.add("d-none");
-    document
-      .getElementById("current-btns-responsive")
-      .classList.remove("d-flex");
-  }, 200);
+  getElement("current-btns-responsive").classList.remove("show");
+  setTimeout(() => toggleElements("current-btns-responsive", "responsive-small-edit", null, true), 200);
 }
 
-/**
- * Handles media query changes for responsive design
- *
- * @param {MediaQueryList} e - The media query event
- */
+/** Handles responsive design changes */
 function handleMediaQueryChange(e) {
-  if (e.matches) {
-    document.getElementById("right-section").classList.add("d-none");
-    document.getElementById("responsive-small-add").classList.remove("d-none");
-    document.getElementById("current-btns-responsive").classList.add("d-none");
-  } else {
-    document.getElementById("right-section").classList.remove("d-none");
-    document.getElementById("responsive-small-add").classList.add("d-none");
-    document.getElementById("responsive-small-edit").classList.add("d-none");
-  }
+  if (e.matches) toggleElements("right-section", null, "responsive-small-add", true);
+  else toggleElements("right-section", "responsive-small-add", "responsive-small-edit", false);
 }
 
-/**
- * Initializes event listeners on DOM content loaded
- */
-document.addEventListener("DOMContentLoaded", () => {
-  mediaQuery.addEventListener("change", handleMediaQueryChange);
-  document
-    .getElementById("add-contact-btn-big")
-    .addEventListener("click", openLightboxAdd);
-  document
-    .getElementById("responsive-small-add")
-    .addEventListener("click", openLightboxAdd);
-  document
-    .getElementById("responsive-small-edit")
-    .addEventListener("click", openEditResponsive);
-  document
-    .getElementById("current-edit")
-    .addEventListener("click", openLightboxEdit);
-  document
-    .getElementById("current-edit-responsive")
-    .addEventListener("click", openLightboxEdit);
-  document
-    .getElementById("lightbox-overlay")
-    .addEventListener("click", closeLightbox);
-  document
-    .getElementById("back-icon")
-    .addEventListener("click", closeShownContact);
-  document
-    .getElementById("right-section")
-    .addEventListener("click", closeEditResponsive);
-  document.getElementById("current-delete").addEventListener("click", () => {
-    if (selectedContact && selectedContact.id) {
-      deleteContact(selectedContact.id);
-    } else {
-      alert("No contact found!");
-    }
-  });
+/** Gets DOM element by ID */
+function getElement(id) {
+  return document.getElementById(id);
+}
 
-  document
-    .getElementById("current-delete-responsive")
-    .addEventListener("click", () => {
-      if (selectedContact && selectedContact.id) {
-        deleteContact(selectedContact.id);
-      } else {
-        alert("No contact found!");
-      }
-      document
-        .getElementById("current-btns-responsive")
-        .classList.replace("d-flex", "d-none");
-      document
-        .getElementById("current-btns-responsive")
-        .classList.remove("show");
-    });
+/** Toggles element visibility */
+function toggleElements(showId, hideId1, hideId2, reverse) {
+  if (showId) getElement(showId).classList[reverse ? "add" : "remove"]("d-none");
+  if (hideId1) getElement(hideId1).classList[reverse ? "remove" : "add"]("d-none");
+  if (hideId2) getElement(hideId2).classList[reverse ? "remove" : "add"]("d-none");
+}
 
+/** Sets up all click events */
+function setupEvents() {
+  getElement("add-contact-btn-big").onclick = () => openLightbox("add");
+  getElement("responsive-small-add").onclick = () => openLightbox("add");
+  getElement("responsive-small-edit").onclick = openEditResponsive;
+  getElement("current-edit").onclick = () => openLightbox("edit");
+  getElement("current-edit-responsive").onclick = () => openLightbox("edit");
+  getElement("lightbox-overlay").onclick = closeLightbox;
+  getElement("back-icon").onclick = closeShownContact;
+  getElement("right-section").onclick = closeEditResponsive;
+  getElement("current-delete").onclick = () => selectedContact?.id ? deleteContact(selectedContact.id) : alert("No contact!");
+  getElement("current-delete-responsive").onclick = () => {
+    if (selectedContact?.id) deleteContact(selectedContact.id);
+    toggleElements("current-btns-responsive", null, null, true);
+    getElement("current-btns-responsive").classList.remove("show");
+  };
+  mediaQuery.onchange = handleMediaQueryChange;
   initContactsList();
-});
+}
+
+setupEvents();
