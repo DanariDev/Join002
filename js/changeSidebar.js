@@ -4,11 +4,15 @@
  * 
  */
 function init() {
-    const { navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter } = initDomElements();
+    const { navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter, specialLink } = initDomElements();
 
     if(localStorage.getItem('unregistered') == 'true'){
         navLinkHideAllClass.forEach((element) => {
             element.classList.add('d-none');
+            if(localStorage.getItem('special-unregistered') == 'true'){
+                specialLink.attributes[0].value = 'register.html';
+                specialLink.children[1].innerHTML = 'Sign Up';
+            }
         });
 
         topbarIcons.classList.add('d-none')
@@ -29,8 +33,9 @@ function initDomElements(){
     const navLinkUnregistered = document.getElementById('nav-link-unregisteredID');
     const sidebarFooterLinks = document.getElementById('sidebar-footer-linksID');
     const sidebarFooter = document.getElementById('sidebar-footer');
+    const specialLink= document.getElementById('nav-link-unregisteredID');
 
-    return {navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter}
+    return {navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter, specialLink}
 }
 
 window.addEventListener("load", function() {
