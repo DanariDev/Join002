@@ -60,12 +60,12 @@
 .login-box {
     display: flex;
     flex-direction: column;
-    background: var(--clr-200);
+    background: #ffffff; /* Weiße Karte */
     width: 70%;
-    max-width: 900px;
+    max-width: 400px; /* Begrenzte Breite für bessere Proportionen */
     padding: 40px;
     border-radius: 12px;
-    box-shadow: 0 0 16px rgba(0, 0, 0, 0.25);
+    box-shadow: none; /* Schatten entfernen */
     text-align: center;
 }
 
@@ -117,22 +117,19 @@
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
-    color: var(--clr-200);
+    color: var(--clr-700); /* Dunkle Schriftfarbe */
     height: 48px;
-    border-radius: 8px;
-    border-color: var(--clr-700);
-    background-color: var(--clr-700);
-    font-size: 16px;
+    background-color: #ffffff; /* Weißer Gasblock */
+    border: 2px solid var(--clr-700); /* Passender Rahmen */
     flex: 1;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .btn-secondary:hover,
 .btn-primary:hover {
-    background-color: var(--clr-200);
-    color: var(--clr-700);
+    background-color: var(--clr-700); /* Dunkler Hintergrund beim Hover */
+    color: var(--clr-200); /* Helle Schrift beim Hover */
     border-color: var(--clr-700);
-    border-radius: 8px;
 }
 
 .email-input {
@@ -168,7 +165,6 @@
 footer {
     display: flex;
     justify-content: center;
-
 }
 
 .footer-links {
@@ -181,6 +177,7 @@ footer {
 footer a {
     text-decoration: none;
     color: var(--clr-900);
+    font-size: var(--fs-20); /* Erhöhte Schriftgröße */
     gap: 12px;
 }
 

@@ -2,23 +2,23 @@ Protokoll der Loom-Aufnahme: Zu überarbeitende Punkte für das Projekt
 Basierend auf der Loom-Aufnahme hier eine Zusammenfassung der Punkte, die im Projekt überarbeitet oder verbessert werden müssen:
 1. Setup-Seite
 
-Join-Logo-Animation:
+Join-Logo-Animation:✅
 Problem: Animation ist zu groß.
 Lösung: Größe der Animation reduzieren.
 Zusätzlich: Der Container sollte nicht mitbewegt werden. Stattdessen soll die Animation als Overlay fungieren, das sanft ausfadet.
 
 
-Container-Design:
+Container-Design:✅
 Problem: Container wirkt gestreckt, enthält einen unpassenden Schatten, und die Karte sollte weiß sein.
 Lösung: Design an Vorlage anpassen (weiße Karte, Schatten entfernen, Proportionen korrigieren).
 
 
-Button-Design:
+Button-Design:✅
 Problem: Buttons haben Standardrahmen (grau/schwarz), Gasblock sollte weiß sein.
 Lösung: Button- und Gasblock-Design exakt nach Vorlage umsetzen (weißer Gasblock, passende Rahmen).
 
 
-Links:
+Links:✅
 Problem: Links sind zu klein und schwer lesbar, selbst auf großem Bildschirm.
 Lösung: Schriftgröße der Links erhöhen für bessere Lesbarkeit.
 

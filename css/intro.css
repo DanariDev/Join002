@@ -18,19 +18,18 @@
 
 .starting-logo img,
 .starting-logo-responsive img {
-    width: 50%;
-    height: 80%;
+    width: 10%; /* Ausgangsgröße, die dir passt */
+    height: auto; /* Automatische Höhe basierend auf Breite */
     object-fit: contain;
     align-self: center;
-
 }
 
 @keyframes slideToLeftCorner {
     to {
-        width: 100px;
-        height: 100px;
+        width: 250px; /* Erhöhte Endgröße */
+        height: 150px; /* Entsprechende Höhe */
         top: 20px;
         left: 0;
-        transform: scale(0.9);
+        transform: scale(1); /* Keine Verkleinerung */
     }
 }
