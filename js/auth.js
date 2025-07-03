@@ -1,4 +1,3 @@
-
 import { auth, db } from "./firebase-config.js";
 import {
   createUserWithEmailAndPassword,
@@ -14,7 +13,7 @@ import {
 
 /**
  * With this function, a new user is registered and stored on the Firebase
- * 
+ *
  * @returns -return alert("Passwörter stimmen nicht überein!");
  */
 async function signup() {
@@ -22,14 +21,17 @@ async function signup() {
   const email = document.querySelector(".email-input")?.value.trim();
   const pass = document.querySelector(".password-input")?.value.trim();
   const repeat = document.getElementById("password-repeat-input")?.value.trim();
-  if (!name || !email || !pass || !repeat) return alert("Bitte alle Felder ausfüllen!");
+  if (!name || !email || !pass || !repeat)
+    return alert("Bitte alle Felder ausfüllen!");
   if (pass !== repeat) return alert("Passwörter stimmen nicht überein!");
 
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, pass);
     await set(ref(db, `users/${cred.user.uid}`), { name, email });
-    const initials = name.split(" ")[0][0].toUpperCase() + name.split(" ")[1][0].toUpperCase();
-    await set(ref(db, `contacts/${email.replace(/\./g, "_")}`), { name, email, initials });
+    const initials =
+      name.split(" ")[0][0].toUpperCase() + name.split(" ")[1][0].toUpperCase();
+    const newContactRef = push(ref(db, "contacts"));
+    await set(newContactRef, { name, email, initials });
 
     localStorage.setItem("isGuest", "false");
     localStorage.setItem("userName", name);
@@ -42,7 +44,7 @@ async function signup() {
 
 /**
  * With this function a user logged in. It is checked whether email and password fit a user
- * 
+ *
  * @returns -alert("Bitte E-Mail und Passwort eingeben!");
  */
 function login() {
@@ -63,8 +65,8 @@ function login() {
 
 /**
  * This function can be registered with a guest login
- * 
- * 
+ *
+ *
  */
 export function loginAsGuest() {
   localStorage.setItem("isGuest", "true");
@@ -74,8 +76,8 @@ export function loginAsGuest() {
 
 /**
  * This function logs off a user
- * 
- * 
+ *
+ *
  */
 export function logout() {
   signOut(auth)
@@ -88,7 +90,7 @@ export function logout() {
 
 /**
  * This function ensures that the buttons have a click event
- * 
+ *
  * @returns -stop
  */
 function init() {
