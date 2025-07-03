@@ -60,7 +60,23 @@ function closeTopbarMenu(){
     }
 }
 
+/**
+ * This function removes the data when logging out
+ * 
+ */
+function logout(){
+    localStorage.removeItem("isGuest");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("firebase:host:join002-26fa4-default-rtdb.firebaseio.com");
+}
+
 window.addEventListener("load", function() {
+    if(!localStorage.getItem("isGuest") && !localStorage.getItem("userName") && localStorage.getItem("unregistered") == 'false'){
+        window.location.replace("./index.html");
+        return;
+    }
+
     initSidbarTopbar();
     document.body.addEventListener("click", closeTopbarMenu);
+    document.getElementById('log-out-buttonID').addEventListener("click", logout);
 });

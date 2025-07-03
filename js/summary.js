@@ -15,11 +15,6 @@ function $(s) {
  * Handles authentication state changes and initializes summary data
  */
 function handleAuthState() {
-    if(!localStorage.getItem("isGuest") && !localStorage.getItem("userName")){
-        window.location.replace("./index.html");
-        return;
-    }
-
     let name = localStorage.getItem('userName');
     showGreetingUser(name);
 }
@@ -112,7 +107,7 @@ function count(arr, key, val) {
 function showDeadline(tasks) {
     let dates = [];
     for (let i = 0; i < tasks.length; i++) {
-        if (tasks[i].dueDate) {
+        if (tasks[i].priority == "urgent") {
             let d = new Date(tasks[i].dueDate);
             if (d > new Date()) dates.push(d);
         }
