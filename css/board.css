@@ -139,6 +139,10 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.task-card:hover {
+  rotate: 2deg;
+}
+
 #board .task-column.drag-over {
   outline: 2px dashed var(--clr-500);
   background-color: var(--clr-200);
@@ -276,4 +280,13 @@
 .full-name {
   font-size: var(--fs-16);
   font-weight: 500;
+}
+
+.placeholder {
+  display: flex;
+  border: 2px dotted rgb(0, 0, 0);
+  height: 100px;
+  justify-content: center;
+  align-items: center;
+
 }

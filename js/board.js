@@ -33,14 +33,18 @@ function loadTasks() {
   const tasksRef = ref(db, 'tasks');
   onValue(tasksRef, (snapshot) => {
     const tasks = snapshot.val();
-    if (!tasks) return;
+    if (!tasks) {
+      addPlaceholders();
+      return;
+    }
     for (let id in tasks) {
       tasks[id].id = id;
       renderTask(tasks[id]);
     }
     setupDropTargets();
+    addPlaceholders();
   }, { onlyOnce: true });
-};
+}
 
 /**
  * Renders a single task
@@ -58,6 +62,7 @@ function renderTask(task) {
   setupTaskCardEvents(card, task);
   target.appendChild(card);
   updateTaskLabel(card, task);
+  addPlaceholders();
 };
 
 /**
@@ -166,6 +171,7 @@ function handleDrop(event, column) {
   if (!card || !newStatus) return;
   update(ref(db, 'tasks/' + id), { status: newStatus }).then(() => {
     column.appendChild(card);
+    addPlaceholders();
     const taskRef = ref(db, 'tasks/' + id);
     onValue(taskRef, (snapshot) => {
       const task = snapshot.val();
@@ -173,6 +179,23 @@ function handleDrop(event, column) {
         updateProgressBar(card, task.subtasks);
       }
     }, { onlyOnce: true });
+  });
+}
+
+function addPlaceholders() {
+  const columns = document.querySelectorAll('.task-column');
+  columns.forEach(column => {
+    const placeholder = column.querySelector('.placeholder');
+    const taskCards = column.querySelectorAll('.task-card');
+    if (taskCards.length > 0 && placeholder) {
+      placeholder.remove();
+    }
+    if (taskCards.length === 0 && !placeholder) {
+      const newPlaceholder = document.createElement('div');
+      newPlaceholder.className = 'placeholder';
+      newPlaceholder.innerText = 'no task available';
+      column.appendChild(newPlaceholder);
+    }
   });
 }
 
