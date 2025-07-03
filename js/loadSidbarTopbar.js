@@ -1,3 +1,5 @@
+import { logout } from "/js/auth.js";
+
 /**
  * This function initializes the function generateInitialsTopBarMenu()
  * 
