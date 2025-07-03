@@ -15,11 +15,6 @@ function $(s) {
  * Handles authentication state changes and initializes summary data
  */
 function handleAuthState() {
-    if(!localStorage.getItem("isGuest") && !localStorage.getItem("userName")){
-        window.location.replace("./index.html");
-        return;
-    }
-
     let name = localStorage.getItem('userName');
     showGreetingUser(name);
 }
