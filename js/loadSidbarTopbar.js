@@ -69,12 +69,12 @@ function logout(){
 }
 
 window.addEventListener("load", function() {
-    if(localStorage.getItem("isGuest") == 'false' && !localStorage.getItem("userName")){
+    if(!localStorage.getItem("isGuest") && !localStorage.getItem("userName") && localStorage.getItem("unregistered") == 'false'){
         window.location.replace("./index.html");
         return;
     }
 
     initSidbarTopbar();
     document.body.addEventListener("click", closeTopbarMenu);
-    document.addEventListener("click", logout);
+    document.getElementById('log-out-buttonID').addEventListener("click", logout);
 });
