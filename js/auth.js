@@ -9,6 +9,7 @@ import {
   set,
   get,
   child,
+  push
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 /**
@@ -28,7 +29,14 @@ async function signup() {
   try {
     const cred = await createUserWithEmailAndPassword(auth, email, pass);
     await set(ref(db, `users/${cred.user.uid}`), { name, email });
-    const initials = name.split(" ")[0][0].toUpperCase() + name.split(" ")[1][0].toUpperCase();
+    let initials;
+    if(name.split(" ").length > 1){
+      initials = name.split(" ")[0][0].toUpperCase() + name.split(" ")[1][0].toUpperCase();
+    }
+    else{
+      initials = name.split(" ")[0][0].toUpperCase();
+    }
+    
     await set(push(ref(db, "contacts")), { name, email, initials });
     localStorage.setItem("isGuest", "false"); localStorage.setItem("userName", name);
     alert("Registrierung erfolgreich!"); window.location.href = "summary.html";
