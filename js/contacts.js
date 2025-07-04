@@ -217,6 +217,11 @@ async function saveContactEdits(contactId) {
     return;
   }
 
+  if(!/^[+]?\d+$/.test(phone)){
+    alert("Invalid phone format!");
+    return;
+  }
+
   await updateContact(contactId, {
     name,
     email,
@@ -271,6 +276,11 @@ async function addNewContact() {
 
   if (!/^\S+@\S+\.\S+$/.test(email)) {
     alert("Invalid email format!");
+    return;
+  }
+
+  if(!/^[+]?\d+$/.test(phone)){
+    alert("Invalid phone format!");
     return;
   }
 
