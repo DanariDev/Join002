@@ -103,6 +103,7 @@ function findCurrentContact(idNumber, letter, index) {
     () => getElement("showed-current-contact").classList.add("show"),
     10
   );
+  document.getElementById('responsive-small-edit').classList.remove('d-none');
 }
 
 /** Shows contact card with details */
@@ -301,6 +302,8 @@ function closeShownContact() {
 
 /** Opens responsive edit menu */
 function openEditResponsive() {
+  document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+  document.getElementById('current-btns-responsive').classList.add('d-flex');
   toggleElements(
     "current-btns-responsive",
     "responsive-small-edit",
@@ -317,13 +320,16 @@ function openEditResponsive() {
 function closeEditResponsive() {
   getElement("current-btns-responsive").classList.remove("show");
   setTimeout(
-    () =>
+    () => {
       toggleElements(
         "current-btns-responsive",
         "responsive-small-edit",
         null,
         true
       ),
+      document.getElementById('current-btns-responsive').classList.remove('d-flex'),
+      document.getElementsByTagName('body')[0].removeAttribute('style')
+    },
     200
   );
 }
