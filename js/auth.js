@@ -17,9 +17,9 @@ import {
  * @returns -return alert("Passwörter stimmen nicht überein!");
  */
 async function signup() {
-  const name = document.querySelector(".name-input")?.value.trim();
-  const email = document.querySelector(".email-input")?.value.trim();
-  const pass = document.querySelector(".password-input")?.value.trim();
+  const name = document.getElementById("name-input")?.value.trim();
+  const email = document.getElementById("email-input")?.value.trim();
+  const pass = document.getElementById("password-input")?.value.trim();
   const repeat = document.getElementById("password-repeat-input")?.value.trim();
   if (!name || !email || !pass || !repeat) return alert("Bitte alle Felder ausfüllen!");
   if (!/^\S+@\S+\.\S+$/.test(email)) return alert("Ungültige E-Mail-Adresse!");
