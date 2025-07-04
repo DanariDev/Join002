@@ -334,7 +334,7 @@ function clearForm() {
   createBtn.disabled = true;
   createBtn.classList.add("disabled");
   document.querySelectorAll(".all-priority-btns").forEach((btn) => {
-    btn.classList.remove("urgent-btn-active", "medium-btn-active", "low-btn-active");
+    btn.classList.remove("urgent-btn-active", "low-btn-active");
     btn.querySelector("img").src = `assets/img/${btn.id}-icon.png`;
   });
   assignedTo = [];
