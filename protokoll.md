@@ -26,17 +26,17 @@ Lösung: Schriftgröße der Links erhöhen für bessere Lesbarkeit.
 
 2. Mobile Ansicht
 
-Animation:
+Animation:✅
 Problem: Animation auf Mobilgeräten muss überprüft werden.
 Lösung: Sicherstellen, dass die Animation wie auf der Desktop-Version korrekt als Overlay ausfadet.
 
 
-Layout:
+Layout:✅
 Problem: Inhalte wirken gequetscht, insbesondere Input-Felder und Buttons.
 Lösung: Mehr Platz für Input-Felder und Buttons schaffen, Abstände gemäß Design-Vorlage anpassen.
 
 
-Abstände:
+Abstände:✅
 Problem: Signup-Bereich benötigt mehr Abstand.
 Lösung: Abstände im Signup-Bereich gemäß Design-Vorlage optimieren.
 
@@ -44,7 +44,7 @@ Lösung: Abstände im Signup-Bereich gemäß Design-Vorlage optimieren.
 
 3. Registrierung (Signup)
 
-Bilder:
+Bilder:✅
 Problem: Bilder laufen ineinander.
 Lösung: Design überprüfen und Bilder korrekt anzeigen.
 

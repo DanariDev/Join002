@@ -9,7 +9,6 @@
         animation: slideToLeftCornerResponsive 1.25s ease forwards;
         animation-delay: 0.75s;
         background-color: var(--clr-700);
-        /* background im Container statt Img */
     }
 
     .starting-logo-responsive img {
@@ -18,14 +17,12 @@
 
     @keyframes slideToLeftCornerResponsive {
         to {
-            width: 100px;
-            height: 100px;
+            width: 250px;
+            height: 150px;
             top: 20px;
-            left: 0;
+            left: 40px;
             opacity: 0;
-            /* statt display: none */
             transform: scale(0.9);
-            /* für mehr Weichheit */
         }
     }
 }
