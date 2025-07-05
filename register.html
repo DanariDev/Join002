@@ -25,32 +25,39 @@
       </a>
       <h1 class="underline">Sign Up</h1>
 
-      <form id="loginForm">
+      <form id="loginForm" novalidate>
         <div class="input-wrapper">
           <input id="name-input" class="name-input" type="text" placeholder="Name" required />
+          <div class="error-message name-error"></div>
         </div>
 
         <div class="input-wrapper">
           <input id="email-input" class="email-input" type="email" placeholder="Email" required />
+          <div class="error-message email-error"></div>
         </div>
 
         <div class="input-wrapper">
           <input id="password-input" class="password-input" type="password" placeholder="Password" required />
+          <div class="error-message password-error"></div>
         </div>
 
         <div class="input-wrapper">
-          <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password" required />
+          <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password"
+            required />
+          <div class="error-message repeat-error"></div>
         </div>
 
         <label>
-          <input type="checkbox" required />
+          <input id="privacy-checkbox" type="checkbox" required />
           I accept the <a id="privacyPolicyFormID" href="privacy-policy.html">Privacy Policy</a>
         </label>
+        <div class="error-message checkbox-error"></div>
 
         <div class="button-row">
           <button type="submit" class="btn-primary">Sign Up</button>
         </div>
       </form>
+
     </div>
 
   </div>

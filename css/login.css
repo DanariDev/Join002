@@ -95,12 +95,11 @@
     width: 90%;
     min-height: 48px;
     padding: 12px;
-    border: 1px solid var(--clr-300);
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     position: relative;
-    margin: 12px;
+    margin: 12px 12px 0 12px;
 }
 
 .button-row {
@@ -147,18 +146,21 @@
     background-image: url("../assets/img/mail.svg");
     background-repeat: no-repeat;
     background-position: right 24px center;
+    border: 1px solid var(--clr-300);
 }
 
 .password-input {
     background-image: url("../assets/img/lock.png");
     background-repeat: no-repeat;
     background-position: right 24px center;
+    border: 1px solid var(--clr-300);
 }
 
 .name-input {
     background-image: url("../assets/img/person.png");
     background-repeat: no-repeat;
     background-position: right 24px center;
+    border: 1px solid var(--clr-300);
 }
 
 .back-icon {
@@ -198,4 +200,19 @@ footer a {
 
 footer a:hover {
     color: var(--clr-500);
+}
+
+.input-error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+    display: none;
+}
+
+input.input-error[type="checkbox"] {
+    outline: 2px solid red;
 }

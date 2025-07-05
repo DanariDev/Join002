@@ -38,14 +38,16 @@
 
       <h1 class="underline">Log in</h1>
 
-      <form id="loginForm">
+      <form id="loginForm" novalidate>
 
         <div class="input-wrapper">
-          <input type="email" class="email-input" placeholder="Email" required />
+          <input type="email" class="email-input" id="email-input" placeholder="Email" />
+          <div class="error-message email-error"></div>
         </div>
 
         <div class="input-wrapper">
-          <input type="password" class="password-input" placeholder="Password" required />
+          <input type="password" class="password-input" id="password-input" placeholder="Password" />
+          <div class="error-message password-error"></div>
         </div>
 
         <div class="button-row">
