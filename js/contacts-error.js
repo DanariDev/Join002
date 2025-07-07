@@ -1,3 +1,9 @@
+/**
+ * This function resets the error message
+ * 
+ * @param {object} inputs -delivers the input-Dom value
+ * @param {object} errors -delivers the error-div-Dom value
+ */
 function resetErrors(inputs, errors) {
   inputs.forEach(i => i.classList.remove("input-error"));
   errors.forEach(e => {
@@ -6,12 +12,24 @@ function resetErrors(inputs, errors) {
   });
 }
 
+/**
+ * This function sets the error message
+ * 
+ * @param {object} input -delivers the input-Dom value
+ * @param {object} errorElem -delivers the error-div-Dom value
+ * @param {string} message -delivers the message value
+ */
 function showError(input, errorElem, message) {
   input.classList.add("input-error");
   errorElem.textContent = message;
   errorElem.style.display = "block";
 }
 
+/**
+ * This function checks whether the values ​​fit in the input fields
+ * 
+ * @returns -There becomes the values of "has error", "name", "email", "phone" return
+ */
 function checkInput() {
   const nameInput = document.getElementById("edit-name");
   const emailInput = document.getElementById("edit-email");
