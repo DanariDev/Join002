@@ -175,24 +175,20 @@
         margin: 1rem;
     }
 
-    #edit-icon {
-        position: absolute;
-        top: 24%;
-        border: 2px solid var(--clr-200);
-    }
-
     #lightbox input {
         min-width: 0;
     }
 
     .lightbox-right {
         border-radius: 0 0 20px 20px;
-        padding: 1rem 0;
+        flex: 1;
+        padding: 3rem 0 1rem 0;
     }
 
     .lightbox-left {
         border-radius: 20px 20px 0 0;
-        padding: 4rem 0;
+        padding: 4rem 0 6rem 0;
+        height: calc(50% - 10rem);
     }
 
     .blue-line {
@@ -214,8 +210,18 @@
         font-size: 25px;
     }
 
-    .current-icon {
-        display: none;
+    .current-icon, #edit-icon {
+        position: fixed;
+        top: 44%;
+        border: solid;
+    }
+
+    .editing-lighbox {
+        padding: 0;
+    }
+
+    .btns-lighbox{
+        justify-content: center;
     }
 }
 
