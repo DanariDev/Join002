@@ -247,7 +247,6 @@
     transition: transform 0.5s ease-in-out;
 }
 
-/* Lightbox left */
 .lightbox-left {
     display: flex;
     flex-direction: column;
@@ -272,6 +271,8 @@ h2 {
 .lightbox-left span {
     font-size: var(--fs-27);
     position: relative;
+    margin: 0 2rem;
+    align-self: start;
 }
 
 .lightbox-left span::after,
@@ -286,7 +287,6 @@ h2 {
     border-radius: 4px;
 }
 
-/* Lightbox right */
 .lightbox-right {
     display: flex;
     justify-content: space-evenly;

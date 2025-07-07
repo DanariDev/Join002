@@ -126,6 +126,7 @@
         height: calc(100vh - 169px);
         width: 100vw;
         left: 0;
+        overflow: hidden;
     }
 
     .split-contact-header {
@@ -200,6 +201,7 @@
 
     .lightbox-left span {
         font-size: 20px;
+        align-self: auto;
     }
 
     #current-name {
