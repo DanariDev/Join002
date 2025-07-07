@@ -61,9 +61,18 @@ function rightAddingTemplate() {
     <button class="close-button" id="lightbox-ol-close-btn">X</button>
     <img class="current-icon" src="assets/img/person.png" alt="Person Icon">
 <div class="editing-lighbox">
-    <input id="edit-name" type="text" placeholder="Name" required>
-    <input id="edit-email" type="email" placeholder="Email" required>
-    <input id="edit-phone" type="tel" placeholder="Phone" required>
+    <div>
+        <input id="edit-name" type="text" placeholder="Name" required>
+        <div class="error-message name-error"></div>
+    </div>
+    <div>
+        <input id="edit-email" type="email" placeholder="Email" required>
+        <div class="error-message email-error"></div>
+    </div>
+    <div>
+        <input id="edit-phone" type="tel" placeholder="Phone" required>
+        <div class="error-message phone-error"></div>
+    </div>
 <div class="btns-lighbox">
 <button id="cancel-btn">Cancel <span>X</span></button>
 <button id="create-btn">Create Contact <img src="assets/img/check.png" alt="check"></button>
@@ -95,9 +104,18 @@ function rightEditingTemplate() {
     <button class="close-button" id="lightbox-ol-close-btn">X</button>
     <div id="edit-icon"></div>
     <div class="editing-lighbox">
-   <input id="edit-name" type="text" placeholder="Name" required>
-    <input id="edit-email" type="email" placeholder="Email" required>
-    <input id="edit-phone" type="tel" placeholder="Phone" required>
+    <div>
+        <input id="edit-name" type="text" placeholder="Name" required>
+        <div class="error-message name-error"></div>
+    </div>
+    <div>
+        <input id="edit-email" type="email" placeholder="Email" required>
+        <div class="error-message email-error"></div>
+    </div>
+    <div>
+        <input id="edit-phone" type="tel" placeholder="Phone" required>
+        <div class="error-message phone-error"></div>
+    </div>
         <div class="btns-lighbox">
             <button id="deleteBtn">Delete</button>
             <button id="saveBtn">Save<img src="assets/img/check.png" alt="check"></button>

@@ -109,3 +109,18 @@ h3 {
     color: var(--clr-700);
     margin: 0;
 }
+
+.input-error {
+    border: 1px solid red;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 4px;
+    display: none;
+}
+
+input.input-error[type="checkbox"] {
+    outline: 2px solid red;
+}

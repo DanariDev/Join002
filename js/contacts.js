@@ -206,24 +206,8 @@ function closeLightbox() {
 
 /** Saves edited contact data */
 async function saveContactEdits(contactId) {
-  const name = getElement("edit-name").value.trim();
-  const email = getElement("edit-email").value.trim();
-  const phone = getElement("edit-phone").value.trim();
-
-  if (!name || !email || !phone) {
-    alert("All fields are required!");
-    return;
-  }
-
-  if (!/^\S+@\S+\.\S+$/.test(email)) {
-    alert("Invalid email format!");
-    return;
-  }
-
-  if(!/^[+]?\d+$/.test(phone)){
-    alert("Invalid phone format!");
-    return;
-  }
+  const {hasError, name, email, phone} = checkInput();
+  if (hasError) return;
 
   await updateContact(contactId, {
     name,
@@ -270,25 +254,8 @@ async function deleteContact(contactId) {
 
 /** Adds a new contact */
 async function addNewContact() {
-  const name = getElement("edit-name").value.trim();
-  const email = getElement("edit-email").value.trim();
-  const phone = getElement("edit-phone").value.trim();
-
-  if (!name || !email || !phone) {
-    alert("All fields are required!");
-    return;
-  }
-
-  if (!/^\S+@\S+\.\S+$/.test(email)) {
-    alert("Invalid email format!");
-    return;
-  }
-
-  if(!/^[+]?\d+$/.test(phone)){
-    alert("Invalid phone format!");
-    return;
-  }
-
+  const {hasError, name, email, phone} = checkInput();
+  if (hasError) return;
   await addContact({ name, email, phone, initials: getInitials(name) });
   closeLightbox();
   initContactsList();
