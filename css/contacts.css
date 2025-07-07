@@ -48,7 +48,6 @@
 #contacts-list-wrapper {
     flex: 1;
     overflow-y: auto;
-    overflow-x: hidden;
 }
 
 .list-alphabet {
@@ -69,8 +68,7 @@
     padding: 1rem;
 }
 
-.choosen,
-.list-contact-wrapper:hover {
+.choosen, .list-contact-wrapper:hover {
     border-radius: 10px;
     background-color: var(--clr-700);
     color: var(--clr-200);
@@ -145,7 +143,6 @@
 /* Shown Head */
 .current-top {
     display: flex;
-    /* justify-content: space-between; */
     align-items: center;
     flex-wrap: wrap;
     gap: 54px;
@@ -159,8 +156,7 @@
 
 #current-edit-responsive,
 #current-delete-responsive,
-#current-edit,
-#current-delete {
+#current-edit, #current-delete {
     height: 64px;
     width: 120px;
     border: none;
@@ -172,13 +168,11 @@
 
 #current-edit-responsive:hover,
 #current-delete-responsive:hover,
-#current-edit:hover,
-#current-delete:hover {
+#current-edit:hover, #current-delete:hover {
     color: var(--clr-500);
 }
 
-.current-icon,
-#current-icon,
+.current-icon, #current-icon,
 #edit-icon {
     display: flex;
     justify-content: center;
@@ -272,18 +266,24 @@ h2 {
     margin: 2rem;
     font-size: var(--fs-61);
     font-weight: 700;
+    position: relative;
 }
 
 .lightbox-left span {
     font-size: var(--fs-27);
+    position: relative;
 }
 
-.blue-line {
-    width: 80px;
-    margin: 10px 2rem;
-    border: 3px solid var(--clr-500);
-    border-radius: 2px;
-    align-self: start;
+.lightbox-left span::after,
+.edit-contact-h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -16px;
+    width: 33%;
+    height: 5px;
+    background-color: var(--clr-500);
+    border-radius: 4px;
 }
 
 /* Lightbox right */
@@ -310,6 +310,7 @@ h2 {
     border: 1px solid var(--clr-300);
     border-radius: 10px;
     font-size: var(--fs-20);
+    padding: 0 60px 0 16px;
 }
 
 #edit-name {
@@ -329,10 +330,8 @@ h2 {
     gap: 24px;
 }
 
-#create-btn,
-#saveBtn,
-#cancel-btn,
-#deleteBtn {
+#create-btn, #saveBtn,
+#cancel-btn, #deleteBtn {
     display: flex;
     gap: 4px;
     padding: 1rem;
@@ -379,4 +378,23 @@ h2 {
 #lightbox.show,
 #showed-current-contact.show {
     transform: translateX(0);
+}
+
+.close-button {
+    position: absolute;
+    border: 0;
+    background-color: transparent;
+    right: 32px;
+    top: 32px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 100%;
+    width: 23px;
+    height: 23px;
+    padding: 3.5px;
+}
+
+.close-button:hover {
+    color: red;
+    background: rgb(0, 0, 0, 0.1);
 }

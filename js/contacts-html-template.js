@@ -47,10 +47,7 @@ function leftAddingTemplate() {
     return `<div class="lightbox-left">
     <img class="join-logo-left" src="assets/img/logo_dark.png" alt="Join Logo">
     <h2>Add Contact</h2>
-    <div class="lightbox-subline">
-        <span>Tasks are better with a team!</span>
-        <div class="blue-line"></div>
-    </div>
+    <span>Tasks are better with a team!</span>
 </div>`
 };
 
@@ -61,6 +58,7 @@ function leftAddingTemplate() {
  */
 function rightAddingTemplate() {
     return `<div class="lightbox-right">
+    <button class="close-button" id="lightbox-ol-close-btn">X</button>
     <img class="current-icon" src="assets/img/person.png" alt="Person Icon">
 <div class="editing-lighbox">
     <input id="edit-name" type="text" placeholder="Name" required>
@@ -82,10 +80,8 @@ function rightAddingTemplate() {
 function leftEditingTemplate() {
     return `<div class="lightbox-left">
     <img class="join-logo-left" src="assets/img/logo_dark.png" alt="Join Logo">
-    <div class="lightbox-subline">
-    <h2>Edit Contact</h2>
-        <div class="blue-line"></div>
-    </div>
+    <div class="lightbox-subline"></div>
+    <h2 class="edit-contact-h2">Edit Contact</h2>
 </div>`
 };
 
@@ -96,6 +92,7 @@ function leftEditingTemplate() {
  */
 function rightEditingTemplate() {
     return `<div class="lightbox-right">
+    <button class="close-button" id="lightbox-ol-close-btn">X</button>
     <div id="edit-icon"></div>
     <div class="editing-lighbox">
    <input id="edit-name" type="text" placeholder="Name" required>

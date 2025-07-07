@@ -147,6 +147,8 @@ function openLightbox(mode) {
   lightbox.innerHTML = "";
   renderLightboxTemplates(mode, lightbox);
   setupLightboxEvents(mode);
+  getElement("lightbox-ol-close-btn").onclick = closeLightbox;
+  closeEditResponsive();
 }
 
 /** Renders lightbox templates */
@@ -163,7 +165,7 @@ function renderLightboxTemplates(mode, lightbox) {
 function fillEditForm() {
   if (!selectedContact) return;
   const icon = getElement("edit-icon");
-  icon.innerText = selectedContact.icon || "";
+  icon.innerText = selectedContact.initials || "";
   icon.style.backgroundColor = getColorForName(selectedContact.name);
   getElement("edit-name").value = selectedContact.name || "";
   getElement("edit-email").value = selectedContact.email || "";
@@ -230,12 +232,14 @@ async function saveContactEdits(contactId) {
     initials: getInitials(name),
   });
   updateUIAfterEdit();
+  closeEditResponsive();
 }
 
 /** Updates UI after edit/delete */
 function updateUIAfterEdit() {
   const lastId = selectedContact?.id;
   getElement("showed-current-contact").classList.replace("d-flex", "d-none");
+  getElement("current-btns-responsive").classList.replace("d-flex", "d-none");
   closeLightbox();
   initContactsList().then(() => {
     if (!lastId) return;
@@ -393,3 +397,4 @@ function findContactIndex(id) {
 }
 
 setupEvents();
+window.addEventListener('resize', closeEditResponsive);

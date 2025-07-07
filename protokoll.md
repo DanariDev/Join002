@@ -49,14 +49,14 @@ Problem: Bilder laufen ineinander.
 Lösung: Design überprüfen und Bilder korrekt anzeigen.
 
 
-Validierung:
+Validierung: ✅
 Problem: Fehlende oder unzureichende Validierung bei der Registrierung:
 Passwörter, die nicht übereinstimmen, werden nicht sofort erkannt.
 Fehlerhafte E-Mail-Adressen (z. B. test.com) werden akzeptiert.
 Fehlermeldungen (z. B. „Passwords don’t match“) fehlen oder sind inkonsistent.
 
 
-Lösung:
+Lösung:✅
 Sofortige Validierung für Passwortübereinstimmung und E-Mail-Format implementieren.
 Fehlermeldungen wie in der Vorlage anzeigen (z. B. unter dem Formular).
 Sicherstellen, dass Registrierung bei ungültigen Daten nicht durchläuft.
@@ -77,7 +77,7 @@ Problem: Eingabe ungültiger E-Mail-Adressen wird nicht abgefangen.
 Lösung: Validierung für E-Mail-Felder implementieren, um ungültige Eingaben zu verhindern.
 
 
-Abstände:
+Abstände:✅
 Problem: Zu wenig Abstand zu den Seitenrändern.
 Lösung: Abstände gemäß Design-Vorlage anpassen.
 
@@ -94,7 +94,7 @@ Design-Treue:
 Überall sicherstellen, dass das Design exakt der Vorlage entspricht (Farben, Abstände, Proportionen).
 
 
-GitHub-Commits:
+GitHub-Commits: ✅
 Commits sehen sauber und ausgeglichen aus, keine Änderungen erforderlich.
 
 
