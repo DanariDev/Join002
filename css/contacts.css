@@ -68,7 +68,8 @@
     padding: 1rem;
 }
 
-.choosen, .list-contact-wrapper:hover {
+.choosen,
+.list-contact-wrapper:hover {
     border-radius: 10px;
     background-color: var(--clr-700);
     color: var(--clr-200);
@@ -156,7 +157,8 @@
 
 #current-edit-responsive,
 #current-delete-responsive,
-#current-edit, #current-delete {
+#current-edit,
+#current-delete {
     height: 64px;
     width: 120px;
     border: none;
@@ -168,11 +170,13 @@
 
 #current-edit-responsive:hover,
 #current-delete-responsive:hover,
-#current-edit:hover, #current-delete:hover {
+#current-edit:hover,
+#current-delete:hover {
     color: var(--clr-500);
 }
 
-.current-icon, #current-icon,
+.current-icon,
+#current-icon,
 #edit-icon {
     display: flex;
     justify-content: center;
@@ -307,10 +311,13 @@ h2 {
     height: 50px;
     min-width: 300px;
     box-sizing: border-box;
-    border: 1px solid var(--clr-300);
     border-radius: 10px;
     font-size: var(--fs-20);
     padding: 0 60px 0 16px;
+}
+
+input {
+    border: 1px solid var(--clr-300);
 }
 
 #edit-name {
@@ -330,8 +337,10 @@ h2 {
     gap: 24px;
 }
 
-#create-btn, #saveBtn,
-#cancel-btn, #deleteBtn {
+#create-btn,
+#saveBtn,
+#cancel-btn,
+#deleteBtn {
     display: flex;
     gap: 4px;
     padding: 1rem;
