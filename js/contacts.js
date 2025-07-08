@@ -239,7 +239,10 @@ function updateUIAfterEdit() {
 
 /** Deletes a contact */
 async function deleteContact(contactId) {
-  if (!contactId || !confirm("Delete contact?")) return;
+  if (!contactId || !confirm("Delete contact?")) {
+    document.getElementById('responsive-small-edit').classList.remove('d-none');
+    return;
+  }
   try {
     await removeContact(contactId);
     await removeContactFromAllTasks(selectedContact?.name);
