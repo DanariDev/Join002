@@ -96,11 +96,11 @@
 }
 
 .list-name {
-    font-size: var(--fs-20);
+    font-size: var(--fs-24);
 }
 
 .list-email {
-    font-size: var(--fs-16);
+    font-size: var(--fs-20);
     color: var(--clr-500);
 }
 
