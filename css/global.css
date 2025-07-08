@@ -116,11 +116,12 @@ h3 {
 
 .error-message {
     color: red;
-    font-size: 0.9em;
+    font-size: var(--fs-16);
     margin-top: 4px;
     display: none;
 }
 
 input.input-error[type="checkbox"] {
     outline: 2px solid red;
+    border: none;
 }

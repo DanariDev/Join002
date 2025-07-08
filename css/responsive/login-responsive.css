@@ -1,8 +1,8 @@
 /* Media Querry Big Displays */
 @media (min-width: 1200px) {
     .underline:after {
-        left: 45.5%;
-        right: 45.5%;
+        left: 43.5%;
+        right: 43.5%;
     }
 }
 
@@ -27,7 +27,7 @@
         color: var(--clr-700);
         display: flex;
         align-items: center;
-        padding: 2rem;
+        padding: 1rem;
         gap: 8px;
     }
 
@@ -52,7 +52,8 @@
     .btn-secondary {
         padding: 7px;
         font-size: 12px;
-
+        max-width: none;
+        width: 180px;
     }
 
     .underline:after {
@@ -62,7 +63,9 @@
 
     .button-row {
         flex-direction: column;
-        margin: 5px;
+        margin: 21px 5px 5px 5px;
+        align-items: center;
+        gap: 21px;
     }
 }
 
