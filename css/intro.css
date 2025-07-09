@@ -10,18 +10,10 @@
     margin: 0;
     width: 100vw;
     height: 100vh;
-    animation: slideToLeftCorner 1.25s ease forwards;
-    animation-delay: 0.75s;
-    z-index: 1000;
+    animation: slideToLeftCorner 1.25s 0.75s ease forwards;
+    z-index: 2;
     background-color: var(--clr-200);
-}
-
-.starting-logo img,
-.starting-logo-responsive img {
-    width: 10%;
-    height: auto;
-    object-fit: contain;
-    align-self: center;
+    object-fit: scale-down;
 }
 
 @keyframes slideToLeftCorner {
@@ -29,7 +21,12 @@
         width: 250px;
         height: 150px;
         top: 20px;
-        left: 40px;
-        transform: scale(1);
+    }
+    60%{
+        background-color: transparent;
+    }
+
+    101%{
+        object-fit: contain;
     }
 }

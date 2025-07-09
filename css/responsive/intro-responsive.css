@@ -6,23 +6,38 @@
 
 @media (max-width: 800px) {
     .starting-logo-responsive {
-        animation: slideToLeftCornerResponsive 1.25s ease forwards;
-        animation-delay: 0.75s;
+        animation: slideToLeftCornerResponsive 1.25s 0.75s ease forwards;
         background-color: var(--clr-700);
-    }
-
-    .starting-logo-responsive img {
-        object-fit: contain;
     }
 
     @keyframes slideToLeftCornerResponsive {
         to {
-            width: 250px;
-            height: 150px;
-            top: 20px;
-            left: 40px;
+            width: 150px;
+            height: 80px;
+            top: 32px;
             opacity: 0;
-            transform: scale(0.9);
+        }
+
+        20%{
+            background-color: transparent;
+            opacity: 0;
+        }
+    }
+    
+    @keyframes slideToLeftCorner {
+        to {
+            width: 150px;
+            height: 80px;
+            top: 32px;
+        }
+        60%{
+            background-color: transparent;
+        }
+
+        101%{
+            object-fit: contain;
         }
     }
 }
+
+

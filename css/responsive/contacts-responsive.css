@@ -225,6 +225,22 @@
     }
 }
 
+@media (max-height: 740px) {
+    .lightbox-right {
+        padding: 6rem 0 1rem 0;
+    }
+
+    .current-icon, #edit-icon {
+        top: 43%;
+    }
+}
+
+@media (max-height: 667px) {
+    .current-icon, #edit-icon {
+        top: 38%;
+    }
+}
+
 @media (min-width: 801px) and (max-width: 806px) {
     h1{
         font-size: 57.2px;
