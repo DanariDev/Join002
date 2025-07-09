@@ -93,15 +93,24 @@
     flex-direction: column;
     flex: 1;
     gap: 8px;
+
+    overflow: hidden;
 }
 
 .list-name {
     font-size: var(--fs-24);
+
+    text-wrap-mode: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .list-email {
     font-size: var(--fs-20);
     color: var(--clr-500);
+
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Right Section */
