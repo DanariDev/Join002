@@ -13,24 +13,25 @@
     animation: slideToLeftCorner 1.25s 0.75s ease forwards;
     z-index: 2;
     background-color: var(--clr-200);
-    object-fit: scale-down;
-}
-
-.starting-logo-responsive{
-    transform: scale(2.8);
+    object-fit: none;
 }
 
 @keyframes slideToLeftCorner {
     to {
-        width: 250px;
+        width: 150px;
         height: 150px;
         top: 20px;
     }
+
+    1%{
+            object-fit: contain;
+        }
+
     60%{
         background-color: transparent;
     }
 
-    101%{
+    100%{
         object-fit: contain;
     }
 }

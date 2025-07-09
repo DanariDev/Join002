@@ -10,6 +10,10 @@
         background-color: var(--clr-700);
     }
 
+    .starting-logo{
+        transform: scale(.37);
+    }
+
     @keyframes slideToLeftCornerResponsive {
         to {
             width: 150px;
@@ -18,7 +22,7 @@
             opacity: 0;
         }
 
-        20%{
+        30%{
             background-color: transparent;
             opacity: 0;
         }
@@ -30,12 +34,19 @@
             height: 80px;
             top: 32px;
         }
-        60%{
+
+        1%{
+            object-fit: contain;
+        }
+
+        10% {
             background-color: transparent;
         }
 
-        101%{
-            object-fit: contain;
+        100% {
+             transform: scale(1);
+             object-fit: contain;
+             background-color: transparent;
         }
     }
 }
