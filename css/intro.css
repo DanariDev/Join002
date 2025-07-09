@@ -16,6 +16,10 @@
     object-fit: scale-down;
 }
 
+.starting-logo-responsive{
+    transform: scale(2.8);
+}
+
 @keyframes slideToLeftCorner {
     to {
         width: 250px;
