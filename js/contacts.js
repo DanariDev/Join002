@@ -190,7 +190,7 @@ function setupLightboxEvents(mode) {
         : alert("No contact!");
     getElement("deleteBtn").onclick = () =>
       selectedContact?.id
-        ? deleteContact(selectedContact.id)
+        ? opendeleteContactQuery(selectedContact.id)
         : alert("No contact!");
   }
 }
@@ -237,12 +237,38 @@ function updateUIAfterEdit() {
   });
 }
 
+/**
+ * This function opens delete Query and assigns an on-click function to the buttons and the query-body
+ * 
+ * @param {string} contactId -This string is assigned here so that the correct contact is deleted
+ */
+function opendeleteContactQuery(contactId){
+  document.getElementById('query-window').classList.remove('d-none');
+  document.getElementById("cancel-delete-button").onclick = () => deleteContactQuery(false, contactId, event);
+  document.getElementById("query-window").onclick = () => deleteContactQuery(false, contactId, event);
+  document.getElementById("yes-delete-button").onclick = () => deleteContactQuery(true, contactId, event);
+}
+
+/**
+ * This functions carry out the query as to whether or not should be deleted
+ * 
+ * @param {boolean} deleteC - Gives back whether or not should be deleted
+ * @param {string} contactId -This string is assigned here so that the correct contact is deleted
+ * @param {object} event - Event is needed to stop propagation
+ */
+function deleteContactQuery(deleteC, contactId, event){
+  event.stopPropagation();
+  document.getElementById('query-window').classList.add('d-none');
+  deleteContact(contactId, deleteC);
+}
+
 /** Deletes a contact */
-async function deleteContact(contactId) {
-  if (!contactId || !confirm("Delete contact?")) {
+async function deleteContact(contactId, deleteC) {
+  if (!contactId || !deleteC) {
     document.getElementById('responsive-small-edit').classList.remove('d-none');
     return;
   }
+
   try {
     await removeContact(contactId);
     await removeContactFromAllTasks(selectedContact?.name);
@@ -348,10 +374,10 @@ function setupEvents() {
   getElement("right-section").onclick = closeEditResponsive;
   getElement("current-delete").onclick = () =>
     selectedContact?.id
-      ? deleteContact(selectedContact.id)
+      ? opendeleteContactQuery(selectedContact.id)
       : alert("No contact!");
   getElement("current-delete-responsive").onclick = () => {
-    if (selectedContact?.id) deleteContact(selectedContact.id);
+    if (selectedContact?.id) opendeleteContactQuery(selectedContact.id);
     toggleElements("current-btns-responsive", null, null, true);
     getElement("current-btns-responsive").classList.remove("show");
   };

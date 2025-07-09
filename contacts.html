@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
     <link rel="stylesheet" href="css/topbar.css" />
     <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
+    <link rel="stylesheet" href="./css/query-overlay.css">
     <link rel="stylesheet" href="css/global.css">
     <link rel="stylesheet" href="css/contacts.css">
     <link rel="stylesheet" href="css/responsive/contacts-responsive.css">
@@ -20,7 +21,7 @@
 <title>Document</title>
 </head>
 
-<body>
+<body id="body">
 
     <div class="sidebar">
 
@@ -155,6 +156,16 @@
             <div id="lightbox" onclick="event.stopPropagation()"></div>
         </div>
     </main>
+
+    <div id="query-window" class="overlay-body d-none">
+        <div class="overlay-window">
+            <span>Would you really like to delete this contact?</span>
+            <div class="overlay-buttons-div">
+                <button id="yes-delete-button">Yes</button>
+                <button id="cancel-delete-button">Cancel</button>
+            </div>
+        </div>
+    </div>
 
     <script type="module" src="./js/contacts.js"></script>
     <script src="./js/contacts-html-template.js"></script>
