@@ -20,7 +20,6 @@ async function loadContactOptions(assignedTo) {
     wrapper.appendChild(createCard(assignedList));
 };
 
-
 function taskPopupHtmlTemplate(task) {
     const formattedDate = task.dueDate.split('-').reverse().join('/');
     const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
@@ -31,7 +30,6 @@ function taskPopupHtmlTemplate(task) {
     loadContactOptions(task.assignedTo || []);
     document.getElementById('popup-priority').innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
 };
-
 
 function createSubtaskItem(task, subtask, index) {
     const li = document.createElement('li');
@@ -48,7 +46,6 @@ function createSubtaskItem(task, subtask, index) {
     return li;
 };
 
-
 function createPopupSubtask(task) {
     const subtaskList = document.getElementById('popup-subtasks');
     subtaskList.innerHTML = "";
@@ -58,7 +55,6 @@ function createPopupSubtask(task) {
         subtaskList.appendChild(li);
     });
 };
-
 
 export function renderPopup(task) {
     const overlay = document.getElementById('task-overlay');
@@ -72,7 +68,6 @@ export function renderPopup(task) {
     document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
 };
 
-
 function getLabelColor() {
     const label = document.querySelector('.task-label-overlay');
     const text = label.textContent.trim();
@@ -82,7 +77,6 @@ function getLabelColor() {
         label.classList.add('blue-background');
     };
 };
-
 
 function closePopup() {
     const taskOverlay = document.getElementById('task-overlay');
@@ -99,10 +93,8 @@ function closePopup() {
     if (editTaskOverlay?.classList.contains('d-flex')) {
         editTaskOverlay.classList.replace('d-flex', 'd-none');
     }
-
     location.reload();
 };
-
 
 function initOverlayCloseHandler() {
     document.addEventListener('click', function (event) {
@@ -131,7 +123,6 @@ function initOverlayCloseHandler() {
         }
     });
 };
-
 
 function toggleSubtask(taskId, index, checked) {
     const taskRef = ref(db, `tasks/${taskId}/subtasks/${index}`);
@@ -172,13 +163,11 @@ function deleteTask(taskId, deleteT) {
     }
 };
 
-
 async function loadContacts() {
     const snapshot = await get(ref(db, 'contacts'));
     const data = snapshot.val();
     return data ? Object.values(data) : [];
 };
-
 
 function updateAssignedToUI() {
     const selectedDiv = document.getElementById('editing-contacts-selected');
@@ -195,7 +184,6 @@ function updateAssignedToUI() {
     });
 };
 
-
 async function editTask(taskId) {
     const taskData = getCurrentValues();
     openEditOverlay();
@@ -206,13 +194,11 @@ async function editTask(taskId) {
     updateSaveEditBtn();
 };
 
-
 function openEditOverlay() {
     const overlay = document.getElementById('edit-task-overlay');
     overlay.classList.replace('d-none', 'd-flex');
     document.getElementById('editing-cancel-btn').addEventListener('click', closePopup);
 };
-
 
 function fillTaskForm(task) {
     document.getElementById('editing-title').value = task.title;
@@ -221,7 +207,6 @@ function fillTaskForm(task) {
     document.getElementById('editing-category').value = task.category;
 };
 
-
 function prepareSubtasks(subtasks) {
     editingSubtasks = (Array.isArray(subtasks) ? subtasks : []).map(sub => ({
         text: typeof sub === 'string' ? sub : (sub?.text || ''),
@@ -229,7 +214,6 @@ function prepareSubtasks(subtasks) {
     }));
     renderEditingSubtasks();
 };
-
 
 function setupPriorityButtons(priorityValue) {
     const priorities = ['urgent', 'medium', 'low'];
@@ -247,7 +231,6 @@ function setupPriorityButtons(priorityValue) {
         if (prio === current) btn.classList.add(`${prio}-btn-active`);
     });
 };
-
 
 async function setupContactsDropdown(assignedNames) {
     const allContacts = await loadContacts();
@@ -277,7 +260,6 @@ async function setupContactsDropdown(assignedNames) {
         }
     });
 };
-
 
 function createContactEntry(contact, assignedNames) {
     const checkbox = document.createElement('input');
@@ -317,7 +299,6 @@ function createContactEntry(contact, assignedNames) {
     return { wrapper, checked: checkbox.checked };
 };
 
-
 function updateSaveEditBtn() {
     const title = document.getElementById('editing-title').value.trim();
     const description = document.getElementById('editing-description').value.trim();
@@ -329,12 +310,10 @@ function updateSaveEditBtn() {
     saveBtn.classList.toggle('disabled', !allFilled);
 };
 
-
 function formatDateToInput(dateStr) {
     const [day, month, year] = dateStr.split('/');
     return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
 };
-
 
 function getCurrentValues() {
     const category = document.querySelector('.task-label-overlay').textContent;
@@ -349,7 +328,6 @@ function getCurrentValues() {
     return { category, title, description, dueDate, priority, assignedTo, subtasks };
 };
 
-
 function addSubtaskFromInput() {
     const input = document.getElementById('editing-subtask');
     const text = input.value.trim();
@@ -357,9 +335,8 @@ function addSubtaskFromInput() {
     editingSubtasks.push({ text, done: false });
     renderEditingSubtasks();
     input.value = '';
-    updateSaveEditBtn?.(); // Optional – falls du den Save-Button dynamisch prüfen willst
+    updateSaveEditBtn?.();
 };
-
 
 function renderEditingSubtasks() {
     const ul = document.getElementById('editing-subtask-list');
@@ -379,7 +356,6 @@ function renderEditingSubtasks() {
         ul.appendChild(li);
     });
 };
-
 
 async function handleSaveEditTask() {
     const taskId = document.getElementById('task-overlay').dataset.taskId;
@@ -405,7 +381,6 @@ async function handleSaveEditTask() {
     closePopup();
 };
 
-
 function initSubtaskInputAndSaveListener() {
     document.getElementById('editing-subtask').addEventListener('keydown', e => {
         if (e.key === 'Enter') {
@@ -417,11 +392,9 @@ function initSubtaskInputAndSaveListener() {
     document.getElementById('editing-save-btn').addEventListener('click', handleSaveEditTask);
 };
 
-
 function init() {
     initOverlayCloseHandler();
     initSubtaskInputAndSaveListener()
 };
-
 
 init()
