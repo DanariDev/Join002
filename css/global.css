@@ -132,7 +132,6 @@ h3 {
     border: 1.5px solid black;
     cursor: pointer;
     border-radius: 2px;
-    margin-bottom: auto;
 }
 
 #privacy-checkbox:checked::before {
