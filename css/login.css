@@ -49,24 +49,24 @@
 }
 
 .logo {
-    width: 100px;
-    height: auto;
-    margin-bottom: 32px;
     position: absolute;
-    top: 40px;
-    left: 80px;
+    top: 20px;
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    align-self: start;
+    left: 0;
 }
 
 .login-box {
     display: flex;
     flex-direction: column;
     background: #ffffff;
-    width: 70%;
-    max-width: 652px;
-    padding: 1rem;
-    border-radius: 12px;
-    box-shadow: none;
     text-align: center;
+    box-shadow: 2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    padding: 3rem;
+    border-radius: 16px;
+    width: 600px;
 }
 
 .underline {
@@ -98,13 +98,12 @@
 .input-wrapper input {
     box-sizing: border-box;
     width: 90%;
-    min-height: 48px;
     padding: 12px;
     border-radius: 8px;
     font-size: 16px;
     font-weight: 400;
     position: relative;
-    margin: 12px 12px 0 12px;
+    margin: 20px 12px 0 12px;
 }
 
 #password-repeat-input {

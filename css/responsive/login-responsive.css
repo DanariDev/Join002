@@ -16,10 +16,12 @@
         height: auto;
         padding: 16rem 1rem 1rem 1rem;
         justify-content: space-between;
+        gap: 32px;
     }
 
     .login-box {
         width: 90%;
+        padding: 1rem;
     }
 
     .sign-up-wrapper-responsive {
@@ -43,6 +45,11 @@
         left: 38%;
         right: 38%;
     }
+
+    .logo{
+        height: 80px;
+        top: 32px;
+    }
 }
 
 
@@ -50,10 +57,9 @@
 
     .btn-primary,
     .btn-secondary {
-        padding: 7px;
-        font-size: 12px;
+        padding: 14px;
         max-width: none;
-        width: 180px;
+        width: 150px;
     }
 
     .underline:after {
