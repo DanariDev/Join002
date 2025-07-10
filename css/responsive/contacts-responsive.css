@@ -153,18 +153,17 @@
 
     #lightbox input {
         min-width: 0;
+        margin: 0px 8px;
     }
 
     .lightbox-right {
         border-radius: 0 0 20px 20px;
-        flex: 1;
-        padding: 3rem 0 1rem 0;
+        padding: 7rem 0 1rem 0;
     }
 
     .lightbox-left {
         border-radius: 20px 20px 0 0;
-        padding: 4rem 0 6rem 0;
-        height: calc(50% - 10rem);
+        padding: 4rem 0 7rem 0;
     }
 
     .blue-line {
@@ -174,6 +173,7 @@
     .lightbox-left span {
         font-size: 20px;
         align-self: auto;
+        text-wrap-mode: nowrap;
     }
 
     #current-name {
@@ -198,7 +198,7 @@
 
     .current-icon, #edit-icon {
         position: fixed;
-        top: 44%;
+        top: 31%;
         border: solid;
     }
 
@@ -208,22 +208,11 @@
 
     .btns-lighbox{
         justify-content: center;
-    }
-}
-
-@media (max-height: 740px) {
-    .lightbox-right {
-        padding: 6rem 0 1rem 0;
+        gap: 12px;
     }
 
-    .current-icon, #edit-icon {
-        top: 43%;
-    }
-}
-
-@media (max-height: 667px) {
-    .current-icon, #edit-icon {
-        top: 38%;
+    #lightbox.show {
+        transform: translateY(-38px);
     }
 }
 
