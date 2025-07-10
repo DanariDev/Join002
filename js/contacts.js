@@ -288,6 +288,8 @@ async function addNewContact() {
   await addContact({ name, email, phone, initials: getInitials(name) });
   closeLightbox();
   initContactsList();
+  document.getElementById('confirmation-window').classList.remove('d-none');
+  setTimeout(() => { document.getElementById('confirmation-window').classList.add("d-none");}, 3000);
 }
 
 /** Hides contact details */

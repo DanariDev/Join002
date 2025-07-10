@@ -54,7 +54,6 @@
     position: fixed;
     top: 32px;
     display: flex;
-    width: 180px;
     background-color: var(--clr-700);
     color: white;
     padding: 24px;
