@@ -204,6 +204,16 @@
         font-size: 25px;
     }
 
+    .current-bottom p {
+        font-size: 20px;
+    }
+
+    .current-information span,
+    #current-mail,
+    #current-phone {
+        font-size: 16px;
+    }
+
     #current-icon {
         height: 80px;
         width: 80px;

@@ -258,6 +258,8 @@
     border-radius: 10px;
     transform: translateX(100%);
     transition: transform 0.5s ease-in-out;
+    max-height: 507px;
+    max-width: 1062px;
 }
 
 .lightbox-left {
