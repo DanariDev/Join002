@@ -145,7 +145,7 @@ function opendeleteQuery(taskId){
  * This functions carry out the query as to whether or not should be deleted
  * 
  * @param {boolean} deleteT - Gives back whether or not should be deleted
- * @param {string} contactId -This string is assigned here so that the correct task is deleted
+ * @param {string} taskId -This string is assigned here so that the correct task is deleted
  * @param {object} event - Event is needed to stop propagation
  */
 function deleteQuery(deleteT, taskId, event){
