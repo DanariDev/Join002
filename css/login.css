@@ -240,3 +240,26 @@ footer a:hover {
     margin-top: 4px;
     display: none;
 }
+
+#privacy-checkbox.input-error{
+    border: 1.5px solid red;
+}
+
+#privacy-checkbox {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid black;
+    cursor: pointer;
+    border-radius: 2px;
+}
+
+#privacy-checkbox:checked::before {
+  content: '✔';
+  font-size: 12px; 
+  font-weight: bold;
+  color: black;
+  line-height: 0;
+  padding-left: 1.5px;
+  padding-bottom: 3px;
+}
