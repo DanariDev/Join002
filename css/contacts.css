@@ -18,7 +18,9 @@
     display: flex;
     flex-direction: column;
     flex: 1;
-    max-width: 320px;
+    max-width: 500px;
+    min-width: 318px;
+    width: 31.5%;
 }
 
 #add-contact-btn-big {
@@ -28,7 +30,6 @@
     gap: 16px;
     flex: 1;
     max-height: 50px;
-    width: 100%;
     padding: 1rem;
     border: none;
     border-radius: 10px;
@@ -38,6 +39,9 @@
     background-color: var(--clr-700);
     text-wrap: nowrap;
     cursor: pointer;
+    width: 90%;
+    align-self: center;
+    margin-right: 12px;
 }
 
 #add-contact-btn-big:hover {
@@ -66,6 +70,7 @@
     display: flex;
     gap: 35px;
     padding: 1rem;
+    cursor: pointer;
 }
 
 .choosen,
@@ -175,6 +180,9 @@
     font-size: var(--fs-16);
     background: none;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 #current-edit-responsive:hover,
