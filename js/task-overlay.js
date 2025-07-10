@@ -68,7 +68,7 @@ export function renderPopup(task) {
     createPopupSubtask(task)
     getLabelColor()
     document.getElementById('overlay-close').addEventListener('click', closePopup);
-    document.getElementById('delete-task-btn').onclick = () => deleteTask(task.id);
+    document.getElementById('delete-task-btn').onclick = () => opendeleteQuery(task.id);
     document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
 };
 
@@ -138,14 +138,38 @@ function toggleSubtask(taskId, index, checked) {
     update(taskRef, { done: checked });
 };
 
+/**
+ * This function opens delete Query and assigns an on-click function to the buttons and the query-body
+ * 
+ * @param {string} taskId -This string is assigned here so that the correct task is deleted
+ */
+function opendeleteQuery(taskId){
+  document.getElementById('query-window').classList.remove('d-none');
+  document.getElementById("cancel-delete-button").onclick = () => deleteQuery(false, taskId, event);
+  document.getElementById("query-window").onclick = () => deleteQuery(false, taskId, event);
+  document.getElementById("yes-delete-button").onclick = () => deleteQuery(true, taskId, event);
+}
 
-function deleteTask(taskId) {
-    if (confirm('Do you really want to delete this task?')) {
+/**
+ * This functions carry out the query as to whether or not should be deleted
+ * 
+ * @param {boolean} deleteT - Gives back whether or not should be deleted
+ * @param {string} contactId -This string is assigned here so that the correct task is deleted
+ * @param {object} event - Event is needed to stop propagation
+ */
+function deleteQuery(deleteT, taskId, event){
+  event.stopPropagation();
+  document.getElementById('query-window').classList.add('d-none');
+  deleteTask(taskId, deleteT);
+}
+
+function deleteTask(taskId, deleteT) {
+    if (deleteT) {
         remove(ref(db, `tasks/${taskId}`)).then(() => {
             closePopup();
             document.querySelector(`[data-id='${taskId}']`)?.remove();
         });
-    };
+    }
 };
 
 

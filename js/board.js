@@ -221,6 +221,12 @@ function updateProgressBar(card, subtasks) {
 loadTasks();
 loadEventListeners();
 
+if (localStorage.getItem("wasSavedTask") == 'true') {
+  document.getElementById('confirmation-window').classList.remove('d-none');
+  setTimeout(() => { document.getElementById('confirmation-window').classList.add("d-none");}, 2000);
+  localStorage.removeItem("wasSavedTask");
+}
+
 // ADD TASK OVERLAY
 
 /**

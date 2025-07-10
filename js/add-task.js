@@ -169,8 +169,8 @@ function validateAndSaveTask(task) {
     return;
   }
   push(ref(db, "tasks"), task).then(function () {
-    alert("Aufgabe erfolgreich gespeichert!");
     resetForm();
+    localStorage.setItem("wasSavedTask", "true");
     window.location.href = "board.html";
   });
 };

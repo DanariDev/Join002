@@ -1,5 +1,5 @@
 .overlay-body{
-    position: absolute;
+    position: fixed;
     display: flex;
     justify-content: center;
     background-color: rgb(0, 0, 0, 0.4);
@@ -47,4 +47,23 @@
     color: white;
     background-color: #2A3647;
     border: var(--clr-200) solid 1px;
+}
+
+
+.confirmation-window{
+    position: fixed;
+    top: 32px;
+    display: flex;
+    width: 180px;
+    background-color: var(--clr-700);
+    color: white;
+    padding: 24px;
+    border-radius: 16px;
+    font-size: 16px;
+    margin-left: 232px;
+    justify-self: center;
+}
+
+.especially-for-board{
+    z-index: 9999;
 }
