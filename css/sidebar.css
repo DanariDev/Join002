@@ -37,6 +37,7 @@
   font-weight: 400;
   transition: background-color 0.2s ease;
   padding: 8px 48px;
+  text-wrap-mode: nowrap;
 }
 
 
