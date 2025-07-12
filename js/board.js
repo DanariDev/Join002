@@ -128,8 +128,10 @@ function updateSubtaskCount(card, subtasks) {
     }
   }
   card.querySelector('.task-count').textContent = doneSubtasks + '/' + totalSubtasks + ' Subtasks';
-  // if(doneSubtasks <=0) document.getElementsByClassName('progress-bar-task-conter-div')[0].classList.add('d-none');
-  // else document.getElementsByClassName('progress-bar-task-conter-div')[0].classList.remove('d-none');
+  if(doneSubtasks <=0) card.querySelector('.progress-bar-container').classList.add('d-none');
+  else card.querySelector('.progress-bar-container').classList.remove('d-none');
+  if(totalSubtasks <=0) card.querySelector('.progress-bar-task-conter-div').classList.add('d-none');
+  else card.querySelector('.progress-bar-task-conter-div').classList.remove('d-none');
 };
 
 /**
