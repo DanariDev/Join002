@@ -1,0 +1,11 @@
+@media (max-width: 800px) {
+    .overlay-content {
+        min-width: 400px;
+    }
+}
+
+@media (max-width: 500px) {
+    .overlay-content {
+        min-width: 200px;
+    }
+}

@@ -338,3 +338,8 @@
   object-fit: contain;
   margin-right: 8px;
 }
+
+.assigned-list{
+  overflow: auto;
+  max-height: 190px;
+}
