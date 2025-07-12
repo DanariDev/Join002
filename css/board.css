@@ -327,3 +327,14 @@
   margin: 16px 0;
   align-items: center;
 }
+
+.assigned-initials_priority-div{
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.priority-img{
+  object-fit: contain;
+  margin-right: 8px;
+}

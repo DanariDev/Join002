@@ -91,6 +91,9 @@ function updateTaskCard(card, task) {
   card.querySelector('.task-desc').textContent = task.description;
   const initialsContainer = card.querySelector('.assigned-initials');
   initialsContainer.classList.add('d-flex');
+  if (task.priority == 'low') card.querySelector('.priority-img').attributes[1].value = '/assets/img/low-btn-icon.png'
+  if (task.priority == 'medium') card.querySelector('.priority-img').attributes[1].value = '/assets/img/medium-btn-icon.png'
+  if (task.priority == 'urgent') card.querySelector('.priority-img').attributes[1].value = '/assets/img/urgent-btn-icon.png'
   updateInitials(initialsContainer, task.assignedTo);
   updateSubtaskCount(card, task.subtasks);
   updateProgressBar(card, task.subtasks);
