@@ -214,6 +214,10 @@
     #lightbox.show {
         transform: translateY(-38px);
     }
+
+    .close-button {
+        color: white;
+    }
 }
 
 @media (min-width: 801px) and (max-width: 806px) {
