@@ -111,6 +111,8 @@
     flex-wrap: wrap;
     height: auto;
     justify-content: flex-start;
+    align-items: baseline;
+    margin-top: 0;
 }
 
 .overlay-key {

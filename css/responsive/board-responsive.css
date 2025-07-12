@@ -41,6 +41,10 @@
         font-size: 36px;
     }
 
+    #add-task-button-responsive {
+        padding: 8px 13.62px;
+    }
+
     .search-task-field {
         display: flex;
         justify-content: center;

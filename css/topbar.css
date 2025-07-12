@@ -1,19 +1,18 @@
 @import url("global.css");
 
 .topbar {
-  background-color: var(--clr-200);
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
   margin-left: 22.138rem;
-  border-bottom: 1px solid var(--clr-300);
 }
 
 .topbar-title {
-  font-size: calc(0.8985rem + 0.390625vw);
+  font-size: 20px;
   font-weight: 400;
-  color: var(--clr-700);
+  color: black;
   padding-left: 64px;
 }
 

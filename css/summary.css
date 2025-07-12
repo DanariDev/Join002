@@ -2,9 +2,13 @@
 
 
 /* Sidebar */
-.summary-link,
-.summary-link:hover {
+.summary-link{
   background-color: var(--clr-900);
+  color: rgb(255, 255, 255);
+}
+
+.summary-link img{
+  filter: contrast(1.5);
 }
 
 

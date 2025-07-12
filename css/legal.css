@@ -36,10 +36,8 @@ h2 {
   color: var(--clr-700);
 }
 
-.legal-link,
-.legal-link:hover {
+.legal-link{
   background-color: var(--clr-900);
-  color: var(--clr-500);
 }
 
 .blue-print {

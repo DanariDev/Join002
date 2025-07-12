@@ -2,14 +2,23 @@
 @import url("add-task.css");
 
 
-.add-task-link,
-.add-task-link:hover {
+.add-task-link {
   background: none;
+  color: rgb(255, 255, 255, 0.5);
+}
+
+.add-task-link img{
+  filter: contrast(1);
 }
 
 .board-link,
 .board-link:hover {
   background-color: var(--clr-900);
+  color: rgb(255, 255, 255);
+}
+
+.board-link img{
+  filter: contrast(1.5);
 }
 
 .board-main {
@@ -21,7 +30,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 10px 0;
+  margin: 10px 0 32px;
 }
 
 
@@ -35,6 +44,10 @@
   background-position: right 24px center;
 }
 
+#search-input::placeholder{
+  color: #d1d1d1;
+}
+
 .search-task-field {
   display: flex;
   justify-content: center;
@@ -46,7 +59,7 @@
 #add-task-button-responsive {
   background-color: var(--clr-700);
   color: var(--clr-200);
-  height: 48px;
+  padding: 10px 20px;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -69,45 +82,41 @@
 
 .to-do-field {
   grid-area: to-do;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-weight: bold;
-  gap: 3px;
 }
 
 .in-progress-field {
   grid-area: in-progress;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-weight: bold;
-  gap: 3px;
 }
 
 .await-field {
   grid-area: await;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-weight: bold;
-  gap: 3px;
 }
 
 .done-field {
   grid-area: done;
-  display: flex;
-  justify-content: start;
-  align-items: center;
-  font-weight: bold;
-  gap: 3px;
 }
 
 .to-do-tasks {
   grid-area: to-do-tasks;
+}
+
+.to-do-field,
+.in-progress-field,
+.await-field,
+.done-field{
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  gap: 3px;
+  margin: 0px 4px;
+}
+
+.to-do-field *,
+.in-progress-field *,
+.await-field *,
+.done-field *{
+  color: #42526e;
 }
 
 .in-progress-tasks {
@@ -152,8 +161,10 @@
 .add-task-btn {
   cursor: pointer;
   color: var(--clr-700);
-  border-radius: 25px;
+  border-radius: 8px;
   text-align: center;
+  padding: 0px 2.84px;
+  font-weight: bolder;
 }
 
 .responsive-show {
@@ -224,6 +235,7 @@
   font-size: var(--fs-16);
   font-weight: bold;
   margin-bottom: 4px;
+  color: #2a3647
 }
 
 .task-desc {
@@ -236,8 +248,8 @@
   background-color: var(--clr-200);
   height: 6px;
   border-radius: 4px;
-  margin-bottom: 10px;
   overflow: hidden;
+  width: 50%;
 }
 
 .progress-bar {
@@ -274,7 +286,8 @@
 /* Subtask Count */
 .task-count {
   font-size: 12px;
-  color: var(--clr-400);
+  color: black;
+  text-wrap-mode: nowrap;
 }
 
 .full-name {
@@ -284,10 +297,14 @@
 
 .placeholder {
   display: flex;
-  border: 2px dotted rgb(0, 0, 0);
-  height: 100px;
+  border: 2px dotted rgb(0, 0, 0, 0.2);
   justify-content: center;
   align-items: center;
+  border-radius: 8px;
+  background-color: rgb(0, 0, 0, 0.1);
+  font-size: 16px;
+  padding: 12px 0;
+  color: gray;
 }
 
 #no-results-message {
@@ -297,4 +314,16 @@
   justify-content: center;
   align-items: center;
   padding: 2rem;
+}
+
+.headline-board{
+  color: black;
+}
+
+.progress-bar-task-conter-div{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  margin: 16px 0;
+  align-items: center;
 }

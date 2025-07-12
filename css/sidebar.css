@@ -31,7 +31,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
-  color: var(--clr-200);
+  color: rgb(255, 255, 255, 0.5);
   text-decoration: none;
   font-size: var(--fs-16);
   font-weight: 400;

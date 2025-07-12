@@ -127,7 +127,9 @@ function updateSubtaskCount(card, subtasks) {
       if (subtasks[i].done) doneSubtasks++;
     }
   }
-  card.querySelector('.task-count').textContent = doneSubtasks + '/' + totalSubtasks;
+  card.querySelector('.task-count').textContent = doneSubtasks + '/' + totalSubtasks + ' Subtasks';
+  // if(doneSubtasks <=0) document.getElementsByClassName('progress-bar-task-conter-div')[0].classList.add('d-none');
+  // else document.getElementsByClassName('progress-bar-task-conter-div')[0].classList.remove('d-none');
 };
 
 /**
