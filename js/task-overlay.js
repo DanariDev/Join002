@@ -66,6 +66,7 @@ export function renderPopup(task) {
     document.getElementById('overlay-close').addEventListener('click', closePopup);
     document.getElementById('delete-task-btn').onclick = () => opendeleteQuery(task.id);
     document.getElementById('edit-task-btn').onclick = () => editTask(task.id);
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden'
 };
 
 function getLabelColor() {
@@ -197,6 +198,7 @@ async function editTask(taskId) {
 function openEditOverlay() {
     const overlay = document.getElementById('edit-task-overlay');
     overlay.classList.replace('d-none', 'd-flex');
+    document.getElementById('task-overlay').classList.replace('d-flex', 'd-none')
     document.getElementById('editing-cancel-btn').addEventListener('click', closePopup);
 };
 

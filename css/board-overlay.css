@@ -98,6 +98,8 @@
 #popup-subtasks {
     list-style: none;
     padding: 0;
+    overflow: auto;
+    max-height: 150px;
 }
 
 .assigned-item {

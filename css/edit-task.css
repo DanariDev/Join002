@@ -130,9 +130,18 @@ li {
     margin: 6px 0 6px 0;
 }
 
+#editing-subtask-list{
+    overflow: auto;
+    max-height: 90px;
+}
+
 #editing-subtask-list li {
     display: flex;
     justify-content: space-between;
+}
+
+#editing-subtask-list li img{
+    cursor: pointer;
 }
 
 
@@ -174,6 +183,9 @@ li {
     border: none;
     cursor: pointer;
     font-size: var(--fs-20);
+
+    overflow: auto;
+    max-height: 62px;
 }
 
 .contact-selected {

@@ -1,11 +1,51 @@
+@media (max-width: 940px) {
+    #edit-task-form {
+        flex-direction: column;
+    }
+
+    .edit-task-main {
+        max-height: 560px;
+        margin: 32px;
+    }
+
+    #edit-task-form{
+        overflow: auto;
+    }
+}
+
 @media (max-width: 800px) {
     .overlay-content {
         min-width: 400px;
     }
 }
 
-@media (max-width: 500px) {
-    .overlay-content {
-        min-width: 200px;
+@media (max-width: 520px) {
+    .edit-task-cancel-and-save-btn{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #editing-priority-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #editing-priority-buttons button{
+        width: 122.5px;
+        flex: none;
     }
 }
+
+@media (max-width: 500px) {
+    .overlay-content {
+        min-width: 256px;
+    }
+}
+
+@media (max-width: 500px) {
+    .edit-task-main h1{
+        font-size: 40px;
+    }
+}
+
