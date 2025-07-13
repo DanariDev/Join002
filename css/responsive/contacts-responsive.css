@@ -6,6 +6,7 @@
         flex-direction: column;
         align-items: start;
         gap: 8px;
+        font-size: 20px;
     }
 
     .split-contact-header {
@@ -15,8 +16,8 @@
     .contact-details-haeder span {
         position: relative;
     }
-    
-    .contact-details-haeder span::after{
+
+    .contact-details-haeder span::after {
         content: '';
         position: absolute;
         left: 0;
@@ -37,6 +38,10 @@
 }
 
 @media (max-width: 800px) {
+
+    h1 {
+        font-size: 47px;
+    }
 
     #current-btns {
         display: none;
@@ -177,7 +182,7 @@
     }
 
     #current-name {
-        font-size: 25px;
+        font-size: 27px;
     }
 
     .current-bottom p {
@@ -191,12 +196,13 @@
     }
 
     #current-icon {
-        height: 80px;
-        width: 80px;
+        height: 70px;
+        width: 70px;
         font-size: 25px;
     }
 
-    .current-icon, #edit-icon {
+    .current-icon,
+    #edit-icon {
         position: fixed;
         top: 31%;
         border: solid;
@@ -206,7 +212,7 @@
         padding: 0;
     }
 
-    .btns-lighbox{
+    .btns-lighbox {
         justify-content: center;
         gap: 12px;
     }
@@ -221,7 +227,7 @@
 }
 
 @media (min-width: 801px) and (max-width: 806px) {
-    h1{
+    h1 {
         font-size: 57.2px;
     }
 }
