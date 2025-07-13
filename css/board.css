@@ -64,7 +64,7 @@
   border-radius: 10px;
   cursor: pointer;
   font-weight: 600;
-  font-size: var(--fs-21);
+  font-size: var(--fs-20);
   white-space: nowrap;
 }
 
@@ -285,7 +285,7 @@
 
 /* Subtask Count */
 .task-count {
-  font-size: 12px;
+  font-size: 14px;
   color: black;
   text-wrap-mode: nowrap;
 }
@@ -310,7 +310,7 @@
 #no-results-message {
   display: none;
   color: red;
-  font-size: var(--fs-21);
+  font-size: var(--fs-18);
   justify-content: center;
   align-items: center;
   padding: 2rem;

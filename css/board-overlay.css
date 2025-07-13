@@ -29,7 +29,7 @@
     right: 16px;
     background: none;
     border: none;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     color: var(--clr-700);
@@ -145,4 +145,5 @@ li {
 
 .overlay-section input {
     max-width: 25px;
+    font-size: var(--fs-16);
 }

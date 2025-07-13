@@ -1,6 +1,7 @@
 @import url("global.css");
 
 
+
 /* Sidebar */
 .summary-link{
   background-color: var(--clr-900);
@@ -11,16 +12,14 @@
   filter: contrast(1.5);
 }
 
-
 /* Header */
 .summary-header {
   display: flex;
   align-items: center;
   gap: 30px;
-  margin-left: 22.138rem;
-  padding: 2rem;
+  margin-left: 28rem;
+  padding: 8rem 2rem 4rem;
 }
-
 
 .summary-divider {
   height: 59px;
@@ -28,29 +27,26 @@
   border-radius: 2px;
 }
 
-
 .summary-title {
   color: var(--clr-700);
   font-size: var(--fs-27);
   font-weight: 400;
 }
 
-
 /* Main Content */
 .summary-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-left: 22.138rem;
-  padding: 4rem;
+  margin-left: 28rem;
+  padding: 0 2rem 2rem;
 }
 
-
+/* Main Content all Cards */
 .summary-content-wrapper {
   display: flex;
   gap: 48px;
 }
-
 
 /* Main Content left Side */
 .summary-left {
@@ -60,14 +56,13 @@
   max-width: 560px;
 }
 
-
 /* Main Content all Cards */
 .summary-box {
   background-color: var(--clr-200);
   border-radius: 30px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
   margin: 0 1rem;
-  padding: 1rem;
+  padding: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -75,27 +70,24 @@
   box-sizing: border-box;
   text-align: center;
   flex-direction: column;
-  min-height: 168px;
+  min-height: 140px;
   flex: 1;
 }
-
 
 .summary-box span {
   color: var(--clr-700);
   font-size: var(--fs-20);
 }
 
-
 .summary-box img {
-  width: 69px;
+  width: 50px;
   height: auto;
   object-fit: contain;
 }
 
-
 .summary-box:hover {
   background-color: var(--clr-900);
-  scale: 110%;
+  scale: 105%;
   transition: 0.2s ease-in-out;
 
   h2,
@@ -105,7 +97,6 @@
   }
 }
 
-
 /* Main Content first Card row*/
 #todo,
 #done {
@@ -114,7 +105,6 @@
   align-items: center;
 }
 
-
 /* Main Content second Card row*/
 .urgent-wrapper {
   flex-direction: row;
@@ -122,13 +112,11 @@
   text-align: center;
 }
 
-
 #urgent {
   flex-direction: row;
   align-items: center;
   gap: 10px;
 }
-
 
 .divider {
   width: 1px;
@@ -137,19 +125,16 @@
   margin: 0;
 }
 
-
 #deadline-date {
   color: var(--clr-700);
   font-size: var(--fs-21);
   font-weight: 700;
 }
 
-
 #deadline-title {
   color: var(--clr-700);
   font-size: var(--fs-16);
 }
-
 
 /* Summary Greetings*/
 #summary-greeting-wrapper {
@@ -157,15 +142,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: start;
+  margin-left: 10vw;
 }
-
 
 #summary-greeting-wrapper span {
   color: var(--clr-500);
   font-size: var(--fs-64);
   font-weight: 700;
 }
-
 
 #summary-greeting-time {
   color: var(--clr-700);
@@ -174,9 +158,17 @@
   line-height: 1.2;
 }
 
-
 h2 {
   color: var(--clr-700);
   font-size: var(--fs-64);
   margin: 0;
+}
+
+/* Entfernung der blauen Linie */
+.summary-header::after {
+  content: none;
+}
+
+.summary-title {
+  color: var(--clr-700);
 }
