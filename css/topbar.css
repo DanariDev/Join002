@@ -7,6 +7,7 @@
   align-items: center;
   padding: 2rem;
   margin-left: 22.138rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .topbar-title {
@@ -46,7 +47,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid #000;
+  border: 3px solid #000; /* Erhöht von 2px auf 4px */
   font-size: var(--fs-27);
   cursor: pointer;
 }
