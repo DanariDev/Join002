@@ -13,19 +13,18 @@
   z-index: 100;
 }
 
-
 .sidebar-logo {
   align-self: center;
-  margin: 2rem;
+  margin: 6rem; /* Reduziert von 2rem auf 1rem */
 }
-
 
 .sidebar-nav {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  padding: 0 0  200px 0;
+  font-family: 'Inter', sans-serif;
 }
-
 
 .nav-link {
   display: flex;
@@ -40,7 +39,6 @@
   text-wrap-mode: nowrap;
 }
 
-
 .add-task-link:hover,
 .board-link:hover,
 .contacts-link:hover,
@@ -49,34 +47,29 @@
   background-color: var(--clr-600);
 }
 
-
 .privacy-policy-link:hover,
 .legal-link:hover {
   background-color: none;
   color: var(--clr-500);
 }
 
-
 .nav-link img {
   width: 24px;
   height: 24px;
 }
 
-
 .sidebar-footer {
   display: flex;
   flex-direction: column;
-  padding: 40px 0;
+  padding: 0 0 50px 0;
   font-family: 'Inter', sans-serif;
 }
-
 
 .sidebar-footer-links {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-
 
 .sidebar-footer-links a {
   text-decoration: none;
