@@ -14,6 +14,11 @@
 }
 
 @media (max-width: 800px) {
+
+    h1 {
+        font-size: 47px !important;
+    }
+
     #sidebar-footer {
         display: none;
     }
