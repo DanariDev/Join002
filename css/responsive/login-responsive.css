@@ -50,8 +50,26 @@
         height: 80px;
         top: 32px;
     }
+
+    .passwort-input-button-div,
+    .passwort-repeat-input-button-div {
+        width: 100%;
+    }
+
+    #show-hide-password, 
+    #show-hide-repeat-password {
+        justify-self: anchor-center;
+        right: -350px;
+    }
 }
 
+@media (max-width: 534px){
+    #show-hide-password, 
+    #show-hide-repeat-password {
+        right: 41px;
+        justify-self: auto;
+    }
+}
 
 @media (max-width: 490px) {
 
