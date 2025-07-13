@@ -17,6 +17,7 @@
 
 /* Content Box */
 .add-task-main {
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
   gap: 32px;

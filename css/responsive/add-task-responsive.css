@@ -5,7 +5,10 @@
       min-width: 480px; 
       font-size: calc(var(--fs-20) * 1); 
     }
-  
+    .add-task-main {
+        margin: 0 auto; 
+        padding: 4rem; 
+      }
     .add-task-form-content {
       flex: 1 1 50%; 
       min-width: 480px; 
