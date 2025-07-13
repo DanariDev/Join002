@@ -27,7 +27,7 @@
 
 @media (max-width: 800px) {}
 
-@media (max-width: 1100px) {
+@media (max-width: 800px) {
 
   h2,
   h1 {
@@ -152,5 +152,6 @@
     justify-content: center;
     max-width: 1400px;
     margin: 0 auto;
+    gap: 100px;
   }
 }
