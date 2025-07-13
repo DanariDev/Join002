@@ -200,7 +200,7 @@ function addPlaceholders() {
     if (taskCards.length === 0 && !placeholder) {
       const newPlaceholder = document.createElement('div');
       newPlaceholder.className = 'placeholder';
-      newPlaceholder.innerText = 'no task available';
+      newPlaceholder.innerText = 'No tasks To do';
       column.appendChild(newPlaceholder);
     }
   });
