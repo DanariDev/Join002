@@ -1,8 +1,9 @@
 /* Media Querry Big Displays */
 @media (min-width: 1920px) {
     select#category {
+        min-height: 50px;
       min-width: 480px; /* Beibehaltung der Mindestbreite */
-      font-size: calc(var(--fs-20) * 0.7); /* Stärkere Reduzierung der Schriftgröße auf 80% */
+      font-size: calc(var(--fs-20) * 1); /* Stärkere Reduzierung der Schriftgröße auf 80% */
       
       background-color: rgba(255, 0, 0, 0.1); 
     }
