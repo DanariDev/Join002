@@ -10,7 +10,7 @@
 @media (max-width: 900px) {}
 
 
-@media (max-width: 800px) {
+@media (max-width: 1100px) {
 
     .login-page-wrapper {
         height: auto;
@@ -46,7 +46,7 @@
         right: 38%;
     }
 
-    .logo{
+    .logo {
         height: 80px;
         top: 32px;
     }

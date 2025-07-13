@@ -1,4 +1,4 @@
-@media (max-width: 940px) {
+@media (max-width: 1100px) {
     #edit-task-form {
         flex-direction: column;
     }
@@ -8,7 +8,7 @@
         margin: 32px;
     }
 
-    #edit-task-form{
+    #edit-task-form {
         overflow: auto;
     }
 }
@@ -20,7 +20,7 @@
 }
 
 @media (max-width: 520px) {
-    .edit-task-cancel-and-save-btn{
+    .edit-task-cancel-and-save-btn {
         flex-direction: column;
         align-items: center;
     }
@@ -31,7 +31,7 @@
         gap: 8px;
     }
 
-    #editing-priority-buttons button{
+    #editing-priority-buttons button {
         width: 122.5px;
         flex: none;
     }
@@ -44,8 +44,7 @@
 }
 
 @media (max-width: 500px) {
-    .edit-task-main h1{
+    .edit-task-main h1 {
         font-size: 40px;
     }
 }
-

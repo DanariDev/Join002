@@ -1,121 +1,123 @@
 @media (min-width: 1920px) {
-    select#category {
-      min-height: 50px;
-      min-width: 480px; 
-      font-size: calc(var(--fs-20) * 1); 
-    }
-    .add-task-main {
-      margin: 0 auto; 
-      padding: 4rem; 
-    }
-    .board-main {
-      max-width: 1400px; 
-      margin: 0 auto; 
-      padding: 4rem; 
-    }
+  select#category {
+    min-height: 50px;
+    min-width: 480px;
+    font-size: calc(var(--fs-20) * 1);
   }
-  
-  /* Media Querry Big Displays */
-  @media (min-width: 1200px) {}
-  
-  /* Media Querry Small Displays */
-  @media (max-width: 900px) {}
-  
-  @media (max-width: 800px) {}
-  
-  @media (max-width: 800px) {
-    h1 {
-      font-size: 47px;
-    }
-  
-    #sidebar-footer {
-      display: none;
-    }
-  
-    .board-main {
-      margin-left: 0;
-      padding: 10px 10px 8vh 10px;
-    }
-  
-    .board-header {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 10px;
-    }
-  
-    .board-header a {
-      text-decoration: none;
-    }
-  
-    .responsive-d-none {
-      display: none;
-    }
-  
-    .responsive-show {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 5px;
-      border-radius: 55px;
-      font-size: 36px;
-    }
-  
-    #add-task-button-responsive {
-      padding: 8px 13.62px;
-    }
-  
-    .search-task-field {
-      display: flex;
-      justify-content: center;
-    }
-  
-    .responsive-space-between {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      width: 100%;
-    }
-  
-    .add-task-button {
-      flex: 0;
-      width: 35px;
-      text-align: center;
-      padding: 5px;
-    }
-  
-    #board {
-      grid-template-columns: 1fr;
-      grid-template-areas:
-        "to-do"
-        "to-do-tasks"
-        "in-progress"
-        "in-progress-tasks"
-        "await"
-        "await-tasks"
-        "done"
-        "done-tasks";
-      gap: 20px;
-    }
-  
-    .to-do-field,
-    .in-progress-field,
-    .await-field,
-    .done-field {
-      justify-content: space-between;
-    }
-  
-    #form-add-task {
-      display: flex;
-      flex-direction: column;
-    }
-  
-    #add-task-form {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
+
+  .add-task-main {
+    margin: 0 auto;
+    padding: 4rem;
   }
-  
-  @media (max-width: 490px) {}
-  
-  @media (max-width: 320px) {}
+
+  .board-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem;
+  }
+}
+
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+@media (max-width: 800px) {}
+
+@media (max-width: 1100px) {
+  h1 {
+    font-size: 47px;
+  }
+
+  #sidebar-footer {
+    display: none;
+  }
+
+  .board-main {
+    margin-left: 0;
+    padding: 10px 10px 8vh 10px;
+  }
+
+  .board-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .board-header a {
+    text-decoration: none;
+  }
+
+  .responsive-d-none {
+    display: none;
+  }
+
+  .responsive-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border-radius: 55px;
+    font-size: 36px;
+  }
+
+  #add-task-button-responsive {
+    padding: 8px 13.62px;
+  }
+
+  .search-task-field {
+    display: flex;
+    justify-content: center;
+  }
+
+  .responsive-space-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .add-task-button {
+    flex: 0;
+    width: 35px;
+    text-align: center;
+    padding: 5px;
+  }
+
+  #board {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "to-do"
+      "to-do-tasks"
+      "in-progress"
+      "in-progress-tasks"
+      "await"
+      "await-tasks"
+      "done"
+      "done-tasks";
+    gap: 20px;
+  }
+
+  .to-do-field,
+  .in-progress-field,
+  .await-field,
+  .done-field {
+    justify-content: space-between;
+  }
+
+  #form-add-task {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #add-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
