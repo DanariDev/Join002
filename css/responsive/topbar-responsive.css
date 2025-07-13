@@ -23,7 +23,7 @@
 
     .topbar-logo {
         display: block;
-        width: 8%;
+        max-width: 50px;
     }
 
     .topbar-user {
