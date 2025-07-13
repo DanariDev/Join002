@@ -21,9 +21,14 @@
       display: flex;
       flex-direction: column;
     }
-  }
-  
-  @media (max-width: 800px) {
+}
+
+@media (max-width: 800px) {
+
+    h1 {
+        font-size: 47px !important;
+    }
+
     #sidebar-footer {
       display: none;
     }

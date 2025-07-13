@@ -35,35 +35,15 @@ body {
     --clr-900: #091930;
     /* für Buttons */
 
-
-    /* Font size ausgehend von 1440 x 1024 wie im Mockup */
-
-    --fs-16: calc(0.98998rem + 0.390625vw);
-    /* Dynamische Font Size von 16px */
-
-    --fs-20: calc(1.37166rem + 0.390625vw);
-    /* Dynamische Font Size von 20px */
-
-    --fs-21: calc(1.46708rem + 0.390625vw);
-    /* Dynamische Font Size von 21px */
-
-    --fs-24: calc(1.75334rem + 0.390625vw);
-    /* Dynamische Font Size von 21px */
-
-    --fs-27: calc(2.0396rem + 0.390625vw);
-    /* Dynamische Font Size von 27px */
-
-    --fs-36: calc(2.89838rem + 0.390625vw);
-    /* Dynamische Font Size von 36px */
-
-    --fs-47: calc(3.948rem + 0.390625vw);
-    /* Dynamische Font Size von 36px */
-
-    --fs-61: calc(5.28387rem + 0.390625vw);
-    /* Dynamische Font Size von 61px */
-
-    --fs-64: calc(5.57013rem + 0.390625vw);
-    /* Dynamische Font Size von 64px */
+    --fs-16: 16px;
+    --fs-20: 20px;
+    --fs-21: 21px;
+    --fs-24: 24px;
+    --fs-27: 27px;
+    --fs-36: 36px;
+    --fs-47: 47px;
+    --fs-61: 61px;
+    --fs-64: 64px;
 }
 
 
@@ -95,7 +75,7 @@ body {
 }
 
 p {
-    font-size: var(--fs-16);
+    font-size: 16px;
 }
 
 h1 {
@@ -105,7 +85,7 @@ h1 {
 }
 
 h3 {
-    font-size: calc(1.1485rem + 0.390625vw);
+    font-size: 20px;
     color: var(--clr-700);
     margin: 0;
 }
