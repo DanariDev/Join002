@@ -3,12 +3,12 @@
 
 
 /* Sidebar */
-.summary-link{
+.summary-link {
   background-color: var(--clr-900);
   color: rgb(255, 255, 255);
 }
 
-.summary-link img{
+.summary-link img {
   filter: contrast(1.5);
 }
 
@@ -72,7 +72,7 @@
   flex-direction: column;
   min-height: 140px;
   flex: 1;
-  min-width: px; 
+  min-width: px;
 }
 
 .summary-box span {

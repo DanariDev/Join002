@@ -35,6 +35,7 @@
         flex-direction: row;
         justify-content: space-around;
         gap: 6px;
+        padding: 0;
     }
 
     .responsive-font {
