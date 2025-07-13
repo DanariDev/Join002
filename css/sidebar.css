@@ -2,7 +2,7 @@
 :root {
   --sidebar-width: 22.138rem;
   --sidebar-bg: var(--clr-700);
-  --sidebar-gap: 10rem; 
+  --sidebar-gap: 9rem; 
   --nav-padding-bottom: 200px;
   --footer-padding-bottom: 50px;
   --link-color: rgba(255, 255, 255, 0.5);
