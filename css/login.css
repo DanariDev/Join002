@@ -263,3 +263,22 @@ footer a:hover {
   padding-left: 1.5px;
   padding-bottom: 3px;
 }
+
+.passwort-input-button-div, .passwort-repeat-input-button-div{
+    position: relative;
+    display: inline-block;
+    width: 90%;
+}
+
+#show-hide-password, #show-hide-repeat-password{
+    position: absolute;
+    right: 84px;
+    top: 72%;
+    transform: translateY(-50%);
+    border: none;
+    cursor: pointer;
+    width: 23px;
+    height: 23px;
+    background-image: url(../assets/img/hiden-password.png);
+    background-repeat: no-repeat;
+}
