@@ -50,8 +50,12 @@
   border: 3px solid #000; /* Erhöht von 2px auf 4px */
   font-size: var(--fs-27);
   cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
 
+.topbar-user:hover {
+  background-color: #e0e0e0;
+}
 .menu {
   display: flex;
   position: fixed;

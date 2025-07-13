@@ -93,7 +93,8 @@
 
   h2,
   #deadline-date,
-  span {
+  span,
+  #deadline-title {
     color: var(--clr-200);
   }
 }
