@@ -1,13 +1,12 @@
 @import url("global.css");
 
-
 /* Sidebar */
 .add-task-link {
   background-color: var(--clr-900);
   color: rgb(255, 255, 255);
 }
 
-.add-task-link img{
+.add-task-link img {
   filter: contrast(1.5);
 }
 
@@ -15,7 +14,6 @@
 .page-wrapper {
   height: calc(100vh - 103px);
 }
-
 
 /* Content Box */
 .add-task-main {
@@ -25,7 +23,6 @@
   padding: 4rem;
   margin-left: 22.138rem;
 }
-
 
 /* Formular */
 #add-task-form {
@@ -39,7 +36,6 @@
   flex: 1;
   gap: 16px;
 }
-
 
 label,
 ::placeholder {
@@ -59,11 +55,14 @@ textarea {
   font-family: 'Inter', sans-serif;
 }
 
+select#category {
+  min-width: 300px; /* Standard-Mindestbreite für kleinere Bildschirme */
+}
+
 .description-input {
   height: 100px;
   resize: none;
 }
-
 
 .grey-bar {
   width: 1px;
@@ -132,7 +131,6 @@ li {
   margin: 6px 0 6px 0;
 }
 
-
 /* Selected Contacts on Form */
 .form-selected-contact {
   display: flex;
@@ -161,8 +159,6 @@ li {
   border-radius: 100%;
   color: var(--clr-200);
 }
-
-
 
 .form-selected-contact input {
   height: 30px;
