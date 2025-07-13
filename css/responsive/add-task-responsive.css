@@ -2,15 +2,15 @@
 @media (min-width: 1920px) {
     select#category {
         min-height: 50px;
-      min-width: 480px; /* Beibehaltung der Mindestbreite */
-      font-size: calc(var(--fs-20) * 1); /* Stärkere Reduzierung der Schriftgröße auf 80% */
+      min-width: 480px; 
+      font-size: calc(var(--fs-20) * 1); 
       
       background-color: rgba(255, 0, 0, 0.1); 
     }
   
     .add-task-form-content {
-      flex: 1 1 50%; /* Erhöht die Flexibilität des Containers */
-      min-width: 480px; /* Mindestbreite, um die Kinder zu unterstützen */
+      flex: 1 1 50%; 
+      min-width: 480px; 
     }
   }
   
