@@ -2,9 +2,9 @@
 @media (min-width: 1920px) {
     select#category {
       min-width: 480px; /* Beibehaltung der Mindestbreite */
-      font-size: calc(var(--fs-20) * 0.6); /* Stärkere Reduzierung der Schriftgröße auf 80% */
-      /* Debugging: Hintergrundfarbe, um zu sehen, ob die Regel greift */
-      background-color: rgba(255, 0, 0, 0.1); /* Leichter roter Hintergrund */
+      font-size: calc(var(--fs-20) * 0.7); /* Stärkere Reduzierung der Schriftgröße auf 80% */
+      
+      background-color: rgba(255, 0, 0, 0.1); 
     }
   
     .add-task-form-content {
