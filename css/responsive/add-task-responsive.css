@@ -4,8 +4,6 @@
         min-height: 50px;
       min-width: 480px; 
       font-size: calc(var(--fs-20) * 1); 
-      
-      background-color: rgba(255, 0, 0, 0.1); 
     }
   
     .add-task-form-content {
