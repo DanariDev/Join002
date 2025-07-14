@@ -323,7 +323,7 @@ function getCurrentValues() {
     const dueDate = document.getElementById('edit-due-date').textContent.replace('Due date:', '').trim();
     const priority = document.getElementById('popup-priority').textContent.replace('Priority:', '').trim();
     const names = document.querySelectorAll('#edit-assigned .full-name');
-    const assignedTo = Array.from(names).map(el => el.textContent.trim().replace('(you)'));
+    const assignedTo = Array.from(names).map(el => el.textContent.replace('(you)', '').trim());
     const subtaskElements = document.querySelectorAll('#popup-subtasks .subtask-overlay-list');
     const subtasks = Array.from(subtaskElements).map(el => el.textContent.trim());
     return { category, title, description, dueDate, priority, assignedTo, subtasks };

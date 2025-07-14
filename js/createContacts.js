@@ -45,7 +45,7 @@ function createInitialsDiv(name) {
 function createNameDiv(name) {
     const div = document.createElement('div');
     div.classList.add('full-name');
-    // if(name == localStorage.getItem('userName')) name += ' (you)';
+    if(name == localStorage.getItem('userName')) name += ' (you)';
     div.textContent = name;
     return div;
 };
