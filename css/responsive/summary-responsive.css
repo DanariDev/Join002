@@ -2,6 +2,39 @@
   gap: 15px;
 }
 
+@media (min-width: 1920px) {
+  .summary-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  .summary-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 10rem 2rem 8rem;
+    width: 100%;
+  }
+
+  .summary-content-wrapper {
+    display: flex;
+    justify-content: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    gap: 100px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .summary-content-wrapper {
+    display: flex;
+  }
+}
+
 /* Für große Bildschirme */
 @media (min-width: 1920px) {
   .summary-main {
@@ -81,6 +114,7 @@
   }
 
   .summary-header {
+    display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin: 0 auto;
@@ -100,6 +134,8 @@
     font-size: 20px;
     font-weight: 400;
     color: #647187;
+    display: inline-block;
+    position: relative;
   }
 
   .summary-divider {
@@ -127,29 +163,7 @@
   }
 }
 
-/* Für kleinere Bildschirme */
-@media (max-width: 900px) {
-  .summary-header {
-    padding: 1.5rem;
-    max-width: 90%;
-    gap: 10px;
-  }
-
-  .summary-header h2 {
-    margin-left: 0.6rem;
-    font-size: calc(28px + 2vw);
-  }
-
-  .summary-title {
-    font-size: calc(16px + 1vw);
-  }
-
-  .summary-divider {
-    width: 100px;
-    height: 3px;
-    margin-left: 0.6rem;
-  }
-
+@media (min-width: 356px) and (max-width: 601px) {
   .summary-main {
     padding: 1.5rem;
     max-width: 90%;
