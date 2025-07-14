@@ -1,7 +1,5 @@
 @import url("global.css");
 
-
-
 /* Sidebar */
 .summary-link {
   background-color: var(--clr-900);
@@ -73,7 +71,7 @@
   flex-direction: column;
   min-height: 140px;
   flex: 1;
-  min-width: px;
+  min-width: 0; /* Korrigierter Wert von 'px' */
 }
 
 .summary-box span {
@@ -113,6 +111,15 @@
   flex-direction: row;
   justify-content: space-around;
   text-align: center;
+}
+
+.urgent-wrapper .summary-box {
+  min-height: 100px; /* Reduzierte Höhe */
+  flex-direction: row; /* Inhalt nebeneinander */
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Kleinerer Abstand zwischen Inhalt */
+  padding: 0.5rem; /* Etwas weniger Padding */
 }
 
 #urgent {

@@ -1,0 +1,152 @@
+/* Für sehr kleine Bildschirme */
+@media (max-width: 490px) {
+  .summary-header {
+    padding: 1rem;
+    gap: 8px;
+    max-width: 95%;
+  }
+
+  .summary-header h2 {
+    margin-left: 0.4rem;
+    font-size: calc(24px + 2vw);
+  }
+
+  .summary-title {
+    font-size: calc(14px + 1vw);
+  }
+
+  .summary-divider {
+    max-width: 80px;
+    height: 2px;
+    margin-left: 0.4rem;
+  }
+
+  .summary-main {
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  .summary-content-wrapper {
+    max-width: 95%;
+    padding: 0 1rem;
+    gap: 8px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .summary-box,
+  .urgent,
+  .urgent-wrapper .summary-box {
+    padding: 0.6rem;
+    margin: 0.4rem 0;
+    min-height: 70px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .summary-box img,
+  .urgent img,
+  .urgent-wrapper .summary-box img {
+    width: calc(25px + 2vw);
+  }
+
+  .summary-box span,
+  .urgent-wrapper .summary-box span,
+  #deadline-title {
+    font-size: calc(12px + 1vw);
+  }
+
+  #deadline-date {
+    font-size: calc(12px + 1vw);
+  }
+
+  #summary-greeting-wrapper span {
+    font-size: calc(20px + 2vw);
+  }
+
+  #summary-greeting-time {
+    font-size: calc(16px + 1vw);
+  }
+
+  .urgent-wrapper {
+    flex-direction: row; 
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .urgent-wrapper .summary-box {
+    width: 48%; 
+    max-width: 48%;
+  }
+}
+
+/* Für extrem kleine Bildschirme */
+@media (max-width: 350px) {
+  .summary-main {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .summary-content-wrapper {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    gap: 6px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .summary-box,
+  .urgent,
+  .urgent-wrapper .summary-box {
+    margin: 0.4rem 0;
+    padding: 0.2rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    border-radius: 10px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .summary-box img,
+  .urgent img,
+  .urgent-wrapper .summary-box img {
+    width: calc(18px + 2vw);
+  }
+
+  .summary-box span,
+  .urgent-wrapper .summary-box span,
+  #deadline-title {
+    font-size: calc(10px + 1vw);
+  }
+
+  #deadline-date {
+    font-size: calc(10px + 1vw);
+  }
+
+  #summary-greeting-wrapper span {
+    font-size: calc(16px + 2vw);
+  }
+
+  #summary-greeting-time {
+    font-size: calc(12px + 1vw);
+  }
+
+  .urgent-wrapper {
+    flex-direction: column; 
+    gap: 4px;
+    width: 100%;
+    max-width: 100%;
+    align-items: center;
+  }
+}
