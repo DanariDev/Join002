@@ -1,11 +1,9 @@
 import { db } from "./firebase-config.js";
 import { getColorForName } from "./createContacts.js";
 import { ref, push, get, } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
 let subtasks = [];
 let contacts = [];
 let assignedTo = [];
-
 /**
  * Retrieves the trimmed value of an element by CSS selector
  * @param {string} selector - CSS selector for the input element
@@ -70,18 +68,21 @@ function addNewSubtask() {
  * @returns {HTMLElement} - Dropdown item element
  */
 function createDropdownItem(contact) {
+  let name = contact.name
   const initials = contact.name
     .split(" ")
     .map((p) => p[0]?.toUpperCase())
     .join("");
   const color = getColorForName(contact.name);
   const item = document.createElement("div");
+  if(name == localStorage.getItem('userName')) name += ' (you)';
   item.innerHTML = `
         <label class="form-selected-contact">
             <input type="checkbox" value="${contact.email}" data-name="${contact.name}" />
-            ${contact.name}
+            ${name}
             <div class="assigned-initials" style="background-color:${color};">${initials}</div>
         </label>`;
+  if(contact.name == localStorage.getItem('userName')) contact.name += ' (you)';
   return item;
 };
 

@@ -6,6 +6,10 @@
   color: rgb(255, 255, 255);
 }
 
+.summary-header h1{ 
+  color: black
+}
+
 .summary-link img {
   filter: contrast(1.5);
 }
@@ -17,7 +21,7 @@
   align-items: center;
   gap: 30px;
   margin-left: 28rem;
-  padding: 10rem 2rem 2rem 20rem;
+  padding: 10rem 2rem 6rem 3rem;
 }
 
 .summary-divider {
@@ -168,7 +172,7 @@
 }
 
 h2 {
-  color: var(--clr-700);
+  color: black;
   font-size: var(--fs-64);
   margin: 0;
 }

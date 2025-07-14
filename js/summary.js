@@ -27,11 +27,11 @@ function showGreetingTime() {
     const currentHour = new Date().getHours();
 
     if (currentHour >= 18) {
-        greetingTime.textContent = 'Good evening';
+        greetingTime.textContent = 'Good evening,';
     } else if (currentHour >= 12) {
-        greetingTime.textContent = 'Good afternoon';
+        greetingTime.textContent = 'Good afternoon,';
     } else {
-        greetingTime.textContent = 'Good morning';
+        greetingTime.textContent = 'Good morning,';
     }
 };
 

@@ -244,6 +244,7 @@ async function setupContactsDropdown(assignedNames) {
     dropdownSelected.innerHTML = '';
     dropdownList.classList.remove('show');
     allContacts.forEach(contact => {
+        if(contact.name == localStorage.getItem('userName')) contact.name += ' (you)';
         const entry = createContactEntry(contact, assignedNames);
         dropdownList.appendChild(entry.wrapper);
         if (entry.checked) assignedTo.push({ name: contact.name, email: contact.email });
@@ -280,12 +281,7 @@ function createContactEntry(contact, assignedNames) {
         updateAssignedToUI();
         updateSaveEditBtn();
     };
-    const initials = contact.name
-        .split(' ')
-        .map(part => part[0]?.toUpperCase())
-        .join('')
-        .slice(0, 2);
-
+    const initials = contact.name.split(' ').map(part => part[0]?.toUpperCase()).join('').slice(0, 2);
     const editInitials = document.createElement('div');
     editInitials.classList.add('assigned-initials');
     editInitials.textContent = initials;
