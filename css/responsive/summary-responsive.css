@@ -2,7 +2,6 @@
   gap: 15px;
 }
 
-/* Für große Bildschirme */
 @media (min-width: 1920px) {
   .summary-main {
     max-width: 1400px;
@@ -11,6 +10,9 @@
   }
 
   .summary-header {
+    display: flex;
+    align-items: center;
+    gap: 30px;
     margin: 0 auto;
     max-width: 1400px;
     padding: 10rem 2rem 8rem;
@@ -18,6 +20,8 @@
   }
 
   .summary-content-wrapper {
+    display: flex;
+    justify-content: center;
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 2rem;
@@ -25,7 +29,33 @@
   }
 }
 
-/* Für mittlere Bildschirme */
+@media (min-width: 1200px) {
+  .summary-content-wrapper {
+    display: flex;
+  }
+}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {
+  .summary-header {
+    gap: 15px;
+    margin-left: 22.138rem;
+    padding: 1.5rem;
+  }
+
+  #summary-greeting-wrapper span {
+    color: var(--clr-500);
+    font-size: var(--fs-47);
+    font-weight: 700;
+  }
+}
+
+.summary-content-wrapper {
+  gap: 15px;
+}
+
+
+
 @media (max-width: 1100px) {
   h2,
   h1 {
@@ -72,22 +102,19 @@
   }
 
   .summary-content-wrapper {
-    max-width: 670px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    gap: 10px;
-    flex-direction: column;
-    align-items: center;
+    width: 100%;
+    gap: 0;
+    justify-content: center;
   }
 
   .summary-header {
+    display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    margin: 0 auto;
-    padding: 1.5rem;
+    align-items: center;
+    margin: 0;
+    gap: 0;
+    padding: 0.9rem;
     max-width: 670px;
-    width: 100%;
-    gap: 10px;
   }
 
   .summary-header h2 {
@@ -100,17 +127,19 @@
     font-size: 20px;
     font-weight: 400;
     color: #647187;
+    display: inline-block;
+    position: relative;
   }
 
-  .summary-divider {
-    order: 3;
-    width: 100px;
+  .summary-title:after {
+    content: "";
+    position: absolute;
+    left: 3%;
+    right: 71%;
+    top: 162px;
     height: 3px;
-    background-color: var(--clr-500);
-    border: none;
-    border-radius: 2px;
-    margin-top: 5px;
-    margin-left: 0.6rem;
+    background-color: #29ABE2;
+    border-radius: 3px;
   }
 
   .summary-box,
@@ -124,6 +153,45 @@
 
   .summary-box img {
     width: 40px;
+  }
+}
+
+@media (max-width: 900px) {
+  .summary-header {
+    gap: 15px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 670px;
+  }
+
+  .summary-header h2 {
+    margin-left: 0.6rem;
+  }
+
+  .summary-divider {
+    margin-left: 0.6rem;
+  }
+
+  .summary-main {
+    margin: 0 auto;
+    padding: 1.5rem;
+    max-width: 670px;
+    width: 100%;
+  }
+
+  .summary-content-wrapper {
+    width: 100%;
+    max-width: 670px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    gap: 0;
+  }
+
+  #summary-greeting-wrapper span {
+    color: var(--clr-500);
+    font-size: var(--fs-47);
+    font-weight: 700;
   }
 }
 
@@ -151,296 +219,37 @@
   }
 
   .summary-main {
-    padding: 1.5rem;
-    max-width: 90%;
-  }
-
-  .summary-content-wrapper {
-    max-width: 90%;
-    padding: 0 1.5rem;
-    gap: 10px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .summary-left {
-    margin-bottom: 2rem;
-    gap: 10px;
-  }
-
-  .summary-box,
-  .urgent {
-    padding: 0.8rem;
-    margin: 0.5rem;
-    min-height: calc(90px + 5vw);
-    border-radius: 20px;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .summary-box img,
-  .urgent img {
-    width: calc(30px + 2vw);
-  }
-
-  .summary-box span,
-  #deadline-title {
-    font-size: calc(14px + 1vw);
-  }
-
-  #deadline-date {
-    font-size: calc(14px + 1vw);
-  }
-
-  #summary-greeting-wrapper span {
-    font-size: calc(24px + 2vw);
-  }
-
-  #summary-greeting-time {
-    font-size: calc(18px + 1vw);
-  }
-
-  .urgent-wrapper {
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .urgent-wrapper .summary-box {
-    min-height: 80px;
-    flex-direction: row;
-    gap: 6px;
-    padding: 0.4rem;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .urgent-wrapper .summary-box img {
-    width: calc(25px + 2vw);
-  }
-
-  .urgent-wrapper .summary-box span {
-    font-size: calc(12px + 1vw);
+    margin: 0;
+    padding: 2rem;
   }
 }
 
-/* Für sehr kleine Bildschirme */
-@media (max-width: 490px) {
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
+
+/* Media Querry Big Displays (ab 1920px) */
+@media (min-width: 1920px) {
+  .summary-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
   .summary-header {
-    padding: 1rem;
-    gap: 8px;
-    max-width: 95%;
-  }
-
-  .summary-header h2 {
-    margin-left: 0.4rem;
-    font-size: calc(24px + 2vw);
-  }
-
-  .summary-title {
-    font-size: calc(14px + 1vw);
-  }
-
-  .summary-divider {
-    max-width: 80px;
-    height: 2px;
-    margin-left: 0.4rem;
-  }
-
-  .summary-main {
-    padding: 1rem;
-    max-width: 95%;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin: 0 auto; 
+    max-width: 1400px; 
+    padding: 10rem 2rem 8rem;
   }
 
   .summary-content-wrapper {
-    max-width: 95%;
-    padding: 0 1rem;
-    gap: 8px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .summary-box,
-  .urgent,
-  .urgent-wrapper .summary-box {
-    padding: 0.6rem;
-    margin: 0.4rem 0;
-    min-height: 70px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  .summary-box img,
-  .urgent img,
-  .urgent-wrapper .summary-box img {
-    width: calc(25px + 2vw);
-  }
-
-  .summary-box span,
-  .urgent-wrapper .summary-box span,
-  #deadline-title {
-    font-size: calc(12px + 1vw);
-  }
-
-  #deadline-date {
-    font-size: calc(12px + 1vw);
-  }
-
-  #summary-greeting-wrapper span {
-    font-size: calc(20px + 2vw);
-  }
-
-  #summary-greeting-time {
-    font-size: calc(16px + 1vw);
-  }
-
-  .urgent-wrapper {
-    gap: 4px;
-  }
-}
-
-/* Für extrem kleine Bildschirme */
-@media (max-width: 350px) {
-  .summary-main {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .summary-content-wrapper {
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    max-width: 100%;
-    gap: 6px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .summary-box,
-  .urgent,
-  .urgent-wrapper .summary-box {
-    margin: 0.4rem 0;
-    padding: 0.2rem;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-    min-height: 50px;
-    border-radius: 10px;
-    flex-direction: row;
-    align-items: center;
+    display: flex;
     justify-content: center;
-  }
-
-  .summary-box img,
-  .urgent img,
-  .urgent-wrapper .summary-box img {
-    width: calc(18px + 2vw);
-  }
-
-  .summary-box span,
-  .urgent-wrapper .summary-box span,
-  #deadline-title {
-    font-size: calc(10px + 1vw);
-  }
-
-  #deadline-date {
-    font-size: calc(10px + 1vw);
-  }
-
-  #summary-greeting-wrapper span {
-    font-size: calc(16px + 2vw);
-  }
-
-  #summary-greeting-time {
-    font-size: calc(12px + 1vw);
-  }
-
-  .urgent-wrapper {
-    flex-direction: column;
-    gap: 4px;
-    width: 100%;
-    max-width: 100%;
-    align-items: center;
-  }
-}
-
-/* Für sehr kleine Bildschirme */
-@media (max-width: 320px) {
-  .summary-header {
-    padding: 0.8rem;
-    gap: 6px;
-    max-width: 100%;
-  }
-
-  .summary-header h2 {
-    margin-left: 0.3rem;
-    font-size: calc(20px + 2vw);
-  }
-
-  .summary-title {
-    font-size: calc(12px + 1vw);
-  }
-
-  .summary-divider {
-    max-width: 60px;
-    height: 2px;
-    margin-left: 0.3rem;
-  }
-
-  .summary-main {
-    padding: 0.8rem;
-    max-width: 100%;
-  }
-
-  .summary-content-wrapper {
-    max-width: 100%;
-    padding: 0 0.8rem;
-    gap: 6px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .summary-box,
-  .urgent,
-  .urgent-wrapper .summary-box {
-    padding: 0.5rem;
-    margin: 0.4rem 0;
-    min-height: 60px;
-    border-radius: 12px;
-    width: 100%;
-    max-width: 100%;
-    min-width: 0;
-  }
-
-  .summary-box img,
-  .urgent img,
-  .urgent-wrapper .summary-box img {
-    width: calc(20px + 2vw);
-  }
-
-  .summary-box span,
-  .urgent-wrapper .summary-box span,
-  #deadline-title {
-    font-size: calc(11px + 1vw);
-  }
-
-  #deadline-date {
-    font-size: calc(11px + 1vw);
-  }
-
-  #summary-greeting-wrapper span {
-    font-size: calc(18px + 2vw);
-  }
-
-  #summary-greeting-time {
-    font-size: calc(14px + 1vw);
-  }
-
-  .urgent-wrapper {
-    gap: 4px;
+    max-width: 1400px;
+    margin: 0 auto;
+    gap: 100px;
   }
 }
