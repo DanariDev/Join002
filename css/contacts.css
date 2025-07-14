@@ -430,3 +430,7 @@ input {
     color: red;
     background: rgb(0, 0, 0, 0.1);
 }
+
+.error-message {
+    justify-self: center;
+}

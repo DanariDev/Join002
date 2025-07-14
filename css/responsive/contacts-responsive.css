@@ -203,7 +203,7 @@
   .current-icon,
   #edit-icon {
     position: fixed;
-    top: 31%;
+    top: 32%;
     border: solid;
   }
   
@@ -223,6 +223,14 @@
   .close-button {
     color: white;
   }
+
+  #cancel-btn{
+    display: none;
+  }
+
+  .lightbox-subline{
+    height: 23px;
+  }
 }
 
 @media (min-width: 801px) and (max-width: 806px) {
@@ -234,73 +242,60 @@
   
   .list-name {
     font-size: 20px
-    }
-    
-    .list-email {
-      font-size: 16px
-    }
-    
-    
-    .initial-icon {
-      height: 40px; 
-      width: 40px;
-      font-size: 16px; 
-    }
-    
-    
-    #current-name {
-      font-size: calc(1rem + 1vw); 
-    }
-    
-    .current-bottom p {
-      font-size: calc(0.8rem + 1vw);
-    }
-    
-    .current-information span,
-    #current-mail,
-    #current-phone {
-      font-size: calc(0.7rem + 1vw);
-    }
-    
-    
-    #current-icon {
-      height: 50px;
-      width: 50px;
-      font-size: calc(0.8rem + 1vw);
-    }
-    
-    
-    #add-contact-btn-big,
-    #create-btn,
-    #saveBtn,
-    #cancel-btn,
-    #deleteBtn {
-      font-size: calc(0.7rem + 1vw);
-      padding: 0.8rem;
-    }
-    
-    
-    #lightbox h2 {
-      font-size: calc(1.2rem + 1vw);
-    }
-    
-    .lightbox-left span {
-      font-size: calc(0.8rem + 1vw);
-    }
-    
-    #lightbox input {
-      height: 40px;
-      font-size: calc(0.7rem + 1vw);
-    }
-    
-    
-    .list-contact-wrapper {
-      gap: 20px; 
-      padding: 0.8rem;
-    }
-    
-    .contact-details-haeder {
-      font-size: calc(0.8rem + 1vw);
-    }
   }
+    
+  .list-email {
+    font-size: 16px
+  }
+    
+    
+  .initial-icon {
+    height: 40px; 
+    width: 40px;
+    font-size: 16px; 
+  }
+    
+  .current-icon, #edit-icon{
+    height: 70px;
+    width: 70px;
+    padding: 1rem;
+  }
+
+  .editing-lighbox {
+    align-items: center;
+  }
+
+  #lightbox input {
+    font-size: 18px;
+    width: 79%;
+    padding: 0px 48px 0px 8px;
+    margin-left: 33px;
+    height: 40px;
+  }
+
+  #add-contact-btn-big, #create-btn, #saveBtn, #cancel-btn, #deleteBtn{
+    gap: 6px;
+  }
+  
+  #add-contact-btn-big,
+  #create-btn,
+  #saveBtn,
+  #cancel-btn,
+  #deleteBtn {
+    padding: 0.8rem;
+  }
+  
+  #add-contact-btn-big, #create-btn, #saveBtn, #cancel-btn, #deleteBtn {
+    font-size: 16px;
+  }
+
+  .list-contact-wrapper {
+    gap: 20px; 
+    padding: 0.8rem;
+  }
+
+  #lightbox h2 {
+    font-size: 40px;
+  }
+}
   
