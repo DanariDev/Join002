@@ -233,20 +233,18 @@
 @media (max-width: 350px) {
   
   .list-name {
-    font-size: calc(
-      0.8rem + 1vw
-      ); 
+    font-size: 20px
     }
     
     .list-email {
-      font-size: calc(0.7rem + 1vw);
+      font-size: 16px
     }
     
     
     .initial-icon {
-      height: 32px; 
-      width: 32px;
-      font-size: calc(0.6rem + 1vw); 
+      height: 40px; 
+      width: 40px;
+      font-size: 16px; 
     }
     
     
