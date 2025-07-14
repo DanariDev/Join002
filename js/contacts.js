@@ -17,7 +17,7 @@ import {
   getColorForName,
 } from "./contacts-data.js";
 
-const mediaQuery = window.matchMedia("(max-width: 800px)");
+const mediaQuery = window.matchMedia("(max-width: 1100px)");
 let contacts = [],
   groupedContacts = [],
   selectedContact = null;
