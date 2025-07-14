@@ -1,21 +1,14 @@
 /* Media Querry Small Displays */
 @media (max-width: 970px) {
-  .contact-details-haeder {
-    flex-wrap: wrap;
-    flex-direction: column;
-    align-items: start;
-    gap: 8px;
-    font-size: 20px;
-  }
-
+  
   .split-contact-header {
     display: none;
   }
-
+  
   .contact-details-haeder span {
     position: relative;
   }
-
+  
   .contact-details-haeder span::after {
     content: "";
     position: absolute;
@@ -26,29 +19,37 @@
     background-color: var(--clr-500);
     border-radius: 4px;
   }
-
+  
   #right-section {
     padding: 0;
   }
-
+  
   #showed-current-contact {
     padding: 5rem 0;
   }
 }
 
 @media (max-width: 1100px) {
+  .contact-details-haeder {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    font-size: 20px;
+  }
+
   h1 {
     font-size: 47px;
   }
-
+  
   #current-btns {
     display: none;
   }
-
+  
   #add-contact-btn-big {
     display: none;
   }
-
+  
   #current-btns-responsive {
     gap: 0;
     flex-direction: column;
@@ -62,21 +63,21 @@
     box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
     border-radius: 25px 25px 0 25px;
   }
-
+  
   #current-btns-responsive.show {
     transform: translateY(0);
   }
-
+  
   #current-edit {
     height: 50px;
     border-radius: 25px 25px 0 0;
   }
-
+  
   #current-delete {
     height: 50px;
     border-radius: 0 0 0 25px;
   }
-
+  
   #responsive-small-edit,
   #responsive-small-add {
     position: absolute;
@@ -89,13 +90,13 @@
     border-radius: 75px;
     z-index: 1000;
   }
-
+  
   #contacts-main {
     margin: 0;
     height: calc(100vh - 170px);
     padding: 1rem 1rem 0 1rem;
   }
-
+  
   #right-section {
     padding: 0;
     position: absolute;
@@ -105,7 +106,7 @@
     left: 0;
     overflow: hidden;
   }
-
+  
   .split-contact-header {
     position: absolute;
     rotate: 90deg;
@@ -113,112 +114,112 @@
     left: 55px;
     height: 90px;
   }
-
+  
   #showed-current-contact {
     padding: 5rem 1rem;
   }
-
+  
   .current-top {
     gap: 21px;
   }
-
+  
   #left-section {
     max-width: none;
     min-width: auto;
     width: auto;
   }
-
+  
   .responsive-wrapper {
     display: flex;
     justify-content: space-between;
     width: 90%;
   }
-
+  
   #back-icon {
     padding: 0;
     display: block;
   }
-
+  
   #lightbox {
     flex-direction: column;
     height: 100%;
     transform: translatey(100%);
   }
-
+  
   .join-logo-left {
     display: none;
   }
-
+  
   #lightbox h2 {
     font-size: var(--fs-47);
     margin: 1rem;
   }
-
+  
   #lightbox input {
     min-width: 0;
     margin: 0px 8px;
   }
-
+  
   .lightbox-right {
     border-radius: 0 0 20px 20px;
     padding: 7rem 0 1rem 0;
   }
-
+  
   .lightbox-left {
     border-radius: 20px 20px 0 0;
     padding: 4rem 0 7rem 0;
   }
-
+  
   .blue-line {
     margin: 10px 1rem;
   }
-
+  
   .lightbox-left span {
     font-size: 20px;
     align-self: auto;
     text-wrap-mode: nowrap;
   }
-
+  
   #current-name {
     font-size: 27px;
   }
-
+  
   .current-bottom p {
     font-size: 20px;
   }
-
+  
   .current-information span,
   #current-mail,
   #current-phone {
     font-size: 16px;
   }
-
+  
   #current-icon {
     height: 70px;
     width: 70px;
     font-size: 25px;
   }
-
+  
   .current-icon,
   #edit-icon {
     position: fixed;
     top: 31%;
     border: solid;
   }
-
+  
   .editing-lighbox {
     padding: 0;
   }
-
+  
   .btns-lighbox {
     justify-content: center;
     gap: 12px;
   }
-
+  
   #lightbox.show {
     transform: translateY(-38px);
   }
-
+  
   .close-button {
     color: white;
   }
@@ -234,73 +235,74 @@
   .list-name {
     font-size: calc(
       0.8rem + 1vw
-    ); 
+      ); 
+    }
+    
+    .list-email {
+      font-size: calc(0.7rem + 1vw);
+    }
+    
+    
+    .initial-icon {
+      height: 32px; 
+      width: 32px;
+      font-size: calc(0.6rem + 1vw); 
+    }
+    
+    
+    #current-name {
+      font-size: calc(1rem + 1vw); 
+    }
+    
+    .current-bottom p {
+      font-size: calc(0.8rem + 1vw);
+    }
+    
+    .current-information span,
+    #current-mail,
+    #current-phone {
+      font-size: calc(0.7rem + 1vw);
+    }
+    
+    
+    #current-icon {
+      height: 50px;
+      width: 50px;
+      font-size: calc(0.8rem + 1vw);
+    }
+    
+    
+    #add-contact-btn-big,
+    #create-btn,
+    #saveBtn,
+    #cancel-btn,
+    #deleteBtn {
+      font-size: calc(0.7rem + 1vw);
+      padding: 0.8rem;
+    }
+    
+    
+    #lightbox h2 {
+      font-size: calc(1.2rem + 1vw);
+    }
+    
+    .lightbox-left span {
+      font-size: calc(0.8rem + 1vw);
+    }
+    
+    #lightbox input {
+      height: 40px;
+      font-size: calc(0.7rem + 1vw);
+    }
+    
+    
+    .list-contact-wrapper {
+      gap: 20px; 
+      padding: 0.8rem;
+    }
+    
+    .contact-details-haeder {
+      font-size: calc(0.8rem + 1vw);
+    }
   }
-
-  .list-email {
-    font-size: calc(0.7rem + 1vw);
-  }
-
- 
-  .initial-icon {
-    height: 32px; 
-    width: 32px;
-    font-size: calc(0.6rem + 1vw); 
-  }
-
   
-  #current-name {
-    font-size: calc(1rem + 1vw); 
-  }
-
-  .current-bottom p {
-    font-size: calc(0.8rem + 1vw);
-  }
-
-  .current-information span,
-  #current-mail,
-  #current-phone {
-    font-size: calc(0.7rem + 1vw);
-  }
-
- 
-  #current-icon {
-    height: 50px;
-    width: 50px;
-    font-size: calc(0.8rem + 1vw);
-  }
-
-  
-  #add-contact-btn-big,
-  #create-btn,
-  #saveBtn,
-  #cancel-btn,
-  #deleteBtn {
-    font-size: calc(0.7rem + 1vw);
-    padding: 0.8rem;
-  }
-
-  
-  #lightbox h2 {
-    font-size: calc(1.2rem + 1vw);
-  }
-
-  .lightbox-left span {
-    font-size: calc(0.8rem + 1vw);
-  }
-
-  #lightbox input {
-    height: 40px;
-    font-size: calc(0.7rem + 1vw);
-  }
-
-  
-  .list-contact-wrapper {
-    gap: 20px; 
-    padding: 0.8rem;
-  }
-
-  .contact-details-haeder {
-    font-size: calc(0.8rem + 1vw);
-  }
-}
