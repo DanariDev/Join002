@@ -1,11 +1,7 @@
-/* Responsive Styles for Summary Page */
-
-/* Base styles for summary-content-wrapper (applied globally unless overridden) */
 .summary-content-wrapper {
   gap: 15px;
 }
 
-/* Media Query for Very Large Displays (1920px and above) */
 @media (min-width: 1920px) {
   .summary-main {
     max-width: 1400px;
@@ -20,7 +16,7 @@
     margin: 0 auto;
     max-width: 1400px;
     padding: 10rem 2rem 8rem;
-    width: 100%; /* Ensure it scales with the screen */
+    width: 100%;
   }
 
   .summary-content-wrapper {
@@ -28,19 +24,17 @@
     justify-content: center;
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 2rem; /* Align padding with summary-main */
+    padding: 0 2rem;
     gap: 100px;
   }
 }
 
-/* Media Query for Large Displays (1200px and above) */
 @media (min-width: 1200px) {
   .summary-content-wrapper {
     display: flex;
   }
 }
 
-/* Media Query for Medium to Small Displays (1100px and below) */
 @media (max-width: 1100px) {
   h2,
   h1 {
@@ -52,10 +46,10 @@
   }
 
   .summary-main {
-    margin: 0 auto; /* Center the main content */
-    padding: 1.5rem; /* Match padding with summary-header */
-    max-width: 670px; /* Consistent max-width */
-    width: 100%; /* Ensure it scales with the screen */
+    margin: 0 auto;
+    padding: 1.5rem;
+    max-width: 670px;
+    width: 100%;
   }
 
   #summary-greeting-wrapper {
@@ -90,9 +84,9 @@
 
   .summary-content-wrapper {
     width: 100%;
-    max-width: 670px; /* Match max-width with summary-header and summary-main */
-    margin: 0 auto; /* Center the content wrapper */
-    padding: 0 1.5rem; /* Match padding with summary-main */
+    max-width: 670px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     gap: 0;
     justify-content: center;
   }
@@ -100,43 +94,43 @@
   .summary-header {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Left-align for better title and divider placement */
-    margin: 0 auto; /* Center the header */
-    gap: 10px; /* Space between elements */
-    padding: 1.5rem; /* Match padding with summary-main */
-    max-width: 670px; /* Consistent max-width */
-    width: 100%; /* Ensure it scales with the screen */
+    align-items: flex-start;
+    margin: 0 auto;
+    gap: 10px;
+    padding: 1.5rem;
+    max-width: 670px;
+    width: 100%;
   }
 
   .summary-header h2 {
-    order: 1; /* Join 360 first */
-    margin-left: 0.6rem; /* Align with the left edge of the To-do box */
+    order: 1;
+    margin-left: 0.6rem;
   }
 
   .summary-title {
-    order: 2; /* Key Metrics at a Glance second */
+    order: 2;
     font-size: 20px;
     font-weight: 400;
     color: #647187;
-    display: inline-block; /* Ensure the title only takes the width of its content */
-    position: relative; /* Allow the divider to align relative to the title */
+    display: inline-block;
+    position: relative;
   }
 
   .summary-divider {
-    order: 3; /* Divider last, under Key Metrics at a Glance */
+    order: 3;
     display: block;
-    width: 100%; /* Match the width of the summary-title */
-    max-width: 100px; /* Cap the width at 100px */
+    width: 100%;
+    max-width: 100px;
     height: 3px;
     background-color: var(--clr-500);
     border: none;
     border-radius: 2px;
-    margin-top: 5px; /* Space between title and divider */
-    margin-left: 0.6rem; /* Align with the h2 and To-do box */
+    margin-top: 5px;
+    margin-left: 0.6rem;
   }
 
   #summary-greeting-wrapper {
-    order: 0; /* Ensure greeting stays at the top (though it fades out) */
+    order: 0;
   }
 
   .summary-box,
@@ -152,36 +146,35 @@
   }
 }
 
-/* Media Query for Small Displays (900px and below) */
 @media (max-width: 900px) {
   .summary-header {
     gap: 15px;
-    margin: 0 auto; /* Center the header */
-    padding: 1.5rem; /* Consistent padding */
-    width: 100%; /* Ensure it scales with the screen */
-    max-width: 670px; /* Consistent max-width */
+    margin: 0 auto;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 670px;
   }
 
   .summary-header h2 {
-    margin-left: 0.6rem; /* Align with the left edge of the To-do box */
+    margin-left: 0.6rem;
   }
 
   .summary-divider {
-    margin-left: 0.6rem; /* Align with the h2 and To-do box */
+    margin-left: 0.6rem;
   }
 
   .summary-main {
-    margin: 0 auto; /* Center the main content */
-    padding: 1.5rem; /* Consistent padding */
-    max-width: 670px; /* Consistent max-width */
-    width: 100%; /* Ensure it scales with the screen */
+    margin: 0 auto;
+    padding: 1.5rem;
+    max-width: 670px;
+    width: 100%;
   }
 
   .summary-content-wrapper {
     width: 100%;
-    max-width: 670px; /* Consistent max-width */
-    margin: 0 auto; /* Center the content wrapper */
-    padding: 0 1.5rem; /* Consistent padding */
+    max-width: 670px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     gap: 0;
   }
 
@@ -192,36 +185,34 @@
   }
 }
 
-/* Media Query for Mobile Displays (356px to 601px) */
 @media (min-width: 356px) and (max-width: 601px) {
   .summary-main {
-    margin: 0 auto; /* Center the main content */
-    padding: 1.5rem; /* Consistent padding */
-    max-width: 670px; /* Consistent max-width */
-    width: 100%; /* Ensure it scales with the screen */
+    margin: 0 auto;
+    padding: 1.5rem;
+    max-width: 670px;
+    width: 100%;
   }
 
   .summary-content-wrapper {
     width: 100%;
-    max-width: 670px; /* Consistent max-width */
-    margin: 0 auto; /* Center the content wrapper */
-    padding: 0 1.5rem; /* Consistent padding */
+    max-width: 670px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     gap: 0;
   }
 }
 
-/* Media Query for Very Small Displays (490px and below) */
 @media (max-width: 490px) {
   .summary-header {
-    padding: 1.5rem; /* Consistent padding */
+    padding: 1.5rem;
     gap: 10px;
-    margin: 0 auto; /* Center the header */
-    width: 100%; /* Ensure it scales with the screen */
-    max-width: 670px; /* Consistent max-width */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 670px;
   }
 
   .summary-header h2 {
-    margin-left: 0.6rem; /* Align with the left edge of the To-do box */
+    margin-left: 0.6rem;
   }
 
   .summary-title {
@@ -233,28 +224,28 @@
   }
 
   .summary-divider {
-    width: 100%; /* Match the width of the summary-title */
-    max-width: 100px; /* Cap the width at 100px */
+    width: 100%;
+    max-width: 100px;
     height: 3px;
     background-color: var(--clr-500);
     border: none;
     border-radius: 2px;
     margin-top: 5px;
-    margin-left: 0.6rem; /* Align with the h2 and To-do box */
+    margin-left: 0.6rem;
   }
 
   .summary-main {
-    margin: 0 auto; /* Center the main content */
-    padding: 1.5rem; /* Consistent padding */
-    max-width: 670px; /* Consistent max-width */
-    width: 100%; /* Ensure it scales with the screen */
+    margin: 0 auto;
+    padding: 1.5rem;
+    max-width: 670px;
+    width: 100%;
   }
 
   .summary-content-wrapper {
     width: 100%;
-    max-width: 670px; /* Consistent max-width */
-    margin: 0 auto; /* Center the content wrapper */
-    padding: 0 1.5rem; /* Consistent padding */
+    max-width: 670px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     gap: 0;
   }
 
@@ -271,18 +262,17 @@
   }
 }
 
-/* Media Query for Tiny Displays (320px and below) */
 @media (max-width: 320px) {
   .summary-header {
-    padding: 1.5rem; /* Consistent padding */
+    padding: 1.5rem;
     gap: 10px;
-    margin: 0 auto; /* Center the header */
-    width: 100%; /* Ensure it scales with the screen */
-    max-width: 670px; /* Consistent max-width */
+    margin: 0 auto;
+    width: 100%;
+    max-width: 670px;
   }
 
   .summary-header h2 {
-    margin-left: 0.6rem; /* Align with the left edge of the To-do box */
+    margin-left: 0.6rem;
   }
 
   .summary-title {
@@ -294,28 +284,28 @@
   }
 
   .summary-divider {
-    width: 100%; /* Match the width of the summary-title */
-    max-width: 100px; /* Cap the width at 100px */
+    width: 100%;
+    max-width: 100px;
     height: 3px;
     background-color: var(--clr-500);
     border: none;
     border-radius: 2px;
     margin-top: 5px;
-    margin-left: 0.6rem; /* Align with the h2 and To-do box */
+    margin-left: 0.6rem;
   }
 
   .summary-main {
-    margin: 0 auto; /* Center the main content */
-    padding: 1.5rem; /* Consistent padding */
-    max-width: 670px; /* Consistent max-width */
-    width: 100%; /* Ensure it scales with the screen */
+    margin: 0 auto;
+    padding: 1.5rem;
+    max-width: 670px;
+    width: 100%;
   }
 
   .summary-content-wrapper {
     width: 100%;
-    max-width: 670px; /* Consistent max-width */
-    margin: 0 auto; /* Center the content wrapper */
-    padding: 0 1.5rem; /* Consistent padding */
+    max-width: 670px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
     gap: 0;
   }
 
