@@ -144,19 +144,6 @@ li {
   color: var(--clr-200);
   cursor: pointer;
 }
-
-.assigned-initials {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 20px;
-  width: 20px;
-  margin: 4px;
-  border: 2px solid var(--clr-200);
-  border-radius: 100%;
-  color: var(--clr-200);
-}
-
 .form-selected-contact input {
   height: 30px;
   width: 20px;
