@@ -10,9 +10,11 @@
   <link rel="stylesheet" href="css/sidebar.css" />
   <link rel="stylesheet" href="css/topbar.css" />
   <link rel="stylesheet" href="css/summary.css" />
-  <link rel="stylesheet" href="css/responsive/summary-responsive.css">
+  
   <link rel="stylesheet" href="css/responsive/topbar-responsive.css">
   <link rel="stylesheet" href="css/responsive/sidebar-responsive.css">
+  <link rel="stylesheet" href="css/responsive/summary-responsive-mobile.css">
+  <link rel="stylesheet" href="css/responsive/summary-responssive-base.css">
   <script src="js/loadSidbarTopbar.js"></script>
 </head>
 
@@ -96,7 +98,7 @@
           </div>
         </div>
 
-        <div class="urgent-wrapper summary-box " onclick="window.location.href='board.html'">
+        <div class="summary-box urgent-wrapper" onclick="window.location.href='board.html'">
           <div id="urgent" class="flex-column">
             <img src="assets/img/urgent-icon.png" alt="urgent-icon" />
             <div class="flex-column">
@@ -110,6 +112,7 @@
             <span id="deadline-title">Upcoming Deadline</span>
           </div>
         </div>
+        
 
         <div class="display-flex" onclick="window.location.href='board.html'">
           <div id="atBoard" class="summary-box">
@@ -135,7 +138,6 @@
       </div>
     </div>
   </main>
-
   <script type="module" src="./js/summary.js"></script>
 </body>
 
