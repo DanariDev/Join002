@@ -385,3 +385,9 @@ option {
   border: 2px solid white;
   box-sizing: border-box;
 }
+
+.no-contacts-slected{
+    justify-self: center;
+    font-size: 16px;
+    color: rgb(255, 0, 0, 0.6);
+}

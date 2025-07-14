@@ -364,6 +364,9 @@ function initDropdownHandling() {
       populateContactsDropdown(false); // Alle Kontakte
     } else if (contactDropdownClickState === 2) {
       populateContactsDropdown(true); // Nur ausgewählte
+      if(document.querySelectorAll('.form-selected-contact').length <1 ){
+        document.getElementById('contacts-dropdown-list').innerHTML = `<div class="no-contacts-slected">No contacts were selected</div>`;
+      }
     } else {
       dropdown.classList.remove("show");
       contactDropdownClickState = 0;
