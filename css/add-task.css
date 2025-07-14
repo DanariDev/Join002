@@ -53,7 +53,7 @@ textarea {
   border-radius: 10px;
   font-size: var(--fs-20);
   box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .description-input {
@@ -135,12 +135,12 @@ li {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 
 .form-selected-contact-active,
 .form-selected-contact:hover {
-  background-color: var(--clr-700);
+  background-color: #091930;
   color: var(--clr-200);
   cursor: pointer;
 }
@@ -160,6 +160,49 @@ li {
 .form-selected-contact input {
   height: 30px;
   width: 20px;
+}
+.form-selected-contact input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid white;
+  border-radius: 4px;
+  background-color: transparent;
+  position: relative;
+  cursor: pointer;
+  z-index: 1; /* damit Haken oben bleibt */
+}
+
+.form-selected-contact input[type="checkbox"]:checked {
+  background-color: #091930;
+}
+
+.form-selected-contact input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 4px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.form-selected-contact input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+.form-selected-contact input[type="checkbox"]:checked:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 10; /* eckig, nicht rund */
+  background-color: rgba(255, 255, 255, 0.9); /* stärker sichtbar */
+  z-index: 2;
 }
 
 #contacts-selected {
@@ -216,6 +259,7 @@ li {
   flex-wrap: wrap;
   gap: 6px;
   border: none;
+  display: none;
 }
 
 .contacts-dropdown-list {
@@ -278,13 +322,13 @@ option {
   cursor: pointer;
 }
 
-.btn-create-task{
+.btn-create-task {
   color: #ffffff;
   background-color: var(--clr-700);
   font-weight: 600;
 }
 
-#clear-btn:hover{
+#clear-btn:hover {
   color: var(--clr-500);
   border-color: var(--clr-500);
 }
@@ -293,8 +337,6 @@ option {
   background-color: var(--clr-500);
   border-color: var(--clr-500);
 }
-
-
 
 .required:after {
   content: " *";
@@ -323,4 +365,23 @@ option {
 .disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+#selected-contact-insignias {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+.assigned-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  font-weight: 600;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  box-sizing: border-box;
 }
