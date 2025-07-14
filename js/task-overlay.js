@@ -178,9 +178,11 @@ function updateAssignedToUI() {
     }
     selectedDiv.innerHTML = '';
     assignedTo.forEach(contact => {
+        let name = contact.name
+        if(name == localStorage.getItem('userName')) name += ' (you)';
         const selectedContact = document.createElement('div');
         selectedContact.classList.add('contact-selected');
-        selectedContact.textContent = contact.name;
+        selectedContact.textContent = name;
         selectedDiv.appendChild(selectedContact);
     });
 };
@@ -244,7 +246,6 @@ async function setupContactsDropdown(assignedNames) {
     dropdownSelected.innerHTML = '';
     dropdownList.classList.remove('show');
     allContacts.forEach(contact => {
-        if(contact.name == localStorage.getItem('userName')) contact.name += ' (you)';
         const entry = createContactEntry(contact, assignedNames);
         dropdownList.appendChild(entry.wrapper);
         if (entry.checked) assignedTo.push({ name: contact.name, email: contact.email });
@@ -281,13 +282,15 @@ function createContactEntry(contact, assignedNames) {
         updateAssignedToUI();
         updateSaveEditBtn();
     };
+    let name = contact.name
+    if(name == localStorage.getItem('userName')) name += ' (you)';
     const initials = contact.name.split(' ').map(part => part[0]?.toUpperCase()).join('').slice(0, 2);
     const editInitials = document.createElement('div');
     editInitials.classList.add('assigned-initials');
     editInitials.textContent = initials;
     editInitials.style.backgroundColor = getColorForName(contact.name);
     const label = document.createElement('label');
-    label.textContent = contact.name;
+    label.textContent = name;
     label.classList.add('form-selected-contact');
     label.prepend(checkbox);
     label.appendChild(editInitials);
@@ -320,7 +323,7 @@ function getCurrentValues() {
     const dueDate = document.getElementById('edit-due-date').textContent.replace('Due date:', '').trim();
     const priority = document.getElementById('popup-priority').textContent.replace('Priority:', '').trim();
     const names = document.querySelectorAll('#edit-assigned .full-name');
-    const assignedTo = Array.from(names).map(el => el.textContent.trim());
+    const assignedTo = Array.from(names).map(el => el.textContent.trim().replace('(you)'));
     const subtaskElements = document.querySelectorAll('#popup-subtasks .subtask-overlay-list');
     const subtasks = Array.from(subtaskElements).map(el => el.textContent.trim());
     return { category, title, description, dueDate, priority, assignedTo, subtasks };

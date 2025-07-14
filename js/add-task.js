@@ -90,8 +90,6 @@ function createDropdownItem(contact) {
             ${name}
             <div class="assigned-initials" style="background-color:${color};">${initials}</div>
         </label>`;
-  if (contact.name == localStorage.getItem("userName"))
-    contact.name += " (you)";
   return item;
 }
 
