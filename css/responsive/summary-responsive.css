@@ -145,7 +145,8 @@
     display: flex;
     align-items: center;
     gap: 30px;
-    margin-left: 28rem;
+    margin: 0 auto; /* Zentriert den Header */
+    max-width: 1400px; /* Optional: Begrenzt die Breite wie bei summary-main */
     padding: 10rem 2rem 8rem;
   }
 
