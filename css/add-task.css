@@ -272,9 +272,9 @@ li {
   cursor: pointer;
 }
 
-.contacts-dropdown-list div:hover {
+/* .contacts-dropdown-list div:hover {
   background-color: var(--clr-200);
-}
+} */
 
 option {
   font-size: var(--fs-16);

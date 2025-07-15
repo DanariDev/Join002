@@ -72,21 +72,24 @@
 
 .initials-task-overlay,
 .initials-task {
-  height: auto;
+  height: 20px;
+  aspect-ratio: 1;
   padding: 0.7rem;
-  border-radius: 50%; /* Rundung anpassen */
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: var(--fs-16);
   color: var(--clr-200);
-  border: 2px solid var(--clr-200); /* Weiße Umrandung, angepasst an Overlay-Farben */
+  border: 1px solid var(--clr-200);
   margin-top: 5px;
-  margin-left: -10px; /* Leichte Überlappung */
+  margin-left: -10px;
 }
 
 .initials-task-overlay {
   margin: 5px;
+  width: 20px;
+  aspect-ratio: 1;
 }
 
 #popup-subtasks {
@@ -103,13 +106,16 @@
 }
 
 .overlay .assigned-initials {
-  width: auto;
-  flex-wrap: wrap; /* Erlaubt Umbruch nur im Overlay */
-  height: auto;
+  /* width: auto; */
+  flex-wrap: wrap;
+  /* height: auto; */
   justify-content: flex-start;
   align-items: baseline;
   margin-top: 0;
-  display: flex; /* Sicherstellen, dass Flex aktiv ist */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
 }
 .overlay .initials-task {
   width: 32px;
@@ -130,10 +136,11 @@
   background-color: inherit; /* Hintergrundfarbe von getColorForName */
 }
 
-.overlay .initials-task:first-child {
-  margin-left: 0; /* Kein negativer Margin für das erste Element */
+/*.overlay .initials-task:first-child {
+  margin-left: 0; /* Kein negativer Margin für das erste Element
   z-index: 2;
-}
+}*/
+
 .overlay-key {
   font-size: var(--fs-16);
   color: var(--clr-400);
