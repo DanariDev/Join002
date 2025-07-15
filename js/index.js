@@ -26,10 +26,10 @@ function togglePassword() {
 
     if (passwordInput.type == "password") {
         passwordInput.type = "text";
-        showHidePassword.style.backgroundImage = "url(../assets/img/show-password.png)";
+        showHidePassword.style.backgroundImage = "url(./assets/img/show-password.png)";
     } else {
         passwordInput.type = "password";
-        showHidePassword.style.backgroundImage = "url(../assets/img/hiden-password.png)";
+        showHidePassword.style.backgroundImage = "url(./assets/img/hiden-password.png)";
     }
 }
 
@@ -43,10 +43,10 @@ function togglePasswordRepeat(){
 
     if (passwordRepeatInput.type == "password") {
         passwordRepeatInput.type = "text";
-        showHideRepeatPassword.style.backgroundImage = "url(../assets/img/show-password.png)";
+        showHideRepeatPassword.style.backgroundImage = "url(./assets/img/show-password.png)";
     } else {
         passwordRepeatInput.type = "password";
-        showHideRepeatPassword.style.backgroundImage = "url(../assets/img/hiden-password.png)";
+        showHideRepeatPassword.style.backgroundImage = "url(./assets/img/hiden-password.png)";
     }
 }
 
@@ -64,7 +64,7 @@ window.addEventListener("load", function () {
         document.getElementById('show-hide-password').classList.remove('d-none');
        }
        else{
-        passwortInput.style.backgroundImage = "url(../assets/img/lock.png)";
+        passwortInput.style.backgroundImage = "url(./assets/img/lock.png)";
         document.getElementById('show-hide-password').classList.add('d-none');
        } 
     });
@@ -76,7 +76,7 @@ window.addEventListener("load", function () {
         document.getElementById('show-hide-repeat-password').classList.remove('d-none');
        }
        else{
-        passwortRepeatInput.style.backgroundImage = "url(../assets/img/lock.png)";
+        passwortRepeatInput.style.backgroundImage = "url(./assets/img/lock.png)";
         document.getElementById('show-hide-repeat-password').classList.add('d-none');
        } 
     });

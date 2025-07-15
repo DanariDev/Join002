@@ -83,9 +83,9 @@ function updateTaskCard(card, task) {
   card.querySelector('.task-title').textContent = task.title;
   card.querySelector('.task-desc').textContent = task.description;
   const initialsContainer = card.querySelector('.assigned-initials');
-  if (task.priority === 'low') card.querySelector('.priority-img').setAttribute('src', '/assets/img/low-btn-icon.png');
-  if (task.priority === 'medium') card.querySelector('.priority-img').setAttribute('src', '/assets/img/medium-btn-icon.png');
-  if (task.priority === 'urgent') card.querySelector('.priority-img').setAttribute('src', '/assets/img/urgent-btn-icon.png');
+  if (task.priority === 'low') card.querySelector('.priority-img').setAttribute('src', './assets/img/low-btn-icon.png');
+  if (task.priority === 'medium') card.querySelector('.priority-img').setAttribute('src', './assets/img/medium-btn-icon.png');
+  if (task.priority === 'urgent') card.querySelector('.priority-img').setAttribute('src', './assets/img/urgent-btn-icon.png');
   renderInitials(initialsContainer, task.assignedTo);
   updateSubtaskCount(card, task.subtasks);
   updateProgressBar(card, task.subtasks);
