@@ -124,8 +124,9 @@ textarea {
 }
 
 li {
-  font-size: var(--fs-20);
+  font-size: var(--fs-16);
   margin: 6px 0 6px 0;
+  gap: 8px;
 }
 
 #editing-subtask-list {
@@ -387,4 +388,8 @@ option {
     border-radius: 0;
     height: auto;
     padding-left: 12px;
+}
+
+.title-size {
+  font-size: var(--fs-20);
 }

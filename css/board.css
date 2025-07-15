@@ -170,7 +170,7 @@
 .green-background,
 .blue-background {
   width: fit-content;
-  padding: 2px 8px;
+  padding: 4px 16px;
   border-radius: 8px;
 }
 
@@ -182,7 +182,7 @@
 
 .blue-background,
 .label-user {
-  background-color: #005eff;
+  background-color: #0038ff;
   color: var(--clr-200);
 }
 
@@ -217,7 +217,7 @@
 .task-label {
   font-size: var(--fs-16);
   font-weight: bold;
-  padding: 2px 8px;
+  padding: 4px 16px;
   border-radius: 8px;
   display: inline-block;
   margin-bottom: 10px;

@@ -96,7 +96,7 @@ function taskPopupHtmlTemplate(task) {
   document.getElementById("popup-due-date").innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
   document.getElementById("popup-category").innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
   loadContactOptions(task.assignedTo || []);
-  document.getElementById("popup-priority").innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
+  document.getElementById("popup-priority").innerHTML = `<p class="string-img"><span class="overlay-key">Priority:</span> ${selectedPriority} <img class="priorty-img" src="./assets/img/${selectedPriority.toLowerCase()}-btn-icon.png"" alt=""></p>`;
 }
 
 function createSubtaskItem(task, subtask, index) {

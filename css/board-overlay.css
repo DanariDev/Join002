@@ -66,7 +66,7 @@
 }
 
 .overlay-actions button:hover {
-  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
+  color: var(--clr-500);
 }
 
 .initials-task-overlay,
@@ -162,4 +162,25 @@ li {
 .overlay-section input {
   max-width: 25px;
   font-size: var(--fs-16);
+}
+
+.separate-delete-edit {
+  height: 24px;
+  width: 1.5px;
+  background-color: rgb(0, 0, 0, 0.1);
+}
+
+.title-input{
+  font-size: 35px;
+  color: black;
+}
+
+.priorty-img {
+  width: 16px;
+  object-fit: contain;
+}
+
+.string-img{
+  display: flex;
+  gap: 8px;
 }
