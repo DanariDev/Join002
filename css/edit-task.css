@@ -377,3 +377,13 @@ option {
   align-items: center;
   padding: 4px;
 }
+
+.assigned-initials-board {
+    display: flex;
+    width: 133px;
+    flex-wrap: wrap;
+    overflow: auto;
+    border-radius: 0;
+    height: auto;
+    padding-left: 12px;
+}
