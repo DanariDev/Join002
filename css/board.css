@@ -1,13 +1,12 @@
 @import url("global.css");
 @import url("add-task.css");
 
-
 .add-task-link {
   background: none;
   color: rgb(255, 255, 255, 0.5);
 }
 
-.add-task-link img{
+.add-task-link img {
   filter: contrast(1);
 }
 
@@ -17,7 +16,7 @@
   color: rgb(255, 255, 255);
 }
 
-.board-link img{
+.board-link img {
   filter: contrast(1.5);
 }
 
@@ -33,7 +32,6 @@
   margin: 10px 0 32px;
 }
 
-
 #search-input {
   height: 48px;
   padding: 0px 12px;
@@ -44,7 +42,7 @@
   background-position: right 24px center;
 }
 
-#search-input::placeholder{
+#search-input::placeholder {
   color: #d1d1d1;
 }
 
@@ -79,7 +77,6 @@
   gap: 10px;
 }
 
-
 .to-do-field {
   grid-area: to-do;
 }
@@ -103,7 +100,7 @@
 .to-do-field,
 .in-progress-field,
 .await-field,
-.done-field{
+.done-field {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -115,7 +112,7 @@
 .to-do-field *,
 .in-progress-field *,
 .await-field *,
-.done-field *{
+.done-field * {
   color: #42526e;
 }
 
@@ -140,7 +137,6 @@
   gap: 10px;
 }
 
-
 .task-card {
   background-color: var(--clr-200);
   border-radius: 8px;
@@ -156,7 +152,6 @@
   outline: 2px dashed var(--clr-500);
   background-color: var(--clr-200);
 }
-
 
 .add-task-btn {
   cursor: pointer;
@@ -205,8 +200,6 @@
   align-items: center;
 }
 
-
-
 .task-card {
   background-color: var(--clr-200);
   border-radius: 16px;
@@ -229,13 +222,11 @@
   margin-bottom: 10px;
 }
 
-
-
 .task-title {
   font-size: var(--fs-16);
   font-weight: bold;
   margin-bottom: 4px;
-  color: #2a3647
+  color: #2a3647;
 }
 
 .task-desc {
@@ -316,11 +307,11 @@
   padding: 2rem;
 }
 
-.headline-board{
+.headline-board {
   color: black;
 }
 
-.progress-bar-task-conter-div{
+.progress-bar-task-conter-div {
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -328,18 +319,55 @@
   align-items: center;
 }
 
-.assigned-initials_priority-div{
+.assigned-initials_priority-div {
   display: flex;
   justify-content: space-between;
   gap: 8px;
 }
 
-.priority-img{
+.priority-img {
   object-fit: contain;
   margin-right: 8px;
 }
 
-.assigned-list{
+.assigned-list {
   overflow: auto;
   max-height: 190px;
+}
+.assigned-initials {
+  display: flex;
+  flex-direction: row;
+  gap: 0; /* Kein Abstand, das machen wir manuell über negative Margin */
+  max-width: 100%;
+  overflow: visible;
+  position: relative;
+}
+
+.initials-task {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid white;
+  margin-left: -8px;
+  z-index: 1;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+.initials-task:first-child {
+  margin-left: 0;
+  z-index: 2;
+}
+
+.assigned-initials_priority-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
 }
