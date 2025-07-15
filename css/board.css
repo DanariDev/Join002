@@ -345,7 +345,7 @@
 }
 
 .assigned-initials {
-  background: transparent !important; /* <- verhindert dunklen Hintergrund */
+  /*background: transparent !important; /* <- verhindert dunklen Hintergrund */
   display: flex;
   align-items: center;
   position: relative;
@@ -369,9 +369,4 @@
   z-index: 1;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   position: relative;
-}
-
-.initials-task:first-child {
-  margin-left: 0;
-  z-index: 2;
 }
