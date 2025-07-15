@@ -2,31 +2,19 @@ import { db } from "./firebase-config.js";
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { renderPopup } from "./task-overlay.js";
 import { addTaskOverlayLoad } from "./add-task.js";
+import { renderInitials } from "./utils.js";
 
 /**
- * This function creates a Dom element
- * @param {Object} s -Information of the Dom element
+ * Utility function to select a DOM element
+ * @param {string} selector - CSS selector for the DOM element
+ * @returns {HTMLElement|null} - Selected DOM element or null
  */
-function $(s) {
-  return document.querySelector(s);
-};
+function $(selector) {
+  return document.querySelector(selector);
+}
 
 /**
- * This function creates background color for initials
- * @param {string} name -The name of the contact
- * @returns -Gives back a color value
- */
-function getColorForName(name) {
-  const colors = ['#FF5733', '#33B5FF', '#33FF99', '#FF33EC', '#ffcb20', '#9D33FF', '#33FFDA', '#FF8C33', '#3385FF', '#FF3333'];
-  let hash = 0;
-  for (let i = 0; i < name.length; i++) {
-    hash = name.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  return colors[Math.abs(hash) % colors.length];
-};
-
-/**
- * Loads tasks into the board
+ * Loads tasks from Firebase and renders them on the board
  */
 function loadTasks() {
   document.getElementById('task-overlay')?.classList.add('d-none');
@@ -47,11 +35,16 @@ function loadTasks() {
 }
 
 /**
- * Renders a single task
- * @param {Object} task -Hands over the information of a task
+ * Renders a single task card in the appropriate column
+ * @param {Object} task - Task data including id, status, category, etc.
  */
 function renderTask(task) {
-  const colMap = { todo: '.to-do-tasks', 'in-progress': '.in-progress-tasks', await: '.await-tasks', done: '.done-tasks' };
+  const colMap = {
+    todo: '.to-do-tasks',
+    'in-progress': '.in-progress-tasks',
+    await: '.await-tasks',
+    done: '.done-tasks'
+  };
   const target = $(colMap[task.status] || '.to-do-tasks');
   if (!target) return;
   const template = document.querySelector('#task-template');
@@ -63,12 +56,12 @@ function renderTask(task) {
   target.appendChild(card);
   updateTaskLabel(card, task);
   addPlaceholders();
-};
+}
 
 /**
- * Updates task label based on category
- * @param {Object} card -Hands over the information of the card
- * @param {Object} task -Hands over the information of a task
+ * Updates the task label with appropriate styling based on category
+ * @param {HTMLElement} card - Task card element
+ * @param {Object} task - Task data
  */
 function updateTaskLabel(card, task) {
   const label = card.querySelector('.task-label');
@@ -78,49 +71,30 @@ function updateTaskLabel(card, task) {
   } else if (text === 'User Story') {
     label.classList.add('blue-background');
   }
-};
+}
 
 /**
- * Updates the task card with task data
- * @param {Object} card -Hands over the information of the card
- * @param {Object} task -Hands over the information of a task
+ * Updates the task card with task data including title, description, priority, and subtasks
+ * @param {HTMLElement} card - Task card element
+ * @param {Object} task - Task data
  */
 function updateTaskCard(card, task) {
   card.querySelector('.task-label').textContent = task.category;
   card.querySelector('.task-title').textContent = task.title;
   card.querySelector('.task-desc').textContent = task.description;
   const initialsContainer = card.querySelector('.assigned-initials');
-  initialsContainer.classList.add('d-flex');
-  if (task.priority == 'low') card.querySelector('.priority-img').attributes[1].value = '/assets/img/low-btn-icon.png'
-  if (task.priority == 'medium') card.querySelector('.priority-img').attributes[1].value = '/assets/img/medium-btn-icon.png'
-  if (task.priority == 'urgent') card.querySelector('.priority-img').attributes[1].value = '/assets/img/urgent-btn-icon.png'
-  updateInitials(initialsContainer, task.assignedTo);
+  if (task.priority === 'low') card.querySelector('.priority-img').setAttribute('src', '/assets/img/low-btn-icon.png');
+  if (task.priority === 'medium') card.querySelector('.priority-img').setAttribute('src', '/assets/img/medium-btn-icon.png');
+  if (task.priority === 'urgent') card.querySelector('.priority-img').setAttribute('src', '/assets/img/urgent-btn-icon.png');
+  renderInitials(initialsContainer, task.assignedTo);
   updateSubtaskCount(card, task.subtasks);
   updateProgressBar(card, task.subtasks);
-};
+}
 
 /**
- * Updates initials for assigned contacts
- * @param {Object} initialsContainer -Container for initials
- * @param {Array} assignedTo -Array of assigned names
- */
-function updateInitials(initialsContainer, assignedTo) {
-  if (Array.isArray(assignedTo.sort((a, b) => a.localeCompare(b)))) {
-    assignedTo.forEach(name => {
-      const initials = name.split(" ").map(part => part[0]?.toUpperCase()).join("");
-      const initialsDiv = document.createElement('div');
-      initialsDiv.classList.add('initials-task');
-      initialsDiv.textContent = initials;
-      initialsDiv.style.backgroundColor = getColorForName(name);
-      initialsContainer.appendChild(initialsDiv);
-    });
-  }
-};
-
-/**
- * Updates subtask count on card
- * @param {Object} card -Hands over the information of the card
- * @param {Array} subtasks -Array of subtasks
+ * Updates the subtask count and visibility of progress bar
+ * @param {HTMLElement} card - Task card element
+ * @param {Array} subtasks - Array of subtasks
  */
 function updateSubtaskCount(card, subtasks) {
   const totalSubtasks = subtasks ? subtasks.length : 0;
@@ -130,17 +104,17 @@ function updateSubtaskCount(card, subtasks) {
       if (subtasks[i].done) doneSubtasks++;
     }
   }
-  card.querySelector('.task-count').textContent = doneSubtasks + '/' + totalSubtasks + ' Subtasks';
-  if(doneSubtasks <=0) card.querySelector('.progress-bar-container').classList.add('d-none');
+  card.querySelector('.task-count').textContent = `${doneSubtasks}/${totalSubtasks} Subtasks`;
+  if (doneSubtasks <= 0) card.querySelector('.progress-bar-container').classList.add('d-none');
   else card.querySelector('.progress-bar-container').classList.remove('d-none');
-  if(totalSubtasks <=0) card.querySelector('.progress-bar-task-conter-div').classList.add('d-none');
+  if (totalSubtasks <= 0) card.querySelector('.progress-bar-task-conter-div').classList.add('d-none');
   else card.querySelector('.progress-bar-task-conter-div').classList.remove('d-none');
-};
+}
 
 /**
- * Sets up drag and click events for task card
- * @param {Object} card -Hands over the information of the card
- * @param {Object} task -Hands over the information of a task
+ * Sets up drag and click event listeners for a task card
+ * @param {HTMLElement} card - Task card element
+ * @param {Object} task - Task data
  */
 function setupTaskCardEvents(card, task) {
   card.ondragstart = (e) => {
@@ -149,46 +123,59 @@ function setupTaskCardEvents(card, task) {
   };
   card.ondragend = () => card.classList.remove('dragging');
   card.onclick = () => renderPopup(task);
-};
+}
 
 /**
- * Sets up drop targets for columns
+ * Sets up drop targets for task columns
  */
 function setupDropTargets() {
   const columns = document.querySelectorAll('#board .task-column');
   columns.forEach(col => {
-    col.ondragover = (e) => { e.preventDefault(); col.classList.add('drag-over'); };
+    col.ondragover = (e) => {
+      e.preventDefault();
+      col.classList.add('drag-over');
+    };
     col.ondragleave = () => col.classList.remove('drag-over');
     col.ondrop = (e) => handleDrop(e, col);
   });
-};
+}
 
 /**
- * Handles dropping a task into a new column
- * @param {Object} event -Drag event
- * @param {Object} column -Hands over the information of the column
+ * Handles dropping a task into a new column and updates its status
+ * @param {Event} event - Drag event
+ * @param {HTMLElement} column - Target column element
  */
 function handleDrop(event, column) {
   event.preventDefault();
   column.classList.remove('drag-over');
   const id = event.dataTransfer.getData('text');
   const card = document.querySelector(`[data-id='${id}']`);
-  const map = { 'to-do-tasks': 'todo', 'in-progress-tasks': 'in-progress', 'await-tasks': 'await', 'done-tasks': 'done' };
+  const map = {
+    'to-do-tasks': 'todo',
+    'in-progress-tasks': 'in-progress',
+    'await-tasks': 'await',
+    'done-tasks': 'done'
+  };
   const newStatus = map[column.classList[0]];
   if (!card || !newStatus) return;
-  update(ref(db, 'tasks/' + id), { status: newStatus }).then(() => {
+  update(ref(db, `tasks/${id}`), { status: newStatus }).then(() => {
     column.appendChild(card);
     addPlaceholders();
-    const taskRef = ref(db, 'tasks/' + id);
+    const taskRef = ref(db, `tasks/${id}`);
     onValue(taskRef, (snapshot) => {
       const task = snapshot.val();
       if (task && Array.isArray(task.subtasks)) {
         updateProgressBar(card, task.subtasks);
       }
     }, { onlyOnce: true });
+  }).catch((error) => {
+    console.error('Error updating task status:', error);
   });
 }
 
+/**
+ * Adds placeholders to empty columns
+ */
 function addPlaceholders() {
   const columns = document.querySelectorAll('.task-column');
   columns.forEach(column => {
@@ -207,14 +194,13 @@ function addPlaceholders() {
 }
 
 /**
- * Updates the progress bar based on status
- * @param {Object} card -Hands over the information of the card
- * @param {string} newStatus -Hands over the status name
+ * Updates the progress bar based on subtask completion
+ * @param {HTMLElement} card - Task card element
+ * @param {Array} subtasks - Array of subtasks
  */
 function updateProgressBar(card, subtasks) {
-  const bar = card.querySelector(".progress-bar");
-  bar.className = "progress-bar";
-
+  const bar = card.querySelector('.progress-bar');
+  bar.className = 'progress-bar';
   if (!Array.isArray(subtasks) || subtasks.length === 0) {
     bar.style.width = '0%';
     return;
@@ -223,35 +209,29 @@ function updateProgressBar(card, subtasks) {
   const done = subtasks.filter(st => st.done).length;
   const percentage = Math.round((done / total) * 100);
   bar.style.width = `${percentage}%`;
-};
-
-loadTasks();
-loadEventListeners();
-
-if (localStorage.getItem("wasSavedTask") == 'true') {
-  document.getElementById('confirmation-window').classList.remove('d-none');
-  setTimeout(() => { document.getElementById('confirmation-window').classList.add("d-none");}, 2000);
-  localStorage.removeItem("wasSavedTask");
 }
 
-// ADD TASK OVERLAY
-
 /**
- * Loads the task form HTML
+ * Loads the task form HTML for the add-task overlay
  */
 async function loadTaskForm() {
-  const response = await fetch('add-task.html');
-  const html = await response.text();
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(html, 'text/html');
-  const form = doc.getElementById('add-task-form');
-  document.getElementById('formContainer').innerHTML = '';
-  document.getElementById('formContainer').appendChild(form);
-  loadEventListeners();
-};
+  try {
+    const response = await fetch('add-task.html');
+    if (!response.ok) throw new Error(`Failed to fetch add-task.html: ${response.statusText}`);
+    const html = await response.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const form = doc.getElementById('add-task-form');
+    document.getElementById('formContainer').innerHTML = '';
+    document.getElementById('formContainer').appendChild(form);
+    loadEventListeners();
+  } catch (error) {
+    console.error('Error loading task form:', error);
+  }
+}
 
 /**
- * Opens the Add-Tasks-Overlay
+ * Opens the Add-Task overlay
  */
 export async function openForm() {
   await loadTaskForm();
@@ -261,7 +241,7 @@ export async function openForm() {
 }
 
 /**
- * Closes the add-tasks-overlay
+ * Closes the add-task and task overlays
  */
 function closeForm() {
   const taskOverlay = document.getElementById('task-overlay');
@@ -273,8 +253,7 @@ function closeForm() {
     addTaskOverlay.style.display = 'none';
     document.getElementById('form-add-task').style.display = 'none';
   }
-};
-
+}
 
 /**
  * Sets up event listeners for the board
@@ -283,26 +262,38 @@ function loadEventListeners() {
   document.getElementById('closeFormModal').addEventListener('click', () => closeForm());
   document.getElementById('add-task-button').addEventListener('click', openForm);
   document.querySelectorAll('.add-task-btn').forEach(btn => btn.addEventListener('click', openForm));
-};
+}
 
 /**
  * Prevents a link (a-tag) from opening
- * @param {object} event -PointerEvent gives back
+ * @param {Event} event - PointerEvent
  */
 function handleClick(event) {
   event.preventDefault();
-};
+}
 
 /**
  * Handles media query changes for Add-Task link
- * @param {object} event -MediaQueryList gives back
+ * @param {MediaQueryList} event - MediaQueryList event
  */
 function handleMediaQueryChange(event) {
-  const responsiveLinkElements = document.querySelectorAll("#responsive-link-add-task");
+  const responsiveLinkElements = document.querySelectorAll('#responsive-link-add-task');
   responsiveLinkElements.forEach(element => {
-    if (event.matches) element.addEventListener("click", handleClick);
-    else element.removeEventListener("click", handleClick);
+    if (event.matches) element.addEventListener('click', handleClick);
+    else element.removeEventListener('click', handleClick);
   });
-};
+}
 
-handleMediaQueryChange(window.matchMedia("(min-width: 801px)"));
+// Initialize tasks and event listeners
+loadTasks();
+loadEventListeners();
+handleMediaQueryChange(window.matchMedia('(min-width: 801px)'));
+
+// Show confirmation window if a task was saved
+if (localStorage.getItem('wasSavedTask') === 'true') {
+  document.getElementById('confirmation-window').classList.remove('d-none');
+  setTimeout(() => {
+    document.getElementById('confirmation-window').classList.add('d-none');
+  }, 2000);
+  localStorage.removeItem('wasSavedTask');
+}

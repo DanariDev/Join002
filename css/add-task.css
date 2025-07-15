@@ -359,7 +359,7 @@ option {
   margin-top: 8px;
   flex-wrap: wrap;
 }
-.assigned-initials {
+.add-task-main .assigned-initials {
   width: 40px;
   height: 40px;
   border-radius: 50%;

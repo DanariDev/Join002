@@ -1,149 +1,166 @@
 /* Opened Task background */
 .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
-
 
 /* Opened Task lightbox Content */
 .overlay-content {
-    background-color: var(--clr-200);
-    border-radius: 25px;
-    padding: 2rem;
-    max-width: 800px;
-    position: relative;
+  background-color: var(--clr-200);
+  border-radius: 25px;
+  padding: 2rem;
+  max-width: 800px;
+  position: relative;
 }
 
 /* Close Button Task lightbox Content */
 #overlay-close,
 .close-btn {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: none;
-    border: none;
-    font-size: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    color: var(--clr-700);
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  color: var(--clr-700);
 }
 
 #overlay-close:hover,
 .close-btn:hover {
-    background-color: var(--clr-300);
-    color: red;
-    border-radius: 100%;
+  background-color: var(--clr-300);
+  color: red;
+  border-radius: 100%;
 }
 
 .overlay-section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 /* Save and Close button on opened Task */
 
-
 .overlay-actions {
-    display: flex;
-    justify-content: end;
-    align-items: center;
+  display: flex;
+  justify-content: end;
+  align-items: center;
 }
 
 .overlay-actions button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--clr-200);
-    gap: 6px;
-    color: var(--clr-700);
-    padding: 1rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--clr-200);
+  gap: 6px;
+  color: var(--clr-700);
+  padding: 1rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
 }
 
 .overlay-actions button:hover {
-    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
 }
-
-
 
 .initials-task-overlay,
 .initials-task {
-    height: auto;
-    padding: 0.7rem;
-    border-radius: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: var(--fs-16);
-    color: var(--clr-200);
-    border: 2px solid var(--clr-200);
-    margin-top: 5px;
-    margin-left: -8px;
-
+  height: auto;
+  padding: 0.7rem;
+  border-radius: 50%; /* Rundung anpassen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fs-16);
+  color: var(--clr-200);
+  border: 2px solid var(--clr-200); /* Weiße Umrandung, angepasst an Overlay-Farben */
+  margin-top: 5px;
+  margin-left: -10px; /* Leichte Überlappung */
 }
 
 .initials-task-overlay {
-    margin: 5px;
+  margin: 5px;
 }
 
-
 #popup-subtasks {
-    list-style: none;
-    padding: 0;
-    overflow: auto;
-    max-height: 150px;
+  list-style: none;
+  padding: 0;
+  overflow: auto;
+  max-height: 150px;
 }
 
 .assigned-item {
-    display: flex;
-    align-items: center;
-    justify-content: start;
+  display: flex;
+  align-items: center;
+  justify-content: start;
 }
 
-.assigned-initials {
-    width: auto;
-    flex-wrap: wrap;
-    height: auto;
-    justify-content: flex-start;
-    align-items: baseline;
-    margin-top: 0;
+.overlay .assigned-initials {
+  width: auto;
+  flex-wrap: wrap; /* Erlaubt Umbruch nur im Overlay */
+  height: auto;
+  justify-content: flex-start;
+  align-items: baseline;
+  margin-top: 0;
+  display: flex; /* Sicherstellen, dass Flex aktiv ist */
+}
+.overlay .initials-task {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%; /* Rundung anpassen */
+  color: var(--clr-200);
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 2px solid var(--clr-200); /* Weiße Umrandung */
+  margin-left: -10px; /* Leichte Überlappung */
+  z-index: 1;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  background-color: inherit; /* Hintergrundfarbe von getColorForName */
 }
 
+.overlay .initials-task:first-child {
+  margin-left: 0; /* Kein negativer Margin für das erste Element */
+  z-index: 2;
+}
 .overlay-key {
-    font-size: var(--fs-16);
-    color: var(--clr-400);
+  font-size: var(--fs-16);
+  color: var(--clr-400);
 }
 
 #form-add-task {
-    display: none;
-    position: fixed;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -40%);
-    height: min-content;
-    width: 80%;
-    max-width: 1600px;
-    padding: 2rem;
-    border-radius: 25px;
-    background: var(--clr-200);
-    z-index: 1000;
+  display: none;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+  height: min-content;
+  width: 80%;
+  max-width: 1600px;
+  padding: 2rem;
+  border-radius: 25px;
+  background: var(--clr-200);
+  z-index: 1000;
 }
 
 li {
-    display: flex;
-    justify-content: start;
-    align-items: center;
+  display: flex;
+  justify-content: start;
+  align-items: center;
 }
 
 .overlay-section input {
-    max-width: 25px;
-    font-size: var(--fs-16);
+  max-width: 25px;
+  font-size: var(--fs-16);
 }

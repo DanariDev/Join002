@@ -334,40 +334,44 @@
   overflow: auto;
   max-height: 190px;
 }
-.assigned-initials {
-  display: flex;
-  flex-direction: row;
-  gap: 0; /* Kein Abstand, das machen wir manuell über negative Margin */
-  max-width: 100%;
-  overflow: visible;
-  position: relative;
-}
-
-.initials-task {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  color: white;
-  font-weight: bold;
-  font-size: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: 2px solid white;
-  margin-left: -8px;
-  z-index: 1;
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-  position: relative;
-}
-.initials-task:first-child {
-  margin-left: 0;
-  z-index: 2;
-}
 
 .assigned-initials_priority-div {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 8px;
+  flex-wrap: nowrap; /* Verhindert Zeilenumbruch */
+  width: 100%; /* Stellt sicher, dass der Container die volle Breite nutzt */
+}
+
+.assigned-initials {
+  background: transparent !important; /* <- verhindert dunklen Hintergrund */
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 0; /* falls da noch Padding drauf war */
+}
+
+
+.initials-task {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--clr-500); 
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid white;
+  margin-left: -10px;
+  z-index: 1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.initials-task:first-child {
+  margin-left: 0;
+  z-index: 2;
 }

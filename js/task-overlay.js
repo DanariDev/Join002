@@ -1,11 +1,8 @@
 import { db } from "./firebase-config.js";
-import { createCard, getColorForName } from "./createContacts.js";
-import {
-  ref,
-  update,
-  remove,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { createCard } from "./createContacts.js";
+import { ref, update, remove, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { updateEditingContactInsignias } from "./edit-task-insignias.js";
+import { renderInitials } from "./utils.js"; // Neuer Import
 
 let editingSubtasks = [];
 let assignedTo = [];
@@ -15,16 +12,13 @@ async function setupContactsDropdown(assignedNames) {
   const allContacts = await loadContacts();
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
 
-  const dropdownList = document.getElementById(
-    "editing-contacts-dropdown-list"
-  );
+  const dropdownList = document.getElementById("editing-contacts-dropdown-list");
   const dropdownSelected = document.getElementById("editing-contacts-selected");
   assignedTo = [];
   dropdownList.innerHTML = "";
   dropdownSelected.innerHTML = "";
   dropdownList.classList.remove("show");
 
-  // ✨ Sortierte Listen erstellen:
   const selected = [];
   const unselected = [];
 
@@ -36,11 +30,9 @@ async function setupContactsDropdown(assignedNames) {
     }
   });
 
-  // ✨ Beide Listen sortieren (alphabetisch)
   selected.sort((a, b) => a.name.localeCompare(b.name));
   unselected.sort((a, b) => a.name.localeCompare(b.name));
 
-  // ✨ Jetzt alles rendern – zuerst die ausgewählten
   [...selected, ...unselected].forEach((contact) => {
     const entry = createContactEntry(contact, assignedNames);
     dropdownList.appendChild(entry.wrapper);
@@ -53,7 +45,6 @@ async function setupContactsDropdown(assignedNames) {
   dropdownSelected.onclick = (e) => {
     e.stopPropagation();
     contactDropdownClickState++;
-
     if (contactDropdownClickState === 1) {
       dropdownList.classList.add("show");
       showAllContacts();
@@ -66,10 +57,7 @@ async function setupContactsDropdown(assignedNames) {
   };
 
   window.addEventListener("click", (event) => {
-    if (
-      !dropdownList.contains(event.target) &&
-      !dropdownSelected.contains(event.target)
-    ) {
+    if (!dropdownList.contains(event.target) && !dropdownSelected.contains(event.target)) {
       dropdownList.classList.remove("show");
       contactDropdownClickState = 0;
     }
@@ -88,28 +76,6 @@ function showSelectedContactsOnly() {
     entry.style.display = checkbox.checked ? "block" : "none";
   });
 }
-function updateEditingContactInsignias(selectedContacts) {
-  const container = document.getElementById(
-    "selected-editing-contact-insignias"
-  );
-  if (!container) return;
-
-  container.innerHTML = "";
-  selectedContacts.forEach(({ name }) => {
-    const initials = name
-      .split(" ")
-      .map((n) => n[0]?.toUpperCase())
-      .join("");
-    const color = getColorForName(name);
-
-    const badge = document.createElement("div");
-    badge.className = "assigned-initials";
-    badge.style.backgroundColor = color;
-    badge.textContent = initials;
-
-    container.appendChild(badge);
-  });
-}
 
 async function loadContactOptions(assignedTo) {
   const assignedList = Array.isArray(assignedTo)
@@ -124,25 +90,13 @@ async function loadContactOptions(assignedTo) {
 
 function taskPopupHtmlTemplate(task) {
   const formattedDate = task.dueDate.split("-").reverse().join("/");
-  const selectedPriority =
-    task.priority.charAt(0).toUpperCase() +
-    task.priority.slice(1).toLowerCase();
-  document.getElementById(
-    "popup-title"
-  ).innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
-  document.getElementById(
-    "popup-description"
-  ).innerHTML = `<p id="edit-description">${task.description}</p>`;
-  document.getElementById(
-    "popup-due-date"
-  ).innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
-  document.getElementById(
-    "popup-category"
-  ).innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
+  const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
+  document.getElementById("popup-title").innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
+  document.getElementById("popup-description").innerHTML = `<p id="edit-description">${task.description}</p>`;
+  document.getElementById("popup-due-date").innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
+  document.getElementById("popup-category").innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
   loadContactOptions(task.assignedTo || []);
-  document.getElementById(
-    "popup-priority"
-  ).innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
+  document.getElementById("popup-priority").innerHTML = `<p><span class="overlay-key">Priority:</span> ${selectedPriority}</p>`;
 }
 
 function createSubtaskItem(task, subtask, index) {
@@ -177,13 +131,11 @@ export function renderPopup(task) {
   taskPopupHtmlTemplate(task);
   createPopupSubtask(task);
   getLabelColor();
-  document
-    .getElementById("overlay-close")
-    .addEventListener("click", closePopup);
-  document.getElementById("delete-task-btn").onclick = () =>
-    opendeleteQuery(task.id);
+  document.getElementById("overlay-close").addEventListener("click", closePopup);
+  document.getElementById("delete-task-btn").onclick = () => opendeleteQuery(task.id);
   document.getElementById("edit-task-btn").onclick = () => editTask(task.id);
   document.getElementsByTagName("body")[0].style.overflow = "hidden";
+  updateEditingContactInsignias(task.assignedTo || []);
 }
 
 function getLabelColor() {
@@ -234,11 +186,7 @@ function initOverlayCloseHandler() {
       },
     ];
     for (const { overlay, content, isVisible } of configs) {
-      if (
-        isVisible(overlay) &&
-        !content?.contains(event.target) &&
-        overlay.contains(event.target)
-      ) {
+      if (isVisible(overlay) && !content?.contains(event.target) && overlay.contains(event.target)) {
         closePopup();
         break;
       }
@@ -251,28 +199,13 @@ function toggleSubtask(taskId, index, checked) {
   update(taskRef, { done: checked });
 }
 
-/**
- * This function opens delete Query and assigns an on-click function to the buttons and the query-body
- *
- * @param {string} taskId -This string is assigned here so that the correct task is deleted
- */
 function opendeleteQuery(taskId) {
   document.getElementById("query-window").classList.remove("d-none");
-  document.getElementById("cancel-delete-button").onclick = () =>
-    deleteQuery(false, taskId, event);
-  document.getElementById("query-window").onclick = () =>
-    deleteQuery(false, taskId, event);
-  document.getElementById("yes-delete-button").onclick = () =>
-    deleteQuery(true, taskId, event);
+  document.getElementById("cancel-delete-button").onclick = () => deleteQuery(false, taskId, event);
+  document.getElementById("query-window").onclick = () => deleteQuery(false, taskId, event);
+  document.getElementById("yes-delete-button").onclick = () => deleteQuery(true, taskId, event);
 }
 
-/**
- * This functions carry out the query as to whether or not should be deleted
- *
- * @param {boolean} deleteT - Gives back whether or not should be deleted
- * @param {string} taskId -This string is assigned here so that the correct task is deleted
- * @param {object} event - Event is needed to stop propagation
- */
 function deleteQuery(deleteT, taskId, event) {
   event.stopPropagation();
   document.getElementById("query-window").classList.add("d-none");
@@ -295,29 +228,12 @@ async function loadContacts() {
 }
 
 function updateAssignedToUI() {
-    const selectedDiv = document.getElementById("editing-contacts-selected");
-    selectedDiv.textContent = "Select contact(s) to assign";
-  
-    const insigniaContainer = document.getElementById("selected-editing-contact-insignias");
-    if (!insigniaContainer) return;
-  
-    insigniaContainer.innerHTML = "";
-  
-    assignedTo.forEach(({ name }) => {
-      const initials = name
-        .split(" ")
-        .map(n => n[0]?.toUpperCase())
-        .join("");
-  
-      const badge = document.createElement("div");
-      badge.className = "assigned-initials";
-      badge.style.backgroundColor = getColorForName(name);
-      badge.textContent = initials;
-  
-      insigniaContainer.appendChild(badge);
-    });
-  }
-  
+  const selectedDiv = document.getElementById("editing-contacts-selected");
+  selectedDiv.textContent = "Select contact(s) to assign";
+  const insigniaContainer = document.getElementById("selected-editing-contact-insignias");
+  if (!insigniaContainer) return;
+  renderInitials(insigniaContainer, assignedTo, 'assigned-initials'); // Verwende renderInitials
+}
 
 async function editTask(taskId) {
   const taskData = getCurrentValues();
@@ -333,17 +249,13 @@ function openEditOverlay() {
   const overlay = document.getElementById("edit-task-overlay");
   overlay.classList.replace("d-none", "d-flex");
   document.getElementById("task-overlay").classList.replace("d-flex", "d-none");
-  document
-    .getElementById("editing-cancel-btn")
-    .addEventListener("click", closePopup);
+  document.getElementById("editing-cancel-btn").addEventListener("click", closePopup);
 }
 
 function fillTaskForm(task) {
   document.getElementById("editing-title").value = task.title;
   document.getElementById("editing-description").value = task.description;
-  document.getElementById("editing-date").value = formatDateToInput(
-    task.dueDate
-  );
+  document.getElementById("editing-date").value = formatDateToInput(task.dueDate);
   document.getElementById("editing-category").value = task.category;
 }
 
@@ -362,11 +274,7 @@ function setupPriorityButtons(priorityValue) {
     const btn = document.getElementById(`editing-${prio}-btn`);
     btn.classList.remove(`${prio}-btn-active`);
     btn.onclick = () => {
-      priorities.forEach((other) =>
-        document
-          .getElementById(`editing-${other}-btn`)
-          .classList.remove(`${other}-btn-active`)
-      );
+      priorities.forEach((other) => document.getElementById(`editing-${other}-btn`).classList.remove(`${other}-btn-active`));
       btn.classList.add(`${prio}-btn-active`);
       updateSaveEditBtn();
     };
@@ -381,7 +289,6 @@ function createContactEntry(contact, assignedNames) {
   checkbox.dataset.name = contact.name;
   checkbox.checked = assignedNames.includes(contact.name);
   checkbox.onclick = (e) => e.stopPropagation();
-
   checkbox.onchange = () => {
     if (checkbox.checked) {
       assignedTo.push({ name: contact.name, email: contact.email });
@@ -396,20 +303,14 @@ function createContactEntry(contact, assignedNames) {
 
   let name = contact.name;
   if (name == localStorage.getItem("userName")) name += " (you)";
-  const initials = contact.name
-    .split(" ")
-    .map((part) => part[0]?.toUpperCase())
-    .join("")
-    .slice(0, 2);
-  const editInitials = document.createElement("div");
-  editInitials.classList.add("assigned-initials");
-  editInitials.textContent = initials;
-  editInitials.style.backgroundColor = getColorForName(contact.name);
+  const initialsDiv = document.createElement("div");
+  initialsDiv.classList.add("assigned-initials");
+  renderInitials(initialsDiv, [contact], "assigned-initials"); // Verwende renderInitials für einzelnen Kontakt
   const label = document.createElement("label");
   label.textContent = name;
   label.classList.add("form-selected-contact");
   label.prepend(checkbox);
-  label.appendChild(editInitials);
+  label.appendChild(initialsDiv);
   if (checkbox.checked) {
     label.classList.add("form-selected-contact-checked");
   }
@@ -421,14 +322,11 @@ function createContactEntry(contact, assignedNames) {
 
 function updateSaveEditBtn() {
   const title = document.getElementById("editing-title").value.trim();
-  const description = document
-    .getElementById("editing-description")
-    .value.trim();
+  const description = document.getElementById("editing-description").value.trim();
   const date = document.getElementById("editing-date").value;
   const category = document.getElementById("editing-category").value;
   const saveBtn = document.getElementById("editing-save-btn");
-  const allFilled =
-    title && description && date && category && assignedTo.length > 0;
+  const allFilled = title && description && date && category && assignedTo.length > 0;
   saveBtn.disabled = !allFilled;
   saveBtn.classList.toggle("disabled", !allFilled);
 }
@@ -441,36 +339,14 @@ function formatDateToInput(dateStr) {
 function getCurrentValues() {
   const category = document.querySelector(".task-label-overlay").textContent;
   const title = document.getElementById("edit-title").innerHTML.trim();
-  const description = document
-    .getElementById("edit-description")
-    .innerHTML.trim();
-  const dueDate = document
-    .getElementById("edit-due-date")
-    .textContent.replace("Due date:", "")
-    .trim();
-  const priority = document
-    .getElementById("popup-priority")
-    .textContent.replace("Priority:", "")
-    .trim();
+  const description = document.getElementById("edit-description").innerHTML.trim();
+  const dueDate = document.getElementById("edit-due-date").textContent.replace("Due date:", "").trim();
+  const priority = document.getElementById("popup-priority").textContent.replace("Priority:", "").trim();
   const names = document.querySelectorAll("#edit-assigned .full-name");
-  const assignedTo = Array.from(names).map((el) =>
-    el.textContent.replace("(you)", "").trim()
-  );
-  const subtaskElements = document.querySelectorAll(
-    "#popup-subtasks .subtask-overlay-list"
-  );
-  const subtasks = Array.from(subtaskElements).map((el) =>
-    el.textContent.trim()
-  );
-  return {
-    category,
-    title,
-    description,
-    dueDate,
-    priority,
-    assignedTo,
-    subtasks,
-  };
+  const assignedTo = Array.from(names).map((el) => el.textContent.replace("(you)", "").trim());
+  const subtaskElements = document.querySelectorAll("#popup-subtasks .subtask-overlay-list");
+  const subtasks = Array.from(subtaskElements).map((el) => el.textContent.trim());
+  return { category, title, description, dueDate, priority, assignedTo, subtasks };
 }
 
 function addSubtaskFromInput() {
@@ -506,15 +382,11 @@ async function handleSaveEditTask() {
   const taskId = document.getElementById("task-overlay").dataset.taskId;
   if (!taskId) return;
   const title = document.getElementById("editing-title").value.trim();
-  const description = document
-    .getElementById("editing-description")
-    .value.trim();
+  const description = document.getElementById("editing-description").value.trim();
   const dueDate = document.getElementById("editing-date").value;
   const category = document.getElementById("editing-category").value;
   const priority = ["urgent", "medium", "low"].find((prio) =>
-    document
-      .getElementById(`editing-${prio}-btn`)
-      .classList.contains(`${prio}-btn-active`)
+    document.getElementById(`editing-${prio}-btn`).classList.contains(`${prio}-btn-active`)
   );
   const fullTask = {
     id: taskId,
@@ -531,20 +403,14 @@ async function handleSaveEditTask() {
 }
 
 function initSubtaskInputAndSaveListener() {
-  document
-    .getElementById("editing-subtask")
-    .addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
-        addSubtaskFromInput();
-      }
-    });
-  document
-    .querySelector(".subtask-button")
-    .addEventListener("click", addSubtaskFromInput);
-  document
-    .getElementById("editing-save-btn")
-    .addEventListener("click", handleSaveEditTask);
+  document.getElementById("editing-subtask").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      addSubtaskFromInput();
+    }
+  });
+  document.querySelector(".subtask-button").addEventListener("click", addSubtaskFromInput);
+  document.getElementById("editing-save-btn").addEventListener("click", handleSaveEditTask);
 }
 
 function init() {
