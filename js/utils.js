@@ -31,10 +31,6 @@ export function renderInitials(container, assigned, className = 'initials-task',
       initialsDiv.classList.add(className);
       initialsDiv.textContent = initials;
       initialsDiv.style.backgroundColor = getColorForName(name);
-      // if (index === 0) {
-      //   initialsDiv.style.marginLeft = '0';
-      //   initialsDiv.style.zIndex = '2';
-      // }
       container.appendChild(initialsDiv);
     });
   }

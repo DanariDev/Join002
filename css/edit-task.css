@@ -183,10 +183,8 @@ li {
   position: relative;
 }
 
-/* ✅ Ausgewählt */
 .form-selected-contact input[type="checkbox"]:checked {
   background-color: var(--clr-900);
-  /* #091930 */
   border: 2px solid white;
 }
 
@@ -292,10 +290,6 @@ li {
   cursor: pointer;
 }
 
-/* .contacts-dropdown-list div:hover {
-  background-color: var(--clr-200);
-} */
-
 option {
   font-size: var(--fs-16);
   overflow: hidden;
@@ -373,12 +367,13 @@ option {
 }
 
 .assigned-initials {
-  width: 32px;
-  height: 32px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   color: white;
   font-weight: 500;
   font-size: 14px;
   display: flex;
   align-items: center;
+  padding: 4px;
 }

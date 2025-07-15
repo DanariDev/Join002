@@ -340,16 +340,14 @@
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  flex-wrap: nowrap; /* Verhindert Zeilenumbruch */
-  width: 100%; /* Stellt sicher, dass der Container die volle Breite nutzt */
+  width: 100%;
 }
 
 .assigned-initials {
-  /*background: transparent !important; /* <- verhindert dunklen Hintergrund */
   display: flex;
   align-items: center;
   position: relative;
-  padding: 0; /* falls da noch Padding drauf war */
+  padding: 0;
 }
 
 
@@ -359,7 +357,6 @@
   border-radius: 50%;
   background-color: var(--clr-500); 
   color: white;
-  font-weight: bold;
   font-size: 14px;
   display: flex;
   align-items: center;

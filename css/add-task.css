@@ -144,10 +144,12 @@ li {
   color: var(--clr-200);
   cursor: pointer;
 }
+
 .form-selected-contact input {
   height: 30px;
   width: 20px;
 }
+
 .form-selected-contact input[type="checkbox"] {
   appearance: none;
   width: 20px;
@@ -157,7 +159,7 @@ li {
   background-color: transparent;
   position: relative;
   cursor: pointer;
-  z-index: 1; /* damit Haken oben bleibt */
+  z-index: 1;
 }
 
 .form-selected-contact input[type="checkbox"]:checked {
@@ -180,6 +182,7 @@ li {
 .form-selected-contact input[type="checkbox"]:checked::after {
   opacity: 1;
 }
+
 .form-selected-contact input[type="checkbox"]:checked:hover::before {
   content: "";
   position: absolute;
@@ -187,8 +190,8 @@ li {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 10; /* eckig, nicht rund */
-  background-color: rgba(255, 255, 255, 0.9); /* stärker sichtbar */
+  border-radius: 10;
+  background-color: rgba(255, 255, 255, 0.9);
   z-index: 2;
 }
 
@@ -272,10 +275,6 @@ li {
   cursor: pointer;
 }
 
-/* .contacts-dropdown-list div:hover {
-  background-color: var(--clr-200);
-} */
-
 option {
   font-size: var(--fs-16);
   overflow: hidden;
@@ -353,12 +352,15 @@ option {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 #selected-contact-insignias {
   display: flex;
   gap: 8px;
   margin-top: 8px;
   flex-wrap: wrap;
+  width: 280px;
 }
+
 .add-task-main .assigned-initials {
   width: 40px;
   height: 40px;
