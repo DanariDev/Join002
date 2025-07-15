@@ -157,6 +157,7 @@ li {
   color: var(--clr-200);
   cursor: pointer;
 }
+
 .form-selected-contact-checked {
   background-color: #091930 !important;
   color: white;
@@ -170,42 +171,44 @@ li {
   height: 30px;
   width: 20px;
 }
+
 .form-selected-contact input[type="checkbox"] {
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  /* ✅ Ausgewählt */
-  .form-selected-contact input[type="checkbox"]:checked {
-    background-color: var(--clr-900); /* #091930 */
-    border: 2px solid white;
-  }
-  
-  /* Haken zeichnen */
-  .form-selected-contact input[type="checkbox"]::after {
-    content: "";
-    position: absolute;
-    top: 2px;
-    left: 4px;
-    width: 4px;
-    height: 8px;
-    border: solid white;
-    border-width: 0 2px 2px 0;
-    transform: rotate(45deg);
-    display: none;
-  }
-  
-  /* Haken sichtbar nur wenn aktiv */
-  .form-selected-contact input[type="checkbox"]:checked::after {
-    display: block;
-  }
-  
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* ✅ Ausgewählt */
+.form-selected-contact input[type="checkbox"]:checked {
+  background-color: var(--clr-900);
+  /* #091930 */
+  border: 2px solid white;
+}
+
+/* Haken zeichnen */
+.form-selected-contact input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  width: 4px;
+  height: 8px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+/* Haken sichtbar nur wenn aktiv */
+.form-selected-contact input[type="checkbox"]:checked::after {
+  display: block;
+}
+
 
 #editing-contacts-selected {
   display: flex;
@@ -361,23 +364,22 @@ option {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
 #selected-editing-contact-insignias {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
-  }
-  .assigned-initials {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: var(--clr-700);
-    color: white;
-    font-weight: 500;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.assigned-initials {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background-color: var(--clr-700);
+  color: white;
+  font-weight: 500;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
