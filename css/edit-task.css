@@ -22,6 +22,7 @@
   max-width: 800px;
   height: min-content;
   border-radius: 25px;
+  position: relative;
 }
 
 /* Formular */

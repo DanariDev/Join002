@@ -250,6 +250,7 @@ function openEditOverlay() {
   overlay.classList.replace("d-none", "d-flex");
   document.getElementById("task-overlay").classList.replace("d-flex", "d-none");
   document.getElementById("editing-cancel-btn").addEventListener("click", closePopup);
+  document.getElementById("overlay-edit-close").addEventListener("click", closePopup);
 }
 
 function fillTaskForm(task) {

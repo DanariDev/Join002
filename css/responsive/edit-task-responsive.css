@@ -41,10 +41,15 @@
     .overlay-content {
         min-width: 256px;
     }
-}
 
-@media (max-width: 500px) {
     .edit-task-main h1 {
         font-size: 40px;
     }
 }
+
+@media (max-width: 400px) {
+    .edit-task-main {
+        margin: 0px;
+    }
+}
+
