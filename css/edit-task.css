@@ -380,7 +380,7 @@ option {
 
 .assigned-initials-board {
     display: flex;
-    width: 133px;
+    width: auto;
     flex-wrap: wrap;
     overflow: auto;
     border-radius: 0;

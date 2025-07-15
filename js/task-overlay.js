@@ -261,8 +261,7 @@ function fillTaskForm(task) {
 
 function prepareSubtasks(subtasks) {
   editingSubtasks = (Array.isArray(subtasks) ? subtasks : []).map((sub) => ({
-    text: typeof sub === "string" ? sub : sub?.text || "",
-    done: !!sub?.done,
+    text: typeof sub === "string" ? sub : sub?.text || "", done: !!sub?.done,
   }));
   renderEditingSubtasks();
 }
@@ -305,7 +304,7 @@ function createContactEntry(contact, assignedNames) {
   if (name == localStorage.getItem("userName")) name += " (you)";
   const initialsDiv = document.createElement("div");
   initialsDiv.classList.add("assigned-initials");
-  renderInitials(initialsDiv, [contact], "assigned-initials"); // Verwende renderInitials für einzelnen Kontakt
+  renderInitials(initialsDiv, [contact], "assigned-initials");
   const label = document.createElement("label");
   label.textContent = name;
   label.classList.add("form-selected-contact");
@@ -388,16 +387,8 @@ async function handleSaveEditTask() {
   const priority = ["urgent", "medium", "low"].find((prio) =>
     document.getElementById(`editing-${prio}-btn`).classList.contains(`${prio}-btn-active`)
   );
-  const fullTask = {
-    id: taskId,
-    title,
-    description,
-    dueDate,
-    category,
-    priority,
-    assignedTo: assignedTo.map((a) => a.name),
-    subtasks: editingSubtasks,
-  };
+  const fullTask = {id: taskId, title, description, dueDate, category, priority,
+    assignedTo: assignedTo.map((a) => a.name), subtasks: editingSubtasks};
   await update(ref(db, `tasks/${taskId}`), fullTask);
   closePopup();
 }
