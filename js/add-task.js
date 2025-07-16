@@ -78,14 +78,17 @@ function createSubtaskIcon(type, action) {
   icon.onclick = action;
   return icon;
 }
+
+
 function makeSubtaskEditable(li, s, i) {
   const input = document.createElement("input");
-  const img = document.querySelectorAll(".subtask-item img");
+  const img = li.querySelector("img");
   input.value = s.text;
   input.className = "subtask-edit-input";
-  img.forEach((image) => {
-    image.style.display = "none";
-  });
+
+  if (img) {
+    img.style.display = "none";
+  }
 
   input.onblur = () => {
     subtasks[i].text = input.value.trim();
@@ -99,6 +102,8 @@ function makeSubtaskEditable(li, s, i) {
   li.replaceChild(input, li.firstChild);
   input.focus();
 }
+
+
 function deleteSubtask(i) {
   subtasks.splice(i, 1);
   renderSubtasks();
