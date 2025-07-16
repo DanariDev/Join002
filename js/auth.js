@@ -38,13 +38,13 @@ async function signup() {
   const repeat = repeatInput.value.trim();
 
   let hasError = false;
-  if (!name) { showError(nameInput, nameError, "Bitte Namen eingeben."); hasError = true; }
-  if (!email) { showError(emailInput, emailError, "Bitte E-Mail eingeben."); hasError = true; }
-  else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Ungültige E-Mail-Adresse!"); hasError = true; }
-  if (!pass) { showError(passInput, passError, "Bitte Passwort eingeben."); hasError = true; }
-  if (!repeat) { showError(repeatInput, repeatError, "Bitte Passwort bestätigen."); hasError = true; }
-  else if (pass !== repeat) { showError(repeatInput, repeatError, "Passwörter stimmen nicht überein!"); hasError = true; }
-  if (!checkbox.checked) { showError(checkbox, checkboxError, "Bitte akzeptiere die Datenschutzbestimmungen."); hasError = true; }
+  if (!name) { showError(nameInput, nameError, "Please enter your name!"); hasError = true; }
+  if (!email) { showError(emailInput, emailError, "Please enter your email address!"); hasError = true; }
+  else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Invalid email address!"); hasError = true; }
+  if (!pass) { showError(passInput, passError, "Please enter a password!"); hasError = true; }
+  if (!repeat) { showError(repeatInput, repeatError, "Please confirm your password!"); hasError = true; }
+  else if (pass !== repeat) { showError(repeatInput, repeatError, "Passwords do not match!"); hasError = true; }
+  if (!checkbox.checked) { showError(checkbox, checkboxError, "Please accept the privacy policy!"); hasError = true; }
   if (hasError) return;
 
   try {
@@ -80,9 +80,9 @@ function login() {
   const pass = passInput.value.trim();
   let hasError = false;
 
-  if (!email) { showError(emailInput, emailError, "Bitte E-Mail eingeben."); hasError = true; }
-  else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Ungültige E-Mail-Adresse!"); hasError = true; }
-  if (!pass) { showError(passInput, passError, "Bitte Passwort eingeben."); hasError = true; }
+  if (!email) { showError(emailInput, emailError, "Please enter your email address!"); hasError = true; }
+  else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Invalid email address!"); hasError = true; }
+  if (!pass) { showError(passInput, passError, "Please enter your password!"); hasError = true; }
   if (hasError) return;
 
   signInWithEmailAndPassword(auth, email, pass)
@@ -94,7 +94,7 @@ function login() {
       window.location.href = "summary.html";
     })
     .catch(e => {
-      showError(passInput, passError, "Login fehlgeschlagen: E-mail und Passwort stimmen nicht überein!");
+      showError(passInput, passError, "invalid login!");
     });
 }
 
@@ -154,14 +154,14 @@ function resetErrors(inputs, errors) {
   inputs.forEach(i => i.classList.remove("input-error"));
   errors.forEach(e => {
     e.textContent = "";
-    e.style.display = "none";
+    e.style.visibility = 'hidden';
   });
 }
 
 function showError(input, errorElem, message) {
   input.classList.add("input-error");
   errorElem.textContent = message;
-  errorElem.style.display = "block";
+  errorElem.style.visibility = 'visible';
 }
 
 init();
