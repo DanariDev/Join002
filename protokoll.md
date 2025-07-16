@@ -37,7 +37,7 @@
 
 ## 🔍 Suche
 
-- ❌ **Suche funktioniert nicht**
+- ✅ **Suche funktioniert nicht**
   - Kein Ergebnis bei Eingabe
   - Sollte beim Tippen filtern (nicht erst bei Enter)
   - Sollte **Titel**, optional **Beschreibung oder Kategorie** durchsuchen

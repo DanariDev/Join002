@@ -3,6 +3,7 @@ import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0
 import { renderPopup } from "./task-overlay.js";
 import { addTaskOverlayLoad } from "./add-task.js";
 import { renderInitials } from "./utils.js";
+import { setupTaskCardEvents, setupDropTargets } from "./dragDrop.js";
 
 /**
  * Utility function to select a DOM element
@@ -112,71 +113,9 @@ function updateSubtaskCount(card, subtasks) {
 }
 
 /**
- * Sets up drag and click event listeners for a task card
- * @param {HTMLElement} card - Task card element
- * @param {Object} task - Task data
- */
-function setupTaskCardEvents(card, task) {
-  card.ondragstart = (e) => {
-    e.dataTransfer.setData('text', task.id);
-    card.classList.add('dragging');
-  };
-  card.ondragend = () => card.classList.remove('dragging');
-  card.onclick = () => renderPopup(task);
-}
-
-/**
- * Sets up drop targets for task columns
- */
-function setupDropTargets() {
-  const columns = document.querySelectorAll('#board .task-column');
-  columns.forEach(col => {
-    col.ondragover = (e) => {
-      e.preventDefault();
-      col.classList.add('drag-over');
-    };
-    col.ondragleave = () => col.classList.remove('drag-over');
-    col.ondrop = (e) => handleDrop(e, col);
-  });
-}
-
-/**
- * Handles dropping a task into a new column and updates its status
- * @param {Event} event - Drag event
- * @param {HTMLElement} column - Target column element
- */
-function handleDrop(event, column) {
-  event.preventDefault();
-  column.classList.remove('drag-over');
-  const id = event.dataTransfer.getData('text');
-  const card = document.querySelector(`[data-id='${id}']`);
-  const map = {
-    'to-do-tasks': 'todo',
-    'in-progress-tasks': 'in-progress',
-    'await-tasks': 'await',
-    'done-tasks': 'done'
-  };
-  const newStatus = map[column.classList[0]];
-  if (!card || !newStatus) return;
-  update(ref(db, `tasks/${id}`), { status: newStatus }).then(() => {
-    column.appendChild(card);
-    addPlaceholders();
-    const taskRef = ref(db, `tasks/${id}`);
-    onValue(taskRef, (snapshot) => {
-      const task = snapshot.val();
-      if (task && Array.isArray(task.subtasks)) {
-        updateProgressBar(card, task.subtasks);
-      }
-    }, { onlyOnce: true });
-  }).catch((error) => {
-    console.error('Error updating task status:', error);
-  });
-}
-
-/**
  * Adds placeholders to empty columns
  */
-function addPlaceholders() {
+export function addPlaceholders() {
   const columns = document.querySelectorAll('.task-column');
   columns.forEach(column => {
     const placeholder = column.querySelector('.placeholder');
