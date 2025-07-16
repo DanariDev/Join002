@@ -20,18 +20,30 @@ export function getColorForName(name) {
  * @param {string} [youLabel=' (you)'] - Label to append for the current user
  */
 export function renderInitials(container, assigned, className = 'initials-task', youLabel = ' (you)') {
-  container.innerHTML = ''; // Clear container
+  container.innerHTML = '';
   container.classList.add('d-flex');
-  if (Array.isArray(assigned) && assigned.length > 0) {
-    assigned.forEach((item, index) => {
-      const name = typeof item === 'string' ? item : item.name;
-      const displayName = name === localStorage.getItem('userName') ? `${name}${youLabel}` : name;
-      const initials = name.split(' ').map(part => part[0]?.toUpperCase()).join('').slice(0, 2);
-      const initialsDiv = document.createElement('div');
-      initialsDiv.classList.add(className);
-      initialsDiv.textContent = initials;
-      initialsDiv.style.backgroundColor = getColorForName(name);
-      container.appendChild(initialsDiv);
-    });
+
+  const maxIcons = 3;
+  const visible = assigned.slice(0, maxIcons);
+  const hiddenCount = assigned.length - maxIcons;
+
+  visible.forEach(item => {
+    const name = typeof item === 'string' ? item : item.name;
+    const displayName = name === localStorage.getItem('userName') ? `${name}${youLabel}` : name;
+    const initials = name.split(' ').map(part => part[0]?.toUpperCase()).join('').slice(0, 2);
+    
+    const initialsDiv = document.createElement('div');
+    initialsDiv.classList.add(className);
+    initialsDiv.textContent = initials;
+    initialsDiv.style.backgroundColor = getColorForName(name);
+    container.appendChild(initialsDiv);
+  });
+
+  if (hiddenCount > 0) {
+    const moreDiv = document.createElement('div');
+    moreDiv.classList.add(className, 'initials-extra');
+    moreDiv.textContent = `+${hiddenCount}`;
+    moreDiv.title = `${hiddenCount} weitere Person${hiddenCount > 1 ? 'en' : ''}`;
+    container.appendChild(moreDiv);
   }
 }

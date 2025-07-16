@@ -1,6 +1,11 @@
 import { db } from "./firebase-config.js";
 import { createCard } from "./createContacts.js";
-import { ref, update, remove, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import {
+  ref,
+  update,
+  remove,
+  get,
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { updateEditingContactInsignias } from "./edit-task-insignias.js";
 import { renderInitials } from "./utils.js"; // Neuer Import
 
@@ -12,7 +17,9 @@ async function setupContactsDropdown(assignedNames) {
   const allContacts = await loadContacts();
   allContacts.sort((a, b) => a.name.localeCompare(b.name));
 
-  const dropdownList = document.getElementById("editing-contacts-dropdown-list");
+  const dropdownList = document.getElementById(
+    "editing-contacts-dropdown-list"
+  );
   const dropdownSelected = document.getElementById("editing-contacts-selected");
   assignedTo = [];
   dropdownList.innerHTML = "";
@@ -57,7 +64,10 @@ async function setupContactsDropdown(assignedNames) {
   };
 
   window.addEventListener("click", (event) => {
-    if (!dropdownList.contains(event.target) && !dropdownSelected.contains(event.target)) {
+    if (
+      !dropdownList.contains(event.target) &&
+      !dropdownSelected.contains(event.target)
+    ) {
       dropdownList.classList.remove("show");
       contactDropdownClickState = 0;
     }
@@ -90,13 +100,25 @@ async function loadContactOptions(assignedTo) {
 
 function taskPopupHtmlTemplate(task) {
   const formattedDate = task.dueDate.split("-").reverse().join("/");
-  const selectedPriority = task.priority.charAt(0).toUpperCase() + task.priority.slice(1).toLowerCase();
-  document.getElementById("popup-title").innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
-  document.getElementById("popup-description").innerHTML = `<p id="edit-description">${task.description}</p>`;
-  document.getElementById("popup-due-date").innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
-  document.getElementById("popup-category").innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
+  const selectedPriority =
+    task.priority.charAt(0).toUpperCase() +
+    task.priority.slice(1).toLowerCase();
+  document.getElementById(
+    "popup-title"
+  ).innerHTML = `<h3 id="edit-title" class="title-input">${task.title}</h3>`;
+  document.getElementById(
+    "popup-description"
+  ).innerHTML = `<p id="edit-description">${task.description}</p>`;
+  document.getElementById(
+    "popup-due-date"
+  ).innerHTML = `<p id="edit-due-date" class="tab-size"><span class="overlay-key">Due date:</span> ${formattedDate}</p>`;
+  document.getElementById(
+    "popup-category"
+  ).innerHTML = `<p class="task-label-overlay">${task.category}</p>`;
   loadContactOptions(task.assignedTo || []);
-  document.getElementById("popup-priority").innerHTML = `<p class="string-img"><span class="overlay-key">Priority:</span> ${selectedPriority} <img class="priorty-img" src="./assets/img/${selectedPriority.toLowerCase()}-btn-icon.png"" alt=""></p>`;
+  document.getElementById(
+    "popup-priority"
+  ).innerHTML = `<p class="string-img"><span class="overlay-key">Priority:</span> ${selectedPriority} <img class="priorty-img" src="./assets/img/${selectedPriority.toLowerCase()}-btn-icon.png"" alt=""></p>`;
 }
 
 function createSubtaskItem(task, subtask, index) {
@@ -131,8 +153,11 @@ export function renderPopup(task) {
   taskPopupHtmlTemplate(task);
   createPopupSubtask(task);
   getLabelColor();
-  document.getElementById("overlay-close").addEventListener("click", closePopup);
-  document.getElementById("delete-task-btn").onclick = () => opendeleteQuery(task.id);
+  document
+    .getElementById("overlay-close")
+    .addEventListener("click", closePopup);
+  document.getElementById("delete-task-btn").onclick = () =>
+    opendeleteQuery(task.id);
   document.getElementById("edit-task-btn").onclick = () => editTask(task.id);
   document.getElementsByTagName("body")[0].style.overflow = "hidden";
   updateEditingContactInsignias(task.assignedTo || []);
@@ -148,11 +173,13 @@ function getLabelColor() {
   }
 }
 
-function closePopup() {
+async function closePopup() {
   const taskOverlay = document.getElementById("task-overlay");
   const addTaskOverlay = document.getElementById("add-task-overlay");
   const editTaskOverlay = document.getElementById("edit-task-overlay");
+
   document.getElementById("formContainer").innerHTML = "";
+
   if (taskOverlay?.classList.contains("d-flex")) {
     taskOverlay.classList.replace("d-flex", "d-none");
   }
@@ -163,7 +190,12 @@ function closePopup() {
   if (editTaskOverlay?.classList.contains("d-flex")) {
     editTaskOverlay.classList.replace("d-flex", "d-none");
   }
-  location.reload();
+
+  if (window.taskWasEdited) {
+    const module = await import("./board.js");
+    await module.renderBoard();
+    window.taskWasEdited = false;
+  }
 }
 
 function initOverlayCloseHandler() {
@@ -186,7 +218,11 @@ function initOverlayCloseHandler() {
       },
     ];
     for (const { overlay, content, isVisible } of configs) {
-      if (isVisible(overlay) && !content?.contains(event.target) && overlay.contains(event.target)) {
+      if (
+        isVisible(overlay) &&
+        !content?.contains(event.target) &&
+        overlay.contains(event.target)
+      ) {
         closePopup();
         break;
       }
@@ -201,9 +237,12 @@ function toggleSubtask(taskId, index, checked) {
 
 function opendeleteQuery(taskId) {
   document.getElementById("query-window").classList.remove("d-none");
-  document.getElementById("cancel-delete-button").onclick = () => deleteQuery(false, taskId, event);
-  document.getElementById("query-window").onclick = () => deleteQuery(false, taskId, event);
-  document.getElementById("yes-delete-button").onclick = () => deleteQuery(true, taskId, event);
+  document.getElementById("cancel-delete-button").onclick = () =>
+    deleteQuery(false, taskId, event);
+  document.getElementById("query-window").onclick = () =>
+    deleteQuery(false, taskId, event);
+  document.getElementById("yes-delete-button").onclick = () =>
+    deleteQuery(true, taskId, event);
 }
 
 function deleteQuery(deleteT, taskId, event) {
@@ -230,9 +269,11 @@ async function loadContacts() {
 function updateAssignedToUI() {
   const selectedDiv = document.getElementById("editing-contacts-selected");
   selectedDiv.textContent = "Select contact(s) to assign";
-  const insigniaContainer = document.getElementById("selected-editing-contact-insignias");
+  const insigniaContainer = document.getElementById(
+    "selected-editing-contact-insignias"
+  );
   if (!insigniaContainer) return;
-  renderInitials(insigniaContainer, assignedTo, 'assigned-initials'); // Verwende renderInitials
+  renderInitials(insigniaContainer, assignedTo, "assigned-initials"); // Verwende renderInitials
 }
 
 async function editTask(taskId) {
@@ -249,20 +290,27 @@ function openEditOverlay() {
   const overlay = document.getElementById("edit-task-overlay");
   overlay.classList.replace("d-none", "d-flex");
   document.getElementById("task-overlay").classList.replace("d-flex", "d-none");
-  document.getElementById("editing-cancel-btn").addEventListener("click", closePopup);
-  document.getElementById("overlay-edit-close").addEventListener("click", closePopup);
+  document
+    .getElementById("editing-cancel-btn")
+    .addEventListener("click", closePopup);
+  document
+    .getElementById("overlay-edit-close")
+    .addEventListener("click", closePopup);
 }
 
 function fillTaskForm(task) {
   document.getElementById("editing-title").value = task.title;
   document.getElementById("editing-description").value = task.description;
-  document.getElementById("editing-date").value = formatDateToInput(task.dueDate);
+  document.getElementById("editing-date").value = formatDateToInput(
+    task.dueDate
+  );
   document.getElementById("editing-category").value = task.category;
 }
 
 function prepareSubtasks(subtasks) {
   editingSubtasks = (Array.isArray(subtasks) ? subtasks : []).map((sub) => ({
-    text: typeof sub === "string" ? sub : sub?.text || "", done: !!sub?.done,
+    text: typeof sub === "string" ? sub : sub?.text || "",
+    done: !!sub?.done,
   }));
   renderEditingSubtasks();
 }
@@ -274,7 +322,11 @@ function setupPriorityButtons(priorityValue) {
     const btn = document.getElementById(`editing-${prio}-btn`);
     btn.classList.remove(`${prio}-btn-active`);
     btn.onclick = () => {
-      priorities.forEach((other) => document.getElementById(`editing-${other}-btn`).classList.remove(`${other}-btn-active`));
+      priorities.forEach((other) =>
+        document
+          .getElementById(`editing-${other}-btn`)
+          .classList.remove(`${other}-btn-active`)
+      );
       btn.classList.add(`${prio}-btn-active`);
       updateSaveEditBtn();
     };
@@ -322,11 +374,14 @@ function createContactEntry(contact, assignedNames) {
 
 function updateSaveEditBtn() {
   const title = document.getElementById("editing-title").value.trim();
-  const description = document.getElementById("editing-description").value.trim();
+  const description = document
+    .getElementById("editing-description")
+    .value.trim();
   const date = document.getElementById("editing-date").value;
   const category = document.getElementById("editing-category").value;
   const saveBtn = document.getElementById("editing-save-btn");
-  const allFilled = title && description && date && category && assignedTo.length > 0;
+  const allFilled =
+    title && description && date && category && assignedTo.length > 0;
   saveBtn.disabled = !allFilled;
   saveBtn.classList.toggle("disabled", !allFilled);
 }
@@ -339,14 +394,36 @@ function formatDateToInput(dateStr) {
 function getCurrentValues() {
   const category = document.querySelector(".task-label-overlay").textContent;
   const title = document.getElementById("edit-title").innerHTML.trim();
-  const description = document.getElementById("edit-description").innerHTML.trim();
-  const dueDate = document.getElementById("edit-due-date").textContent.replace("Due date:", "").trim();
-  const priority = document.getElementById("popup-priority").textContent.replace("Priority:", "").trim();
+  const description = document
+    .getElementById("edit-description")
+    .innerHTML.trim();
+  const dueDate = document
+    .getElementById("edit-due-date")
+    .textContent.replace("Due date:", "")
+    .trim();
+  const priority = document
+    .getElementById("popup-priority")
+    .textContent.replace("Priority:", "")
+    .trim();
   const names = document.querySelectorAll("#edit-assigned .full-name");
-  const assignedTo = Array.from(names).map((el) => el.textContent.replace("(you)", "").trim());
-  const subtaskElements = document.querySelectorAll("#popup-subtasks .subtask-overlay-list");
-  const subtasks = Array.from(subtaskElements).map((el) => el.textContent.trim());
-  return { category, title, description, dueDate, priority, assignedTo, subtasks };
+  const assignedTo = Array.from(names).map((el) =>
+    el.textContent.replace("(you)", "").trim()
+  );
+  const subtaskElements = document.querySelectorAll(
+    "#popup-subtasks .subtask-overlay-list"
+  );
+  const subtasks = Array.from(subtaskElements).map((el) =>
+    el.textContent.trim()
+  );
+  return {
+    category,
+    title,
+    description,
+    dueDate,
+    priority,
+    assignedTo,
+    subtasks,
+  };
 }
 
 function addSubtaskFromInput() {
@@ -381,28 +458,50 @@ function renderEditingSubtasks() {
 async function handleSaveEditTask() {
   const taskId = document.getElementById("task-overlay").dataset.taskId;
   if (!taskId) return;
+
   const title = document.getElementById("editing-title").value.trim();
-  const description = document.getElementById("editing-description").value.trim();
+  const description = document
+    .getElementById("editing-description")
+    .value.trim();
   const dueDate = document.getElementById("editing-date").value;
   const category = document.getElementById("editing-category").value;
   const priority = ["urgent", "medium", "low"].find((prio) =>
-    document.getElementById(`editing-${prio}-btn`).classList.contains(`${prio}-btn-active`)
+    document
+      .getElementById(`editing-${prio}-btn`)
+      .classList.contains(`${prio}-btn-active`)
   );
-  const fullTask = {id: taskId, title, description, dueDate, category, priority,
-    assignedTo: assignedTo.map((a) => a.name), subtasks: editingSubtasks};
+
+  const fullTask = {
+    id: taskId,
+    title,
+    description,
+    dueDate,
+    category,
+    priority,
+    assignedTo: assignedTo.map((a) => a.name),
+    subtasks: editingSubtasks,
+  };
+
   await update(ref(db, `tasks/${taskId}`), fullTask);
-  closePopup();
+  await import("./board.js").then((m) => m.renderBoard());
+  closePopup(); 
 }
 
 function initSubtaskInputAndSaveListener() {
-  document.getElementById("editing-subtask").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      e.preventDefault();
-      addSubtaskFromInput();
-    }
-  });
-  document.querySelector(".subtask-button").addEventListener("click", addSubtaskFromInput);
-  document.getElementById("editing-save-btn").addEventListener("click", handleSaveEditTask);
+  document
+    .getElementById("editing-subtask")
+    .addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        addSubtaskFromInput();
+      }
+    });
+  document
+    .querySelector(".subtask-button")
+    .addEventListener("click", addSubtaskFromInput);
+  document
+    .getElementById("editing-save-btn")
+    .addEventListener("click", handleSaveEditTask);
 }
 
 function init() {
@@ -411,3 +510,6 @@ function init() {
 }
 
 init();
+document
+  .getElementById("editing-save-btn")
+  ?.addEventListener("click", handleSaveEditTask);
