@@ -296,3 +296,47 @@ footer a:hover {
     background-image: url(../assets/img/hiden-password.png);
     background-repeat: no-repeat;
 }
+
+.notification {
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 100%);
+    bottom: 0;
+    max-width: 500px;
+    width: 90%;
+    padding: 1rem 1.5rem;
+    border-radius: 25px;
+    font-size: 16px;
+    text-align: center;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.notification.success {
+    background-color: var(--clr-900);
+    color: var(--clr-200);
+}
+
+.notification.error {
+    background-color: var(--clr-900);
+    color: var(--clr-200);
+    border: 2px solid red;
+}
+
+.notification.show {
+    animation: slideUp 0.5s ease-out forwards;
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translate(-50%, 100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        bottom: 50%;
+        opacity: 1;
+    }
+}

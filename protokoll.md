@@ -5,7 +5,7 @@
 - [ ] **Content-Breite begrenzen**  
   ➤ Maximalbreite auf **~1044px** setzen (auch für Icon + Button)
 
-- [ ] **Validierung korrekt darstellen**  
+- [ ] **Validierung korrekt darstellen**  ✅
   ➤ Fehlertexte sollen **unter den Inputs** erscheinen – keine Verschiebung der Elemente!  
   ➤ Platz für Fehlermeldungen einplanen (z. B. über `min-height` oder Padding)
 

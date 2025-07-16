@@ -54,10 +54,12 @@ async function signup() {
     await set(push(ref(db, "contacts")), { name, email, initials });
     localStorage.setItem("isGuest", "false");
     localStorage.setItem("userName", name);
-    alert("Registrierung erfolgreich!");
-    window.location.href = "summary.html";
+    showNotification("registration successfuly!", "success");
+    setTimeout(() => {
+      window.location.href = "summary.html";
+    }, 2000);
   } catch (e) {
-    alert("Fehler bei Registrierung:\n" + e.message);
+    showNotification("registration failure:\n" + e.message, "error");
   }
 }
 
@@ -162,6 +164,18 @@ function showError(input, errorElem, message) {
   input.classList.add("input-error");
   errorElem.textContent = message;
   errorElem.style.visibility = 'visible';
+}
+
+function showNotification(message, type = "success") {
+  const box = document.getElementById("notification");
+  box.textContent = message;
+  box.className = `notification ${type} show`;
+
+  setTimeout(() => {
+    box.classList.remove("show");
+    box.style.bottom = "-100px";
+    box.style.opacity = "0";
+  }, 4000);
 }
 
 init();
