@@ -397,3 +397,20 @@ option {
   height: 18px;
   cursor: pointer;
 }
+
+#subtask-list {
+  max-height: 120px; 
+  overflow-y: auto;
+  margin-top: 8px;
+  padding-right: 6px; 
+}
+
+#subtask-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+#subtask-list::-webkit-scrollbar-thumb {
+  background-color: var(--clr-500);
+  border-radius: 10px;
+}
+
