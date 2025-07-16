@@ -28,7 +28,7 @@
 
 ## 📱 Mobile-Funktionen
 
-- ❌ Aktuell keine Möglichkeit, Tasks auf dem Handy zu verschieben  
+- ✅ Aktuell keine Möglichkeit, Tasks auf dem Handy zu verschieben  
   **Lösungsvorschläge:**
   - [ ] Extra Button zum Verschieben
   - [ ] Touch-Gesten ermöglichen
