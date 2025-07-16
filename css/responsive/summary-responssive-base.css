@@ -46,7 +46,6 @@
     left: 0;
     width: 100vw;
     height: calc(100vh - 71px);
-
     background-color: white;
     align-items: center;
     z-index: 999;

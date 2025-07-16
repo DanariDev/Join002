@@ -375,11 +375,12 @@ option {
   box-sizing: border-box;
 }
 
-.no-contacts-slected{
-    justify-self: center;
-    font-size: 16px;
-    color: rgb(255, 0, 0, 0.6);
+.no-contacts-slected {
+  justify-self: center;
+  font-size: 16px;
+  color: rgb(255, 0, 0, 0.6);
 }
+
 .subtask-item {
   display: flex;
   justify-content: space-between;
@@ -396,13 +397,14 @@ option {
   width: 18px;
   height: 18px;
   cursor: pointer;
+  margin: 0 5px;
 }
 
 #subtask-list {
-  max-height: 120px; 
+  max-height: 120px;
   overflow-y: auto;
   margin-top: 8px;
-  padding-right: 6px; 
+  padding-right: 6px;
 }
 
 #subtask-list::-webkit-scrollbar {
@@ -413,4 +415,3 @@ option {
   background-color: var(--clr-500);
   border-radius: 10px;
 }
-

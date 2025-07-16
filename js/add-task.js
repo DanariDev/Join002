@@ -80,8 +80,12 @@ function createSubtaskIcon(type, action) {
 }
 function makeSubtaskEditable(li, s, i) {
   const input = document.createElement("input");
+  const img = document.querySelectorAll(".subtask-item img");
   input.value = s.text;
   input.className = "subtask-edit-input";
+  img.forEach((image) => {
+    image.style.display = "none";
+  });
 
   input.onblur = () => {
     subtasks[i].text = input.value.trim();
