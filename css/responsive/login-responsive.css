@@ -7,11 +7,11 @@
 }
 
 /* Media Querry Small Displays */
-@media (max-width: 900px) {}
+@media (max-width: 900px) {
+}
 
-
+/* Media Querry Small Displays */
 @media (max-width: 1100px) {
-
     .login-page-wrapper {
         height: auto;
         padding: 16rem 1rem 1rem 1rem;
@@ -20,8 +20,10 @@
     }
 
     .login-box {
+        max-width: 500px;
         width: 90%;
         padding: 1rem;
+        position: relative; 
     }
 
     .sign-up-wrapper-responsive {
@@ -48,7 +50,11 @@
 
     .logo {
         height: 80px;
-        top: 32px;
+        width: 80px;
+        position: absolute;
+        top: calc(-1 * (80px + 0.5rem)); 
+        left: 0; 
+        object-fit: contain;
     }
 
     .passwort-input-button-div,
@@ -56,23 +62,26 @@
         width: 100%;
     }
 
-    #show-hide-password, 
+    #show-hide-password,
     #show-hide-repeat-password {
         justify-self: anchor-center;
         right: -350px;
     }
 }
 
-@media (max-width: 534px){
-    #show-hide-password, 
+@media (max-width: 534px) {
+    #show-hide-password,
     #show-hide-repeat-password {
         right: 41px;
         justify-self: auto;
     }
+
+    .logo {
+        top: calc(-1 * (80px + 0.5rem)); 
+    }
 }
 
 @media (max-width: 490px) {
-
     .btn-primary,
     .btn-secondary {
         padding: 14px;
@@ -91,11 +100,19 @@
         align-items: center;
         gap: 21px;
     }
+
+    .logo {
+        top: calc(-1 * (80px + 0.5rem)); 
+    }
 }
 
 @media (max-width: 320px) {
     .underline:after {
         left: 28.5%;
         right: 28.5%;
+    }
+
+    .logo {
+        top: calc(-1 * (80px + 0.5rem)); 
     }
 }

@@ -1,50 +1,85 @@
-# ✅ Was schon gut läuft
+# ✅ Join Projekt – Checkliste zur Verbesserung
 
-- Responsive Grundobjekt funktioniert
-- Clear-Funktion klappt
-- Tasks werden korrekt erstellt und dem Board zugewiesen
-- Kontakte werden angezeigt
-- Edit-Form zeigt Scrollbar (teilweise)
-- Mobile-Darstellung grundsätzlich cool gelöst
+## 🔐 Login & Sign-Up
 
----
+- [ ] **Content-Breite begrenzen**  
+  ➤ Maximalbreite auf **~1044px** setzen (auch für Icon + Button)
 
-# 🛠️ To-do-Liste nach Themenbereichen
+- [ ] **Validierung korrekt darstellen**  
+  ➤ Fehlertexte sollen **unter den Inputs** erscheinen – keine Verschiebung der Elemente!  
+  ➤ Platz für Fehlermeldungen einplanen (z. B. über `min-height` oder Padding)
 
-## 🔧 Task-Formular & Task-Funktionen
+- [ ] **Alert entfernen bei erfolgreichem Signup**  
+  ➤ Statt `alert()` lieber eine **Snackbar / Hinweisbox** unten anzeigen  
+  ➤ Danach automatische **Weiterleitung** auf Dashboard-Seite
 
-- ✅ Priority-Auswahl: darf **nicht „kleben“** – wurde geprüft
-- ✅ Subtasks: nur **max. 3 anzeigen**, danach Scrollbar einbauen
-- ✅ **Subtasks im Edit-Modus nicht bearbeitbar** → editierbar machen
-- ✅ Bei Datumsauswahl im Kalender: **Vergangenheit blockieren**
-  - [ ] Sowohl im Date-Picker
-  - [ ] Als auch bei manueller Eingabe
-- ✅ **Assigned-To-Initialen** im Edit-Formular auch als **kleine farbige Icons anzeigen**
-- ❌ **Scrollbars im Edit-Fenster** bei langen Texten ergänzen
-- ✅ **Seiten-Refresh** verhindern, wenn ein Task geschlossen wird
-- ✅ **Taskbilder** auf **3 Icons begrenzen**, dann z. B. „+2“ anzeigen
+- [ ] **Firebase Fehlermeldung abfangen & vereinfachen**  
+  ➤ Kein „FirebaseError: invalid credentials“ anzeigen  
+  ➤ Lieber: **„E-Mail oder Passwort falsch“** – zur Sicherheit & besseren UX
 
 ---
 
-## 📱 Mobile-Funktionen
+## 📱 Responsiveness
 
-- ✅ Aktuell keine Möglichkeit, Tasks auf dem Handy zu verschieben  
-  **Lösungsvorschläge:**
-  - [ ] Extra Button zum Verschieben
-  - [ ] Touch-Gesten ermöglichen
-
----
-
-## 🔍 Suche
-
-- ✅ **Suche funktioniert nicht**
-  - Kein Ergebnis bei Eingabe
-  - Sollte beim Tippen filtern (nicht erst bei Enter)
-  - Sollte **Titel**, optional **Beschreibung oder Kategorie** durchsuchen
+- [ ] **Auf Mobile: Menü-Animation prüfen**  
+  ➤ Animation schneidet Menü ab / kein Abstand  
+  ➤ Bitte **Padding/Margin** ergänzen
 
 ---
 
-## ✨ Zusätzliche Hinweise / Ideen
+## 📑 Datenschutz & Impressum
 
-- [ ] Bei vielen „Assigned“-Kontakten: nur **3 anzeigen**, dann z. B. `+X`
-- [ ] **Kleine Kontakt-Symbole** aus der Mobile-Version auch **auf dem Desktop anzeigen**
+- [ ] **Privacy Policy enthält noch Lorem Ipsum**  
+  ➤ Bitte **echten Text einfügen oder Dummy-Platzhalter** kenntlich machen  
+  ➤ Impressum & Legal Notice wurden bereits korrekt eingebunden 👍
+
+---
+
+## 🧾 Dashboard / Summary
+
+- [ ] **7 Tasks vorhanden & korrekt geladen?**  
+  ➤ Ja – wurde bestätigt ✅
+
+- [ ] **Mobile Ansicht prüfen – Task Cards sichtbar?**  
+  ➤ Sieht gut aus auf Handy 👍  
+  ➤ Ggf. nochmals Task-Box-Layout testen
+
+---
+
+## 🧩 Tasks & Subtasks
+
+- [ ] **Subtasks nicht editierbar**  
+  ➤ Subtasks können zwar hinzugefügt, aber **nicht bearbeitet** werden  
+  ➤ Bitte Editier-Funktion nachrüsten
+
+- [ ] **Vergangenes Startdatum prüfen**  
+  ➤ Ist **bearbeitbar?** Bitte testen und ggf. sichern
+
+- [ ] **Buttons im Task-Fenster überarbeiten**  
+  ➤ Buttons sehen **anders aus als im Figma**  
+  ➤ Bitte Figma-Styles 1:1 übernehmen
+
+- [ ] **Contact-Badges im Edit-Modus falsch platziert**  
+  ➤ Contacts sollten **nur in der Übersicht** angezeigt werden  
+  ➤ Im Edit-Task: Ggf. neue Anzeige-Logik einbauen
+
+---
+
+## 📌 Hinweise
+
+- [ ] **Finale Codequalität prüfen**  
+  ➤ Keine `alert()`s  
+  ➤ Keine echten Fehlermeldungen an User geben  
+  ➤ UX & Design auf Figma-Vorgaben abstimmen  
+  ➤ Saubere Übergänge zwischen Login → Dashboard
+
+---
+
+## ✉️ Nach der Umsetzung
+
+- [ ] Alle Punkte abgeschlossen?  
+- [ ] Projekt erneut einreichen oder testen lassen  
+- [ ] Eigene Screenshots vom Handy/Desktop checken
+
+---
+

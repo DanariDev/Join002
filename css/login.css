@@ -1,5 +1,16 @@
 @import url("global.css");
 
+body {
+    max-width: 1044px;
+    width: 100%;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
 .sign-up-wrapper-responsive {
     display: none;
     font-size: var(--fs-16);
@@ -16,12 +27,13 @@
     justify-content: center;
     height: calc(100vh - 250px);
     padding: 16rem 4rem 4rem 4rem;
+    width: 100%;
 }
 
 .sign-up-wrapper {
     position: absolute;
     top: 40px;
-    right: 80px;
+    right: 20px; 
     font-size: var(--fs-16);
     color: var(--clr-700);
     display: flex;
@@ -51,11 +63,10 @@
 .logo {
     position: absolute;
     top: 20px;
+    left: 20px; 
     width: 150px;
     height: 150px;
     object-fit: contain;
-    align-self: start;
-    left: 0;
 }
 
 .login-box {
@@ -106,7 +117,7 @@
     margin: 20px 12px 0 12px;
 }
 
-.privacy-checkbox-label{
+.privacy-checkbox-label {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -241,7 +252,7 @@ footer a:hover {
     display: none;
 }
 
-#privacy-checkbox.input-error{
+#privacy-checkbox.input-error {
     border: 1.5px solid red;
 }
 
@@ -255,22 +266,24 @@ footer a:hover {
 }
 
 #privacy-checkbox:checked::before {
-  content: '✔';
-  font-size: 12px; 
-  font-weight: bold;
-  color: black;
-  line-height: 0;
-  padding-left: 1.5px;
-  padding-bottom: 3px;
+    content: '✔';
+    font-size: 12px;
+    font-weight: bold;
+    color: black;
+    line-height: 0;
+    padding-left: 1.5px;
+    padding-bottom: 3px;
 }
 
-.passwort-input-button-div, .passwort-repeat-input-button-div{
+.passwort-input-button-div,
+.passwort-repeat-input-button-div {
     position: relative;
     display: inline-block;
     width: 90%;
 }
 
-#show-hide-password, #show-hide-repeat-password{
+#show-hide-password,
+#show-hide-repeat-password {
     position: absolute;
     right: 84px;
     top: 72%;
