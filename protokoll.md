@@ -13,7 +13,7 @@
   ➤ Statt `alert()` lieber eine **Snackbar / Hinweisbox** unten anzeigen  
   ➤ Danach automatische **Weiterleitung** auf Dashboard-Seite
 
-- [ ] **Firebase Fehlermeldung abfangen & vereinfachen**  
+- [ ] **Firebase Fehlermeldung abfangen & vereinfachen**  ✅
   ➤ Kein „FirebaseError: invalid credentials“ anzeigen  
   ➤ Lieber: **„E-Mail oder Passwort falsch“** – zur Sicherheit & besseren UX
 

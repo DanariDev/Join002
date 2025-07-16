@@ -94,7 +94,7 @@ function login() {
       window.location.href = "summary.html";
     })
     .catch(e => {
-      showError(passInput, passError, "Login fehlgeschlagen: " + e.message);
+      showError(passInput, passError, "Login fehlgeschlagen: E-mail und Passwort stimmen nicht überein!");
     });
 }
 
