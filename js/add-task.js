@@ -50,11 +50,54 @@ function getPriority() {
 function renderSubtasks() {
   const list = document.getElementById("subtask-list");
   list.innerHTML = "";
-  for (let i = 0; i < subtasks.length; i++) {
-    const li = document.createElement("li");
-    li.textContent = subtasks[i].text;
-    list.appendChild(li);
-  }
+  subtasks.forEach((s, i) => {
+    list.appendChild(createSubtaskElement(s, i));
+  });
+}
+function createSubtaskElement(s, i) {
+  const li = document.createElement("li");
+  li.className = "subtask-item";
+
+  const span = document.createElement("span");
+  span.className = "subtask-text";
+  span.textContent = s.text;
+
+  const icons = document.createElement("div");
+  icons.appendChild(
+    createSubtaskIcon("edit", () => makeSubtaskEditable(li, s, i))
+  );
+  icons.appendChild(createSubtaskIcon("delete", () => deleteSubtask(i)));
+
+  li.append(span, icons);
+  return li;
+}
+function createSubtaskIcon(type, action) {
+  const icon = document.createElement("img");
+  icon.src = `assets/img/${type === "edit" ? "edit.png" : "delete.png"}`;
+  icon.className = "subtask-icon";
+  icon.onclick = action;
+  return icon;
+}
+function makeSubtaskEditable(li, s, i) {
+  const input = document.createElement("input");
+  input.value = s.text;
+  input.className = "subtask-edit-input";
+
+  input.onblur = () => {
+    subtasks[i].text = input.value.trim();
+    renderSubtasks();
+  };
+
+  input.onkeydown = (e) => {
+    if (e.key === "Enter") input.blur();
+  };
+
+  li.replaceChild(input, li.firstChild);
+  input.focus();
+}
+function deleteSubtask(i) {
+  subtasks.splice(i, 1);
+  renderSubtasks();
 }
 
 /**
@@ -146,7 +189,7 @@ function updateAssignedToUI() {
   const container = document.getElementById("selected-contact-insignias");
   container.innerHTML = "";
 
-  if (contactDropdownClickState === 0 && assignedTo.length > 0) {
+  if (assignedTo.length > 0) {
     assignedTo.forEach(({ name }) => {
       const initials = name
         .split(" ")
@@ -200,10 +243,20 @@ function createTask(event) {
  * @param {Object} task - Task object to validate and save
  */
 function validateAndSaveTask(task) {
-  if (!task.title || !task.dueDate || !task.category || !task.assignedTo) {
-    alert("Bitte fülle alle Pflichtfelder aus!");
+  const selectedDate = new Date(task.dueDate);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (isNaN(selectedDate.getTime())) {
+    alert("Bitte gib ein gültiges Datum ein.");
     return;
   }
+
+  if (selectedDate < today) {
+    alert("Das gewählte Datum liegt in der Vergangenheit.");
+    return;
+  }
+
   push(ref(db, "tasks"), task).then(function () {
     resetForm();
     localStorage.setItem("wasSavedTask", "true");
@@ -346,7 +399,43 @@ function init() {
     if (e.key === "Enter") e.preventDefault(), addNewSubtask();
   });
   updateInputs();
+  document.getElementById("date").addEventListener("blur", validateDateField);
+
+
+  /**Vergangeheit wird verhindert */
+  document.getElementById("date").min = new Date().toISOString().split("T")[0];
 }
+function validateDateField() {
+  const input = document.getElementById("date");
+  const value = input.value;
+
+  if (value.length < 10) return;
+
+  let selected;
+  const germanDate = /^\d{2}\.\d{2}\.\d{4}$/;
+
+  if (germanDate.test(value)) {
+    const [day, month, year] = value.split(".");
+    selected = new Date(`${year}-${month}-${day}`);
+  } else {
+    selected = new Date(value);
+  }
+
+  if (isNaN(selected.getTime())) return;
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  if (selected < today) {
+    alert("Das gewählte Datum liegt in der Vergangenheit.");
+    input.value = "";
+  }
+}
+
+
+
+
+
 
 /**
  * Initializes dropdown toggle behavior for contacts selection
@@ -364,8 +453,10 @@ function initDropdownHandling() {
       populateContactsDropdown(false); // Alle Kontakte
     } else if (contactDropdownClickState === 2) {
       populateContactsDropdown(true); // Nur ausgewählte
-      if(document.querySelectorAll('.form-selected-contact').length <1 ){
-        document.getElementById('contacts-dropdown-list').innerHTML = `<div class="no-contacts-slected">No contacts were selected</div>`;
+      if (document.querySelectorAll(".form-selected-contact").length < 1) {
+        document.getElementById(
+          "contacts-dropdown-list"
+        ).innerHTML = `<div class="no-contacts-slected">No contacts were selected</div>`;
       }
     } else {
       dropdown.classList.remove("show");

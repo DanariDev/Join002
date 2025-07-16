@@ -148,11 +148,12 @@ function getLabelColor() {
   }
 }
 
-function closePopup() {
+async function closePopup() {
   const taskOverlay = document.getElementById("task-overlay");
   const addTaskOverlay = document.getElementById("add-task-overlay");
   const editTaskOverlay = document.getElementById("edit-task-overlay");
   document.getElementById("formContainer").innerHTML = "";
+
   if (taskOverlay?.classList.contains("d-flex")) {
     taskOverlay.classList.replace("d-flex", "d-none");
   }
@@ -163,8 +164,14 @@ function closePopup() {
   if (editTaskOverlay?.classList.contains("d-flex")) {
     editTaskOverlay.classList.replace("d-flex", "d-none");
   }
-  location.reload();
+
+  if (window.taskWasEdited) {
+    const module = await import('./board.js');
+    module.renderBoard();  
+    window.taskWasEdited = false;
+  }
 }
+
 
 function initOverlayCloseHandler() {
   document.addEventListener("click", function (event) {
