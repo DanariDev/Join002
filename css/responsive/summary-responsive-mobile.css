@@ -22,7 +22,7 @@
   }
 
   .summary-main {
-    padding: 1rem;
+    padding: 0rem;
     max-width: 95%;
   }
 
@@ -71,7 +71,7 @@
   }
 
   .urgent-wrapper {
-    flex-direction: row; 
+    flex-direction: row;
     justify-content: space-between;
     gap: 10px;
     width: 100%;
@@ -79,7 +79,7 @@
   }
 
   .urgent-wrapper .summary-box {
-    width: 48%; 
+    width: 48%;
     max-width: 48%;
   }
 }
@@ -143,7 +143,7 @@
   }
 
   .urgent-wrapper {
-    flex-direction: column; 
+    flex-direction: column;
     gap: 4px;
     width: 100%;
     max-width: 100%;

@@ -9,7 +9,7 @@
   ➤ Fehlertexte sollen **unter den Inputs** erscheinen – keine Verschiebung der Elemente!  
   ➤ Platz für Fehlermeldungen einplanen (z. B. über `min-height` oder Padding)
 
-- [ ] **Alert entfernen bei erfolgreichem Signup**  
+- [ ] **Alert entfernen bei erfolgreichem Signup**  ✅
   ➤ Statt `alert()` lieber eine **Snackbar / Hinweisbox** unten anzeigen  
   ➤ Danach automatische **Weiterleitung** auf Dashboard-Seite
 
@@ -21,7 +21,7 @@
 
 ## 📱 Responsiveness
 
-- [ ] **Auf Mobile: Menü-Animation prüfen**  
+- [ ] **Auf Mobile: Menü-Animation prüfen**  ✅
   ➤ Animation schneidet Menü ab / kein Abstand  
   ➤ Bitte **Padding/Margin** ergänzen
 
