@@ -48,11 +48,11 @@
 
 ## 🧩 Tasks & Subtasks
 
-- [ ] **Subtasks nicht editierbar**  
+- [ ] **Subtasks nicht editierbar**  ✅
   ➤ Subtasks können zwar hinzugefügt, aber **nicht bearbeitet** werden  
   ➤ Bitte Editier-Funktion nachrüsten
 
-- [ ] **Vergangenes Startdatum prüfen**  
+- [ ] **Vergangenes Startdatum prüfen**  ✅
   ➤ Ist **bearbeitbar?** Bitte testen und ggf. sichern
 
 - [ ] **Buttons im Task-Fenster überarbeiten**  

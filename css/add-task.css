@@ -75,30 +75,34 @@ textarea {
 #medium-btn,
 #low-btn {
   flex: 1;
-  height: 35px;
+  height: 56px;
   border: none;
   border-radius: 10px;
   font-size: var(--fs-20);
   font-weight: 600;
   cursor: pointer;
+  max-width: 136px;
 }
 
-#urgent-btn:hover,
 .urgent-btn-active {
   background-color: #c93939;
   color: var(--clr-200);
 }
 
-#medium-btn:hover,
 .medium-btn-active {
   background-color: #ffaa00;
   color: var(--clr-200);
 }
 
-#low-btn:hover,
 .low-btn-active {
   background-color: #5dc43e;
   color: var(--clr-200);
+}
+
+#low-btn:hover,
+#medium-btn:hover,
+#urgent-btn:hover {
+  box-shadow: 0px 2px 5px rgb(92, 92, 92);
 }
 
 .subtask-wrapper {

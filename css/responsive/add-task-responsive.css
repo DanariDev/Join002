@@ -61,12 +61,14 @@
 }
 
 @media (max-width: 400px) {
-    #urgent-btn, 
-    #medium-btn, 
-    #low-btn, 
-    #clear-btn, 
+
+    #urgent-btn,
+    #medium-btn,
+    #low-btn,
+    #clear-btn,
     .btn-create-task {
         text-wrap-mode: nowrap;
-        font-size: 19px;
+        font-size: 16px;
+        max-width: 95px;
     }
 }

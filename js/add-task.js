@@ -385,7 +385,6 @@ function hoverPriorityBtns() {
   btns.forEach(({ id, icon }) => {
     const btn = document.getElementById(id);
     const img = btn.querySelector("img");
-    btn.onmouseover = () => (img.src = `assets/img/${icon}-hover.png`);
     btn.onmouseout = () => {
       if (!btn.classList.contains(`${id}-active`))
         img.src = `assets/img/${icon}.png`;
