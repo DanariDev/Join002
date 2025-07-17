@@ -67,7 +67,7 @@
 
 ## 📌 Hinweise
 
-- [ ] **Finale Codequalität prüfen**  
+- [ ] **Finale Codequalität prüfen**  (Daniel in bearbeitung)
   ➤ Keine `alert()`s  
   ➤ Keine echten Fehlermeldungen an User geben  
   ➤ UX & Design auf Figma-Vorgaben abstimmen  
