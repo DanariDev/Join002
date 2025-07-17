@@ -433,3 +433,8 @@ option {
   background-color: var(--clr-500);
   border-radius: 10px;
 }
+
+
+#error-message{
+  font-size: 16px;
+}
