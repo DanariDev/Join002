@@ -37,10 +37,10 @@
 
 ## 🧾 Dashboard / Summary
 
-- [ ] **7 Tasks vorhanden & korrekt geladen?**  
-  ➤ Ja – wurde bestätigt ✅
+- [ ] **7 Tasks vorhanden & korrekt geladen?**  ✅
+  ➤ Ja – wurde bestätigt 
 
-- [ ] **Mobile Ansicht prüfen – Task Cards sichtbar?**  
+- [ ] **Mobile Ansicht prüfen – Task Cards sichtbar?**  ✅
   ➤ Sieht gut aus auf Handy 👍  
   ➤ Ggf. nochmals Task-Box-Layout testen
 

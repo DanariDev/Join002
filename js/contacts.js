@@ -206,7 +206,7 @@ function closeLightbox() {
 
 /** Saves edited contact data */
 async function saveContactEdits(contactId) {
-  const {hasError, name, email, phone} = checkInput();
+  const { hasError, name, email, phone } = checkInput();
   if (hasError) return;
 
   await updateContact(contactId, {
@@ -242,7 +242,7 @@ function updateUIAfterEdit() {
  * 
  * @param {string} contactId -This string is assigned here so that the correct contact is deleted
  */
-function opendeleteContactQuery(contactId){
+function opendeleteContactQuery(contactId) {
   document.getElementById('query-window').classList.remove('d-none');
   document.getElementById("cancel-delete-button").onclick = () => deleteContactQuery(false, contactId, event);
   document.getElementById("query-window").onclick = () => deleteContactQuery(false, contactId, event);
@@ -256,7 +256,7 @@ function opendeleteContactQuery(contactId){
  * @param {string} contactId -This string is assigned here so that the correct contact is deleted
  * @param {object} event - Event is needed to stop propagation
  */
-function deleteContactQuery(deleteC, contactId, event){
+function deleteContactQuery(deleteC, contactId, event) {
   event.stopPropagation();
   document.getElementById('query-window').classList.add('d-none');
   deleteContact(contactId, deleteC);
@@ -283,13 +283,13 @@ async function deleteContact(contactId, deleteC) {
 
 /** Adds a new contact */
 async function addNewContact() {
-  const {hasError, name, email, phone} = checkInput();
+  const { hasError, name, email, phone } = checkInput();
   if (hasError) return;
   await addContact({ name, email, phone, initials: getInitials(name) });
   closeLightbox();
   initContactsList();
   document.getElementById('confirmation-window').classList.remove('d-none');
-  setTimeout(() => { document.getElementById('confirmation-window').classList.add("d-none");}, 3000);
+  setTimeout(() => { document.getElementById('confirmation-window').classList.add("d-none"); }, 3000);
 }
 
 /** Hides contact details */
@@ -300,6 +300,7 @@ function closeShownContact() {
     "responsive-small-add",
     true
   );
+  document.getElementById('responsive-small-edit').classList.remove('d-none');
 }
 
 /** Opens responsive edit menu */
@@ -329,8 +330,8 @@ function closeEditResponsive() {
         null,
         true
       ),
-      document.getElementById('current-btns-responsive').classList.remove('d-flex'),
-      document.getElementsByTagName('body')[0].removeAttribute('style')
+        document.getElementById('current-btns-responsive').classList.remove('d-flex'),
+        document.getElementsByTagName('body')[0].removeAttribute('style')
     },
     200
   );
