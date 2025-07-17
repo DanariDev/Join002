@@ -55,7 +55,7 @@
 - [ ] **Vergangenes Startdatum prüfen**  ✅
   ➤ Ist **bearbeitbar?** Bitte testen und ggf. sichern
 
-- [ ] **Buttons im Task-Fenster überarbeiten**  
+- [ ] **Buttons im Task-Fenster überarbeiten**  ✅
   ➤ Buttons sehen **anders aus als im Figma**  
   ➤ Bitte Figma-Styles 1:1 übernehmen
 
