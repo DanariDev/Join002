@@ -79,7 +79,6 @@ function createSubtaskIcon(type, action) {
   return icon;
 }
 
-
 function makeSubtaskEditable(li, s, i) {
   const input = document.createElement("input");
   const img = li.querySelector("img");
@@ -102,7 +101,6 @@ function makeSubtaskEditable(li, s, i) {
   li.replaceChild(input, li.firstChild);
   input.focus();
 }
-
 
 function deleteSubtask(i) {
   subtasks.splice(i, 1);
@@ -248,32 +246,6 @@ function createTask(event) {
 }
 
 /**
- * Validates task data and saves it to Firebase
- * @param {Object} task - Task object to validate and save
- */
-function validateAndSaveTask(task) {
-  const selectedDate = new Date(task.dueDate);
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  if (isNaN(selectedDate.getTime())) {
-    alert("Bitte gib ein gültiges Datum ein.");
-    return;
-  }
-
-  if (selectedDate < today) {
-    alert("Das gewählte Datum liegt in der Vergangenheit.");
-    return;
-  }
-
-  push(ref(db, "tasks"), task).then(function () {
-    resetForm();
-    localStorage.setItem("wasSavedTask", "true");
-    window.location.href = "board.html";
-  });
-}
-
-/**
  * Resets the task form to its initial state
  */
 function resetForm() {
@@ -391,59 +363,55 @@ function hoverPriorityBtns() {
     };
   });
 }
+function validateDateField() {
+  const dateInput = document.getElementById("due-date");
+  const errorMessage = document.getElementById("error-message");
+  const today = new Date().toISOString().split("T")[0];
+
+  if (dateInput.value < today) {
+    errorMessage.textContent = "The due date cannot be in the past.";
+    errorMessage.style.color = "red";
+    dateInput.value = ""; 
+    return false;
+  } else {
+    errorMessage.textContent = "";
+    return true;
+  }
+}
+
 
 /**
  * Initializes event listeners and form state
  */
 function init() {
   const createBtn = document.getElementById("create-task-btn");
+  const dateInput = document.getElementById("due-date");
+  const today = new Date().toISOString().split("T")[0];
+
   createBtn.disabled = true;
   createBtn.classList.add("disabled");
   document.getElementById("add-task-form").onsubmit = createTask;
+
   document.querySelector(".subtask-button").onclick = addNewSubtask;
   document.getElementById("clear-btn").onclick = clearForm;
   initDropdownHandling();
+
   document.getElementById("subtask").addEventListener("keypress", (e) => {
     if (e.key === "Enter") e.preventDefault(), addNewSubtask();
   });
+
   updateInputs();
-  document.getElementById("date").addEventListener("blur", validateDateField);
 
-
-  /**Vergangeheit wird verhindert */
-  document.getElementById("date").min = new Date().toISOString().split("T")[0];
+  dateInput.addEventListener("blur", validateDateField);
+   dateInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      validateDateField();
+    }
+  });
+  dateInput.min = today;
+  dateInput.value = today;
 }
-function validateDateField() {
-  const input = document.getElementById("date");
-  const value = input.value;
-
-  if (value.length < 10) return;
-
-  let selected;
-  const germanDate = /^\d{2}\.\d{2}\.\d{4}$/;
-
-  if (germanDate.test(value)) {
-    const [day, month, year] = value.split(".");
-    selected = new Date(`${year}-${month}-${day}`);
-  } else {
-    selected = new Date(value);
-  }
-
-  if (isNaN(selected.getTime())) return;
-
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-
-  if (selected < today) {
-    alert("Das gewählte Datum liegt in der Vergangenheit.");
-    input.value = "";
-  }
-}
-
-
-
-
-
 
 /**
  * Initializes dropdown toggle behavior for contacts selection

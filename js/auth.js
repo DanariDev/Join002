@@ -60,7 +60,7 @@ async function signup() {
     }, 1000);
   } catch (e) {
     const msg = e.code === "auth/email-already-in-use"
-      ? "Diese E-Mail-Adresse wird bereits verwendet."
+      ? "This email address is already in use."
       : "Registrierung fehlgeschlagen:\n" + e.message;
     showNotification(msg, "error");
   }
