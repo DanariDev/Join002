@@ -67,11 +67,11 @@
 
 ## 📌 Hinweise
 
-- [ ] **Finale Codequalität prüfen**  
-  ➤ Keine `alert()`s  
-  ➤ Keine echten Fehlermeldungen an User geben  
+- [ ] **Finale Codequalität prüfen**  (Daniel in bearbeitung)
+  ➤ Keine `alert()`s  ✅
+  ➤ Keine echten Fehlermeldungen an User geben  ✅
   ➤ UX & Design auf Figma-Vorgaben abstimmen  
-  ➤ Saubere Übergänge zwischen Login → Dashboard
+  ➤ Saubere Übergänge zwischen Login → Dashboard✅
 
 ---
 
