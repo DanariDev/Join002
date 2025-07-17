@@ -74,28 +74,34 @@ textarea {
 #editing-medium-btn,
 #editing-low-btn {
   flex: 1;
-  height: 35px;
+  height: 56px;
   border: none;
   border-radius: 10px;
   font-size: var(--fs-20);
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
+  max-width: 136px;
+  background-color: white;
+  color: var(--clr-900);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;  
 }
 
 #editing-urgent-btn:hover,
-.urgent-btn-active {
+#editing-urgent-btn.urgent-btn-active {
   background-color: #c93939;
   color: var(--clr-200);
 }
 
 #editing-medium-btn:hover,
-.medium-btn-active {
+#editing-medium-btn.medium-btn-active {
   background-color: #ffaa00;
   color: var(--clr-200);
 }
 
 #editing-low-btn:hover,
-.low-btn-active {
+#editing-low-btn.low-btn-active {
   background-color: #5dc43e;
   color: var(--clr-200);
 }
@@ -216,7 +222,7 @@ li {
   min-height: 40px;
   gap: 6px;
   padding: 6px;
-  background-color: var(--clr-200);
+  background-color: white;
   border: none;
   cursor: pointer;
   font-size: var(--fs-20);
@@ -256,7 +262,7 @@ li {
   padding: 6px;
   border: 1px solid var(--clr-300);
   border-radius: 6px;
-  background-color: var(--clr-200);
+  background-color: white;
   font-size: 14px;
 }
 
@@ -275,7 +281,7 @@ li {
   left: 0;
   right: 0;
   max-height: 150px;
-  background-color: var(--clr-200);
+  background-color: white;
   border: 1px solid var(--clr-300);
   border-top: none;
   overflow-y: auto;
