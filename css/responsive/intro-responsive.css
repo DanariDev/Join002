@@ -19,7 +19,12 @@
             width: 150px;
             height: 80px;
             top: 32px;
+            left: 0;
             opacity: 0;
+        }
+
+        0%{
+            left: 0;
         }
 
         30% {
@@ -33,10 +38,15 @@
             width: 150px;
             height: 80px;
             top: 32px;
+            left: 0;
+        }
+        0%{
+            transform: scale(0.9);
         }
 
         1% {
             object-fit: contain;
+            left: 0;
         }
 
         10% {

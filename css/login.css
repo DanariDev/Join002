@@ -3,12 +3,14 @@
 body {
   max-width: 1044px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  justify-self: center;
+  animation: hidden-overlay 1.25s 0.75s ease forwards;
 }
 
 .sign-up-wrapper-responsive {
@@ -26,7 +28,7 @@ body {
   align-items: center;
   justify-content: center;
   height: calc(100vh - 250px);
-  padding: 16rem 4rem 4rem 4rem;
+  padding: 16rem 0rem 0rem 0rem;
   width: 100%;
 }
 
@@ -288,7 +290,7 @@ footer a:hover {
 #show-hide-repeat-password {
   position: absolute;
   right: 84px;
-  top: 72%;
+  top: 58%;
   transform: translateY(-50%);
   cursor: pointer;
   width: 23px;
@@ -381,6 +383,16 @@ footer a:hover {
   @keyframes spin {
     to {
       transform: rotate(360deg);
+    }
+  }
+
+  @keyframes hidden-overlay {
+    0%{
+      overflow: hidden;
+    }
+
+    100%{
+      overflow: auto;
     }
   }
   
