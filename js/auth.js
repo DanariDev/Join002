@@ -59,8 +59,12 @@ async function signup() {
       startTransitionToSummary();
     }, 1000);
   } catch (e) {
-    showNotification("registration failure:\n" + e.message, "error");
+    const msg = e.code === "auth/email-already-in-use"
+      ? "Diese E-Mail-Adresse wird bereits verwendet."
+      : "Registrierung fehlgeschlagen:\n" + e.message;
+    showNotification(msg, "error");
   }
+  
 }
 
 /**
