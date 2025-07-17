@@ -157,6 +157,7 @@
 .add-task-btn {
   cursor: pointer;
   color: var(--clr-700);
+  border: 2px solid var(--clr-700);
   border-radius: 8px;
   text-align: center;
   padding: 0px 2.84px;
@@ -302,7 +303,7 @@
 #no-results-message {
   display: none;
   color: red;
-  font-size: var(--fs-18);
+  font-size: var(--fs-21);
   justify-content: center;
   align-items: center;
   padding: 2rem;

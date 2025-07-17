@@ -1,4 +1,4 @@
-.overlay-body{
+.overlay-body {
     position: fixed;
     display: flex;
     justify-content: center;
@@ -11,30 +11,31 @@
     z-index: 900;
 }
 
-.overlay-window{
+.overlay-window {
     display: flex;
     flex-direction: column;
     gap: 32px;
     background-color: var(--clr-700);
     color: white;
     padding: 24px;
-    border-radius: 16px;
+    border-radius: 25px;
+    z-index: 9999;
 }
 
-.overlay-window *{
+.overlay-window * {
     font-size: 16px;
 }
 
-.overlay-buttons-div{
+.overlay-buttons-div {
     display: flex;
     gap: 24px;
     justify-content: flex-end;
 }
 
-.overlay-buttons-div button{
+.overlay-buttons-div button {
     padding: 5px 10px;
     border: 2px solid #2A3647;
-    border-radius: 10px;
+    border-radius: 12px;
     font-weight: 600;
     color: var(--clr-700);
     background-color: var(--clr-200);
@@ -43,14 +44,14 @@
     border: solid 1px;
 }
 
-.overlay-buttons-div button:hover{
+.overlay-buttons-div button:hover {
     color: white;
     background-color: #2A3647;
     border: var(--clr-200) solid 1px;
 }
 
 
-.confirmation-window{
+.confirmation-window {
     position: fixed;
     top: 32px;
     display: flex;
@@ -63,6 +64,6 @@
     justify-self: center;
 }
 
-.especially-for-board{
+.especially-for-board {
     z-index: 9999;
 }

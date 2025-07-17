@@ -226,7 +226,7 @@ function handleMediaQueryChange(event) {
 // Initialize tasks and event listeners
 loadTasks();
 loadEventListeners();
-handleMediaQueryChange(window.matchMedia('(min-width: 801px)'));
+handleMediaQueryChange(window.matchMedia('(min-width: 1100px)'));
 
 // Show confirmation window if a task was saved
 if (localStorage.getItem('wasSavedTask') === 'true') {

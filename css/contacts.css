@@ -1,12 +1,12 @@
 @import url("global.css");
 
-.contacts-link{
+.contacts-link {
     background-color: var(--clr-900);
     color: rgb(255, 255, 255);
 }
 
-.contacts-link img{
-  filter: contrast(1.5);
+.contacts-link img {
+    filter: contrast(1.5);
 }
 
 /* Left Section */
@@ -259,7 +259,7 @@
     top: 0;
     left: 0;
     background-color: #0000004d;
-    z-index: 9999;
+    z-index: 900;
 }
 
 #lightbox {
@@ -282,6 +282,7 @@
     background-color: var(--clr-700);
     color: var(--clr-200);
     border-radius: 20px 0 0 20px;
+    min-height: 400px;
 }
 
 .join-logo-left {
@@ -321,6 +322,7 @@ h2 {
     flex: 1;
     background-color: var(--clr-200);
     border-radius: 0 20px 20px 0;
+    min-height: 400px;
 }
 
 .editing-lighbox {
