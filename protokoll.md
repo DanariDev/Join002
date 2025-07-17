@@ -27,10 +27,10 @@
 
 ---
 
-## 📑 Datenschutz & Impressum
+## 📑 Datenschutz & Impressum ✅
 
 - [ ] **Privacy Policy enthält noch Lorem Ipsum**  ✅
-  ➤ Bitte **echten Text einfügen oder Dummy-Platzhalter** kenntlich machen  
+  ➤ Bitte **echten Text einfügen oder Dummy-Platzhalter** kenntlich machen  ✅
   ➤ Impressum & Legal Notice wurden bereits korrekt eingebunden 👍
 
 ---
@@ -67,11 +67,11 @@
 
 ## 📌 Hinweise
 
-- [ ] **Finale Codequalität prüfen**  
-  ➤ Keine `alert()`s  
-  ➤ Keine echten Fehlermeldungen an User geben  
-  ➤ UX & Design auf Figma-Vorgaben abstimmen  
-  ➤ Saubere Übergänge zwischen Login → Dashboard
+- [ ] **Finale Codequalität prüfen**  (Daniel in bearbeitung)✅
+  ➤ Keine `alert()`s  ✅
+  ➤ Keine echten Fehlermeldungen an User geben  ✅
+  ➤ UX & Design auf Figma-Vorgaben abstimmen  ✅
+  ➤ Saubere Übergänge zwischen Login → Dashboard✅
 
 ---
 

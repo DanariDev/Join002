@@ -56,14 +56,12 @@ async function signup() {
     localStorage.setItem("userName", name);
     showNotification("registration successfuly!", "success");
     setTimeout(() => {
-      window.location.href = "summary.html";
-    }, 2000);
+      startTransitionToSummary();
+    }, 1000);
   } catch (e) {
     showNotification("registration failure:\n" + e.message, "error");
   }
 }
-
-
 
 /**
  * With this function a user logged in. It is checked whether email and password fit a user
@@ -93,28 +91,25 @@ function login() {
       const name = snap.exists() ? snap.val().name : "User";
       localStorage.setItem("isGuest", "false");
       localStorage.setItem("userName", name);
-      window.location.href = "summary.html";
+      startTransitionToSummary();
     })
     .catch(e => {
-      showError(passInput, passError, "invalid login!");
+      showError(passInput, passError, "Email address or password is incorrect.");
     });
 }
 
-
 /**
  * This function can be registered with a guest login
- *
  *
  */
 export function loginAsGuest() {
   localStorage.setItem("isGuest", "true");
   localStorage.removeItem("userName");
-  window.location.href = "summary.html";
+  startTransitionToSummary();
 }
 
 /**
  * This function logs off a user
- *
  *
  */
 export function logout() {
@@ -176,6 +171,15 @@ function showNotification(message, type = "success") {
     box.style.bottom = "-100px";
     box.style.opacity = "0";
   }, 4000);
+}
+
+function startTransitionToSummary() {
+  const overlay = document.getElementById("page-transition");
+  if (overlay) overlay.classList.remove("hidden");
+
+  setTimeout(() => {
+    window.location.href = "summary.html";
+  }, 500);
 }
 
 init();
