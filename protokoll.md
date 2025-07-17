@@ -29,7 +29,7 @@
 
 ## 📑 Datenschutz & Impressum
 
-- [ ] **Privacy Policy enthält noch Lorem Ipsum**  
+- [ ] **Privacy Policy enthält noch Lorem Ipsum**  ✅
   ➤ Bitte **echten Text einfügen oder Dummy-Platzhalter** kenntlich machen  
   ➤ Impressum & Legal Notice wurden bereits korrekt eingebunden 👍
 
