@@ -232,18 +232,27 @@ function loadContacts() {
  */
 function createTask(event) {
   event.preventDefault();
+
   const task = {
     title: getValue("#title"),
     description: getValue("#description"),
-    dueDate: getValue("#date"),
+    dueDate: getValue("#due-date"), 
     category: getValue("#category"),
     assignedTo: assignedTo.map((c) => c.name),
     priority: getPriority(),
     subtasks: subtasks,
     status: "todo",
   };
-  validateAndSaveTask(task);
+
+  const taskRef = ref(db, "tasks");
+  push(taskRef, task).then(() => {
+    resetForm(); 
+    console.log("Task erfolgreich erstellt!");
+  }).catch((error) => {
+    console.error("Fehler beim Erstellen des Tasks:", error);
+  });
 }
+
 
 /**
  * Resets the task form to its initial state
@@ -261,7 +270,7 @@ function resetForm() {
  */
 function updateCreateTaskBtn() {
   const title = getValue("#title");
-  const date = getValue("#date");
+  const date = getValue("#due-date");
   const category = getValue("#category");
   const hasContacts = assignedTo.length > 0;
   const allFilled = title && date && category && hasContacts;
@@ -384,14 +393,16 @@ function validateDateField() {
  * Initializes event listeners and form state
  */
 function init() {
+  const dateInput = document.getElementById("date") ?? document.getElementById("due-date");
   const createBtn = document.getElementById("create-task-btn");
-  const dateInput = document.getElementById("due-date");
   const today = new Date().toISOString().split("T")[0];
-
   createBtn.disabled = true;
   createBtn.classList.add("disabled");
+  createBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    createTask(e);
+  });
   document.getElementById("add-task-form").onsubmit = createTask;
-
   document.querySelector(".subtask-button").onclick = addNewSubtask;
   document.getElementById("clear-btn").onclick = clearForm;
   initDropdownHandling();
@@ -403,15 +414,18 @@ function init() {
   updateInputs();
 
   dateInput.addEventListener("blur", validateDateField);
-   dateInput.addEventListener("keydown", (e) => {
+  dateInput.addEventListener("keydown", (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
       validateDateField();
     }
   });
+
   dateInput.min = today;
   dateInput.value = today;
 }
+
+
 
 /**
  * Initializes dropdown toggle behavior for contacts selection
