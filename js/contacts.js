@@ -103,7 +103,7 @@ function findCurrentContact(idNumber, letter, index) {
     () => getElement("showed-current-contact").classList.add("show"),
     10
   );
-  document.getElementById('responsive-small-edit').classList.remove('d-none');
+  document.getElementById("responsive-small-edit").classList.remove("d-none");
 }
 
 /** Shows contact card with details */
@@ -225,7 +225,13 @@ function updateUIAfterEdit() {
   getElement("showed-current-contact").classList.replace("d-flex", "d-none");
   getElement("current-btns-responsive").classList.replace("d-flex", "d-none");
   closeLightbox();
+
+  const listWrapper = getElement("contacts-list-wrapper");
+  const scrollTop = listWrapper.scrollTop;
+
   initContactsList().then(() => {
+    listWrapper.scrollTop = scrollTop;
+
     if (!lastId) return;
     const match = contacts.find((c) => c.id === lastId);
     if (!match) return;
@@ -237,35 +243,39 @@ function updateUIAfterEdit() {
   });
 }
 
+
 /**
  * This function opens delete Query and assigns an on-click function to the buttons and the query-body
- * 
+ *
  * @param {string} contactId -This string is assigned here so that the correct contact is deleted
  */
 function opendeleteContactQuery(contactId) {
-  document.getElementById('query-window').classList.remove('d-none');
-  document.getElementById("cancel-delete-button").onclick = () => deleteContactQuery(false, contactId, event);
-  document.getElementById("query-window").onclick = () => deleteContactQuery(false, contactId, event);
-  document.getElementById("yes-delete-button").onclick = () => deleteContactQuery(true, contactId, event);
+  document.getElementById("query-window").classList.remove("d-none");
+  document.getElementById("cancel-delete-button").onclick = () =>
+    deleteContactQuery(false, contactId, event);
+  document.getElementById("query-window").onclick = () =>
+    deleteContactQuery(false, contactId, event);
+  document.getElementById("yes-delete-button").onclick = () =>
+    deleteContactQuery(true, contactId, event);
 }
 
 /**
  * This functions carry out the query as to whether or not should be deleted
- * 
+ *
  * @param {boolean} deleteC - Gives back whether or not should be deleted
  * @param {string} contactId -This string is assigned here so that the correct contact is deleted
  * @param {object} event - Event is needed to stop propagation
  */
 function deleteContactQuery(deleteC, contactId, event) {
   event.stopPropagation();
-  document.getElementById('query-window').classList.add('d-none');
+  document.getElementById("query-window").classList.add("d-none");
   deleteContact(contactId, deleteC);
 }
 
 /** Deletes a contact */
 async function deleteContact(contactId, deleteC) {
   if (!contactId || !deleteC) {
-    document.getElementById('responsive-small-edit').classList.remove('d-none');
+    document.getElementById("responsive-small-edit").classList.remove("d-none");
     return;
   }
 
@@ -280,7 +290,6 @@ async function deleteContact(contactId, deleteC) {
   }
 }
 
-
 /** Adds a new contact */
 async function addNewContact() {
   const { hasError, name, email, phone } = checkInput();
@@ -288,8 +297,10 @@ async function addNewContact() {
   await addContact({ name, email, phone, initials: getInitials(name) });
   closeLightbox();
   initContactsList();
-  document.getElementById('confirmation-window').classList.remove('d-none');
-  setTimeout(() => { document.getElementById('confirmation-window').classList.add("d-none"); }, 3000);
+  document.getElementById("confirmation-window").classList.remove("d-none");
+  setTimeout(() => {
+    document.getElementById("confirmation-window").classList.add("d-none");
+  }, 3000);
 }
 
 /** Hides contact details */
@@ -300,13 +311,13 @@ function closeShownContact() {
     "responsive-small-add",
     true
   );
-  document.getElementById('responsive-small-edit').classList.remove('d-none');
+  document.getElementById("responsive-small-edit").classList.remove("d-none");
 }
 
 /** Opens responsive edit menu */
 function openEditResponsive() {
-  document.getElementsByTagName('body')[0].style.overflow = 'hidden';
-  document.getElementById('current-btns-responsive').classList.add('d-flex');
+  document.getElementsByTagName("body")[0].style.overflow = "hidden";
+  document.getElementById("current-btns-responsive").classList.add("d-flex");
   toggleElements(
     "current-btns-responsive",
     "responsive-small-edit",
@@ -322,19 +333,18 @@ function openEditResponsive() {
 /** Closes responsive edit menu */
 function closeEditResponsive() {
   getElement("current-btns-responsive").classList.remove("show");
-  setTimeout(
-    () => {
-      toggleElements(
-        "current-btns-responsive",
-        "responsive-small-edit",
-        null,
-        true
-      ),
-        document.getElementById('current-btns-responsive').classList.remove('d-flex'),
-        document.getElementsByTagName('body')[0].removeAttribute('style')
-    },
-    200
-  );
+  setTimeout(() => {
+    toggleElements(
+      "current-btns-responsive",
+      "responsive-small-edit",
+      null,
+      true
+    ),
+      document
+        .getElementById("current-btns-responsive")
+        .classList.remove("d-flex"),
+      document.getElementsByTagName("body")[0].removeAttribute("style");
+  }, 200);
 }
 
 /** Handles responsive design changes */
@@ -396,4 +406,4 @@ function findContactIndex(id) {
 }
 
 setupEvents();
-window.addEventListener('resize', closeEditResponsive);
+window.addEventListener("resize", closeEditResponsive);
