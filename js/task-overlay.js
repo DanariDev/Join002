@@ -435,21 +435,56 @@ function addSubtaskFromInput() {
 function renderEditingSubtasks() {
   const ul = document.getElementById("editing-subtask-list");
   ul.innerHTML = "";
+
   editingSubtasks.forEach((sub, index) => {
-    const image = document.createElement("img");
-    image.src = "./assets/img/delete.png";
     const li = document.createElement("li");
-    li.textContent = sub.text;
-    li.dataset.index = index;
-    li.appendChild(image);
-    image.addEventListener("click", () => {
+    li.className = "subtask-item";
+
+    const span = document.createElement("span");
+    span.className = "subtask-text";
+    span.textContent = sub.text;
+
+    const icons = document.createElement("div");
+    icons.className = "subtask-icons";
+    
+    const editIcon = document.createElement("img");
+    editIcon.src = "./assets/img/edit.png";
+    editIcon.className = "subtask-icon";
+    editIcon.onclick = () => makeEditingSubtaskEditable(li, sub, index);
+
+    const deleteIcon = document.createElement("img");
+    deleteIcon.src = "./assets/img/delete.png";
+    deleteIcon.className = "subtask-icon";
+    deleteIcon.onclick = () => {
       editingSubtasks.splice(index, 1);
       renderEditingSubtasks();
       updateSaveEditBtn?.();
-    });
+    };
+
+    icons.append(editIcon, deleteIcon);
+    li.append(span, icons);
     ul.appendChild(li);
   });
 }
+function makeEditingSubtaskEditable(li, subtask, index) {
+  const input = document.createElement("input");
+  input.className = "subtask-edit-input";
+  input.value = subtask.text;
+
+  input.onblur = () => {
+    editingSubtasks[index].text = input.value.trim();
+    renderEditingSubtasks();
+  };
+
+  input.onkeydown = (e) => {
+    if (e.key === "Enter") input.blur();
+  };
+
+  li.innerHTML = ""; 
+  li.appendChild(input);
+  input.focus();
+}
+
 
 async function handleSaveEditTask() {
   const taskId = document.getElementById("task-overlay").dataset.taskId;
