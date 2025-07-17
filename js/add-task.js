@@ -247,7 +247,7 @@ function createTask(event) {
   const taskRef = ref(db, "tasks");
   push(taskRef, task).then(() => {
     resetForm(); 
-    console.log("Task erfolgreich erstellt!");
+    window.location.href = "board.html";
   }).catch((error) => {
     console.error("Fehler beim Erstellen des Tasks:", error);
   });
