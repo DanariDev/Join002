@@ -5,6 +5,7 @@ import {
   push,
   get,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { renderInitials } from "./utils.js"; 
 let subtasks = [];
 let contacts = [];
 let assignedTo = [];
@@ -194,25 +195,9 @@ function handleCheckboxChange({
  */
 function updateAssignedToUI() {
   const container = document.getElementById("selected-contact-insignias");
-  container.innerHTML = "";
-
-  if (assignedTo.length > 0) {
-    assignedTo.forEach(({ name }) => {
-      const initials = name
-        .split(" ")
-        .map((n) => n[0]?.toUpperCase())
-        .join("");
-      const color = getColorForName(name);
-
-      const badge = document.createElement("div");
-      badge.className = "assigned-initials";
-      badge.style.backgroundColor = color;
-      badge.textContent = initials;
-
-      container.appendChild(badge);
-    });
-  }
+  renderInitials(container, assignedTo);
 }
+
 
 /**
  * Loads contacts from Firebase and populates the dropdown
@@ -236,7 +221,7 @@ function createTask(event) {
   const task = {
     title: getValue("#title"),
     description: getValue("#description"),
-    dueDate: getValue("#due-date"), 
+    dueDate: getValue("#due-date"),
     category: getValue("#category"),
     assignedTo: assignedTo.map((c) => c.name),
     priority: getPriority(),
@@ -245,14 +230,15 @@ function createTask(event) {
   };
 
   const taskRef = ref(db, "tasks");
-  push(taskRef, task).then(() => {
-    resetForm(); 
-    window.location.href = "board.html";
-  }).catch((error) => {
-    console.error("Fehler beim Erstellen des Tasks:", error);
-  });
+  push(taskRef, task)
+    .then(() => {
+      resetForm();
+      window.location.href = "board.html";
+    })
+    .catch((error) => {
+      console.error("Fehler beim Erstellen des Tasks:", error);
+    });
 }
-
 
 /**
  * Resets the task form to its initial state
@@ -272,8 +258,7 @@ function updateCreateTaskBtn() {
   const title = getValue("#title");
   const date = getValue("#due-date");
   const category = getValue("#category");
-  const hasContacts = assignedTo.length > 0;
-  const allFilled = title && date && category && hasContacts;
+  const allFilled = title && date && category;
   const createBtn = document.getElementById("create-task-btn");
   createBtn.disabled = !allFilled;
   createBtn.classList.toggle("disabled", !allFilled);
@@ -380,7 +365,7 @@ function validateDateField() {
   if (dateInput.value < today) {
     errorMessage.textContent = "The due date cannot be in the past.";
     errorMessage.style.color = "red";
-    dateInput.value = ""; 
+    dateInput.value = "";
     return false;
   } else {
     errorMessage.textContent = "";
@@ -388,12 +373,12 @@ function validateDateField() {
   }
 }
 
-
 /**
  * Initializes event listeners and form state
  */
 function init() {
-  const dateInput = document.getElementById("date") ?? document.getElementById("due-date");
+  const dateInput =
+    document.getElementById("date") ?? document.getElementById("due-date");
   const createBtn = document.getElementById("create-task-btn");
   const today = new Date().toISOString().split("T")[0];
   createBtn.disabled = true;
@@ -425,8 +410,6 @@ function init() {
   dateInput.value = today;
 }
 
-
-
 /**
  * Initializes dropdown toggle behavior for contacts selection
  */
@@ -444,9 +427,7 @@ function initDropdownHandling() {
     } else if (contactDropdownClickState === 2) {
       populateContactsDropdown(true); // Nur ausgewählte
       if (document.querySelectorAll(".form-selected-contact").length < 1) {
-        document.getElementById(
-          "contacts-dropdown-list"
-        ).innerHTML = `<div class="no-contacts-slected">No contacts were selected</div>`;
+        document.getElementById("contacts-dropdown-list").innerHTML = ``;
       }
     } else {
       dropdown.classList.remove("show");

@@ -46,4 +46,5 @@ export function renderInitials(container, assigned, className = 'initials-task',
     moreDiv.title = `${hiddenCount} weitere Person${hiddenCount > 1 ? 'en' : ''}`;
     container.appendChild(moreDiv);
   }
+  
 }
