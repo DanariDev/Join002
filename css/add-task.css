@@ -4,6 +4,7 @@
 .add-task-link {
   background-color: var(--clr-900);
   color: rgb(255, 255, 255);
+  box-sizing: border-box;
 }
 
 .add-task-link img {
@@ -12,8 +13,11 @@
 
 /* Wrapper */
 .page-wrapper {
-  height: calc(100vh - 103px);
+  min-height: calc(100vh - 103px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
+
 
 /* Content Box */
 .add-task-main {
@@ -604,3 +608,6 @@ option {
   cursor: pointer;
 }
 
+html, body {
+  overflow: hidden;
+}
