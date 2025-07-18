@@ -16,11 +16,14 @@
 - ✅ Buttons `Add Task` Clear & Create Task sehen noch deutlich anders aus als im Figma-Design.
 - ✅ Icons auf den Buttons fehlen oder unterscheiden sich vom Design.
 - ✅ Assigned To ist aktuell **Pflichtfeld**, muss **optional** sein.
+- ✅ Buttons `Add Task` Clear & Create Task sehen noch deutlich anders aus als im Figma-Design.
+- ✅ Icons auf den Buttons fehlen oder unterscheiden sich vom Design.
+- ✅ Assigned To ist aktuell **Pflichtfeld**, muss **optional** sein.
 
 ---
 
 ### 🧾 Sign-Up / Formulare
-- [ ] Bei Fehlermeldungen ist der Abstand zu den Eingabefeldern zu gering – mehr **Vertical Padding** nötig.
+- ✅ Bei Fehlermeldungen ist der Abstand zu den Eingabefeldern zu gering – mehr **Vertical Padding** nötig.
 - [ ] Design-Details beim Select "Assigned To" weichen ab (Name & Checkbox neben dem Icon statt Space-Between).
 - [ ] Wenn zu viele Personen ausgewählt werden, muss ein **“+X”** Indikator eingeblendet werden (z. B. `+10`).
 - ✅ Aktuell wird bei "No contacts selected" eine weiße Box eingeblendet – bitte **ganz entfernen**, da kein Pflichtfeld.
@@ -32,7 +35,7 @@
 - [ ] Subtask-Zeile soll einen **Hover-Effekt** bekommen (hellgrau o. ä.).
 - [ ] Action-Buttons (Edit, Delete) sollen **in der Subtask-Zeile** angezeigt werden, nicht als extra Bereich.
 - [ ] Rahmen und Farbgebung der Buttons sind aktuell zu **dunkel/schwarz** – orientiere dich am Design.
-- ✅ Scrollbar soll von Anfang an da sein – aktuell verschieben sich die Buttons erst nach mehreren Einträgen.
+- [ ] Scrollbar soll von Anfang an da sein – aktuell verschieben sich die Buttons erst nach mehreren Einträgen.
   - Besser: Fixe Höhe für Liste setzen und Scrollbar direkt aktivieren, statt Elemente "nach unten zu schieben".
 
 ---

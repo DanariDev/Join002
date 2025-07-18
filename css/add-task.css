@@ -22,9 +22,9 @@
   flex-direction: column;
   gap: 32px;
   padding: 4rem;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 22.138rem;
 }
+
 
 /* Formular */
 #add-task-form {
@@ -56,9 +56,6 @@ textarea {
   font-size: var(--fs-20);
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-}
-.add-task-form-content {
-  gap: 15px;
 }
 
 .description-input {
@@ -93,16 +90,19 @@ textarea {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
 }
+
 #urgent-btn:hover,
 #medium-btn:hover,
 #low-btn:hover {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
+
 .urgent-btn-active img,
 .medium-btn-active img,
 .low-btn-active img {
   filter: brightness(0) invert(1);
 }
+
 #urgent-btn.urgent-btn-active,
 #medium-btn.medium-btn-active,
 #low-btn.low-btn-active {
@@ -312,41 +312,20 @@ option {
 
 .add-task-create-and-clear-btn {
   display: flex;
-  justify-content: flex-end; /* Buttons an rechte Seite schieben */
-  gap: 16px;
-  margin-top: 16px;
+  justify-content: space-around;
+  flex: 1;
+  gap: 10px;
+  padding: 1rem;
 }
+
 
 #clear-btn {
   width: 110px;
   height: 56px;
   border-radius: 10px;
-  padding: 16px;
-  background-color: #f6f7f8;
-  border: 1px solid #2a3647;
-  color: #2a3647;
   font-size: var(--fs-20);
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-}
-
-#clear-btn:hover {
-  background-color: #ffffff;
-  border-color: #29abe2;
-  color: #2a3647;
-  box-shadow: 0 0 0 0.5px #29abe2 inset;
-}
-
-.btn-create-task {
-  width: 183px;
-  height: 56px;
-  padding: 16px;
-  background-color: #091930;
-  border: 1px solid #091930;
-  border-radius: 10px;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: var(--fs-20);
   cursor: pointer;
   transition: all 0.1s ease-in-out;
 }
@@ -360,12 +339,6 @@ option {
   color: #ffffff;
   background-color: var(--clr-700);
   font-weight: 600;
-  transition: background-color 100ms ease-in-out, transform 100ms ease-in-out,
-    box-shadow 100ms ease-in-out;
-}
-.btn-create-task:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) inset;
 }
 
 #clear-btn:hover {
@@ -376,19 +349,6 @@ option {
 .btn-create-task:hover {
   background-color: var(--clr-500);
   border-color: var(--clr-500);
-}
-.btn-cross {
-  font-size: 18px;
-  margin-left: 8px;
-  vertical-align: middle;
-  position: relative;
-  top: -1px; /* 👈 leicht nach oben verschoben */
-  color: #2a3647;
-  transition: color 0.2s ease;
-}
-
-#clear-btn:hover .btn-cross {
-  color: #29abe2;
 }
 
 .required:after {
@@ -473,6 +433,7 @@ option {
   margin-top: 8px;
   padding-right: 6px;
 }
+
 
 #subtask-list::-webkit-scrollbar {
   width: 6px;
