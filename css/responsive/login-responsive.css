@@ -1,9 +1,9 @@
 /* Media Querry Big Displays */
 @media (min-width: 1200px) {
-    .underline:after {
-        left: 43.5%;
-        right: 43.5%;
-    }
+  .underline:after {
+    left: 43.5%;
+    right: 43.5%;
+  }
 }
 
 /* Media Querry Small Displays */
@@ -11,108 +11,133 @@
 }
 
 /* Media Querry Small Displays */
-@media (max-width: 1100px) {
-    .login-page-wrapper {
-        height: auto;
-        /* padding: 16rem 1rem 1rem 1rem; */
-        justify-content: space-between;
-        gap: 32px;
-    }
+@media (min-width: 1100px) {
+  body.register-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
 
-    .login-box {
-        max-width: 500px;
-        width: 90%;
-        padding: 1rem;
-        position: relative; 
-    }
+  body.register-page .login-page-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 
-    .sign-up-wrapper-responsive {
-        font-size: var(--fs-16);
-        color: var(--clr-700);
-        display: flex;
-        align-items: center;
-        padding: 1rem;
-        gap: 8px;
-    }
+  body.register-page footer#login-footer {
+    margin-top: auto;
+    padding: 1rem 0;
+  }
 
-    .sign-up-wrapper {
-        display: none;
-    }
+  body.register-page .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+}
 
-    #sidebar-footer {
-        display: none;
-    }
+.login-page-wrapper {
+  height: auto;
+  /* padding: 16rem 1rem 1rem 1rem; */
+  justify-content: space-between;
+  gap: 32px;
+}
 
-    .underline:after {
-        left: 38%;
-        right: 38%;
-    }
+.login-box {
+  max-width: 500px;
+  width: 90%;
+  padding: 1rem;
+  position: relative;
+}
 
-    .logo {
-        height: 80px;
-        width: 80px;
-        position: absolute;
-        top: calc(-1 * (80px + 0.5rem)); 
-        left: 0; 
-        object-fit: contain;
-    }
+.sign-up-wrapper-responsive {
+  font-size: var(--fs-16);
+  color: var(--clr-700);
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 8px;
+}
 
-    .passwort-input-button-div,
-    .passwort-repeat-input-button-div {
-        width: 100%;
-    }
+.sign-up-wrapper {
+  display: none;
+}
 
-    #show-hide-password,
-    #show-hide-repeat-password {
-        justify-self: anchor-center;
-        right: -350px;
-    }
+#sidebar-footer {
+  display: none;
+}
+
+.underline:after {
+  left: 38%;
+  right: 38%;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+  position: absolute;
+  top: calc(-1 * (80px + 0.5rem));
+  left: 0;
+  object-fit: contain;
+}
+
+.passwort-input-button-div,
+.passwort-repeat-input-button-div {
+  width: 100%;
+}
+
+#show-hide-password,
+#show-hide-repeat-password {
+  justify-self: anchor-center;
+  right: -350px;
 }
 
 @media (max-width: 534px) {
-    #show-hide-password,
-    #show-hide-repeat-password {
-        right: 41px;
-        justify-self: auto;
-    }
+  #show-hide-password,
+  #show-hide-repeat-password {
+    right: 41px;
+    justify-self: auto;
+  }
 
-    .logo {
-        top: calc(-1 * (80px + 0.5rem)); 
-    }
+  .logo {
+    top: calc(-1 * (80px + 0.5rem));
+  }
 }
 
 @media (max-width: 490px) {
-    .btn-primary,
-    .btn-secondary {
-        padding: 14px;
-        max-width: none;
-        width: 150px;
-    }
+  .btn-primary,
+  .btn-secondary {
+    padding: 14px;
+    max-width: none;
+    width: 150px;
+  }
 
-    .underline:after {
-        left: 36.5%;
-        right: 36.5%;
-    }
+  .underline:after {
+    left: 36.5%;
+    right: 36.5%;
+  }
 
-    .button-row {
-        flex-direction: column;
-        margin: 21px 5px 5px 5px;
-        align-items: center;
-        gap: 21px;
-    }
+  .button-row {
+    flex-direction: column;
+    margin: 21px 5px 5px 5px;
+    align-items: center;
+    gap: 21px;
+  }
 
-    .logo {
-        top: calc(-1 * (80px + 0.5rem)); 
-    }
+  .logo {
+    top: calc(-1 * (80px + 0.5rem));
+  }
 }
 
 @media (max-width: 320px) {
-    .underline:after {
-        left: 28.5%;
-        right: 28.5%;
-    }
+  .underline:after {
+    left: 28.5%;
+    right: 28.5%;
+  }
 
-    .logo {
-        top: calc(-1 * (80px + 0.5rem)); 
-    }
+  .logo {
+    top: calc(-1 * (80px + 0.5rem));
+  }
 }

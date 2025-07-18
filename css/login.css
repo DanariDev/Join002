@@ -84,25 +84,26 @@ body {
 
 .underline {
   position: relative;
-  display: inline-block;
-  font-size: 36px;
+  display: block;
+  font-size: 60px;
   font-weight: 700;
   color: #000;
   text-align: center;
-  margin-bottom: 32px;
-  grid-column: 3/8;
+  margin: 0 auto 32px auto;
 }
 
-.underline:after {
+.underline::after {
   content: "";
   position: absolute;
-  left: 43.5%;
-  right: 43.5%;
+  left: 30%;
+  transform: translateX(-50%);
   bottom: -10px;
   height: 3px;
+  width: 65%;
   background-color: var(--clr-500);
   border-radius: 3px;
 }
+
 
 .input-wrapper input {
   max-width: 422px;
@@ -203,6 +204,7 @@ body {
 .back_to_login {
   display: flex;
   align-items: center;
+
 }
 
 footer {
@@ -250,9 +252,12 @@ footer a:hover {
 .error-message {
   color: red;
   font-size: var(--fs-16);
-  margin: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
   min-height: 26px;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   visibility: hidden;
 }
 
