@@ -8,11 +8,15 @@
   flex: 1;
 }
 
-.privacy-policy-link{
+.privacy-policy-link {
   background-color: var(--clr-900);
 }
 
 h2 {
   font-size: var(--fs-27);
   margin: 32px 0 10px 0;
+}
+
+li {
+  font-size: 14px;
 }
