@@ -18,6 +18,7 @@
 /* Content Box */
 .add-task-main {
   max-width: 1100px;
+  max-width: 1100px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -318,6 +319,7 @@ option {
   margin-top: 16px;
 }
 
+
 #clear-btn {
   width: 110px;
   height: 56px;
@@ -475,6 +477,7 @@ option {
   margin-top: 8px;
   padding-right: 6px;
 }
+
 
 #subtask-list::-webkit-scrollbar {
   width: 6px;
