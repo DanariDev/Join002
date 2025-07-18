@@ -14,7 +14,6 @@
   <link rel="stylesheet" href="css/responsive/privacy-policy-responsive.css">
   <link rel="stylesheet" href="css/responsive/sidebar-responsive.css" />
   <script src="js/loadSidbarTopbar.js"></script>
-  <script src="js/changeSidebar.js"></script>
 </head>
 
 <body>
@@ -40,11 +39,19 @@
 
   <div class="topbar">
     <span class="topbar-title">Kanban Project Management Tool</span>
+
     <img class="topbar-logo" src="assets/img/logo-start.png" alt="">
-    <div class="topbar-icons">
+    <div class="topbar-icons" id="topbar-iconsID">
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
       <div onclick="openMenu(event)" class="topbar-user"></div>
     </div>
+  </div>
+
+  <div id="menuID" class="menu d-none">
+    <a class="d-none" href="./help.html">Help</a>
+    <a href="./legal.html">Legal Notice</a>
+    <a href="./privacy-policy.html">Privacy Policy</a>
+    <a href="./index.html" id="log-out-buttonID">Log out</a>
   </div>
 
   <main class="privacy-main">
