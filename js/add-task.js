@@ -272,8 +272,7 @@ function updateCreateTaskBtn() {
   const title = getValue("#title");
   const date = getValue("#due-date");
   const category = getValue("#category");
-  const hasContacts = assignedTo.length > 0;
-  const allFilled = title && date && category && hasContacts;
+  const allFilled = title && date && category;
   const createBtn = document.getElementById("create-task-btn");
   createBtn.disabled = !allFilled;
   createBtn.classList.toggle("disabled", !allFilled);

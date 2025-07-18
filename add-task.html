@@ -105,7 +105,8 @@
 
           </div>
 
-          <label class="required">Assigned to</label>
+          <label>Assigned to</label>
+
           <div class="contacts-dropdown" id="contacts-dropdown">
             <div class="contacts-dropdown-inner" id="contacts-selected">Select contact(s)</div>
             <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
@@ -128,12 +129,20 @@
           <ul id="subtask-list"></ul>
 
           <span class="required-explain-responsive">This field is required</span>
+          <div style="height: 32px;"></div>
 
           <div class="add-task-create-and-clear-btn">
-            <button type="reset" id="clear-btn">Clear &#10006;</button>
-            <button id="create-task-btn" type="button" class="btn-create-task">Create Task ✔</button>
-
+            <button type="reset" id="clear-btn">
+              Clear <span class="btn-cross">✖</span>
+            </button>
+            
+          
+            <button id="create-task-btn" type="button" class="btn-create-task">
+              Create Task
+              <img src="assets/img/check.png" alt="Check icon" class="btn-icon" />
+            </button>
           </div>
+          
         </div>
       </form>
 
