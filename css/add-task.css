@@ -307,11 +307,11 @@ option {
 
 .add-task-create-and-clear-btn {
   display: flex;
-  justify-content: space-around;
-  flex: 1;
-  gap: 10px;
-  padding: 1rem;
+  justify-content: flex-end;    /* Buttons an rechte Seite schieben */
+  gap: 16px;
+  margin-top: 16px;
 }
+
 
 #clear-btn,
 .btn-create-task {
@@ -419,11 +419,13 @@ option {
 }
 
 #subtask-list {
-  max-height: 120px;
+  height: 90px;
+  max-height: 160px;
   overflow-y: auto;
   margin-top: 8px;
   padding-right: 6px;
 }
+
 
 #subtask-list::-webkit-scrollbar {
   width: 6px;

@@ -13,7 +13,7 @@
 
 ### 🖥 Allgemeines Layout
 - ✅ **Content-Begrenzung** liegt aktuell bei `1044px`, sollte aber eher `1440px` oder `1920px` sein.
-- [ ] Buttons `Add Task` (Urgent, Medium, Low) sehen noch deutlich anders aus als im Figma-Design.
+- [ ] Buttons `Add Task` Clear & Create Task sehen noch deutlich anders aus als im Figma-Design.
 - [ ] Icons auf den Buttons fehlen oder unterscheiden sich vom Design.
 - [ ] Assigned To ist aktuell **Pflichtfeld**, muss **optional** sein.
 
@@ -32,7 +32,7 @@
 - [ ] Subtask-Zeile soll einen **Hover-Effekt** bekommen (hellgrau o. ä.).
 - [ ] Action-Buttons (Edit, Delete) sollen **in der Subtask-Zeile** angezeigt werden, nicht als extra Bereich.
 - [ ] Rahmen und Farbgebung der Buttons sind aktuell zu **dunkel/schwarz** – orientiere dich am Design.
-- [ ] Scrollbar soll von Anfang an da sein – aktuell verschieben sich die Buttons erst nach mehreren Einträgen.
+- ✅ Scrollbar soll von Anfang an da sein – aktuell verschieben sich die Buttons erst nach mehreren Einträgen.
   - Besser: Fixe Höhe für Liste setzen und Scrollbar direkt aktivieren, statt Elemente "nach unten zu schieben".
 
 ---
