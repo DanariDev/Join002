@@ -148,7 +148,38 @@ textarea {
 
 li {
   font-size: var(--fs-20);
-  margin: 6px 0 6px 0;
+  margin: 0;
+}
+
+.subtask-edit-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 0px;
+  min-height: 32px;
+  background-color: white;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.subtask-edit-input {
+  flex: 1;
+  font-size: var(--fs-20);
+  padding: 8px;
+  border: 1px solid var(--clr-300);
+  border-radius: 10px;
+  outline: none;
+  font-family: "Inter", sans-serif;
+  background-color: white;
+  width: 100%;
+}
+
+.subtask-edit-wrapper .subtask-icon {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin: 0 2px;
 }
 
 /* Selected Contacts on Form */
@@ -179,7 +210,6 @@ li {
   height: 20px;
   border: 2px solid white;
   border-radius: 4px;
-  background-color: transparent;
   position: relative;
   cursor: pointer;
   z-index: 1;
@@ -214,7 +244,6 @@ li {
   width: 100%;
   height: 100%;
   border-radius: 10;
-  background-color: rgba(255, 255, 255, 0.9);
   z-index: 2;
 }
 
@@ -410,16 +439,47 @@ option {
 
 .subtask-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  padding: 6px;
-  min-height: 40px;
+  padding: 4px;
+  min-height: 32px;
+}
+
+.subtask-text,
+.subtask-edit-input {
+  flex: 1;
+  font-size: var(--fs-20);
+  border: none;
+  background: transparent;
+  padding: 0;
+  height: 32px;
+  line-height: 32px;
+  font-family: "Inter", sans-serif;
 }
 
 .subtask-item .subtask-text {
   flex: 1;
   font-size: var(--fs-20);
+}
+
+.subtask-edit-input {
+  border-bottom: 1px solid var(--clr-300);
+  outline: none;
+}
+
+.subtask-icon {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  margin-left: 8px;
+  right: 0;
+}
+
+.subtask-item input.subtask-edit-input {
+  width: 100%;
+  background-color: transparent;
+  margin: 0;
 }
 
 .subtask-item:hover {

@@ -5,7 +5,7 @@ import {
   push,
   get,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { renderInitials } from "./utils.js"; 
+import { renderInitials } from "./utils.js";
 let subtasks = [];
 let contacts = [];
 let assignedTo = [];
@@ -64,14 +64,24 @@ function createSubtaskElement(s, i) {
   span.textContent = s.text;
 
   const icons = document.createElement("div");
-  icons.appendChild(
-    createSubtaskIcon("edit", () => makeSubtaskEditable(li, s, i))
-  );
-  icons.appendChild(createSubtaskIcon("delete", () => deleteSubtask(i)));
+  const editIcon = createSubtaskIcon("edit", () => makeSubtaskEditable(li, s, i));
+  const deleteIcon = createSubtaskIcon("delete", () => deleteSubtask(i));
+  icons.appendChild(editIcon);
+  icons.appendChild(deleteIcon);
 
   li.append(span, icons);
+
+  li.addEventListener("click", (e) => {
+    const isIcon = e.target.closest(".subtask-icon");
+    const isInput = li.querySelector("input");
+    if (!isIcon && !isInput) {
+      makeSubtaskEditable(li, s, i);
+    }
+  });
+
   return li;
 }
+
 function createSubtaskIcon(type, action) {
   const icon = document.createElement("img");
   icon.src = `assets/img/${type === "edit" ? "edit.png" : "delete.png"}`;
@@ -81,14 +91,12 @@ function createSubtaskIcon(type, action) {
 }
 
 function makeSubtaskEditable(li, s, i) {
+  const inputWrapper = document.createElement("div");
+  inputWrapper.className = "subtask-edit-wrapper";
+
   const input = document.createElement("input");
-  const img = li.querySelector("img");
   input.value = s.text;
   input.className = "subtask-edit-input";
-
-  if (img) {
-    img.style.display = "none";
-  }
 
   input.onblur = () => {
     subtasks[i].text = input.value.trim();
@@ -99,9 +107,20 @@ function makeSubtaskEditable(li, s, i) {
     if (e.key === "Enter") input.blur();
   };
 
-  li.replaceChild(input, li.firstChild);
+  const editIcon = createSubtaskIcon("edit", () => makeSubtaskEditable(li, s, i));
+  const deleteIcon = createSubtaskIcon("delete", () => deleteSubtask(i));
+
+  inputWrapper.appendChild(input);
+  inputWrapper.appendChild(editIcon);
+  inputWrapper.appendChild(deleteIcon);
+
+  // Leere das <li> und füge Wrapper hinzu
+  li.innerHTML = "";
+  li.appendChild(inputWrapper);
   input.focus();
 }
+
+
 
 function deleteSubtask(i) {
   subtasks.splice(i, 1);
