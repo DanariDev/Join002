@@ -186,7 +186,7 @@ li {
 .form-selected-contact {
   display: flex;
   flex-direction: row-reverse;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   padding: 0 10px;
   border-radius: 10px;
@@ -369,6 +369,7 @@ option {
   background-color: var(--clr-700);
   font-weight: 600;
   border-radius: 10px;
+  font-size: var(--fs-20);
 }
 
 #clear-btn:hover {

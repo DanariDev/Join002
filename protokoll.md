@@ -24,18 +24,18 @@
 
 ### 🧾 Sign-Up / Formulare
 - ✅ Bei Fehlermeldungen ist der Abstand zu den Eingabefeldern zu gering – mehr **Vertical Padding** nötig.
-- [ ] Design-Details beim Select "Assigned To" weichen ab (Name & Checkbox neben dem Icon statt Space-Between).
-- [ ] Wenn zu viele Personen ausgewählt werden, muss ein **“+X”** Indikator eingeblendet werden (z. B. `+10`).
+- ✅ Design-Details beim Select "Assigned To" weichen ab (Name & Checkbox neben dem Icon statt Space-Between).
+- ✅ Wenn zu viele Personen ausgewählt werden, muss ein **“+X”** Indikator eingeblendet werden (z. B. `+10`).
 - ✅ Aktuell wird bei "No contacts selected" eine weiße Box eingeblendet – bitte **ganz entfernen**, da kein Pflichtfeld.
 
 ---
 
 ### 📋 Subtasks
-- [ ] Subtasks lassen sich nur über den kleinen Button bearbeiten – **es soll durch Klick auf die ganze Zeile** gehen.
-- [ ] Subtask-Zeile soll einen **Hover-Effekt** bekommen (hellgrau o. ä.).
-- [ ] Action-Buttons (Edit, Delete) sollen **in der Subtask-Zeile** angezeigt werden, nicht als extra Bereich.
-- [ ] Rahmen und Farbgebung der Buttons sind aktuell zu **dunkel/schwarz** – orientiere dich am Design.
-- [ ] Scrollbar soll von Anfang an da sein – aktuell verschieben sich die Buttons erst nach mehreren Einträgen.
+- ✅ Subtasks lassen sich nur über den kleinen Button bearbeiten – **es soll durch Klick auf die ganze Zeile** gehen.
+- ✅ Subtask-Zeile soll einen **Hover-Effekt** bekommen (hellgrau o. ä.).
+- ✅ Action-Buttons (Edit, Delete) sollen **in der Subtask-Zeile** angezeigt werden, nicht als extra Bereich.
+- ✅ Rahmen und Farbgebung der Buttons sind aktuell zu **dunkel/schwarz** – orientiere dich am Design.
+- ✅ Scrollbar soll von Anfang an da sein – aktuell verschieben sich die Buttons erst nach mehreren Einträgen.
   - Besser: Fixe Höhe für Liste setzen und Scrollbar direkt aktivieren, statt Elemente "nach unten zu schieben".
 
 ---
