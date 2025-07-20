@@ -212,7 +212,7 @@ li {
   appearance: none;
   width: 20px;
   height: 20px;
-  border: 2px solid white;
+  border: 2px solid #a4a4a4;
   border-radius: 4px;
   position: relative;
   cursor: pointer;
@@ -345,8 +345,8 @@ option {
 
 .add-task-create-and-clear-btn {
   display: flex;
-  justify-content: flex-end; 
-  gap: 16px; 
+  justify-content: flex-end;
+  gap: 16px;
   padding: 1rem 0;
 }
 
@@ -600,6 +600,7 @@ option {
   color: #ffffff;
   font-weight: bold;
 }
+
 #add-task-form button:disabled {
   cursor: pointer;
 }
@@ -608,6 +609,7 @@ option {
   cursor: pointer;
 }
 
-html, body {
+html,
+body {
   overflow: hidden;
 }

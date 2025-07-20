@@ -1,0 +1,18 @@
+@import url("global.css");
+
+.privacy-main {
+  margin-left: 22.138rem;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.privacy-policy-link {
+  background-color: var(--clr-900);
+}
+
+h2 {
+  font-size: var(--fs-27);
+  margin: 32px 0 10px 0;
+}
