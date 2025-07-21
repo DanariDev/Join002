@@ -190,8 +190,10 @@ async function closePopup() {
   if (editTaskOverlay?.classList.contains("d-flex")) {
     editTaskOverlay.classList.replace("d-flex", "d-none");
   }
-  location.reload();
+
+  await import("./board.js").then((m) => m.renderBoard());
 }
+
 
 
 function initOverlayCloseHandler() {
