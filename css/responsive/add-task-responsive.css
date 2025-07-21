@@ -9,6 +9,7 @@
     .add-task-main {
         margin: 0 auto;
         padding: 4rem;
+        padding-bottom: 0;
     }
 
     .add-task-form-content {
@@ -46,7 +47,7 @@
 
     .add-task-create-and-clear-btn {
         padding: 10px;
-        gap: 5px;
+        gap: 32px;
     }
 
     .required-explain {
@@ -58,17 +59,47 @@
         font-size: var(--fs-20);
         display: block;
     }
+
+    input, select, textarea {
+        max-width: none;
+    }
+
+    .input-container{
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    #urgent-btn, #medium-btn, #low-btn {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
 }
 
 @media (max-width: 400px) {
 
     #urgent-btn,
     #medium-btn,
-    #low-btn,
-    #clear-btn,
-    .btn-create-task {
+    #low-btn {
         text-wrap-mode: nowrap;
         font-size: 16px;
         max-width: 180px;
+    }
+
+    .btn-create-task,
+    #clear-btn {
+        text-wrap-mode: nowrap;
+        font-size: 18px;
+    }
+
+    #urgent-btn img,
+    #medium-btn img,
+    #low-btn img {
+        height: 14px;
+        width: 18.38px;
+        object-fit: contain;
     }
 }

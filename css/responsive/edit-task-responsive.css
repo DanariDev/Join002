@@ -26,14 +26,25 @@
     }
 
     #editing-priority-buttons {
-        flex-direction: column;
-        align-items: center;
         gap: 8px;
     }
 
     #editing-priority-buttons button {
-        width: 122.5px;
-        flex: none;
+        text-wrap-mode: nowrap;
+        font-size: 16px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #editing-priority-buttons button img {
+        height: 13px;
+        width: 17.06px;
+        object-fit: contain;
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 }
 
@@ -47,9 +58,18 @@
     }
 }
 
+@media (max-width: 450px) {
+    #editing-contacts-selected {
+        font-size: 16px;
+    }
+}
+
+
+
 @media (max-width: 400px) {
     .edit-task-main {
         margin: 0px;
+        padding: 4rem 2rem;
     }
 }
 
