@@ -1,5 +1,11 @@
 @import url("global.css");
 
+.sign-up-wrapper,
+.footer-links {
+    opacity: 0;
+    animation: opacityOne 1.25s 0.75s ease forwards;
+}
+
 .starting-logo,
 .starting-logo-responsive {
     position: absolute;
@@ -9,11 +15,12 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 100px;
-    height: 120px;
+    width: 50%;
+    height: 50%;
     animation: slideToLeftCorner 1.25s 0.75s ease forwards;
     z-index: 2;
     background-color: white;
+    object-fit: none;
 }
 
 .starting-logo img,
@@ -25,9 +32,18 @@
 
 @keyframes slideToLeftCorner {
     to {
+        width: 100px;
+        height: 120px;
         top: 32px;
         left: 20px;
         transform: translate(0, 0);
         background-color: transparent;
+        object-fit: contain;
+    }
+}
+
+@keyframes opacityOne {
+    to {
+        opacity: 1;
     }
 }
