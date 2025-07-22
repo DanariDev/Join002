@@ -20,20 +20,28 @@ function $(selector) {
 function loadTasks() {
   document.getElementById('task-overlay')?.classList.add('d-none');
   const tasksRef = ref(db, 'tasks');
+
   onValue(tasksRef, (snapshot) => {
     const tasks = snapshot.val();
+
+    // 🔁 Optional: Alte Tasks vorher löschen, damit sie nicht doppelt erscheinen
+    document.querySelectorAll('.task-card').forEach(card => card.remove());
+
     if (!tasks) {
       addPlaceholders();
       return;
     }
+
     for (let id in tasks) {
       tasks[id].id = id;
       renderTask(tasks[id]);
     }
+
     setupDropTargets();
     addPlaceholders();
-  }, { onlyOnce: true });
+  }); // ⬅️ Kein { onlyOnce: true } mehr!
 }
+
 
 /**
  * Renders a single task card in the appropriate column
