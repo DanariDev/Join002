@@ -137,6 +137,7 @@ li {
 #editing-subtask-list {
   overflow: auto;
   max-height: 90px;
+  padding-left: 0;
 }
 
 #editing-subtask-list li {
@@ -221,14 +222,15 @@ li {
   flex-wrap: wrap;
   min-height: 40px;
   gap: 6px;
-  padding: 6px;
+  padding-left: 8px;
   background-color: white;
   border: none;
   cursor: pointer;
   font-size: var(--fs-20);
-
-  overflow: auto;
-  max-height: 62px;
+  border-radius: 10px;
+  background-image: url(../assets/img/drop-down-arrow.png);
+  background-repeat: no-repeat;
+  background-position: right;
 }
 
 .contact-selected {
@@ -259,9 +261,8 @@ li {
   flex-direction: column;
   gap: 4px;
   min-height: 40px;
-  padding: 6px;
   border: 1px solid var(--clr-300);
-  border-radius: 6px;
+  border-radius: 10px;
   background-color: white;
   font-size: 14px;
 }
@@ -343,7 +344,7 @@ option {
 }
 
 .required-explain {
-  font-size: var(--fs-20);
+  margin-top: 0px;
 }
 
 .required-explain:before {

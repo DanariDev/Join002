@@ -148,7 +148,7 @@ function openLightbox(mode) {
   renderLightboxTemplates(mode, lightbox);
   setupLightboxEvents(mode);
   getElement("lightbox-ol-close-btn").onclick = closeLightbox;
-  closeEditResponsive();
+  // closeEditResponsive();
 }
 
 /** Renders lightbox templates */
@@ -304,14 +304,18 @@ async function addNewContact() {
 }
 
 /** Hides contact details */
-function closeShownContact() {
+function closeShownContact(event) {
+  event.stopPropagation();
   toggleElements(
     "right-section",
     "responsive-small-edit",
     "responsive-small-add",
     true
   );
-  document.getElementById("responsive-small-edit").classList.remove("d-none");
+  document.getElementById("responsive-small-edit").classList.add("d-none");
+  document.getElementById("current-btns-responsive").classList.remove("d-flex");
+  document.getElementById("current-btns-responsive").classList.add("d-none");
+  document.getElementById("current-btns-responsive").classList.remove("show");
 }
 
 /** Opens responsive edit menu */

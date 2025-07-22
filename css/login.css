@@ -11,6 +11,7 @@ body {
   position: relative;
   justify-self: center;
   animation: hidden-overlay 1.25s 0.75s ease forwards;
+  background-color: white;
 }
 
 .sign-up-wrapper-responsive {

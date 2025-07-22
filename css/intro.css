@@ -1,42 +1,49 @@
 @import url("global.css");
 
+.sign-up-wrapper,
+.footer-links {
+    opacity: 0;
+    animation: opacityOne 1.25s 0.75s ease forwards;
+}
+
 .starting-logo,
 .starting-logo-responsive {
-    position: absolute; 
+    position: absolute;
     display: flex;
     justify-content: center;
-    top: 0;
-    /* left: auto;  */
-    margin: 0;
-    width: 100vw;
-    height: 100%; 
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
     animation: slideToLeftCorner 1.25s 0.75s ease forwards;
     z-index: 2;
-    background-color: var(--clr-200);
+    background-color: white;
     object-fit: none;
+}
+
+.starting-logo img,
+.starting-logo-responsive img {
+    width: 100px;
+    height: 120px;
+    object-fit: contain;
 }
 
 @keyframes slideToLeftCorner {
     to {
-        width: 150px;
-        height: 150px;
-        top: 20px;
-        left: 20px; 
-        transform: none; 
-    }
-    0%{
+        width: 100px;
+        height: 120px;
+        top: 32px;
         left: 20px;
-    }
-
-    1% {
-        object-fit: contain;
-    }
-
-    60% {
+        transform: translate(0, 0);
         background-color: transparent;
-    }
-
-    100% {
         object-fit: contain;
+    }
+}
+
+@keyframes opacityOne {
+    to {
+        opacity: 1;
     }
 }

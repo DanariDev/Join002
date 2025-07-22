@@ -17,14 +17,6 @@
   }
 }
 
-/* Media Querry Big Displays */
-@media (min-width: 1200px) {}
-
-/* Media Querry Small Displays */
-@media (max-width: 900px) {}
-
-@media (max-width: 800px) {}
-
 @media (max-width: 1100px) {
   h1 {
     font-size: 47px;
@@ -118,6 +110,8 @@
   }
 }
 
-@media (max-width: 490px) {}
-
-@media (max-width: 320px) {}
+@media (max-height: 670px){
+  .assigned-list {
+     max-height: 100px;
+  }
+}

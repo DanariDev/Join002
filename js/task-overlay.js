@@ -91,8 +91,8 @@ async function loadContactOptions(assignedTo) {
   const assignedList = Array.isArray(assignedTo)
     ? assignedTo
     : typeof assignedTo === "string" && assignedTo.trim()
-    ? [assignedTo.trim()]
-    : [];
+      ? [assignedTo.trim()]
+      : [];
   const wrapper = document.getElementById("popup-assigned");
   wrapper.innerHTML = `<span class="overlay-key">Assigned to:</span>`;
   wrapper.appendChild(createCard(assignedList));
@@ -190,8 +190,8 @@ async function closePopup() {
   if (editTaskOverlay?.classList.contains("d-flex")) {
     editTaskOverlay.classList.replace("d-flex", "d-none");
   }
-  location.reload();
 }
+
 
 
 function initOverlayCloseHandler() {
@@ -446,7 +446,7 @@ function renderEditingSubtasks() {
 
     const icons = document.createElement("div");
     icons.className = "subtask-icons";
-    
+
     const editIcon = document.createElement("img");
     editIcon.src = "./assets/img/edit.png";
     editIcon.className = "subtask-icon";
@@ -480,7 +480,7 @@ function makeEditingSubtaskEditable(li, subtask, index) {
     if (e.key === "Enter") input.blur();
   };
 
-  li.innerHTML = ""; 
+  li.innerHTML = "";
   li.appendChild(input);
   input.focus();
 }
@@ -515,7 +515,7 @@ async function handleSaveEditTask() {
 
   await update(ref(db, `tasks/${taskId}`), fullTask);
   await import("./board.js").then((m) => m.renderBoard());
-  closePopup(); 
+  closePopup();
 }
 
 function initSubtaskInputAndSaveListener() {

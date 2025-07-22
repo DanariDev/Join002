@@ -207,6 +207,7 @@
     gap: 10px;
     width: 100%;
     max-width: 100%;
+    text-wrap-mode: nowrap;
   }
 
   .urgent-wrapper .summary-box {
@@ -236,6 +237,6 @@
 
   .summary-box span,
   #deadline-title {
-    font-size: 16px;
+    font-size: 14px;
   }
 }
