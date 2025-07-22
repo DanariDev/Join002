@@ -2,7 +2,7 @@
 :root {
   --sidebar-width: 22.138rem;
   --sidebar-bg: var(--clr-700);
-  --sidebar-gap: 9rem; 
+  --sidebar-gap: 9rem;
   --nav-padding-bottom: 200px;
   --footer-padding-bottom: 50px;
   --link-color: rgba(255, 255, 255, 0.5);
@@ -23,7 +23,6 @@
   top: 0;
   z-index: 100;
   justify-items: center;
-
   display: flex;
   flex-direction: column;
   gap: 88px;
@@ -33,8 +32,8 @@
 /* Logo Bereich */
 .sidebar-logo {
   grid-area: logo;
-  align-self: center; 
-  justify-self: center; 
+  align-self: center;
+  justify-self: center;
   padding-bottom: 2rem;
   max-height: 300px;
 }

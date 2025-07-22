@@ -21,9 +21,11 @@
       <span>Loading Dashboard...</span>
     </div>
   </div>
-  
-  
+
+
   <div class="login-page-wrapper">
+
+    <img class="starting-logo" src="assets/img/logo-start.png" alt="Join Logo">
 
     <img src="assets/img/logo.svg" alt="Join Logo" class="logo">
 
@@ -33,21 +35,21 @@
       <a href="index.html" class="back_to_login">
         <img class="back-icon" src="assets/img/arrow-left-line.png" alt="Back">
       </a>
-    
+
       <!-- Mittig zentrierter Titel -->
       <h1 class="underline">Sign up</h1>
-    
+
       <form id="loginForm" novalidate>
         <div class="input-wrapper">
           <input id="name-input" class="name-input" type="text" placeholder="Name" required />
           <div class="error-message name-error"></div>
         </div>
-    
+
         <div class="input-wrapper">
           <input id="email-input" class="email-input" type="email" placeholder="Email" required />
           <div class="error-message email-error"></div>
         </div>
-    
+
         <div class="input-wrapper">
           <div class="passwort-input-button-div">
             <input type="password" class="password-input" id="password-input" placeholder="Password" />
@@ -55,28 +57,29 @@
           </div>
           <div class="error-message password-error"></div>
         </div>
-    
+
         <div class="input-wrapper">
           <div class="passwort-repeat-input-button-div">
-            <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password" required />
+            <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password"
+              required />
             <div id="show-hide-repeat-password" class="d-none"></div>
           </div>
           <div class="error-message repeat-error"></div>
         </div>
-    
+
         <label class="privacy-checkbox-label">
           <input id="privacy-checkbox" type="checkbox" required />
           I accept the <a id="privacyPolicyFormID" href="privacy-policy.html">Privacy Policy</a>
         </label>
         <div class="error-message checkbox-error"></div>
-    
+
         <div class="button-row">
           <button type="submit" class="btn-primary">Sign Up</button>
         </div>
       </form>
-    
+
     </div>
-    
+
     <div id="notification" class="notification hidden"></div>
   </div>
 

@@ -6,7 +6,7 @@
   color: rgb(255, 255, 255);
 }
 
-.summary-header h1{ 
+.summary-header h1 {
   color: black
 }
 
@@ -75,7 +75,8 @@
   flex-direction: column;
   min-height: 140px;
   flex: 1;
-  min-width: 0; /* Korrigierter Wert von 'px' */
+  min-width: 0;
+  /* Korrigierter Wert von 'px' */
 }
 
 .summary-box span {
@@ -118,12 +119,16 @@
 }
 
 .urgent-wrapper .summary-box {
-  min-height: 100px; /* Reduzierte Höhe */
-  flex-direction: row; /* Inhalt nebeneinander */
+  min-height: 100px;
+  /* Reduzierte Höhe */
+  flex-direction: row;
+  /* Inhalt nebeneinander */
   align-items: center;
   justify-content: center;
-  gap: 8px; /* Kleinerer Abstand zwischen Inhalt */
-  padding: 0.5rem; /* Etwas weniger Padding */
+  gap: 8px;
+  /* Kleinerer Abstand zwischen Inhalt */
+  padding: 0.5rem;
+  /* Etwas weniger Padding */
 }
 
 #urgent {
@@ -147,7 +152,7 @@
 
 #deadline-title {
   color: var(--clr-700);
-  font-size: var(--fs-16);
+  font-size: var(--fs-20);
 }
 
 /* Summary Greetings*/

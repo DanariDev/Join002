@@ -47,4 +47,30 @@
 
 ---
 
+
+
+## To Do:
+
+## Login:
+
+- Intro Animation wird noch in der größe falsch verschoben.
+
+## legal Notice:
+
+- Developer Akademie entfernen
+
+
+## Board:
+
+- Firebase Daten werden nicht vollständig gelöscht beim deleten einer Task
+
+
+## Contacts:
+
+- nach dem öffnen und schließen eines Contactes werden die menu reiter nicht korrekt zurückgesetzt
+
+
+
+
+
 Viel Erfolg bei der Umsetzung! 💪

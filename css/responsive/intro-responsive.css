@@ -14,16 +14,17 @@
         transform: scale(.37);
     }
 
+
     @keyframes slideToLeftCornerResponsive {
         to {
             width: 150px;
-            height: 80px;
+            height: 150px;
             top: 32px;
             left: 0;
             opacity: 0;
         }
 
-        0%{
+        0% {
             left: 0;
         }
 
@@ -40,7 +41,8 @@
             top: 32px;
             left: 0;
         }
-        0%{
+
+        0% {
             transform: scale(0.9);
         }
 

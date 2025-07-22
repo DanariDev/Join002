@@ -7,11 +7,19 @@
 }
 
 /* Media Querry Small Displays */
-@media (max-width: 900px) {
-}
+@media (max-width: 900px) {}
 
 /* Media Querry Small Displays */
-@media (min-width: 1100px) {
+@media (max-width: 1100px) {
+
+  .starting-logo {
+    position: absolute;
+    width: 64px;
+    height: auto;
+    left: 25px;
+    top: 25px;
+  }
+
   body.register-page {
     display: flex;
     flex-direction: column;
@@ -36,65 +44,65 @@
     justify-content: center;
     gap: 24px;
   }
-}
 
-.login-page-wrapper {
-  height: auto;
-  /* padding: 16rem 1rem 1rem 1rem; */
-  justify-content: space-between;
-  gap: 32px;
-}
 
-.login-box {
-  max-width: 500px;
-  width: 90%;
-  padding: 1rem;
-  position: relative;
-}
+  .login-page-wrapper {
+    height: calc(100vh - 16rem);
+    justify-content: space-between;
+  }
 
-.sign-up-wrapper-responsive {
-  font-size: var(--fs-16);
-  color: var(--clr-700);
-  display: flex;
-  align-items: center;
-  padding: 1rem;
-  gap: 8px;
-}
+  .login-box {
+    max-width: 500px;
+    width: 90%;
+    padding: 1rem;
+    position: relative;
+  }
 
-.sign-up-wrapper {
-  display: none;
-}
+  .sign-up-wrapper-responsive {
+    font-size: var(--fs-16);
+    color: var(--clr-700);
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 8px;
+  }
 
-#sidebar-footer {
-  display: none;
-}
+  .sign-up-wrapper {
+    display: none;
+  }
 
-.underline:after {
-  left: 38%;
-  right: 38%;
-}
+  #sidebar-footer {
+    display: none;
+  }
 
-.logo {
-  height: 80px;
-  width: 80px;
-  position: absolute;
-  top: calc(-1 * (80px + 0.5rem));
-  left: 0;
-  object-fit: contain;
-}
+  .underline:after {
+    left: 38%;
+    right: 38%;
+  }
 
-.passwort-input-button-div,
-.passwort-repeat-input-button-div {
-  width: 100%;
-}
+  .logo {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: calc(-1 * (80px + 0.5rem));
+    left: 0;
+    object-fit: contain;
+  }
 
-#show-hide-password,
-#show-hide-repeat-password {
-  justify-self: anchor-center;
-  right: -350px;
+  .passwort-input-button-div,
+  .passwort-repeat-input-button-div {
+    width: 100%;
+  }
+
+  #show-hide-password,
+  #show-hide-repeat-password {
+    justify-self: anchor-center;
+    right: -350px;
+  }
 }
 
 @media (max-width: 534px) {
+
   #show-hide-password,
   #show-hide-repeat-password {
     right: 41px;
@@ -107,6 +115,7 @@
 }
 
 @media (max-width: 490px) {
+
   .btn-primary,
   .btn-secondary {
     padding: 14px;
@@ -115,7 +124,7 @@
   }
 
   .underline:after {
-    left: 36.5%;
+    left: 50%;
     right: 36.5%;
   }
 
@@ -133,7 +142,7 @@
 
 @media (max-width: 320px) {
   .underline:after {
-    left: 28.5%;
+    left: 50%;
     right: 28.5%;
   }
 

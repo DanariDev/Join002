@@ -2,18 +2,23 @@
 
 .starting-logo,
 .starting-logo-responsive {
-    position: absolute; 
+    position: absolute;
     display: flex;
     justify-content: center;
     top: 0;
-    /* left: auto;  */
     margin: 0;
     width: 100vw;
-    height: 100%; 
+    height: 100%;
     animation: slideToLeftCorner 1.25s 0.75s ease forwards;
     z-index: 2;
     background-color: var(--clr-200);
     object-fit: none;
+}
+
+.starting-logo img,
+.starting-logo-responsive img {
+    max-width: 150px;
+    max-height: 150px;
 }
 
 @keyframes slideToLeftCorner {
@@ -21,10 +26,11 @@
         width: 150px;
         height: 150px;
         top: 20px;
-        left: 20px; 
-        transform: none; 
+        left: 20px;
+        transform: none;
     }
-    0%{
+
+    0% {
         left: 20px;
     }
 
