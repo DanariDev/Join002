@@ -24,7 +24,7 @@ function loadTasks() {
   onValue(tasksRef, (snapshot) => {
     const tasks = snapshot.val();
 
-    // 🔁 Optional: Alte Tasks vorher löschen, damit sie nicht doppelt erscheinen
+    
     document.querySelectorAll('.task-card').forEach(card => card.remove());
 
     if (!tasks) {
@@ -39,7 +39,7 @@ function loadTasks() {
 
     setupDropTargets();
     addPlaceholders();
-  }); // ⬅️ Kein { onlyOnce: true } mehr!
+  }); 
 }
 
 
