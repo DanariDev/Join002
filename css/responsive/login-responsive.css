@@ -76,8 +76,8 @@
     height: 80px;
     width: 80px;
     position: absolute;
-    top: calc(-1 * (80px + 0.5rem));
-    left: 0;
+    top: 20px;
+    left: 20px;
     object-fit: contain;
   }
 

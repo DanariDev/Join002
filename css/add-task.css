@@ -63,7 +63,7 @@ textarea {
   font-family: "Inter", sans-serif;
 }
 
-select{
+select {
   background-image: url(../assets/img/drop-down-arrow.png);
   background-repeat: no-repeat;
   background-position: right;
@@ -205,6 +205,7 @@ li {
   align-items: center;
   padding: 4px 10px;
   border-radius: 10px;
+  gap: 10px;
 }
 
 .form-selected-contact-active,
@@ -437,7 +438,7 @@ option {
   align-items: center;
   gap: 8px;
   padding-top: 0px;
-   margin-bottom: 8px;
+  margin-bottom: 8px;
   margin-top: -8px;
   flex-wrap: wrap;
   width: 280px;
