@@ -84,3 +84,4 @@ window.addEventListener("load", function () {
     document.getElementById('show-hide-password').addEventListener("click", togglePassword);
     document.getElementById('show-hide-repeat-password')?.addEventListener("click", togglePasswordRepeat);
 });
+
