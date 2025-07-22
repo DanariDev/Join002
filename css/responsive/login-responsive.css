@@ -12,14 +12,6 @@
 /* Media Querry Small Displays */
 @media (max-width: 1100px) {
 
-  .starting-logo {
-    position: absolute;
-    width: 64px;
-    height: auto;
-    left: 25px;
-    top: 25px;
-  }
-
   body.register-page {
     display: flex;
     flex-direction: column;
