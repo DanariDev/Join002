@@ -120,7 +120,7 @@
   border-radius: 50%;
   color: var(--clr-200);
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,7 +130,6 @@
   z-index: 1;
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
   position: relative;
-  background-color: inherit;
 }
 
 .overlay-key {
@@ -170,7 +169,7 @@ li {
   background-color: rgb(0, 0, 0, 0.1);
 }
 
-.title-input{
+.title-input {
   font-size: 35px;
   color: black;
 }
@@ -180,7 +179,7 @@ li {
   object-fit: contain;
 }
 
-.string-img{
+.string-img {
   display: flex;
   gap: 8px;
 }
