@@ -7,18 +7,21 @@ function init() {
     const { navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter, specialLink } = initDomElements();
 
     if (localStorage.getItem('unregistered') == 'true') {
-        navLinkHideAllClass.forEach((element) => {
-            element.classList.add('d-none');
-            if (localStorage.getItem('special-unregistered') == 'true') {
-                specialLink.attributes[0].value = 'register.html';
-                specialLink.children[1].innerHTML = 'Sign Up';
-            }
-        });
+        if (localStorage.getItem('special-unregistered') == 'true') {
+            specialLink.attributes[0].value = 'register.html';
+            specialLink.children[1].innerHTML = 'Sign Up';
+        }
 
         topbarIcons.classList.add('d-none')
         navLinkUnregistered.classList.remove('d-none');
         sidebarFooterLinks.classList.add('unregistered-sidebar')
         sidebarFooter.classList.add('d-flex');
+    }
+
+    else{
+        navLinkHideAllClass.forEach((element) => {
+            element.classList.remove('d-none');
+        });
     }
 }
 
