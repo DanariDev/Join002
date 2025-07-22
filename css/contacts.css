@@ -12,7 +12,7 @@
 /* Left Section */
 #contacts-main {
     display: flex;
-    height: calc(100vh - 124px);
+    height: calc(100vh - 125px);
     padding: 2rem 2rem 0 2rem;
     margin-left: 22.138rem;
     overflow-x: hidden;
