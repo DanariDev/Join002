@@ -57,7 +57,7 @@
 
 ## legal Notice:
 
-- Developer Akademie entfernen
+-✅ Developer Akademie entfernen
 
 
 ## Board:
@@ -67,7 +67,7 @@
 
 ## Contacts:
 
-- nach dem öffnen und schließen eines Contactes werden die menu reiter nicht korrekt zurückgesetzt
+-✅ nach dem öffnen und schließen eines Contactes werden die menu reiter nicht korrekt zurückgesetzt
 
 
 
