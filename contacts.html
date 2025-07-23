@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="css/contacts.css">
     <link rel="stylesheet" href="css/responsive/contacts-responsive.css">
     <link rel="stylesheet" href="css/responsive/query-overlay-responsive.css">
-    <script src="./js/loadSidbarTopbar.js"></script>
+    <script type="module" src="./js/help/main.js"></script>
 </head>
 
 
@@ -172,9 +172,15 @@
     <span>Contact successfully saved!</span>
   </div>
 
-    <script type="module" src="./js/contacts.js"></script>
-    <script src="./js/contacts-html-template.js"></script>
-    <script src="./js/contacts-error.js"></script>
+    <!-- Firebase Grundfunktionen -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+<script type="module" src="./js/contacts/main.js"></script>
+
+
+
+
 
 </body>
 
