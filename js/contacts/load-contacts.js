@@ -17,11 +17,17 @@ function renderContacts(contacts) {
   contacts.forEach(contact => wrapper.append(createContactHTML(contact)));
 }
 
+import { getInitials, getRandomColor } from './contact-style.js';
+
 function createContactHTML(contact) {
   const div = document.createElement('div');
   div.className = 'list-contact-wrapper';
+
+  const initials = getInitials(contact.name);
+  const color = getRandomColor(contact.name);
+
   div.innerHTML = `
-    <div class="initial-icon">${getInitials(contact.name)}</div>
+    <div class="initial-icon" style="background-color: ${color};">${initials}</div>
     <div class="list-contact-information">
       <span class="list-name">${contact.name}</span>
       <span class="list-email">${contact.email}</span>
@@ -29,10 +35,5 @@ function createContactHTML(contact) {
   return div;
 }
 
-function getInitials(name) {
-  return name
-    .split(' ')
-    .map(w => w[0]?.toUpperCase())
-    .join('')
-    .slice(0, 2);
-}
+
+
