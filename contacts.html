@@ -158,8 +158,31 @@
 
 
         <div id="lightbox-overlay" class="d-none">
-            <div id="lightbox" onclick="event.stopPropagation()"></div>
-        </div>
+            <div id="lightbox">
+              <!-- Lightbox-Content -->
+              <div class="lightbox-left">
+                <img src="assets/img/join-logo.png" class="join-logo-left">
+                <h2 class="edit-contact-h2">Edit contact</h2>
+                <span>Better with a team</span>
+              </div>
+              <div class="lightbox-right">
+                <div class="edit-initial-circle" id="edit-initial-circle">DK</div>
+
+                <div class="editing-lighbox">
+                  <input id="edit-name" type="text" placeholder="Name">
+                  <input id="edit-email" type="email" placeholder="E-Mail">
+                  <input id="edit-phone" type="tel" placeholder="Telefonnummer">
+                  <div class="btns-lighbox">
+                    <button id="deleteBtn">Delete</button>
+                    <button id="saveBtn">Save <img src="assets/img/check.png"></button>
+                  </div>
+                </div>
+              </div>
+              <button class="close-button">&times;</button>
+            </div>
+            
+          
+        </div>  
     </main>
 
     <div id="query-window" class="overlay-body d-none">
