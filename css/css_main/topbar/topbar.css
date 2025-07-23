@@ -59,7 +59,7 @@
 }
 
 .menu {
-  display: flex;
+  display: none;
   position: fixed;
   right: 0;
   flex-direction: column;

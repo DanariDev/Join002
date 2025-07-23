@@ -1,5 +1,6 @@
-import { initContactsList } from './load-contacts.js';
+import { initContactsList } from "./load-contacts.js";
 
-window.addEventListener('DOMContentLoaded', () => {
-  initContactsList();
+window.addEventListener("DOMContentLoaded", async () => {
+  await initContactsList(); 
+  await import("./contacts-live-update.js"); 
 });
