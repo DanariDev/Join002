@@ -1,3 +1,9 @@
+/**
+ * This function ensures that the top bar menu can be opened and closed. 
+ * In addition, the values are reset when you press the logout button
+ * 
+ * @returns - If userIcon, menu or logoutBtn does not exist, the function will be stopped here
+ */
 export function setupTopbarMenu() {
   const userIcon = document.querySelector('.topbar-user');
   const menu = document.getElementById('menuID');
