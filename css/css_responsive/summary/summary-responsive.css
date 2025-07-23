@@ -60,6 +60,7 @@
 
 /* Für mittlere Bildschirme */
 @media (max-width: 1100px) {
+
   h2,
   h1 {
     font-size: 47px;
@@ -92,6 +93,7 @@
     0% {
       opacity: 1;
     }
+
     100% {
       opacity: 0;
       display: none;
