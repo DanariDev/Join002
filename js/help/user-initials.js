@@ -3,7 +3,10 @@ import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/f
 import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 /**
- * 
+ * This function checks whether and what value the user has, or if it is a guest login. 
+ * If the user check is successful, the function test1 will be executed. 
+ * If the guest check is successful, the function test2 will be executed. 
+ * If neither check is successful, the process will be aborted.
  */
 export function showUserInitials() {
   onAuthStateChanged(auth, (user) => {
@@ -16,9 +19,11 @@ export function showUserInitials() {
 }
 
 /**
+ * This function retrieves the user's name using the user ID (uid) and passes it to the handleInitialDisplay function. 
+ * If the user ID has no value, the function will be aborted.
  * 
- * @param {*} uid 
- * @returns 
+ * @param {string} uid -This string contains the value of the user ID.
+ * @returns -If no value is present, the process will be aborted here.
  */
 async function loadUserInitials(uid) {
   const userRef = ref(db, `users/${uid}`);
@@ -30,8 +35,9 @@ async function loadUserInitials(uid) {
 }
 
 /**
+ * This function passes the name to the getInitials function. Then, the adjusted value is passed to the insertInitials function.
  * 
- * @param {*} name 
+ * @param {string} name -This string has the name of the user
  */
 function handleInitialDisplay(name) {
   const initials = getInitials(name);
@@ -39,10 +45,10 @@ function handleInitialDisplay(name) {
 }
 
 /**
+ * This function create the initials based on the name
  * 
- * 
- * @param {*} name 
- * @returns 
+ * @param {string} name - Name of the user
+ * @returns - gives the initials of the name back
  */
 function getInitials(name) {
   return name
@@ -53,8 +59,9 @@ function getInitials(name) {
 }
 
 /**
+ * This function assigns the initial value to the topbar menu icon
  * 
- * @param {*} initials 
+ * @param {string} initials -This variable has the value for the initial
  */
 function insertInitials(initials) {
   const el = document.querySelector('.topbar-user');
