@@ -2,6 +2,9 @@ import { auth, db } from '../firebase/firebase-init.js';
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+/**
+ * 
+ */
 export function showUserInitials() {
   onAuthStateChanged(auth, (user) => {
     if (!user) return;
@@ -12,6 +15,11 @@ export function showUserInitials() {
   });
 }
 
+/**
+ * 
+ * @param {*} uid 
+ * @returns 
+ */
 async function loadUserInitials(uid) {
   const userRef = ref(db, `users/${uid}`);
   const snapshot = await get(userRef);
@@ -21,11 +29,21 @@ async function loadUserInitials(uid) {
   handleInitialDisplay(name);
 }
 
+/**
+ * 
+ * @param {*} name 
+ */
 function handleInitialDisplay(name) {
   const initials = getInitials(name);
   insertInitials(initials || '?');
 }
 
+/**
+ * This function create the initials based on the name
+ * 
+ * @param {string} name - Name of the user
+ * @returns - gives the initials of the name back
+ */
 function getInitials(name) {
   return name
     .split(' ')
@@ -34,6 +52,10 @@ function getInitials(name) {
     .slice(0, 2);
 }
 
+/**
+ * 
+ * @param {*} initials 
+ */
 function insertInitials(initials) {
   const el = document.querySelector('.topbar-user');
   if (el) el.textContent = initials;
