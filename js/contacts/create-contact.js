@@ -1,0 +1,97 @@
+import { db } from "../firebase/firebase-init.js";
+import { ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { setupContactClickEvents } from "./open-contact.js";
+
+export function initAddContactOverlay() {
+  const btn = document.getElementById("add-contact-btn-big");
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    document.getElementById("add-contact-overlay")?.classList.remove("d-none");
+  });
+}
+
+window.closeAddContactOverlay = function () {
+  document.getElementById("add-contact-overlay")?.classList.add("d-none");
+};
+
+
+function openAddContactOverlay() {
+  const overlay = document.getElementById("add-contact-overlay");
+  if (!overlay) {
+    console.error("Overlay not found");
+    return;
+  }
+  overlay.classList.remove("d-none");
+}
+
+function renderCreateForm() {
+  const name = document.getElementById("edit-name");
+  const email = document.getElementById("edit-email");
+  const phone = document.getElementById("edit-phone");
+  const saveBtn = document.getElementById("saveBtn");
+
+  if (name) name.value = "";
+  if (email) email.value = "";
+  if (phone) phone.value = "";
+  if (saveBtn) {
+    saveBtn.innerHTML = 'Create contact <img src="assets/img/check.png">';
+    saveBtn.onclick = createContact;
+  }
+}
+
+async function createContact() {
+  const name = document.getElementById("edit-name")?.value;
+  const email = document.getElementById("edit-email")?.value;
+  const phone = document.getElementById("edit-phone")?.value;
+
+  if (!name || !email || !phone) {
+    showErrorMessage("Bitte alle Felder ausfüllen!");
+    return;
+  }
+
+  try {
+    const newRef = push(ref(db, "contacts"));
+    await newRef.set({ name, email, phone });
+    closeAddContactOverlay();
+    showSuccessMessage("Kontakt erstellt!");
+    setupContactClickEvents();
+  } catch (err) {
+    console.error("Fehler beim Erstellen:", err);
+    showErrorMessage("Fehler beim Erstellen des Kontakts!");
+  }
+}
+
+function closeAddContactOverlay() {
+  const overlay = document.getElementById("add-contact-overlay");
+  if (overlay) {
+    overlay.classList.add("d-none");
+  }
+}
+
+function showSuccessMessage(message) {
+  const box = document.getElementById("confirmation-window");
+  const span = box?.querySelector("span");
+  if (!box || !span) return;
+  span.textContent = message;
+  box.classList.remove("d-none", "error");
+  box.style.display = "block";
+  setTimeout(() => {
+    box.style.display = "none";
+    box.classList.add("d-none");
+  }, 2000);
+}
+
+function showErrorMessage(message) {
+  const box = document.getElementById("confirmation-window");
+  const span = box?.querySelector("span");
+  if (!box || !span) return;
+  span.textContent = message;
+  box.classList.remove("d-none");
+  box.classList.add("error");
+  box.style.display = "block";
+  setTimeout(() => {
+    box.style.display = "none";
+    box.classList.add("d-none");
+    box.classList.remove("error");
+  }, 2000);
+}

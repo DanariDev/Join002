@@ -19,7 +19,7 @@
   <link rel="stylesheet" href="/css/css_main/contacts/global.css" type="text/css">
   <link rel="stylesheet" href="/css/contacts.css" type="text/css">
   <link rel="stylesheet" href="/css/query-overlay.css" type="text/css">
-    <script type="module" src="./js/help/main.js"></script>
+    
 </head>
 
 
@@ -108,7 +108,30 @@
 
             <div id="contacts-list-wrapper"></div>
         </div>
-
+        <!-- Add Contact Overlay -->
+<div id="add-contact-overlay" class="overlay d-none">
+    <div class="overlay-bg" onclick="closeAddContactOverlay()"></div>
+    <div class="overlay-box">
+      <div class="overlay-left">
+        <img src="./assets/img/join-logo.png" class="join-logo-left">
+        <h2 class="edit-contact-h2">Add contact</h2>
+        <span>Tasks are better with a team!</span>
+      </div>
+      <div class="overlay-right">
+        <img onclick="closeAddContactOverlay()" class="close-overlay-btn" src="./assets/img/close.png" alt="close">
+        <form id="create-contact-form">
+          <input id="new-name" type="text" placeholder="Name" required>
+          <input id="new-email" type="email" placeholder="Email" required>
+          <input id="new-phone" type="tel" placeholder="Phone" required>
+          <div class="button-row">
+            <button type="button" onclick="closeAddContactOverlay()">Cancel</button>
+            <button id="create-contact-btn" type="submit">Create contact</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
         <div id="right-section" class="d-none">
 
             <div class="contact-details-haeder">
@@ -198,11 +221,16 @@
     <div id="confirmation-window" class="confirmation-window d-none">
         <span>Contact successfully saved!</span>
     </div>
+<!-- Add Contact Overlay -->
+<div id="add-contact-btn-big" class="add-contact">Add new Contact</div>
 
+
+  
     <!-- Firebase Grundfunktionen -->
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
+    <script type="module" src="./js/help/main.js"></script>
     <script type="module" src="./js/contacts/main.js"></script>
 
 

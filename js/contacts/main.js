@@ -1,8 +1,11 @@
 import { initContactsList } from "./load-contacts.js";
+import { setupContactClickEvents } from "./open-contact.js";
+import { initAddContactOverlay } from "./create-contact.js";
 
-
-
+// Hauptinitialisierung
 window.addEventListener("DOMContentLoaded", async () => {
-  await import("./contacts-live-update.js"); // Nur noch live laden!
+  await initContactsList();               // Kontakte aus DB laden
+  setupContactClickEvents();             // Klicks für Anzeige & Bearbeiten
+  initAddContactOverlay();               // "Neuer Kontakt"-Overlay aktivieren
+  await import("./contacts-live-update.js"); // Live-Änderungen
 });
-
