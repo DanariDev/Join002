@@ -1,6 +1,7 @@
 import { getContactById } from './load-contacts.js';
 import { db } from '../firebase/firebase-init.js';
 import { ref, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getInitials, getRandomColor } from "./contact-style.js";
 
 
 export function setupContactClickEvents() {
@@ -25,6 +26,12 @@ async function openContactDetails(id) {
 }
 
 function fillContactDetails(contact, card) {
+  const initials = getInitials(contact.name);
+  const color = getRandomColor(contact.name);
+
+  const icon = document.getElementById('current-icon');
+  icon.textContent = initials;
+  icon.style.backgroundColor = color;
   document.getElementById('current-icon').textContent = getInitials(contact.name);
   document.getElementById('current-name').textContent = contact.name;
   document.getElementById('current-mail').textContent = contact.email;
@@ -32,6 +39,7 @@ function fillContactDetails(contact, card) {
   document.getElementById('current-phone').textContent = contact.phone;
   document.getElementById('current-phone').href = `tel:${contact.phone}`;
 }
+
 
 function showContactCard() {
   const rightSection = document.getElementById('right-section');
@@ -94,7 +102,3 @@ function showSuccessMessage() {
   setTimeout(() => confirmation.style.display = 'none', 2000);
 }
 
-function getInitials(name) {
-  const parts = name.split(' ');
-  return parts.length === 1 ? parts[0][0] : parts[0][0] + parts[1][0];
-}
