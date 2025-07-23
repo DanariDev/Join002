@@ -3,12 +3,17 @@ import {
   ref,
   get,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { setupContactClickEvents } from "./open-contact.js";
+import { getInitials, getRandomColor } from "./contact-style.js";
 
 export function initContactsList() {
   const contactsRef = ref(db, "contacts");
   get(contactsRef).then((snapshot) => {
     if (!snapshot.exists()) return;
-    const contacts = Object.values(snapshot.val());
+    const contacts = Object.entries(snapshot.val()).map(([id, data]) => ({
+      id,
+      ...data,
+    }));
     renderContacts(contacts);
   });
 }
@@ -18,9 +23,9 @@ function renderContacts(contacts) {
   if (!wrapper) return;
   wrapper.innerHTML = "";
   contacts.forEach((contact) => wrapper.append(createContactHTML(contact)));
-}
 
-import { getInitials, getRandomColor } from "./contact-style.js";
+  setupContactClickEvents(); // Events aktivieren
+}
 
 function createContactHTML(contact) {
   const div = document.createElement("div");
@@ -40,4 +45,26 @@ function createContactHTML(contact) {
   div.classList.add("contact-entry");
 
   return div;
+}
+export { createContactHTML };
+export function updateContactHTML(contact) {
+  const element = document.getElementById(`contact-${contact.id}`);
+  if (!element) return;
+
+  const initials = getInitials(contact.name);
+  const color = getRandomColor(contact.name);
+
+  element.innerHTML = `
+    <div class="initial-icon" style="background-color: ${color};">${initials}</div>
+    <div class="list-contact-information">
+      <span class="list-name">${contact.name}</span>
+      <span class="list-email">${contact.email}</span>
+    </div>`;
+}
+
+export async function getContactById(id) {
+  const contactRef = ref(db, `contacts/${id}`);
+  const snapshot = await get(contactRef);
+  if (!snapshot.exists()) return null;
+  return { id, ...snapshot.val() };
 }

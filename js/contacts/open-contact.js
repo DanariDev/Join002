@@ -1,5 +1,7 @@
 import { getContactById } from './load-contacts.js';
-import { db, ref, update } from '../firebase/firebase-init.js';
+import { db } from '../firebase/firebase-init.js';
+import { ref, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
 
 export function setupContactClickEvents() {
   document.querySelectorAll('.contact-entry').forEach(el => {
