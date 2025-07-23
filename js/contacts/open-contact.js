@@ -1,20 +1,34 @@
 import { getContactById } from "./load-contacts.js";
 import { openEditContactLightbox } from "./edit-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
+import { db } from "../firebase/firebase-init.js";
+import {
+  ref,
+  remove,
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 export function setupContactClickEvents() {
   document.querySelectorAll(".contact-entry").forEach((el) => {
-    el.addEventListener("click", () => openContactDetails(el.dataset.contactId));
+    el.addEventListener("click", () =>
+      openContactDetails(el.dataset.contactId)
+    );
   });
   document.getElementById("current-edit")?.addEventListener("click", () => {
     openEditContactLightbox(
       document.getElementById("showed-current-contact").dataset.contactId
     );
   });
-  document.getElementById("current-edit-responsive")?.addEventListener("click", () => {
-    openEditContactLightbox(
-      document.getElementById("showed-current-contact").dataset.contactId
-    );
+  document
+    .getElementById("current-edit-responsive")
+    ?.addEventListener("click", () => {
+      openEditContactLightbox(
+        document.getElementById("showed-current-contact").dataset.contactId
+      );
+    });
+  document.getElementById("current-delete")?.addEventListener("click", () => {
+    const id = document.getElementById("showed-current-contact")?.dataset
+      .contactId;
+    if (id) deleteContact(id); // Funktion kommt gleich
   });
 }
 
@@ -53,4 +67,34 @@ function showContactCard() {
     contactCard.classList.remove("d-none");
     contactCard.classList.add("show");
   }
+}
+async function deleteContact(id) {
+  try {
+    await remove(ref(db, `contacts/${id}`));
+    closeEditLightbox(); // optional – falls Lightbox noch offen ist
+    hideContactCard(); // entfernt die rechte Detailansicht
+    showSuccessMessage("Contact deleted!");
+  } catch (error) {
+    console.error("Error deleting contact:", error);
+    showErrorMessage("Error deleting contact!");
+  }
+}
+function showSuccessMessage(message) {
+  const window = document.getElementById("confirmation-window");
+  if (!window) return;
+  window.querySelector("span").textContent = message;
+  window.classList.remove("d-none");
+  setTimeout(() => window.classList.add("d-none"), 2000);
+}
+
+function showErrorMessage(message) {
+  const window = document.getElementById("confirmation-window");
+  if (!window) return;
+  window.querySelector("span").textContent = message;
+  window.classList.remove("d-none");
+  window.classList.add("error");
+  setTimeout(() => {
+    window.classList.add("d-none");
+    window.classList.remove("error");
+  }, 2000);
 }
