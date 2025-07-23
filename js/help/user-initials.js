@@ -39,10 +39,10 @@ function handleInitialDisplay(name) {
 }
 
 /**
- * This function create the initials based on the name
  * 
- * @param {string} name - Name of the user
- * @returns - gives the initials of the name back
+ * 
+ * @param {*} name 
+ * @returns 
  */
 function getInitials(name) {
   return name
