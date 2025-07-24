@@ -6,6 +6,7 @@ import {
   ref,
   remove,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { closeAllContactOverlays } from "./contacts-utils.js";
 
 export function setupContactClickEvents() {
   document.querySelectorAll(".contact-entry").forEach((el) => {
@@ -33,6 +34,7 @@ export function setupContactClickEvents() {
 }
 
 async function openContactDetails(id) {
+  closeAllContactOverlays();
   const contact = await getContactById(id);
   if (!contact) return;
   const card = document.getElementById("showed-current-contact");
@@ -66,6 +68,11 @@ function showContactCard() {
     rightSection.classList.remove("d-none");
     contactCard.classList.remove("d-none");
     contactCard.classList.add("show");
+    // Reinswipen animieren:
+    // Erst vorhandene Animation zurücksetzen (damit auch beim Wechsel der Effekt kommt)
+    rightSection.classList.remove("slide-in");
+    void rightSection.offsetWidth; // Trick zum Zurücksetzen der Animation
+    rightSection.classList.add("slide-in");
   }
 }
 async function deleteContact(id) {

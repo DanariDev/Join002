@@ -5,6 +5,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setupContactClickEvents } from "./open-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
+import { renderSortedContacts } from "./contacts-list-utils.js";
 
 export function initContactsList() {
   const contactsRef = ref(db, "contacts");
@@ -20,12 +21,9 @@ export function initContactsList() {
 
 function renderContacts(contacts) {
   const wrapper = document.querySelector("#contacts-list-wrapper");
-  if (!wrapper) return;
-  wrapper.innerHTML = "";
-  contacts.forEach((contact) => wrapper.append(createContactHTML(contact)));
-
-  setupContactClickEvents(); // Events aktivieren
+  renderSortedContacts(contacts, wrapper, createContactHTML, setupContactClickEvents);
 }
+
 
 function createContactHTML(contact) {
   const div = document.createElement("div");

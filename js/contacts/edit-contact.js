@@ -7,6 +7,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
 
+
 export async function openEditContactLightbox(id) {
   const contact = await getContactById(id);
   if (!contact) return;

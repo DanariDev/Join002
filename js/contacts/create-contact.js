@@ -1,11 +1,13 @@
 import { db } from "../firebase/firebase-init.js";
-import { ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setupContactClickEvents } from "./open-contact.js";
+import { closeAllContactOverlays } from "./contacts-utils.js";
 
 export function initAddContactOverlay() {
   const btn = document.getElementById("add-contact-btn-big");
   if (!btn) return;
   btn.addEventListener("click", () => {
+    closeAllContactOverlays();
     document.getElementById("add-contact-overlay")?.classList.remove("d-none");
   });
 }
@@ -40,9 +42,9 @@ function renderCreateForm() {
 }
 
 async function createContact() {
-  const name = document.getElementById("edit-name")?.value;
-  const email = document.getElementById("edit-email")?.value;
-  const phone = document.getElementById("edit-phone")?.value;
+  const name = document.getElementById("new-name")?.value;
+  const email = document.getElementById("new-email")?.value;
+  const phone = document.getElementById("new-phone")?.value;
 
   if (!name || !email || !phone) {
     showErrorMessage("Bitte alle Felder ausfüllen!");
@@ -50,8 +52,9 @@ async function createContact() {
   }
 
   try {
-    const newRef = push(ref(db, "contacts"));
-    await newRef.set({ name, email, phone });
+    const contactsRef = ref(db, "contacts");
+    const newRef = push(contactsRef); 
+    await set(newRef, { name, email, phone }); 
     closeAddContactOverlay();
     showSuccessMessage("Kontakt erstellt!");
     setupContactClickEvents();
@@ -60,6 +63,8 @@ async function createContact() {
     showErrorMessage("Fehler beim Erstellen des Kontakts!");
   }
 }
+
+
 
 function closeAddContactOverlay() {
   const overlay = document.getElementById("add-contact-overlay");
@@ -95,3 +100,8 @@ function showErrorMessage(message) {
     box.classList.remove("error");
   }, 2000);
 }
+
+document.getElementById("create-contact-form").addEventListener("submit", function(event) {
+  event.preventDefault();    
+  createContact();           
+});
