@@ -1,5 +1,3 @@
-
-
 /* Sidebar */
 .add-task-link {
   background-color: var(--clr-900);
@@ -317,6 +315,17 @@ li {
   height: 40px;
 }
 
+#contacts-dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: white;
+  border: 1px solid var(--clr-300);
+  border-radius: 0 0 10px 10px;
+}
+
 .contacts-dropdown-inner {
   display: flex;
   align-items: center;
@@ -327,26 +336,47 @@ li {
 }
 
 .contacts-dropdown-list {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
+  display: flex;
   max-height: 150px;
-  background-color: white;
-  border: 1px solid var(--clr-300);
-  border-top: none;
+  flex-direction: column;
   overflow-y: auto;
-  z-index: 1000;
+  gap: 10px;
+}
+
+.contacts-dropdown-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+  font-size: 16px;
+  padding: 4px;
+}
+
+.contacts-dropdown-item:hover {
+  background-color: var(--clr-700);
+  border-radius: 15px;
+  color: white;
+}
+
+.contact-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border: 2px solid white;
+  border-radius: 100%;
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  cursor: pointer;
+}
+
+.contacts-dropdown-item input {
+  width: auto;
 }
 
 .contacts-dropdown-list.show {
   display: block;
-}
-
-.contacts-dropdown-list div {
-  padding: 8px;
-  cursor: pointer;
 }
 
 option {

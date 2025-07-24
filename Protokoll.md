@@ -20,8 +20,10 @@ Edit fenster war ansonsten nicht zentriert, da User Agent nur display: block hin
 
 
 - Creat Contact stylen und hübsch machen, dass ich weiter an den funktionen der buttons und os arbeiten kann bitte.😊
-❌ Hier hab ich das gröbste schonmal angepasst zum weiterarbeiten, den rest mach ich morgen vormittags.
+✅ Wurde an Figma angepasst
 
 - AddTask Contacts: Drop down funktioniert muss nur gestylt werden, dann sieht man das drop down.
+✅ Ich habe das Design angepasst, fehlen nur noch die abschließenden funktionen, wenn kontakte ausgewählt werden.
 
-- edit- contacte werden syncronisiert in contacts, liste wird auch alphabetisch geordnet beim lsöchen udn erstellen eines contacts. Was war der dritte Fehler nochmal?
+- edit 
+- contacte werden syncronisiert in contacts, liste wird auch alphabetisch geordnet beim lsöchen udn erstellen eines contacts. Was war der dritte Fehler nochmal?
