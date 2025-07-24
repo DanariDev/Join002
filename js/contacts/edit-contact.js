@@ -6,6 +6,7 @@ import {
   remove,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
+import { checkInput } from "../multiple-application/error-message.js"
 
 
 export async function openEditContactLightbox(id) {
@@ -37,6 +38,13 @@ function fillEditLightbox(contact) {
 function showEditLightbox() {
   const overlay = document.getElementById("lightbox-overlay");
   const lightbox = document.getElementById("lightbox");
+  
+  Array.from(document.getElementsByTagName('input')).forEach(e => e.classList.remove("input-error"));
+  document.querySelectorAll(".error-message").forEach(d =>{
+    d.textContent = "";
+    d.style.display = "none"
+  });
+
   if (overlay && lightbox) {
     overlay.classList.remove("d-none");
     overlay.classList.add("d-flex");
@@ -57,10 +65,9 @@ function setupLightboxButtons(id) {
 
 async function saveContactChanges(id) {
   const fields = getEditFields();
-  if (!fields.name || !fields.email || !fields.phone) {
-    showErrorMessage("Bitte alle Felder ausfüllen!");
-    return;
-  }
+  let hasError = checkInput("edit-name", "edit-email", "edit-phone", null, null);
+  if (hasError) return;
+
   try {
     await update(ref(db, `contacts/${id}`), fields);
     closeEditLightbox();
