@@ -1,4 +1,4 @@
-@import url("global.css");
+/* @import url("global.css"); */
 
 body {
   max-width: 1400px;
@@ -175,21 +175,21 @@ body {
 }
 
 .email-input {
-  background-image: url("../assets/img/mail.svg");
+  background-image: url("../../../assets/img/mail.svg");
   background-repeat: no-repeat;
   background-position: right 24px center;
   border: 1px solid var(--clr-300);
 }
 
 .password-input {
-  background-image: url("../assets/img/lock.png");
+  background-image: url("../../../assets/img/lock.png");
   background-repeat: no-repeat;
   background-position: right 24px center;
   border: 1px solid var(--clr-300);
 }
 
 .name-input {
-  background-image: url("../assets/img/person.png");
+  background-image: url("../../../assets/img/person.png");
   background-repeat: no-repeat;
   background-position: right 24px center;
   border: 1px solid var(--clr-300);
@@ -301,7 +301,7 @@ footer a:hover {
   cursor: pointer;
   width: 23px;
   height: 23px;
-  background-image: url(../assets/img/hiden-password.png);
+  background-image: url("../../../assets/img/hiden-password.png");
   background-repeat: no-repeat;
 }
 
