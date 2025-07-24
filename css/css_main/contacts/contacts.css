@@ -267,7 +267,7 @@
   z-index: 900;
 }
 
-.overlay-box {
+.overlay-bg {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -277,7 +277,18 @@
   top: 0;
   left: 0;
   background-color: #0000004d;
+  z-index: 800;
+}
+
+.overlay-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: max-content;
+  width: 80%;
+  max-width: 1444px;
   z-index: 900;
+  position: relative;
 }
 
 #lightbox {
@@ -302,6 +313,7 @@
   color: var(--clr-200);
   border-radius: 20px 0 0 20px;
   min-height: 400px;
+  z-index: 900;
 }
 
 #create-contact-form {
@@ -363,6 +375,7 @@ h2 {
   background-color: var(--clr-200);
   border-radius: 0 20px 20px 0;
   min-height: 400px;
+  z-index: 900;
 }
 
 .edit-initial-circle {
@@ -409,6 +422,7 @@ h2 {
   padding: 2rem;
 }
 
+.overlay input,
 #lightbox input {
   height: 50px;
   min-width: 300px;
@@ -422,14 +436,17 @@ input {
   border: 1px solid var(--clr-300);
 }
 
+#new-name,
 #edit-name {
   background: url("/assets/img/person.png") no-repeat right 24px center;
 }
 
+#new-email,
 #edit-email {
   background: url("/assets/img/mail.svg") no-repeat right 24px center;
 }
 
+#new-phone,
 #edit-phone {
   background: url("/assets/img/phone.png") no-repeat right 24px center;
 }
@@ -439,6 +456,8 @@ input {
   gap: 24px;
 }
 
+
+#create-contact-btn,
 #create-btn,
 #saveBtn,
 #cancel-btn,
@@ -458,13 +477,12 @@ input {
 .close-overlay-btn {
   position: absolute;
   border: 0;
-  background-color: red;
-  right: 32px;
-  top: 32px;
+  right: 16px;
+  top: 16px;
   cursor: pointer;
   border-radius: 100%;
-  width: 56px;
-  height: 56px;
+  width: 25px;
+  height: 25px;
   padding: 1rem;
 }
 
@@ -512,7 +530,12 @@ input {
   background-color: #ccc;
 }
 
-#create-btn:hover,
+.button-row {
+  display: flex;
+  gap: 32px;
+}
+
+#create-contact-btn:hover,
 #saveBtn:hover {
   background-color: var(--clr-500);
   border: 1px solid var(--clr-500);
@@ -555,7 +578,7 @@ input {
   background-color: transparent;
   right: 32px;
   top: 32px;
-  font-size: 16px;
+  font-size: 36px;
   cursor: pointer;
   border-radius: 100%;
   width: 23px;

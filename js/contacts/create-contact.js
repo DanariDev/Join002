@@ -16,6 +16,10 @@ window.closeAddContactOverlay = function () {
   document.getElementById("add-contact-overlay")?.classList.add("d-none");
 };
 
+document.querySelector(".overlay-box").addEventListener("click", (event) => {
+  event.stopPropagation(); // Verhindert, dass das Event an übergeordnete Elemente weitergegeben wird
+});
+
 
 function openAddContactOverlay() {
   const overlay = document.getElementById("add-contact-overlay");
@@ -53,8 +57,8 @@ async function createContact() {
 
   try {
     const contactsRef = ref(db, "contacts");
-    const newRef = push(contactsRef); 
-    await set(newRef, { name, email, phone }); 
+    const newRef = push(contactsRef);
+    await set(newRef, { name, email, phone });
     closeAddContactOverlay();
     showSuccessMessage("Kontakt erstellt!");
     setupContactClickEvents();
@@ -101,7 +105,7 @@ function showErrorMessage(message) {
   }, 2000);
 }
 
-document.getElementById("create-contact-form").addEventListener("submit", function(event) {
-  event.preventDefault();    
-  createContact();           
+document.getElementById("create-contact-form").addEventListener("submit", function (event) {
+  event.preventDefault();
+  createContact();
 });

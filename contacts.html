@@ -110,27 +110,29 @@
         </div>
         <!-- Add Contact Overlay -->
         <div id="add-contact-overlay" class="overlay d-none">
-            <div class="overlay-bg" onclick="closeAddContactOverlay()"></div>
-            <div class="overlay-box">
-                <div class="overlay-left">
-                    <img src="assets/img/logo_dark.png" class="join-logo-left">
-                    <h2 class="edit-contact-h2">Add contact</h2>
-                    <span>Tasks are better with a team!</span>
-                </div>
-                <div class="overlay-right">
-                    <img onclick="closeAddContactOverlay()" class="close-overlay-btn" src="assets/img/X.png"
-                        alt="close">
-                    <div class="add-initial-circle" id="add-initial-circle"><img src="assets/img/person_add.png" alt="">
+            <div class="overlay-bg" onclick="closeAddContactOverlay()">
+                <div class="overlay-box">
+                    <div class="overlay-left">
+                        <img src="assets/img/logo_dark.png" class="join-logo-left">
+                        <h2 class="edit-contact-h2">Add contact</h2>
+                        <span>Tasks are better with a team!</span>
                     </div>
-                    <form id="create-contact-form">
-                        <input id="new-name" type="text" placeholder="Name" required>
-                        <input id="new-email" type="email" placeholder="Email" required>
-                        <input id="new-phone" type="tel" placeholder="Phone" required>
-                        <div class="button-row">
-                            <button type="button" onclick="closeAddContactOverlay()">Cancel</button>
-                            <button id="create-contact-btn" type="submit">Create contact</button>
+                    <div class="overlay-right">
+                        <img onclick="closeAddContactOverlay()" class="close-overlay-btn" src="assets/img/X.png"
+                            alt="close">
+                        <div class="add-initial-circle" id="add-initial-circle"><img src="assets/img/person_add.png"
+                                alt="">
                         </div>
-                    </form>
+                        <form id="create-contact-form">
+                            <input id="new-name" type="text" placeholder="Name" required>
+                            <input id="new-email" type="email" placeholder="Email" required>
+                            <input id="new-phone" type="tel" placeholder="Phone" required>
+                            <div class="button-row">
+                                <button type="button" id="cancel-btn" onclick="closeAddContactOverlay()">Cancel</button>
+                                <button id="create-contact-btn" type="submit">Create contact</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -224,12 +226,12 @@
     <div id="confirmation-window" class="confirmation-window d-none">
         <span>Contact successfully saved!</span>
     </div>
-   
+
 
 
 
     <!-- Firebase Grundfunktionen -->
-    
+
     <script type="module" src="./js/help/main.js"></script>
     <script type="module" src="./js/contacts/main.js"></script>
 
