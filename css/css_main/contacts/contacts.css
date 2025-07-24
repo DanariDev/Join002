@@ -484,6 +484,9 @@ input {
   width: 25px;
   height: 25px;
   padding: 1rem;
+  font-size: 16px;
+  text-align: center;
+  font-weight: 700;
 }
 
 #confirm-overlay {
