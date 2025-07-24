@@ -1,0 +1,109 @@
+/**
+ * This function resets the error message
+ * 
+ * @param {object} inputs -delivers the input-Dom value
+ * @param {object} errors -delivers the error-div-Dom value
+ */
+function resetErrors(inputs, errors) {
+  inputs.classList.remove("input-error");
+  errors.forEach(e => {
+    e.textContent = "";
+    e.style.display = "none";
+  });
+}
+
+/**
+ * This function sets the error message
+ * 
+ * @param {object} input -delivers the input-Dom value
+ * @param {object} errorElem -delivers the error-div-Dom value
+ * @param {string} message -delivers the message value
+ */
+function showError(input, errorElem, message) {
+  input.classList.add("input-error");
+  errorElem.forEach(e => {
+    e.textContent = message; 
+    e.style.display = "block";
+  });
+}
+
+/**
+ * This function checks whether the values ​​fit in the input fields
+ * 
+ * @returns -There becomes the values of "has error", "name", "email", "phone" return
+ */
+export function checkInput(nameCheckValue, emailCheckValue, phoneCheckValue, passwordCheckValue, passwordRepeatCheckValue) {
+    let hasError = false
+
+    if(nameCheckValue != null) hasError = nameCheck(nameCheckValue, hasError);
+    if(emailCheckValue != null) hasError = emailCheck(emailCheckValue, hasError);
+    if(phoneCheckValue != null) hasError = phoneCheck(phoneCheckValue, hasError);
+    if(passwordCheckValue != null) hasError = passwordCheck(passwordCheckValue, hasError);
+    if(passwordRepeatCheckValue != null) hasError = passwordRepeatCheck(passwordRepeatCheckValue, hasError);
+
+  return hasError;
+}
+
+function nameCheck(nameCheckValue, hasError){
+    const nameInput = document.getElementById(nameCheckValue);
+    const nameError = document.querySelectorAll(".name-error");
+
+    resetErrors(nameInput, nameError);
+    const name = nameInput.value.trim();
+    
+    if(!name) { showError(nameInput, nameError, "Bitte Name eingeben."); hasError = true; }  //name
+
+    return hasError;
+}
+
+function emailCheck(emailCheckValue, hasError){
+    const emailInput = document.getElementById(emailCheckValue);
+    const emailError = document.querySelectorAll(".email-error");
+
+    resetErrors(emailInput, emailError);
+    const email = emailInput.value.trim();
+    
+    if(!email) { showError(emailInput, emailError, "Bitte E-Mail eingeben."); hasError = true; } //email
+    else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Ungültige E-Mail-Adresse!"); hasError = true; }
+
+    return hasError;
+}
+
+function phoneCheck (phoneCheckValue, hasError){
+    const phoneInput = document.getElementById(phoneCheckValue);
+    const phoneError = document.querySelectorAll(".phone-error");
+
+    resetErrors(phoneInput, phoneError);
+    const phone = phoneInput.value.trim();
+
+    if(!phone) { showError(phoneInput, phoneError, "Bitte Telefonnummer eingeben."); hasError = true; } //telefon
+    else if (!/^[+]?\d+$/.test(phone)) { showError(phoneInput, phoneError, "Ungültige Telefonnummer!"); hasError = true; }
+
+    return hasError;
+}
+
+function passwordCheck (passwordCheckValue, hasError){
+    const passwordInput = document.getElementById(passwordCheckValue);
+    const passwordError = document.querySelectorAll(".password-error");
+
+    resetErrors(passwordInput, passwordError);
+    const password = passwordInput.value.trim();
+
+    if(!password) { showError(passwordInput, passwordError, "Bitte Password eingeben."); hasError = true; }  //password
+    else if(password.length <6){ showError(passwordInput, passwordError, "Das Passwort muss länger als 5 zeichen sein"); hasError = true; }
+
+    return hasError;
+}
+
+function passwordRepeatCheck (passwordRepeatCheckValue, hasError){
+    const passwordRepeatInput = document.getElementById(passwordRepeatCheckValue);
+    const passwordRepeatError = document.querySelectorAll("passwordRepeat-error");
+
+    resetErrors(passwordRepeatInput, passwordRepeatError)
+    const passwordRepeat = passwordRepeatInput.value.trim();
+
+    if(!passwordRepeat) { showError(passwordRepeatInput, passwordRepeatError, "Bitte das Passwort wiederholt eingeben."); hasError = true; }  //password repeat
+    else if(passwordRepeat != password){ showError(passwordRepeatInput, passwordRepeatError, "Stimmt mit dem Passwort nicht überein"); hasError = true; }
+
+    return hasError;
+}

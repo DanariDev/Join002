@@ -120,9 +120,21 @@
                                 alt="">
                         </div>
                         <form id="create-contact-form">
-                            <input id="new-name" type="text" placeholder="Name" required>
-                            <input id="new-email" type="email" placeholder="Email" required>
-                            <input id="new-phone" type="tel" placeholder="Phone" required>
+                            <div>
+                                <input id="new-name" type="text" placeholder="Name">
+                                <div class="error-message name-error"></div>
+                            </div>
+
+                            <div>
+                                <input id="new-email" type="email" placeholder="Email">
+                                <div class="error-message email-error"></div>
+                            </div>
+
+                            <div>
+                                <input id="new-phone" type="tel" placeholder="Phone">
+                                <div class="error-message phone-error"></div>
+                            </div>
+
                             <div class="button-row">
                                 <button type="button" id="cancel-btn" onclick="closeAddContactOverlay()">Cancel
                                     ✖</button>
@@ -193,9 +205,21 @@
                     <div class="edit-initial-circle" id="edit-initial-circle"></div>
 
                     <div class="editing-lighbox">
-                        <input id="edit-name" type="text" placeholder="Name">
-                        <input id="edit-email" type="email" placeholder="E-Mail">
-                        <input id="edit-phone" type="tel" placeholder="Telefonnummer">
+                        <div>
+                            <input id="edit-name" type="text" placeholder="Name">
+                            <div class="error-message name-error"></div>
+                        </div>
+
+                        <div>
+                            <input id="edit-email" type="email" placeholder="Email">
+                            <div class="error-message email-error"></div>
+                        </div>
+
+                        <div>
+                            <input id="edit-phone" type="tel" placeholder="Phone">
+                            <div class="error-message phone-error"></div>
+                        </div>
+                        
                         <div class="btns-lighbox">
                             <button id="deleteBtn">Delete ✖</button>
                             <button id="saveBtn">Save ✔</button>

@@ -3,13 +3,23 @@ import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/fireb
 import { setupContactClickEvents } from "./open-contact.js";
 import { closeAllContactOverlays } from "./contacts-utils.js";
 import { initContactsList } from "./load-contacts.js";
+import { checkInput } from "../multiple-application/error-message.js"
 
 export function initAddContactOverlay() {
   const btn = document.getElementById("add-contact-btn-big");
   if (!btn) return;
   btn.addEventListener("click", () => {
     closeAllContactOverlays();
+    document.getElementById('new-name').value ="";
+    document.getElementById('new-email').value ="";
+    document.getElementById('new-phone').value ="";
     document.getElementById("add-contact-overlay")?.classList.remove("d-none");
+
+    Array.from(document.getElementsByTagName('input')).forEach(e => e.classList.remove("input-error"));
+    document.querySelectorAll(".error-message").forEach(d =>{
+      d.textContent = "";
+      d.style.display = "none"
+    })
   });
 }
 
@@ -51,10 +61,8 @@ async function createContact() {
   const email = document.getElementById("new-email")?.value;
   const phone = document.getElementById("new-phone")?.value;
 
-  if (!name || !email || !phone) {
-    showErrorMessage("Bitte alle Felder ausfüllen!");
-    return;
-  }
+  let hasError = checkInput("new-name", "new-email", "new-phone", null, null);
+  if (hasError) return;
 
   try {
     const contactsRef = ref(db, "contacts");
