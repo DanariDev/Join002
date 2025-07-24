@@ -1,5 +1,4 @@
-@import url("global.css");
-@import url("add-task.css");
+
 
 .add-task-link {
   background: none;
@@ -38,7 +37,8 @@
   padding: 0px 12px;
   border: 1px solid var(--clr-300);
   border-radius: 10px;
-  background-image: url("../assets/img/search.png");
+  background-image: url("/assets/img/search.png");
+
   background-repeat: no-repeat;
   background-position: right 24px center;
 }
