@@ -26,6 +26,7 @@ export function setupTopbarMenu() {
   document.addEventListener('click', (e) => {
     if (!menu.contains(e.target) && !userIcon.contains(e.target)) {
       menu.classList.add('d-none');
+      menu.classList.remove('d-flex');
     }
   });
 }
