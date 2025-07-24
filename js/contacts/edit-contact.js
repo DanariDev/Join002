@@ -40,10 +40,7 @@ function showEditLightbox() {
   const lightbox = document.getElementById("lightbox");
   
   Array.from(document.getElementsByTagName('input')).forEach(e => e.classList.remove("input-error"));
-  document.querySelectorAll(".error-message").forEach(d =>{
-    d.textContent = "";
-    d.style.display = "none"
-  });
+  document.querySelectorAll(".error-message").forEach(d => d.textContent = "");
 
   if (overlay && lightbox) {
     overlay.classList.remove("d-none");

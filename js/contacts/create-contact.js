@@ -16,10 +16,7 @@ export function initAddContactOverlay() {
     document.getElementById("add-contact-overlay")?.classList.remove("d-none");
 
     Array.from(document.getElementsByTagName('input')).forEach(e => e.classList.remove("input-error"));
-    document.querySelectorAll(".error-message").forEach(d =>{
-      d.textContent = "";
-      d.style.display = "none"
-    })
+    document.querySelectorAll(".error-message").forEach(d => d.textContent = "");
   });
 }
 
@@ -115,7 +112,7 @@ function showErrorMessage(message) {
   }, 2000);
 }
 
-document.getElementById("create-contact-form").addEventListener("submit", function (event) {
+document.getElementById("create-contact-form").addEventListener("click", function (event) {
   event.preventDefault();
   createContact();
 });

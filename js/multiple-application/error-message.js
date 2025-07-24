@@ -6,10 +6,7 @@
  */
 function resetErrors(inputs, errors) {
   inputs.classList.remove("input-error");
-  errors.forEach(e => {
-    e.textContent = "";
-    e.style.display = "none";
-  });
+  errors.forEach(e => e.textContent = "");
 }
 
 /**
@@ -21,10 +18,7 @@ function resetErrors(inputs, errors) {
  */
 function showError(input, errorElem, message) {
   input.classList.add("input-error");
-  errorElem.forEach(e => {
-    e.textContent = message; 
-    e.style.display = "block";
-  });
+  errorElem.forEach(e => e.textContent = message);
 }
 
 /**

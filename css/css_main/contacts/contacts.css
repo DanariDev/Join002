@@ -319,7 +319,7 @@
 #create-contact-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   padding: 2rem;
 }
 
@@ -418,7 +418,7 @@ h2 {
 .editing-lighbox {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 10px;
   padding: 2rem;
 }
 
