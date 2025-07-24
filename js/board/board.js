@@ -1,4 +1,4 @@
-import { db } from './firebase/firebase-init.js';
+import { db } from '../firebase/firebase-init.js';
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const tasksRef = ref(db, 'tasks/');
