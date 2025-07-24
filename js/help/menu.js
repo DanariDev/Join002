@@ -14,6 +14,7 @@ export function setupTopbarMenu() {
   userIcon.addEventListener('click', (e) => {
     e.stopPropagation();
     menu.classList.toggle('d-none');
+    menu.classList.toggle('d-flex');
   });
 
   logoutBtn.addEventListener('click', () => {

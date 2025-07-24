@@ -7,18 +7,9 @@ export function initDueDateInput() {
   const today = getTodayDateString();
   dateInput.value = formatGermanDate(today);
 
-  // Flatpickr aktivieren:
-  flatpickr(dateInput, {
-    dateFormat: "d.m.Y", // TT.MM.JJJJ
-    minDate: "today",
-    allowInput: true,
-    locale: "de",
-    onClose: validateDate // Prüfung direkt nach Auswahl
-  });
-
   // Prüfen auf blur (Feld verlassen) oder Enter
   dateInput.addEventListener('blur', validateDate);
-  dateInput.addEventListener('keydown', function(e) {
+  dateInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
       validateDate();
       e.preventDefault();
