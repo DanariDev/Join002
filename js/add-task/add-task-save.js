@@ -1,5 +1,6 @@
 import { db } from '../firebase/firebase-init.js';
 import { ref, push, set } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { getSelectedPriority } from './add-task-priority.js';
 
 export async function saveTaskToDB(task) {
   try {
