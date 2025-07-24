@@ -65,9 +65,7 @@ async function saveContactChanges(id) {
     await update(ref(db, `contacts/${id}`), fields);
     closeEditLightbox();
     const card = document.getElementById("showed-current-contact");
-    if (card && card.dataset.contactId === id) {
-      openContactDetails(id);
-    }
+    
     showSuccessMessage();
   } catch (error) {
     console.error("Error updating contact:", error);
