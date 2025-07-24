@@ -1,0 +1,143 @@
+import { db } from "../firebase/firebase-init.js";
+import {
+  ref,
+  onValue,
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { getInitials, getRandomColor } from "../contacts/contact-style.js";
+
+let allContacts = [];
+let selectedContacts = new Set();
+
+export function initContactsDropdown() {
+  const dropdownList = document.getElementById("contacts-dropdown-list");
+  if (!dropdownList) return;
+  const contactsRef = ref(db, "contacts");
+  onValue(contactsRef, (snapshot) => {
+    allContacts = [];
+    snapshot.forEach(child => {
+      allContacts.push({ id: child.key, ...child.val() });
+    });
+    renderContactsDropdown();
+  });
+}
+
+
+function setupContactsListener() {
+  const contactsRef = ref(db, "contacts");
+  onValue(contactsRef, (snapshot) => {
+    allContacts = [];
+    snapshot.forEach((child) => {
+      allContacts.push({ id: child.key, ...child.val() });
+    });
+    renderContactsDropdown();
+  });
+}
+function renderContactsDropdown() {
+  const dropdownList = document.getElementById("contacts-dropdown-list");
+  dropdownList.innerHTML = "";
+  allContacts.forEach(contact => {
+    dropdownList.appendChild(createContactRow(contact));
+  });
+}
+
+
+function filterContacts(filter) {
+  if (!filter) return allContacts;
+  return allContacts.filter(
+    (c) =>
+      c.name.toLowerCase().includes(filter.toLowerCase()) ||
+      (c.email && c.email.toLowerCase().includes(filter.toLowerCase()))
+  );
+}
+
+function createContactRow(contact) {
+  const row = document.createElement("div");
+  row.className = "contacts-dropdown-item";
+  row.appendChild(createInitialsCircle(contact));
+  row.appendChild(createContactName(contact));
+  row.appendChild(createCheckbox(contact));
+  return row;
+}
+
+function createInitialsCircle(contact) {
+  const initials = document.createElement("div");
+  initials.className = "contact-initials";
+  initials.textContent = getInitials(contact.name);
+  initials.style.background = getRandomColor(contact.name);
+  return initials;
+}
+
+function createContactName(contact) {
+  const name = document.createElement("span");
+  name.className = "contact-name";
+  name.textContent = contact.name;
+  return name;
+}
+
+function createCheckbox(contact) {
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  checkbox.checked = selectedContacts.has(contact.id);
+  checkbox.addEventListener("change", () => handleContactToggle(contact.id));
+  return checkbox;
+}
+
+function handleContactToggle(id) {
+  if (selectedContacts.has(id)) selectedContacts.delete(id);
+  else selectedContacts.add(id);
+  renderContactsDropdown(
+    document.getElementById("contacts-search-input").value
+  );
+  renderSelectedInsignias();
+}
+
+function renderSelectedInsignias() {
+  const container = document.getElementById("selected-contact-insignias");
+  container.innerHTML = "";
+  allContacts.forEach((c) => {
+    if (selectedContacts.has(c.id)) {
+      container.appendChild(createInsignia(c));
+    }
+  });
+}
+
+function createInsignia(contact) {
+  const insignia = document.createElement("div");
+  insignia.className = "contact-insignia";
+  insignia.textContent = getInitials(contact.name);
+  insignia.title = contact.name;
+  insignia.style.background = getRandomColor(contact.name);
+  return insignia;
+}
+
+export function getSelectedContactIds() {
+  return Array.from(selectedContacts);
+}
+export function setupDropdownOpenClose() {
+  const dropdown = document.getElementById("contacts-dropdown");
+  const selected = document.getElementById("contacts-selected");
+  const panel = document.getElementById("contacts-dropdown-panel");
+
+  if (!dropdown || !selected || !panel) return;
+
+  // Panel auf/zu schalten beim Klick auf das Eingabefeld
+  selected.addEventListener("click", (e) => {
+    e.stopPropagation();
+    panel.classList.toggle("d-none");
+  });
+
+  // Bei Klick außerhalb Panel schließen
+  document.addEventListener("click", (e) => {
+    if (!dropdown.contains(e.target)) {
+      panel.classList.add("d-none");
+    }
+  });
+
+  // Escape schließt Panel
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      panel.classList.add("d-none");
+    }
+  });
+}
+

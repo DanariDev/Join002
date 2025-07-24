@@ -113,11 +113,16 @@
           <label>Assigned to</label>
 
           <div class="contacts-dropdown" id="contacts-dropdown">
-            <div class="contacts-dropdown-inner" id="contacts-selected">Select contact(s) to assign</div>
-            <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+            <div class="contacts-dropdown-inner" id="contacts-selected">
+              Select contact(s) to assign
+            </div>
+            <div class="contacts-dropdown-panel d-none" id="contacts-dropdown-panel">
+              <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+            </div>
           </div>
           <div id="selected-contact-insignias"></div>
-
+          
+          
           <label class="required" for="category">Category</label>
           <select id="category" required>
             <option value="" disabled selected>Select task category</option>
