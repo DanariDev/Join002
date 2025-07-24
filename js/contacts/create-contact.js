@@ -2,6 +2,7 @@ import { db } from "../firebase/firebase-init.js";
 import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setupContactClickEvents } from "./open-contact.js";
 import { closeAllContactOverlays } from "./contacts-utils.js";
+import { initContactsList } from "./load-contacts.js";
 
 export function initAddContactOverlay() {
   const btn = document.getElementById("add-contact-btn-big");
@@ -61,6 +62,7 @@ async function createContact() {
     await set(newRef, { name, email, phone });
     closeAddContactOverlay();
     showSuccessMessage("Kontakt erstellt!");
+    await initContactsList();
     setupContactClickEvents();
   } catch (err) {
     console.error("Fehler beim Erstellen:", err);

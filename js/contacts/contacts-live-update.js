@@ -3,10 +3,15 @@ import {
   ref,
   onChildAdded,
   onChildChanged,
-  onChildRemoved
+  onChildRemoved,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-import { createContactHTML, updateContactHTML } from "./load-contacts.js";
+import { getInitials, getRandomColor } from "./contact-style.js";
+import {
+  getContactById,
+  createContactHTML,
+  updateContactHTML,
+} from "./load-contacts.js";
 import { setupContactClickEvents } from "./open-contact.js";
 
 const contactsRef = ref(db, "contacts");
@@ -27,10 +32,15 @@ onChildAdded(contactsRef, (snapshot) => {
   setupContactClickEvents();
 });
 
-onChildChanged(contactsRef, (snapshot) => {
-  const contact = snapshot.val();
-  contact.id = snapshot.key;
-  updateContactHTML(contact);
+onChildChanged(contactsRef, async (snapshot) => {
+  const c = snapshot.val();
+  c.id = snapshot.key;
+  updateContactHTML(c);
+  const card = document.getElementById("showed-current-contact");
+  if (card && card.dataset.contactId === c.id) {
+    const f = await getContactById(c.id);
+    fillContactPanel(f);
+  }
 });
 
 onChildRemoved(contactsRef, (snapshot) => {
@@ -38,3 +48,17 @@ onChildRemoved(contactsRef, (snapshot) => {
   const el = document.getElementById(`contact-${id}`);
   if (el) el.remove();
 });
+function fillContactPanel(c) {
+  let i = document.getElementById("current-icon");
+  let n = document.getElementById("current-name");
+  let m = document.getElementById("current-mail");
+  let p = document.getElementById("current-phone");
+  if (!i || !n || !m || !p) return;
+  i.textContent = getInitials(c.name);
+  i.style.backgroundColor = getRandomColor(c.name);
+  n.textContent = c.name;
+  m.textContent = c.email;
+  m.href = `mailto:${c.email}`;
+  p.textContent = c.phone;
+  p.href = `tel:${c.phone}`;
+}

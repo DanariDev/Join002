@@ -64,23 +64,30 @@ async function saveContactChanges(id) {
   try {
     await update(ref(db, `contacts/${id}`), fields);
     closeEditLightbox();
+    const card = document.getElementById("showed-current-contact");
+    if (card && card.dataset.contactId === id) {
+      openContactDetails(id);
+    }
     showSuccessMessage();
   } catch (error) {
     console.error("Error updating contact:", error);
     showErrorMessage("Fehler beim Speichern!");
   }
+  
 }
 
 async function deleteContact(id) {
   try {
-    await remove(ref(db, `contacts/${id}`));
-    closeEditLightbox();
-    hideContactCard();
-    showSuccessMessage("deleting contact!");
+    await update(ref(db, `contacts/${id}`), fields);
   } catch (error) {
-    console.error("Error deleting contact:", error);
-    showErrorMessage("Error deleting contact!");
+    console.error("Fehler beim Update:", error);
+    showErrorMessage("Fehler beim Speichern!");
+    return;
   }
+  // UI-Update nur wenn Datenbank wirklich ok war!
+  closeEditLightbox();
+  showSuccessMessage("Kontakt gespeichert!");
+  
 }
 
 export function closeEditLightbox() {
@@ -115,7 +122,7 @@ function showErrorMessage(message) {
   }
 }
 
-function hideContactCard() {
+export function hideContactCard() {
   const rightSection = document.getElementById("right-section");
   const contactCard = document.getElementById("showed-current-contact");
   if (rightSection && contactCard) {

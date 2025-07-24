@@ -1,5 +1,5 @@
 import { getContactById } from "./load-contacts.js";
-import { openEditContactLightbox } from "./edit-contact.js";
+import { openEditContactLightbox,hideContactCard } from "./edit-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
 import { db } from "../firebase/firebase-init.js";
 import {
@@ -7,6 +7,7 @@ import {
   remove,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { closeAllContactOverlays } from "./contacts-utils.js";
+
 
 export function setupContactClickEvents() {
   document.querySelectorAll(".contact-entry").forEach((el) => {
@@ -78,14 +79,14 @@ function showContactCard() {
 async function deleteContact(id) {
   try {
     await remove(ref(db, `contacts/${id}`));
-    closeEditLightbox(); // optional – falls Lightbox noch offen ist
-    hideContactCard(); // entfernt die rechte Detailansicht
+    hideContactCard();
     showSuccessMessage("Contact deleted!");
   } catch (error) {
     console.error("Error deleting contact:", error);
     showErrorMessage("Error deleting contact!");
   }
 }
+
 function showSuccessMessage(message) {
   const window = document.getElementById("confirmation-window");
   if (!window) return;
