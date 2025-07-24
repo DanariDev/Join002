@@ -1,5 +1,10 @@
+<<<<<<< HEAD:js/board.js
 import { db } from './firebase/firebase-init.js';
 import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+=======
+import { db } from '../firebase/firebase-init.js';
+import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+>>>>>>> 10afe545dfded49676a2b0d10115d438233991a9:js/board/board.js
 
 const tasksRef = ref(db, 'tasks/');
 
