@@ -102,22 +102,19 @@
   flex-direction: column;
   flex: 1;
   gap: 8px;
-
   overflow: hidden;
 }
 
 .list-name {
-  font-size: var(--fs-24);
-
+  font-size: var(--fs-20);
   text-wrap-mode: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .list-email {
-  font-size: var(--fs-20);
+  font-size: var(--fs-16);
   color: var(--clr-500);
-
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -580,5 +577,5 @@ input {
   color: #505060;
   margin: 16px 0 4px 6px;
   letter-spacing: 2px;
-  font-size: 1.05rem;
+  font-size: 20px;
 }
