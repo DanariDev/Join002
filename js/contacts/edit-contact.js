@@ -38,6 +38,7 @@ function showEditLightbox() {
   const lightbox = document.getElementById("lightbox");
   if (overlay && lightbox) {
     overlay.classList.remove("d-none");
+    overlay.classList.add("d-flex");
     lightbox.classList.add("show");
   }
 }
@@ -86,6 +87,7 @@ export function closeEditLightbox() {
   const lightbox = document.getElementById("lightbox");
   if (overlay && lightbox) {
     overlay.classList.add("d-none");
+    overlay.classList.remove("d-flex");
     lightbox.classList.remove("show");
   }
 }
