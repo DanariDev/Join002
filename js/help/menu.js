@@ -12,14 +12,14 @@ export function setupTopbarMenu() {
   if (!userIcon || !menu || !logoutBtn) return;
 
   userIcon.addEventListener('click', (e) => {
-    e.stopPropagation(); // Klick nicht an body weitergeben
+    e.stopPropagation(); 
     menu.classList.toggle('d-none');
   });
 
   logoutBtn.addEventListener('click', () => {
-    localStorage.clear(); // Optional: falls du dort was speicherst
-    sessionStorage.clear(); // Auch das
-    window.location.href = 'index.html'; // Zurück zur Login-Seite
+    localStorage.clear(); 
+    sessionStorage.clear(); 
+    window.location.href = 'index.html'; 
   });
 
   document.addEventListener('click', (e) => {
