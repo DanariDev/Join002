@@ -1,5 +1,7 @@
 export function initDueDateInput() {
   const dateInput = document.getElementById('due-date');
+  const currenttoday = new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
+  dateInput.min = currenttoday;
   const errorMsg = document.getElementById('error-message');
   if (!dateInput) return;
 
