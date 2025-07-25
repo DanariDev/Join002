@@ -1,11 +1,9 @@
 import { db } from './firebase/firebase-init.js';
-import { ref, onValue, update, ref as dbRef } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 const tasksRef = ref(db, 'tasks/');
-
 const taskOverlay = document.getElementById('task-overlay');
 const overlayCloseBtn = document.getElementById('overlay-close');
-
 
 overlayCloseBtn.addEventListener('click', () => {
   taskOverlay.classList.add('d-none');
@@ -14,34 +12,30 @@ overlayCloseBtn.addEventListener('click', () => {
 onValue(tasksRef, (snapshot) => {
   const data = snapshot.val();
 
-  
   document.querySelector('.to-do-tasks').innerHTML = '';
   document.querySelector('.in-progress-tasks').innerHTML = '';
   document.querySelector('.await-tasks').innerHTML = '';
   document.querySelector('.done-tasks').innerHTML = '';
 
   if (data) {
-    Object.values(data).ür DebuggingforEach(task => renderTask(task));
+    Object.values(data).forEach(task => renderTask(task));
   }
 
   setupDragAndDrop();
 });
 
 function renderTask(task) {
-  console.log(task); 
-
   const template = document.getElementById('task-template');
   const clone = template.content.cloneNode(true);
 
   const taskCard = clone.querySelector('.task-card');
-  taskCard.setAttribute('draggable', 'true');          
-  taskCard.dataset.taskId = task.id;                    
+  taskCard.setAttribute('draggable', 'true');
+  taskCard.dataset.taskId = task.id;
 
- 
   const labelDiv = clone.querySelector('.task-label');
   if (task.category === "Technical Task") {
     labelDiv.textContent = "Technical Task";
-    labelDiv.style.background = "#00c7a3"; 
+    labelDiv.style.background = "#00c7a3";
     labelDiv.style.color = "white";
   } else if (task.category === "User Story") {
     labelDiv.textContent = "User Story";
@@ -55,27 +49,28 @@ function renderTask(task) {
   labelDiv.style.fontWeight = "bold";
   labelDiv.style.fontSize = "14px";
 
-  
   clone.querySelector('.task-title').textContent = task.title || '';
   clone.querySelector('.task-desc').textContent = task.description || '';
 
-  
   const priorityImg = clone.querySelector('.priority-img');
-  if (task.priority === "urgent") {
-    priorityImg.src = "assets/img/urgent-btn-icon.png";
-    priorityImg.alt = "Urgent";
-  } else if (task.priority === "medium") {
-    priorityImg.src = "assets/img/medium-btn-icon.png";
-    priorityImg.alt = "Medium";
-  } else if (task.priority === "low") {
-    priorityImg.src = "assets/img/low-btn-icon.png";
-    priorityImg.alt = "Low";
-  } else {
-    priorityImg.src = "";
-    priorityImg.alt = "";
+  switch(task.priority) {
+    case "urgent":
+      priorityImg.src = "assets/img/urgent-btn-icon.png";
+      priorityImg.alt = "Urgent";
+      break;
+    case "medium":
+      priorityImg.src = "assets/img/medium-btn-icon.png";
+      priorityImg.alt = "Medium";
+      break;
+    case "low":
+      priorityImg.src = "assets/img/low-btn-icon.png";
+      priorityImg.alt = "Low";
+      break;
+    default:
+      priorityImg.src = "";
+      priorityImg.alt = "";
   }
 
-  
   const progressBar = clone.querySelector('.progress-bar');
   const taskCount = clone.querySelector('.task-count');
   if (task.subtasks && task.subtasks.length > 0) {
@@ -88,12 +83,8 @@ function renderTask(task) {
     taskCount.textContent = '0 / 0';
   }
 
-  
-  taskCard.addEventListener('click', () => {
-    openTaskOverlay(task);
-  });
+  taskCard.addEventListener('click', () => openTaskOverlay(task));
 
-  
   let col = '.to-do-tasks';
   if (task.status === 'in-progress') col = '.in-progress-tasks';
   else if (task.status === 'await-feedback') col = '.await-tasks';
@@ -101,7 +92,6 @@ function renderTask(task) {
 
   document.querySelector(col).appendChild(clone);
 }
-
 
 function openTaskOverlay(task) {
   taskOverlay.classList.remove('d-none');
@@ -112,10 +102,8 @@ function openTaskOverlay(task) {
   document.getElementById('popup-due-date').textContent = task.dueDate || '';
   document.getElementById('popup-priority').textContent = task.priority || '';
 
-  
   document.getElementById('popup-assigned').textContent = (task.assignedTo || []).join(', ');
 
-  
   const subtasksList = document.getElementById('popup-subtasks');
   subtasksList.innerHTML = '';
   if (task.subtasks && task.subtasks.length > 0) {
@@ -126,7 +114,6 @@ function openTaskOverlay(task) {
     });
   }
 }
-
 
 function setupDragAndDrop() {
   let draggedTask = null;
@@ -161,7 +148,7 @@ function setupDragAndDrop() {
       const updates = {};
       updates['/tasks/' + taskId + '/status'] = newStatus;
 
-      update(dbRef(db), updates)
+      update(ref(db), updates)
         .then(() => console.log('Task-Status wurde aktualisiert:', newStatus))
         .catch(error => {
           console.error('Fehler beim Aktualisieren:', error);
@@ -172,3 +159,25 @@ function setupDragAndDrop() {
     });
   });
 }
+
+const searchInput = document.getElementById('search-input');
+
+searchInput.addEventListener('input', () => {
+  const filter = searchInput.value.toLowerCase();
+
+  document.querySelectorAll('.task-card').forEach(taskCard => {
+    const title = taskCard.querySelector('.task-title').textContent.toLowerCase();
+    const desc = taskCard.querySelector('.task-desc').textContent.toLowerCase();
+
+    if (title.includes(filter) || desc.includes(filter)) {
+      taskCard.classList.remove('d-none');
+    } else {
+      taskCard.classList.add('d-none');
+    }
+  });
+
+  const anyVisible = Array.from(document.querySelectorAll('.task-card'))
+    .some(card => !card.classList.contains('d-none'));
+
+  document.getElementById('no-results-message').style.display = anyVisible ? 'none' : 'block';
+});
