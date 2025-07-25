@@ -26,7 +26,7 @@ function showError(input, errorElem, message) {
  * 
  * @returns -There becomes the values of "has error", "name", "email", "phone" return
  */
-export function checkInput(nameCheckValue, emailCheckValue, phoneCheckValue, passwordCheckValue, passwordRepeatCheckValue) {
+export function checkInput(nameCheckValue, emailCheckValue, phoneCheckValue, passwordCheckValue, passwordRepeatCheckValue, errorCode = null) {
     let hasError = false
 
     if(nameCheckValue != null) hasError = nameCheck(nameCheckValue, hasError);
@@ -34,6 +34,7 @@ export function checkInput(nameCheckValue, emailCheckValue, phoneCheckValue, pas
     if(phoneCheckValue != null) hasError = phoneCheck(phoneCheckValue, hasError);
     if(passwordCheckValue != null) hasError = passwordCheck(passwordCheckValue, hasError);
     if(passwordRepeatCheckValue != null) hasError = passwordRepeatCheck(passwordRepeatCheckValue, hasError);
+    if(errorCode != null) incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, errorCode);
 
   return hasError;
 }
@@ -100,4 +101,23 @@ function passwordRepeatCheck (passwordRepeatCheckValue, hasError){
     else if(passwordRepeat != password){ showError(passwordRepeatInput, passwordRepeatError, "Stimmt mit dem Passwort nicht überein"); hasError = true; }
 
     return hasError;
+}
+
+function incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, errorCode){
+  const emailInput = document.getElementById(emailCheckValue);
+  const emailError = document.querySelectorAll(".email-error");
+  resetErrors(emailInput, emailError);
+
+  const passwordInput = document.getElementById(passwordCheckValue);
+  const passwordError = document.querySelectorAll(".password-error");
+  resetErrors(passwordInput, passwordError);
+
+  if (errorCode == 'auth/invalid-email' || errorCode == 'auth/user-not-found' || errorCode == 'auth/wrong-password'|| errorCode == 'auth/invalid-credential') {
+    showError(emailInput, emailError, "");
+    showError(passwordInput, passwordError, "Ungültige Anmeldedaten, bitte prüfen Sie Passwort und E-mail");
+  } 
+  else {
+    showError(emailInput, emailError, "");
+    showError(passwordInput, passwordError, "Es ist ein unerwarteter Fehler aufgetreten. Bitte kontaktieren Sie den Kundensupport.");
+  }
 }

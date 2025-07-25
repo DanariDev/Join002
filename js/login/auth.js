@@ -1,17 +1,14 @@
-// js/login/auth.js
 import { auth } from '../firebase/firebase-init.js';
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { checkInput } from "../multiple-application/error-message.js";
 
 
 export function initFirebaseLogin() {
-  const form = document.getElementById('loginForm');
+  const userLoginBtn = document.getElementById('userLogin');
   const guestBtn = document.getElementById('guestLogin');
 
-  if (form) {
-    form.addEventListener('formValid', (e) => {
-      const { email, password } = e.detail;
-      loginUser(email, password);
-    });
+  if (userLoginBtn) {
+    userLoginBtn.addEventListener('click', loginUser)
   }
 
   if (guestBtn) {
@@ -19,10 +16,18 @@ export function initFirebaseLogin() {
   }
 }
 
-function loginUser(email, password) {
+async function loginUser() {
+  const email = document.getElementById('email-input').value;
+  const password = document.getElementById('password-input').value;
+  let hasError = checkInput(null, "email-input", null, "password-input", null);
+  if (hasError) return;
+
   signInWithEmailAndPassword(auth, email, password)
-    .then(() => redirectToSummary())
-    .catch(() => showLoginError());
+  .then(() => redirectToSummary())
+  .catch((error) => {
+    checkInput(null, "email-input", null, "password-input", null, error.code);
+    console.clear();
+  });
 }
 
 function loginAsGuest() {
@@ -33,12 +38,4 @@ function loginAsGuest() {
 
 function redirectToSummary() {
   window.location.href = 'summary.html';
-}
-
-function showLoginError() {
-  const msg = document.querySelector('.password-error');
-  if (msg) {
-    msg.textContent = 'E-Mailadresse oder Passwort falsch!';
-    msg.style.visibility = 'visible';
-  }
 }
