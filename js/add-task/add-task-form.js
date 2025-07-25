@@ -2,13 +2,17 @@ import { saveTaskToDB } from "./add-task-save.js";
 import { getSelectedPriority } from "./add-task-priority.js"; // <--- diese Zeile ergänzen!
 
 export function initAddTaskForm() {
-  const form = document.getElementById("add-task-form");
   const createBtn = document.getElementById("create-task-btn");
-  if (!form || !createBtn) return;
-
-  createBtn.addEventListener("click", (event) => {
+  if (!createBtn) return;
+  createBtn.addEventListener("click", function (event) {
     event.preventDefault();
-    handleCreateTask();
+    clearAllFieldErrors();
+    let valid = true;
+    if (!validateTitle()) valid = false;
+    if (!validateDueDate()) valid = false;
+    if (!validateCategory()) valid = false;
+    // weitere Checks hier...
+    if (valid) saveTaskToDB(collectTaskData());
   });
 }
 
@@ -16,6 +20,13 @@ function handleCreateTask() {
   clearAllFieldErrors();
   if (!validateTitle() | !validateDueDate()) return;
   saveTaskToDB(collectTaskData());
+}
+function showFieldError(field, message) {
+  const errorDiv = document.getElementById(`error-${field}`);
+  if (errorDiv) {
+    errorDiv.textContent = message;
+    errorDiv.style.color = "red";
+  }
 }
 
 function validateTitle() {
@@ -35,15 +46,30 @@ function validateDueDate() {
   }
   return true;
 }
+function validateCategory() {
+  const category = document.getElementById("category").value;
+  if (!category) {
+    showFieldError("category", "Please select a category!");
+    return false;
+  }
+  clearFieldError("category");
+  return true;
+}
 
 function collectTaskData() {
   return {
     title: document.getElementById("title").value.trim(),
     description: document.getElementById("description").value.trim(),
     dueDate: document.getElementById("due-date").value,
-    priority: getSelectedPriority(),         // <---- HIER EINFÜGEN!
+    priority: getSelectedPriority(),
     createdAt: Date.now(),
   };
+}
+function clearFieldError(field) {
+  const errorDiv = document.getElementById(`error-${field}`);
+  if (errorDiv) {
+    errorDiv.textContent = "";
+  }
 }
 
 function clearAllFieldErrors() {
@@ -51,4 +77,4 @@ function clearAllFieldErrors() {
   clearFieldError("due-date");
 }
 
-// showError, showFieldError und clearFieldError bleiben wie gehabt
+

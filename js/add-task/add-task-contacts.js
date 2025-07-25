@@ -14,13 +14,12 @@ export function initContactsDropdown() {
   const contactsRef = ref(db, "contacts");
   onValue(contactsRef, (snapshot) => {
     allContacts = [];
-    snapshot.forEach(child => {
+    snapshot.forEach((child) => {
       allContacts.push({ id: child.key, ...child.val() });
     });
     renderContactsDropdown();
   });
 }
-
 
 function setupContactsListener() {
   const contactsRef = ref(db, "contacts");
@@ -35,11 +34,10 @@ function setupContactsListener() {
 function renderContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   dropdownList.innerHTML = "";
-  allContacts.forEach(contact => {
+  allContacts.forEach((contact) => {
     dropdownList.appendChild(createContactRow(contact));
   });
 }
-
 
 function filterContacts(filter) {
   if (!filter) return allContacts;
@@ -53,11 +51,22 @@ function filterContacts(filter) {
 function createContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
+  if (selectedContacts.has(contact.id)) {
+    row.classList.add("selected");
+  }
   row.appendChild(createInitialsCircle(contact));
   row.appendChild(createContactName(contact));
   row.appendChild(createCheckbox(contact));
+  row.addEventListener("click", function(e) {
+    e.stopPropagation();
+    if (e.target.tagName !== "INPUT") {
+      handleContactToggle(contact.id);
+    }
+  });
+  
   return row;
 }
+
 
 function createInitialsCircle(contact) {
   const initials = document.createElement("div");
@@ -83,13 +92,15 @@ function createCheckbox(contact) {
 }
 
 function handleContactToggle(id) {
-  if (selectedContacts.has(id)) selectedContacts.delete(id);
-  else selectedContacts.add(id);
-  renderContactsDropdown(
-    document.getElementById("contacts-search-input").value
-  );
+  if (selectedContacts.has(id)) {
+    selectedContacts.delete(id);
+  } else {
+    selectedContacts.add(id);
+  }
+  renderContactsDropdown();
   renderSelectedInsignias();
 }
+
 
 function renderSelectedInsignias() {
   const container = document.getElementById("selected-contact-insignias");
@@ -140,4 +151,3 @@ export function setupDropdownOpenClose() {
     }
   });
 }
-
