@@ -1,5 +1,5 @@
 import { saveTaskToDB } from "./add-task-save.js";
-import { getSelectedPriority } from "./add-task-priority.js"; // <--- diese Zeile ergänzen!
+import { getSelectedPriority } from "./add-task-priority.js";
 
 export function initAddTaskForm() {
   const createBtn = document.getElementById("create-task-btn");
@@ -11,7 +11,7 @@ export function initAddTaskForm() {
     if (!validateTitle()) valid = false;
     if (!validateDueDate()) valid = false;
     if (!validateCategory()) valid = false;
-    // weitere Checks hier...
+
     if (valid) saveTaskToDB(collectTaskData());
   });
 }
@@ -56,15 +56,7 @@ function validateCategory() {
   return true;
 }
 
-function collectTaskData() {
-  return {
-    title: document.getElementById("title").value.trim(),
-    description: document.getElementById("description").value.trim(),
-    dueDate: document.getElementById("due-date").value,
-    priority: getSelectedPriority(),
-    createdAt: Date.now(),
-  };
-}
+
 function clearFieldError(field) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) {
@@ -77,4 +69,61 @@ function clearAllFieldErrors() {
   clearFieldError("due-date");
 }
 
+function addSubtask() {
+  const input = document.getElementById("subtask");
+  const value = input.value.trim();
+  if (!value) return;
+  const list = document.getElementById("subtask-list");
+  const li = document.createElement("li");
+  li.textContent = value;
+  list.appendChild(li);
+  input.value = "";
+}
+document.getElementById("subtask").addEventListener("keydown", function (e) {
+  if (e.key === "Enter") {
+    addSubtask();
+    e.preventDefault();
+  }
+});
 
+document.querySelector(".subtask-button").addEventListener("click", addSubtask);
+document.getElementById("subtask-list").addEventListener("click", function (e) {
+  if (e.target.tagName === "LI") {
+    editSubtask(e.target);
+  }
+});
+
+function editSubtask(li) {
+  const oldValue = li.textContent;
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = oldValue;
+  li.textContent = "";
+  li.appendChild(input);
+  input.focus();
+
+  input.addEventListener("blur", finishEdit);
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") finishEdit();
+  });
+
+  function finishEdit() {
+    li.textContent = input.value.trim() || oldValue;
+  }
+}
+function collectTaskData() {
+  return {
+    title: document.getElementById("title").value.trim(),
+    description: document.getElementById("description").value.trim(),
+    dueDate: document.getElementById("due-date").value,
+    priority: getSelectedPriority(),
+    category: document.getElementById("category").value,
+    subtasks: getSubtasks(),  // <<-- NEU!
+    createdAt: Date.now(),
+  };
+}
+
+function getSubtasks() {
+  const items = document.querySelectorAll("#subtask-list li");
+  return Array.from(items).map(li => li.textContent.trim());
+}
