@@ -85,7 +85,7 @@ function passwordCheck (passwordCheckValue, hasError){
     const password = passwordInput.value.trim();
 
     if(!password) { showError(passwordInput, passwordError, "Bitte Password eingeben."); hasError = true; }  //password
-    else if(password.length <6){ showError(passwordInput, passwordError, "Das Passwort muss länger als 5 zeichen sein"); hasError = true; }
+    else if(password.length <6){ showError(passwordInput, passwordError, "Das Passwort muss mindestens 6 Zeichen lang sein."); hasError = true; }
 
     return hasError;
 }
