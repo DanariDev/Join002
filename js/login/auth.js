@@ -33,7 +33,8 @@ async function loginUser() {
 function loginAsGuest() {
   const email = 'guest@example.com';
   const password = 'guest123';
-  loginUser(email, password);
+  signInWithEmailAndPassword(auth, email, password)
+  .then(() => redirectToSummary())
 }
 
 function redirectToSummary() {
