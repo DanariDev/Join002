@@ -62,7 +62,7 @@ function setupLightboxButtons(id) {
 
 async function saveContactChanges(id) {
   const fields = getEditFields();
-  let hasError = checkInput("edit-name", "edit-email", "edit-phone", null, null);
+  let hasError = checkInput("edit-name", "edit-email", "edit-phone", null, null, null, null);
   if (hasError) return;
 
   try {

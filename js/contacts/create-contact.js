@@ -42,7 +42,7 @@ function renderCreateForm() {
   const name = document.getElementById("edit-name");
   const email = document.getElementById("edit-email");
   const phone = document.getElementById("edit-phone");
-  const saveBtn = document.getElementById("saveBtn");
+  const saveBtn = document.getElementById("create-contact-btn");
 
   if (name) name.value = "";
   if (email) email.value = "";
@@ -58,7 +58,7 @@ async function createContact() {
   const email = document.getElementById("new-email")?.value;
   const phone = document.getElementById("new-phone")?.value;
 
-  let hasError = checkInput("new-name", "new-email", "new-phone", null, null);
+  let hasError = checkInput("new-name", "new-email", "new-phone", null, null, null, null);
   if (hasError) return;
 
   try {
@@ -112,7 +112,7 @@ function showErrorMessage(message) {
   }, 2000);
 }
 
-document.getElementById("create-contact-form").addEventListener("click", function (event) {
+document.getElementById("create-contact-btn").addEventListener("click", function (event) {
   event.preventDefault();
   createContact();
 });

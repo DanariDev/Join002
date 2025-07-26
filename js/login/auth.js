@@ -25,7 +25,7 @@ async function loginUser() {
   signInWithEmailAndPassword(auth, email, password)
   .then(() => redirectToSummary())
   .catch((error) => {
-    checkInput(null, "email-input", null, "password-input", null, error.code);
+    checkInput(null, "email-input", null, "password-input", null, null, error.code);
     console.clear();
   });
 }

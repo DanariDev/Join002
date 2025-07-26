@@ -134,3 +134,8 @@ function incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, erro
     showError(passwordInput, passwordError, "Es ist ein unerwarteter Fehler aufgetreten. Bitte kontaktieren Sie den Kundensupport.");
   }
 }
+
+
+
+//vorlage -> checkInput(Name, Email, Phone, Password, PasswordRepeat, privacyCheckbox, errorCode)
+//die werte die benötigt werden, die passende -ID- einfügen, die nihct gebraucht werden -null- einsetzten
