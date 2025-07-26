@@ -161,7 +161,52 @@
     <div id="form-add-task">
       <button id="closeFormModal" class="close-btn">×</button>
       <h1>Add Task</h1>
-      <div id="formContainer"></div>
+      <form id="add-task-form" autocomplete="off">
+  <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+    <!-- Linke Spalte -->
+    <div style="flex: 1 1 280px; min-width: 240px;">
+      <label for="task-title"><b>Title*</b></label>
+      <input id="task-title" required placeholder="Enter a title" style="width: 100%; margin-bottom: 18px;">
+      
+      <label for="task-description">Description</label>
+      <textarea id="task-description" placeholder="Enter a description" style="width: 100%; min-height: 55px; margin-bottom: 18px;"></textarea>
+      
+      <label for="task-date"><b>Due date*</b></label>
+      <input id="task-date" required type="date" style="width: 100%; margin-bottom: 12px;">
+      <div style="font-size:13px;color:#f25a54;margin-top:6px;">*This field is required</div>
+    </div>
+    <!-- Rechte Spalte -->
+    <div style="flex: 1 1 280px; min-width: 240px;">
+      <label><b>Priority</b></label>
+      <div style="margin-bottom:16px; display: flex; gap: 8px;">
+        <button type="button" class="prio-btn urgent">Urgent</button>
+        <button type="button" class="prio-btn medium selected">Medium</button>
+        <button type="button" class="prio-btn low">Low</button>
+      </div>
+      <label for="task-assigned">Assigned to</label>
+      <select id="task-assigned" style="width:100%;margin-bottom:12px;">
+        <option>Select contacts to assign</option>
+      </select>
+      <label for="task-category"><b>Category*</b></label>
+      <select id="task-category" required style="width:100%;margin-bottom:12px;">
+        <option value="">Select task category</option>
+        <option value="Technical Task">Technical Task</option>
+        <option value="User Story">User Story</option>
+      </select>
+      <label>Subtasks</label>
+      <div style="display:flex;margin-bottom:12px;">
+        <input id="subtask-input" placeholder="Add new subtask" style="flex:1;">
+        <button type="button" id="add-subtask-btn" style="margin-left:7px;border-radius:6px;border:1.5px solid #aaa;">+</button>
+      </div>
+      <ul id="subtasks-list" style="min-height:24px;"></ul>
+      <div style="text-align:right;margin-top:22px;">
+        <button type="reset" class="cancel-btn">Cancel</button>
+        <button type="submit" class="create-btn">Create Task</button>
+      </div>
+    </div>
+  </div>
+</form>
+
     </div>
   </div>
 
