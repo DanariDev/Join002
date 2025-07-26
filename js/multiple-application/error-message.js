@@ -26,81 +26,94 @@ function showError(input, errorElem, message) {
  * 
  * @returns -There becomes the values of "has error", "name", "email", "phone" return
  */
-export function checkInput(nameCheckValue, emailCheckValue, phoneCheckValue, passwordCheckValue, passwordRepeatCheckValue, errorCode = null) {
-    let hasError = false
+export function checkInput(nameCheckValue = null, emailCheckValue = null, phoneCheckValue = null, passwordCheckValue = null, passwordRepeatCheckValue = null, privacyCheckboxValue = null, errorCode = null) {
+  let hasError = false
 
-    if(nameCheckValue != null) hasError = nameCheck(nameCheckValue, hasError);
-    if(emailCheckValue != null) hasError = emailCheck(emailCheckValue, hasError);
-    if(phoneCheckValue != null) hasError = phoneCheck(phoneCheckValue, hasError);
-    if(passwordCheckValue != null) hasError = passwordCheck(passwordCheckValue, hasError);
-    if(passwordRepeatCheckValue != null) hasError = passwordRepeatCheck(passwordRepeatCheckValue, hasError);
-    if(errorCode != null) incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, errorCode);
+  if(nameCheckValue != null) hasError = nameCheck(nameCheckValue, hasError);
+  if(emailCheckValue != null) hasError = emailCheck(emailCheckValue, hasError);
+  if(phoneCheckValue != null) hasError = phoneCheck(phoneCheckValue, hasError);
+  if(passwordCheckValue != null) hasError = passwordCheck(passwordCheckValue, hasError);
+  if(passwordRepeatCheckValue != null) hasError = passwordRepeatCheck(passwordRepeatCheckValue, hasError);
+  if(privacyCheckboxValue != null) hasError = privacyCheckbox(privacyCheckboxValue, hasError);
+  if(errorCode != null) incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, errorCode);
 
   return hasError;
 }
 
 function nameCheck(nameCheckValue, hasError){
-    const nameInput = document.getElementById(nameCheckValue);
-    const nameError = document.querySelectorAll(".name-error");
+  const nameInput = document.getElementById(nameCheckValue);
+  const nameError = document.querySelectorAll(".name-error");
 
-    resetErrors(nameInput, nameError);
-    const name = nameInput.value.trim();
+  resetErrors(nameInput, nameError);
+  const name = nameInput.value.trim();
     
-    if(!name) { showError(nameInput, nameError, "Bitte Name eingeben."); hasError = true; }  //name
+  if(!name) { showError(nameInput, nameError, "Bitte Name eingeben."); hasError = true; }
 
-    return hasError;
+  return hasError;
 }
 
 function emailCheck(emailCheckValue, hasError){
-    const emailInput = document.getElementById(emailCheckValue);
-    const emailError = document.querySelectorAll(".email-error");
+  const emailInput = document.getElementById(emailCheckValue);
+  const emailError = document.querySelectorAll(".email-error");
 
-    resetErrors(emailInput, emailError);
-    const email = emailInput.value.trim();
+  resetErrors(emailInput, emailError);
+  const email = emailInput.value.trim();
     
-    if(!email) { showError(emailInput, emailError, "Bitte E-Mail eingeben."); hasError = true; } //email
-    else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Ungültige E-Mail-Adresse!"); hasError = true; }
+  if(!email) { showError(emailInput, emailError, "Bitte E-Mail eingeben."); hasError = true; }
+  else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Ungültige E-Mail-Adresse!"); hasError = true; }
 
-    return hasError;
+  return hasError;
 }
 
 function phoneCheck (phoneCheckValue, hasError){
-    const phoneInput = document.getElementById(phoneCheckValue);
-    const phoneError = document.querySelectorAll(".phone-error");
+  const phoneInput = document.getElementById(phoneCheckValue);
+  const phoneError = document.querySelectorAll(".phone-error");
 
-    resetErrors(phoneInput, phoneError);
-    const phone = phoneInput.value.trim();
+  resetErrors(phoneInput, phoneError);
+  const phone = phoneInput.value.trim();
 
-    if(!phone) { showError(phoneInput, phoneError, "Bitte Telefonnummer eingeben."); hasError = true; } //telefon
-    else if (!/^[+]?\d+$/.test(phone)) { showError(phoneInput, phoneError, "Ungültige Telefonnummer!"); hasError = true; }
+  if(!phone) { showError(phoneInput, phoneError, "Bitte Telefonnummer eingeben."); hasError = true; }
+  else if (!/^[+]?\d+$/.test(phone)) { showError(phoneInput, phoneError, "Ungültige Telefonnummer!"); hasError = true; }
 
-    return hasError;
+  return hasError;
 }
 
 function passwordCheck (passwordCheckValue, hasError){
-    const passwordInput = document.getElementById(passwordCheckValue);
-    const passwordError = document.querySelectorAll(".password-error");
+  const passwordInput = document.getElementById(passwordCheckValue);
+  const passwordError = document.querySelectorAll(".password-error");
 
-    resetErrors(passwordInput, passwordError);
-    const password = passwordInput.value.trim();
+  resetErrors(passwordInput, passwordError);
+  const password = passwordInput.value.trim();
 
-    if(!password) { showError(passwordInput, passwordError, "Bitte Password eingeben."); hasError = true; }  //password
-    else if(password.length <6){ showError(passwordInput, passwordError, "Das Passwort muss mindestens 6 Zeichen lang sein."); hasError = true; }
+  if(!password) { showError(passwordInput, passwordError, "Bitte Password eingeben."); hasError = true; }
+  else if(password.length <6){ showError(passwordInput, passwordError, "Das Passwort muss mindestens 6 Zeichen lang sein."); hasError = true; }
 
-    return hasError;
+  return hasError;
 }
 
 function passwordRepeatCheck (passwordRepeatCheckValue, hasError){
-    const passwordRepeatInput = document.getElementById(passwordRepeatCheckValue);
-    const passwordRepeatError = document.querySelectorAll("passwordRepeat-error");
+  const passwordRepeatInput = document.getElementById(passwordRepeatCheckValue);
+  const passwordRepeatError = document.querySelectorAll(".repeat-error");
 
-    resetErrors(passwordRepeatInput, passwordRepeatError)
-    const passwordRepeat = passwordRepeatInput.value.trim();
+  resetErrors(passwordRepeatInput, passwordRepeatError)
+  const passwordRepeat = passwordRepeatInput.value.trim();
+  const password = document.getElementById('password-input').value.trim();
 
-    if(!passwordRepeat) { showError(passwordRepeatInput, passwordRepeatError, "Bitte das Passwort wiederholt eingeben."); hasError = true; }  //password repeat
-    else if(passwordRepeat != password){ showError(passwordRepeatInput, passwordRepeatError, "Stimmt mit dem Passwort nicht überein"); hasError = true; }
+  if(!passwordRepeat) { showError(passwordRepeatInput, passwordRepeatError, "Bitte das Passwort wiederholt eingeben."); hasError = true; }
+  else if(passwordRepeat != password){ showError(passwordRepeatInput, passwordRepeatError, "Stimmt mit dem Passwort nicht überein"); hasError = true; }
 
-    return hasError;
+  return hasError;
+}
+
+function privacyCheckbox (privacyCheckboxValue, hasError) {
+  const checkbox = document.getElementById(privacyCheckboxValue);
+  const checkboxError = document.querySelectorAll(".checkbox-error");
+
+  resetErrors(checkbox, checkboxError);
+
+  if (!checkbox.checked) { showError(checkbox, checkboxError, "Bitte akzeptiere die Datenschutzbestimmungen."); hasError = true; }
+  
+  return hasError;
 }
 
 function incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, errorCode){

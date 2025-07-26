@@ -39,18 +39,18 @@
 
       <form id="loginForm" novalidate>
         <div class="input-wrapper">
-          <input id="name-input" class="name-input" type="text" placeholder="Name" required />
+          <input id="name-input" class="name-input" type="text" placeholder="Name"/>
           <div class="error-message name-error"></div>
         </div>
 
         <div class="input-wrapper">
-          <input id="email-input" class="email-input" type="email" placeholder="Email" required />
+          <input id="email-input" class="email-input" type="email" placeholder="Email"/>
           <div class="error-message email-error"></div>
         </div>
 
         <div class="input-wrapper">
           <div class="passwort-input-button-div">
-            <input type="password" class="password-input" id="password-input" placeholder="Password" />
+            <input type="password" class="password-input" id="password-input" placeholder="Password"/>
             <div id="show-hide-password" class="d-none"></div>
           </div>
           <div class="error-message password-error"></div>
@@ -58,21 +58,20 @@
 
         <div class="input-wrapper">
           <div class="passwort-repeat-input-button-div">
-            <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password"
-              required />
+            <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password"/>
             <div id="show-hide-repeat-password" class="d-none"></div>
           </div>
           <div class="error-message repeat-error"></div>
         </div>
 
         <label class="privacy-checkbox-label">
-          <input id="privacy-checkbox" type="checkbox" required />
+          <input id="privacy-checkbox" type="checkbox"/>
           I accept the <a id="privacyPolicyFormID" href="privacy-policy.html">Privacy Policy</a>
         </label>
         <div class="error-message checkbox-error"></div>
 
         <div class="button-row">
-          <button type="submit" class="btn-primary">Sign Up</button>
+          <button type="button" id="sign-up-btn" class="btn-primary">Sign Up</button>
         </div>
       </form>
 
@@ -88,10 +87,6 @@
     </div>
   </footer>
   <!-- Firebase Grundfunktionen -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"></script>
-  <script src="./firebase/firebase-init.js"></script>
 
   <script type="module" src="js/register/main.js"></script>
   <script type="module" src="js/multiple-application/changeSidebarStarter.js"></script>
