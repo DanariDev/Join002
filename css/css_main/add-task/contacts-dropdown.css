@@ -181,13 +181,26 @@
     display: block;
 }
 
+.contact-insignia {
+    display: flex;
+    height: 42px;
+    min-width: 42px;
+    border-radius: 100%;
+    border: 2px, solid, white;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    margin-left: -16px;
+}
+
 #selected-contact-insignias {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding-top: 0px;
-    margin-bottom: 8px;
-    margin-top: -8px;
+    margin: -8px 0 8px 0px;
     flex-wrap: wrap;
     width: 280px;
 }
