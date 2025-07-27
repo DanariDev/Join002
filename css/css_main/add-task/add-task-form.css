@@ -1,0 +1,91 @@
+/* Formular */
+#add-task-form {
+    display: flex;
+    gap: 32px;
+}
+
+.add-task-form-content {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 16px;
+}
+
+label,
+::placeholder {
+    font-size: var(--fs-20);
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 600px;
+    padding: 8px;
+    border: 1px solid var(--clr-300);
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+select {
+    background-image: url(../../../assets/img/drop-down-arrow.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.description-input {
+    height: 100px;
+    resize: none;
+}
+
+.grey-bar {
+    width: 1px;
+    background-color: var(--clr-300);
+}
+
+option {
+    font-size: var(--fs-16);
+    overflow: hidden;
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}
+
+.required-explain {
+    font-size: var(--fs-20);
+    margin-top: -48px;
+}
+
+.required-explain:before {
+    content: " *";
+    color: red;
+}
+
+.required-explain-responsive {
+    display: none;
+    font-size: var(--fs-20);
+}
+
+.required-explain-responsive:before {
+    content: " *";
+    color: red;
+}
+
+.disabled {
+    cursor: not-allowed;
+}
+
+#add-task-form button:disabled {
+    cursor: pointer;
+}
+
+#add-task-form button:not(:disabled) {
+    cursor: pointer;
+}
