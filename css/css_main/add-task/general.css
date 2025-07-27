@@ -1,0 +1,48 @@
+.bottom-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.add-task-create-and-clear-btn {
+    display: flex;
+    justify-content: flex-end;
+    gap: 16px;
+    padding: 1rem 0;
+}
+
+#clear-btn {
+    width: 110px;
+    height: 56px;
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+.btn-create-task:hover {
+    background-color: var(--clr-500);
+    border-color: var(--clr-500);
+}
+
+.btn-create-task {
+    color: #ffffff;
+    background-color: var(--clr-700);
+    font-weight: 600;
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    padding: 0 16px;
+}
+
+#clear-btn:hover {
+    color: var(--clr-500);
+    border-color: var(--clr-500);
+}
+
+.btn-create-task:hover {
+    background-color: var(--clr-500);
+    border-color: var(--clr-500);
+}

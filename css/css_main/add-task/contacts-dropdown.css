@@ -1,0 +1,213 @@
+/* Selected Contacts on Form */
+.form-selected-contact {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 10px;
+    gap: 10px;
+}
+
+.form-selected-contact-active,
+.form-selected-contact:hover {
+    background-color: #091930;
+    color: var(--clr-200);
+    cursor: pointer;
+}
+
+.form-selected-contact input {
+    height: 30px;
+    width: 20px;
+    margin-left: auto;
+}
+
+.form-selected-contact input[type="checkbox"] {
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #a4a4a4;
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.form-selected-contact input[type="checkbox"]:checked {
+    background-color: #091930;
+}
+
+.form-selected-contact input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 6px;
+    width: 4px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+}
+
+.form-selected-contact input[type="checkbox"]:checked::after {
+    opacity: 1;
+}
+
+.form-selected-contact input[type="checkbox"]:checked:hover::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10;
+    z-index: 2;
+}
+
+#contacts-selected {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 40px;
+    gap: 6px;
+    padding-left: 8px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: var(--fs-20);
+    border-radius: 10px;
+    background-image: url(../../../assets/img/drop-down-arrow.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.contact-selected {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background-color: var(--clr-300);
+    border-radius: 20px;
+    font-size: var(--fs-20);
+}
+
+.contact-selected span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dropdown-arrow {
+    padding-right: 4px;
+    margin-left: auto;
+    font-size: var(--fs-16);
+    color: var(--clr-700);
+}
+
+.contacts-dropdown {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 40px;
+    border: 1px solid var(--clr-300);
+    border-radius: 10px;
+    background-color: white;
+    font-size: 14px;
+    height: 40px;
+}
+
+#contacts-dropdown-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: white;
+    border: 1px solid var(--clr-300);
+    border-radius: 0 0 10px 10px;
+}
+
+.contacts-dropdown-inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    border: none;
+    display: none;
+}
+
+.contacts-dropdown-list {
+    display: flex;
+    max-height: 150px;
+    flex-direction: column;
+    overflow-y: auto;
+    gap: 10px;
+}
+
+.contacts-dropdown-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 60%;
+    font-size: 16px;
+    padding: 4px;
+}
+
+.contacts-dropdown-item:hover {
+    background-color: var(--clr-700);
+    border-radius: 15px;
+    color: white;
+}
+
+.contact-initials {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    border: 2px solid white;
+    border-radius: 100%;
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0;
+    cursor: pointer;
+}
+
+.contacts-dropdown-item input {
+    width: auto;
+}
+
+.contacts-dropdown-list.show {
+    display: block;
+}
+
+#selected-contact-insignias {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-top: 0px;
+    margin-bottom: 8px;
+    margin-top: -8px;
+    flex-wrap: wrap;
+    width: 280px;
+}
+
+.add-task-main .assigned-initials {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    box-sizing: border-box;
+}
+
+.no-contacts-slected {
+    justify-self: center;
+    font-size: 16px;
+    color: rgb(255, 0, 0, 0.6);
+}

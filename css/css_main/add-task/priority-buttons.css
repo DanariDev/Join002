@@ -1,0 +1,56 @@
+#priority-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+#urgent-btn,
+#medium-btn,
+#low-btn {
+    flex: 1;
+    height: 56px;
+    border: none;
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    font-weight: 500;
+    cursor: pointer;
+    max-width: 136px;
+    background-color: white;
+    color: var(--clr-900);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+#urgent-btn:hover,
+#medium-btn:hover,
+#low-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.urgent-btn-active img,
+.medium-btn-active img,
+.low-btn-active img {
+    filter: brightness(0) invert(1);
+}
+
+#urgent-btn.urgent-btn-active,
+#medium-btn.medium-btn-active,
+#low-btn.low-btn-active {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+#urgent-btn.urgent-btn-active {
+    background-color: #c93939;
+    color: white;
+}
+
+#medium-btn.medium-btn-active {
+    background-color: #ffaa00;
+    color: white;
+}
+
+#low-btn.low-btn-active {
+    background-color: #5dc43e;
+    color: white;
+}

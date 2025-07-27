@@ -1,0 +1,39 @@
+.success-message {
+    position: fixed;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #5dc43e;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0.95;
+    transition: opacity 0.4s;
+}
+
+.d-none {
+    display: none !important;
+}
+
+.error-message-popup {
+    position: fixed;
+    top: 90px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #c93939;
+    color: #fff;
+    padding: 16px 32px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    z-index: 1001;
+    opacity: 0.96;
+    transition: opacity 0.4s;
+}
+
+#error-message {
+    font-size: 16px;
+}

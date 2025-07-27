@@ -1,0 +1,10 @@
+/* Sidebar */
+.add-task-link {
+    background-color: var(--clr-900);
+    color: rgb(255, 255, 255);
+    box-sizing: border-box;
+}
+
+.add-task-link img {
+    filter: contrast(1.5);
+}

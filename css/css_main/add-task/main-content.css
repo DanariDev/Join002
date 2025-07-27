@@ -1,0 +1,10 @@
+/* Content Box */
+.add-task-main {
+    max-width: 1100px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    padding: 4rem;
+    padding-bottom: 0;
+    margin-left: 22.138rem;
+}
