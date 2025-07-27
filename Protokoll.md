@@ -27,3 +27,9 @@ Edit fenster war ansonsten nicht zentriert, da User Agent nur display: block hin
 
 - edit 
 - contacte werden syncronisiert in contacts, liste wird auch alphabetisch geordnet beim lsöchen udn erstellen eines contacts. Was war der dritte Fehler nochmal?
+
+
+**Conatcts:** 
+    -responsive 
+        Die Buttons werden nicht angezeigt (der Button zum Kontakt hinzufügen und der Button, der das Menü zum Löschen und Bearbeiten öffnet). 
+        Außerdem funktioniert der Pfeil auf der Detail-Seite nicht, mit dem man wieder zur Kontakt-Liste zurückkommt.
