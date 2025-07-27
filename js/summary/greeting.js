@@ -25,7 +25,7 @@ export function initGreeting() {
       const snapshot = await get(userRef);
 
       if (isGuest) {
-        nameField.textContent = "Guest";
+        nameField.textContent = "";
       } else if (snapshot.exists()) {
         const data = snapshot.val();
         nameField.textContent = data.name;
@@ -33,7 +33,7 @@ export function initGreeting() {
         nameField.textContent = "Unbekannt";
       }
     } else {
-      nameField.textContent = "Guest";
+      nameField.textContent = "";
     }
   });
 }
