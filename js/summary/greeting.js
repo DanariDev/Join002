@@ -1,10 +1,12 @@
 import { auth, db } from "../firebase/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import {
-  ref,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, get, } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+/**
+ * This function outputs a time-based personalized greeting. 
+ * Additionally, the name of the logged-in user is identified and 
+ * displayed. For guest logins, no name is shown.
+ */
 export function initGreeting() {
   const nameField = document.querySelector("#summary-greeting-name");
   const timeField = document.querySelector("#summary-greeting-time");
