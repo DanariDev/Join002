@@ -32,30 +32,37 @@ function togglePasswordRepeat(){
     }
 }
 
-window.addEventListener("load", function () {
-    const passwortInput = document.getElementById('password-input')
-    passwortInput.addEventListener("input", function() {
+/**
+ * This function swaps the icon in the password input field if the input field is not empty.
+ * Additionally, it checks if the password input field exists.
+ * 
+ * @param {string} input -This string returns the ID of the input field.
+ * @param {string} icon -This string returns the ID of the icon (div).
+ */
+function passwortLength(input, icon){
+    const passwortInput = document.getElementById(input)
+    passwortInput?.addEventListener("input", function() {
        if(passwortInput.value.length >0) {
         passwortInput.style.backgroundImage = "url('')";
-        document.getElementById('show-hide-password').classList.remove('d-none');
+        document.getElementById(icon).classList.remove('d-none');
        }
        else{
         passwortInput.style.backgroundImage = "url(./assets/img/lock.png)";
-        document.getElementById('show-hide-password').classList.add('d-none');
+        document.getElementById(icon).classList.add('d-none');
        } 
     });
+}
 
-    const passwortRepeatInput = document.getElementById('password-repeat-input')
-    passwortRepeatInput?.addEventListener("input", function() {
-       if(passwortRepeatInput.value.length >0) {
-        passwortRepeatInput.style.backgroundImage = "url('')";
-        document.getElementById('show-hide-repeat-password').classList.remove('d-none');
-       }
-       else{
-        passwortRepeatInput.style.backgroundImage = "url(./assets/img/lock.png)";
-        document.getElementById('show-hide-repeat-password').classList.add('d-none');
-       } 
-    });
+/**
+ * This statement ensures that after the page loads, the same function is executed twice with different values. 
+ * Additionally, the two icons (divs) ("show-hide-password" and "show-hide-repeat-password"), if both are present, will each receive a click event listener. 
+ * If only "show-hide-password" is present, it will be the only one assigned a click event listener. 
+ * If the "show-hide-password" icon is clicked, the "togglePassword" function is executed. 
+ * If the "show-hide-repeat-password" icon is clicked, the "togglePasswordRepeat" function is executed.
+ */
+window.addEventListener("load", function () {
+    passwortLength('password-input', 'show-hide-password');
+    passwortLength('password-repeat-input', 'show-hide-repeat-password');
 
     document.getElementById('show-hide-password').addEventListener("click", togglePassword);
     document.getElementById('show-hide-repeat-password')?.addEventListener("click", togglePasswordRepeat);

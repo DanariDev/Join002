@@ -22,9 +22,17 @@ function showError(input, errorElem, message) {
 }
 
 /**
- * This function checks whether the values ​​fit in the input fields
+ * This function checks if the parameters are not "null" and executes them if applicable.
  * 
- * @returns -There becomes the values of "has error", "name", "email", "phone" return
+ * @param {*} nameCheckValue -If this value is to be checked, the appropriate ID must be provided here. If the value should not be checked, simply "null" (without quotes) will be used.
+ * @param {*} emailCheckValue -If this value is to be checked, the appropriate ID must be provided here. If the value should not be checked, simply "null" (without quotes) will be used.
+ * @param {*} phoneCheckValue -If this value is to be checked, the appropriate ID must be provided here. If the value should not be checked, simply "null" (without quotes) will be used.
+ * @param {*} passwordCheckValue -If this value is to be checked, the appropriate ID must be provided here. If the value should not be checked, simply "null" (without quotes) will be used.
+ * @param {*} passwordRepeatCheckValue -If this value is to be checked, the appropriate ID must be provided here. If the value should not be checked, simply "null" (without quotes) will be used.
+ * @param {*} privacyCheckboxValue -If this value is to be checked, the appropriate ID must be provided here. If the value should not be checked, simply "null" (without quotes) will be used.
+ * @param {*} errorCode -If this value is to be checked, the appropriate string of the error code must be provided here. If the value should not be checked, simply "null" (without quotes) will be used.
+ * @returns -Here, either true or false is returned, depending on the value of "hasError".
+ * 
  */
 export function checkInput(nameCheckValue = null, emailCheckValue = null, phoneCheckValue = null, passwordCheckValue = null, passwordRepeatCheckValue = null, privacyCheckboxValue = null, errorCode = null) {
   let hasError = false
@@ -40,6 +48,16 @@ export function checkInput(nameCheckValue = null, emailCheckValue = null, phoneC
   return hasError;
 }
 
+/**
+ * This function checks if the values are correct. 
+ * If they are not, they are highlighted, 
+ * and a hint is displayed indicating that something is wrong. 
+ * Additionally, the value of "hasError" is returned.
+ * 
+ * @param {string} nameCheckValue -Here is the string of the input-name-id.
+ * @param {boolean} hasError -Depending on whether the value is correct or not, the value is set to true or false here.
+ * @returns -Here, either true or false is returned, depending on the value of "hasError".
+ */
 function nameCheck(nameCheckValue, hasError){
   const nameInput = document.getElementById(nameCheckValue);
   const nameError = document.querySelectorAll(".name-error");
@@ -52,6 +70,16 @@ function nameCheck(nameCheckValue, hasError){
   return hasError;
 }
 
+/**
+ * This function checks if the values are correct. 
+ * If they are not, they are highlighted, 
+ * and a hint is displayed indicating that something is wrong. 
+ * Additionally, the value of "hasError" is returned.
+ * 
+ * @param {string} emailCheckValue -Here is the string of the input-email-id.
+ * @param {boolean} hasError -Depending on whether the value is correct or not, the value is set to true or false here.
+ * @returns -Here, either true or false is returned, depending on the value of "hasError".
+ */
 function emailCheck(emailCheckValue, hasError){
   const emailInput = document.getElementById(emailCheckValue);
   const emailError = document.querySelectorAll(".email-error");
@@ -65,6 +93,16 @@ function emailCheck(emailCheckValue, hasError){
   return hasError;
 }
 
+/**
+ * This function checks if the values are correct. 
+ * If they are not, they are highlighted, 
+ * and a hint is displayed indicating that something is wrong. 
+ * Additionally, the value of "hasError" is returned.
+ * 
+ * @param {string} phoneCheckValue -Here is the string of the input-phone-id.
+ * @param {boolean} hasError -Depending on whether the value is correct or not, the value is set to true or false here.
+ * @returns -Here, either true or false is returned, depending on the value of "hasError".
+ */
 function phoneCheck (phoneCheckValue, hasError){
   const phoneInput = document.getElementById(phoneCheckValue);
   const phoneError = document.querySelectorAll(".phone-error");
@@ -78,6 +116,16 @@ function phoneCheck (phoneCheckValue, hasError){
   return hasError;
 }
 
+/**
+ * This function checks if the values are correct. 
+ * If they are not, they are highlighted, 
+ * and a hint is displayed indicating that something is wrong. 
+ * Additionally, the value of "hasError" is returned.
+ * 
+ * @param {string} passwortCheckValue -Here is the string of the input-passwort-id.
+ * @param {boolean} hasError -Depending on whether the value is correct or not, the value is set to true or false here.
+ * @returns -Here, either true or false is returned, depending on the value of "hasError".
+ */
 function passwordCheck (passwordCheckValue, hasError){
   const passwordInput = document.getElementById(passwordCheckValue);
   const passwordError = document.querySelectorAll(".password-error");
@@ -91,6 +139,16 @@ function passwordCheck (passwordCheckValue, hasError){
   return hasError;
 }
 
+/**
+ * This function checks if the values are correct. 
+ * If they are not, they are highlighted, 
+ * and a hint is displayed indicating that something is wrong. 
+ * Additionally, the value of "hasError" is returned.
+ * 
+ * @param {string} passwordRepeatCheckValue -Here is the string of the input-password-repeat-id.
+ * @param {boolean} hasError -Depending on whether the value is correct or not, the value is set to true or false here.
+ * @returns -Here, either true or false is returned, depending on the value of "hasError".
+ */
 function passwordRepeatCheck (passwordRepeatCheckValue, hasError){
   const passwordRepeatInput = document.getElementById(passwordRepeatCheckValue);
   const passwordRepeatError = document.querySelectorAll(".repeat-error");
@@ -105,6 +163,16 @@ function passwordRepeatCheck (passwordRepeatCheckValue, hasError){
   return hasError;
 }
 
+/**
+ * This function checks if the values are correct. 
+ * If they are not, they are highlighted, 
+ * and a hint is displayed indicating that something is wrong. 
+ * Additionally, the value of "hasError" is returned.
+ * 
+ * @param {string} privacyCheckboxValue -Here is the string of the input-privacy-Checkbox-id.
+ * @param {boolean} hasError -Depending on whether the value is correct or not, the value is set to true or false here.
+ * @returns -Here, either true or false is returned, depending on the value of "hasError".
+ */
 function privacyCheckbox (privacyCheckboxValue, hasError) {
   const checkbox = document.getElementById(privacyCheckboxValue);
   const checkboxError = document.querySelectorAll(".checkbox-error");
@@ -116,6 +184,14 @@ function privacyCheckbox (privacyCheckboxValue, hasError) {
   return hasError;
 }
 
+/**
+ * This function checks if the values email and/or password are valid for Firebase. 
+ * If they don't match, they are highlighted, and a hint is displayed indicating that something is wrong.
+ * 
+ * @param {string} emailCheckValue - -Here is the string of the input-email-id.
+ * @param {string} passwordCheckValue -Here is the string of the input-passwort-id.
+ * @param {string} errorCode -Here is the string of the errorCode from Firebase.
+ */
 function incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, errorCode){
   const emailInput = document.getElementById(emailCheckValue);
   const emailError = document.querySelectorAll(".email-error");
@@ -138,4 +214,4 @@ function incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, erro
 
 
 //vorlage -> checkInput(Name, Email, Phone, Password, PasswordRepeat, privacyCheckbox, errorCode)
-//die werte die benötigt werden, die passende -ID- einfügen, die nihct gebraucht werden -null- einsetzten
+//Die Werte, die benötigt werden, müssen die passende -"ID"- haben. Die Werte, die nicht gebraucht werden, müssen mit -null- ersetzt werden.

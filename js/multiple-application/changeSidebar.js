@@ -1,7 +1,5 @@
 /**
- * This function exchanges the links in the sidebar when you go on legal or privacy policy via the start/index page
- * 
- * 
+ * This function swaps the links in the sidebar when you click on Link "Privacy Policy" or "Legal Notice" on the "index" page.
  */
 function init() {
     const { navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter, specialLink } = initDomElements();
@@ -26,7 +24,7 @@ function init() {
 }
 
 /**
- * This function hands over Dom Elements of variables
+ * This function assigns "Document Object Model" (DOM) elements to variables.
  * 
  * @returns -The variables
  */
@@ -41,6 +39,9 @@ function initDomElements() {
     return { navLinkHideAllClass, topbarIcons, navLinkUnregistered, sidebarFooterLinks, sidebarFooter, specialLink }
 }
 
+/**
+ * This statement ensures that the "init" function is called after the page loads.
+ */
 window.addEventListener("load", function () {
     init();
 });
