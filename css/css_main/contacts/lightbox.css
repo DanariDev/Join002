@@ -120,6 +120,8 @@ h2 {
     border-radius: 0 20px 20px 0;
     min-height: 400px;
     z-index: 900;
+    max-width: 622px;
+    position: relative;
 }
 
 .edit-initial-circle {

@@ -50,6 +50,7 @@
     flex-direction: column;
     border-radius: 0 0 25px 25px;
     width: 100%;
+    position: static;
   }
 
   .overlay-left {
@@ -310,11 +311,15 @@
 @media (max-width: 400px) {
   .overlay-left span,
   .lightbox-left span {
-    font-size: 23px;
+    font-size: 21px;
   }
 
   .overlay-left h2{
-    font-size: 51px;
+    font-size: 48px;
+  }
+
+  .overlay-box{
+    max-width: 320px;
   }
 }
 
@@ -385,5 +390,15 @@
 
   #lightbox h2 {
     font-size: 40px;
+  }
+}
+
+@media (max-height: 670px) {
+  .overlay-left{
+    min-height: 224px;
+  }
+
+  .add-initial-circle {
+    top: -35px;
   }
 }
