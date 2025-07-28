@@ -58,3 +58,5 @@ function clearForm() {
       renderSelectedInsignias();
   }
 }
+
+document.getElementById('clear-btn').addEventListener('click', clearForm);
