@@ -1,0 +1,284 @@
+/* Lightbox */
+#lightbox-overlay {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0000004d;
+    z-index: 900;
+}
+
+.overlay-bg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #0000004d;
+    z-index: 800;
+}
+
+.overlay-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: max-content;
+    width: 80%;
+    max-width: 1444px;
+    z-index: 900;
+    position: relative;
+}
+
+#lightbox {
+    display: flex;
+    flex-direction: row;
+    height: 50vh;
+    width: 90%;
+    border-radius: 10px;
+    transform: translateX(100%);
+    transition: transform 0.5s ease-in-out;
+    max-height: 507px;
+    max-width: 1062px;
+}
+
+.overlay-left,
+.lightbox-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    border-radius: 20px 0 0 20px;
+    min-height: 400px;
+    z-index: 900;
+}
+
+#create-contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2rem;
+}
+
+.join-logo-left {
+    width: 55px;
+    margin: 1rem 2rem;
+}
+
+h2 {
+    margin: 2rem;
+    font-size: var(--fs-61);
+    font-weight: 700;
+    position: relative;
+}
+
+.overlay-left span,
+.lightbox-left span {
+    font-size: var(--fs-27);
+    position: relative;
+    margin: 0 2rem;
+    align-self: start;
+}
+
+.overlay-left span::after,
+.lightbox-left span::after,
+.edit-contact-h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -16px;
+    width: 33%;
+    height: 5px;
+    background-color: var(--clr-500);
+    border-radius: 4px;
+}
+
+
+.lightbox-right {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+    background-color: var(--clr-200);
+    border-radius: 0 20px 20px 0;
+    min-height: 400px;
+}
+
+.overlay-right {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex: 1;
+    background-color: var(--clr-200);
+    border-radius: 0 20px 20px 0;
+    min-height: 400px;
+    z-index: 900;
+}
+
+.edit-initial-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: var(--fs-47);
+    font-weight: 500;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin-bottom: 20px;
+    border: 2px solid white;
+}
+
+.add-initial-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    font-size: var(--fs-47);
+    font-weight: 500;
+    color: white;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    margin-bottom: 20px;
+    border: 2px solid white;
+}
+
+.add-initial-circle img {
+    width: 100%;
+    height: auto;
+    padding: 2rem;
+}
+
+.editing-lighbox {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 2rem;
+}
+
+.overlay input,
+#lightbox input {
+    height: 50px;
+    min-width: 300px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    padding: 0 60px 0 16px;
+}
+
+input {
+    border: 1px solid var(--clr-300);
+}
+
+#new-name,
+#edit-name {
+    background: url("/assets/img/person.png") no-repeat right 24px center;
+}
+
+#new-email,
+#edit-email {
+    background: url("/assets/img/mail.svg") no-repeat right 24px center;
+}
+
+#new-phone,
+#edit-phone {
+    background: url("/assets/img/phone.png") no-repeat right 24px center;
+}
+
+#confirm-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.confirm-box {
+    background: white;
+    border-radius: 10px;
+    padding: 24px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    max-width: 320px;
+    width: 100%;
+    font-family: sans-serif;
+}
+
+.confirm-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.confirm-buttons button {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+#confirm-yes {
+    background-color: #ff4d4d;
+    color: white;
+}
+
+#confirm-no {
+    background-color: #ccc;
+}
+
+.close-button {
+    position: absolute;
+    border: 0;
+    background-color: transparent;
+    right: 32px;
+    top: 32px;
+    font-size: 36px;
+    cursor: pointer;
+    border-radius: 100%;
+    width: 23px;
+    height: 23px;
+    padding: 3.5px;
+}
+
+.close-button:hover {
+    color: red;
+    background: rgb(0, 0, 0, 0.1);
+}
+
+.error-message {
+    justify-self: center;
+}
+
+.close-overlay-btn {
+    position: absolute;
+    border: 0;
+    right: 16px;
+    top: 16px;
+    cursor: pointer;
+    border-radius: 100%;
+    width: 25px;
+    height: 25px;
+    padding: 1rem;
+    font-size: 16px;
+    text-align: center;
+    font-weight: 700;
+}
+
+#lightbox.show,
+#showed-current-contact.show {
+    display: flex;
+    transform: translateX(0);
+}

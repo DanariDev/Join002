@@ -1,0 +1,74 @@
+/* Contact List */
+#contacts-list-wrapper {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.list-alphabet {
+    height: min-content;
+    padding: 1rem;
+    font-size: var(--fs-20);
+}
+
+.split-list-line {
+    padding: 0;
+    margin: 4px;
+    border: 1px solid var(--clr-300);
+}
+
+.list-contact-wrapper {
+    display: flex;
+    gap: 35px;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.choosen,
+.list-contact-wrapper:hover {
+    border-radius: 10px;
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+}
+
+.initial-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 42px;
+    width: 42px;
+    flex-shrink: 0;
+    border-radius: 100%;
+    font-size: var(--fs-16);
+    color: var(--clr-200);
+    border: 2px solid var(--clr-200);
+}
+
+.list-contact-information {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 8px;
+    overflow: hidden;
+}
+
+.list-name {
+    font-size: var(--fs-20);
+    text-wrap-mode: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-email {
+    font-size: var(--fs-16);
+    color: var(--clr-500);
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-divider {
+    font-weight: bold;
+    color: #505060;
+    margin: 16px 0 4px 6px;
+    letter-spacing: 2px;
+    font-size: 20px;
+}
