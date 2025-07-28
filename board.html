@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/css_main/board/board.css" />
   <link rel="stylesheet" href="css/css_main/board/board-overlay.css" /> 
   <link rel="stylesheet" href="css/css_main/board/edit-task.css" /> 
+  <link rel="stylesheet" href="css/css_main/board/add-task.css" />
   <link rel="stylesheet" href="css/css_responsive/contacts/query-overlay-responsive.css" /> 
   <link rel="stylesheet" href="css/css_responsive/board/board-responsive.css" /> 
   <link rel="stylesheet" href="css/css_responsive/topbar/topbar-responsive.css" />
@@ -20,7 +21,6 @@
   <link rel="stylesheet" href="css/css_responsive/board/board-overlay-responsive.css" />
   <link rel="stylesheet" href="css/css_responsive/board/edit-task-responsive.css" /> 
 </head>
-
 
 <body>
   <div class="sidebar">
@@ -55,7 +55,6 @@
 
   <div class="topbar">
     <span class="topbar-title">Kanban Project Management Tool</span>
-
     <img class="topbar-logo" src="assets/img/logo-start.png" alt="" />
     <div class="topbar-icons">
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
@@ -78,7 +77,6 @@
             +
           </button></a>
       </div>
-
       <div class="search-task-field">
         <input type="text" placeholder="Find Task" id="search-input" />
         <button id="add-task-button" class="responsive-d-none">
@@ -157,56 +155,74 @@
     </div>
   </div>
 
+  <!-- NEU: Add Task Overlay im Gruppen-Look -->
   <div id="add-task-overlay" class="overlay d-none">
     <div id="form-add-task">
       <button id="closeFormModal" class="close-btn">×</button>
       <h1>Add Task</h1>
       <form id="add-task-form" autocomplete="off">
-  <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
-    <!-- Linke Spalte -->
-    <div style="flex: 1 1 280px; min-width: 240px;">
-      <label for="task-title"><b>Title*</b></label>
-      <input id="task-title" required placeholder="Enter a title" style="width: 100%; margin-bottom: 18px;">
-      
-      <label for="task-description">Description</label>
-      <textarea id="task-description" placeholder="Enter a description" style="width: 100%; min-height: 55px; margin-bottom: 18px;"></textarea>
-      
-      <label for="task-date"><b>Due date*</b></label>
-      <input id="task-date" required type="date" style="width: 100%; margin-bottom: 12px;">
-      <div style="font-size:13px;color:#f25a54;margin-top:6px;">*This field is required</div>
-    </div>
-    <!-- Rechte Spalte -->
-    <div style="flex: 1 1 280px; min-width: 240px;">
-      <label><b>Priority</b></label>
-      <div style="margin-bottom:16px; display: flex; gap: 8px;">
-        <button type="button" class="prio-btn urgent">Urgent</button>
-        <button type="button" class="prio-btn medium selected">Medium</button>
-        <button type="button" class="prio-btn low">Low</button>
-      </div>
-      <label for="task-assigned">Assigned to</label>
-      <select id="task-assigned" style="width:100%;margin-bottom:12px;">
-        <option>Select contacts to assign</option>
-      </select>
-      <label for="task-category"><b>Category*</b></label>
-      <select id="task-category" required style="width:100%;margin-bottom:12px;">
-        <option value="">Select task category</option>
-        <option value="Technical Task">Technical Task</option>
-        <option value="User Story">User Story</option>
-      </select>
-      <label>Subtasks</label>
-      <div style="display:flex;margin-bottom:12px;">
-        <input id="subtask-input" placeholder="Add new subtask" style="flex:1;">
-        <button type="button" id="add-subtask-btn" style="margin-left:7px;border-radius:6px;border:1.5px solid #aaa;">+</button>
-      </div>
-      <ul id="subtasks-list" style="min-height:24px;"></ul>
-      <div style="text-align:right;margin-top:22px;">
-        <button type="reset" class="cancel-btn">Cancel</button>
-        <button type="submit" class="create-btn">Create Task</button>
-      </div>
-    </div>
-  </div>
-</form>
+        <div class="add-task-form-content">
+          <label class="required" for="task-title">Title</label>
+          <input id="task-title" type="text" placeholder="Enter a title" required />
 
+          <label for="task-description">Description</label>
+          <textarea id="task-description" class="description-input" placeholder="Enter a description"></textarea>
+
+          <label class="required" for="task-date">Due date</label>
+          <input id="task-date" type="date" required />
+          <span class="required-explain">This field is required</span>
+        </div>
+        <div class="grey-bar"></div>
+        <div class="add-task-form-content">
+          <label>Priority</label>
+          <div id="priority-buttons">
+            <button type="button" id="urgent-btn">
+              Urgent
+            </button>
+            <button type="button" id="medium-btn" class="medium-btn-active">
+              Medium
+            </button>
+            <button type="button" id="low-btn">
+              Low
+            </button>
+          </div>
+
+          <label>Assigned to</label>
+          <div class="contacts-dropdown" id="contacts-dropdown">
+            <div class="contacts-dropdown-inner" id="contacts-selected">
+              Select contact(s)
+            </div>
+            <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+          </div>
+          <div id="selected-contact-insignias" class="contacts-dropdown-inner"></div>
+
+          <label class="required" for="task-category">Category</label>
+          <select id="task-category" required>
+            <option value="" disabled selected>Select task category</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="User Story">User Story</option>
+          </select>
+
+          <label for="subtask">Subtasks</label>
+          <div class="subtask-wrapper">
+            <input type="text" id="subtask-input" placeholder="Enter subtask" autocomplete="off" />
+            <button type="button" class="subtask-button">+</button>
+          </div>
+
+          <ul id="subtasks-list" class="subtask-list"></ul>
+
+          <span class="required-explain-responsive">This field is required</span>
+
+          <div class="add-task-create-and-clear-btn">
+            <button type="reset" id="clear-btn">
+              Cancel
+            </button>
+            <button id="create-btn" type="submit" class="btn-create-task">
+              Create Task
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -228,7 +244,6 @@
     <main class="edit-task-main">
       <button id="overlay-edit-close" class="close-btn">×</button>
       <h1>Edit Task</h1>
-
       <form id="edit-task-form">
         <div class="edit-task-form-content">
           <label class="required" for="title">Title</label>
@@ -241,9 +256,7 @@
           <label class="required" for="date">Due date</label>
           <input class="date-input" type="date" id="editing-date" required />
         </div>
-
         <div class="grey-bar"></div>
-
         <div class="edit-task-form-content">
           <label>Priority</label>
           <div id="editing-priority-buttons">
@@ -260,7 +273,6 @@
               <img src="assets/img/low-btn-icon.png" alt="low-icon" />
             </button>
           </div>
-
           <label>Assigned to</label>
           <div class="contacts-dropdown" id="editing-contacts-dropdown">
             <div class="contacts-dropdown-inner" id="editing-contacts-selected">
@@ -269,24 +281,19 @@
             <div class="contacts-dropdown-list" id="editing-contacts-dropdown-list"></div>
           </div>
           <div id="selected-editing-contact-insignias" class="contacts-dropdown-inner"></div>
-
           <label class="required" for="category">Category</label>
           <select id="editing-category" required>
             <option value="" disabled selected>Select task category</option>
             <option value="Technical Task">Technical Task</option>
             <option value="User Story">User Story</option>
           </select>
-
           <label for="subtask">Subtasks</label>
           <div class="subtask-wrapper">
             <input type="text" id="editing-subtask" placeholder="Enter subtask" autocomplete="off" />
             <button type="button" class="subtask-button">+</button>
           </div>
-
           <ul id="editing-subtask-list"></ul>
-
           <span class="required-explain-responsive">This field is required</span>
-
           <div class="edit-task-cancel-and-save-btn">
             <button type="reset" id="editing-cancel-btn">
               Cancel &#10006;
@@ -297,28 +304,12 @@
           </div>
         </div>
       </form>
-
       <span class="required-explain">This field is required</span>
     </main>
   </div>
 
   <!-- Firebase Grundfunktionen -->
-
-  
-<!-- Nur diese beiden einbinden -->
-<script type="module" src="js/help/main.js"></script>
-<script type="module" src="js/board/main.js"></script>
-
-
-  
-
-
-  
-  
-
-
-
-
+  <script type="module" src="js/help/main.js"></script>
+  <script type="module" src="js/board/main.js"></script>
 </body>
-
 </html>
