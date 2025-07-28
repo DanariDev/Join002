@@ -70,6 +70,8 @@ function setupLightboxButtons(id) {
   if (closeBtn) closeBtn.onclick = closeEditLightbox;
   const deleteBtn = document.getElementById("deleteBtn");
   if (deleteBtn) deleteBtn.onclick = () => deleteContact(id);
+  const deleteResponiveBtn = document.getElementById("current-delete-responsive");
+  if (deleteResponiveBtn) deleteResponiveBtn.onclick = () => deleteContact(id);
 }
 
 /**
