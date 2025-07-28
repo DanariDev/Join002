@@ -63,3 +63,38 @@ function setProgress(clone, task) {
     count.textContent = '0 / 0';
   }
 }
+
+document.addEventListener('click', function (e) {
+  const card = e.target.closest('.task-card');
+  if (card) {
+    const taskId = card.dataset.taskId;
+    openTaskOverlay(taskId);
+  }
+});
+
+function openTaskOverlay(taskId) {
+  document.getElementById('task-overlay').classList.remove('d-none');
+  const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
+  if (!card) return;
+  const category = card.querySelector('.task-label').textContent;
+  const title = card.querySelector('.task-title').textContent;
+  const desc = card.querySelector('.task-desc').textContent;
+  const prioImg = card.querySelector('.priority-img');
+  const prio = prioImg?.alt || '';
+  document.getElementById('popup-category').innerHTML = `
+    <span class="task-label" style="
+      background:${category==='User Story' ? '#0038ff':'#00c7a3'};
+      color:#fff;padding:5px 18px;border-radius:10px;font-weight:bold;display:inline-block;">
+      ${category}
+    </span>`;
+  document.getElementById('popup-title').innerHTML = `
+    <h2 style="font-size:2.8rem;margin:20px 0 10px 0;font-weight:900;">${title}</h2>`;
+  document.getElementById('popup-description').innerHTML = `
+    <div style="margin-bottom:10px;">${desc || ''}</div>`;
+  document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>-</span>`;
+  document.getElementById('popup-priority').innerHTML = `<b>Priority:</b>
+    <span style="color:${prio==='Urgent'?'#c93939':prio==='Medium'?'#ffaa00':'#5dc43e'}">${prio}</span>`;
+  document.getElementById('overlay-close').onclick = function() {
+    document.getElementById('task-overlay').classList.add('d-none');
+  };
+}
