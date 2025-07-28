@@ -24,6 +24,10 @@
     transform: translate(-50%, -50%);
 }
 
+.add-task-form-content {
+    width: 100%;
+}
+
 #edit-task-overlay {
     position: fixed;
     top: 0;
