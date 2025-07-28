@@ -17,7 +17,11 @@
     border-radius: 25px;
     padding: 2rem;
     max-width: 800px;
-    position: relative;
+    min-width: 600px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 #edit-task-overlay {
@@ -45,7 +49,6 @@
 }
 
 #form-add-task {
-    display: none;
     position: fixed;
     top: 40%;
     left: 50%;
@@ -59,18 +62,7 @@
     z-index: 1000;
 }
 
-#form-add-task {
-    min-width: 540px;
-    max-width: 1040px;
-    width: 100%;
-    background: var(--clr-200);
-    border-radius: 24px;
-    box-shadow: 0 6px 40px 0 rgba(0, 0, 0, 0.13);
-    padding: 3rem 2.5rem 2.5rem 2.5rem;
-    position: relative;
-    display: block;
-    margin: 0 auto;
-}
+
 
 #form-add-task h1 {
     font-size: 3rem;
@@ -80,7 +72,6 @@
 }
 
 #add-task-overlay {
-    display: flex !important;
     align-items: center;
     justify-content: center;
     z-index: 10001;
@@ -165,9 +156,6 @@ textarea {
     outline: 2px solid #2a3647;
 }
 
-.overlay-content {
-    min-width: 600px;
-}
 
 .overlay-key {
     font-size: var(--fs-16);

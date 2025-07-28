@@ -28,11 +28,6 @@ function setLabel(clone, task) {
     labelDiv.textContent = "User Story";
     labelDiv.style.background = "#0038ff";
   } else labelDiv.textContent = "";
-  labelDiv.style.color = "white";
-  labelDiv.style.padding = "2px 14px";
-  labelDiv.style.borderRadius = "8px";
-  labelDiv.style.fontWeight = "bold";
-  labelDiv.style.fontSize = "14px";
 }
 function setPriority(clone, task) {
   const img = clone.querySelector('.priority-img');
@@ -82,19 +77,17 @@ function openTaskOverlay(taskId) {
   const prioImg = card.querySelector('.priority-img');
   const prio = prioImg?.alt || '';
   document.getElementById('popup-category').innerHTML = `
-    <span class="task-label" style="
-      background:${category==='User Story' ? '#0038ff':'#00c7a3'};
-      color:#fff;padding:5px 18px;border-radius:10px;font-weight:bold;display:inline-block;">
+    <span class="task-label">
       ${category}
     </span>`;
   document.getElementById('popup-title').innerHTML = `
-    <h2 style="font-size:2.8rem;margin:20px 0 10px 0;font-weight:900;">${title}</h2>`;
+    <h2>${title}</h2>`;
   document.getElementById('popup-description').innerHTML = `
-    <div style="margin-bottom:10px;">${desc || ''}</div>`;
+    <div>${desc || ''}</div>`;
   document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>-</span>`;
   document.getElementById('popup-priority').innerHTML = `<b>Priority:</b>
-    <span style="color:${prio==='Urgent'?'#c93939':prio==='Medium'?'#ffaa00':'#5dc43e'}">${prio}</span>`;
-  document.getElementById('overlay-close').onclick = function() {
+    <span>${prio}</span>`;
+  document.getElementById('overlay-close').onclick = function () {
     document.getElementById('task-overlay').classList.add('d-none');
   };
 }

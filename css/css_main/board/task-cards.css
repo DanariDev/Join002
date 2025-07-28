@@ -98,6 +98,9 @@
     border-radius: 8px;
     display: inline-block;
     margin-bottom: 10px;
+    color: white;
+
+    background-color: red;
 }
 
 .task-title {

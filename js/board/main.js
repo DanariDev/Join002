@@ -8,7 +8,7 @@ document.querySelectorAll('.add-task-btn, #add-task-button').forEach(btn => {
   btn.addEventListener('click', function (e) {
     e.preventDefault();
     document.getElementById('add-task-overlay').classList.remove('d-none');
-    document.getElementById('form-add-task').style.display = 'block';
+    document.getElementById('form-add-task').style.display = 'flex';
     // Formular leeren
     document.getElementById('add-task-form').reset();
     // Default-Prio setzen
@@ -40,7 +40,7 @@ document.querySelectorAll('.prio-btn').forEach(btn => {
 });
 
 
-document.getElementById('search-input').addEventListener('input', function() {
+document.getElementById('search-input').addEventListener('input', function () {
   const searchValue = this.value.trim().toLowerCase();
   const allTaskCards = document.querySelectorAll('.task-card');
   let anyVisible = false;
@@ -57,7 +57,7 @@ document.getElementById('search-input').addEventListener('input', function() {
     }
   });
 
-  
+
   const noResultsMsg = document.getElementById('no-results-message');
   if (searchValue && !anyVisible) {
     noResultsMsg.style.display = 'flex';

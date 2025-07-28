@@ -10,7 +10,6 @@
 
   <link rel="stylesheet" href="css/css_main/board/buttons.css">
   <link rel="stylesheet" href="css/css_main/board/contatcs-dropdown.css">
-  <link rel="stylesheet" href="css/css_main/board/edit-task.css">
   <link rel="stylesheet" href="css/css_main/board/main-content.css">
   <link rel="stylesheet" href="css/css_main/board/navigation.css">
   <link rel="stylesheet" href="css/css_main/board/overlay.css">
@@ -170,7 +169,7 @@
       <button id="closeFormModal" class="close-btn">×</button>
       <h1>Add Task</h1>
       <form id="add-task-form" autocomplete="off">
-        <<<<<<< HEAD <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
+        <div style="display: flex; gap: 2rem; flex-wrap: wrap;">
           <!-- Linke Spalte -->
           <div style="flex: 1 1 280px; min-width: 240px;">
             <label for="task-title"><b>Title*</b></label>
@@ -214,73 +213,72 @@
               <button type="submit" class="create-btn">Create Task</button>
             </div>
           </div>
-    </div>
-    </form>
-    =======
-    <div class="add-task-form-content">
-      <label class="required" for="task-title">Title</label>
-      <input id="task-title" type="text" placeholder="Enter a title" required />
-      >>>>>>> 3c69a926a1507e131cf5fc91110e3a8d66450741
-
-      <label for="task-description">Description</label>
-      <textarea id="task-description" class="description-input" placeholder="Enter a description"></textarea>
-
-      <label class="required" for="task-date">Due date</label>
-      <input id="task-date" type="date" required />
-      <span class="required-explain">This field is required</span>
-    </div>
-    <div class="grey-bar"></div>
-    <div class="add-task-form-content">
-      <label>Priority</label>
-      <div id="priority-buttons">
-        <button type="button" id="urgent-btn">
-          Urgent
-        </button>
-        <button type="button" id="medium-btn" class="medium-btn-active">
-          Medium
-        </button>
-        <button type="button" id="low-btn">
-          Low
-        </button>
-      </div>
-
-      <label>Assigned to</label>
-      <div class="contacts-dropdown" id="contacts-dropdown">
-        <div class="contacts-dropdown-inner" id="contacts-selected">
-          Select contact(s)
         </div>
-        <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+      </form>
+      =======
+      <div class="add-task-form-content">
+        <label class="required" for="task-title">Title</label>
+        <input id="task-title" type="text" placeholder="Enter a title" required />
+
+        <label for="task-description">Description</label>
+        <textarea id="task-description" class="description-input" placeholder="Enter a description"></textarea>
+
+        <label class="required" for="task-date">Due date</label>
+        <input id="task-date" type="date" required />
+        <span class="required-explain">This field is required</span>
       </div>
-      <div id="selected-contact-insignias" class="contacts-dropdown-inner"></div>
+      <div class="grey-bar"></div>
+      <div class="add-task-form-content">
+        <label>Priority</label>
+        <div id="priority-buttons">
+          <button type="button" id="urgent-btn">
+            Urgent
+          </button>
+          <button type="button" id="medium-btn" class="medium-btn-active">
+            Medium
+          </button>
+          <button type="button" id="low-btn">
+            Low
+          </button>
+        </div>
 
-      <label class="required" for="task-category">Category</label>
-      <select id="task-category" required>
-        <option value="" disabled selected>Select task category</option>
-        <option value="Technical Task">Technical Task</option>
-        <option value="User Story">User Story</option>
-      </select>
+        <label>Assigned to</label>
+        <div class="contacts-dropdown" id="contacts-dropdown">
+          <div class="contacts-dropdown-inner" id="contacts-selected">
+            Select contact(s)
+          </div>
+          <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+        </div>
+        <div id="selected-contact-insignias" class="contacts-dropdown-inner"></div>
 
-      <label for="subtask">Subtasks</label>
-      <div class="subtask-wrapper">
-        <input type="text" id="subtask-input" placeholder="Enter subtask" autocomplete="off" />
-        <button type="button" class="subtask-button">+</button>
+        <label class="required" for="task-category">Category</label>
+        <select id="task-category" required>
+          <option value="" disabled selected>Select task category</option>
+          <option value="Technical Task">Technical Task</option>
+          <option value="User Story">User Story</option>
+        </select>
+
+        <label for="subtask">Subtasks</label>
+        <div class="subtask-wrapper">
+          <input type="text" id="subtask-input" placeholder="Enter subtask" autocomplete="off" />
+          <button type="button" class="subtask-button">+</button>
+        </div>
+
+        <ul id="subtasks-list" class="subtask-list"></ul>
+
+        <span class="required-explain-responsive">This field is required</span>
+
+        <div class="add-task-create-and-clear-btn">
+          <button type="reset" id="clear-btn">
+            Cancel
+          </button>
+          <button id="create-btn" type="submit" class="btn-create-task">
+            Create Task
+          </button>
+        </div>
       </div>
-
-      <ul id="subtasks-list" class="subtask-list"></ul>
-
-      <span class="required-explain-responsive">This field is required</span>
-
-      <div class="add-task-create-and-clear-btn">
-        <button type="reset" id="clear-btn">
-          Cancel
-        </button>
-        <button id="create-btn" type="submit" class="btn-create-task">
-          Create Task
-        </button>
-      </div>
+      </form>
     </div>
-    </form>
-  </div>
   </div>
 
   <div id="confirmation-window" class="confirmation-window d-none">
@@ -366,9 +364,9 @@
   </div>
 
   <!-- Firebase Grundfunktionen -->
-  <<<<<<< HEAD <!-- Nur diese beiden einbinden -->
-    <script type="module" src="js/help/main.js"></script>
-    <script type="module" src="js/board/main.js"></script>
+  <!-- Nur diese beiden einbinden -->
+  <script type="module" src="js/help/main.js"></script>
+  <script type="module" src="js/board/main.js"></script>
 
 
 
@@ -380,10 +378,9 @@
 
 
 
-    =======
-    <script type="module" src="js/help/main.js"></script>
-    <script type="module" src="js/board/main.js"></script>
-    >>>>>>> 3c69a926a1507e131cf5fc91110e3a8d66450741
+  =======
+  <script type="module" src="js/help/main.js"></script>
+  <script type="module" src="js/board/main.js"></script>
 </body>
 
 </html>
