@@ -1,0 +1,27 @@
+.board-main {
+    margin-left: 22.138rem;
+    padding: 4rem;
+    padding-bottom: 21.92px;
+}
+
+.board-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 32px;
+}
+
+/* GRID LAYOUT */
+#board {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "to-do in-progress await done"
+        "to-do-tasks in-progress-tasks await-tasks done-tasks";
+    gap: 10px;
+}
+
+.headline-board {
+    color: black;
+}

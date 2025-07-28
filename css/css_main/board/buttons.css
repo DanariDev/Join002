@@ -1,0 +1,202 @@
+#add-task-button,
+#add-task-button-responsive {
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: var(--fs-20);
+    white-space: nowrap;
+}
+
+.add-task-btn {
+    cursor: pointer;
+    color: var(--clr-700);
+    border: 2px solid var(--clr-700);
+    border-radius: 8px;
+    text-align: center;
+    padding: 0px 2.84px;
+    font-weight: bolder;
+}
+
+.responsive-show {
+    display: none;
+}
+
+/* Close Button Task lightbox Content */
+#overlay-close,
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--clr-700);
+}
+
+#overlay-close:hover,
+.close-btn:hover {
+    background-color: var(--clr-300);
+    color: red;
+    border-radius: 100%;
+}
+
+/* Save and Close button on opened Task */
+.overlay-actions {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.overlay-actions button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--clr-200);
+    gap: 6px;
+    color: var(--clr-700);
+    padding: 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.overlay-actions button:hover {
+    color: var(--clr-500);
+}
+
+.prio-btn {
+    background: #f7f8fa;
+    color: #111;
+    border: unset;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.13s;
+}
+
+.prio-btn.selected,
+.prio-btn.medium.selected {
+    background: #ffce44 !important;
+    color: #222;
+}
+
+.prio-btn.urgent {
+    background: #ffe1e1;
+}
+
+.prio-btn.urgent.selected {
+    background: #ff6a5e;
+    color: white;
+}
+
+.prio-btn.low {
+    background: #e6f4d7;
+}
+
+.prio-btn.low.selected {
+    background: #7be07b;
+    color: white;
+}
+
+.cancel-btn {
+    border-radius: 8px;
+    margin-right: 6px;
+    padding: 9px 18px;
+    background: #fff;
+    color: #222;
+    border: 1.5px solid #d2d2d2;
+    font-size: 1rem;
+}
+
+.create-btn {
+    border-radius: 8px;
+    padding: 9px 18px;
+    background: #2a3647;
+    color: #fff;
+    font-weight: bold;
+    font-size: 1rem;
+    border: unset;
+    cursor: pointer;
+}
+
+#editing-priority-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+#editing-urgent-btn,
+#editing-medium-btn,
+#editing-low-btn {
+    flex: 1;
+    height: 56px;
+    border: none;
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    font-weight: 500;
+    cursor: pointer;
+    max-width: 136px;
+    background-color: white;
+    color: var(--clr-900);
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+#editing-urgent-btn:hover,
+#editing-urgent-btn.urgent-btn-active {
+    background-color: #c93939;
+    color: var(--clr-200);
+}
+
+#editing-medium-btn:hover,
+#editing-medium-btn.medium-btn-active {
+    background-color: #ffaa00;
+    color: var(--clr-200);
+}
+
+#editing-low-btn:hover,
+#editing-low-btn.low-btn-active {
+    background-color: #5dc43e;
+    color: var(--clr-200);
+}
+
+.edit-task-cancel-and-save-btn {
+    display: flex;
+    justify-content: space-around;
+    flex: 1;
+    gap: 10px;
+    padding: 1rem;
+}
+
+#editing-cancel-btn,
+.btn-edit-save {
+    width: 160px;
+    padding: 0.5rem;
+    border: 2px solid var(--clr-700);
+    border-radius: 10px;
+    font-size: var(--fs-20);
+    font-weight: 600;
+    color: var(--clr-900);
+    background-color: var(--clr-200);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+#editing-cancel-btn,
+.btn-edit-save:hover {
+    color: #ffffff;
+    background-color: var(--clr-700);
+}
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}

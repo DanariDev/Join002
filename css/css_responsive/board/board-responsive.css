@@ -110,8 +110,8 @@
   }
 }
 
-@media (max-height: 670px){
+@media (max-height: 670px) {
   .assigned-list {
-     max-height: 100px;
+    max-height: 100px;
   }
 }
