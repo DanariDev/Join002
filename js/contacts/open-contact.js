@@ -3,11 +3,9 @@ import { getContactById } from "./load-contacts.js";
 import { openEditContactLightbox,hideContactCard } from "./edit-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
 import { db } from "../firebase/firebase-init.js";
-import {
-  ref,
-  remove,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, remove, } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { closeAllContactOverlays } from "./contacts-utils.js";
+import {mediaQuery, handleMediaQueryChange} from "./contact-responsive.js";
 
 /**
  * Sets up click events for contact entries, edit buttons, and delete button.
@@ -49,6 +47,9 @@ async function openContactDetails(id) {
   card.dataset.contactId = id;
   fillContactDetails(contact, card);
   showContactCard();
+
+  handleMediaQueryChange(mediaQuery);
+  document.getElementById('responsive-small-edit').classList.remove('d-none');
 }
 
 /**
@@ -127,4 +128,10 @@ function showErrorMessage(message) {
     window.classList.add("d-none");
     window.classList.remove("error");
   }, 2000);
+}
+
+export function backToContactList(){
+  document.getElementById('right-section').classList.replace('slide-in', 'd-none');
+  handleMediaQueryChange(mediaQuery);
+  document.getElementById('responsive-small-edit').classList.add('d-none');
 }

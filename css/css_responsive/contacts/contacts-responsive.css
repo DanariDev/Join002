@@ -101,10 +101,6 @@
     z-index: 800;
   }
 
-  #responsive-small-edit {
-    z-index: 901;
-  }
-
   #contacts-main {
     margin: 0;
     height: calc(100vh - 170px);

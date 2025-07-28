@@ -194,4 +194,23 @@ function handleOverlayClick(e) {
   }
 }
 
+function responsiveEditDeleteMenuOpen(event){
+  document.getElementById('current-btns-responsive').classList.remove('d-none');
+  document.getElementById('body').classList.add('overflow-hidden');
+  setTimeout(() => {document.getElementById('current-btns-responsive').classList.add('show');}, 1);
+  document.getElementById('responsive-small-edit').classList.add('d-none');
+  event.stopPropagation();
+}
+
+function responsiveEditDeleteMenuClose(){
+  document.getElementById('current-btns-responsive').classList.remove('show');
+  setTimeout(() => {
+    document.getElementById('current-btns-responsive').classList.add('d-none');
+    document.getElementById('body').classList.remove('overflow-hidden');
+  }, 450);
+  document.getElementById('responsive-small-edit').classList.remove('d-none');
+}
+
 document.addEventListener("click", handleOverlayClick);
+document.getElementById('responsive-small-edit').addEventListener("click", responsiveEditDeleteMenuOpen);
+document.getElementById('contacts-main').addEventListener("click", responsiveEditDeleteMenuClose)

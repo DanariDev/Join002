@@ -22,6 +22,22 @@ export function initAddContactOverlay() {
     Array.from(document.getElementsByTagName('input')).forEach(e => e.classList.remove("input-error"));
     document.querySelectorAll(".error-message").forEach(d => d.textContent = "");
   });
+  responsiveAddContakt();
+}
+
+function responsiveAddContakt(){
+  const responsiveBtn = document.getElementById("responsive-small-add");
+  if (!responsiveBtn) return;
+  responsiveBtn.addEventListener("click", () => {
+    closeAllContactOverlays();
+    document.getElementById('new-name').value ="";
+    document.getElementById('new-email').value ="";
+    document.getElementById('new-phone').value ="";
+    document.getElementById("add-contact-overlay")?.classList.remove("d-none");
+
+    Array.from(document.getElementsByTagName('input')).forEach(e => e.classList.remove("input-error"));
+    document.querySelectorAll(".error-message").forEach(d => d.textContent = "");
+  });
 }
 
 /**
