@@ -28,11 +28,6 @@ function setLabel(clone, task) {
     labelDiv.textContent = "User Story";
     labelDiv.style.background = "#0038ff";
   } else labelDiv.textContent = "";
-  labelDiv.style.color = "white";
-  labelDiv.style.padding = "2px 14px";
-  labelDiv.style.borderRadius = "8px";
-  labelDiv.style.fontWeight = "bold";
-  labelDiv.style.fontSize = "14px";
 }
 function setPriority(clone, task) {
   const img = clone.querySelector('.priority-img');
@@ -62,4 +57,37 @@ function setProgress(clone, task) {
     bar.style.width = '0%';
     count.textContent = '0 / 0';
   }
+}
+
+document.addEventListener('click', function (e) {
+  const card = e.target.closest('.task-card');
+  if (card) {
+    const taskId = card.dataset.taskId;
+    openTaskOverlay(taskId);
+  }
+});
+
+function openTaskOverlay(taskId) {
+  document.getElementById('task-overlay').classList.remove('d-none');
+  const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
+  if (!card) return;
+  const category = card.querySelector('.task-label').textContent;
+  const title = card.querySelector('.task-title').textContent;
+  const desc = card.querySelector('.task-desc').textContent;
+  const prioImg = card.querySelector('.priority-img');
+  const prio = prioImg?.alt || '';
+  document.getElementById('popup-category').innerHTML = `
+    <span class="task-label">
+      ${category}
+    </span>`;
+  document.getElementById('popup-title').innerHTML = `
+    <h2>${title}</h2>`;
+  document.getElementById('popup-description').innerHTML = `
+    <div>${desc || ''}</div>`;
+  document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>-</span>`;
+  document.getElementById('popup-priority').innerHTML = `<b>Priority:</b>
+    <span>${prio}</span>`;
+  document.getElementById('overlay-close').onclick = function () {
+    document.getElementById('task-overlay').classList.add('d-none');
+  };
 }

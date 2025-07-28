@@ -1,0 +1,177 @@
+.to-do-field {
+    grid-area: to-do;
+}
+
+.in-progress-field {
+    grid-area: in-progress;
+}
+
+.await-field {
+    grid-area: await;
+}
+
+.done-field {
+    grid-area: done;
+}
+
+.to-do-tasks {
+    grid-area: to-do-tasks;
+}
+
+.to-do-field,
+.in-progress-field,
+.await-field,
+.done-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    gap: 3px;
+    margin: 0px 4px;
+}
+
+.to-do-field *,
+.in-progress-field *,
+.await-field *,
+.done-field * {
+    color: #42526e;
+}
+
+.in-progress-tasks {
+    grid-area: in-progress-tasks;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.await-tasks {
+    grid-area: await-tasks;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.done-tasks {
+    grid-area: done-tasks;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.board-column {
+    background-color: var(--clr-200);
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.board-column h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-card {
+    background-color: var(--clr-200);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.task-card:hover {
+    rotate: 2deg;
+}
+
+#board .task-column.drag-over {
+    outline: 2px dashed var(--clr-500);
+    background-color: var(--clr-200);
+}
+
+.task-label {
+    font-size: var(--fs-16);
+    font-weight: bold;
+    padding: 4px 16px;
+    border-radius: 8px;
+    display: inline-block;
+    margin-bottom: 10px;
+    color: white;
+
+    background-color: red;
+}
+
+.task-title {
+    font-size: var(--fs-16);
+    font-weight: bold;
+    margin-bottom: 4px;
+    color: #2a3647;
+}
+
+.task-desc {
+    font-size: var(--fs-16);
+    color: var(--clr-400);
+    margin-bottom: 10px;
+}
+
+.green-background,
+.blue-background {
+    width: fit-content;
+    padding: 4px 16px;
+    border-radius: 8px;
+}
+
+.green-background,
+.label-technical {
+    background-color: #00c7a3;
+    color: var(--clr-200);
+}
+
+.blue-background,
+.label-user {
+    background-color: #0038ff;
+    color: var(--clr-200);
+}
+
+.placeholder {
+    display: flex;
+    border: 2px dotted rgb(0, 0, 0, 0.2);
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: rgb(0, 0, 0, 0.1);
+    font-size: 16px;
+    padding: 12px 0;
+    color: gray;
+}
+
+.task-card:hover {
+    transform: translateY(-2px);
+}
+
+.task-card {
+    position: relative;
+}
+
+.priority-img {
+    object-fit: contain;
+    margin-right: 8px;
+}
+
+.separate-delete-edit {
+    height: 24px;
+    width: 1.5px;
+    background-color: rgb(0, 0, 0, 0.1);
+}
+
+.priorty-img {
+    width: 16px;
+    object-fit: contain;
+}
+
+.string-img {
+    display: flex;
+    gap: 8px;
+}

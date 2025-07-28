@@ -1,0 +1,50 @@
+.subtask-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+
+.subtask-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    font-size: var(--fs-20);
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.subtask-list {
+    list-style: disc;
+    padding-left: 20px;
+    margin: 8px 0;
+}
+
+li {
+    font-size: var(--fs-16);
+    margin: 6px 0 6px 0;
+    gap: 8px;
+}
+
+#editing-subtask-list {
+    overflow: auto;
+    max-height: 90px;
+    padding-left: 0;
+}
+
+#editing-subtask-list li {
+    display: flex;
+    justify-content: space-between;
+}
+
+#editing-subtask-list li img {
+    cursor: pointer;
+}
+
+#popup-subtasks {
+    list-style: none;
+    padding: 0;
+    overflow: auto;
+    max-height: 150px;
+}

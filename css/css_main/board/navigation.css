@@ -1,0 +1,18 @@
+ .add-task-link {
+     background: none;
+     color: rgb(255, 255, 255, 0.5);
+ }
+
+ .add-task-link img {
+     filter: contrast(1);
+ }
+
+ .board-link,
+ .board-link:hover {
+     background-color: var(--clr-900);
+     color: rgb(255, 255, 255);
+ }
+
+ .board-link img {
+     filter: contrast(1.5);
+ }

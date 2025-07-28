@@ -1,0 +1,29 @@
+#search-input {
+    height: 48px;
+    padding: 0px 12px;
+    border: 1px solid var(--clr-300);
+    border-radius: 10px;
+    background-image: url("../../../assets/img/search.png");
+    background-repeat: no-repeat;
+    background-position: right 24px center;
+}
+
+#search-input::placeholder {
+    color: #d1d1d1;
+}
+
+.search-task-field {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+#no-results-message {
+    display: none;
+    color: red;
+    font-size: var(--fs-21);
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}

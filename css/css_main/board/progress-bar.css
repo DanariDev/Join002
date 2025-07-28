@@ -1,0 +1,53 @@
+.progress-bar-container {
+    background-color: var(--clr-200);
+    height: 6px;
+    border-radius: 4px;
+    overflow: hidden;
+    width: 50%;
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--clr-500);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-0 {
+    width: 0%;
+}
+
+.progress-25 {
+    width: 25%;
+}
+
+.progress-50 {
+    width: 50%;
+}
+
+.progress-60 {
+    width: 60%;
+}
+
+.progress-75 {
+    width: 75%;
+}
+
+.progress-100 {
+    width: 100%;
+}
+
+/* Subtask Count */
+.task-count {
+    font-size: 14px;
+    color: black;
+    text-wrap-mode: nowrap;
+}
+
+.progress-bar-task-conter-div {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    margin: 16px 0;
+    align-items: center;
+}
