@@ -42,8 +42,8 @@
 @media (max-width: 1100px) {
   .overlay-box {
     flex-direction: column;
-    height: 90%;
-    width: 90%;
+    height: auto;
+    width: auto;
   }
 
   .overlay-right {
@@ -58,9 +58,12 @@
     width: 100%;
   }
 
+  .overlay-left, .lightbox-left {
+    min-height: 320px;
+  }
 
-  #create-contact-form {
-    width: 100%;
+  #create-contact-form{
+    margin-top: -60px;
   }
 
   #create-contact-form input {
@@ -68,16 +71,20 @@
   }
 
   .add-initial-circle {
-    max-width: 45px;
-    max-height: 45px;
-    padding: 1rem;
+    width: 95.07px;
+    padding: .764rem 1rem;
+    position: relative;
+    top: -60px;
   }
 
   .edit-initial-circle {
-    max-width: 50px;
-    max-height: 50px;
+    max-width: 120px;
+    max-height: 120px;
     border-radius: 100%;
-    font-size: 16px;
+    font-size: 47px;
+    position: relative;
+    top: -128px;
+
   }
 
   .contact-details-haeder {
@@ -193,6 +200,7 @@
   #lightbox {
     flex-direction: column;
     height: 100%;
+    width: auto;
     transform: translatey(100%);
   }
 
@@ -214,6 +222,8 @@
     border-radius: 0 0 20px 20px;
     padding: 7rem 0 2rem 0;
     min-height: fit-content;
+    display: flex;
+    flex-direction: column;
   }
 
   .lightbox-left {
@@ -261,6 +271,7 @@
 
   .editing-lighbox {
     padding: 0;
+    margin-top: -120px;
   }
 
   .btns-lighbox {
@@ -293,6 +304,17 @@
 @media (min-width: 801px) and (max-width: 806px) {
   h1 {
     font-size: 57.2px;
+  }
+}
+
+@media (max-width: 400px) {
+  .overlay-left span,
+  .lightbox-left span {
+    font-size: 23px;
+  }
+
+  .overlay-left h2{
+    font-size: 51px;
   }
 }
 

@@ -57,7 +57,7 @@
     color: var(--clr-200);
     border-radius: 20px 0 0 20px;
     min-height: 400px;
-    z-index: 900;
+    /* z-index: 900; */
 }
 
 #create-contact-form {
@@ -253,7 +253,8 @@ input {
     padding: 3.5px;
 }
 
-.close-button:hover {
+.close-button:hover,
+.close-overlay-btn:hover {
     color: red;
     background: rgb(0, 0, 0, 0.1);
 }

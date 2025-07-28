@@ -84,6 +84,7 @@
 .button-row {
     display: flex;
     gap: 32px;
+    justify-content: center;
 }
 
 #create-contact-btn:hover,
