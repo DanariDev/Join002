@@ -1,3 +1,8 @@
+// add-task-priority.js
+
+/**
+ * Initializes priority buttons: sets medium as default if none active, adds click listeners to toggle active classes exclusively.
+ */
 export function initPriorityButtons() {
   const btns = [
     { id: "urgent-btn", class: "urgent-btn-active" },
@@ -25,6 +30,9 @@ export function initPriorityButtons() {
   });
 }
 
+/**
+ * Returns the selected priority string based on active button class.
+ */
 export function getSelectedPriority() {
   if (document.getElementById("urgent-btn").classList.contains("urgent-btn-active")) return "urgent";
   if (document.getElementById("medium-btn").classList.contains("medium-btn-active")) return "medium";

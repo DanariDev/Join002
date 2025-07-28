@@ -1,3 +1,8 @@
+// contact-style.js
+
+/**
+ * Generates initials from name (first two letters uppercase).
+ */
 export function getInitials(name) {
   return name
     .split(" ")
@@ -6,6 +11,9 @@ export function getInitials(name) {
     .slice(0, 2);
 }
 
+/**
+ * Generates a deterministic random color based on name hash.
+ */
 export function getRandomColor(name) {
   const colors = [
     "#29ABE2", // Blau
@@ -25,4 +33,3 @@ export function getRandomColor(name) {
   const index = Math.abs(hash) % colors.length;
   return colors[index];
 }
-

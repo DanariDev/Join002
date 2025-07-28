@@ -8,6 +8,10 @@ import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 let allContacts = [];
 let selectedContacts = new Set();
 
+/**
+ * Initializes the contacts dropdown by setting up a real-time listener on Firebase "contacts" reference.
+ * Updates allContacts array and renders the dropdown.
+ */
 export function initContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   if (!dropdownList) return;
@@ -21,6 +25,9 @@ export function initContactsDropdown() {
   });
 }
 
+/**
+ * Sets up a real-time listener for contacts (similar to initContactsDropdown, possibly redundant).
+ */
 function setupContactsListener() {
   const contactsRef = ref(db, "contacts");
   onValue(contactsRef, (snapshot) => {
@@ -31,6 +38,10 @@ function setupContactsListener() {
     renderContactsDropdown();
   });
 }
+
+/**
+ * Renders the contacts list in the dropdown UI by creating rows for each contact.
+ */
 function renderContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   dropdownList.innerHTML = "";
@@ -39,6 +50,9 @@ function renderContactsDropdown() {
   });
 }
 
+/**
+ * Filters contacts based on a search string (by name or email, case-insensitive). Not used in current code.
+ */
 function filterContacts(filter) {
   if (!filter) return allContacts;
   return allContacts.filter(
@@ -48,6 +62,9 @@ function filterContacts(filter) {
   );
 }
 
+/**
+ * Creates a DOM row element for a contact in the dropdown, including initials, name, checkbox, and click handler.
+ */
 function createContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
@@ -67,7 +84,9 @@ function createContactRow(contact) {
   return row;
 }
 
-
+/**
+ * Creates a circle element with contact initials and random background color.
+ */
 function createInitialsCircle(contact) {
   const initials = document.createElement("div");
   initials.className = "contact-initials";
@@ -76,6 +95,9 @@ function createInitialsCircle(contact) {
   return initials;
 }
 
+/**
+ * Creates a span element for the contact's name.
+ */
 function createContactName(contact) {
   const name = document.createElement("span");
   name.className = "contact-name";
@@ -83,6 +105,9 @@ function createContactName(contact) {
   return name;
 }
 
+/**
+ * Creates a checkbox for selecting the contact, with change handler.
+ */
 function createCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -91,6 +116,9 @@ function createCheckbox(contact) {
   return checkbox;
 }
 
+/**
+ * Toggles selection of a contact ID in the Set, then re-renders dropdown and selected insignias.
+ */
 function handleContactToggle(id) {
   if (selectedContacts.has(id)) {
     selectedContacts.delete(id);
@@ -101,7 +129,9 @@ function handleContactToggle(id) {
   renderSelectedInsignias();
 }
 
-
+/**
+ * Renders visual insignias for selected contacts in a container.
+ */
 function renderSelectedInsignias() {
   const container = document.getElementById("selected-contact-insignias");
   container.innerHTML = "";
@@ -112,6 +142,9 @@ function renderSelectedInsignias() {
   });
 }
 
+/**
+ * Creates an insignia element (badge) for a selected contact with initials and color.
+ */
 function createInsignia(contact) {
   const insignia = document.createElement("div");
   insignia.className = "contact-insignia";
@@ -121,9 +154,16 @@ function createInsignia(contact) {
   return insignia;
 }
 
+/**
+ * Returns an array of selected contact IDs.
+ */
 export function getSelectedContactIds() {
   return Array.from(selectedContacts);
 }
+
+/**
+ * Sets up event listeners to open/close the dropdown panel on click or escape key.
+ */
 export function setupDropdownOpenClose() {
   const dropdown = document.getElementById("contacts-dropdown");
   const selected = document.getElementById("contacts-selected");

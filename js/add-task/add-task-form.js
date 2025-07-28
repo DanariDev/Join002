@@ -1,6 +1,10 @@
+// add-task-form.js
 import { saveTaskToDB } from "./add-task-save.js";
 import { getSelectedPriority } from "./add-task-priority.js";
 
+/**
+ * Initializes the add-task form: adds click listener to create button for validation and saving.
+ */
 export function initAddTaskForm() {
   const createBtn = document.getElementById("create-task-btn");
   if (!createBtn) return;
@@ -16,11 +20,18 @@ export function initAddTaskForm() {
   });
 }
 
+/**
+ * Handles task creation: clears errors, validates title and due date, saves if valid.
+ */
 function handleCreateTask() {
   clearAllFieldErrors();
   if (!validateTitle() | !validateDueDate()) return;
   saveTaskToDB(collectTaskData());
 }
+
+/**
+ * Displays error message for a specific field.
+ */
 function showFieldError(field, message) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) {
@@ -29,6 +40,9 @@ function showFieldError(field, message) {
   }
 }
 
+/**
+ * Validates title field: checks if non-empty, shows error if not.
+ */
 function validateTitle() {
   const title = document.getElementById("title").value.trim();
   if (!title) {
@@ -38,6 +52,9 @@ function validateTitle() {
   return true;
 }
 
+/**
+ * Validates due date field: checks if selected, shows error if not.
+ */
 function validateDueDate() {
   const dueDate = document.getElementById("due-date").value;
   if (!dueDate) {
@@ -46,6 +63,10 @@ function validateDueDate() {
   }
   return true;
 }
+
+/**
+ * Validates category field: checks if selected, shows error if not, clears error otherwise.
+ */
 function validateCategory() {
   const category = document.getElementById("category").value;
   if (!category) {
@@ -56,7 +77,9 @@ function validateCategory() {
   return true;
 }
 
-
+/**
+ * Clears error message for a specific field.
+ */
 function clearFieldError(field) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) {
@@ -64,11 +87,17 @@ function clearFieldError(field) {
   }
 }
 
+/**
+ * Clears all field errors (title, due-date).
+ */
 function clearAllFieldErrors() {
   clearFieldError("title");
   clearFieldError("due-date");
 }
 
+/**
+ * Adds a new subtask to the list from input value if non-empty, clears input.
+ */
 function addSubtask() {
   const input = document.getElementById("subtask");
   const value = input.value.trim();
@@ -79,6 +108,7 @@ function addSubtask() {
   list.appendChild(li);
   input.value = "";
 }
+
 document.getElementById("subtask").addEventListener("keydown", function (e) {
   if (e.key === "Enter") {
     addSubtask();
@@ -93,6 +123,9 @@ document.getElementById("subtask-list").addEventListener("click", function (e) {
   }
 });
 
+/**
+ * Edits a subtask li element: replaces text with input, restores on blur or enter.
+ */
 function editSubtask(li) {
   const oldValue = li.textContent;
   const input = document.createElement("input");
@@ -111,6 +144,10 @@ function editSubtask(li) {
     li.textContent = input.value.trim() || oldValue;
   }
 }
+
+/**
+ * Collects all task data from form fields into an object, including subtasks.
+ */
 function collectTaskData() {
   return {
     title: document.getElementById("title").value.trim(),
@@ -123,6 +160,9 @@ function collectTaskData() {
   };
 }
 
+/**
+ * Retrieves array of subtask texts from list items.
+ */
 function getSubtasks() {
   const items = document.querySelectorAll("#subtask-list li");
   return Array.from(items).map(li => li.textContent.trim());

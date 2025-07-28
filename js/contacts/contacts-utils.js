@@ -1,3 +1,8 @@
+// contacts-utils.js
+
+/**
+ * Closes all contact-related overlays and hides the contact card.
+ */
 export function closeAllContactOverlays() {
   document.getElementById("add-contact-overlay")?.classList.add("d-none");
   document.getElementById("lightbox-overlay")?.classList.add("d-none");

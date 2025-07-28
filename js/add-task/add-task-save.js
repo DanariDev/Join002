@@ -1,3 +1,4 @@
+// add-task-save.js
 import { db } from "../firebase/firebase-init.js";
 import {
   ref,
@@ -6,6 +7,10 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getSelectedPriority } from "./add-task-priority.js";
 
+/**
+ * Saves a task object to Firebase Realtime Database under "tasks" reference.
+ * Shows success message on save, clears form; shows error on failure.
+ */
 export async function saveTaskToDB(task) {
   try {
     const tasksRef = ref(db, "tasks");
@@ -18,6 +23,9 @@ export async function saveTaskToDB(task) {
   }
 }
 
+/**
+ * Displays a success message in a box that hides after 2.5 seconds.
+ */
 function showSuccess(msg) {
   const box = document.getElementById("success-message");
   if (!box) return;
@@ -28,6 +36,9 @@ function showSuccess(msg) {
   }, 2500); // Box verschwindet nach 2,5 Sekunden
 }
 
+/**
+ * Displays an error message in a box that hides after 3.5 seconds.
+ */
 function showError(msg) {
   const box = document.getElementById("error-message-popup");
   if (!box) return;
@@ -38,6 +49,9 @@ function showError(msg) {
   }, 3500); // Fehler bleibt etwas länger sichtbar
 }
 
+/**
+ * Resets the form, sets due date to today, clears subtasks and selected contacts.
+ */
 function clearForm() {
   document.getElementById("add-task-form").reset();
 

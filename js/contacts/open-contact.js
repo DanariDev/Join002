@@ -1,3 +1,4 @@
+// open-contact.js
 import { getContactById } from "./load-contacts.js";
 import { openEditContactLightbox,hideContactCard } from "./edit-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
@@ -8,7 +9,9 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { closeAllContactOverlays } from "./contacts-utils.js";
 
-
+/**
+ * Sets up click events for contact entries, edit buttons, and delete button.
+ */
 export function setupContactClickEvents() {
   document.querySelectorAll(".contact-entry").forEach((el) => {
     el.addEventListener("click", () =>
@@ -34,6 +37,9 @@ export function setupContactClickEvents() {
   });
 }
 
+/**
+ * Opens contact details card, fills with data, shows with animation.
+ */
 async function openContactDetails(id) {
   closeAllContactOverlays();
   const contact = await getContactById(id);
@@ -45,6 +51,9 @@ async function openContactDetails(id) {
   showContactCard();
 }
 
+/**
+ * Fills contact details in the card (icon, name, mail, phone).
+ */
 function fillContactDetails(contact, card) {
   const fields = {
     icon: document.getElementById("current-icon"),
@@ -62,6 +71,9 @@ function fillContactDetails(contact, card) {
   fields.phone.href = `tel:${contact.phone}`;
 }
 
+/**
+ * Shows the contact card with slide-in animation.
+ */
 function showContactCard() {
   const rightSection = document.getElementById("right-section");
   const contactCard = document.getElementById("showed-current-contact");
@@ -76,6 +88,10 @@ function showContactCard() {
     rightSection.classList.add("slide-in");
   }
 }
+
+/**
+ * Deletes contact from Firebase, hides card, shows success message.
+ */
 async function deleteContact(id) {
   try {
     await remove(ref(db, `contacts/${id}`));
@@ -87,6 +103,9 @@ async function deleteContact(id) {
   }
 }
 
+/**
+ * Shows success message in confirmation window, hides after 2 seconds.
+ */
 function showSuccessMessage(message) {
   const window = document.getElementById("confirmation-window");
   if (!window) return;
@@ -95,6 +114,9 @@ function showSuccessMessage(message) {
   setTimeout(() => window.classList.add("d-none"), 2000);
 }
 
+/**
+ * Shows error message in confirmation window, hides after 2 seconds.
+ */
 function showErrorMessage(message) {
   const window = document.getElementById("confirmation-window");
   if (!window) return;

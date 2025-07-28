@@ -1,3 +1,4 @@
+// load-contacts.js
 import { db } from "../firebase/firebase-init.js";
 import {
   ref,
@@ -7,6 +8,9 @@ import { setupContactClickEvents } from "./open-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
 import { renderSortedContacts } from "./contacts-list-utils.js";
 
+/**
+ * Initializes contacts list by fetching from Firebase and rendering.
+ */
 export function initContactsList() {
   const contactsRef = ref(db, "contacts");
   get(contactsRef).then((snapshot) => {
@@ -19,12 +23,17 @@ export function initContactsList() {
   });
 }
 
+/**
+ * Renders sorted contacts using utility function.
+ */
 function renderContacts(contacts) {
   const wrapper = document.querySelector("#contacts-list-wrapper");
   renderSortedContacts(contacts, wrapper, createContactHTML, setupContactClickEvents);
 }
 
-
+/**
+ * Creates HTML element for a contact entry.
+ */
 function createContactHTML(contact) {
   const div = document.createElement("div");
   div.className = "list-contact-wrapper";
@@ -45,6 +54,10 @@ function createContactHTML(contact) {
   return div;
 }
 export { createContactHTML };
+
+/**
+ * Updates HTML of an existing contact entry.
+ */
 export function updateContactHTML(contact) {
   const element = document.getElementById(`contact-${contact.id}`);
   if (!element) return;
@@ -60,6 +73,9 @@ export function updateContactHTML(contact) {
     </div>`;
 }
 
+/**
+ * Fetches a single contact by ID from Firebase.
+ */
 export async function getContactById(id) {
   const contactRef = ref(db, `contacts/${id}`);
   const snapshot = await get(contactRef);

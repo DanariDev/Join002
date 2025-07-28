@@ -1,3 +1,4 @@
+// edit-contact.js
 import { getContactById } from "./load-contacts.js";
 import { db } from "../firebase/firebase-init.js";
 import {
@@ -8,7 +9,9 @@ import {
 import { getInitials, getRandomColor } from "./contact-style.js";
 import { checkInput } from "../multiple-application/error-message.js"
 
-
+/**
+ * Opens the edit contact lightbox, fills fields with contact data, sets up buttons.
+ */
 export async function openEditContactLightbox(id) {
   const contact = await getContactById(id);
   if (!contact) return;
@@ -20,6 +23,9 @@ export async function openEditContactLightbox(id) {
   setupLightboxButtons(id);
 }
 
+/**
+ * Fills the edit lightbox fields with contact details.
+ */
 function fillEditLightbox(contact) {
   const fields = {
     name: document.getElementById("edit-name"),
@@ -35,6 +41,9 @@ function fillEditLightbox(contact) {
   fields.icon.style.backgroundColor = getRandomColor(contact.name);
 }
 
+/**
+ * Shows the edit lightbox overlay and clears errors.
+ */
 function showEditLightbox() {
   const overlay = document.getElementById("lightbox-overlay");
   const lightbox = document.getElementById("lightbox");
@@ -49,6 +58,9 @@ function showEditLightbox() {
   }
 }
 
+/**
+ * Sets up event listeners for save, cancel, close, and delete buttons in lightbox.
+ */
 function setupLightboxButtons(id) {
   const saveBtn = document.getElementById("saveBtn");
   if (saveBtn) saveBtn.onclick = () => saveContactChanges(id);
@@ -60,6 +72,9 @@ function setupLightboxButtons(id) {
   if (deleteBtn) deleteBtn.onclick = () => deleteContact(id);
 }
 
+/**
+ * Saves changes to contact in Firebase, closes lightbox on success.
+ */
 async function saveContactChanges(id) {
   const fields = getEditFields();
   let hasError = checkInput("edit-name", "edit-email", "edit-phone", null, null, null, null);
@@ -78,6 +93,9 @@ async function saveContactChanges(id) {
   
 }
 
+/**
+ * Deletes contact from Firebase, closes lightbox on success.
+ */
 async function deleteContact(id) {
   try {
     await update(ref(db, `contacts/${id}`), fields);
@@ -92,6 +110,9 @@ async function deleteContact(id) {
   
 }
 
+/**
+ * Closes the edit lightbox overlay.
+ */
 export function closeEditLightbox() {
   const overlay = document.getElementById("lightbox-overlay");
   const lightbox = document.getElementById("lightbox");
@@ -102,6 +123,9 @@ export function closeEditLightbox() {
   }
 }
 
+/**
+ * Shows a success message that hides after 2 seconds.
+ */
 function showSuccessMessage(message = "Contact saved!") {
   const confirmation = document.querySelector(".confirmation-window");
   if (confirmation) {
@@ -113,6 +137,9 @@ function showSuccessMessage(message = "Contact saved!") {
   }
 }
 
+/**
+ * Shows an error message that hides after 2 seconds.
+ */
 function showErrorMessage(message) {
   const confirmation = document.querySelector(".confirmation-window");
   if (confirmation) {
@@ -124,6 +151,9 @@ function showErrorMessage(message) {
   }
 }
 
+/**
+ * Hides the contact card and right section.
+ */
 export function hideContactCard() {
   const rightSection = document.getElementById("right-section");
   const contactCard = document.getElementById("showed-current-contact");
@@ -134,6 +164,9 @@ export function hideContactCard() {
   }
 }
 
+/**
+ * Retrieves edited fields from input elements.
+ */
 function getEditFields() {
   return {
     name: document.getElementById("edit-name")?.value,
@@ -142,6 +175,9 @@ function getEditFields() {
   };
 }
 
+/**
+ * Handles clicks outside the lightbox to close it.
+ */
 function handleOverlayClick(e) {
   const overlay = document.getElementById("lightbox-overlay");
   const lightbox = document.getElementById("lightbox");

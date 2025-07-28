@@ -1,3 +1,9 @@
+// add-task-date.js
+
+/**
+ * Initializes due date input: sets min to today, default value to German format today,
+ * adds blur and keydown listeners for validation.
+ */
 export function initDueDateInput() {
   const dateInput = document.getElementById('due-date');
   const currenttoday = new Date().toISOString().split('T')[0]; // "YYYY-MM-DD"
@@ -58,6 +64,9 @@ export function initDueDateInput() {
   }
 }
 
+/**
+ * Returns today's date as ISO string (YYYY-MM-DD).
+ */
 function getTodayDateString() {
   const today = new Date();
   return today.toISOString().split('T')[0];

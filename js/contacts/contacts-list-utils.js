@@ -1,11 +1,11 @@
 // contacts-list-utils.js
 
 /**
- * Sortiert und gruppiert Kontakte alphabetisch und rendert sie in die Kontaktliste.
- * @param {Array} contacts - Array aller Kontaktobjekte
- * @param {HTMLElement} wrapper - Der DOM-Container für die Liste (z.B. contacts-list-wrapper)
- * @param {Function} createContactHTML - Funktion zum Erstellen eines Kontakt-Elements
- * @param {Function} setupContactClickEvents - Funktion zum Setzen der Click-Events
+ * Sorts and groups contacts alphabetically, renders them into the contact list wrapper.
+ * @param {Array} contacts - Array of contact objects
+ * @param {HTMLElement} wrapper - DOM container for the list
+ * @param {Function} createContactHTML - Function to create contact HTML element
+ * @param {Function} setupContactClickEvents - Function to set up click events
  */
 export function renderSortedContacts(contacts, wrapper, createContactHTML, setupContactClickEvents) {
   if (!wrapper) return;

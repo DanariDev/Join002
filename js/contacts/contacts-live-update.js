@@ -1,3 +1,4 @@
+// contacts-live-update.js
 import { db } from "../firebase/firebase-init.js";
 import {
   ref,
@@ -14,6 +15,9 @@ import {
 } from "./load-contacts.js";
 import { setupContactClickEvents } from "./open-contact.js";
 
+/**
+ * Sets up real-time listeners for contacts: adds, updates, or removes contacts dynamically in the UI.
+ */
 const contactsRef = ref(db, "contacts");
 
 onChildAdded(contactsRef, (snapshot) => {
@@ -48,6 +52,10 @@ onChildRemoved(contactsRef, (snapshot) => {
   const el = document.getElementById(`contact-${id}`);
   if (el) el.remove();
 });
+
+/**
+ * Fills the contact panel with details like initials, name, email, phone.
+ */
 function fillContactPanel(c) {
   let i = document.getElementById("current-icon");
   let n = document.getElementById("current-name");

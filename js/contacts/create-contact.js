@@ -1,3 +1,4 @@
+// create-contact.js
 import { db } from "../firebase/firebase-init.js";
 import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setupContactClickEvents } from "./open-contact.js";
@@ -5,6 +6,9 @@ import { closeAllContactOverlays } from "./contacts-utils.js";
 import { initContactsList } from "./load-contacts.js";
 import { checkInput } from "../multiple-application/error-message.js"
 
+/**
+ * Initializes add contact button to open overlay and clear fields/errors.
+ */
 export function initAddContactOverlay() {
   const btn = document.getElementById("add-contact-btn-big");
   if (!btn) return;
@@ -20,6 +24,9 @@ export function initAddContactOverlay() {
   });
 }
 
+/**
+ * Closes the add contact overlay.
+ */
 window.closeAddContactOverlay = function () {
   document.getElementById("add-contact-overlay")?.classList.add("d-none");
 };
@@ -28,7 +35,9 @@ document.querySelector(".overlay-box").addEventListener("click", (event) => {
   event.stopPropagation(); // Verhindert, dass das Event an übergeordnete Elemente weitergegeben wird
 });
 
-
+/**
+ * Opens the add contact overlay.
+ */
 function openAddContactOverlay() {
   const overlay = document.getElementById("add-contact-overlay");
   if (!overlay) {
@@ -38,6 +47,9 @@ function openAddContactOverlay() {
   overlay.classList.remove("d-none");
 }
 
+/**
+ * Renders (clears) the create form fields and sets button to create mode.
+ */
 function renderCreateForm() {
   const name = document.getElementById("edit-name");
   const email = document.getElementById("edit-email");
@@ -53,6 +65,9 @@ function renderCreateForm() {
   }
 }
 
+/**
+ * Creates a new contact in Firebase, closes overlay, refreshes list on success.
+ */
 async function createContact() {
   const name = document.getElementById("new-name")?.value;
   const email = document.getElementById("new-email")?.value;
@@ -75,8 +90,9 @@ async function createContact() {
   }
 }
 
-
-
+/**
+ * Closes the add contact overlay.
+ */
 function closeAddContactOverlay() {
   const overlay = document.getElementById("add-contact-overlay");
   if (overlay) {
@@ -84,6 +100,9 @@ function closeAddContactOverlay() {
   }
 }
 
+/**
+ * Shows success message in confirmation window, hides after 2 seconds.
+ */
 function showSuccessMessage(message) {
   const box = document.getElementById("confirmation-window");
   const span = box?.querySelector("span");
@@ -97,6 +116,9 @@ function showSuccessMessage(message) {
   }, 2000);
 }
 
+/**
+ * Shows error message in confirmation window, hides after 2 seconds.
+ */
 function showErrorMessage(message) {
   const box = document.getElementById("confirmation-window");
   const span = box?.querySelector("span");
