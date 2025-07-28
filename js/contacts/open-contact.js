@@ -33,6 +33,11 @@ export function setupContactClickEvents() {
       .contactId;
     if (id) deleteContact(id); // Funktion kommt gleich
   });
+  document.getElementById("current-delete-responsive")?.addEventListener("click", () => {
+    const id = document.getElementById("showed-current-contact")?.dataset
+      .contactId;
+    if (id) deleteContact(id);
+  });
 }
 
 /**
