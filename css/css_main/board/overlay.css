@@ -65,7 +65,7 @@
     height: min-content;
     width: 80%;
     max-width: 1600px;
-    padding: 2rem;
+    padding: 7.5rem 2rem 2rem 2rem;
     border-radius: 25px;
     background: var(--clr-200);
     z-index: 1000;
@@ -74,10 +74,12 @@
 
 
 #form-add-task h1 {
-    font-size: 3rem;
+    font-size: 61px;
     font-weight: 800;
     margin: 0 0 2rem 0;
     letter-spacing: -2px;
+    position: absolute;
+    top: 0;
 }
 
 #add-task-overlay {

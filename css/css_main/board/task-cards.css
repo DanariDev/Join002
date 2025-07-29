@@ -174,3 +174,8 @@
     display: flex;
     gap: 8px;
 }
+
+.required-explain {
+    font-size: var(--fs-20);
+    margin: 0 !important;
+}
