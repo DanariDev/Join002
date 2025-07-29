@@ -1,3 +1,5 @@
+import { openEditTaskOverlay } from "./edit-task.js";
+import { showEditForm, initEditTaskForm } from "./edit-task-form.js";
 
 export function renderTask(task) {
   const template = document.getElementById('task-template');
@@ -109,5 +111,11 @@ function setTaskOverlayHandlers(taskId) {
   document.getElementById('delete-task-btn').onclick = function () {
     deleteTask(taskId);
   };
+  document.getElementById('edit-task-btn').onclick = function () {
+    document.getElementById('task-overlay').classList.add('d-none');
+    window.currentEditTaskId = taskId; 
+    showEditForm(taskId);              
+  };
 }
+
 
