@@ -6,7 +6,6 @@ let selectedContacts = [];
 let allContacts = [];
 
 export function initOverlay() {
-
   document.querySelectorAll('.add-task-btn, #add-task-button').forEach(btn => {
     btn.addEventListener('click', async function (e) {
       e.preventDefault();
@@ -18,12 +17,11 @@ export function initOverlay() {
       );
       document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
 
-      // Kontakte laden und Dropdown rendern
       allContacts = await loadAllContacts();
       selectedContacts = [];
       renderContactsDropdown();
       renderSelectedContacts();
-      closeContactsDropdown(); // sicherstellen, dass Dropdown zu ist
+      closeContactsDropdown();
     });
   });
 
@@ -60,26 +58,15 @@ export function initOverlay() {
     });
   });
 
-  // -------- Dropdown-Logik für Kontakte --------
+  // --- Kontakte-Dropdown-Logik ---
   const contactSelect = document.getElementById('contacts-selected');
   const contactDropdown = document.getElementById('contacts-dropdown-list');
 
-  // Dropdown per Klick auf Feld öffnen/schließen
   contactSelect.addEventListener('click', function(e) {
     e.stopPropagation();
-    if (contactDropdown.style.display === 'block') {
-      contactDropdown.style.display = 'none';
-    } else {
-      contactDropdown.style.display = 'block';
-    }
+    contactDropdown.style.display = contactDropdown.style.display === 'block' ? 'none' : 'block';
   });
 
-  // Klick außerhalb: Dropdown schließen
-  document.addEventListener('click', function(e) {
-    if (contactDropdown) contactDropdown.style.display = 'none';
-  });
-
-  // Dropdown beim Overlay-Start zu
   closeContactsDropdown();
 }
 
@@ -224,4 +211,18 @@ document.getElementById('create-btn').addEventListener('click', function (e) {
     .catch(error => {
       alert('Fehler beim Speichern: ' + error.message);
     });
+});
+
+
+
+document.addEventListener('click', function(e) {
+  const contactDropdown = document.getElementById('contacts-dropdown-list');
+  const contactSelect = document.getElementById('contacts-selected');
+  if (
+    contactDropdown &&
+    !contactDropdown.contains(e.target) &&
+    e.target !== contactSelect
+  ) {
+    contactDropdown.style.display = 'none';
+  }
 });
