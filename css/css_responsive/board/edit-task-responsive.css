@@ -81,8 +81,14 @@
 
 @media (max-width: 400px) {
     .edit-task-main {
+        position: relative;
+        top: 120px;
         margin: 0px;
         padding: 4rem 2rem;
+    }
+
+    .required-explain {
+        margin-top: 2px;
     }
 }
 
