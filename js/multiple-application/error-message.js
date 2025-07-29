@@ -65,7 +65,7 @@ function nameCheck(nameCheckValue, hasError){
   resetErrors(nameInput, nameError);
   const name = nameInput.value.trim();
     
-  if(!name) { showError(nameInput, nameError, "Bitte Name eingeben."); hasError = true; }
+  if(!name) { showError(nameInput, nameError, "Please enter your name."); hasError = true; }
 
   return hasError;
 }
@@ -87,8 +87,8 @@ function emailCheck(emailCheckValue, hasError){
   resetErrors(emailInput, emailError);
   const email = emailInput.value.trim();
     
-  if(!email) { showError(emailInput, emailError, "Bitte E-Mail eingeben."); hasError = true; }
-  else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Ungültige E-Mail-Adresse!"); hasError = true; }
+  if(!email) { showError(emailInput, emailError, "Please enter your email."); hasError = true; }
+  else if (!/^\S+@\S+\.\S+$/.test(email)) { showError(emailInput, emailError, "Invalid email address!"); hasError = true; }
 
   return hasError;
 }
@@ -110,8 +110,8 @@ function phoneCheck (phoneCheckValue, hasError){
   resetErrors(phoneInput, phoneError);
   const phone = phoneInput.value.trim();
 
-  if(!phone) { showError(phoneInput, phoneError, "Bitte Telefonnummer eingeben."); hasError = true; }
-  else if (!/^[+]?\d+$/.test(phone)) { showError(phoneInput, phoneError, "Ungültige Telefonnummer!"); hasError = true; }
+  if(!phone) { showError(phoneInput, phoneError, "Please enter your phone number."); hasError = true; }
+  else if (!/^[+]?\d+$/.test(phone)) { showError(phoneInput, phoneError, "Invalid phone number!"); hasError = true; }
 
   return hasError;
 }
@@ -133,8 +133,8 @@ function passwordCheck (passwordCheckValue, hasError){
   resetErrors(passwordInput, passwordError);
   const password = passwordInput.value.trim();
 
-  if(!password) { showError(passwordInput, passwordError, "Bitte Password eingeben."); hasError = true; }
-  else if(password.length <6){ showError(passwordInput, passwordError, "Das Passwort muss mindestens 6 Zeichen lang sein."); hasError = true; }
+  if(!password) { showError(passwordInput, passwordError, "Please enter your password."); hasError = true; }
+  else if(password.length <6){ showError(passwordInput, passwordError, "The password must be at least 6 characters long."); hasError = true; }
 
   return hasError;
 }
@@ -157,8 +157,8 @@ function passwordRepeatCheck (passwordRepeatCheckValue, hasError){
   const passwordRepeat = passwordRepeatInput.value.trim();
   const password = document.getElementById('password-input').value.trim();
 
-  if(!passwordRepeat) { showError(passwordRepeatInput, passwordRepeatError, "Bitte das Passwort wiederholt eingeben."); hasError = true; }
-  else if(passwordRepeat != password){ showError(passwordRepeatInput, passwordRepeatError, "Stimmt mit dem Passwort nicht überein"); hasError = true; }
+  if(!passwordRepeat) { showError(passwordRepeatInput, passwordRepeatError, "Please re-enter the password."); hasError = true; }
+  else if(passwordRepeat != password){ showError(passwordRepeatInput, passwordRepeatError, "The passwords do not match."); hasError = true; }
 
   return hasError;
 }
@@ -179,7 +179,7 @@ function privacyCheckbox (privacyCheckboxValue, hasError) {
 
   resetErrors(checkbox, checkboxError);
 
-  if (!checkbox.checked) { showError(checkbox, checkboxError, "Bitte akzeptiere die Datenschutzbestimmungen."); hasError = true; }
+  if (!checkbox.checked) { showError(checkbox, checkboxError, "Please accept the privacy policy."); hasError = true; }
   
   return hasError;
 }
@@ -203,11 +203,11 @@ function incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, erro
 
   if (errorCode == 'auth/invalid-email' || errorCode == 'auth/user-not-found' || errorCode == 'auth/wrong-password'|| errorCode == 'auth/invalid-credential') {
     showError(emailInput, emailError, "");
-    showError(passwordInput, passwordError, "Ungültige Anmeldedaten, bitte prüfen Sie Passwort und E-mail");
+    showError(passwordInput, passwordError, "Invalid login credentials, please check your password and email.");
   } 
   else {
     showError(emailInput, emailError, "");
-    showError(passwordInput, passwordError, "Es ist ein unerwarteter Fehler aufgetreten. Bitte kontaktieren Sie den Kundensupport.");
+    showError(passwordInput, passwordError, "An unexpected error occurred. Please contact customer support.");
   }
 }
 
@@ -215,3 +215,6 @@ function incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, erro
 
 //vorlage -> checkInput(Name, Email, Phone, Password, PasswordRepeat, privacyCheckbox, errorCode)
 //Die Werte, die benötigt werden, müssen die passende -"ID"- haben. Die Werte, die nicht gebraucht werden, müssen mit -null- ersetzt werden.
+
+//sample -> checkInput(Name, Email, Phone, Password, PasswordRepeat, privacyCheckbox, errorCode)
+//The values that are required must have the corresponding -"ID"-. The values that are not needed must be replaced with -null-.
