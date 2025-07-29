@@ -1,3 +1,4 @@
+
 export function renderTask(task) {
   const template = document.getElementById('task-template');
   const clone = template.content.cloneNode(true);
@@ -76,31 +77,37 @@ document.addEventListener('click', function (e) {
   }
 });
 
-function openTaskOverlay(taskId) {
+import { deleteTask } from "./delete-task.js";
+
+export function openTaskOverlay(taskId) {
   document.getElementById('task-overlay').classList.remove('d-none');
   const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
   if (!card) return;
+  setTaskOverlayContent(card);
+  setTaskOverlayHandlers(taskId);
+}
 
+function setTaskOverlayContent(card) {
   const category = card.querySelector('.task-label').textContent;
   const title = card.querySelector('.task-title').textContent;
   const desc = card.querySelector('.task-desc').textContent;
   const prioImg = card.querySelector('.priority-img');
   const prio = prioImg?.alt || '';
-
-  // Set overlay content
-  document.getElementById('popup-category').innerHTML = `
-    <span class="task-label">${category}</span>`;
+  document.getElementById('popup-category').innerHTML = `<span class="task-label">${category}</span>`;
   document.getElementById('popup-title').innerHTML = `<h2>${title}</h2>`;
   document.getElementById('popup-description').innerHTML = `<div>${desc || ''}</div>`;
   document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>-</span>`;
   document.getElementById('popup-priority').innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
-
-  // Apply category style to popup label
   const labelSpan = document.querySelector('#popup-category .task-label');
   if (labelSpan) applyCategoryStyle(labelSpan, category);
+}
 
-  // Close button
+function setTaskOverlayHandlers(taskId) {
   document.getElementById('overlay-close').onclick = function () {
     document.getElementById('task-overlay').classList.add('d-none');
   };
+  document.getElementById('delete-task-btn').onclick = function () {
+    deleteTask(taskId);
+  };
 }
+
