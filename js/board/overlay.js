@@ -6,15 +6,18 @@ let selectedContacts = [];
 let allContacts = [];
 
 export function initOverlay() {
+
   document.querySelectorAll('.add-task-btn, #add-task-button').forEach(btn => {
     btn.addEventListener('click', async function (e) {
       e.preventDefault();
       document.getElementById('add-task-overlay').classList.remove('d-none');
       document.getElementById('form-add-task').style.display = 'flex';
 
+      // Prioritäts-Buttons richtig zurücksetzen
       ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
         document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
       );
+      // Medium als Standard aktivieren
       document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
 
       allContacts = await loadAllContacts();
@@ -47,11 +50,15 @@ export function initOverlay() {
     }
   });
 
+  // --- PRIORITÄTS-BUTTONS ---
   ['urgent-btn', 'medium-btn', 'low-btn'].forEach(btnId => {
     document.getElementById(btnId).addEventListener('click', function () {
-      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
-        document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
-      );
+      // Alle Prioritäts-Buttons deaktivieren
+      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id => {
+        document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active');
+      });
+
+      // Nur geklickten Button aktivieren mit richtiger Farbe
       if (btnId === 'urgent-btn') this.classList.add('selected', 'urgent-btn-active');
       if (btnId === 'medium-btn') this.classList.add('selected', 'medium-btn-active');
       if (btnId === 'low-btn') this.classList.add('selected', 'low-btn-active');
@@ -65,6 +72,12 @@ export function initOverlay() {
   contactSelect.addEventListener('click', function(e) {
     e.stopPropagation();
     contactDropdown.style.display = contactDropdown.style.display === 'block' ? 'none' : 'block';
+  });
+
+  document.addEventListener('click', function(e) {
+    if (!contactDropdown.contains(e.target) && e.target !== contactSelect) {
+      contactDropdown.style.display = 'none';
+    }
   });
 
   closeContactsDropdown();
@@ -145,7 +158,7 @@ function renderContactsDropdown() {
       div.classList.add('selected-contact');
     }
     div.addEventListener('click', function(e) {
-      e.stopPropagation(); // verhindert Schließen beim Auswählen
+      e.stopPropagation();
       toggleContact(contact);
     });
     list.appendChild(div);
@@ -211,18 +224,4 @@ document.getElementById('create-btn').addEventListener('click', function (e) {
     .catch(error => {
       alert('Fehler beim Speichern: ' + error.message);
     });
-});
-
-
-
-document.addEventListener('click', function(e) {
-  const contactDropdown = document.getElementById('contacts-dropdown-list');
-  const contactSelect = document.getElementById('contacts-selected');
-  if (
-    contactDropdown &&
-    !contactDropdown.contains(e.target) &&
-    e.target !== contactSelect
-  ) {
-    contactDropdown.style.display = 'none';
-  }
 });
