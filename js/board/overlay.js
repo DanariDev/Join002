@@ -33,3 +33,54 @@ export function initOverlay() {
     });
   });
 }
+
+let subtasks = []; 
+
+function renderSubtasks() {
+  const list = document.getElementById('subtasks-list');
+  list.innerHTML = '';
+  subtasks.forEach((subtask, idx) => {
+    const li = document.createElement('li');
+    li.classList.add('subtask-item');
+    li.innerHTML = `
+      <span class="subtask-text">${subtask}</span>
+      <img class="subtask-delete" src="assets/img/delete.png" alt="Delete" data-idx="${idx}" style="width:16px;cursor:pointer;">
+    `;
+    list.appendChild(li);
+  });
+}
+
+
+function addSubtask() {
+  const input = document.getElementById('subtask-input');
+  const value = input.value.trim();
+  if (!value) return;
+  subtasks.push(value);
+  input.value = '';
+  renderSubtasks();
+}
+
+
+document.getElementById('subtask-input').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    addSubtask();
+    e.preventDefault();
+  }
+});
+document.querySelector('.subtask-button').addEventListener('click', addSubtask);
+
+
+document.getElementById('subtasks-list').addEventListener('click', function(e) {
+  if (e.target.classList.contains('subtask-delete')) {
+    const idx = e.target.getAttribute('data-idx');
+    subtasks.splice(idx, 1);
+    renderSubtasks();
+  }
+});
+
+
+document.getElementById('closeFormModal').addEventListener('click', function () {
+  subtasks = [];
+  renderSubtasks();
+});
+
