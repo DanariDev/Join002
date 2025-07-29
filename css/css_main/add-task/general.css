@@ -21,6 +21,7 @@
     transition: all 0.2s ease-in-out;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
+    border: 2px, solid, var(--clr-700);
 }
 
 .btn-create-task:hover {
@@ -35,11 +36,13 @@
     border-radius: 10px;
     font-size: var(--fs-20);
     padding: 0 16px;
+    border: 2px, solid, var(--clr-700);
 }
 
 #clear-btn:hover {
     color: var(--clr-500);
     border-color: var(--clr-500);
+    border: 2px, solid, var(--clr-500);
 }
 
 .btn-create-task:hover {

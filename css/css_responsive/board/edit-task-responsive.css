@@ -11,11 +11,24 @@
     #edit-task-form {
         overflow: auto;
     }
+
+    #popup-title h2 {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .overlay-content {
+        font-size: 16px;
+    }
+
+    .overlay-key {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 800px) {
     .overlay-content {
-        min-width: 400px;
+        max-width: 320px;
     }
 }
 
@@ -50,7 +63,7 @@
 
 @media (max-width: 500px) {
     .overlay-content {
-        min-width: 256px;
+        width: 256px;
     }
 
     .edit-task-main h1 {
@@ -68,8 +81,14 @@
 
 @media (max-width: 400px) {
     .edit-task-main {
+        position: relative;
+        top: 120px;
         margin: 0px;
         padding: 4rem 2rem;
+    }
+
+    .required-explain {
+        margin-top: 2px;
     }
 }
 
