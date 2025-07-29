@@ -11,11 +11,24 @@
     #edit-task-form {
         overflow: auto;
     }
+
+    #popup-title h2 {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .overlay-content {
+        font-size: 16px;
+    }
+
+    .overlay-key {
+        font-size: 16px;
+    }
 }
 
 @media (max-width: 800px) {
     .overlay-content {
-        min-width: 400px;
+        max-width: 320px;
     }
 }
 
@@ -50,7 +63,7 @@
 
 @media (max-width: 500px) {
     .overlay-content {
-        min-width: 256px;
+        width: 256px;
     }
 
     .edit-task-main h1 {
