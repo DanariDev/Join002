@@ -1,41 +1,57 @@
 import { db } from '../firebase/firebase-init.js';
-import { ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, push, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+let subtasks = [];
+let selectedContacts = [];
+let allContacts = [];
 
 export function initOverlay() {
-  
+
   document.querySelectorAll('.add-task-btn, #add-task-button').forEach(btn => {
-    btn.addEventListener('click', function (e) {
+    btn.addEventListener('click', async function (e) {
       e.preventDefault();
       document.getElementById('add-task-overlay').classList.remove('d-none');
       document.getElementById('form-add-task').style.display = 'flex';
 
-      
-      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id => 
+      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
         document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
       );
-      
       document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
+
+      // Kontakte laden und Dropdown rendern
+      allContacts = await loadAllContacts();
+      selectedContacts = [];
+      renderContactsDropdown();
+      renderSelectedContacts();
+      closeContactsDropdown(); // sicherstellen, dass Dropdown zu ist
     });
   });
 
-  
   document.getElementById('closeFormModal').addEventListener('click', function () {
     document.getElementById('add-task-overlay').classList.add('d-none');
     document.getElementById('form-add-task').style.display = 'none';
+    subtasks = [];
+    selectedContacts = [];
+    renderSubtasks();
+    renderSelectedContacts();
+    closeContactsDropdown();
   });
 
-  
   document.getElementById('add-task-overlay').addEventListener('click', function (e) {
     if (e.target === this) {
       this.classList.add('d-none');
       document.getElementById('form-add-task').style.display = 'none';
+      subtasks = [];
+      selectedContacts = [];
+      renderSubtasks();
+      renderSelectedContacts();
+      closeContactsDropdown();
     }
   });
 
-  
   ['urgent-btn', 'medium-btn', 'low-btn'].forEach(btnId => {
     document.getElementById(btnId).addEventListener('click', function () {
-      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id => 
+      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
         document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
       );
       if (btnId === 'urgent-btn') this.classList.add('selected', 'urgent-btn-active');
@@ -43,15 +59,42 @@ export function initOverlay() {
       if (btnId === 'low-btn') this.classList.add('selected', 'low-btn-active');
     });
   });
+
+  // -------- Dropdown-Logik für Kontakte --------
+  const contactSelect = document.getElementById('contacts-selected');
+  const contactDropdown = document.getElementById('contacts-dropdown-list');
+
+  // Dropdown per Klick auf Feld öffnen/schließen
+  contactSelect.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (contactDropdown.style.display === 'block') {
+      contactDropdown.style.display = 'none';
+    } else {
+      contactDropdown.style.display = 'block';
+    }
+  });
+
+  // Klick außerhalb: Dropdown schließen
+  document.addEventListener('click', function(e) {
+    if (contactDropdown) contactDropdown.style.display = 'none';
+  });
+
+  // Dropdown beim Overlay-Start zu
+  closeContactsDropdown();
 }
 
-let subtasks = [];
+// Hilfsfunktion, um Dropdown zu schließen
+function closeContactsDropdown() {
+  const dropdown = document.getElementById('contacts-dropdown-list');
+  if (dropdown) dropdown.style.display = 'none';
+}
 
+// -------- SUBTASKS --------
 function renderSubtasks() {
   const list = document.getElementById('subtasks-list');
   list.innerHTML = '';
   subtasks.forEach((subtask, idx) => {
-    const txt = subtask.text || subtask; 
+    const txt = subtask.text || subtask;
     const li = document.createElement('li');
     li.classList.add('subtask-item');
     li.innerHTML = `
@@ -92,7 +135,60 @@ document.getElementById('closeFormModal').addEventListener('click', function () 
   renderSubtasks();
 });
 
-document.getElementById('create-btn').addEventListener('click', function(e) {
+// -------- Kontakte --------
+async function loadAllContacts() {
+  const contactsRef = ref(db, "contacts");
+  const snapshot = await get(contactsRef);
+  if (!snapshot.exists()) return [];
+  return Object.entries(snapshot.val()).map(([id, data]) => ({
+    id,
+    ...data,
+  }));
+}
+
+function renderContactsDropdown() {
+  const list = document.getElementById('contacts-dropdown-list');
+  list.innerHTML = '';
+  allContacts.forEach(contact => {
+    const div = document.createElement('div');
+    div.className = 'contact-option';
+    div.dataset.contactId = contact.id;
+    div.textContent = contact.name + ' (' + contact.email + ')';
+    if (selectedContacts.some(c => c.id === contact.id)) {
+      div.classList.add('selected-contact');
+    }
+    div.addEventListener('click', function(e) {
+      e.stopPropagation(); // verhindert Schließen beim Auswählen
+      toggleContact(contact);
+    });
+    list.appendChild(div);
+  });
+}
+
+function toggleContact(contact) {
+  const idx = selectedContacts.findIndex(c => c.id === contact.id);
+  if (idx === -1) {
+    selectedContacts.push(contact);
+  } else {
+    selectedContacts.splice(idx, 1);
+  }
+  renderContactsDropdown();
+  renderSelectedContacts();
+}
+
+function renderSelectedContacts() {
+  const div = document.getElementById('selected-contact-insignias');
+  div.innerHTML = '';
+  selectedContacts.forEach(c => {
+    const span = document.createElement('span');
+    span.className = 'contact-insignia';
+    span.textContent = c.name.split(' ').map(w => w[0]).join('').toUpperCase();
+    div.appendChild(span);
+  });
+}
+
+// -------- Task erstellen --------
+document.getElementById('create-btn').addEventListener('click', function (e) {
   e.preventDefault();
 
   const title = document.getElementById('task-title').value.trim();
@@ -111,16 +207,18 @@ document.getElementById('create-btn').addEventListener('click', function(e) {
     category,
     priority,
     subtasks: subtasks,
-    status: 'to-do', 
-    
+    assignedTo: selectedContacts.map(c => c.id),
+    status: 'to-do',
   };
 
-  
   const tasksRef = ref(db, 'tasks/');
   push(tasksRef, task)
     .then(() => {
       subtasks = [];
+      selectedContacts = [];
       renderSubtasks();
+      renderSelectedContacts();
+      closeContactsDropdown();
       document.getElementById('add-task-overlay').classList.add('d-none');
     })
     .catch(error => {
