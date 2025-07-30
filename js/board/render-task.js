@@ -199,3 +199,10 @@ function addRestBubble(count, container) {
   container.appendChild(span);
 }
 
+
+document.getElementById("task-overlay").addEventListener("click", function (e) {
+  if (e.target === this) {
+    this.classList.add("d-none");
+  }
+});
+
