@@ -37,6 +37,7 @@ function setEditPrio(priority) {
 }
 
 function setEditTaskHandlers(taskId) {
+  console.log('setEditTaskHandlers:', document.getElementById('overlay-edit-close'));
   document.getElementById('overlay-edit-close').onclick = closeEditOverlay;
   document.getElementById('editing-cancel-btn').onclick = closeEditOverlay;
   document.getElementById('editing-save-btn').onclick = function (e) {

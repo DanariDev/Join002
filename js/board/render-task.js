@@ -140,7 +140,7 @@ function setTaskOverlayHandlers(taskId) {
   document.getElementById("edit-task-btn").onclick = function () {
     document.getElementById("task-overlay").classList.add("d-none");
     window.currentEditTaskId = taskId;
-    showEditForm(taskId);
+    openEditTaskOverlay(taskId);
   };
 }
 
