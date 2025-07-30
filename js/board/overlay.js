@@ -6,7 +6,7 @@ let selectedContacts = [];
 let allContacts = [];
 
 export function initOverlay() {
-  
+
   document.querySelectorAll('.add-task-btn, #add-task-button').forEach(btn => {
     btn.addEventListener('click', async function (e) {
       e.preventDefault();
@@ -27,6 +27,12 @@ export function initOverlay() {
       renderSelectedContacts();
       closeContactsDropdown();
     });
+  });
+
+  // Cancel-Button schließt nur das Overlay (Feld bleibt wie eingegeben)
+  document.getElementById('clear-btn').addEventListener('click', function (e) {
+    e.preventDefault();
+    closeOverlay();
   });
 
   // Overlay schließen Button
