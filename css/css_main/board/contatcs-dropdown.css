@@ -239,6 +239,7 @@
     flex-wrap: wrap;
     gap: 6px;
     border: none;
+    font-size: 20px;
 }
 
 .contacts-dropdown-list {
@@ -253,6 +254,10 @@
     border-top: none;
     overflow-y: auto;
     z-index: 1000;
+}
+
+.contact-option {
+    font-size: 20px;
 }
 
 .contacts-dropdown-list.show {
@@ -273,6 +278,21 @@ li {
 option {
     font-size: var(--fs-16);
     overflow: hidden;
+}
+
+.contact-insignia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    border-radius: 100%;
+    color: white;
+    border: 2px, solid, white;
+    background-color: grey;
+    padding: 4px;
+    margin-left: -16px;
 }
 
 #selected-editing-contact-insignias {
