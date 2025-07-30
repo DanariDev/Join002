@@ -12,7 +12,7 @@
 }
 
 .contacts-dropdown-inner {
-  <<<<<<< HEAD display: flex;
+  display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
@@ -25,13 +25,6 @@
   font-size: var(--fs-20);
   color: var(--clr-700);
   user-select: none;
-  =======display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  border: none;
-  font-size: 20px;
-  >>>>>>>6e26b6f08b8c1d6dd900e3d220033d59cf7593fa
 }
 
 .contacts-dropdown-list {
@@ -114,5 +107,4 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 8px;
-  >>>>>>>6e26b6f08b8c1d6dd900e3d220033d59cf7593fa
 }
