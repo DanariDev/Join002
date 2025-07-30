@@ -197,7 +197,7 @@
 #selected-contact-insignias {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
     gap: 8px;
     padding-top: 0px;
     margin: -8px 0 8px 0px;

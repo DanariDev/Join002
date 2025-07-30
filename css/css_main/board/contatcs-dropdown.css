@@ -12,8 +12,7 @@
 }
 
 .contacts-dropdown-inner {
-<<<<<<< HEAD
-  display: flex;
+  <<<<<<< HEAD display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 6px;
@@ -26,14 +25,13 @@
   font-size: var(--fs-20);
   color: var(--clr-700);
   user-select: none;
-=======
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 6px;
-    border: none;
-    font-size: 20px;
->>>>>>> 6e26b6f08b8c1d6dd900e3d220033d59cf7593fa
+  =======display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  border: none;
+  font-size: 20px;
+  >>>>>>>6e26b6f08b8c1d6dd900e3d220033d59cf7593fa
 }
 
 .contacts-dropdown-list {
@@ -51,17 +49,12 @@
   border-radius: 0 0 10px 10px;
 }
 
-<<<<<<< HEAD
-.contacts-dropdown-list.active {
-  display: block;
-=======
 .contact-option {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .contacts-dropdown-list.show {
-    display: block;
->>>>>>> 6e26b6f08b8c1d6dd900e3d220033d59cf7593fa
+  display: block;
 }
 
 .contacts-dropdown-list div {
@@ -91,35 +84,35 @@
   justify-content: center;
   margin-right: 6px;
   user-select: none;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-<<<<<<< HEAD
 #selected-contact-insignias {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 8px;
-=======
+}
+
 .contact-insignia {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    width: 30px;
-    font-size: 20px;
-    border-radius: 100%;
-    color: white;
-    border: 2px, solid, white;
-    background-color: grey;
-    padding: 4px;
-    margin-left: -16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  font-size: 20px;
+  border-radius: 100%;
+  color: white;
+  border: 2px, solid, white;
+  background-color: grey;
+  padding: 4px;
+  margin-left: -16px;
 }
 
 #selected-editing-contact-insignias {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 8px;
->>>>>>> 6e26b6f08b8c1d6dd900e3d220033d59cf7593fa
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+  >>>>>>>6e26b6f08b8c1d6dd900e3d220033d59cf7593fa
 }
