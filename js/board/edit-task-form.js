@@ -1,6 +1,8 @@
 // edit-task-form.js
 import { db } from '../firebase/firebase-init.js';
 import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { setSelectedEditContacts } from "./edit-task-contacts.js";
+
 
 /**
  * Initialisiert das Edit-Formular für Tasks.
@@ -24,10 +26,12 @@ export function initEditTaskForm() {
  * Füllt das Edit-Formular mit den Daten einer bestehenden Task.
  */
 export function fillEditFormWithTask(task) {
+  setSelectedEditContacts(task.assignedTo || []);
   document.getElementById('editing-title').value = task.title || '';
   document.getElementById('editing-description').value = task.description || '';
   document.getElementById('editing-date').value = task.dueDate || '';
   document.getElementById('editing-category').value = task.category || '';
+  document.getElementById('editing-title').value = task.title || '';
   setEditPriority(task.priority);
   fillEditSubtasks(task.subtasks || []);
   // Assigned und Kontakte ggf. ergänzen!

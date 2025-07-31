@@ -146,3 +146,8 @@ export function setupAddDropdownOpenClose() {
     }
   });
 }
+export function resetSelectedAddContacts() {
+  selectedAddContacts.clear();
+  renderAddContactsDropdown();
+  renderSelectedAddInsignias();
+}

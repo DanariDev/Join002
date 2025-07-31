@@ -146,3 +146,8 @@ export function setupEditDropdownOpenClose() {
     }
   });
 }
+export function setSelectedEditContacts(ids) {
+  selectedEditContacts = new Set(ids);      // IDs setzen
+  renderEditContactsDropdown();              // Dropdown neu bauen
+  renderSelectedEditInsignias();             // Badges anzeigen
+}

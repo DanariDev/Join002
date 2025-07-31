@@ -6,6 +6,8 @@ import {
   set,
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getSelectedPriority } from "./add-task-priority.js";
+import { resetSelectedContacts } from "./add-task-contacts.js";
+
 
 /**
  * Saves a task object to Firebase Realtime Database under "tasks" reference.
@@ -65,12 +67,9 @@ function clearForm() {
   const subtaskList = document.getElementById("subtask-list");
   if (subtaskList) subtaskList.innerHTML = "";
 
-  if (window.selectedContacts) {
-    selectedContacts.clear();
-    if (typeof renderContactsDropdown === "function") renderContactsDropdown();
-    if (typeof renderSelectedInsignias === "function")
-      renderSelectedInsignias();
-  }
+  
+  resetSelectedContacts();
 }
+
 
 document.getElementById('clear-btn').addEventListener('click', clearForm);

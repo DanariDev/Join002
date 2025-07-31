@@ -1,6 +1,7 @@
 // add-task-form.js
 import { saveTaskToDB } from "./add-task-save.js";
 import { getSelectedPriority } from "./add-task-priority.js";
+import { getSelectedContactIds } from "./add-task-contacts.js";
 
 /**
  * Initializes the add-task form: adds click listener to create button for validation and saving.
@@ -155,8 +156,9 @@ function collectTaskData() {
     dueDate: document.getElementById("due-date").value,
     priority: getSelectedPriority(),
     category: document.getElementById("category").value,
-    subtasks: getSubtasks(),  // <<-- NEU!
+    subtasks: getSubtasks(),  
     createdAt: Date.now(),
+    assignedTo: getSelectedContactIds(),
   };
 }
 
