@@ -260,3 +260,11 @@ function hideAllRequiredErrors() {
     span.style.display = 'none';
   });
 }
+
+// Schließen mit ESC-Taste
+document.addEventListener('keydown', function(e) {
+  const overlay = document.getElementById('add-task-overlay');
+  if (e.key === 'Escape' && !overlay.classList.contains('d-none')) {
+    closeBoardOverlay();
+  }
+});

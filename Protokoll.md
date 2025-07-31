@@ -16,9 +16,10 @@
 - Nach Speichern Overlay schließen und Board aktualisieren
 - Keine doppelten IDs im HTML
 - Add Task Overlay schließen über Cancel & Hintergrundklick
+- Validierung & Fehlerhinweise für Pflichtfelder verbessern (User-friendly Fehlermeldungen)
 
 ## ❗ Offene Aufgaben / ToDo
-- Validierung & Fehlerhinweise für Pflichtfelder verbessern (User-friendly Fehlermeldungen)
+
 - Subtasks mit Checkbox "erledigt" im Task-Detail-Overlay (statt nur Liste)
 - Edit-Formular speichert ALLE Felder (assignedTo fehlt noch)
 - Subtasks: Bearbeiten mit Status "erledigt/nicht"
