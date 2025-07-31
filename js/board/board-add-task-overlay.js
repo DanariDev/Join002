@@ -2,7 +2,7 @@
 
 import { db } from '../firebase/firebase-init.js';
 import { ref, push, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
+import { getRandomColor } from "../contacts/contact-style.js";
 // States
 let subtasks = [];
 let selectedContacts = [];
@@ -166,6 +166,7 @@ function renderBoardSelectedContacts() {
   selectedContacts.forEach(c => {
     const span = document.createElement('span');
     span.className = 'contact-insignia';
+    span.style.background = getRandomColor(c.name);
     span.textContent = c.name.split(' ').map(w => w[0]).join('').toUpperCase();
     div.appendChild(span);
   });
