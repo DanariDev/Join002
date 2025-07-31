@@ -9,7 +9,6 @@ let selectedContacts = [];
 let allContacts = [];
 
 export function initBoardOverlay() {
-  // Overlay öffnen: Alle Plus- und Add Task-Buttons auf dem Board
   document.querySelectorAll('.add-task-btn, #add-task-button').forEach(btn => {
     btn.addEventListener('click', async function (e) {
       e.preventDefault();
@@ -17,7 +16,6 @@ export function initBoardOverlay() {
     });
   });
 
-  // Overlay schließen ("X" und Cancel)
   document.getElementById('closeFormModal').onclick = closeBoardOverlay;
   document.getElementById('clear-btn').onclick = function (e) {
     e.preventDefault();
@@ -73,13 +71,17 @@ export function initBoardOverlay() {
 
   // Task anlegen
   document.getElementById('create-btn').onclick = createBoardTask;
+
+  // Hide errors on input
+  ['task-title', 'task-date', 'task-category'].forEach(id => {
+    document.getElementById(id).addEventListener('input', () => hideRequiredError(id));
+  });
 }
 
 async function openBoardOverlay() {
   document.getElementById('add-task-overlay').classList.remove('d-none');
   document.getElementById('form-add-task').style.display = 'flex';
 
-  // Kontakte laden
   allContacts = await loadAllBoardContacts();
   selectedContacts = [];
   renderBoardContactsDropdown();
@@ -92,35 +94,32 @@ async function openBoardOverlay() {
   );
   document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
 
-  // Felder resetten
+  // Felder resetten + Fehler ausblenden
   resetBoardOverlay();
+  hideAllRequiredErrors();
 }
 
 function resetBoardOverlay() {
-  // Alle Inputs leeren
   document.getElementById('task-title').value = '';
   document.getElementById('task-description').value = '';
   document.getElementById('task-date').value = '';
   document.getElementById('task-category').selectedIndex = 0;
-
-  // Prio zurücksetzen
   ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
     document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
   );
   document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
-
-  // Kontakte/Subtasks zurücksetzen
   selectedContacts = [];
   renderBoardContactsDropdown();
   renderBoardSelectedContacts();
-
   subtasks = [];
   renderBoardSubtasks();
+  hideAllRequiredErrors();
 }
 
 function closeBoardOverlay() {
   document.getElementById('add-task-overlay').classList.add('d-none');
   document.getElementById('form-add-task').style.display = 'none';
+  hideAllRequiredErrors();
 }
 
 // --- Kontakte / Chips ---
@@ -194,23 +193,27 @@ function addBoardSubtask() {
   renderBoardSubtasks();
 }
 
-// --- Task anlegen (wie Add Task) ---
+// --- Task anlegen (mit Required Fehlermeldungen) ---
 function createBoardTask(e) {
   e.preventDefault();
 
+  let valid = true;
+
   const title = document.getElementById('task-title').value.trim();
-  const description = document.getElementById('task-description').value.trim();
   const dueDate = document.getElementById('task-date').value;
   const category = document.getElementById('task-category').value;
+
+  if (!title) { showRequiredError('task-title'); valid = false; }
+  if (!dueDate) { showRequiredError('task-date'); valid = false; }
+  if (!category) { showRequiredError('task-category'); valid = false; }
+
+  if (!valid) return;
+
+  const description = document.getElementById('task-description').value.trim();
 
   let priority = 'medium';
   if (document.getElementById('urgent-btn').classList.contains('selected')) priority = 'urgent';
   if (document.getElementById('low-btn').classList.contains('selected')) priority = 'low';
-
-  if (!title || !dueDate || !category) {
-    alert('Bitte fülle alle Pflichtfelder aus (Titel, Fälligkeitsdatum, Kategorie).');
-    return;
-  }
 
   const task = {
     title,
@@ -234,5 +237,26 @@ function createBoardTask(e) {
     });
 }
 
-// --- Initialisierung aufrufen (im board/main.js z.B.) ---
-initBoardOverlay();
+// --- Required Fehlermeldungen anzeigen/ausblenden ---
+function showRequiredError(inputId) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const span = input.nextElementSibling;
+  if (span && span.classList.contains('required-explain')) {
+    span.style.display = 'inline';
+    span.style.color = 'red';
+  }
+}
+function hideRequiredError(inputId) {
+  const input = document.getElementById(inputId);
+  if (!input) return;
+  const span = input.nextElementSibling;
+  if (span && span.classList.contains('required-explain')) {
+    span.style.display = 'none';
+  }
+}
+function hideAllRequiredErrors() {
+  document.querySelectorAll('.required-explain').forEach(span => {
+    span.style.display = 'none';
+  });
+}
