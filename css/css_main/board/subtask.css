@@ -21,42 +21,6 @@
     margin: 8px 0;
 }
 
-.subtask-text {
-    font-size: 20px;
-}
-
-.subtask-item {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: start;
-    align-items: center;
-    font-size: 16px;
-}
-
-.subtask-item input[type="checkbox"] {
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    border: 2px solid #000;
-    border-radius: 4px;
-    background: white;
-    position: relative;
-    cursor: pointer;
-}
-
-.subtask-item input[type="checkbox"]:hover {
-    background: var(--clr-500);
-}
-
-.subtask-item input[type="checkbox"]:checked::after {
-    content: "✔";
-    font-size: 12px;
-    position: absolute;
-    top: -2px;
-    left: 2px;
-    color: black;
-}
-
 li {
     font-size: var(--fs-16);
     margin: 6px 0 6px 0;

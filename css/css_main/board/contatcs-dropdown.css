@@ -1,110 +1,328 @@
+.full-name {
+    font-size: var(--fs-16);
+    font-weight: 500;
+}
+
+.assigned-initials_priority-div {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.assigned-list {
+    overflow: auto;
+    max-height: 190px;
+}
+
+.assigned-initials_priority-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.assigned-initials {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0;
+}
+
+
+.initials-task {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--clr-500);
+    color: white;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    margin-left: -10px;
+    z-index: 1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.initials-extra {
+    background-color: #878787;
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    perspective: 500px;
+    transition: background-color 0.3s ease;
+}
+
+.task-card:hover .initials-extra {
+    animation: coinSpin 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+    background-color: #878787;
+}
+
+.initials-task-overlay,
+.initials-task {
+    height: 20px;
+    width: 20px;
+    aspect-ratio: 1;
+    padding: 0.7rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fs-16);
+    color: var(--clr-200);
+    border: 1px solid var(--clr-200);
+    margin-top: 5px;
+    margin-left: -10px;
+}
+
+.initials-task-overlay {
+    margin: 5px;
+    width: 22px;
+    height: 22px;
+}
+
+.assigned-item {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+
+.overlay .assigned-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    aspect-ratio: 1;
+    margin: 4px 0;
+}
+
+.overlay .initials-task {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--clr-200);
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--clr-200);
+    margin-left: -10px;
+    z-index: 1;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+/* Selected Contacts on Form */
+.form-selected-contact {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    border-radius: 10px;
+}
+
+.form-selected-contact-active,
+.form-selected-contact:hover {
+    background-color: var(--clr-700);
+    color: var(--clr-200);
+    cursor: pointer;
+}
+
+.form-selected-contact-checked {
+    background-color: #091930 !important;
+    color: white;
+}
+
+.form-selected-contact input {
+    height: 30px;
+    width: 20px;
+}
+
+.form-selected-contact input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+}
+
+.form-selected-contact input[type="checkbox"]:checked {
+    background-color: var(--clr-900);
+    border: 2px solid white;
+}
+
+/* Haken zeichnen */
+.form-selected-contact input[type="checkbox"]::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 4px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+/* Haken sichtbar nur wenn aktiv */
+.form-selected-contact input[type="checkbox"]:checked::after {
+    display: block;
+}
+
+
+#editing-contacts-selected {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 40px;
+    gap: 6px;
+    padding-left: 8px;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: var(--fs-20);
+    border-radius: 10px;
+    background-image: url(../assets/img/drop-down-arrow.png);
+    background-repeat: no-repeat;
+    background-position: right;
+}
+
+.contact-selected {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    background-color: var(--clr-300);
+    border-radius: 20px;
+    font-size: var(--fs-20);
+}
+
+.contact-selected span {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.dropdown-arrow {
+    padding-right: 4px;
+    margin-left: auto;
+    font-size: var(--fs-16);
+    color: var(--clr-700);
+}
+
 .contacts-dropdown {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  min-height: 40px;
-  border: 1px solid var(--clr-300);
-  border-radius: 10px;
-  background-color: white;
-  font-size: 14px;
-  cursor: pointer;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 40px;
+    border: 1px solid var(--clr-300);
+    border-radius: 10px;
+    background-color: white;
+    font-size: 14px;
 }
 
 .contacts-dropdown-inner {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  border: none;
-  padding: 10px 40px 10px 15px;
-  background-image: url('../assets/img/drop-down-arrow.png');
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  border-radius: 10px;
-  font-size: var(--fs-20);
-  color: var(--clr-700);
-  user-select: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    border: none;
 }
 
 .contacts-dropdown-list {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  max-height: 150px;
-  background-color: white;
-  border: 1px solid var(--clr-300);
-  border-top: none;
-  overflow-y: auto;
-  z-index: 1000;
-  border-radius: 0 0 10px 10px;
-}
-
-.contact-option {
-  font-size: 20px;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 150px;
+    background-color: white;
+    border: 1px solid var(--clr-300);
+    border-top: none;
+    overflow-y: auto;
+    z-index: 1000;
 }
 
 .contacts-dropdown-list.show {
-  display: block;
+    display: block;
 }
 
 .contacts-dropdown-list div {
-  padding: 8px 15px;
-  cursor: pointer;
-  color: var(--clr-700);
-  transition: background-color 0.2s ease;
+    padding: 8px;
+    cursor: pointer;
 }
 
-.contacts-dropdown-list div:hover,
-.contacts-dropdown-list div.selected-contact {
-  background-color: var(--clr-700);
-  color: var(--clr-200);
-  font-weight: 600;
-  border-radius: 5px;
+li {
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
-.contact-insignia {
-  background-color: var(--clr-500);
-  color: white;
-  font-weight: 500;
-  font-size: 14px;
-  border-radius: 50%;
-  padding: 6px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 6px;
-  user-select: none;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
-
-#selected-contact-insignias {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-.contact-insignia {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 30px;
-  width: 30px;
-  font-size: 20px;
-  border-radius: 100%;
-  color: white;
-  border: 2px, solid, white;
-  background-color: grey;
-  padding: 4px;
-  margin-left: -16px;
+option {
+    font-size: var(--fs-16);
+    overflow: hidden;
 }
 
 #selected-editing-contact-insignias {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.assigned-initials {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    color: white;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    padding: 4px;
+}
+
+.assigned-initials-board {
+    display: flex;
+    width: auto;
+    flex-wrap: wrap;
+    overflow: auto;
+    border-radius: 0;
+    height: auto;
+    padding-left: 12px;
+}
+
+@keyframes coinSpin {
+
+    20% {
+        transform: rotateY(360deg);
+    }
+
+    40% {
+        transform: rotateY(720deg);
+    }
+
+    60% {
+        transform: rotateY(1080deg);
+    }
+
+    80% {
+        transform: rotateY(1260deg);
+    }
+
+    100% {
+        transform: rotateY(1440deg);
+    }
 }
