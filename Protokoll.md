@@ -70,8 +70,4 @@
 
 ---
 
-## 📋 Zusätzliche Vorschläge
-- **Subtask Completion in Task Overlay**: Allow users to toggle subtask completion directly in the Task Detail overlay (`render-task.js`).
-- **Contact Management**: Enhance contact selection with search/filter in dropdowns (`overlay.js`, `edit-task-contacts.js`).
-- **Accessibility**: Ensure form fields have proper ARIA labels and keyboard navigation (`board.html`, `overlay.css`).
-- **Loading States**: Add loading spinners for Firebase operations (e.g., during task loading or saving) (`overlay.js`, new CSS).
+
