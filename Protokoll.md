@@ -1,23 +1,45 @@
-**Board:** 
+# Board Funktionen: To-Do-Liste
 
-- Beim klicken auf eine Task werden nicht alle daten gelden und angezeigt.
-    Es fehlen:  - Datum
-                - zugewiesene Kontakte
-                - Subtask
+## 🟢 Grundfunktionen (bereits vorhanden)
+- [x] Tasks aus Firebase laden und im Board anzeigen
+- [x] Drag & Drop für Tasks zwischen Spalten inkl. Status-Update in Firebase
+- [x] Task-Suche (live filtering)
+- [x] Task-Detail-Overlay öffnen und Task löschen
 
-- Die Subtask müssen anklickbar und damit als erledigt angezeigt werden können (checkbox)
+---
 
-- Nach dem öffnen des Edit Task fensters kann dieses nicht mehr geschlossen werden.
+## 🔜 Was noch fehlt / noch nicht fertig ist
 
-- Die Task Card schließt nicht nach einem klick auserhalb des geöffneten Task fensters
+### 1. Task anlegen (Add Task)
+- [ ] **Neuen Task im Overlay anlegen und in Firebase speichern**  
+  - [ ] Alle Formulardaten (Titel, Beschreibung, Datum, Prio, Kategorie, Kontakte, Subtasks) speichern
+  - [ ] Nach dem Speichern Overlay schließen und Board aktualisieren
+  - [ ] Validierung & Fehlerhinweise für Pflichtfelder
+- [ ] **Subtasks anlegen (mit Checkbox "erledigt" beim Task selbst)**
 
- - Die Progress bar wird noch nicht sichtbar angezeigt. hier sollte ein kleiner Teil (etwa 2-3%) angezeigt werden, auch wenn keine Task erledigt wurde.
- - Die Progress bar muss mit jeder als erledigt angehakten Subtask steigen.
+### 2. Tasks bearbeiten (Edit Task)
+- [ ] **Bearbeiten-Button im Task-Overlay öffnet Edit-Overlay**  
+  - [ ] Richtigen Task im Formular anzeigen
+- [ ] **Edit-Formular speichert ALLE Felder**  
+  - [ ] Titel, Beschreibung, Datum, Prio, Kategorie  
+  - [ ] Kontakte (Assigned To)  
+  - [ ] Subtasks (inkl. Status "erledigt/nicht")  
+- [ ] Nach Speichern Overlay schließen und Board aktualisieren
 
- - Das Add-Task formular im Board hat noch keine vollständigen funktionen. 
- - Es können Task erstellt werden ohne alle Pflichtfelder ausgefüllt zu haben
- - Es kann Datum aus der vergangenheit gewählt werden.
- - Eine erstellte subtask kann nicht vor dem speichern editiert werden.
- diese kann im moment nur gelöscht und neu erstellt werden.
+### 3. Anzeige & UI
+- [ ] **Kontakte (Initialen) auf Task-Card anzeigen**
+- [ ] **Prio-Icons auf Task-Card korrekt anzeigen**
+- [ ] **Subtasks: Fortschrittsbalken & Anzahl richtig anzeigen**
+- [ ] **Fehlermeldungen & UX-Feedback verbessern** (z.B. "Task gespeichert", Fehler beim Speichern)
 
- - Bei den ausgewählten kontakten im Add-Task fenster wird der farbliche hintergrund noch nicht hinzugefügt.
+### 4. Sonstiges
+- [ ] **Alle Overlays schließen bei ESC und Klick außerhalb**
+- [ ] **Keine doppelten IDs im HTML**
+- [ ] **Code überall modular halten, keine Funktionen doppelt**
+- [ ] **Leere Spalten mit Platzhaltertext anzeigen ("No tasks here...")**
+
+---
+
+## 🛠️ Technische Pflege
+- [ ] **Code cleanup & Kommentare prüfen**
+- [ ] **Ladezeiten & Live-Update testen (Firebase OnValue)**
