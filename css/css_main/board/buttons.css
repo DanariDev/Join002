@@ -197,7 +197,7 @@
     background-color: var(--clr-700);
 }
 
-.disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+#editing-save-btn {
+    cursor: pointer;
+    opacity: 1;
 }
