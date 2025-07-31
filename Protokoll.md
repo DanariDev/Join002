@@ -17,6 +17,7 @@
 - Keine doppelten IDs im HTML
 - Add Task Overlay schließen über Cancel & Hintergrundklick
 - Validierung & Fehlerhinweise für Pflichtfelder verbessern (User-friendly Fehlermeldungen)
+- Overlays überall schließen bei ESC und Klick außerhalb (Task-Detail: ESC & Outside fehlt)
 
 ## ❗ Offene Aufgaben / ToDo
 
@@ -25,7 +26,7 @@
 - Subtasks: Bearbeiten mit Status "erledigt/nicht"
 - Fehlermeldungen & UX-Feedback verbessern (Toasts, Inline-Fehler)
 - Responsive Design für Mobile weiter verbessern
-- Overlays überall schließen bei ESC und Klick außerhalb (Task-Detail: ESC & Outside fehlt)
+
 - Code modularisieren, doppelte Funktionen entfernen
 - Leere Spalten mit Platzhaltertext anzeigen
 - Code cleanup & Kommentare verbessern

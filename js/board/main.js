@@ -15,4 +15,26 @@ window.addEventListener("DOMContentLoaded", () => {
   initEditContactsDropdown();
   setupEditDropdownOpenClose();
 });
+// Schließen des Task-Overlays mit ESC-Taste
+document.addEventListener('keydown', function(e) {
+  const overlay = document.getElementById('task-overlay');
+  if (e.key === 'Escape' && overlay && !overlay.classList.contains('d-none')) {
+    overlay.classList.add('d-none');
+  }
+});
+window.addEventListener("DOMContentLoaded", () => {
+  // ...deine bisherigen Inits...
+
+  // Hier Outside-Click für Task-Overlay!
+  const taskOverlay = document.getElementById('task-overlay');
+  if (taskOverlay) {
+    taskOverlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        taskOverlay.classList.add('d-none');
+      }
+    });
+  }
+});
+
+
 
