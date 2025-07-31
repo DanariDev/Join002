@@ -127,7 +127,12 @@
     border: 1px solid var(--clr-300);
     border-radius: 0 0 10px 10px;
 }
-
+.contact-insignia-more {
+    background: #091930;
+    color: #444;
+    font-weight: bold;
+  }
+  
 .contacts-dropdown-inner {
     display: flex;
     align-items: center;
