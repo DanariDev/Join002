@@ -194,7 +194,7 @@
     cursor: pointer;
     font-size: var(--fs-20);
     border-radius: 10px;
-    background-image: url(../assets/img/drop-down-arrow.png);
+    background-image: url(../../../assets/img/drop-down-arrow.png);
     background-repeat: no-repeat;
     background-position: right;
 }
@@ -260,7 +260,7 @@
 }
 
 .contacts-dropdown-list div {
-    
+
     cursor: pointer;
 }
 

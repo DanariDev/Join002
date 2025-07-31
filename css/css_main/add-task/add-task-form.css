@@ -20,7 +20,6 @@ input,
 select,
 textarea {
     width: 100%;
-    max-width: 600px;
     padding: 8px;
     border: 1px solid var(--clr-300);
     border-radius: 10px;
