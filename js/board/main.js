@@ -6,6 +6,7 @@ import { deleteTask } from "./delete-task.js";
 import { openEditTaskOverlay } from "./edit-task.js";
 import { initEditTaskForm } from "./edit-task-form.js";
 import { initEditContactsDropdown, setupEditDropdownOpenClose } from "./edit-task-contacts.js";
+import { initAddContactsDropdown, setupAddDropdownOpenClose } from "./add-task-contacts.js";
 
 window.addEventListener("DOMContentLoaded", () => {
   loadTasks();
@@ -14,6 +15,8 @@ window.addEventListener("DOMContentLoaded", () => {
   initEditTaskForm();
   initEditContactsDropdown();
   setupEditDropdownOpenClose();
+  initAddContactsDropdown();
+  setupAddDropdownOpenClose();
 });
 // Schließen des Task-Overlays mit ESC-Taste
 document.addEventListener('keydown', function(e) {
@@ -36,5 +39,4 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-
+ 
