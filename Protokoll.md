@@ -33,4 +33,6 @@
 - Ladezeiten & Live-Update testen
 
 ---
+**Idee**
 
+- eigene Pop Up html erstellen mit aussehen von add-task html, wenn man auf Board add task+ drückt, wird auf die pop up html seite verlinkt. Style müssen wir  uns morgen nen Kopf machen.
