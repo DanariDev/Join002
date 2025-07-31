@@ -103,32 +103,64 @@ export function openTaskOverlay(taskId) {
   document.getElementById("task-overlay").classList.remove("d-none");
   const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
   if (!card) return;
-  setTaskOverlayContent(card);
+  setTaskOverlayContent(card, taskId);
   setTaskOverlayHandlers(taskId);
+  console.log("?" + taskId.subtasks);
+
 }
 
-function setTaskOverlayContent(card) {
-  const category = card.querySelector(".task-label").textContent;
-  const title = card.querySelector(".task-title").textContent;
-  const desc = card.querySelector(".task-desc").textContent;
-  const prioImg = card.querySelector(".priority-img");
-  const prio = prioImg?.alt || "";
-  document.getElementById(
-    "popup-category"
-  ).innerHTML = `<span class="task-label">${category}</span>`;
+async function setTaskOverlayContent(card, taskId) {
+  const taskSnap = await get(ref(db, `tasks/${taskId}`));
+  if (!taskSnap.exists()) return;
+
+  const task = taskSnap.val();
+
+  const category = task.category || "";
+  const title = task.title || "";
+  const desc = task.description || "";
+  const subtasks = task.subtasks || [];
+  const prio = task.priority || "";
+
+  document.getElementById("popup-category").innerHTML = `<span class="task-label">${category}</span>`;
   document.getElementById("popup-title").innerHTML = `<h2>${title}</h2>`;
-  document.getElementById("popup-description").innerHTML = `<div>${
-    desc || ""
-  }</div>`;
-  document.getElementById(
-    "popup-due-date"
-  ).innerHTML = `<b>Due date:</b> <span>-</span>`;
-  document.getElementById(
-    "popup-priority"
-  ).innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
+  document.getElementById("popup-description").innerHTML = `<div>${desc}</div>`;
+  document.getElementById("popup-due-date").innerHTML = `<b>Due date:</b> <span>${task.dueDate || "-"}</span>`;
+  document.getElementById("popup-priority").innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
+
   const labelSpan = document.querySelector("#popup-category .task-label");
   if (labelSpan) applyCategoryStyle(labelSpan, category);
+
+  loadOverlaySubtasks(subtasks);
+  console.log(subtasks);
+
 }
+
+
+function loadOverlaySubtasks(subtasks) {
+  const subtasksList = document.getElementById("popup-subtasks");
+  subtasksList.innerHTML = "";
+
+  subtasks.forEach((subtask, index) => {
+    const li = document.createElement("li");
+    li.className = "subtask-item";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = false;
+    checkbox.disabled = true;
+    checkbox.id = `subtask-${index}`;
+
+    const label = document.createElement("label");
+    label.htmlFor = `subtask-${index}`;
+    label.textContent = subtask || `Subtask ${index + 1}`;
+
+    li.appendChild(checkbox);
+    li.appendChild(label);
+    subtasksList.appendChild(li);
+  });
+}
+
+
 
 function setTaskOverlayHandlers(taskId) {
   document.getElementById("overlay-close").onclick = function () {

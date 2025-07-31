@@ -27,6 +27,7 @@
 #popup-title h2 {
     font-size: 61px;
     font-weight: 700;
+    margin: 2rem 0;
 }
 
 .add-task-form-content {
@@ -135,6 +136,9 @@ textarea {
 
 .overlay-section {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 .overlay-section input {
