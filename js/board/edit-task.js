@@ -2,7 +2,7 @@ import { db } from '../firebase/firebase-init.js';
 import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 export function openEditTaskOverlay(taskId) {
-  document.getElementById('edit-task-overlay').classList.remove('d-none');
+  document.getElementById('edit-task-overlay').classList.replace('d-none', 'd-flex');
   loadTaskDataForEdit(taskId);
   setEditTaskHandlers(taskId);
 }
@@ -23,17 +23,27 @@ function fillEditForm(task) {
   setEditPrio(task.priority);
   // Hier ggf. assigned, category & subtasks nach deinem Bedarf ergänzen!
   document.getElementById('editing-category').value = task.category || '';
+  setEditSubtasks(task.subtasks);
 }
 
 function setEditPrio(priority) {
   document.querySelectorAll('#editing-priority-buttons .all-priority-btns')
-    .forEach(btn => btn.classList.remove('active'));
+    .forEach(btn =>  btn.classList.remove('urgent-btn-active', 'medium-btn-active', 'low-btn-active'));
   if (priority === "urgent")
-    document.getElementById('editing-urgent-btn').classList.add('active');
+    document.getElementById('editing-urgent-btn').classList.add('urgent-btn-active');
   else if (priority === "medium")
-    document.getElementById('editing-medium-btn').classList.add('active');
+    document.getElementById('editing-medium-btn').classList.add('medium-btn-active');
   else if (priority === "low")
-    document.getElementById('editing-low-btn').classList.add('active');
+    document.getElementById('editing-low-btn').classList.add('low-btn-active');
+}
+
+function setEditSubtasks(subtasks){
+  document.getElementById('editing-subtask-list').innerHTML ="";
+  subtasks.forEach(subtask => {
+    subtask.trim();
+    document.getElementById('editing-subtask-list').innerHTML += `<li class="subtask-item"><span class="subtask-text">${subtask}</span>
+      <img class="subtask-delete" src="assets/img/delete.png" alt="Delete" data-idx="0"></li>`
+  })
 }
 
 function setEditTaskHandlers(taskId) {
@@ -73,5 +83,5 @@ function getSelectedEditPrio() {
 }
 
 function closeEditOverlay() {
-  document.getElementById('edit-task-overlay').classList.add('d-none');
+  document.getElementById('edit-task-overlay').classList.replace('d-flex', 'd-none');
 }
