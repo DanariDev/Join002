@@ -34,8 +34,3 @@
 
 ---
 
-<<<<<<< Updated upstream
-**Letztes Update:** 30.07.2025
-=======
-
->>>>>>> Stashed changes
