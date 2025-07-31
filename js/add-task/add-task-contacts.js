@@ -135,12 +135,18 @@ function handleContactToggle(id) {
 function renderSelectedInsignias() {
   const container = document.getElementById("selected-contact-insignias");
   container.innerHTML = "";
-  allContacts.forEach((c) => {
-    if (selectedContacts.has(c.id)) {
-      container.appendChild(createInsignia(c));
-    }
-  });
+  const selected = allContacts.filter(c => selectedContacts.has(c.id));
+  const maxToShow = 3;
+  selected.slice(0, maxToShow).forEach(c => container.appendChild(createInsignia(c)));
+  if (selected.length > maxToShow) {
+    const more = document.createElement("div");
+    more.className = "contact-insignia contact-insignia-more";
+    more.textContent = `+${selected.length - maxToShow}`;
+    more.title = "Weitere Kontakte ausgewählt";
+    container.appendChild(more);
+  }
 }
+
 
 /**
  * Creates an insignia element (badge) for a selected contact with initials and color.
