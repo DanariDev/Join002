@@ -38,6 +38,7 @@ function setEditPrio(priority) {
 }
 
 function setEditSubtasks(subtasks){
+  if(subtasks == undefined) return;
   document.getElementById('editing-subtask-list').innerHTML ="";
   subtasks.forEach(subtask => {
     subtask.trim();

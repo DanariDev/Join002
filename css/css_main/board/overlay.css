@@ -64,22 +64,17 @@
     transform: translate(-50%, -40%);
     height: min-content;
     width: 80%;
-    max-width: 1600px;
-    padding: 7.5rem 2rem 2rem 2rem;
+    padding: 2rem;
     border-radius: 25px;
     background: var(--clr-200);
     z-index: 1000;
+    max-width: 1459px;
 }
 
 
 
 #form-add-task h1 {
-    font-size: 61px;
-    font-weight: 800;
     margin: 0 0 2rem 0;
-    letter-spacing: -2px;
-    position: absolute;
-    top: 0;
 }
 
 #add-task-overlay {
@@ -153,12 +148,14 @@ textarea {
 #add-task-form select {
     border: unset;
     border-radius: 10px;
-    background: #f7f8fa;
-    font-size: 1rem;
-    padding: 12px;
+    padding: 0 12px;
     margin-bottom: 8px;
     outline: none;
     box-shadow: 0 1.5px 8px rgba(0, 0, 0, 0.04);
+}
+
+#add-task-form textarea{
+    padding-top: 8px;
 }
 
 #add-task-form input:focus,

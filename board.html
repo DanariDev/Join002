@@ -170,72 +170,86 @@
   <!-- NEU: Add Task Overlay im Gruppen-Look -->
 <div id="add-task-overlay" class="overlay d-none">
   <div id="form-add-task">
-    <button id="closeFormModal" class="close-btn">×</button>
+    <button type="reset" id="closeFormModal" class="close-btn">×</button>
     <h1>Add Task</h1>
 
-    <div class="add-task-form-content">
-      <label class="required" for="task-title">Title</label>
-      <input id="task-title" type="text" placeholder="Enter a title" required />
-      <span class="required-explain">This field is required</span>
+      <form id="add-task-form">
+        <div class="add-task-form-content">
+          <label class="required" for="title">Title</label>
+          <input class="title-input title-size" type="text" id="title" placeholder="Enter a title" required />
+          <div id="error-title" class="error-message"></div>
 
-      <label for="task-description">Description</label>
-      <textarea id="task-description" class="description-input" placeholder="Enter a description"></textarea>
+          <label for="description">Description</label>
+          <textarea rows="4" cols="50" class="description-input" id="description"
+            placeholder="Enter a description"></textarea>
 
-      <label class="required" for="task-date">Due date</label>
-      <input id="task-date" type="date" required />
-      <span class="required-explain">This field is required</span>
-    </div>
-    <div class="grey-bar"></div>
-    <div class="add-task-form-content">
-      <label>Priority</label>
-      <div id="priority-buttons">
-        <button type="button" id="urgent-btn">
-          Urgent
-        </button>
-        <button type="button" id="medium-btn" class="medium-btn-active">
-          Medium
-        </button>
-        <button type="button" id="low-btn">
-          Low
-        </button>
-      </div>
+          </textarea>
+          <div class="input-container">
+            <label class="required" for="due-date">Due date</label>
+            <input type="date" id="due-date" placeholder="TT.MM.JJJJ" required>
 
-      <label>Assigned to</label>
-      <div class="contacts-dropdown" id="contacts-dropdown">
-        <div class="contacts-dropdown-inner" id="contacts-selected">
-          Select contact(s)
+
+          </div>
+          <div id="error-due-date" class="error-message"></div>
         </div>
-        <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
-      </div>
-      <div id="selected-contact-insignias" class="contacts-dropdown-inner"></div>
 
-      <label class="required" for="task-category">Category</label>
-      <select id="task-category" required>
-        <option value="" disabled selected>Select task category</option>
-        <option value="Technical Task">Technical Task</option>
-        <option value="User Story">User Story</option>
-      </select>
+        <div class="grey-bar"></div>
+
+        <div class="add-task-form-content">
+          <label>Priority</label>
+          <div id="priority-buttons">
+            <button type="button" id="urgent-btn" class="all-priority-btns">Urgent
+              <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon" />
+            </button>
+            <button type="button" id="medium-btn" class="all-priority-btns medium-btn-active">Medium
+              <img src="assets/img/medium-btn-icon.png" alt="medium-icon" />
+            </button>
+            <button type="button" id="low-btn" class="all-priority-btns">Low
+              <img src="assets/img/low-btn-icon.png" alt="low-icon" />
+            </button>
+
+          </div>
+
+          <label>Assigned to</label>
+
+          <div class="contacts-dropdown" id="contacts-dropdown">
+            <div class="contacts-dropdown-inner" id="contacts-selected">
+              Select contact(s) to assign
+            </div>
+            <div class="contacts-dropdown-panel d-none" id="contacts-dropdown-panel">
+              <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
+            </div>
+          </div>
+          <div id="selected-contact-insignias"></div>
+
+
+          <label class="required" for="category">Category</label>
+          <select id="category" required>
+            <option value="" disabled selected>Select task category</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="User Story">User Story</option>
+          </select>
+          <div id="error-category" class="error-message"></div>
+
+          <label for="subtask">Subtasks</label>
+          <div class="subtask-wrapper">
+            <input type="text" id="subtask" placeholder="Add new subtask" autocomplete="off" />
+            <button type="button" class="subtask-button">+</button>
+          </div>
+
+          <ul id="subtask-list"></ul>
+
+          <span class="required-explain-responsive">This field is required</span>
+
+          <div class="add-task-create-and-clear-btn">
+            <button type="reset" id="clear-btn">Cancel ✖</button>
+            <button id="create-task-btn" type="button" class="btn-create-task">Create Task ✔</button>
+          </div>
+
+        </div>
+      </form>
+
       <span class="required-explain">This field is required</span>
-
-      <label for="subtask">Subtasks</label>
-      <div class="subtask-wrapper">
-        <input type="text" id="subtask-input" placeholder="Enter subtask" autocomplete="off" />
-        <button type="button" class="subtask-button">+</button>
-      </div>
-
-      <ul id="subtasks-list" class="subtask-list"></ul>
-
-      <span class="required-explain-responsive">This field is required</span>
-
-      <div class="add-task-create-and-clear-btn">
-        <button type="reset" id="clear-btn">
-          Cancel ✖
-        </button>
-        <button id="create-btn" type="submit" class="btn-create-task">
-          Create Task ✔
-        </button>
-      </div>
-    </div>
     <!-- </form> --> <!-- Brauchst du nicht nochmal -->
   </div>
 </div>
