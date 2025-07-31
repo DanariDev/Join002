@@ -1,5 +1,6 @@
 import { loadTasks } from "./load-tasks.js";
-import { initOverlay } from "./overlay.js";
+import { initBoardOverlay } from "./board-add-task-overlay.js";
+
 import { initSearch } from "./search.js";
 import { deleteTask } from "./delete-task.js";
 import { openEditTaskOverlay } from "./edit-task.js";
@@ -8,9 +9,10 @@ import { initEditContactsDropdown, setupEditDropdownOpenClose } from "./edit-tas
 
 window.addEventListener("DOMContentLoaded", () => {
   loadTasks();
-  initOverlay();
+  initBoardOverlay();  // <--- statt initOverlay()
   initSearch();
   initEditTaskForm();
   initEditContactsDropdown();
   setupEditDropdownOpenClose();
 });
+

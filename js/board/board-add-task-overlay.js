@@ -1,49 +1,41 @@
+// board-add-task-overlay.js
+
 import { db } from '../firebase/firebase-init.js';
 import { ref, push, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+// States
 let subtasks = [];
 let selectedContacts = [];
 let allContacts = [];
 
-export function initOverlay() {
-  
+export function initBoardOverlay() {
+  // Overlay öffnen: Alle Plus- und Add Task-Buttons auf dem Board
   document.querySelectorAll('.add-task-btn, #add-task-button').forEach(btn => {
     btn.addEventListener('click', async function (e) {
       e.preventDefault();
-      document.getElementById('add-task-overlay').classList.remove('d-none');
-      document.getElementById('form-add-task').style.display = 'flex';
-
-      // Prioritäts-Buttons richtig zurücksetzen
-      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
-        document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
-      );
-      // Medium als Standard aktivieren
-      document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
-
-      // Kontakte laden & Dropdown vorbereiten
-      allContacts = await loadAllContacts();
-      selectedContacts = [];
-      renderContactsDropdown();
-      renderSelectedContacts();
-      closeContactsDropdown();
+      openBoardOverlay();
     });
   });
 
-  // Overlay schließen Button
-  document.getElementById('closeFormModal').addEventListener('click', closeOverlay);
+  // Overlay schließen ("X" und Cancel)
+  document.getElementById('closeFormModal').onclick = closeBoardOverlay;
+  document.getElementById('clear-btn').onclick = function (e) {
+    e.preventDefault();
+    resetBoardOverlay();
+    closeBoardOverlay();
+  };
 
-  // Overlay schließen beim Klick auf Hintergrund
+  // Klick auf den Overlay-Hintergrund schließt das Overlay
   document.getElementById('add-task-overlay').addEventListener('click', function (e) {
-    if (e.target === this) closeOverlay();
+    if (e.target === this) closeBoardOverlay();
   });
 
-  // Prioritäts-Buttons Click-Handler mit gegenseitiger Deaktivierung
+  // Prio-Buttons
   ['urgent-btn', 'medium-btn', 'low-btn'].forEach(btnId => {
     document.getElementById(btnId).addEventListener('click', function () {
-      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id => {
-        const el = document.getElementById(id);
-        el.classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active');
-      });
+      ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
+        document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
+      );
       if (btnId === 'urgent-btn') this.classList.add('selected', 'urgent-btn-active');
       if (btnId === 'medium-btn') this.classList.add('selected', 'medium-btn-active');
       if (btnId === 'low-btn') this.classList.add('selected', 'low-btn-active');
@@ -53,62 +45,86 @@ export function initOverlay() {
   // Kontakte Dropdown öffnen/schließen
   const contactSelect = document.getElementById('contacts-selected');
   const contactDropdown = document.getElementById('contacts-dropdown-list');
-
-  contactSelect.addEventListener('click', e => {
+  contactSelect.onclick = function (e) {
     e.stopPropagation();
-    if (contactDropdown.style.display === 'block') {
-      closeContactsDropdown();
-    } else {
-      contactDropdown.style.display = 'block';
-    }
-  });
-
-  // Klick außerhalb Dropdown schließt es
-  document.addEventListener('click', e => {
+    contactDropdown.style.display = (contactDropdown.style.display === 'block') ? 'none' : 'block';
+  };
+  document.addEventListener('click', function (e) {
     if (!contactDropdown.contains(e.target) && e.target !== contactSelect) {
-      closeContactsDropdown();
+      contactDropdown.style.display = 'none';
     }
   });
 
-  closeContactsDropdown();
-
-  // Subtasks Buttons und Eingaben
+  // Subtasks
   document.getElementById('subtask-input').addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
-      addSubtask();
+      addBoardSubtask();
       e.preventDefault();
     }
   });
-  document.querySelector('.subtask-button').addEventListener('click', addSubtask);
-
+  document.querySelector('.subtask-button').addEventListener('click', addBoardSubtask);
   document.getElementById('subtasks-list').addEventListener('click', function (e) {
     if (e.target.classList.contains('subtask-delete')) {
       const idx = e.target.getAttribute('data-idx');
       subtasks.splice(idx, 1);
-      renderSubtasks();
+      renderBoardSubtasks();
     }
   });
 
-  // Task erstellen
-  document.getElementById('create-btn').addEventListener('click', createTask);
+  // Task anlegen
+  document.getElementById('create-btn').onclick = createBoardTask;
 }
 
-function closeOverlay() {
+async function openBoardOverlay() {
+  document.getElementById('add-task-overlay').classList.remove('d-none');
+  document.getElementById('form-add-task').style.display = 'flex';
+
+  // Kontakte laden
+  allContacts = await loadAllBoardContacts();
+  selectedContacts = [];
+  renderBoardContactsDropdown();
+  renderBoardSelectedContacts();
+  document.getElementById('contacts-dropdown-list').style.display = 'none';
+
+  // Prio & Subtasks zurücksetzen
+  ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
+    document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
+  );
+  document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
+
+  // Felder resetten
+  resetBoardOverlay();
+}
+
+function resetBoardOverlay() {
+  // Alle Inputs leeren
+  document.getElementById('task-title').value = '';
+  document.getElementById('task-description').value = '';
+  document.getElementById('task-date').value = '';
+  document.getElementById('task-category').selectedIndex = 0;
+
+  // Prio zurücksetzen
+  ['urgent-btn', 'medium-btn', 'low-btn'].forEach(id =>
+    document.getElementById(id).classList.remove('selected', 'urgent-btn-active', 'medium-btn-active', 'low-btn-active')
+  );
+  document.getElementById('medium-btn').classList.add('selected', 'medium-btn-active');
+
+  // Kontakte/Subtasks zurücksetzen
+  selectedContacts = [];
+  renderBoardContactsDropdown();
+  renderBoardSelectedContacts();
+
+  subtasks = [];
+  renderBoardSubtasks();
+}
+
+function closeBoardOverlay() {
   document.getElementById('add-task-overlay').classList.add('d-none');
   document.getElementById('form-add-task').style.display = 'none';
-  subtasks = [];
-  selectedContacts = [];
-  renderSubtasks();
-  renderSelectedContacts();
-  closeContactsDropdown();
 }
 
-function closeContactsDropdown() {
-  const dropdown = document.getElementById('contacts-dropdown-list');
-  if (dropdown) dropdown.style.display = 'none';
-}
-
-async function loadAllContacts() {
+// --- Kontakte / Chips ---
+async function loadAllBoardContacts() {
   const contactsRef = ref(db, "contacts");
   const snapshot = await get(contactsRef);
   if (!snapshot.exists()) return [];
@@ -117,38 +133,35 @@ async function loadAllContacts() {
     ...data,
   }));
 }
-
-function renderContactsDropdown() {
+function renderBoardContactsDropdown() {
   const list = document.getElementById('contacts-dropdown-list');
   list.innerHTML = '';
   allContacts.forEach(contact => {
     const div = document.createElement('div');
     div.className = 'contact-option';
     div.dataset.contactId = contact.id;
-    div.textContent = contact.name + ' (' + contact.email + ')';
+    div.textContent = contact.name + (contact.email ? ` (${contact.email})` : '');
     if (selectedContacts.some(c => c.id === contact.id)) {
       div.classList.add('selected-contact');
     }
-    div.addEventListener('click', e => {
+    div.onclick = function (e) {
       e.stopPropagation();
-      toggleContact(contact);
-    });
+      toggleBoardContact(contact);
+    };
     list.appendChild(div);
   });
 }
-
-function toggleContact(contact) {
+function toggleBoardContact(contact) {
   const idx = selectedContacts.findIndex(c => c.id === contact.id);
   if (idx === -1) {
     selectedContacts.push(contact);
   } else {
     selectedContacts.splice(idx, 1);
   }
-  renderContactsDropdown();
-  renderSelectedContacts();
+  renderBoardContactsDropdown();
+  renderBoardSelectedContacts();
 }
-
-function renderSelectedContacts() {
+function renderBoardSelectedContacts() {
   const div = document.getElementById('selected-contact-insignias');
   div.innerHTML = '';
   selectedContacts.forEach(c => {
@@ -159,31 +172,30 @@ function renderSelectedContacts() {
   });
 }
 
-function renderSubtasks() {
+// --- Subtasks ---
+function renderBoardSubtasks() {
   const list = document.getElementById('subtasks-list');
   list.innerHTML = '';
   subtasks.forEach((subtask, idx) => {
-    const txt = subtask.text || subtask;
+    const txt = typeof subtask === 'string' ? subtask : subtask.text;
     const li = document.createElement('li');
-    li.classList.add('subtask-item');
-    li.innerHTML = `
-      <span class="subtask-text">${txt}</span>
-      <img class="subtask-delete" src="assets/img/delete.png" alt="Delete" data-idx="${idx}" style="width:16px;cursor:pointer;">
-    `;
+    li.className = 'subtask-item';
+    li.innerHTML = `<span class="subtask-text">${txt}</span>
+      <img class="subtask-delete" src="assets/img/delete.png" alt="Delete" data-idx="${idx}" style="width:16px;cursor:pointer;">`;
     list.appendChild(li);
   });
 }
-
-function addSubtask() {
+function addBoardSubtask() {
   const input = document.getElementById('subtask-input');
   const value = input.value.trim();
   if (!value) return;
   subtasks.push(value);
   input.value = '';
-  renderSubtasks();
+  renderBoardSubtasks();
 }
 
-function createTask(e) {
+// --- Task anlegen (wie Add Task) ---
+function createBoardTask(e) {
   e.preventDefault();
 
   const title = document.getElementById('task-title').value.trim();
@@ -214,14 +226,13 @@ function createTask(e) {
   const tasksRef = ref(db, 'tasks/');
   push(tasksRef, task)
     .then(() => {
-      subtasks = [];
-      selectedContacts = [];
-      renderSubtasks();
-      renderSelectedContacts();
-      closeContactsDropdown();
-      closeOverlay();
+      resetBoardOverlay();
+      closeBoardOverlay();
     })
     .catch(error => {
       alert('Fehler beim Speichern: ' + error.message);
     });
 }
+
+// --- Initialisierung aufrufen (im board/main.js z.B.) ---
+initBoardOverlay();
