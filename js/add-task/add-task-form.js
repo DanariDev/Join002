@@ -37,7 +37,7 @@ function showFieldError(field, message) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) {
     errorDiv.textContent = message;
-    errorDiv.style.color = "red";
+    // errorDiv.style.color = "red";
   }
 }
 

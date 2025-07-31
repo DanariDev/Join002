@@ -23,13 +23,6 @@
     object-fit: none;
 }
 
-.starting-logo img,
-.starting-logo-responsive img {
-    width: 100px;
-    height: 120px;
-    object-fit: contain;
-}
-
 @keyframes slideToLeftCorner {
     to {
         width: 100px;
@@ -39,6 +32,7 @@
         transform: translate(0, 0);
         background-color: transparent;
         object-fit: contain;
+        opacity: 1;
     }
 }
 

@@ -46,7 +46,7 @@ export function initDueDateInput() {
   function showError(msg) {
     if (errorMsg) {
       errorMsg.textContent = msg;
-      errorMsg.style.color = 'red';
+      // errorMsg.style.color = 'red';
     }
   }
   function hideError() {

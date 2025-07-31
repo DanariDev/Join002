@@ -8,10 +8,11 @@
 
     .starting-logo {
         object-fit: contain;
+        opacity: 0;
     }
 
     .starting-logo-responsive {
-        animation: slideToLeftCornerResponsive 1.25s 0.75s ease forwards;
+        animation: slideToLeftCornerResponsive 1.25s 0.637s ease forwards;
         background-color: var(--clr-700);
         height: 100%;
         width: 100%;
@@ -22,26 +23,27 @@
 
     @keyframes slideToLeftCornerResponsive {
         to {
-            width: 100px;
+            width: 50px;
             height: 120px;
             top: 32px;
             left: 20px;
             transform: translate(0, 0);
             background-color: transparent;
             opacity: 0;
-            object-fit: contain;
+            object-fit: none;
         }
     }
 
     @keyframes slideToLeftCorner {
         to {
-            width: 100px;
+            width: 50px;
             height: 120px;
-            top: 32px;
+            top: 10px;
             left: 20px;
             transform: translate(0, 0);
             background-color: transparent;
             object-fit: contain;
+            opacity: 1;
         }
     }
 }
