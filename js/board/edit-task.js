@@ -6,6 +6,7 @@ import { resetSelectedEditContacts } from './edit-task-contacts.js';
 export function openEditTaskOverlay(taskId) {
   resetSelectedEditContacts(); // Overlay immer sauber starten
   showEditForm(taskId);
+  setEditTaskHandlers(taskId);
 }
 
 function loadTaskDataForEdit(taskId) {
@@ -52,6 +53,8 @@ function setEditTaskHandlers(taskId) {
   console.log('setEditTaskHandlers:', document.getElementById('overlay-edit-close'));
   document.getElementById('overlay-edit-close').onclick = closeEditOverlay;
   document.getElementById('editing-cancel-btn').onclick = closeEditOverlay;
+  closeEditOverlayBackground();
+  closeEditOverlayESC()
   document.getElementById('editing-save-btn').onclick = function (e) {
     e.preventDefault();
     saveEditTask(taskId);
@@ -84,7 +87,28 @@ function getSelectedEditPrio() {
   return "";
 }
 
-export function closeEditOverlay() {
+export function closeEditOverlay(event) {
+  event.stopPropagation();
   resetSelectedEditContacts();
-  document.getElementById('edit-task-overlay').classList.add('d-none');
+  document.getElementById('edit-task-overlay').classList.replace('d-flex','d-none');
+}
+
+function closeEditOverlayBackground(){
+  const taskOverlay = document.getElementById('edit-task-overlay');
+  if (taskOverlay) {
+    taskOverlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        taskOverlay.classList.replace('d-flex','d-none');
+      }
+    });
+  }
+}
+
+function closeEditOverlayESC(){
+  document.addEventListener('keydown', function(e) {
+    const overlay = document.getElementById('edit-task-overlay');
+    if (e.key === 'Escape' && overlay && !overlay.classList.contains('d-none')) {
+      overlay.classList.replace('d-flex','d-none');
+    }
+  });
 }

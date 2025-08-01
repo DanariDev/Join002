@@ -71,7 +71,7 @@ export function showEditForm(taskId) {
   get(taskRef).then(snapshot => {
     if (!snapshot.exists()) return;
     fillEditFormWithTask(snapshot.val());
-    document.getElementById('edit-task-overlay').classList.remove('d-none');
+    document.getElementById('edit-task-overlay').classList.replace('d-none', 'd-flex');
   });
 }
 
