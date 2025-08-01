@@ -102,6 +102,32 @@ h3 {
     /* visibility: hidden; */
 }
 
-.overflow-hidden{
+.overflow-hidden {
     overflow: hidden;
+}
+
+.custom-checkbox {
+    display: none;
+}
+
+.custom-checkbox+label {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.custom-checkbox:checked+label::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #000000;
 }

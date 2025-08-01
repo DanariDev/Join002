@@ -118,9 +118,8 @@ function setTaskOverlayContent(card, taskId) {
     "popup-category"
   ).innerHTML = `<span class="task-label">${category}</span>`;
   document.getElementById("popup-title").innerHTML = `<h2>${title}</h2>`;
-  document.getElementById("popup-description").innerHTML = `<div>${
-    desc || ""
-  }</div>`;
+  document.getElementById("popup-description").innerHTML = `<div>${desc || ""
+    }</div>`;
   document.getElementById(
     "popup-due-date"
   ).innerHTML = `<b>Due date:</b> <span>-</span>`;
@@ -132,18 +131,28 @@ function setTaskOverlayContent(card, taskId) {
   subtaskGenerate(taskId);
 }
 
-function subtaskGenerate(taskId){
-  document.getElementById('popup-subtasks').innerHTML ="";
+function subtaskGenerate(taskId) {
+  document.getElementById('popup-subtasks').innerHTML = "";
   const tasksRef = ref(db, 'tasks/');
   onValue(tasksRef, (snapshot) => {
     const data = snapshot.val();
-    if (data) Object.entries(data).forEach((element) => {
-      if(element[0] == taskId){
-        if(element[1].subtasks != undefined) element[1].subtasks.forEach(subtask => {
-          document.getElementById('popup-subtasks').innerHTML += `<li><input type="checkbox" name="" id=""></input> ${subtask.task}</li>`;
-        })
-      }
-    });
+    if (data) {
+      Object.entries(data).forEach(([key, value]) => {
+        if (key == taskId) {
+          if (value.subtasks != undefined) {
+            value.subtasks.forEach((subtask, index) => {
+              const subtaskId = `subtask-${taskId}-${index}`;
+              document.getElementById('popup-subtasks').innerHTML += `
+                <li>
+                  <input type="checkbox" class="custom-checkbox" id="${subtaskId}" name="subtask-${index}">
+                  <label for="${subtaskId}"></label>
+                  <span>${subtask.task}</span>
+                </li>`;
+            });
+          }
+        }
+      });
+    }
   });
 }
 

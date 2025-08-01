@@ -14,6 +14,7 @@
 label,
 ::placeholder {
     font-size: var(--fs-20);
+    color: #2a3647;
 }
 
 input,
@@ -54,7 +55,7 @@ option {
 
 .required:after {
     content: " *";
-    color: red;
+    color: #ff8291;
 }
 
 .required-explain {
@@ -64,7 +65,7 @@ option {
 
 .required-explain:before {
     content: " *";
-    color: red;
+    color: #ff8291;
 }
 
 .required-explain-responsive {
