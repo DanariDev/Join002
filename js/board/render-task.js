@@ -5,6 +5,7 @@ import { db } from "../firebase/firebase-init.js";
 import {
   ref,
   get,
+  onValue
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { deleteTask } from "./delete-task.js";
 
@@ -103,11 +104,11 @@ export function openTaskOverlay(taskId) {
   document.getElementById("task-overlay").classList.remove("d-none");
   const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
   if (!card) return;
-  setTaskOverlayContent(card);
+  setTaskOverlayContent(card, taskId);
   setTaskOverlayHandlers(taskId);
 }
 
-function setTaskOverlayContent(card) {
+function setTaskOverlayContent(card, taskId) {
   const category = card.querySelector(".task-label").textContent;
   const title = card.querySelector(".task-title").textContent;
   const desc = card.querySelector(".task-desc").textContent;
@@ -128,6 +129,22 @@ function setTaskOverlayContent(card) {
   ).innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
   const labelSpan = document.querySelector("#popup-category .task-label");
   if (labelSpan) applyCategoryStyle(labelSpan, category);
+  subtaskGenerate(taskId);
+}
+
+function subtaskGenerate(taskId){
+  document.getElementById('popup-subtasks').innerHTML ="";
+  const tasksRef = ref(db, 'tasks/');
+  onValue(tasksRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) Object.entries(data).forEach((element) => {
+      if(element[0] == taskId){
+        if(element[1].subtasks != undefined) element[1].subtasks.forEach(subtask => {
+          document.getElementById('popup-subtasks').innerHTML += `<li><input type="checkbox" name="" id=""></input> ${subtask}</li>`;
+        })
+      }
+    });
+  });
 }
 
 function setTaskOverlayHandlers(taskId) {
@@ -198,4 +215,3 @@ function addRestBubble(count, container) {
   span.style.backgroundColor = "#878787";
   container.appendChild(span);
 }
-
