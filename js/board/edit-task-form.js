@@ -58,7 +58,7 @@ function fillEditSubtasks(subtasks) {
   list.innerHTML = "";
   subtasks.forEach(st => {
     const li = document.createElement("li");
-    li.textContent = st;
+    li.textContent = st.task;
     list.appendChild(li);
   });
 }
@@ -124,7 +124,7 @@ function saveEditedTask() {
     dueDate: document.getElementById('editing-date').value,
     priority: getSelectedEditPriority(),
     category: document.getElementById('editing-category').value,
-    subtasks: getEditSubtasks(),
+    subtasks: getEditSubtasks(taskId),
     assignedTo: getSelectedEditContactIds(),
     // assigned usw. ergänzen!
   };
@@ -141,7 +141,10 @@ function getSelectedEditPriority() {
 
 function getEditSubtasks() {
   const items = document.querySelectorAll("#editing-subtask-list li");
-  return Array.from(items).map(li => li.textContent.trim());
+  return Array.from(items).map(li => ({
+    "task" : li.textContent.trim(),
+    "checked": "false"
+  }));
 }
 
 // Subtasks hinzufügen/bearbeiten wie bei Add Task

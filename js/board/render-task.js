@@ -140,7 +140,7 @@ function subtaskGenerate(taskId){
     if (data) Object.entries(data).forEach((element) => {
       if(element[0] == taskId){
         if(element[1].subtasks != undefined) element[1].subtasks.forEach(subtask => {
-          document.getElementById('popup-subtasks').innerHTML += `<li><input type="checkbox" name="" id=""></input> ${subtask}</li>`;
+          document.getElementById('popup-subtasks').innerHTML += `<li><input type="checkbox" name="" id=""></input> ${subtask.task}</li>`;
         })
       }
     });

@@ -9,7 +9,11 @@ import { getSelectedContactIds } from "./add-task-contacts.js";
 export function initAddTaskForm() {
   const createBtn = document.getElementById("create-task-btn");
   if (!createBtn) return;
-  createBtn.addEventListener("click", function (event) {
+
+  const newBtn = createBtn.cloneNode(true);
+  createBtn.parentNode.replaceChild(newBtn, createBtn);
+
+  newBtn.addEventListener("click", function (event) {
     event.preventDefault();
     clearAllFieldErrors();
     let valid = true;
@@ -167,5 +171,8 @@ function collectTaskData() {
  */
 function getSubtasks() {
   const items = document.querySelectorAll("#subtask-list li");
-  return Array.from(items).map(li => li.textContent.trim());
+  return Array.from(items).map(li => ({
+    "task" : li.textContent.trim(),
+    "checked": "false"
+  }));
 }
