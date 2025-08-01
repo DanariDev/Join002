@@ -178,10 +178,7 @@ export function setupDropdownOpenClose() {
   if (!dropdown || !selected || !panel) return;
 
   // Panel auf/zu schalten beim Klick auf das Eingabefeld
-  selected.addEventListener("click", (e) => {
-    e.stopPropagation();
-    panel.classList.toggle("d-none");
-  });
+  selected.addEventListener("click", openClose);
 
   // Bei Klick außerhalb Panel schließen
   document.addEventListener("click", (e) => {
@@ -201,4 +198,10 @@ export function resetSelectedContacts() {
   selectedContacts.clear();
   renderContactsDropdown();
   renderSelectedInsignias();
+}
+
+function openClose(event){
+  const panel = document.getElementById("contacts-dropdown-panel");
+  event.stopPropagation();
+  panel.classList.toggle("d-none");
 }
