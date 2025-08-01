@@ -2,6 +2,8 @@
 import { db } from "../firebase/firebase-init.js";
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "../contacts/contact-style.js";
+import { renderSelectedEditInsignias as renderEditInsigniasBadges } from "./edit-contact-insignias.js";
+
 
 let allEditContacts = [];
 let selectedEditContacts = new Set();
@@ -108,13 +110,11 @@ function handleEditContactToggle(id) {
 export function renderSelectedEditInsignias() {
   const container = document.getElementById("selected-editing-contact-insignias");
   if (!container) return;
-  container.innerHTML = "";
-  allEditContacts.forEach((c) => {
-    if (selectedEditContacts.has(c.id)) {
-      container.appendChild(createEditInsignia(c));
-    }
-  });
+  // IDs → Kontaktobjekte
+  const selectedContacts = allEditContacts.filter(c => selectedEditContacts.has(c.id));
+  renderEditInsigniasBadges(selectedContacts, container);
 }
+
 
 function createEditInsignia(contact) {
   const insignia = document.createElement("div");
