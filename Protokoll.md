@@ -21,7 +21,7 @@
 
 ## ❗ Offene Aufgaben / ToDo
 
-- Subtasks mit Checkbox "erledigt" im Task-Detail-Overlay (statt nur Liste)
+- Subtasks mit Checkbox "erledigt" im Task-Detail-Overlay (statt nur Liste) (wurde angefangen, ist aber noch nicht fertig)
 - Edit-Formular speichert ALLE Felder (assignedTo fehlt noch)
 - Subtasks: Bearbeiten mit Status "erledigt/nicht"
 - Fehlermeldungen & UX-Feedback verbessern (Toasts, Inline-Fehler)
