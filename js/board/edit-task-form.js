@@ -2,6 +2,8 @@
 import { db } from '../firebase/firebase-init.js';
 import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setSelectedEditContacts } from "./edit-task-contacts.js";
+import { getSelectedEditContactIds } from "./edit-task-contacts.js";
+
 
 
 /**
@@ -114,7 +116,7 @@ function clearAllEditFieldErrors() { /* ...optional... */ }
  * Speichert die Änderungen in die DB.
  */
 function saveEditedTask() {
-  const taskId = window.currentEditTaskId; // Muss gesetzt werden beim Öffnen!
+  const taskId = window.currentEditTaskId; 
   if (!taskId) return;
   const updates = {
     title: document.getElementById('editing-title').value.trim(),
@@ -123,6 +125,7 @@ function saveEditedTask() {
     priority: getSelectedEditPriority(),
     category: document.getElementById('editing-category').value,
     subtasks: getEditSubtasks(),
+    assignedTo: getSelectedEditContactIds(),
     // assigned usw. ergänzen!
   };
   update(ref(db, 'tasks/' + taskId), updates)

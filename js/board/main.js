@@ -1,3 +1,4 @@
+// main.js
 import { loadTasks } from "./load-tasks.js";
 import { initBoardOverlay } from "./board-add-task-overlay.js";
 
@@ -9,26 +10,21 @@ import { initEditContactsDropdown, setupEditDropdownOpenClose } from "./edit-tas
 import { initAddContactsDropdown, setupAddDropdownOpenClose } from "./add-task-contacts.js";
 
 window.addEventListener("DOMContentLoaded", () => {
+  // Alle Board-Funktionen
   loadTasks();
-  initBoardOverlay();  // <--- statt initOverlay()
+  initBoardOverlay();
   initSearch();
+
+  // Edit-Funktionen
   initEditTaskForm();
   initEditContactsDropdown();
   setupEditDropdownOpenClose();
+
+  // Add Task Funktionen (Overlay)
   initAddContactsDropdown();
   setupAddDropdownOpenClose();
-});
-// Schließen des Task-Overlays mit ESC-Taste
-document.addEventListener('keydown', function(e) {
-  const overlay = document.getElementById('task-overlay');
-  if (e.key === 'Escape' && overlay && !overlay.classList.contains('d-none')) {
-    overlay.classList.add('d-none');
-  }
-});
-window.addEventListener("DOMContentLoaded", () => {
-  // ...deine bisherigen Inits...
 
-  // Hier Outside-Click für Task-Overlay!
+  // Outside-Click für Task-Overlay!
   const taskOverlay = document.getElementById('task-overlay');
   if (taskOverlay) {
     taskOverlay.addEventListener('click', function(e) {
@@ -39,4 +35,10 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
- 
+// ESC schließt das Task-Overlay
+document.addEventListener('keydown', function(e) {
+  const overlay = document.getElementById('task-overlay');
+  if (e.key === 'Escape' && overlay && !overlay.classList.contains('d-none')) {
+    overlay.classList.add('d-none');
+  }
+});

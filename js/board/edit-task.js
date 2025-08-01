@@ -1,10 +1,11 @@
 import { db } from '../firebase/firebase-init.js';
 import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { showEditForm } from './edit-task-form.js';
+import { resetSelectedEditContacts } from './edit-task-contacts.js';
 
 export function openEditTaskOverlay(taskId) {
-  document.getElementById('edit-task-overlay').classList.replace('d-none', 'd-flex');
-  loadTaskDataForEdit(taskId);
-  setEditTaskHandlers(taskId);
+  resetSelectedEditContacts(); // Overlay immer sauber starten
+  showEditForm(taskId);
 }
 
 function loadTaskDataForEdit(taskId) {
@@ -83,6 +84,7 @@ function getSelectedEditPrio() {
   return "";
 }
 
-function closeEditOverlay() {
-  document.getElementById('edit-task-overlay').classList.replace('d-flex', 'd-none');
+export function closeEditOverlay() {
+  resetSelectedEditContacts();
+  document.getElementById('edit-task-overlay').classList.add('d-none');
 }
