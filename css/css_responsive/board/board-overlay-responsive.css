@@ -1,3 +1,11 @@
 .edit-task-form-content {
     gap: 8px;
 }
+
+@media (max-width: 1100px) {
+
+    #popup-due-date,
+    #popup-priority {
+        max-width: none;
+    }
+}

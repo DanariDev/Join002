@@ -118,7 +118,11 @@ function setTaskOverlayContent(card, taskId) {
   document.getElementById("popup-category").innerHTML = `<span class="task-label">${category}</span>`;
   document.getElementById("popup-title").innerHTML = `<h2>${title}</h2>`;
   document.getElementById("popup-description").innerHTML = `<div>${desc || ""}</div>`;
-  document.getElementById("popup-priority").innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
+  document.getElementById("popup-priority").innerHTML = `<b>Priority:</b>
+  <div class="prio_spacing">
+  <span>${prio}</span>
+  <img src="assets/img/${prio}-btn-icon.png" alt="">
+  </div>`;
   dueDateGenerate(taskId, (formattedDate) => {
     document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>${formattedDate}</span>`;
   });

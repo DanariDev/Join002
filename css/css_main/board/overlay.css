@@ -126,7 +126,8 @@ textarea {
 }
 
 .overlay-section {
-    margin-bottom: 20px;
+    display: grid;
+    gap: 21px;
 }
 
 .overlay-section input {
@@ -154,7 +155,7 @@ textarea {
     box-shadow: 0 1.5px 8px rgba(0, 0, 0, 0.04);
 }
 
-#add-task-form textarea{
+#add-task-form textarea {
     padding-top: 8px;
 }
 
@@ -165,9 +166,28 @@ textarea {
 }
 
 
-.overlay-key {
+.overlay-key,
+.overlay-section b {
     font-size: var(--fs-20);
-    color: var(--clr-400);
+    font-weight: 500;
+    color: #2a3647;
+}
+
+#popup-due-date,
+#popup-priority {
+    display: flex;
+    justify-content: space-between;
+    max-width: 50%;
+}
+
+.prio_spacing {
+    display: flex;
+    justify-content: space-between;
+    min-width: 25%;
+}
+
+.prio_spacing img {
+    object-fit: contain;
 }
 
 .bottom-line {
