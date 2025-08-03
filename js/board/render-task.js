@@ -127,11 +127,42 @@ function setTaskOverlayContent(card, taskId) {
     document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>${formattedDate}</span>`;
   });
 
+  assignedToGenerate(taskId);
+  console.log("TASKID:" + taskId.assignedTo);
+
+
   const labelSpan = document.querySelector("#popup-category .task-label");
   if (labelSpan) applyCategoryStyle(labelSpan, category);
   subtaskGenerate(taskId);
   console.log("Card:" + card, "taskID:" + taskId);
 }
+
+function assignedToGenerate(taskId) {
+  const container = document.getElementById("popup-assigned");
+  container.innerHTML = ""; // Vorherigen Inhalt leeren
+
+  // Label "Assigned To:"
+  const label = document.createElement("b");
+  label.textContent = "Assigned To: ";
+  container.appendChild(label);
+
+  // Initialen-Gruppe in eigenen Container mit class="initial-group"
+  const initialGroupDiv = document.createElement("div");
+  initialGroupDiv.className = "initial-group";
+  container.appendChild(initialGroupDiv);
+
+  // Daten aus Firebase holen
+  const tasksRef = ref(db, 'tasks/' + taskId);
+  onValue(tasksRef, (snapshot) => {
+    const taskData = snapshot.val();
+    if (taskData && taskData.assignedTo) {
+      renderAssignedContacts(taskData.assignedTo, initialGroupDiv);
+    } else {
+      initialGroupDiv.innerHTML = "<span>None assigned</span>";
+    }
+  });
+}
+
 
 function dueDateGenerate(taskId, callback) {
   const tasksRef = ref(db, 'tasks/');

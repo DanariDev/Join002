@@ -209,6 +209,7 @@
     margin: -8px 0 8px 0px;
     flex-wrap: wrap;
     width: 280px;
+    padding-left: 16px;
 }
 
 .add-task-main .assigned-initials {
