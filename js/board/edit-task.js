@@ -1,114 +1,151 @@
-import { db } from '../firebase/firebase-init.js';
+export { db } from "../firebase/firebase-init.js";
 import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { showEditForm } from './edit-task-form.js';
-import { resetSelectedEditContacts } from './edit-task-contacts.js';
+import { showEditForm } from "./edit-task-form.js";
+import { resetSelectedEditContacts, getSelectedEditContactIds } from "./edit-task-contacts.js";
 
 export function openEditTaskOverlay(taskId) {
-  resetSelectedEditContacts(); // Overlay immer sauber starten
+  window.currentEditTaskId = taskId;
+  resetSelectedEditContacts();
   showEditForm(taskId);
   setEditTaskHandlers(taskId);
 }
 
-function loadTaskDataForEdit(taskId) {
-  const taskRef = ref(db, 'tasks/' + taskId);
-  get(taskRef).then((snapshot) => {
-    if (!snapshot.exists()) return;
-    const task = snapshot.val();
-    fillEditForm(task);
+function setEditTaskHandlers(taskId) {
+  const overlay = document.getElementById("edit-task-overlay");
+  const closeBtn = document.getElementById("overlay-edit-close");
+  const cancelBtn = document.getElementById("editing-cancel-btn");
+  const saveBtn = document.getElementById("editing-save-btn");
+
+  // Close handlers
+  closeBtn.onclick = closeEditOverlay;
+  cancelBtn.onclick = closeEditOverlay;
+  overlay.onclick = (e) => { if (e.target === overlay) closeEditOverlay(); };
+  document.onkeydown = (e) => { if (e.key === "Escape" && !overlay.classList.contains("d-none")) closeEditOverlay(); };
+
+  // Save handler via custom event
+  document.addEventListener("saveTask", async (e) => {
+    e.preventDefault();
+    console.log("Save event triggered for taskId:", taskId);
+    if (await validateEditForm()) {
+      await saveEditTask(taskId);
+    }
+  });
+
+  // Ensure save button triggers the event
+  saveBtn.onclick = (e) => {
+    e.preventDefault();
+    console.log("Save button clicked for taskId:", taskId);
+    const saveEvent = new Event("saveTask");
+    document.dispatchEvent(saveEvent);
+  };
+
+  // Priority buttons
+  document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach((btn) => {
+    btn.onclick = () => {
+      document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach((b) =>
+        b.classList.remove("urgent-btn-active", "medium-btn-active", "low-btn-active")
+      );
+      btn.classList.add(`${btn.id.split("-")[1]}-btn-active`);
+    };
   });
 }
 
-function fillEditForm(task) {
-  document.getElementById('editing-title').value = task.title || '';
-  document.getElementById('editing-description').value = task.description || '';
-  document.getElementById('editing-date').value = task.dueDate || '';
-  setEditPrio(task.priority);
-  // Hier ggf. assigned, category & subtasks nach deinem Bedarf ergänzen!
-  document.getElementById('editing-category').value = task.category || '';
-  setEditSubtasks(task.subtasks);
+async function validateEditForm() {
+  clearAllEditFieldErrors();
+  let valid = true;
+
+  const title = document.getElementById("editing-title").value.trim();
+  const dueDate = document.getElementById("editing-date").value;
+  const category = document.getElementById("editing-category").value;
+
+  if (!title) {
+    showEditFieldError("editing-title", "Please enter a title!");
+    valid = false;
+  }
+  if (!dueDate) {
+    showEditFieldError("editing-date", "Please select a due date!");
+    valid = false;
+  }
+  if (!category) {
+    showEditFieldError("editing-category", "Please select a category!");
+    valid = false;
+  }
+
+  return valid;
 }
 
-function setEditPrio(priority) {
-  document.querySelectorAll('#editing-priority-buttons .all-priority-btns')
-    .forEach(btn =>  btn.classList.remove('urgent-btn-active', 'medium-btn-active', 'low-btn-active'));
-  if (priority === "urgent")
-    document.getElementById('editing-urgent-btn').classList.add('urgent-btn-active');
-  else if (priority === "medium")
-    document.getElementById('editing-medium-btn').classList.add('medium-btn-active');
-  else if (priority === "low")
-    document.getElementById('editing-low-btn').classList.add('low-btn-active');
-}
+async function saveEditTask(taskId) {
+  try {
+    const updates = {
+      title: document.getElementById("editing-title").value.trim(),
+      description: document.getElementById("editing-description").value.trim(),
+      dueDate: document.getElementById("editing-date").value,
+      priority: getSelectedEditPrio(),
+      category: document.getElementById("editing-category").value,
+      subtasks: getEditSubtasks(),
+      assignedTo: getSelectedEditContactIds(),
+    };
 
-function setEditSubtasks(subtasks){
-  if(subtasks == undefined) return;
-  document.getElementById('editing-subtask-list').innerHTML ="";
-  subtasks.forEach(subtask => {
-    subtask.trim();
-    document.getElementById('editing-subtask-list').innerHTML += `<li class="subtask-item"><span class="subtask-text">${subtask}</span>
-      <img class="subtask-delete" src="assets/img/delete.png" alt="Delete" data-idx="0"></li>`
-  })
-}
-
-function setEditTaskHandlers(taskId) {
-  console.log('setEditTaskHandlers:', document.getElementById('overlay-edit-close'));
-  document.getElementById('overlay-edit-close').onclick = closeEditOverlay;
-  document.getElementById('editing-cancel-btn').onclick = closeEditOverlay;
-  closeEditOverlayBackground();
-  closeEditOverlayESC()
-  document.getElementById('editing-save-btn').onclick = function (e) {
-    e.preventDefault();
-    saveEditTask(taskId);
-  };
-  // Prio-Buttons aktivieren:
-  document.querySelectorAll('#editing-priority-buttons .all-priority-btns')
-    .forEach(btn => btn.onclick = function () {
-      document.querySelectorAll('#editing-priority-buttons .all-priority-btns')
-        .forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    });
-}
-
-function saveEditTask(taskId) {
-  const updates = {
-    title: document.getElementById('editing-title').value,
-    description: document.getElementById('editing-description').value,
-    dueDate: document.getElementById('editing-date').value,
-    priority: getSelectedEditPrio(),
-    category: document.getElementById('editing-category').value,
-    // Ergänze hier assigned/subtasks, falls gewünscht
-  };
-  update(ref(db, 'tasks/' + taskId), updates).then(closeEditOverlay);
-}
-
-function getSelectedEditPrio() {
-  if (document.getElementById('editing-urgent-btn').classList.contains('active')) return "urgent";
-  if (document.getElementById('editing-medium-btn').classList.contains('active')) return "medium";
-  if (document.getElementById('editing-low-btn').classList.contains('active')) return "low";
-  return "";
-}
-
-export function closeEditOverlay(event) {
-  event.stopPropagation();
-  resetSelectedEditContacts();
-  document.getElementById('edit-task-overlay').classList.replace('d-flex','d-none');
-}
-
-function closeEditOverlayBackground(){
-  const taskOverlay = document.getElementById('edit-task-overlay');
-  if (taskOverlay) {
-    taskOverlay.addEventListener('click', function(e) {
-      if (e.target === this) {
-        taskOverlay.classList.replace('d-flex','d-none');
-      }
-    });
+    console.log("Attempting to save updates:", updates); // Debug output
+    await update(ref(db, `tasks/${taskId}`), updates);
+    console.log("Task successfully updated in Firebase");
+    showSuccessMessage("Task saved successfully!");
+    closeEditOverlay();
+  } catch (error) {
+    console.error("Error saving task:", error);
+    showEditFieldError("general", "Failed to save task. Check console for details.");
   }
 }
 
-function closeEditOverlayESC(){
-  document.addEventListener('keydown', function(e) {
-    const overlay = document.getElementById('edit-task-overlay');
-    if (e.key === 'Escape' && overlay && !overlay.classList.contains('d-none')) {
-      overlay.classList.replace('d-flex','d-none');
-    }
-  });
+function getSelectedEditPrio() {
+  const urgentBtn = document.getElementById("editing-urgent-btn");
+  const mediumBtn = document.getElementById("editing-medium-btn");
+  const lowBtn = document.getElementById("editing-low-btn");
+
+  if (urgentBtn.classList.contains("urgent-btn-active")) return "urgent";
+  if (mediumBtn.classList.contains("medium-btn-active")) return "medium";
+  if (lowBtn.classList.contains("low-btn-active")) return "low";
+  return "";
+}
+
+function getEditSubtasks() {
+  const items = document.querySelectorAll("#editing-subtask-list li");
+  return Array.from(items).map((li) => ({
+    task: li.textContent.trim(),
+    completed: li.dataset.completed === "true",
+  }));
+}
+
+function closeEditOverlay() {
+  resetSelectedEditContacts();
+  const overlay = document.getElementById("edit-task-overlay");
+  if (overlay) overlay.classList.replace("d-flex", "d-none");
+}
+
+function showEditFieldError(field, message) {
+  const errorDiv = document.createElement("div");
+  errorDiv.className = "error-message";
+  errorDiv.textContent = message;
+  const fieldElement = document.getElementById(field);
+  if (fieldElement) {
+    fieldElement.parentElement.appendChild(errorDiv);
+  } else {
+    document.getElementById("edit-task-overlay")?.prepend(errorDiv);
+  }
+}
+
+function showSuccessMessage(message) {
+  const successDiv = document.createElement("div");
+  successDiv.className = "success-message";
+  successDiv.textContent = message;
+  const overlay = document.getElementById("edit-task-overlay");
+  if (overlay) {
+    overlay.appendChild(successDiv);
+    setTimeout(() => successDiv.remove(), 3000); // Remove after 3 seconds
+  }
+}
+
+function clearAllEditFieldErrors() {
+  document.querySelectorAll(".error-message").forEach((el) => el.remove());
+  document.querySelectorAll(".success-message").forEach((el) => el.remove());
 }
