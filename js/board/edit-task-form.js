@@ -1,128 +1,98 @@
+// js/board/edit-task-form.js
+
 import { db } from "../firebase/firebase-init.js";
-import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import {
+  ref,
+  get,
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setSelectedEditContacts } from "./edit-task-contacts.js";
+import { updateTask } from "./board-task-update.js";
 
 export function initEditTaskForm() {
   const saveBtn = document.getElementById("editing-save-btn");
   if (!saveBtn) return;
-  saveBtn.addEventListener("click", (event) => {
+
+  saveBtn.addEventListener("click", async (event) => {
     event.preventDefault();
-    // Die Validierung und Speicherung wird jetzt von edit-task.js übernommen
+
     const taskId = window.currentEditTaskId;
     if (taskId) {
-      const event = new Event("saveTask");
-      document.dispatchEvent(event);
+      await updateTask(taskId);
     }
   });
 }
 
 export function showEditForm(taskId) {
   const taskRef = ref(db, `tasks/${taskId}`);
-  get(taskRef)
-    .then((snapshot) => {
-      if (!snapshot.exists()) {
-        console.error(`Task with ID ${taskId} not found`);
-        showEditFieldError("general", "Task not found. Please try again.");
-        return;
-      }
-      const task = snapshot.val();
-      fillEditFormWithTask(task);
-      document.getElementById("edit-task-overlay").classList.replace("d-none", "d-flex");
-    })
-    .catch((error) => {
-      console.error("Error loading task:", error);
-      showEditFieldError("general", "Failed to load task data. Check your internet connection.");
-    });
+  get(taskRef).then((snapshot) => {
+    if (!snapshot.exists()) {
+      console.error("Task nicht gefunden:", taskId);
+      return;
+    }
+
+    const task = snapshot.val();
+
+    // 🎯 Korrekte IDs laut HTML verwenden
+    document.querySelector("#editing-title").value = task.title || "";
+    document.querySelector("#editing-description").value =
+      task.description || "";
+    document.querySelector("#editing-date").value = task.dueDate || "";
+
+    document
+      .querySelectorAll("#editing-priority-buttons .all-priority-btns")
+      .forEach((btn) => {
+        btn.classList.remove(
+          "urgent-btn-active",
+          "medium-btn-active",
+          "low-btn-active"
+        );
+      });
+
+    if (task.priority === "urgent") {
+      document
+        .getElementById("editing-urgent-btn")
+        .classList.add("urgent-btn-active");
+    } else if (task.priority === "medium") {
+      document
+        .getElementById("editing-medium-btn")
+        .classList.add("medium-btn-active");
+    } else if (task.priority === "low") {
+      document
+        .getElementById("editing-low-btn")
+        .classList.add("low-btn-active");
+    }
+
+    setSelectedEditContacts(task.assignedTo || []);
+    document.getElementById("editing-category").value = task.category || "";
+    generateEditSubtasks(task.subtasks || []);
+    document
+      .getElementById("edit-task-overlay")
+      .classList.replace("d-none", "d-flex");
+  });
 }
 
-function fillEditFormWithTask(task) {
-  setSelectedEditContacts(task.assignedTo || []);
-  document.getElementById("editing-title").value = task.title || "";
-  document.getElementById("editing-description").value = task.description || "";
-  document.getElementById("editing-date").value = task.dueDate || "";
-  document.getElementById("editing-category").value = task.category || "";
-  setEditPriority(task.priority || "");
-  fillEditSubtasks(task.subtasks || []);
-}
-
-function setEditPriority(priority) {
-  document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach((btn) =>
-    btn.classList.remove("urgent-btn-active", "medium-btn-active", "low-btn-active")
-  );
-  if (priority) {
-    document.getElementById(`editing-${priority}-btn`).classList.add(`${priority}-btn-active`);
-  }
-}
-
-function fillEditSubtasks(subtasks) {
-  const list = document.getElementById("editing-subtask-list");
-  if (!list) return;
-  list.innerHTML = "";
-  subtasks.forEach((st) => {
+function generateEditSubtasks(subtasks) {
+  const ul = document.getElementById("editing-subtask-list");
+  ul.innerHTML = "";
+  subtasks.forEach((subtask, index) => {
     const li = document.createElement("li");
-    li.textContent = st.task || st;
-    li.dataset.completed = st.completed || false;
-    list.appendChild(li);
+    li.textContent = subtask.task;
+    li.dataset.completed = subtask.completed ? "true" : "false";
+    ul.appendChild(li);
   });
 }
-
-function showEditFieldError(field, message) {
-  const errorDiv = document.createElement("div");
-  errorDiv.className = "error-message";
-  errorDiv.textContent = message;
-  const fieldElement = document.getElementById(field);
-  if (fieldElement) {
-    fieldElement.parentElement.appendChild(errorDiv);
-  } else {
-    document.getElementById("edit-task-overlay")?.prepend(errorDiv);
+export function setEditTaskHandlers(taskId) {
+  const saveBtn = document.querySelector("#editing-save-btn");
+  if (!saveBtn) {
+    console.warn("Speicher-Button #editing-save-btn nicht gefunden.");
+    return;
   }
-}
 
-// Subtask handling
-document.getElementById("editing-subtask")?.addEventListener("keydown", (e) => {
-  if (e.key === "Enter") {
-    addEditSubtask();
-    e.preventDefault();
-  }
-});
+  saveBtn.disabled = false;
+  saveBtn.classList.remove("disabled");
 
-document.querySelector("#edit-task-overlay .subtask-button")?.addEventListener("click", addEditSubtask);
-
-document.getElementById("editing-subtask-list")?.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    editEditSubtask(e.target);
-  }
-});
-
-function addEditSubtask() {
-  const input = document.getElementById("editing-subtask");
-  const value = input.value.trim();
-  if (!value) return;
-  const list = document.getElementById("editing-subtask-list");
-  if (!list) return;
-  const li = document.createElement("li");
-  li.textContent = value;
-  li.dataset.completed = false;
-  list.appendChild(li);
-  input.value = "";
-}
-
-function editEditSubtask(li) {
-  const oldValue = li.textContent;
-  const input = document.createElement("input");
-  input.type = "text";
-  input.value = oldValue;
-  li.textContent = "";
-  li.appendChild(input);
-  input.focus();
-
-  input.addEventListener("blur", finishEdit);
-  input.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") finishEdit();
-  });
-
-  function finishEdit() {
-    li.textContent = input.value.trim() || oldValue;
-    li.dataset.completed = false;
-  }
+  saveBtn.onclick = async (event) => {
+    event.preventDefault(); // wichtig, wenn Button in <form> liegt
+    await updateTask(taskId);
+  };
 }

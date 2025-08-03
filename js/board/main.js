@@ -4,6 +4,7 @@ import { initBoardOverlay } from "./board-add-task-overlay.js";
 import { initSearch } from "./search.js";
 import { deleteTask } from "./delete-task.js";
 import { openEditTaskOverlay } from "./edit-task.js";
+import { initBoardTaskSave } from "./board-task-save.js";
 import { initEditTaskForm } from "./edit-task-form.js";
 import { initEditContactsDropdown, setupEditDropdownOpenClose } from "./edit-task-contacts.js";
 import { initAddContactsDropdown, setupAddDropdownOpenClose } from "./add-task-contacts.js";
@@ -16,6 +17,7 @@ window.addEventListener("DOMContentLoaded", () => {
   initSearch();
 
   // Edit-Funktionen
+  initBoardTaskSave();
   initEditTaskForm();
   initEditContactsDropdown();
   setupEditDropdownOpenClose();
