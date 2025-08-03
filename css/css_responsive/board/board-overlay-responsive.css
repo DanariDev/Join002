@@ -8,4 +8,9 @@
     #popup-priority {
         max-width: none;
     }
+
+    .prio_spacing img {
+        max-width: 22px;
+    }
+
 }

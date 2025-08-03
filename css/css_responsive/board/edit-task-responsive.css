@@ -82,8 +82,18 @@
         width: 256px;
     }
 
-    .edit-task-main h1 {
+    .edit-task-main h2 {
         font-size: 40px;
+    }
+
+    .overlay-section {
+        gap: 16px;
+    }
+
+    #popup-title h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin: 4px 0;
     }
 }
 

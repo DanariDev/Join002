@@ -16,7 +16,7 @@
     background-color: var(--clr-200);
     border-radius: 25px;
     padding: 2rem;
-    width: clamp(300px, 800px, 1200px);
+    width: clamp(300px, 525px, 1200px);
     position: fixed;
     top: 50%;
     left: 50%;
@@ -27,6 +27,7 @@
 #popup-title h2 {
     font-size: 61px;
     font-weight: 700;
+    margin: 16px 0;
 }
 
 .add-task-form-content {
@@ -182,8 +183,7 @@ textarea {
 
 .prio_spacing {
     display: flex;
-    justify-content: space-between;
-    min-width: 25%;
+    gap: 16px;
 }
 
 .prio_spacing img {

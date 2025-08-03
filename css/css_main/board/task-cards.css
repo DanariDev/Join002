@@ -92,14 +92,15 @@
 }
 
 .task-label {
-    font-size: 16px;
-    font-weight: bold;
+    font-size: 23px;
+    font-weight: 400;
     padding: 4px 16px;
     border-radius: 8px;
     display: inline-block;
     margin-bottom: 10px;
     color: white;
-    background-color: red;
+    height: 36px;
+    align-content: center;
 }
 
 .task-title {
