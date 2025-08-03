@@ -114,21 +114,37 @@ function setTaskOverlayContent(card, taskId) {
   const desc = card.querySelector(".task-desc").textContent;
   const prioImg = card.querySelector(".priority-img");
   const prio = prioImg?.alt || "";
-  document.getElementById(
-    "popup-category"
-  ).innerHTML = `<span class="task-label">${category}</span>`;
+
+  document.getElementById("popup-category").innerHTML = `<span class="task-label">${category}</span>`;
   document.getElementById("popup-title").innerHTML = `<h2>${title}</h2>`;
-  document.getElementById("popup-description").innerHTML = `<div>${desc || ""
-    }</div>`;
-  document.getElementById(
-    "popup-due-date"
-  ).innerHTML = `<b>Due date:</b> <span>-</span>`;
-  document.getElementById(
-    "popup-priority"
-  ).innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
+  document.getElementById("popup-description").innerHTML = `<div>${desc || ""}</div>`;
+  document.getElementById("popup-priority").innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
+  dueDateGenerate(taskId, (formattedDate) => {
+    document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>${formattedDate}</span>`;
+  });
+
   const labelSpan = document.querySelector("#popup-category .task-label");
   if (labelSpan) applyCategoryStyle(labelSpan, category);
   subtaskGenerate(taskId);
+  console.log("Card:" + card, "taskID:" + taskId);
+}
+
+function dueDateGenerate(taskId, callback) {
+  const tasksRef = ref(db, 'tasks/');
+  onValue(tasksRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data && data[taskId]) {
+      const rawDate = data[taskId].dueDate;
+      const formattedDate = formatDate(rawDate);
+      callback(formattedDate);
+    }
+  });
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "";
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
 }
 
 function subtaskGenerate(taskId) {
