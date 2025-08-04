@@ -18,11 +18,13 @@
 - Add Task Overlay schließen über Cancel & Hintergrundklick
 - Validierung & Fehlerhinweise für Pflichtfelder verbessern (User-friendly Fehlermeldungen)
 - Overlays überall schließen bei ESC und Klick außerhalb (Task-Detail: ESC & Outside fehlt)
+- Progress Bar leiste wieder einbauen. Diese ist noch vorhanden hat aber noch keine funktionen. Für jede als abgeschlossene subtask muss der balken steigen.
+- Im Edit Task fenster im board, fehlt die background farbe der Priority buttons wenn diese ausgewählt wurden.
 
 ## ❗ Offene Aufgaben / ToDo
 
-- Progress Bar leiste wieder einbauen. Diese ist noch vorhanden hat aber noch keine funktionen. Für jede als abgeschlossene subtask muss der balken steigen.
-- Im Edit Task fenster im board, fehlt die background farbe der Priority buttons wenn diese ausgewählt wurden.
+
+
 - Die subtask müssen im Edit Task und bei Add-Task icons erhalten und darüber auch löschbar sein.
 
 

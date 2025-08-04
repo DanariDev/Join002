@@ -3,11 +3,15 @@ export function renderProgressBar(subtasks, cardElement) {
   const countDiv = cardElement.querySelector(".task-count");
 
   if (!subtasks || subtasks.length === 0) {
-    bar.className = "progress-bar progress-0";
-    countDiv.textContent = "0/0";
+    bar.style.display = "none";
+    countDiv.textContent = ""; // Zähler ausblenden!
     return;
+  } else {
+    bar.style.display = "block"; // Falls wieder Subtasks kommen, anzeigen
   }
-  const done = subtasks.filter(st => st.checked === true || st.checked === "true").length;
+  const done = subtasks.filter(
+    (st) => st.checked === true || st.checked === "true"
+  ).length;
   const total = subtasks.length;
   let percent = Math.round((done / total) * 100);
 
