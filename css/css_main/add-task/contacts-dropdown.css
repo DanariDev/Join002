@@ -197,6 +197,7 @@
     align-items: center;
     font-size: 16px;
     margin-left: -16px;
+    background-color: #676767;
 }
 
 #selected-contact-insignias {
@@ -208,6 +209,7 @@
     margin: -8px 0 8px 0px;
     flex-wrap: wrap;
     width: 280px;
+    padding-left: 16px;
 }
 
 .add-task-main .assigned-initials {

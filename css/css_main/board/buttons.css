@@ -185,16 +185,22 @@
     border-radius: 10px;
     font-size: var(--fs-20);
     font-weight: 600;
-    color: var(--clr-900);
-    background-color: var(--clr-200);
+    color: #ffffff;
+    background-color: var(--clr-700);
     transition: all 0.2s ease-in-out;
     cursor: pointer;
 }
 
 #editing-cancel-btn,
 .btn-edit-save:hover {
+    color: var(--clr-900);
+    background-color: var(--clr-200);
+}
+
+#editing-cancel-btn:hover {
     color: #ffffff;
-    background-color: var(--clr-700);
+    background-color: var(--clr-500);
+    border-color: var(--clr-500);
 }
 
 #editing-save-btn {

@@ -101,24 +101,6 @@
     margin: 4px 0;
 }
 
-.overlay .initials-task {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    color: var(--clr-200);
-    font-weight: bold;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    border: 2px solid var(--clr-200);
-    margin-left: -10px;
-    z-index: 1;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
-    position: relative;
-}
-
 /* Selected Contacts on Form */
 .form-selected-contact {
     display: flex;
@@ -280,6 +262,7 @@ option {
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 8px;
+    padding-left: 18px;
 }
 
 .assigned-initials {

@@ -114,36 +114,96 @@ function setTaskOverlayContent(card, taskId) {
   const desc = card.querySelector(".task-desc").textContent;
   const prioImg = card.querySelector(".priority-img");
   const prio = prioImg?.alt || "";
-  document.getElementById(
-    "popup-category"
-  ).innerHTML = `<span class="task-label">${category}</span>`;
+
+  document.getElementById("popup-category").innerHTML = `<span class="task-label">${category}</span>`;
   document.getElementById("popup-title").innerHTML = `<h2>${title}</h2>`;
-  document.getElementById("popup-description").innerHTML = `<div>${
-    desc || ""
-  }</div>`;
-  document.getElementById(
-    "popup-due-date"
-  ).innerHTML = `<b>Due date:</b> <span>-</span>`;
-  document.getElementById(
-    "popup-priority"
-  ).innerHTML = `<b>Priority:</b> <span>${prio}</span>`;
+  document.getElementById("popup-description").innerHTML = `<div>${desc || ""}</div>`;
+  document.getElementById("popup-priority").innerHTML = `<b>Priority:</b>
+  <div class="prio_spacing">
+  <span>${prio}</span>
+  <img src="assets/img/${prio}-btn-icon.png" alt="">
+  </div>`;
+  dueDateGenerate(taskId, (formattedDate) => {
+    document.getElementById('popup-due-date').innerHTML = `<b>Due date:</b> <span>${formattedDate}</span>`;
+  });
+
+  assignedToGenerate(taskId);
+  console.log("TASKID:" + taskId.assignedTo);
+
+
   const labelSpan = document.querySelector("#popup-category .task-label");
   if (labelSpan) applyCategoryStyle(labelSpan, category);
   subtaskGenerate(taskId);
+  console.log("Card:" + card, "taskID:" + taskId);
 }
 
-function subtaskGenerate(taskId){
-  document.getElementById('popup-subtasks').innerHTML ="";
+function assignedToGenerate(taskId) {
+  const container = document.getElementById("popup-assigned");
+  container.innerHTML = ""; // Vorherigen Inhalt leeren
+
+  // Label "Assigned To:"
+  const label = document.createElement("b");
+  label.textContent = "Assigned To: ";
+  container.appendChild(label);
+
+  // Initialen-Gruppe in eigenen Container mit class="initial-group"
+  const initialGroupDiv = document.createElement("div");
+  initialGroupDiv.className = "initial-group";
+  container.appendChild(initialGroupDiv);
+
+  // Daten aus Firebase holen
+  const tasksRef = ref(db, 'tasks/' + taskId);
+  onValue(tasksRef, (snapshot) => {
+    const taskData = snapshot.val();
+    if (taskData && taskData.assignedTo) {
+      renderAssignedContacts(taskData.assignedTo, initialGroupDiv);
+    } else {
+      initialGroupDiv.innerHTML = "<span>None assigned</span>";
+    }
+  });
+}
+
+
+function dueDateGenerate(taskId, callback) {
   const tasksRef = ref(db, 'tasks/');
   onValue(tasksRef, (snapshot) => {
     const data = snapshot.val();
-    if (data) Object.entries(data).forEach((element) => {
-      if(element[0] == taskId){
-        if(element[1].subtasks != undefined) element[1].subtasks.forEach(subtask => {
-          document.getElementById('popup-subtasks').innerHTML += `<li><input type="checkbox" name="" id=""></input> ${subtask.task}</li>`;
-        })
-      }
-    });
+    if (data && data[taskId]) {
+      const rawDate = data[taskId].dueDate;
+      const formattedDate = formatDate(rawDate);
+      callback(formattedDate);
+    }
+  });
+}
+
+function formatDate(dateString) {
+  if (!dateString) return "";
+  const [year, month, day] = dateString.split("-");
+  return `${day}/${month}/${year}`;
+}
+
+function subtaskGenerate(taskId) {
+  document.getElementById('popup-subtasks').innerHTML = "";
+  const tasksRef = ref(db, 'tasks/');
+  onValue(tasksRef, (snapshot) => {
+    const data = snapshot.val();
+    if (data) {
+      Object.entries(data).forEach(([key, value]) => {
+        if (key == taskId) {
+          if (value.subtasks != undefined) {
+            value.subtasks.forEach((subtask, index) => {
+              const subtaskId = `subtask-${taskId}-${index}`;
+              document.getElementById('popup-subtasks').innerHTML += `
+                <li>
+                  <input type="checkbox" class="custom-checkbox" id="${subtaskId}" name="subtask-${index}">
+                  <label for="${subtaskId}"></label>
+                  <span>${subtask.task}</span>
+                </li>`;
+            });
+          }
+        }
+      });
+    }
   });
 }
 
