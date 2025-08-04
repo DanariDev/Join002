@@ -1,8 +1,8 @@
+// edit-task.js
 export { db } from "../firebase/firebase-init.js";
 import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { showEditForm } from "./edit-task-form.js";
 import { resetSelectedEditContacts, getSelectedEditContactIds } from "./edit-task-contacts.js";
-
 
 export function openEditTaskOverlay(taskId) {
   window.currentEditTaskId = taskId;
@@ -39,27 +39,6 @@ function setEditTaskHandlers(taskId) {
     const saveEvent = new Event("saveTask");
     document.dispatchEvent(saveEvent);
   };
-
-  // Priority buttons
-  document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach((btn) => {
-    btn.onclick = () => {
-      document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach((b) =>
-        b.classList.remove("active")
-      );
-      btn.classList.add("active");
-    };
-  });
-  
-}
-function getSelectedEditPrio() {
-  const urgentBtn = document.getElementById("editing-urgent-btn");
-  const mediumBtn = document.getElementById("editing-medium-btn");
-  const lowBtn = document.getElementById("editing-low-btn");
-
-  if (document.getElementById("editing-urgent-btn").classList.contains("active")) return "urgent";
-  if (document.getElementById("editing-medium-btn").classList.contains("active")) return "medium";
-  if (document.getElementById("editing-low-btn").classList.contains("active")) return "low";
-  return "";
 }
 
 function getEditSubtasks() {

@@ -1,0 +1,20 @@
+#editing-urgent-btn.active {
+  background-color: #c93939;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+#editing-medium-btn.active {
+  background-color: #ffaa00;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+#editing-low-btn.active {
+  background-color: #5dc43e;
+  color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+#editing-urgent-btn.active img,
+#editing-medium-btn.active img,
+#editing-low-btn.active img {
+  filter: brightness(0) invert(1);
+}

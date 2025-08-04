@@ -7,6 +7,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setSelectedEditContacts } from "./edit-task-contacts.js";
 import { getSelectedEditContactIds } from "./edit-task-contacts.js";
+import { getSelectedEditPriority, initEditPriorityButtons } from "./edit-task-priority.js";
 
 /**
  * Initialisiert das Edit-Formular für Tasks.
@@ -36,7 +37,6 @@ export function fillEditFormWithTask(task) {
   document.getElementById("editing-description").value = task.description || "";
   document.getElementById("editing-date").value = task.dueDate || "";
   document.getElementById("editing-category").value = task.category || "";
-  document.getElementById("editing-title").value = task.title || "";
   setEditPriority(task.priority);
   fillEditSubtasks(task.subtasks || []);
   // Assigned und Kontakte ggf. ergänzen!
@@ -45,6 +45,8 @@ export function fillEditFormWithTask(task) {
     saveBtn.disabled = false;
     saveBtn.classList.remove("disabled");
   }
+  // Priority-Button-Handler neu initialisieren!
+  initEditPriorityButtons();
 }
 
 function setEditPriority(priority) {
@@ -143,7 +145,7 @@ function saveEditedTask() {
     dueDate: document.getElementById("editing-date").value,
     priority: getSelectedEditPriority(),
     category: document.getElementById("editing-category").value,
-    subtasks: getEditSubtasks(taskId),
+    subtasks: getEditSubtasks(),
     assignedTo: getSelectedEditContactIds(),
   };
   console.log("TaskID:", taskId);
@@ -156,21 +158,6 @@ function saveEditedTask() {
     .catch((error) => {
       console.error("Fehler beim Speichern:", error);
     });
-}
-
-
-function getSelectedEditPriority() {
-  if (
-    document.getElementById("editing-urgent-btn").classList.contains("active")
-  )
-    return "urgent";
-  if (
-    document.getElementById("editing-medium-btn").classList.contains("active")
-  )
-    return "medium";
-  if (document.getElementById("editing-low-btn").classList.contains("active"))
-    return "low";
-  return "";
 }
 
 function getEditSubtasks() {
