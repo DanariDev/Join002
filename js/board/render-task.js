@@ -5,7 +5,8 @@ import { db } from "../firebase/firebase-init.js";
 import {
   ref,
   get,
-  onValue
+  onValue,
+  update 
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { deleteTask } from "./delete-task.js";
 import { renderProgressBar } from "./progress-bar.js";
@@ -176,29 +177,71 @@ function formatDate(dateString) {
   return `${day}/${month}/${year}`;
 }
 
+// 1. Einstiegspunkt: Generiere die Subtask-Liste im Overlay
 function subtaskGenerate(taskId) {
-  document.getElementById('popup-subtasks').innerHTML = "";
-  const tasksRef = ref(db, 'tasks/');
-  onValue(tasksRef, (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-      Object.entries(data).forEach(([key, value]) => {
-        if (key == taskId) {
-          if (value.subtasks != undefined) {
-            value.subtasks.forEach((subtask, index) => {
-              const subtaskId = `subtask-${taskId}-${index}`;
-              document.getElementById('popup-subtasks').innerHTML += `
-                <li>
-                  <input type="checkbox" class="custom-checkbox" id="${subtaskId}" name="subtask-${index}">
-                  <label for="${subtaskId}"></label>
-                  <span>${subtask.task}</span>
-                </li>`;
-            });
-          }
-        }
-      });
-    }
+  const list = document.getElementById('popup-subtasks');
+  list.innerHTML = "";
+  const tasksRef = ref(db, 'tasks/' + taskId);
+  get(tasksRef).then((snapshot) => {
+    const task = snapshot.val();
+    renderSubtaskList(list, task, taskId);
   });
+}
+
+
+// 2. Rendere alle Subtasks als Checkboxen
+function renderSubtaskList(list, task, taskId) {
+  if (!task || !task.subtasks) {
+    list.innerHTML = "<li>No subtasks available</li>";
+    return;
+  }
+  list.innerHTML = task.subtasks.map((st, i) => renderSingleSubtask(st, i, taskId)).join('');
+  setSubtaskCheckboxEvents(list, taskId);
+}
+
+// 3. Rendere eine Subtask-Zeile
+function renderSingleSubtask(subtask, index, taskId) {
+  const subtaskId = `subtask-${taskId}-${index}`;
+  const checked = subtask.checked === true || subtask.checked === "true" ? "checked" : "";
+  return `
+    <li>
+      <input type="checkbox" class="custom-checkbox" id="${subtaskId}" name="subtask-${index}" ${checked}>
+      <label for="${subtaskId}"></label>
+      <span>${subtask.task}</span>
+    </li>
+  `;
+}
+
+// 4. Setze Eventhandler für alle Checkboxen
+function setSubtaskCheckboxEvents(list, taskId) {
+  const checkboxes = list.querySelectorAll('.custom-checkbox');
+  checkboxes.forEach((cb, idx) => {
+    cb.addEventListener('change', () => handleSubtaskChange(cb, idx, taskId));
+  });
+}
+
+// 5. Beim Abhaken: Status speichern, neu rendern und Balken updaten
+function handleSubtaskChange(cb, idx, taskId) {
+  const tasksRef = ref(db, 'tasks/' + taskId);
+  get(tasksRef).then((snap) => {
+    const freshTask = snap.val();
+    if (!freshTask || !freshTask.subtasks || !freshTask.subtasks[idx]) return;
+    freshTask.subtasks[idx].checked = cb.checked;
+    update(tasksRef, { subtasks: freshTask.subtasks }).then(() => {
+      const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
+      if (card) renderProgressBar(freshTask.subtasks, card);
+      // Subtasks nach dem Speichern NEU rendern, damit alles aktuell ist
+      subtaskGenerate(taskId);
+    });
+  });
+}
+
+
+// 6. Fortschrittsbalken & Overlay-Subtasks neu zeichnen
+function updateProgressBarAndList(subtasks, taskId) {
+  const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
+  if (card) renderProgressBar(subtasks, card);
+  subtaskGenerate(taskId);
 }
 
 function setTaskOverlayHandlers(taskId) {
