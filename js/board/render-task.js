@@ -8,6 +8,8 @@ import {
   onValue
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { deleteTask } from "./delete-task.js";
+import { renderProgressBar } from "./progress-bar.js";
+
 
 // Task ins Board rendern
 export function renderTask(task) {
@@ -76,19 +78,11 @@ function setPriority(clone, task) {
 }
 
 // Fortschritt/Subtasks
+// In render-task.js:
 function setProgress(clone, task) {
-  const bar = clone.querySelector(".progress-bar");
-  const count = clone.querySelector(".task-count");
-  if (task.subtasks && task.subtasks.length > 0) {
-    const completed = task.subtasks.filter((st) => st.completed).length;
-    const percent = Math.round((completed / task.subtasks.length) * 100);
-    bar.style.width = percent + "%";
-    count.textContent = `${completed} / ${task.subtasks.length}`;
-  } else {
-    bar.style.width = "0%";
-    count.textContent = "0 / 0";
-  }
+  renderProgressBar(task.subtasks, clone);
 }
+
 
 // Card-Overlay öffnen beim Klick
 document.addEventListener("click", function (e) {
