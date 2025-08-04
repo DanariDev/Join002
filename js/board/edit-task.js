@@ -3,6 +3,7 @@ import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/fir
 import { showEditForm } from "./edit-task-form.js";
 import { resetSelectedEditContacts, getSelectedEditContactIds } from "./edit-task-contacts.js";
 
+
 export function openEditTaskOverlay(taskId) {
   window.currentEditTaskId = taskId;
   resetSelectedEditContacts();
@@ -55,9 +56,9 @@ function getSelectedEditPrio() {
   const mediumBtn = document.getElementById("editing-medium-btn");
   const lowBtn = document.getElementById("editing-low-btn");
 
-  if (urgentBtn.classList.contains("urgent-btn-active")) return "urgent";
-  if (mediumBtn.classList.contains("medium-btn-active")) return "medium";
-  if (lowBtn.classList.contains("low-btn-active")) return "low";
+  if (document.getElementById("editing-urgent-btn").classList.contains("active")) return "urgent";
+  if (document.getElementById("editing-medium-btn").classList.contains("active")) return "medium";
+  if (document.getElementById("editing-low-btn").classList.contains("active")) return "low";
   return "";
 }
 
