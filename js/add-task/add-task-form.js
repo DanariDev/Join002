@@ -110,6 +110,8 @@ function addSubtask() {
   const list = document.getElementById("subtask-list");
   const li = document.createElement("li");
   li.textContent = value;
+  li.classList.add('subtask-list');
+  li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" class="subtask-icon"></div>`;
   list.appendChild(li);
   input.value = "";
 }
@@ -147,6 +149,8 @@ function editSubtask(li) {
 
   function finishEdit() {
     li.textContent = input.value.trim() || oldValue;
+    li.classList.add('subtask-list');
+    li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" class="subtask-icon"><img src="assets/img/delete.png" class="subtask-icon"></div>`;
   }
 }
 
