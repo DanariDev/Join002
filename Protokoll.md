@@ -21,11 +21,10 @@
 
 ## ❗ Offene Aufgaben / ToDo
 
-- Subtasks mit Checkbox "erledigt" im Task-Detail-Overlay (statt nur Liste) (wurde angefangen, ist aber noch nicht fertig)
-- Edit-Formular speichert ALLE Felder (assignedTo fehlt noch)
-- Subtasks: Bearbeiten mit Status "erledigt/nicht"
-- Fehlermeldungen & UX-Feedback verbessern (Toasts, Inline-Fehler)
-- Responsive Design für Mobile weiter verbessern
+- Progress Bar leiste wieder einbauen. Diese ist noch vorhanden hat aber noch keine funktionen. Für jede als abgeschlossene subtask muss der balken steigen.
+- Im Edit Task fenster im board, fehlt die background farbe der Priority buttons wenn diese ausgewählt wurden.
+- Die subtask müssen im Edit Task und bei Add-Task icons erhalten und darüber auch löschbar sein.
+
 
 - Code modularisieren, doppelte Funktionen entfernen
 - Leere Spalten mit Platzhaltertext anzeigen

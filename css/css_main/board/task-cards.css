@@ -97,10 +97,13 @@
     padding: 4px 16px;
     border-radius: 8px;
     display: inline-block;
-    margin-bottom: 10px;
     color: white;
-    height: 36px;
+    max-height: 27px;
     align-content: center;
+}
+
+.overlay-content .task-label {
+    height: 36px;
 }
 
 .task-title {
