@@ -19,6 +19,7 @@
     display: flex;
     justify-content: space-between;
     padding-left: 20px;
+    position: relative;
 }
 
 #subtask-list {
@@ -28,12 +29,19 @@
     margin-top: 8px;
     padding-right: 6px;
     padding-left: 0;
+    position: relative;
 }
 
 li {
     font-size: var(--fs-20);
     margin: 6px 0 6px 0;
     gap: 8px;
+}
+
+.subtask-list::before {
+  content: "•";
+  position: absolute;
+  left: 0;
 }
 
 .subtask-icons-div {

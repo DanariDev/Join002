@@ -18,11 +18,18 @@
     display: flex;
     justify-content: space-between;
     padding-left: 20px;
+    position: relative;
 }
 
 li {
     font-size: var(--fs-20);
     margin: 0;
+}
+
+.subtask-list::before {
+  content: "•";
+  position: absolute;
+  left: 0;
 }
 
 .subtask-icons-div{
