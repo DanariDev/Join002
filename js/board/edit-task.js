@@ -27,9 +27,9 @@ function setEditTaskHandlers(taskId) {
   document.addEventListener("saveTask", async (e) => {
     e.preventDefault();
     console.log("Save event triggered for taskId:", taskId);
-    if (await validateEditForm()) {
-      await saveEditTask(taskId);
-    }
+    // if (await validateEditForm()) {
+    //   await saveEditTask(taskId);
+    // }
   });
 
   // Ensure save button triggers the event

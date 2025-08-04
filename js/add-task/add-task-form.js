@@ -111,9 +111,11 @@ function addSubtask() {
   const li = document.createElement("li");
   li.textContent = value;
   li.classList.add('subtask-list');
-  li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" class="subtask-icon"></div>`;
+  li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" id="delete-subtask" class="subtask-icon"></div>`;
   list.appendChild(li);
   input.value = "";
+  document.querySelectorAll("#edit-subtask").forEach(element=> element.addEventListener("click", iconEdit));
+  document.querySelectorAll("#delete-subtask").forEach(element=> element.addEventListener("click", iconDelete));
 }
 
 document.getElementById("subtask").addEventListener("keydown", function (e) {
@@ -150,7 +152,25 @@ function editSubtask(li) {
   function finishEdit() {
     li.textContent = input.value.trim() || oldValue;
     li.classList.add('subtask-list');
-    li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" class="subtask-icon"><img src="assets/img/delete.png" class="subtask-icon"></div>`;
+    li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" id="delete-subtask" class="subtask-icon"></div>`;
+    document.querySelectorAll("#edit-subtask").forEach(element=> element.addEventListener("click", iconEdit));
+    document.querySelectorAll("#delete-subtask").forEach(element=> element.addEventListener("click", iconDelete));
+  }
+}
+
+function deleteSubtask(li){
+  li.remove();
+}
+
+function iconEdit(e) {
+  if (e.target.parentNode.parentNode.tagName === "LI") {
+    editSubtask(e.target.parentNode.parentNode);
+  }
+}
+
+function iconDelete(e){
+  if (e.target.parentNode.parentNode.tagName === "LI") {
+    deleteSubtask(e.target.parentNode.parentNode);
   }
 }
 
