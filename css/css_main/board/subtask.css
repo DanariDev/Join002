@@ -16,15 +16,32 @@
 }
 
 .subtask-list {
-    list-style: disc;
+    display: flex;
+    justify-content: space-between;
     padding-left: 20px;
-    margin: 8px 0;
+}
+
+ul{
+    padding: 0;
 }
 
 li {
-    font-size: var(--fs-16);
+    font-size: var(--fs-20);
     margin: 6px 0 6px 0;
     gap: 8px;
+}
+
+.subtask-icons-div {
+    display: flex;
+    align-items: center;
+}
+
+.subtask-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 8px;
+    object-fit: contain;
 }
 
 #editing-subtask-list {
