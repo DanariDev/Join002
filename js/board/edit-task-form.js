@@ -8,15 +8,10 @@ import {
 import { setSelectedEditContacts } from "./edit-task-contacts.js";
 import { getSelectedEditContactIds } from "./edit-task-contacts.js";
 
-<<<<<<< Updated upstream
-
-
-=======
 /**
  * Initialisiert das Edit-Formular für Tasks.
  * Ruft beim Klick auf Save die Validierung & Speicherung auf.
  */
->>>>>>> Stashed changes
 export function initEditTaskForm() {
   const saveBtn = document.getElementById("editing-save-btn");
   if (!saveBtn) return;
