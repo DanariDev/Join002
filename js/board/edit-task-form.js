@@ -149,13 +149,15 @@ function saveEditedTask() {
   console.log("TaskID:", taskId);
   console.log("Updates:", updates);
   update(ref(db, "tasks/" + taskId), updates)
-    .then(() =>
-      document.getElementById("edit-task-overlay").classList.add("d-none")
-    )
+    .then(() => {
+      // Das Overlay-Fenster schließen (sichtbar ausblenden)
+      document.getElementById("edit-task-overlay").classList.replace("d-flex", "d-none");
+    })
     .catch((error) => {
       console.error("Fehler beim Speichern:", error);
     });
 }
+
 
 function getSelectedEditPriority() {
   if (
