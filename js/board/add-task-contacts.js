@@ -91,13 +91,17 @@ function handleAddContactToggle(id) {
  */
 export function renderSelectedAddInsignias() {
   const container = document.getElementById("selected-contact-insignias");
-  if (!container) return;
   container.innerHTML = "";
-  allAddContacts.forEach((c) => {
-    if (selectedAddContacts.has(c.id)) {
-      container.appendChild(createAddInsignia(c));
-    }
-  });
+  const selected = allAddContacts.filter(c => selectedAddContacts.has(c.id));
+  const maxToShow = 3;
+  selected.slice(0, maxToShow).forEach(c => container.appendChild(createAddInsignia(c)));
+  if (selected.length > maxToShow) {
+    const more = document.createElement("div");
+    more.className = "contact-insignia contact-insignia-more";
+    more.textContent = `+${selected.length - maxToShow}`;
+    more.title = "Weitere Kontakte ausgewählt";
+    container.appendChild(more);
+  }
 }
 
 function createAddInsignia(contact) {
