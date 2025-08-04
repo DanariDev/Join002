@@ -43,11 +43,12 @@ function setEditTaskHandlers(taskId) {
   document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach((btn) => {
     btn.onclick = () => {
       document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach((b) =>
-        b.classList.remove("urgent-btn-active", "medium-btn-active", "low-btn-active")
+        b.classList.remove("active")
       );
-      btn.classList.add(`${btn.id.split("-")[1]}-btn-active`);
+      btn.classList.add("active");
     };
   });
+  
 }
 function getSelectedEditPrio() {
   const urgentBtn = document.getElementById("editing-urgent-btn");
