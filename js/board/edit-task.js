@@ -49,54 +49,6 @@ function setEditTaskHandlers(taskId) {
     };
   });
 }
-
-async function validateEditForm() {
-  clearAllEditFieldErrors();
-  let valid = true;
-
-  const title = document.getElementById("editing-title").value.trim();
-  const dueDate = document.getElementById("editing-date").value;
-  const category = document.getElementById("editing-category").value;
-
-  if (!title) {
-    showEditFieldError("editing-title", "Please enter a title!");
-    valid = false;
-  }
-  if (!dueDate) {
-    showEditFieldError("editing-date", "Please select a due date!");
-    valid = false;
-  }
-  if (!category) {
-    showEditFieldError("editing-category", "Please select a category!");
-    valid = false;
-  }
-
-  return valid;
-}
-
-async function saveEditTask(taskId) {
-  try {
-    const updates = {
-      title: document.getElementById("editing-title").value.trim(),
-      description: document.getElementById("editing-description").value.trim(),
-      dueDate: document.getElementById("editing-date").value,
-      priority: getSelectedEditPrio(),
-      category: document.getElementById("editing-category").value,
-      subtasks: getEditSubtasks(),
-      assignedTo: getSelectedEditContactIds(),
-    };
-
-    console.log("Attempting to save updates:", updates); // Debug output
-    await update(ref(db, `tasks/${taskId}`), updates);
-    console.log("Task successfully updated in Firebase");
-    showSuccessMessage("Task saved successfully!");
-    closeEditOverlay();
-  } catch (error) {
-    console.error("Error saving task:", error);
-    showEditFieldError("general", "Failed to save task. Check console for details.");
-  }
-}
-
 function getSelectedEditPrio() {
   const urgentBtn = document.getElementById("editing-urgent-btn");
   const mediumBtn = document.getElementById("editing-medium-btn");
