@@ -102,6 +102,7 @@ export function showEditForm(taskId) {
     document
       .getElementById("edit-task-overlay")
       .classList.replace("d-none", "d-flex");
+      document.getElementById("body").classList.add('overflow-hidden');
   });
 }
 
@@ -182,6 +183,7 @@ function saveEditedTask() {
     .then(() => {
       // Das Overlay-Fenster schließen (sichtbar ausblenden)
       document.getElementById("edit-task-overlay").classList.replace("d-flex", "d-none");
+      document.getElementById("body").classList.remove('overflow-hidden');
     })
     .catch((error) => {
       console.error("Fehler beim Speichern:", error);

@@ -52,7 +52,10 @@ function getEditSubtasks() {
 function closeEditOverlay() {
   resetSelectedEditContacts();
   const overlay = document.getElementById("edit-task-overlay");
-  if (overlay) overlay.classList.replace("d-flex", "d-none");
+  if (overlay){
+    overlay.classList.replace("d-flex", "d-none");
+    document.getElementById("body").classList.remove('overflow-hidden');
+  }
 }
 
 function showEditFieldError(field, message) {

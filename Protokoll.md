@@ -74,10 +74,10 @@ Hier müssen auch die kontakte wenn sie ausgewählt werden, die hintergrundfarbe
 
 
 ## ❗ Offene Aufgaben board.html: 
- - Der hintergrund sollte nicht scrollbar sein sobald man im layout eine Task öffnet oder Editiert.
- - render-task.js -> ca. Zeile 89
+ - ✅Der hintergrund sollte nicht scrollbar sein sobald man im layout eine Task öffnet oder Editiert.
+ - ✅render-task.js -> ca. Zeile 89
 
-idee: das könnte mit html "overflow: none;" über javascript verknüpft werden (vermute ich). Dann müsste allerdings das ganze beim der function zum schließen wieder auf "overflow: auto;" zurück.
+✅idee: das könnte mit html "overflow: none;" über javascript verknüpft werden (vermute ich). Dann müsste allerdings das ganze beim der function zum schließen wieder auf ✅"overflow: auto;" zurück.
 
 
 - ✅Der Add-Task Button, unserer Grid colum's (to Do, In Progress usw.) versucht im responsive Layout noch ein Add-Task Formular zu öffnen, wie in unserer Desktop ansicht. 
@@ -109,4 +109,4 @@ idee: das könnte mit html "overflow: none;" über javascript verknüpft werden 
 - In beiden seiten ist Die Developer Akedemie noch vertreten. 
 (Ich bin mir aber auch nicht sicher wo diese nun abschließend raus soll?)
 
-(Das mit der Topbar ist erledigt. Das mit "Developer Akedemie" weiß ich auch nicht genau, ob der dableiben soll oder nicht. Können wir ja ggf. bei der Abgabe nachfragen. LF)
+(Das mit der Topbar ist erledigt. Das mit "Developer Akedemie" weiß ich auch nicht genau, ob das dableiben soll oder nicht. Können wir ja ggf. bei der Abgabe nachfragen. LF)

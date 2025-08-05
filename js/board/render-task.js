@@ -97,6 +97,7 @@ document.addEventListener("click", function (e) {
 // Overlay-Funktionen
 export function openTaskOverlay(taskId) {
   document.getElementById("task-overlay").classList.remove("d-none");
+  document.getElementById("body").classList.add('overflow-hidden');
   const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
   if (!card) return;
   setTaskOverlayContent(card, taskId);
@@ -247,12 +248,14 @@ function updateProgressBarAndList(subtasks, taskId) {
 function setTaskOverlayHandlers(taskId) {
   document.getElementById("overlay-close").onclick = function () {
     document.getElementById("task-overlay").classList.add("d-none");
+    document.getElementById("body").classList.remove('overflow-hidden');
   };
   document.getElementById("delete-task-btn").onclick = function () {
     deleteTask(taskId);
   };
   document.getElementById("edit-task-btn").onclick = function () {
     document.getElementById("task-overlay").classList.add("d-none");
+    document.getElementById("body").classList.remove('overflow-hidden');
     window.currentEditTaskId = taskId;
     openEditTaskOverlay(taskId);
   };
