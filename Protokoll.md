@@ -108,4 +108,4 @@ Hier müssen auch die kontakte wenn sie ausgewählt werden, die hintergrundfarbe
 - In beiden seiten ist Die Developer Akedemie noch vertreten. 
 (Ich bin mir aber auch nicht sicher wo diese nun abschließend raus soll?)
 
-(Das mit der Topbar ist erledigt. Das mit "Developer Akedemie" weiß ich auch nicht genau, ob das dableiben soll oder nicht. Können wir ja ggf. bei der Abgabe nachfragen. LF)
+(⁉️Das mit der Topbar ist erledigt. Das mit "Developer Akedemie" weiß ich auch nicht genau, ob das dableiben soll oder nicht. Können wir ja ggf. bei der Abgabe nachfragen. LF⁉️)
