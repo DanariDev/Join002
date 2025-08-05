@@ -1,41 +1,64 @@
 import { auth, db } from "../firebase/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { ref, get, } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 /**
- * This function outputs a time-based personalized greeting. 
- * Additionally, the name of the logged-in user is identified and 
- * displayed. For guest logins, no name is shown.
+ * Zeigt den persönlichen Gruß samt Name nach Login – erst nach dem Laden sichtbar!
  */
 export function initGreeting() {
-  const nameField = document.querySelector("#summary-greeting-name");
-  const timeField = document.querySelector("#summary-greeting-time");
+  return new Promise((resolve) => {
+    const nameField = document.querySelector("#summary-greeting-name");
+    const timeField = document.querySelector("#summary-greeting-time");
 
-  const time = new Date().getHours();
-  if (time < 12) {
-    timeField.textContent = "Good morning,";
-  } else if (time < 18) {
-    timeField.textContent = "Good afternoon,";
-  } else {
-    timeField.textContent = "Good evening,";
-  }
-
-  onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const isGuest = user.email === "guest@example.com";
-      const userRef = ref(db, `users/${user.uid}`);
-      const snapshot = await get(userRef);
-
-      if (isGuest) {
-        nameField.textContent = "";
-      } else if (snapshot.exists()) {
-        const data = snapshot.val();
-        nameField.textContent = data.name;
-      } else {
-        nameField.textContent = "Unbekannt";
-      }
+    // Begrüßungstext setzen
+    const time = new Date().getHours();
+    if (time < 12) {
+      timeField.textContent = "Good morning,";
+    } else if (time < 18) {
+      timeField.textContent = "Good afternoon,";
     } else {
-      nameField.textContent = "";
+      timeField.textContent = "Good evening,";
     }
+
+    // Erst, wenn Auth-State geladen ist, wird alles angezeigt
+    onAuthStateChanged(auth, async (user) => {
+      if (user && user.email !== "guest@example.com") {
+        const userRef = ref(db, `users/${user.uid}`);
+        const snapshot = await get(userRef);
+        if (snapshot.exists() && snapshot.val().name) {
+          nameField.textContent = snapshot.val().name;
+        } else {
+          nameField.textContent = "Unbekannt";
+        }
+      } else {
+        nameField.textContent = "";
+      }
+      resolve(); // Loader kann jetzt ausgeblendet werden
+    });
   });
 }
+
+/**
+ * Blendet den Loader aus und zeigt die Seite an (hidden-Klasse weg!)
+ */
+function hideLoader() {
+  const loader = document.getElementById('summary-loader');
+  setTimeout(() => {
+    if (loader) loader.style.display = 'none';
+    document.body.classList.remove('hidden');
+  }, 900); // 900ms künstliches Delay – passt du an, wie du willst!
+}
+
+
+/**
+ * Ruft alle wichtigen Initialisierungen auf und entfernt dann den Loader.
+ * ACHTUNG: Die init-Funktionen müssen ggf. als Promise angepasst werden, wenn du weitere async-Initialisierungen hast.
+ */
+window.addEventListener('DOMContentLoaded', async () => {
+  // Seite am Anfang ausblenden (falls du das noch nicht im HTML hast)
+  // document.body.classList.add('hidden'); // Nur einmal nötig, am besten schon im HTML
+  await initGreeting();
+  if (window.initTaskCounters) await window.initTaskCounters();
+  if (window.initDeadlineDate) await window.initDeadlineDate();
+  hideLoader(); // Loader ausblenden, Seite zeigen
+});

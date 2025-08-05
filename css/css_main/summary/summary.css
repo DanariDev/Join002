@@ -1,5 +1,11 @@
 /* @import url("global.css"); */
 
+body.hidden > *:not(#summary-loader) {
+  visibility: hidden !important;
+  /* Optional: opacity: 0; */
+  pointer-events: none;
+}
+
 /* Sidebar */
 .summary-link {
   background-color: var(--clr-900);
@@ -189,4 +195,37 @@ h2 {
 
 .summary-title {
   color: var(--clr-700);
+}
+#summary-loader {
+  position: fixed;
+  z-index: 99999;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(255,255,255,0.97);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-bar {
+  width: 120px;
+  height: 8px;
+  background: #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.loader-bar::before {
+  content: '';
+  position: absolute;
+  left: -40%;
+  top: 0;
+  height: 100%;
+  width: 40%;
+  background: #29abe3;
+  border-radius: 4px;
+  animation: loaderBarSlide 1s linear infinite;
+}
+@keyframes loaderBarSlide {
+  0% { left: -40%; }
+  100% { left: 100%; }
 }

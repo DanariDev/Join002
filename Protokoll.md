@@ -20,6 +20,9 @@
 - Overlays überall schließen bei ESC und Klick außerhalb (Task-Detail: ESC & Outside fehlt)
 - Progress Bar leiste wieder einbauen. Diese ist noch vorhanden hat aber noch keine funktionen. Für jede als abgeschlossene subtask muss der balken steigen.
 - Im Edit Task fenster im board, fehlt die background farbe der Priority buttons wenn diese ausgewählt wurden.
+- Der Name bei der begrüßung wird zeitversetzt mit dem begrüßungstext angezeigt.
+  idee: Lässt sich warscheinlich mit opacity schön lösen, wenn der name langsam eingeblendet wird statt zu "ploppen". 
+  - greetings.js -> ca. Zeile 23
 
 ## ❗ Offene Aufgaben / ToDo
 
@@ -51,9 +54,7 @@ Ich habe "versucht", als hilfestellung die ungefähre Position der fehlerquelle 
 ## ✅ Keine Aufgaben register.html:
 
 ## ❗ Offene Aufgaben summary.html: 
- - Der Name bei der begrüßung wird zeitversetzt mit dem begrüßungstext angezeigt.
-  idee: Lässt sich warscheinlich mit opacity schön lösen, wenn der name langsam eingeblendet wird statt zu "ploppen". 
-  - greetings.js -> ca. Zeile 23
+ 
 
 - Die angezeigten Zahlen stimmen nicht ganz mit dem Stand der tatsächlich Task's im Board überein (Await feedback wird nicht richtig aktualisiert.) 
 - task.counter.js -> ca. Zeile 21
