@@ -80,10 +80,10 @@ Hier müssen auch die kontakte wenn sie ausgewählt werden, die hintergrundfarbe
 idee: das könnte mit html "overflow: none;" über javascript verknüpft werden (vermute ich). Dann müsste allerdings das ganze beim der function zum schließen wieder auf "overflow: auto;" zurück.
 
 
-- Der Add-Task Button, unserer Grid colum's (to Do, In Progress usw.) versucht im responsive Layout noch ein Add-Task Formular zu öffnen, wie in unserer Desktop ansicht. 
-- board-add-task-overlay.js -> ca. Zeile 32
+- ✅Der Add-Task Button, unserer Grid colum's (to Do, In Progress usw.) versucht im responsive Layout noch ein Add-Task Formular zu öffnen, wie in unserer Desktop ansicht. 
+- ✅board-add-task-overlay.js -> ca. Zeile 32
 
-(Hier sollte es genauso gelöst werden wie wir es mit dem Großen Add-Task Button taten. Wenn Responsive, weiterleitung zu Add-Task.html.)
+✅(Hier sollte es genauso gelöst werden wie wir es mit dem Großen Add-Task Button taten. Wenn Responsive, weiterleitung zu Add-Task.html.)
 
 
 - Im Edit Task fenster: 
