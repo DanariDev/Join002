@@ -117,13 +117,24 @@ function validateEditTitle() {
   return true;
 }
 function validateEditDueDate() {
-  const dueDate = document.getElementById("editing-date").value;
+  const dueDateInput = document.getElementById("editing-date");
+  const dueDate = dueDateInput.value;
   if (!dueDate) {
     showEditFieldError("editing-date", "Please select a due date!");
     return false;
   }
+  // Prüfe, ob das Datum heute oder später ist
+  const selected = new Date(dueDate + "T00:00:00");
+  const now = new Date();
+  now.setHours(0, 0, 0, 0); // Nur das Datum vergleichen, Uhrzeit ignorieren
+
+  if (selected < now) {
+    showEditFieldError("editing-date", "Due date cannot be in the past!");
+    return false;
+  }
   return true;
 }
+
 function validateEditCategory() {
   const category = document.getElementById("editing-category").value;
   if (!category) {
