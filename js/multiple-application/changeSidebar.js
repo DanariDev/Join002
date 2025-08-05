@@ -44,4 +44,7 @@ function initDomElements() {
  */
 window.addEventListener("load", function () {
     init();
+    if(localStorage.getItem('unregistered') == 'false'){
+        document.getElementById('topbar-iconsID').classList.remove('d-none');
+    }
 });

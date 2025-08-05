@@ -103,10 +103,10 @@ idee: das könnte mit html "overflow: none;" über javascript verknüpft werden 
 
 ## (❗ Offene? ✅ Keine?) Aufgaben legal.html und privacy-policy.html:
 
-- Wenn man als NICHT Angemeldeter User die privacy-policy.html oder Legal-notice.html besucht, wird die topbar kurz sichtbar. Ähnlich wie bei der Sidebar zuvor.
+-✅ Wenn man als NICHT Angemeldeter User die privacy-policy.html oder Legal-notice.html besucht, wird die topbar kurz sichtbar. Ähnlich wie bei der Sidebar zuvor.
 (Da wird er sonst nur wieder sein "Langsames Internet Trick" -ding auspacken können. :D)
 
 - In beiden seiten ist Die Developer Akedemie noch vertreten. 
 (Ich bin mir aber auch nicht sicher wo diese nun abschließend raus soll?)
 
-(wird bearbeitet LF)
+(Das mit der Topbar ist erledigt. Das mit "Developer Akedemie" weiß ich auch nicht genau, ob der dableiben soll oder nicht. Können wir ja ggf. bei der Abgabe nachfragen. LF)
