@@ -36,6 +36,8 @@ export function fillEditFormWithTask(task) {
   document.getElementById("editing-title").value = task.title || "";
   document.getElementById("editing-description").value = task.description || "";
   document.getElementById("editing-date").value = task.dueDate || "";
+  setEditDateMinToday();
+
   document.getElementById("editing-category").value = task.category || "";
   setEditPriority(task.priority);
   fillEditSubtasks(task.subtasks || []);
@@ -47,6 +49,17 @@ export function fillEditFormWithTask(task) {
   }
   // Priority-Button-Handler neu initialisieren!
   initEditPriorityButtons();
+  function setEditDateMinToday() {
+  const input = document.getElementById("editing-date");
+  if (input) {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    input.min = `${yyyy}-${mm}-${dd}`;
+  }
+}
+
 }
 
 function setEditPriority(priority) {
