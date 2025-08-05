@@ -60,5 +60,7 @@ function loginAsGuest() {
  * This function is used to redirect to the "summary.html" page.
  */
 function redirectToSummary() {
+  sessionStorage.setItem('showSummaryLoader', '1');
   window.location.href = 'summary.html';
 }
+

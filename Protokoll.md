@@ -23,10 +23,12 @@
 - Der Name bei der begrüßung wird zeitversetzt mit dem begrüßungstext angezeigt.
   idee: Lässt sich warscheinlich mit opacity schön lösen, wenn der name langsam eingeblendet wird statt zu "ploppen". 
   - greetings.js -> ca. Zeile 23
+  - Die angezeigten Zahlen stimmen nicht ganz mit dem Stand der tatsächlich Task's im Board überein (Await feedback wird nicht richtig aktualisiert.) 
+- task.counter.js -> ca. Zeile 21
+- Die subtask müssen im Edit Task und bei Add-Task icons erhalten und darüber auch löschbar sein.
 
 ## ❗ Offene Aufgaben / ToDo
 
-- Die subtask müssen im Edit Task und bei Add-Task icons erhalten und darüber auch löschbar sein.
 - Code modularisieren, doppelte Funktionen entfernen
 - Leere Spalten mit Platzhaltertext anzeigen
 - Code cleanup & Kommentare verbessern
@@ -56,8 +58,7 @@ Ich habe "versucht", als hilfestellung die ungefähre Position der fehlerquelle 
 ## ❗ Offene Aufgaben summary.html: 
  
 
-- Die angezeigten Zahlen stimmen nicht ganz mit dem Stand der tatsächlich Task's im Board überein (Await feedback wird nicht richtig aktualisiert.) 
-- task.counter.js -> ca. Zeile 21
+
 
 ## ❗ Summary:
 
@@ -107,3 +108,5 @@ idee: das könnte mit html "overflow: none;" über javascript verknüpft werden 
 
 - In beiden seiten ist Die Developer Akedemie noch vertreten. 
 (Ich bin mir aber auch nicht sicher wo diese nun abschließend raus soll?)
+
+(wird bearbeitet LF)
