@@ -18,6 +18,8 @@ import { initDueDateInput } from "../add-task/add-task-date.js";
 import { setupDropdownOpenClose, initContactsDropdown } from "../add-task/add-task-contacts.js";
 import { clearForm } from "../add-task/add-task-save.js"
 
+const mediaQuery = window.matchMedia("(max-width: 1100px)");
+
 /**
  * Sets up event listener for DOM content loaded to initialize all add-task components.
  */
@@ -30,14 +32,17 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 export function initBoardOverlay() {
-  document
-    .querySelectorAll(".add-task-btn, #add-task-button")
-    .forEach((btn) => {
-      btn.addEventListener("click", async function (e) {
-        e.preventDefault();
+  document.querySelectorAll(".add-task-btn, #add-task-button").forEach((btn) => {
+    btn.addEventListener("click", async function (e) {
+      e.preventDefault();
+      if (mediaQuery.matches){
+        window.location.href ="add-task.html"
+      }
+      else{
         openBoardOverlay();
-      });
+      }
     });
+  });
 
   document.getElementById("closeFormModal").onclick = closeBoardOverlay;
   document.getElementById("clear-btn").onclick = function (e) {
