@@ -1,17 +1,19 @@
 import { db } from '../firebase/firebase-init.js';
-import { ref, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { ref, onValue } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+
 
 /**
  * This function retrieves the task data from Firebase and passes it to the function "updateCounters".
  */
 export function initTaskCounters() {
   const tasksRef = ref(db, 'tasks');
-  get(tasksRef).then((snapshot) => {
+  onValue(tasksRef, (snapshot) => {
     if (!snapshot.exists()) return;
     const tasks = Object.values(snapshot.val());
     updateCounters(tasks);
   });
 }
+
 
 /**
  * This function controls the retrieval and output of the values.
@@ -24,8 +26,9 @@ function updateCounters(tasks) {
   setCount('#urgent h2', countByPriority(tasks, 'urgent'));
   setCount('#atBoard h2', tasks.length);
   setCount('#onProgress h2', countByStatus(tasks, 'in-progress'));
-  setCount('#awaitFeedback h2', countByStatus(tasks, 'feedback'));
+  setCount('#awaitFeedback h2', countByStatus(tasks, 'await-feedback')); 
 }
+
 
 /**
  * This function retrieves all tasks with the same status.
