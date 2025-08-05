@@ -103,6 +103,8 @@ async function deleteContact(id) {
     await remove(ref(db, `contacts/${id}`));
     hideContactCard();
     showSuccessMessage("Contact deleted!");
+    document.getElementById('responsive-small-edit').classList.add('d-none');
+    document.getElementById('responsive-small-add').classList.remove('d-none');
   } catch (error) {
     console.error("Error deleting contact:", error);
     showErrorMessage("Error deleting contact!");
