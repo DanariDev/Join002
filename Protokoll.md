@@ -27,6 +27,7 @@
 - task.counter.js -> ca. Zeile 21
 - Die subtask müssen im Edit Task und bei Add-Task icons erhalten und darüber auch löschbar sein.
 
+
 ## ❗ Offene Aufgaben / ToDo
 
 - Code modularisieren, doppelte Funktionen entfernen
