@@ -23,6 +23,8 @@
 - Der Name bei der begrüßung wird zeitversetzt mit dem begrüßungstext angezeigt.
   idee: Lässt sich warscheinlich mit opacity schön lösen, wenn der name langsam eingeblendet wird statt zu "ploppen". 
   - greetings.js -> ca. Zeile 23
+  - Die angezeigten Zahlen stimmen nicht ganz mit dem Stand der tatsächlich Task's im Board überein (Await feedback wird nicht richtig aktualisiert.) 
+- task.counter.js -> ca. Zeile 21
 
 ## ❗ Offene Aufgaben / ToDo
 
@@ -56,8 +58,7 @@ Ich habe "versucht", als hilfestellung die ungefähre Position der fehlerquelle 
 ## ❗ Offene Aufgaben summary.html: 
  
 
-- Die angezeigten Zahlen stimmen nicht ganz mit dem Stand der tatsächlich Task's im Board überein (Await feedback wird nicht richtig aktualisiert.) 
-- task.counter.js -> ca. Zeile 21
+
 
 ## ❗ Summary:
 
