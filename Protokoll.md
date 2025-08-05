@@ -94,10 +94,9 @@ Hier müssen auch die kontakte wenn sie ausgewählt werden, die hintergrundfarbe
 
 
 ## ❗ Offene Aufgaben contacts.html:
-- Nur im Responsive Layout: Wird im Responsive Layout ein geöffneter Kontakt gelöscht, wird hier eine Custom-Fehlermeldung und Fehlermeldungen in der Konsole angezeigt.
-
-- Hier wird, (warscheinlich aufgrund des derzeitigen fehlers im JS) auch der Responsive Button nicht mehr zurückgesetzt nach dem löschen. 
-- edit-contact.js -> ca. Zeile 207
+- ✅Nur im Responsive Layout: Wird im Responsive Layout ein geöffneter Kontakt gelöscht, wird hier eine Custom-Fehlermeldung und Fehlermeldungen in der Konsole angezeigt.
+- ✅Hier wird, (warscheinlich aufgrund des derzeitigen fehlers im JS) auch der Responsive Button nicht mehr zurückgesetzt nach dem löschen. 
+- edit-contact.js -> ca. Zeile 207 <- (⁉️Bei mir tretten keine Fehler auf. Das mit dem Button hatte ich auch, aber Fehlermeldungen gab es weder im responsiven noch im normalen Modus beim Löschen (Buttons wurden korrigiert). LF ⁉️ )
 
 - Beim öffnen eines kontaktes führt die Animation zu verschiebungen. (Kam noch zu keiner Lösung)
 
