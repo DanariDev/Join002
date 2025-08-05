@@ -13,4 +13,7 @@
         max-width: 22px;
     }
 
+    li span {
+        width: 80%;
+    }
 }

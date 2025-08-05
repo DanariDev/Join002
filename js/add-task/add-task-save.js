@@ -23,12 +23,12 @@ export async function saveTaskToDB(task) {
     clearForm();
 
     window.location.pathname.split('/').filter(Boolean).forEach(element => {
-      if(element == 'add-task.html'){
-        setTimeout(function() {
+      if (element == 'add-task.html') {
+        setTimeout(function () {
           window.location.href = 'board.html';
         }, 1000);
       }
-      if(element == 'board.html'){
+      if (element == 'board.html') {
         closeBoardOverlay();
       }
     });
@@ -78,16 +78,16 @@ export function clearForm() {
   }
 
   document.querySelectorAll('.all-priority-btns')
-  .forEach(btn => btn.classList.remove('low-btn-active','medium-btn-active','urgent-btn-active'));
+    .forEach(btn => btn.classList.remove('low-btn-active', 'medium-btn-active', 'urgent-btn-active'));
 
   document.getElementById('medium-btn').classList.add('medium-btn-active');
 
   const subtaskList = document.getElementById("subtask-list");
   if (subtaskList) subtaskList.innerHTML = "";
 
-  document.getElementById('error-title').innerText ="";
-  document.getElementById('error-due-date').innerText ="";
-  document.getElementById('error-category').innerText ="";
+  document.getElementById('error-title').innerText = "";
+  document.getElementById('error-due-date').innerText = "";
+  document.getElementById('error-category').innerText = "";
 
   resetSelectedContacts();
 }

@@ -189,7 +189,7 @@
   }
 
   #deadline-date {
-    font-size: calc(14px + 1vw);
+    font-size: 16px;
   }
 
   #summary-greeting-wrapper span {
@@ -204,7 +204,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     width: 100%;
     max-width: 100%;
     text-wrap-mode: nowrap;

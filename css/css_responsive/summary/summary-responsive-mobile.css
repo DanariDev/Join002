@@ -131,7 +131,7 @@
   }
 
   #deadline-date {
-    font-size: calc(10px + 1vw);
+    font-size: 16px;
   }
 
   #summary-greeting-wrapper span {
