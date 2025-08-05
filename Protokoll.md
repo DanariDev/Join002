@@ -59,7 +59,11 @@ Ich habe "versucht", als hilfestellung die ungefähre Position der fehlerquelle 
 - Die angezeigten Zahlen stimmen nicht ganz mit dem Stand der tatsächlich Task's im Board überein (Await feedback wird nicht richtig aktualisiert.) 
 - task.counter.js -> ca. Zeile 21
 
+## ❗ Summary:
 
+- Loadblaken in index einbauen nicht in sumamry
+
+ 
 ## ❗ Offene Aufgaben add-task.html: 
 - Style anpassungen im Formular: 
 Unter der rubrik "Assigned To:", müssen die checkboxen wie im board gestylt werden.
