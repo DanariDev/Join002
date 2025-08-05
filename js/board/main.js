@@ -32,6 +32,7 @@ window.addEventListener("DOMContentLoaded", () => {
     taskOverlay.addEventListener('click', function(e) {
       if (e.target === this) {
         taskOverlay.classList.add('d-none');
+        document.getElementById("body").classList.remove('overflow-hidden');
       }
     });
   }
@@ -42,5 +43,6 @@ document.addEventListener('keydown', function(e) {
   const overlay = document.getElementById('task-overlay');
   if (e.key === 'Escape' && overlay && !overlay.classList.contains('d-none')) {
     overlay.classList.add('d-none');
+    document.getElementById("body").classList.remove('overflow-hidden');
   }
 });

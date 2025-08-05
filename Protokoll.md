@@ -75,16 +75,16 @@ Hier müssen auch die kontakte wenn sie ausgewählt werden, die hintergrundfarbe
 
 
 ## ❗ Offene Aufgaben board.html: 
- - Der hintergrund sollte nicht scrollbar sein sobald man im layout eine Task öffnet oder Editiert.
- - render-task.js -> ca. Zeile 89
+ - ✅Der hintergrund sollte nicht scrollbar sein sobald man im layout eine Task öffnet oder Editiert.
+ - ✅render-task.js -> ca. Zeile 89
 
-idee: das könnte mit html "overflow: none;" über javascript verknüpft werden (vermute ich). Dann müsste allerdings das ganze beim der function zum schließen wieder auf "overflow: auto;" zurück.
+✅idee: das könnte mit html "overflow: none;" über javascript verknüpft werden (vermute ich). Dann müsste allerdings das ganze beim der function zum schließen wieder auf ✅"overflow: auto;" zurück.
 
 
-- Der Add-Task Button, unserer Grid colum's (to Do, In Progress usw.) versucht im responsive Layout noch ein Add-Task Formular zu öffnen, wie in unserer Desktop ansicht. 
-- board-add-task-overlay.js -> ca. Zeile 32
+- ✅Der Add-Task Button, unserer Grid colum's (to Do, In Progress usw.) versucht im responsive Layout noch ein Add-Task Formular zu öffnen, wie in unserer Desktop ansicht. 
+- ✅board-add-task-overlay.js -> ca. Zeile 32
 
-(Hier sollte es genauso gelöst werden wie wir es mit dem Großen Add-Task Button taten. Wenn Responsive, weiterleitung zu Add-Task.html.)
+✅(Hier sollte es genauso gelöst werden wie wir es mit dem Großen Add-Task Button taten. Wenn Responsive, weiterleitung zu Add-Task.html.)
 
 
 - Im Edit Task fenster: 
@@ -95,19 +95,18 @@ idee: das könnte mit html "overflow: none;" über javascript verknüpft werden 
 
 
 ## ❗ Offene Aufgaben contacts.html:
-- Nur im Responsive Layout: Wird im Responsive Layout ein geöffneter Kontakt gelöscht, wird hier eine Custom-Fehlermeldung und Fehlermeldungen in der Konsole angezeigt.
-
-- Hier wird, (warscheinlich aufgrund des derzeitigen fehlers im JS) auch der Responsive Button nicht mehr zurückgesetzt nach dem löschen. 
-- edit-contact.js -> ca. Zeile 207
+- ✅Nur im Responsive Layout: Wird im Responsive Layout ein geöffneter Kontakt gelöscht, wird hier eine Custom-Fehlermeldung und Fehlermeldungen in der Konsole angezeigt.
+- ✅Hier wird, (warscheinlich aufgrund des derzeitigen fehlers im JS) auch der Responsive Button nicht mehr zurückgesetzt nach dem löschen. 
+- edit-contact.js -> ca. Zeile 207 <- (⁉️Bei mir tretten keine Fehler auf. Das mit dem Button hatte ich auch, aber Fehlermeldungen gab es weder im responsiven noch im normalen Modus beim Löschen (Buttons wurden korrigiert). LF ⁉️ )
 
 - Beim öffnen eines kontaktes führt die Animation zu verschiebungen. (Kam noch zu keiner Lösung)
 
 ## (❗ Offene? ✅ Keine?) Aufgaben legal.html und privacy-policy.html:
 
-- Wenn man als NICHT Angemeldeter User die privacy-policy.html oder Legal-notice.html besucht, wird die topbar kurz sichtbar. Ähnlich wie bei der Sidebar zuvor.
+-✅ Wenn man als NICHT Angemeldeter User die privacy-policy.html oder Legal-notice.html besucht, wird die topbar kurz sichtbar. Ähnlich wie bei der Sidebar zuvor.
 (Da wird er sonst nur wieder sein "Langsames Internet Trick" -ding auspacken können. :D)
 
 - In beiden seiten ist Die Developer Akedemie noch vertreten. 
 (Ich bin mir aber auch nicht sicher wo diese nun abschließend raus soll?)
 
-(wird bearbeitet LF)
+(⁉️Das mit der Topbar ist erledigt. Das mit "Developer Akedemie" weiß ich auch nicht genau, ob das dableiben soll oder nicht. Können wir ja ggf. bei der Abgabe nachfragen. LF⁉️)

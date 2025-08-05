@@ -8,6 +8,7 @@ export function deleteTask(taskId) {
       console.log('Task erfolgreich gelöscht!');
       // Overlay nach dem Löschen schließen (optional)
       document.getElementById('task-overlay').classList.add('d-none');
+      document.getElementById("body").classList.remove('overflow-hidden');
     })
     .catch(error => {
       console.error('Fehler beim Löschen des Tasks:', error);
