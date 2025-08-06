@@ -2,6 +2,7 @@ import { db } from '../firebase/firebase-init.js';
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { renderTask } from "./render-task.js";
 import { setupDragAndDrop } from "./drag-drop.js";
+import { updateColumnPlaceholders } from "./board-placeholder.js";
 
 /**
  * Loads all tasks from the DB and renders them into their board columns.
@@ -17,6 +18,7 @@ export function loadTasks() {
       renderTask(task);
     });
     setupDragAndDrop();
+    updateColumnPlaceholders(); 
   });
 }
 

@@ -1,5 +1,20 @@
 @media (max-width: 1100px) {
     .confirmation-window {
-        margin-left: 0;
+      position: fixed;
+      top: 24px;                 /* Etwas näher am oberen Rand auf kleinen Geräten */
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      background-color: var(--clr-700);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      z-index: 9999;
+      width: auto;
+      max-width: 90vw;           /* Damit es nicht zu breit wird */
+      margin: 0;
+      box-sizing: border-box;
+      text-align: center;
     }
-}
+  }
