@@ -50,28 +50,10 @@
 ## ✅ Keine Aufgaben  board.html: 
 
 
-- ✅Hier wird, (warscheinlich aufgrund des derzeitigen fehlers im JS) auch der Responsive Button nicht mehr zurückgesetzt nach dem löschen. 
-- edit-contact.js -> ca. Zeile 207
-
- <- (⁉️Bei mir tretten keine Fehler auf. Das mit dem Button hatte ich auch, aber Fehlermeldungen gab es weder im responsiven noch im normalen Modus beim Löschen (Buttons wurden korrigiert). LF ⁉️ )
-
-Ich konnte auch keinen fehler mehr festellen. Keine ahnung aber ist wohl erledigt. (Stefan)
 
 
-
-## ❗❗❗❗❗❗❗ Offene Aufgaben: ❗❗❗❗❗❗❗
-
-
-## (❗ Offene? ✅ Keine?) Aufgaben legal.html und privacy-policy.html:
-
-- In beiden seiten ist Die Developer Akedemie noch vertreten. 
-(Ich bin mir aber auch nicht sicher wo diese nun abschließend raus soll?)
-
-(⁉️Das mit der Topbar ist erledigt. Das mit "Developer Akedemie" weiß ich auch nicht genau, ob das dableiben soll oder nicht. Können wir ja ggf. bei der Abgabe nachfragen. LF⁉️)
 
 
 ## ❗ Sonstiges ToDo:
 
-
-- Leere Spalten mit Platzhaltertext anzeigen
 - Ladezeiten & Live-Update testen
