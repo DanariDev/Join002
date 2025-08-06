@@ -56,34 +56,43 @@
   display: none;
   background-color: var(--clr-700);
   color: white;
-  padding: 24px;
+  padding: 12px;
   border-radius: 16px;
-  font-size: 16px;
+  font-size: 20px;
   margin-left: 232px;
   justify-self: center;
+  top: 45%;
 }
 
 .especially-for-board {
   z-index: 9999;
 }
+
 /* Animation für das Overlay-Fenster */
 .overlay-window {
-  opacity: 0; /* Startet unsichtbar */
-  transform: translateY(-20px); /* Startet 20px oberhalb */
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Sanfte Animation */
+  opacity: 0;
+  /* Startet unsichtbar */
+  transform: translateY(-20px);
+  /* Startet 20px oberhalb */
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  /* Sanfte Animation */
 }
 
 /* Sichtbarer Zustand */
 .overlay-body:not(.d-none) .overlay-window {
-  display: flex; /* Sicherstellen, dass das Fenster sichtbar ist */
-  opacity: 1; /* Voll sichtbar */
-  transform: translateY(0); /* An der endgültigen Position */
+  display: flex;
+  /* Sicherstellen, dass das Fenster sichtbar ist */
+  opacity: 1;
+  /* Voll sichtbar */
+  transform: translateY(0);
+  /* An der endgültigen Position */
 }
 
 /* Sicherstellen, dass overlay-body sichtbar ist, wenn d-none entfernt wird */
 .overlay-body:not(.d-none) {
   display: flex;
 }
+
 .overlay-window input {
   height: 50px;
   box-sizing: border-box;
@@ -92,7 +101,8 @@
   padding: 0 60px 0 16px;
   border: 1px solid var(--clr-300);
   background-color: var(--clr-200);
-  margin-bottom: 16px; /* Abstand zwischen Eingabefeldern */
+  margin-bottom: 16px;
+  /* Abstand zwischen Eingabefeldern */
 }
 
 .overlay-window input#edit-name {
