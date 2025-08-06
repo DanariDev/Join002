@@ -28,11 +28,11 @@ function validateDate(dateInput, errorMsg) {
   const value = dateInput.value.trim();
   const todayStr = getTodayDateString();
 
-  if (isGermanDateFormat(value)) {
-    const isoDate = convertToISODate(value);
+  if (value) {
+    const isoDate = value;
     if (!isoDate || isoDate < todayStr) {
       showError(errorMsg, `Bitte ein Datum ab heute (${formatGermanDate(todayStr)}) wählen!`);
-      dateInput.value = formatGermanDate(todayStr);
+      // dateInput.value = todayStr;
     } else {
       hideError(errorMsg);
     }

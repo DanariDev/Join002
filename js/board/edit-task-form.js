@@ -96,24 +96,24 @@ function openEditOverlay() {
 /** Checks if title is valid (not empty) */
 function validateEditTitle() {
   const v = getValue("editing-title");
-  if (!v) return showEditFieldError("editing-title", "Please enter a title!");
+  if (!v) return showEditFieldError("error-edit-title", "Please enter a title!");
   return true;
 }
 /** Checks if due date is valid (not empty, not in past) */
 function validateEditDueDate() {
   const dueDate = getValue("editing-date");
-  if (!dueDate) return showEditFieldError("editing-date", "Please select a due date!");
+  if (!dueDate) return showEditFieldError("error-edit-due-date", "Please select a due date!");
   const selected = new Date(dueDate + "T00:00:00");
   const now = new Date(); now.setHours(0,0,0,0);
   if (selected < now)
-    return showEditFieldError("editing-date", "Due date cannot be in the past!");
+    return showEditFieldError("error-edit-due-date", "Due date cannot be in the past!");
   return true;
 }
 /** Checks if category is valid (not empty) */
 function validateEditCategory() {
   const v = getValue("editing-category");
-  if (!v) return showEditFieldError("editing-category", "Please select a category!");
-  clearEditFieldError("editing-category");
+  if (!v) return showEditFieldError("error-edit-category", "Please select a category!");
+  clearEditFieldError("error-edit-category");
   return true;
 }
 /** Gets value from an input by ID */
@@ -122,9 +122,15 @@ function getValue(id) {
   return el ? el.value.trim() : "";
 }
 /** Shows an error (simple alert fallback) */
-function showEditFieldError(field, msg) { alert(msg); return false; }
-function clearEditFieldError(field) { }
-function clearAllEditFieldErrors() { }
+function showEditFieldError(field, msg) { document.getElementById(field).textContent=msg; return false; }
+function clearEditFieldError(field) { 
+  document.getElementById(field).textContent = "";
+ }
+function clearAllEditFieldErrors() { 
+  document.getElementById("error-edit-title").textContent = "";
+  document.getElementById("error-edit-due-date",).textContent = "";
+  document.getElementById("error-edit-category").textContent = "";
+}
 
 /** === SAVE === */
 /** Saves the edited task to Firebase */

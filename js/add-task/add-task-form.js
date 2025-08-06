@@ -50,6 +50,10 @@ function validateDueDate() {
     showFieldError("due-date", "Please select a due date!");
     return false;
   }
+  if(dueDate<getTodayDateString()){
+    showFieldError("due-date", "Due date cannot be in the past!");
+    return false;
+  }
   return true;
 }
 
@@ -74,6 +78,7 @@ function clearFieldError(field) {
 function clearAllFieldErrors() {
   clearFieldError("title");
   clearFieldError("due-date");
+  clearFieldError("category");
 }
 
 /* --- Subtask logic --- */
@@ -200,4 +205,10 @@ function getSubtasks() {
     "task": li.textContent.trim(),
     "checked": "false"
   }));
+}
+
+/** Gets today's date as YYYY-MM-DD string */
+function getTodayDateString() {
+  const today = new Date();
+  return today.toISOString().split('T')[0];
 }
