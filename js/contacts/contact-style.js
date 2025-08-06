@@ -1,5 +1,7 @@
 /**
- * Generates initials from name (first two letters uppercase).
+ * Generates initials from a name (first two letters, uppercase).
+ * @param {string} name - The full name.
+ * @returns {string} The initials.
  */
 export function getInitials(name) {
   return name
@@ -9,13 +11,19 @@ export function getInitials(name) {
     .slice(0, 2);
 }
 
-/** Returns the uppercase first letter of a word */
+/**
+ * Returns the uppercase first letter of a word.
+ * @param {string} word - A single word.
+ * @returns {string} The uppercase first letter.
+ */
 function getFirstLetter(word) {
   return word[0]?.toUpperCase() || "";
 }
 
 /**
  * Generates a deterministic random color based on name hash.
+ * @param {string} name - The full name.
+ * @returns {string} The color hex code.
  */
 export function getRandomColor(name) {
   const colors = getColorPalette();
@@ -24,7 +32,10 @@ export function getRandomColor(name) {
   return colors[index];
 }
 
-/** Returns the color palette for initials circles */
+/**
+ * Returns the color palette for initials circles.
+ * @returns {Array<string>} Array of color hex codes.
+ */
 function getColorPalette() {
   return [
     "#29ABE2", // Blue
@@ -36,7 +47,11 @@ function getColorPalette() {
   ];
 }
 
-/** Generates a numeric hash from the name string */
+/**
+ * Generates a numeric hash from the name string.
+ * @param {string} name - The name string.
+ * @returns {number} The hash number.
+ */
 function getNameHash(name) {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {

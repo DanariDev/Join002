@@ -1,7 +1,14 @@
-// Checks if the screen width is below 1100px
+/**
+ * Media query to check if the screen width is below 1100px.
+ * @type {MediaQueryList}
+ */
 export const mediaQuery = window.matchMedia("(max-width: 1100px)");
 
-/** Handles responsive design changes when the media query state changes */
+/**
+ * Handles responsive design changes when the media query state changes.
+ * Shows or hides the responsive 'add contact' button.
+ * @param {MediaQueryListEvent} e - The media query event.
+ */
 export function handleMediaQueryChange(e) {
   if (e.matches) {
     showResponsiveAdd();
@@ -11,13 +18,17 @@ export function handleMediaQueryChange(e) {
   }
 }
 
-/** Shows the responsive 'add contact' button for small screens */
+/**
+ * Shows the responsive 'add contact' button for small screens.
+ */
 function showResponsiveAdd() {
   const el = document.getElementById('responsive-small-add');
   if (el) el.classList.remove('d-none');
 }
 
-/** Hides the responsive 'add contact' button if right-section is slided in */
+/**
+ * Hides the responsive 'add contact' button if right-section is slided in.
+ */
 function hideIfSlideIn() {
   const rightSection = document.getElementById('right-section');
   if (!rightSection) return;
@@ -26,7 +37,9 @@ function hideIfSlideIn() {
   });
 }
 
-/** Hides the responsive 'add contact' button */
+/**
+ * Hides the responsive 'add contact' button.
+ */
 function hideResponsiveAdd() {
   const el = document.getElementById('responsive-small-add');
   if (el) el.classList.add('d-none');

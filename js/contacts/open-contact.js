@@ -9,7 +9,7 @@ import { closeAllContactOverlays } from "./contacts-utils.js";
 import { mediaQuery, handleMediaQueryChange } from "./contact-responsive.js";
 
 /**
- * Sets up all click events for contacts, edit & delete buttons.
+ * Sets up all click events for contact list, edit and delete buttons.
  */
 export function setupContactClickEvents() {
   setupContactListEvents();
@@ -18,19 +18,17 @@ export function setupContactClickEvents() {
 }
 
 /**
- * Adds click event to each contact in the list to open details.
+ * Adds click events to each contact entry in the list.
  */
 function setupContactListEvents() {
   document.querySelectorAll(".contact-entry").forEach(el => {
     el.onclick = null;
-    el.addEventListener("click", () =>
-      openContactDetails(el.dataset.contactId)
-    );
+    el.addEventListener("click", () => openContactDetails(el.dataset.contactId));
   });
 }
 
 /**
- * Sets up click events for all edit buttons.
+ * Adds click events for edit buttons (desktop & responsive).
  */
 function setupEditEvents() {
   setupBtn("current-edit", handleEdit);
@@ -38,7 +36,7 @@ function setupEditEvents() {
 }
 
 /**
- * Handler for edit: opens edit contact lightbox.
+ * Handles edit button click: opens the edit contact lightbox.
  */
 function handleEdit() {
   const id = getCurrentContactId();
@@ -46,7 +44,7 @@ function handleEdit() {
 }
 
 /**
- * Sets up click events for all delete buttons.
+ * Adds click events for delete buttons (desktop & responsive).
  */
 function setupDeleteEvents() {
   setupBtn("current-delete", handleDelete);
@@ -54,7 +52,7 @@ function setupDeleteEvents() {
 }
 
 /**
- * Handler for delete: removes contact from database.
+ * Handles delete button click: deletes the contact from database.
  */
 function handleDelete() {
   const id = getCurrentContactId();
@@ -62,7 +60,8 @@ function handleDelete() {
 }
 
 /**
- * Gets the current contact ID from the detail card.
+ * Returns the current contact ID from detail card.
+ * @returns {string|undefined} The contact ID.
  */
 function getCurrentContactId() {
   return document.getElementById("showed-current-contact")?.dataset.contactId;
@@ -70,6 +69,8 @@ function getCurrentContactId() {
 
 /**
  * Adds a click event to a button by its ID.
+ * @param {string} id - Button element ID.
+ * @param {function} fn - Callback function.
  */
 function setupBtn(id, fn) {
   const btn = document.getElementById(id);
@@ -80,7 +81,8 @@ function setupBtn(id, fn) {
 }
 
 /**
- * Opens the contact detail card, fills and animates it.
+ * Opens the contact detail card, fills all fields and animates it.
+ * @param {string} id - Contact ID.
  */
 async function openContactDetails(id) {
   closeAllContactOverlays();
@@ -92,7 +94,9 @@ async function openContactDetails(id) {
 }
 
 /**
- * Sets contact card dataset & fills info.
+ * Sets contact card dataset and fills details.
+ * @param {string} id - Contact ID.
+ * @param {Object} contact - Contact data object.
  */
 function setContactCardData(id, contact) {
   const card = document.getElementById("showed-current-contact");
@@ -102,7 +106,8 @@ function setContactCardData(id, contact) {
 }
 
 /**
- * Fills the contact detail card fields.
+ * Fills all fields in the contact detail card.
+ * @param {Object} contact - Contact data object.
  */
 function fillContactDetails(contact) {
   setInitials(contact.name);
@@ -112,7 +117,8 @@ function fillContactDetails(contact) {
 }
 
 /**
- * Sets the initials circle with color.
+ * Sets the initials circle with a color.
+ * @param {string} name - Contact name.
  */
 function setInitials(name) {
   const icon = document.getElementById("current-icon");
@@ -123,7 +129,9 @@ function setInitials(name) {
 }
 
 /**
- * Sets text for a contact detail field.
+ * Sets the text of a contact detail field.
+ * @param {string} id - Field element ID.
+ * @param {string} text - Field text.
  */
 function setContactField(id, text) {
   const el = document.getElementById(id);
@@ -131,7 +139,10 @@ function setContactField(id, text) {
 }
 
 /**
- * Sets a link field (mail/phone) in contact card.
+ * Sets a link field (mail or phone) in the contact card.
+ * @param {string} id - Element ID.
+ * @param {string} value - Link value (email/phone).
+ * @param {string} prefix - Link prefix ("mailto"/"tel").
  */
 function setContactLink(id, value, prefix) {
   const el = document.getElementById(id);
@@ -142,7 +153,7 @@ function setContactLink(id, value, prefix) {
 }
 
 /**
- * Shows the contact card with animation.
+ * Shows the contact card and plays the slide-in animation.
  */
 function showContactCard() {
   const rightSection = document.getElementById("right-section");
@@ -158,7 +169,7 @@ function showContactCard() {
 }
 
 /**
- * Handles responsive/mobile state for the UI.
+ * Handles responsive/mobile UI state after showing a contact.
  */
 function setResponsiveState() {
   handleMediaQueryChange(mediaQuery);
@@ -168,7 +179,8 @@ function setResponsiveState() {
 }
 
 /**
- * Deletes contact from Firebase and UI.
+ * Deletes contact from Firebase and hides card on success.
+ * @param {string} id - Contact ID.
  */
 async function deleteContact(id) {
   try {
@@ -177,13 +189,13 @@ async function deleteContact(id) {
     showSuccessMessage("Contact deleted!");
     toggleResponsiveAddBtn(true);
   } catch (error) {
-    console.error("Error deleting contact:", error);
     showErrorMessage("Error deleting contact!");
   }
 }
 
 /**
- * Shows the responsive add button after delete.
+ * Shows the responsive add button after deleting a contact.
+ * @param {boolean} isDelete - Always true for delete.
  */
 function toggleResponsiveAddBtn(isDelete) {
   document.getElementById('responsive-small-edit')?.classList.add('d-none');
@@ -192,21 +204,23 @@ function toggleResponsiveAddBtn(isDelete) {
 
 /**
  * Shows a success message for 2 seconds.
+ * @param {string} message - Message text.
  */
 function showSuccessMessage(message) {
   const window = document.getElementById("confirmation-window");
   if (!window) return;
   window.querySelector("span").textContent = message;
   window.classList.remove("d-none");
-  window.style.display = "block";    // Sichtbar machen!
+  window.style.display = "block";
   setTimeout(() => {
     window.classList.add("d-none");
-    window.style.display = "none";   // Wieder verstecken!
+    window.style.display = "none";
   }, 2000);
 }
 
 /**
  * Shows an error message for 2 seconds.
+ * @param {string} message - Message text.
  */
 function showErrorMessage(message) {
   const window = document.getElementById("confirmation-window");
@@ -214,23 +228,23 @@ function showErrorMessage(message) {
   window.querySelector("span").textContent = message;
   window.classList.remove("d-none");
   window.classList.add("error");
-  window.style.display = "block";    // Sichtbar machen!
+  window.style.display = "block";
   setTimeout(() => {
     window.classList.add("d-none");
     window.classList.remove("error");
-    window.style.display = "none";   // Wieder verstecken!
+    window.style.display = "none";
   }, 2000);
 }
 
 /**
- * Displays a confirmation/error message.
+ * Shows a confirmation or error message.
+ * @param {string} message - The message text.
+ * @param {boolean} isError - Whether it's an error message.
  */
 function showMessage(message, isError) {
   const win = document.getElementById("confirmation-window");
-  console.log('confirmation-window:', win);
   const span = win?.querySelector("span");
-  console.log('confirmation span:', span);
-  if (!win || !span) return; // <-- Nur hier ist return erlaubt!
+  if (!win || !span) return;
   span.textContent = message;
   win.classList.remove("d-none");
   if (isError) win.classList.add("error");
@@ -240,11 +254,9 @@ function showMessage(message, isError) {
     win.classList.remove("error");
   }, 2000);
 }
-// <--- ab hier KEIN return mehr!
-
 
 /**
- * Closes the contact card and returns to list.
+ * Closes the contact card and shows the contact list.
  */
 export function backToContactList() {
   document.getElementById('right-section')?.classList.replace('slide-in', 'd-none');
