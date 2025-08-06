@@ -76,7 +76,6 @@ Ich konnte auch keinen fehler mehr festellen. Keine ahnung aber ist wohl erledig
 
 ## ❗ Sonstiges ToDo:
 
-- Code modularisieren, doppelte Funktionen entfernen
+
 - Leere Spalten mit Platzhaltertext anzeigen
-- Code cleanup & Kommentare verbessern
 - Ladezeiten & Live-Update testen
