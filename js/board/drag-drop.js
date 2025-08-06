@@ -3,35 +3,59 @@ import { ref, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase
 
 export function setupDragAndDrop() {
   let draggedTask = null;
+  setupTaskCardDrags(task => { draggedTask = task; });
+  setupTaskColumnDrops(
+    () => draggedTask,
+    task => { draggedTask = task; }
+  );
+}
+
+function setupTaskCardDrags(onDragStart) {
   document.querySelectorAll('.task-card').forEach(task => {
     task.addEventListener('dragstart', e => {
-      draggedTask = e.target;
+      onDragStart(e.target);
       e.dataTransfer.effectAllowed = 'move';
     });
   });
+}
+
+function setupTaskColumnDrops(getDraggedTask, resetDraggedTask) {
   document.querySelectorAll('.task-column').forEach(column => {
-    column.addEventListener('dragover', e => {
-      e.preventDefault();
-      e.dataTransfer.dropEffect = 'move';
-    });
-    column.addEventListener('drop', e => {
-      e.preventDefault();
-      if (!draggedTask) return;
-      column.appendChild(draggedTask);
-      let newStatus;
-      if (column.classList.contains('to-do-tasks')) newStatus = 'to-do';
-      else if (column.classList.contains('in-progress-tasks')) newStatus = 'in-progress';
-      else if (column.classList.contains('await-tasks')) newStatus = 'await-feedback';
-      else if (column.classList.contains('done-tasks')) newStatus = 'done';
-      const taskId = draggedTask.dataset.taskId;
-      const updates = {};
-      updates['/tasks/' + taskId + '/status'] = newStatus;
-      update(ref(db), updates)
-        .then(() => console.log('Task-Status wurde aktualisiert:', newStatus))
-        .catch(error => {
-          console.error('Fehler beim Aktualisieren:', error);
-        });
-      draggedTask = null;
-    });
+    column.addEventListener('dragover', e => handleDragOver(e));
+    column.addEventListener('drop', e => handleDrop(e, column, getDraggedTask, resetDraggedTask));
   });
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+}
+
+function handleDrop(e, column, getDraggedTask, resetDraggedTask) {
+  e.preventDefault();
+  const draggedTask = getDraggedTask();
+  if (!draggedTask) return;
+  column.appendChild(draggedTask);
+  const newStatus = getStatusFromColumn(column);
+  updateTaskStatus(draggedTask.dataset.taskId, newStatus);
+  resetDraggedTask(null);
+}
+
+function getStatusFromColumn(column) {
+  if (column.classList.contains('to-do-tasks')) return 'to-do';
+  if (column.classList.contains('in-progress-tasks')) return 'in-progress';
+  if (column.classList.contains('await-tasks')) return 'await-feedback';
+  if (column.classList.contains('done-tasks')) return 'done';
+  return null;
+}
+
+function updateTaskStatus(taskId, newStatus) {
+  if (!taskId || !newStatus) return;
+  const updates = {};
+  updates['/tasks/' + taskId + '/status'] = newStatus;
+  update(ref(db), updates)
+    .then(() => console.log('Task-Status wurde aktualisiert:', newStatus))
+    .catch(error => {
+      console.error('Fehler beim Aktualisieren:', error);
+    });
 }

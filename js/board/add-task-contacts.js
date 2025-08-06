@@ -21,36 +21,36 @@ export function initAddContactsDropdown() {
   });
 }
 
-/**
- * Zeichnet alle Kontakte als auswählbare Listenelemente ins Add-Dropdown.
- */
 function renderAddContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   dropdownList.innerHTML = "";
-  allAddContacts.forEach((contact) => {
-    dropdownList.appendChild(createAddContactRow(contact));
-  });
+  allAddContacts.forEach((contact) => dropdownList.appendChild(createAddContactRow(contact)));
 }
 
-/**
- * Erstellt eine Zeile für einen Kontakt mit Initialen, Name, Checkbox.
- */
 function createAddContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
   if (selectedAddContacts.has(contact.id)) {
     row.classList.add("selected");
   }
+  addContactRowContent(row, contact);
+  addContactRowClickHandler(row, contact);
+  return row;
+}
+
+function addContactRowContent(row, contact) {
   row.appendChild(createAddInitialsCircle(contact));
   row.appendChild(createAddContactName(contact));
   row.appendChild(createAddCheckbox(contact));
+}
+
+function addContactRowClickHandler(row, contact) {
   row.addEventListener("click", function (e) {
     e.stopPropagation();
     if (e.target.tagName !== "INPUT") {
       handleAddContactToggle(contact.id);
     }
   });
-  return row;
 }
 
 function createAddInitialsCircle(contact) {
@@ -72,14 +72,12 @@ function createAddCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
   checkbox.className = "custom-checkbox";
-  checkbox.id = `checkbox-${contact.id}`; // Eindeutige ID für die Checkbox
+  checkbox.id = `checkbox-${contact.id}`;
   checkbox.checked = selectedAddContacts.has(contact.id);
   checkbox.addEventListener("change", () => handleAddContactToggle(contact.id));
-
   const label = document.createElement("label");
-  label.setAttribute("for", `checkbox-${contact.id}`); // Verknüpfung mit Checkbox
-  label.className = "custom-checkbox-label"; // Optional: Eigene Klasse für Styling
-
+  label.setAttribute("for", `checkbox-${contact.id}`);
+  label.className = "custom-checkbox-label";
   const container = document.createElement("div");
   container.appendChild(checkbox);
   container.appendChild(label);
@@ -96,9 +94,6 @@ function handleAddContactToggle(id) {
   renderSelectedAddInsignias();
 }
 
-/**
- * Zeichnet die "Badges" der ausgewählten Kontakte im Add-Overlay.
- */
 export function renderSelectedAddInsignias() {
   const container = document.getElementById("selected-contact-insignias");
   container.innerHTML = "";
@@ -106,11 +101,7 @@ export function renderSelectedAddInsignias() {
   const maxToShow = 3;
   selected.slice(0, maxToShow).forEach(c => container.appendChild(createAddInsignia(c)));
   if (selected.length > maxToShow) {
-    const more = document.createElement("div");
-    more.className = "contact-insignia contact-insignia-more";
-    more.textContent = `+${selected.length - maxToShow}`;
-    more.title = "Weitere Kontakte ausgewählt";
-    container.appendChild(more);
+    container.appendChild(createMoreInsignia(selected.length - maxToShow));
   }
 }
 
@@ -123,8 +114,16 @@ function createAddInsignia(contact) {
   return insignia;
 }
 
+function createMoreInsignia(num) {
+  const more = document.createElement("div");
+  more.className = "contact-insignia contact-insignia-more";
+  more.textContent = `+${num}`;
+  more.title = "Weitere Kontakte ausgewählt";
+  return more;
+}
+
 /**
- * Gibt die aktuell ausgewählten Kontakt-IDs zurück (z. B. zum Speichern).
+ * Gibt die aktuell ausgewählten Kontakt-IDs zurück.
  */
 export function getSelectedAddContactIds() {
   return Array.from(selectedAddContacts);
@@ -140,26 +139,28 @@ export function setupAddDropdownOpenClose() {
 
   if (!dropdown || !selected || !panel) return;
 
-  // Panel auf/zu beim Klick aufs Feld
-  selected.addEventListener("click", (e) => {
-    e.stopPropagation();
-    panel.classList.toggle("d-none");
-  });
-
-  // Bei Klick außerhalb schließen
-  document.addEventListener("click", (e) => {
-    if (!dropdown.contains(e.target)) {
-      panel.classList.add("d-none");
-    }
-  });
-
-  // ESC schließt Panel
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      panel.classList.add("d-none");
-    }
-  });
+  selected.addEventListener("click", (e) => handleDropdownClick(e, panel));
+  document.addEventListener("click", (e) => handleDocumentClick(e, dropdown, panel));
+  document.addEventListener("keydown", (e) => handleEscapeKey(e, panel));
 }
+
+function handleDropdownClick(e, panel) {
+  e.stopPropagation();
+  panel.classList.toggle("d-none");
+}
+
+function handleDocumentClick(e, dropdown, panel) {
+  if (!dropdown.contains(e.target)) {
+    panel.classList.add("d-none");
+  }
+}
+
+function handleEscapeKey(e, panel) {
+  if (e.key === "Escape") {
+    panel.classList.add("d-none");
+  }
+}
+
 export function resetSelectedAddContacts() {
   selectedAddContacts.clear();
   renderAddContactsDropdown();

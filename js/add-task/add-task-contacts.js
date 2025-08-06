@@ -8,10 +8,8 @@ import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 let allContacts = [];
 let selectedContacts = new Set();
 
-/**
- * Initializes the contacts dropdown by setting up a real-time listener on Firebase "contacts" reference.
- * Updates allContacts array and renders the dropdown.
- */
+// ...IMPORTS und Variablen wie gehabt...
+
 export function initContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   if (!dropdownList) return;
@@ -25,9 +23,6 @@ export function initContactsDropdown() {
   });
 }
 
-/**
- * Sets up a real-time listener for contacts (similar to initContactsDropdown, possibly redundant).
- */
 function setupContactsListener() {
   const contactsRef = ref(db, "contacts");
   onValue(contactsRef, (snapshot) => {
@@ -39,58 +34,56 @@ function setupContactsListener() {
   });
 }
 
-/**
- * Renders the contacts list in the dropdown UI by creating rows for each contact.
- */
+// --- NEU: KURZE Funktionen zum Rendern der Dropdown-Liste ---
 function renderContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   dropdownList.innerHTML = "";
-  allContacts.forEach((contact) => {
-    dropdownList.appendChild(createContactRow(contact));
-  });
+  allContacts.forEach(contact => addContactRowToDropdown(dropdownList, contact));
 }
 
-/**
- * Filters contacts based on a search string (by name or email, case-insensitive). Not used in current code.
- */
-function filterContacts(filter) {
-  if (!filter) return allContacts;
-  return allContacts.filter(
-    (c) =>
-      c.name.toLowerCase().includes(filter.toLowerCase()) ||
-      (c.email && c.email.toLowerCase().includes(filter.toLowerCase()))
-  );
+function addContactRowToDropdown(dropdownList, contact) {
+  const row = createContactRow(contact);
+  dropdownList.appendChild(row);
 }
 
-/**
- * Creates a DOM row element for a contact in the dropdown, including initials, name, checkbox, label, and click handler.
- */
 function createContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
-  if (selectedContacts.has(contact.id)) {
+  setSelectedClass(row, contact.id);
+  addContactRowContent(row, contact);
+  addClickHandlerToContactRow(row, contact);
+  return row;
+}
+
+function setSelectedClass(row, contactId) {
+  if (selectedContacts.has(contactId)) {
     row.classList.add("selected");
   }
+}
+
+function addContactRowContent(row, contact) {
   row.appendChild(createInitialsCircle(contact));
   row.appendChild(createContactName(contact));
-  const checkbox = createCheckbox(contact);
-  row.appendChild(checkbox);
+  row.appendChild(createCheckbox(contact));
+  row.appendChild(createContactLabel(contact));
+}
+
+function createContactLabel(contact) {
   const label = document.createElement("label");
   label.setAttribute("for", `contact-checkbox-${contact.id}`);
-  row.appendChild(label);
+  return label;
+}
+
+function addClickHandlerToContactRow(row, contact) {
   row.addEventListener("click", function (e) {
     e.stopPropagation();
     if (e.target.tagName !== "INPUT" && e.target.tagName !== "LABEL") {
       handleContactToggle(contact.id);
     }
   });
-
-  return row;
 }
 
-/**
- * Creates a circle element with contact initials and random background color.
- */
+// --- REST wie gehabt, da kurz genug ---
 function createInitialsCircle(contact) {
   const initials = document.createElement("div");
   initials.className = "contact-initials";
@@ -99,9 +92,6 @@ function createInitialsCircle(contact) {
   return initials;
 }
 
-/**
- * Creates a span element for the contact's name.
- */
 function createContactName(contact) {
   const name = document.createElement("span");
   name.className = "contact-name";
@@ -109,9 +99,6 @@ function createContactName(contact) {
   return name;
 }
 
-/**
- * Creates a checkbox for selecting the contact, with change handler and associated label.
- */
 function createCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -122,9 +109,15 @@ function createCheckbox(contact) {
   return checkbox;
 }
 
-/**
- * Toggles selection of a contact ID in the Set, then re-renders dropdown and selected insignias.
- */
+function filterContacts(filter) {
+  if (!filter) return allContacts;
+  return allContacts.filter(
+    (c) =>
+      c.name.toLowerCase().includes(filter.toLowerCase()) ||
+      (c.email && c.email.toLowerCase().includes(filter.toLowerCase()))
+  );
+}
+
 function handleContactToggle(id) {
   if (selectedContacts.has(id)) {
     selectedContacts.delete(id);
@@ -135,9 +128,6 @@ function handleContactToggle(id) {
   renderSelectedInsignias();
 }
 
-/**
- * Renders visual insignias for selected contacts in a container.
- */
 function renderSelectedInsignias() {
   const container = document.getElementById("selected-contact-insignias");
   container.innerHTML = "";
@@ -148,14 +138,11 @@ function renderSelectedInsignias() {
     const more = document.createElement("div");
     more.className = "contact-insignia contact-insignia-more";
     more.textContent = `+${selected.length - maxToShow}`;
-    more.title = "Weitere Kontakte ausgewählt";
+    more.title = "More contacts selected";
     container.appendChild(more);
   }
 }
 
-/**
- * Creates an insignia element (badge) for a selected contact with initials and color.
- */
 function createInsignia(contact) {
   const insignia = document.createElement("div");
   insignia.className = "contact-insignia";
@@ -165,16 +152,10 @@ function createInsignia(contact) {
   return insignia;
 }
 
-/**
- * Returns an array of selected contact IDs.
- */
 export function getSelectedContactIds() {
   return Array.from(selectedContacts);
 }
 
-/**
- * Sets up event listeners to open/close the dropdown panel on click or escape key.
- */
 export function setupDropdownOpenClose() {
   const dropdown = document.getElementById("contacts-dropdown");
   const selected = document.getElementById("contacts-selected");
@@ -182,17 +163,14 @@ export function setupDropdownOpenClose() {
 
   if (!dropdown || !selected || !panel) return;
 
-  // Panel auf/zu schalten beim Klick auf das Eingabefeld
   selected.addEventListener("click", openClose);
 
-  // Bei Klick außerhalb Panel schließen
   document.addEventListener("click", (e) => {
     if (!dropdown.contains(e.target)) {
       panel.classList.add("d-none");
     }
   });
 
-  // Escape schließt Panel
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
       panel.classList.add("d-none");

@@ -3,31 +3,44 @@
 /**
  * Initializes priority buttons: sets medium as default if none active, adds click listeners to toggle active classes exclusively.
  */
+// add-task-priority.js
+
+/**
+ * Initializes priority buttons: sets medium as default if none active, adds click listeners.
+ */
 export function initPriorityButtons() {
-  const btns = [
+  const btns = getPriorityButtons();
+
+  setDefaultPriority(btns);
+
+  btns.forEach(({ id, class: activeClass }) => {
+    const btn = document.getElementById(id);
+    btn.addEventListener("click", () => setActivePriority(btns, id, activeClass));
+  });
+}
+
+function getPriorityButtons() {
+  return [
     { id: "urgent-btn", class: "urgent-btn-active" },
     { id: "medium-btn", class: "medium-btn-active" },
     { id: "low-btn", class: "low-btn-active" }
   ];
+}
 
-  // Standard: Medium aktiv, falls nichts gesetzt
-  if (
-    !document.getElementById("urgent-btn").classList.contains("urgent-btn-active") &&
-    !document.getElementById("medium-btn").classList.contains("medium-btn-active") &&
-    !document.getElementById("low-btn").classList.contains("low-btn-active")
-  ) {
+function setDefaultPriority(btns) {
+  const noneActive = btns.every(({ id, class: activeClass }) =>
+    !document.getElementById(id).classList.contains(activeClass)
+  );
+  if (noneActive) {
     document.getElementById("medium-btn").classList.add("medium-btn-active");
   }
+}
 
-  btns.forEach(({ id, class: activeClass }) => {
-    const btn = document.getElementById(id);
-    btn.addEventListener("click", () => {
-      btns.forEach(({ id: otherId, class: otherClass }) => {
-        document.getElementById(otherId).classList.remove(otherClass);
-      });
-      btn.classList.add(activeClass);
-    });
+function setActivePriority(btns, clickedId, activeClass) {
+  btns.forEach(({ id, class: otherClass }) => {
+    document.getElementById(id).classList.remove(otherClass);
   });
+  document.getElementById(clickedId).classList.add(activeClass);
 }
 
 /**

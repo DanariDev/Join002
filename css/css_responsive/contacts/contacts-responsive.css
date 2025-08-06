@@ -1,4 +1,8 @@
 /* Media Querry Small Displays */
+.no-scroll {
+  overflow: hidden !important;
+}
+
 @media (max-width: 970px) {
 
   .lightbox-left,

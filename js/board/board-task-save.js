@@ -1,5 +1,3 @@
-// js/board/board-task-save.js
-
 import { db } from "../firebase/firebase-init.js";
 import { ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { loadTasks } from "./load-tasks.js";
@@ -12,44 +10,57 @@ export function initBoardTaskSave() {
   const saveBtn = form.querySelector("#add-task-btn");
   if (!saveBtn) return;
 
-  saveBtn.addEventListener("click", async (e) => {
-    e.preventDefault();
+  saveBtn.addEventListener("click", (e) => handleSaveClick(e, form));
+}
 
-    const task = getTaskFromForm(form);
-    if (!task) return;
-
-    const taskRef = ref(db, "tasks/");
-    await push(taskRef, task);
-
-    clearForm();
-    closeOverlay();
-    loadTasks();
-  });
+async function handleSaveClick(e, form) {
+  e.preventDefault();
+  const task = getTaskFromForm(form);
+  if (!task) return;
+  await saveTaskToDB(task);
+  clearForm();
+  closeOverlay();
+  loadTasks();
 }
 
 function getTaskFromForm(form) {
   try {
-    const title = form.querySelector("[name='title']").value.trim();
-    const description = form.querySelector("[name='description']").value.trim();
-    const dueDate = form.querySelector("[name='dueDate']").value;
-    const priority = form.querySelector(".priority-button.selected")?.dataset.priority;
+    const title = getValue(form, "[name='title']");
+    const description = getValue(form, "[name='description']");
+    const dueDate = getValue(form, "[name='dueDate']");
+    const priority = getSelectedPriority(form);
     const status = "todo";
-
     if (!title || !description || !dueDate || !priority) return null;
-
-    return {
-      title,
-      description,
-      dueDate,
-      priority,
-      status,
-      subtasks: [],
-      contacts: []
-    };
+    return createTaskObj(title, description, dueDate, priority, status);
   } catch (e) {
     console.error("Form-Auslesen fehlgeschlagen:", e);
     return null;
   }
+}
+
+function getValue(form, selector) {
+  return form.querySelector(selector)?.value.trim();
+}
+
+function getSelectedPriority(form) {
+  return form.querySelector(".priority-button.selected")?.dataset.priority;
+}
+
+function createTaskObj(title, description, dueDate, priority, status) {
+  return {
+    title,
+    description,
+    dueDate,
+    priority,
+    status,
+    subtasks: [],
+    contacts: []
+  };
+}
+
+async function saveTaskToDB(task) {
+  const taskRef = ref(db, "tasks/");
+  await push(taskRef, task);
 }
 
 function closeOverlay() {

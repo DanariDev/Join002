@@ -26,7 +26,7 @@
   - Die angezeigten Zahlen stimmen nicht ganz mit dem Stand der tatsächlich Task's im Board überein (Await feedback wird nicht richtig aktualisiert.) 
 - task.counter.js -> ca. Zeile 21
 - Die subtask müssen im Edit Task und bei Add-Task icons erhalten und darüber auch löschbar sein.
-
+- Beim öffnen eines kontaktes führt die Animation zu verschiebungen. (Kam noch zu keiner Lösung)
 
 
 ---
@@ -61,14 +61,9 @@ Ich konnte auch keinen fehler mehr festellen. Keine ahnung aber ist wohl erledig
 
 ## ❗❗❗❗❗❗❗ Offene Aufgaben: ❗❗❗❗❗❗❗
 
-## ❗ Offene Aufgaben summary.html: 
-
-- Loadbalken in index einbauen nicht in summary
+## Board Leeres Feld kleine card mit no Task oder so
 
 
-## ❗ Offene Aufgaben contacts.html:
-
-- Beim öffnen eines kontaktes führt die Animation zu verschiebungen. (Kam noch zu keiner Lösung)
 
 
 ## (❗ Offene? ✅ Keine?) Aufgaben legal.html und privacy-policy.html:

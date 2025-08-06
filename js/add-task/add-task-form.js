@@ -4,7 +4,7 @@ import { getSelectedPriority } from "./add-task-priority.js";
 import { getSelectedContactIds } from "./add-task-contacts.js";
 
 /**
- * Initializes the add-task form: adds click listener to create button for validation and saving.
+ * Initializes the add-task form.
  */
 export function initAddTaskForm() {
   const createBtn = document.getElementById("create-task-btn");
@@ -13,41 +13,25 @@ export function initAddTaskForm() {
   const newBtn = createBtn.cloneNode(true);
   createBtn.parentNode.replaceChild(newBtn, createBtn);
 
-  newBtn.addEventListener("click", function (event) {
-    event.preventDefault();
-    clearAllFieldErrors();
-    let valid = true;
-    if (!validateTitle()) valid = false;
-    if (!validateDueDate()) valid = false;
-    if (!validateCategory()) valid = false;
-
-    if (valid) saveTaskToDB(collectTaskData());
-  });
+  newBtn.addEventListener("click", handleFormSubmit);
 }
 
-/**
- * Handles task creation: clears errors, validates title and due date, saves if valid.
- */
-function handleCreateTask() {
+function handleFormSubmit(event) {
+  event.preventDefault();
   clearAllFieldErrors();
-  if (!validateTitle() | !validateDueDate()) return;
-  saveTaskToDB(collectTaskData());
+  let valid = true;
+  if (!validateTitle()) valid = false;
+  if (!validateDueDate()) valid = false;
+  if (!validateCategory()) valid = false;
+
+  if (valid) saveTaskToDB(collectTaskData());
 }
 
-/**
- * Displays error message for a specific field.
- */
 function showFieldError(field, message) {
   const errorDiv = document.getElementById(`error-${field}`);
-  if (errorDiv) {
-    errorDiv.textContent = message;
-    // errorDiv.style.color = "red";
-  }
+  if (errorDiv) errorDiv.textContent = message;
 }
 
-/**
- * Validates title field: checks if non-empty, shows error if not.
- */
 function validateTitle() {
   const title = document.getElementById("title").value.trim();
   if (!title) {
@@ -57,9 +41,6 @@ function validateTitle() {
   return true;
 }
 
-/**
- * Validates due date field: checks if selected, shows error if not.
- */
 function validateDueDate() {
   const dueDate = document.getElementById("due-date").value;
   if (!dueDate) {
@@ -69,9 +50,6 @@ function validateDueDate() {
   return true;
 }
 
-/**
- * Validates category field: checks if selected, shows error if not, clears error otherwise.
- */
 function validateCategory() {
   const category = document.getElementById("category").value;
   if (!category) {
@@ -82,61 +60,82 @@ function validateCategory() {
   return true;
 }
 
-/**
- * Clears error message for a specific field.
- */
 function clearFieldError(field) {
   const errorDiv = document.getElementById(`error-${field}`);
-  if (errorDiv) {
-    errorDiv.textContent = "";
-  }
+  if (errorDiv) errorDiv.textContent = "";
 }
 
-/**
- * Clears all field errors (title, due-date).
- */
 function clearAllFieldErrors() {
   clearFieldError("title");
   clearFieldError("due-date");
 }
 
-/**
- * Adds a new subtask to the list from input value if non-empty, clears input.
- */
+/* --- Subtask-Logik modular --- */
+function handleSubtaskInputKey(event) {
+  if (event.key === "Enter") {
+    addSubtask();
+    event.preventDefault();
+  }
+}
+
+function handleSubtaskButtonClick() {
+  addSubtask();
+}
+
+function handleSubtaskListClick(e) {
+  if (e.target.tagName === "LI") {
+    editSubtask(e.target);
+  }
+}
+
+/* --- Event-Listener initialisieren --- */
+document.getElementById("subtask").addEventListener("keydown", handleSubtaskInputKey);
+document.querySelector(".subtask-button").addEventListener("click", handleSubtaskButtonClick);
+document.getElementById("subtask-list").addEventListener("click", handleSubtaskListClick);
+
 function addSubtask() {
   const input = document.getElementById("subtask");
   const value = input.value.trim();
   if (!value) return;
   const list = document.getElementById("subtask-list");
+  const li = createSubtaskListItem(value);
+  list.appendChild(li);
+  input.value = "";
+  addSubtaskIconsListeners(li);
+}
+
+function createSubtaskListItem(value) {
   const li = document.createElement("li");
   li.textContent = value;
   li.classList.add('subtask-list');
-  li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" id="delete-subtask" class="subtask-icon"></div>`;
-  list.appendChild(li);
-  input.value = "";
-  document.querySelectorAll("#edit-subtask").forEach(element=> element.addEventListener("click", iconEdit));
-  document.querySelectorAll("#delete-subtask").forEach(element=> element.addEventListener("click", iconDelete));
+  li.innerHTML += getSubtaskIconsHTML();
+  return li;
 }
 
-document.getElementById("subtask").addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    addSubtask();
-    e.preventDefault();
-  }
-});
+function getSubtaskIconsHTML() {
+  return `<div class="subtask-icons-div">
+    <img src="assets/img/edit.png" class="subtask-icon edit-subtask">
+    <img src="assets/img/delete.png" class="subtask-icon delete-subtask">
+  </div>`;
+}
 
-document.querySelector(".subtask-button").addEventListener("click", addSubtask);
-document.getElementById("subtask-list").addEventListener("click", function (e) {
-  if (e.target.tagName === "LI") {
-    editSubtask(e.target);
-  }
-});
+function addSubtaskIconsListeners(li) {
+  li.querySelector(".edit-subtask").addEventListener("click", iconEdit);
+  li.querySelector(".delete-subtask").addEventListener("click", iconDelete);
+}
 
-/**
- * Edits a subtask li element: replaces text with input, restores on blur or enter.
- */
+function iconEdit(e) {
+  const li = e.target.closest("li");
+  if (li) editSubtask(li);
+}
+
+function iconDelete(e) {
+  const li = e.target.closest("li");
+  if (li) deleteSubtask(li);
+}
+
 function editSubtask(li) {
-  const oldValue = li.textContent;
+  const oldValue = li.firstChild.textContent || li.textContent;
   const input = document.createElement("input");
   input.type = "text";
   input.value = oldValue;
@@ -144,39 +143,24 @@ function editSubtask(li) {
   li.appendChild(input);
   input.focus();
 
-  input.addEventListener("blur", finishEdit);
+  input.addEventListener("blur", () => finishEdit(li, input, oldValue));
   input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") finishEdit();
+    if (e.key === "Enter") finishEdit(li, input, oldValue);
   });
-
-  function finishEdit() {
-    li.textContent = input.value.trim() || oldValue;
-    li.classList.add('subtask-list');
-    li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" id="delete-subtask" class="subtask-icon"></div>`;
-    document.querySelectorAll("#edit-subtask").forEach(element=> element.addEventListener("click", iconEdit));
-    document.querySelectorAll("#delete-subtask").forEach(element=> element.addEventListener("click", iconDelete));
-  }
 }
 
-function deleteSubtask(li){
+function finishEdit(li, input, oldValue) {
+  const value = input.value.trim() || oldValue;
+  li.textContent = value;
+  li.classList.add('subtask-list');
+  li.innerHTML += getSubtaskIconsHTML();
+  addSubtaskIconsListeners(li);
+}
+
+function deleteSubtask(li) {
   li.remove();
 }
 
-function iconEdit(e) {
-  if (e.target.parentNode.parentNode.tagName === "LI") {
-    editSubtask(e.target.parentNode.parentNode);
-  }
-}
-
-function iconDelete(e){
-  if (e.target.parentNode.parentNode.tagName === "LI") {
-    deleteSubtask(e.target.parentNode.parentNode);
-  }
-}
-
-/**
- * Collects all task data from form fields into an object, including subtasks.
- */
 function collectTaskData() {
   return {
     title: document.getElementById("title").value.trim(),
@@ -184,19 +168,16 @@ function collectTaskData() {
     dueDate: document.getElementById("due-date").value,
     priority: getSelectedPriority(),
     category: document.getElementById("category").value,
-    subtasks: getSubtasks(),  
+    subtasks: getSubtasks(),
     createdAt: Date.now(),
     assignedTo: getSelectedContactIds(),
   };
 }
 
-/**
- * Retrieves array of subtask texts from list items.
- */
 function getSubtasks() {
   const items = document.querySelectorAll("#subtask-list li");
   return Array.from(items).map(li => ({
-    "task" : li.textContent.trim(),
+    "task": li.textContent.trim(),
     "checked": "false"
   }));
 }

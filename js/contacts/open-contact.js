@@ -55,7 +55,13 @@ async function openContactDetails(id) {
 
   handleMediaQueryChange(mediaQuery);
   document.getElementById('responsive-small-edit').classList.remove('d-none');
+
+  // **Hier einfügen:**
+  if (window.innerWidth <= 1100) {
+    document.body.classList.add('no-scroll');
+  }
 }
+
 
 /**
  * Fills contact details in the card (icon, name, mail, phone).
