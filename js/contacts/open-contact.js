@@ -194,14 +194,32 @@ function toggleResponsiveAddBtn(isDelete) {
  * Shows a success message for 2 seconds.
  */
 function showSuccessMessage(message) {
-  showMessage(message, false);
+  const window = document.getElementById("confirmation-window");
+  if (!window) return;
+  window.querySelector("span").textContent = message;
+  window.classList.remove("d-none");
+  window.style.display = "block";    // Sichtbar machen!
+  setTimeout(() => {
+    window.classList.add("d-none");
+    window.style.display = "none";   // Wieder verstecken!
+  }, 2000);
 }
 
 /**
  * Shows an error message for 2 seconds.
  */
 function showErrorMessage(message) {
-  showMessage(message, true);
+  const window = document.getElementById("confirmation-window");
+  if (!window) return;
+  window.querySelector("span").textContent = message;
+  window.classList.remove("d-none");
+  window.classList.add("error");
+  window.style.display = "block";    // Sichtbar machen!
+  setTimeout(() => {
+    window.classList.add("d-none");
+    window.classList.remove("error");
+    window.style.display = "none";   // Wieder verstecken!
+  }, 2000);
 }
 
 /**
@@ -209,8 +227,11 @@ function showErrorMessage(message) {
  */
 function showMessage(message, isError) {
   const win = document.getElementById("confirmation-window");
-  if (!win) return;
-  win.querySelector("span").textContent = message;
+  console.log('confirmation-window:', win);
+  const span = win?.querySelector("span");
+  console.log('confirmation span:', span);
+  if (!win || !span) return; // <-- Nur hier ist return erlaubt!
+  span.textContent = message;
   win.classList.remove("d-none");
   if (isError) win.classList.add("error");
   else win.classList.remove("error");
@@ -219,6 +240,8 @@ function showMessage(message, isError) {
     win.classList.remove("error");
   }, 2000);
 }
+// <--- ab hier KEIN return mehr!
+
 
 /**
  * Closes the contact card and returns to list.
