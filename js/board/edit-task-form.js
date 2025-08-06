@@ -1,273 +1,211 @@
-// edit-task-form.js
 import { db } from "../firebase/firebase-init.js";
-import {
-  ref,
-  update,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { setSelectedEditContacts } from "./edit-task-contacts.js";
-import { getSelectedEditContactIds } from "./edit-task-contacts.js";
+import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { setSelectedEditContacts, getSelectedEditContactIds } from "./edit-task-contacts.js";
 import { getSelectedEditPriority, initEditPriorityButtons } from "./edit-task-priority.js";
 
-/**
- * Initialisiert das Edit-Formular für Tasks.
- * Ruft beim Klick auf Save die Validierung & Speicherung auf.
- */
+/* ====================== INIT ====================== */
 export function initEditTaskForm() {
-  const saveBtn = document.getElementById("editing-save-btn");
-  if (!saveBtn) return;
-
-  saveBtn.addEventListener("click", async (event) => {
-    event.preventDefault();
-    clearAllEditFieldErrors();
-    let valid = true;
-    if (!validateEditTitle()) valid = false;
-    if (!validateEditDueDate()) valid = false;
-    if (!validateEditCategory()) valid = false;
-    if (valid) saveEditedTask();
-  });
+  const btn = document.getElementById("editing-save-btn");
+  if (btn) btn.addEventListener("click", onSaveEditClick);
+}
+function onSaveEditClick(event) {
+  event.preventDefault();
+  clearAllEditFieldErrors();
+  let valid = true;
+  if (!validateEditTitle()) valid = false;
+  if (!validateEditDueDate()) valid = false;
+  if (!validateEditCategory()) valid = false;
+  if (valid) saveEditedTask();
 }
 
-/**
- * Füllt das Edit-Formular mit den Daten einer bestehenden Task.
- */
+/* ==================== FORM FÜLLEN ==================== */
 export function fillEditFormWithTask(task) {
   setSelectedEditContacts(task.assignedTo || []);
-  document.getElementById("editing-title").value = task.title || "";
-  document.getElementById("editing-description").value = task.description || "";
-  document.getElementById("editing-date").value = task.dueDate || "";
+  setInputValue("editing-title", task.title || "");
+  setInputValue("editing-description", task.description || "");
+  setInputValue("editing-date", task.dueDate || "");
   setEditDateMinToday();
-
-  document.getElementById("editing-category").value = task.category || "";
+  setInputValue("editing-category", task.category || "");
   setEditPriority(task.priority);
   fillEditSubtasks(task.subtasks || []);
-  // Assigned und Kontakte ggf. ergänzen!
-  const saveBtn = document.getElementById("editing-save-btn");
-  if (saveBtn) {
-    saveBtn.disabled = false;
-    saveBtn.classList.remove("disabled");
-  }
-  // Priority-Button-Handler neu initialisieren!
+  enableSaveBtn();
   initEditPriorityButtons();
-  function setEditDateMinToday() {
+}
+function setInputValue(id, value) {
+  const el = document.getElementById(id);
+  if (el) el.value = value;
+}
+function setEditDateMinToday() {
   const input = document.getElementById("editing-date");
-  if (input) {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = String(today.getMonth() + 1).padStart(2, "0");
-    const dd = String(today.getDate()).padStart(2, "0");
-    input.min = `${yyyy}-${mm}-${dd}`;
+  if (!input) return;
+  const today = new Date();
+  const yyyy = today.getFullYear();
+  const mm = String(today.getMonth() + 1).padStart(2, "0");
+  const dd = String(today.getDate()).padStart(2, "0");
+  input.min = `${yyyy}-${mm}-${dd}`;
+}
+function setEditPriority(priority) {
+  document.querySelectorAll("#editing-priority-buttons .all-priority-btns")
+    .forEach(btn => btn.classList.remove("active"));
+  if (priority === "urgent") activateBtn("editing-urgent-btn");
+  else if (priority === "medium") activateBtn("editing-medium-btn");
+  else if (priority === "low") activateBtn("editing-low-btn");
+}
+function activateBtn(id) {
+  const btn = document.getElementById(id);
+  if (btn) btn.classList.add("active");
+}
+function enableSaveBtn() {
+  const btn = document.getElementById("editing-save-btn");
+  if (btn) {
+    btn.disabled = false;
+    btn.classList.remove("disabled");
   }
 }
 
-}
-
-function setEditPriority(priority) {
-  document
-    .querySelectorAll("#editing-priority-buttons .all-priority-btns")
-    .forEach((btn) => btn.classList.remove("active"));
-  if (priority === "urgent")
-    document.getElementById("editing-urgent-btn").classList.add("active");
-  else if (priority === "medium")
-    document.getElementById("editing-medium-btn").classList.add("active");
-  else if (priority === "low")
-    document.getElementById("editing-low-btn").classList.add("active");
-}
-
-/**
- * Füllt die Subtasks in die Liste.
- */
-function fillEditSubtasks(subtasks) {
-  const list = document.getElementById("editing-subtask-list");
-  list.innerHTML = "";
-  subtasks.forEach((st) => {
-    const li = document.createElement("li");
-    li.textContent = st.task;
-    li.classList.add('subtask-list');
-    li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" id="delete-subtask" class="subtask-icon"></div>`;
-    list.appendChild(li);
-    document.querySelectorAll("#edit-subtask").forEach(element=> element.addEventListener("click", iconEdit));
-    document.querySelectorAll("#delete-subtask").forEach(element=> element.addEventListener("click", iconDelete));
-  });
-}
-
-/**
- * Holt die Task-Daten, trägt sie ins Formular ein und zeigt das Edit-Overlay.
- */
+/* ==================== EDIT-FORM LADEN ==================== */
 export function showEditForm(taskId) {
   const taskRef = ref(db, "tasks/" + taskId);
-  get(taskRef).then((snapshot) => {
+  get(taskRef).then(snapshot => {
     if (!snapshot.exists()) return;
     fillEditFormWithTask(snapshot.val());
-    document
-      .getElementById("edit-task-overlay")
-      .classList.replace("d-none", "d-flex");
-      document.getElementById("body").classList.add('overflow-hidden');
+    openEditOverlay();
   });
 }
+function openEditOverlay() {
+  document.getElementById("edit-task-overlay")
+    .classList.replace("d-none", "d-flex");
+  document.getElementById("body").classList.add("overflow-hidden");
+}
 
-/**
- * Validierungsfunktionen für Edit.
- */
+/* ========== VALIDIERUNG ========== */
 function validateEditTitle() {
-  const title = document.getElementById("editing-title").value.trim();
-  if (!title) {
-    showEditFieldError("editing-title", "Please enter a title!");
-    return false;
-  }
+  const v = getValue("editing-title");
+  if (!v) return showEditFieldError("editing-title", "Please enter a title!");
   return true;
 }
 function validateEditDueDate() {
-  const dueDateInput = document.getElementById("editing-date");
-  const dueDate = dueDateInput.value;
-  if (!dueDate) {
-    showEditFieldError("editing-date", "Please select a due date!");
-    return false;
-  }
-  // Prüfe, ob das Datum heute oder später ist
+  const dueDate = getValue("editing-date");
+  if (!dueDate) return showEditFieldError("editing-date", "Please select a due date!");
   const selected = new Date(dueDate + "T00:00:00");
-  const now = new Date();
-  now.setHours(0, 0, 0, 0); // Nur das Datum vergleichen, Uhrzeit ignorieren
-
-  if (selected < now) {
-    showEditFieldError("editing-date", "Due date cannot be in the past!");
-    return false;
-  }
+  const now = new Date(); now.setHours(0,0,0,0);
+  if (selected < now)
+    return showEditFieldError("editing-date", "Due date cannot be in the past!");
   return true;
 }
-
 function validateEditCategory() {
-  const category = document.getElementById("editing-category").value;
-  if (!category) {
-    showEditFieldError("editing-category", "Please select a category!");
-    return false;
-  }
+  const v = getValue("editing-category");
+  if (!v) return showEditFieldError("editing-category", "Please select a category!");
   clearEditFieldError("editing-category");
   return true;
 }
-
-function showEditFieldError(field, message) {
-  // Optional: Einblenden an passender Stelle
-  alert(message); // Oder ein eigenes Error-Feld!
+function getValue(id) {
+  const el = document.getElementById(id);
+  return el ? el.value.trim() : "";
 }
+function showEditFieldError(field, msg) { alert(msg); return false; }
+function clearEditFieldError(field) { }
+function clearAllEditFieldErrors() { }
 
-function clearEditFieldError(field) {
-  /* ...optional... */
-}
-function clearAllEditFieldErrors() {
-  /* ...optional... */
-}
-
-/**
- * Speichert die Änderungen in die DB.
- */
+/* ========== SPEICHERN ========== */
 function saveEditedTask() {
   const taskId = window.currentEditTaskId;
-  console.log("Speicherfunktion ausgeführt!");
-  if (!taskId) {
-    console.error("Keine TaskID!");
-    return;
-  }
-  const updates = {
-    title: document.getElementById("editing-title").value.trim(),
-    description: document.getElementById("editing-description").value.trim(),
-    dueDate: document.getElementById("editing-date").value,
+  if (!taskId) return console.error("Keine TaskID!");
+  const updates = collectUpdates();
+  update(ref(db, "tasks/" + taskId), updates)
+    .then(closeEditOverlay)
+    .catch(error => console.error("Fehler beim Speichern:", error));
+}
+function collectUpdates() {
+  return {
+    title: getValue("editing-title"),
+    description: getValue("editing-description"),
+    dueDate: getValue("editing-date"),
     priority: getSelectedEditPriority(),
-    category: document.getElementById("editing-category").value,
+    category: getValue("editing-category"),
     subtasks: getEditSubtasks(),
     assignedTo: getSelectedEditContactIds(),
   };
-  console.log("TaskID:", taskId);
-  console.log("Updates:", updates);
-  update(ref(db, "tasks/" + taskId), updates)
-    .then(() => {
-      // Das Overlay-Fenster schließen (sichtbar ausblenden)
-      document.getElementById("edit-task-overlay").classList.replace("d-flex", "d-none");
-      document.getElementById("body").classList.remove('overflow-hidden');
-    })
-    .catch((error) => {
-      console.error("Fehler beim Speichern:", error);
-    });
+}
+function closeEditOverlay() {
+  document.getElementById("edit-task-overlay")
+    .classList.replace("d-flex", "d-none");
+  document.getElementById("body").classList.remove("overflow-hidden");
 }
 
+/* ================== SUBTASKS ================== */
+function fillEditSubtasks(subtasks) {
+  const list = document.getElementById("editing-subtask-list");
+  if (!list) return;
+  list.innerHTML = "";
+  subtasks.forEach(st => addSubtaskListItem(st.task));
+}
 function getEditSubtasks() {
   const items = document.querySelectorAll("#editing-subtask-list li");
-  return Array.from(items).map((li) => ({
-    task: li.textContent.trim(),
-    checked: "false",
-  }));
+  return Array.from(items).map(li => ({ task: li.textContent.trim(), checked: "false" }));
 }
-
-// Subtasks hinzufügen/bearbeiten wie bei Add Task
-document
-  .getElementById("editing-subtask")
-  .addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-      addEditSubtask();
-      e.preventDefault();
-    }
-  });
-document
-  .querySelector("#edit-task-overlay .subtask-button")
-  .addEventListener("click", addEditSubtask);
-document
-  .getElementById("editing-subtask-list")
-  .addEventListener("click", function (e) {
-    if (e.target.tagName === "LI") {
-      editEditSubtask(e.target);
-    }
-  });
-
-function addEditSubtask() {
-  const input = document.getElementById("editing-subtask");
-  const value = input.value.trim();
-  if (!value) return;
+function addSubtaskListItem(text) {
   const list = document.getElementById("editing-subtask-list");
   const li = document.createElement("li");
-  li.textContent = value;
-  li.classList.add('subtask-list');
-  li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" id="delete-subtask" class="subtask-icon"></div>`;
+  li.textContent = text;
+  li.classList.add("subtask-list");
+  li.innerHTML += subtaskIconsHtml();
   list.appendChild(li);
-  input.value = "";
-  document.querySelectorAll("#edit-subtask").forEach(element=> element.addEventListener("click", iconEdit));
-  document.querySelectorAll("#delete-subtask").forEach(element=> element.addEventListener("click", iconDelete));
+  attachSubtaskEvents();
+}
+function subtaskIconsHtml() {
+  return `<div class="subtask-icons-div">
+    <img src="assets/img/edit.png" class="subtask-icon edit-subtask-btn">
+    <img src="assets/img/delete.png" class="subtask-icon delete-subtask-btn"></div>`;
+}
+function attachSubtaskEvents() {
+  document.querySelectorAll(".edit-subtask-btn").forEach(el =>
+    el.onclick = e => editEditSubtask(e.target.closest("li")));
+  document.querySelectorAll(".delete-subtask-btn").forEach(el =>
+    el.onclick = e => deleteSubtask(e.target.closest("li")));
 }
 
+/* ========== SUBTASKS HINZUFÜGEN UND BEARBEITEN ========== */
+function addEditSubtask() {
+  const input = document.getElementById("editing-subtask");
+  if (!input) return;
+  const value = input.value.trim();
+  if (!value) return;
+  addSubtaskListItem(value);
+  input.value = "";
+}
 function editEditSubtask(li) {
-  const oldValue = li.textContent;
+  if (!li) return;
+  const oldValue = li.firstChild.textContent || "";
   const input = document.createElement("input");
   input.type = "text";
   input.value = oldValue;
-  li.textContent = "";
+  li.innerHTML = "";
   li.appendChild(input);
   input.focus();
-
-  input.addEventListener("blur", finishEdit);
-  input.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") finishEdit();
-  });
-
-  function finishEdit() {
-    li.textContent = input.value.trim() || oldValue;
-    li.classList.add('subtask-list');
-    li.innerHTML += `<div class="subtask-icons-div"><img src="assets/img/edit.png" id="edit-subtask" class="subtask-icon"><img src="assets/img/delete.png" id="delete-subtask" class="subtask-icon"></div>`;
-    document.querySelectorAll("#edit-subtask").forEach(element=> element.addEventListener("click", iconEdit));
-    document.querySelectorAll("#delete-subtask").forEach(element=> element.addEventListener("click", iconDelete));
-  }
+  input.onblur = () => finishEditSubtask(li, input, oldValue);
+  input.onkeydown = e => { if (e.key === "Enter") finishEditSubtask(li, input, oldValue); };
 }
-
-function deleteSubtask(li){
-  li.remove();
+function finishEditSubtask(li, input, oldValue) {
+  const text = input.value.trim() || oldValue;
+  li.textContent = text;
+  li.classList.add("subtask-list");
+  li.innerHTML += subtaskIconsHtml();
+  attachSubtaskEvents();
 }
+function deleteSubtask(li) { if (li) li.remove(); }
 
-function iconEdit(e) {
-  if (e.target.parentNode.parentNode.tagName === "LI") {
-    editEditSubtask(e.target.parentNode.parentNode);
-  }
+/* ========== EVENT-INIT ========== */
+function initEditSubtaskEvents() {
+  const input = document.getElementById("editing-subtask");
+  if (input) input.onkeydown = e => {
+    if (e.key === "Enter") { addEditSubtask(); e.preventDefault(); }
+  };
+  const btn = document.querySelector("#edit-task-overlay .subtask-button");
+  if (btn) btn.onclick = addEditSubtask;
+  const list = document.getElementById("editing-subtask-list");
+  if (list) list.onclick = e => {
+    if (e.target.tagName === "LI") editEditSubtask(e.target);
+  };
 }
-
-function iconDelete(e){
-  if (e.target.parentNode.parentNode.tagName === "LI") {
-    deleteSubtask(e.target.parentNode.parentNode);
-  }
-}
+initEditSubtaskEvents();

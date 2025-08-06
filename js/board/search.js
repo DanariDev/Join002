@@ -1,25 +1,36 @@
 export function initSearch() {
-  document.getElementById('search-input').addEventListener('input', function () {
-    const searchValue = this.value.trim().toLowerCase();
-    const allTaskCards = document.querySelectorAll('.task-card');
-    let anyVisible = false;
-
-    allTaskCards.forEach(card => {
-      const title = card.querySelector('.task-title').textContent.toLowerCase();
-      const desc = card.querySelector('.task-desc').textContent.toLowerCase();
-      if (title.includes(searchValue) || desc.includes(searchValue)) {
-        card.style.display = '';
-        anyVisible = true;
-      } else {
-        card.style.display = 'none';
-      }
-    });
-
-    const noResultsMsg = document.getElementById('no-results-message');
-    if (searchValue && !anyVisible) {
-      noResultsMsg.style.display = 'flex';
+  const input = document.getElementById('search-input');
+  if (input) input.addEventListener('input', onSearchInput);
+}
+function onSearchInput(e) {
+  const searchValue = getSearchValue(e.target);
+  const allTaskCards = document.querySelectorAll('.task-card');
+  let anyVisible = filterTaskCards(allTaskCards, searchValue);
+  toggleNoResultsMsg(searchValue, anyVisible);
+}
+function getSearchValue(input) {
+  return input.value.trim().toLowerCase();
+}
+function filterTaskCards(cards, value) {
+  let anyVisible = false;
+  cards.forEach(card => {
+    if (cardMatches(card, value)) {
+      card.style.display = '';
+      anyVisible = true;
     } else {
-      noResultsMsg.style.display = 'none';
+      card.style.display = 'none';
     }
   });
+  return anyVisible;
+}
+function cardMatches(card, value) {
+  const title = card.querySelector('.task-title').textContent.toLowerCase();
+  const desc = card.querySelector('.task-desc').textContent.toLowerCase();
+  return title.includes(value) || desc.includes(value);
+}
+function toggleNoResultsMsg(searchValue, anyVisible) {
+  const noResultsMsg = document.getElementById('no-results-message');
+  if (!noResultsMsg) return;
+  if (searchValue && !anyVisible) noResultsMsg.style.display = 'flex';
+  else noResultsMsg.style.display = 'none';
 }
