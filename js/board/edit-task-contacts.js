@@ -1,16 +1,12 @@
-// edit-task-contacts.js
 import { db } from "../firebase/firebase-init.js";
 import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 import { renderSelectedEditInsignias as renderEditInsigniasBadges } from "./edit-contact-insignias.js";
 
-
 let allEditContacts = [];
 let selectedEditContacts = new Set();
 
-/**
- * Initialisiert das Kontakte-Dropdown für das Edit-Overlay.
- */
+/** Initializes the contacts dropdown for the edit overlay */
 export function initEditContactsDropdown() {
   const dropdownList = document.getElementById("editing-contacts-dropdown-list");
   if (!dropdownList) return;
@@ -25,25 +21,19 @@ export function initEditContactsDropdown() {
   });
 }
 
-/**
- * Markiert alle Kontakte, die per ID im Set stehen. Nach jedem Setzen neu rendern!
- */
+/** Sets the selected contacts by array of IDs */
 export function setSelectedEditContacts(ids) {
   selectedEditContacts = new Set(ids);
   renderEditContactsDropdown();
   renderSelectedEditInsignias();
 }
 
-/**
- * Gibt das Array der aktuell gewählten Kontakt-IDs zurück.
- */
+/** Returns an array of selected contact IDs */
 export function getSelectedEditContactIds() {
   return Array.from(selectedEditContacts);
 }
 
-/**
- * Zeichnet alle Kontakte als auswählbare Listenelemente ins Edit-Dropdown.
- */
+/** Renders all contacts as selectable rows in the dropdown */
 function renderEditContactsDropdown() {
   const dropdownList = document.getElementById("editing-contacts-dropdown-list");
   if (!dropdownList) return;
@@ -53,6 +43,7 @@ function renderEditContactsDropdown() {
   });
 }
 
+/** Creates a single row for a contact in the edit dropdown */
 function createEditContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
@@ -74,6 +65,7 @@ function createEditContactRow(contact) {
   return row;
 }
 
+/** Creates the initials circle for a contact */
 function createEditInitialsCircle(contact) {
   const initials = document.createElement("div");
   initials.className = "contact-initials";
@@ -82,6 +74,7 @@ function createEditInitialsCircle(contact) {
   return initials;
 }
 
+/** Creates the name element for a contact */
 function createEditContactName(contact) {
   const name = document.createElement("span");
   name.className = "contact-name";
@@ -89,6 +82,7 @@ function createEditContactName(contact) {
   return name;
 }
 
+/** Creates a checkbox for contact selection */
 function createEditCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -98,6 +92,7 @@ function createEditCheckbox(contact) {
   return checkbox;
 }
 
+/** Toggles a contact's selection in the edit dropdown */
 function handleEditContactToggle(id) {
   if (selectedEditContacts.has(id)) {
     selectedEditContacts.delete(id);
@@ -108,9 +103,7 @@ function handleEditContactToggle(id) {
   renderSelectedEditInsignias();
 }
 
-/**
- * Zeichnet die "Badges" der ausgewählten Kontakte im Edit-Overlay.
- */
+/** Renders the insignia badges for all selected contacts */
 export function renderSelectedEditInsignias() {
   const container = document.getElementById("selected-editing-contact-insignias");
   if (!container) return;
@@ -119,19 +112,7 @@ export function renderSelectedEditInsignias() {
   renderEditInsigniasBadges(selectedContacts, container);
 }
 
-
-function createEditInsignia(contact) {
-  const insignia = document.createElement("div");
-  insignia.className = "contact-insignia";
-  insignia.textContent = getInitials(contact.name);
-  insignia.title = contact.name;
-  insignia.style.background = getRandomColor(contact.name);
-  return insignia;
-}
-
-/**
- * Öffnen/Schließen-Logik fürs Edit-Dropdown.
- */
+/** Sets up the open/close logic for the edit contacts dropdown */
 export function setupEditDropdownOpenClose() {
   const dropdown = document.getElementById("editing-contacts-dropdown");
   const selected = document.getElementById("editing-contacts-selected");
@@ -157,9 +138,7 @@ export function setupEditDropdownOpenClose() {
   });
 }
 
-/**
- * Optional: Set zurücksetzen, z.B. beim Schließen des Overlays.
- */
+/** Resets all selected contacts (clears set and UI) */
 export function resetSelectedEditContacts() {
   selectedEditContacts.clear();
   renderEditContactsDropdown();

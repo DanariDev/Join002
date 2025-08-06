@@ -6,7 +6,7 @@ import { ref, get, onValue, update } from "https://www.gstatic.com/firebasejs/10
 import { deleteTask } from "./delete-task.js";
 import { renderProgressBar } from "./progress-bar.js";
 
-/* ========== Task ins Board rendern ========== */
+/** Renders a single task into its board column */
 export function renderTask(task) {
   const template = document.getElementById("task-template");
   const clone = template.content.cloneNode(true);
@@ -14,6 +14,8 @@ export function renderTask(task) {
   const col = getTaskCol(task.status);
   document.querySelector(col).appendChild(clone);
 }
+
+/** Returns the selector for the task's board column */
 function getTaskCol(status) {
   if (status === "in-progress") return ".in-progress-tasks";
   if (status === "await-feedback") return ".await-tasks";
@@ -21,7 +23,7 @@ function getTaskCol(status) {
   return ".to-do-tasks";
 }
 
-/* ========== Task-Eigenschaften setzen ========== */
+/** Sets all properties and data on the rendered task card */
 function setTaskProps(clone, task) {
   setLabel(clone, task);
   setTaskMainFields(clone, task);
@@ -30,25 +32,33 @@ function setTaskProps(clone, task) {
   setTaskInitials(clone, task);
   setCardProps(clone, task);
 }
+
+/** Sets main task fields (title, description) */
 function setTaskMainFields(clone, task) {
   clone.querySelector(".task-title").textContent = task.title || "";
   clone.querySelector(".task-desc").textContent = task.description || "";
 }
+
+/** Renders assigned contact initials to the board card */
 function setTaskInitials(clone, task) {
   const initialsDiv = clone.querySelector(".assigned-initials-board");
   renderAssignedContacts(task.assignedTo, initialsDiv);
 }
+
+/** Sets attributes for the task card (draggable, id) */
 function setCardProps(clone, task) {
   const card = clone.querySelector(".task-card");
   card.setAttribute("draggable", "true");
   card.dataset.taskId = task.id;
 }
 
-/* ========== Label-Style ========== */
+/** Sets the label style based on task category */
 function setLabel(clone, task) {
   const labelDiv = clone.querySelector(".task-label");
   applyCategoryStyle(labelDiv, task.category);
 }
+
+/** Applies the correct style to a category label */
 function applyCategoryStyle(labelEl, category) {
   if (category === "Technical Task") {
     labelEl.textContent = "Technical Task";
@@ -62,7 +72,7 @@ function applyCategoryStyle(labelEl, category) {
   }
 }
 
-/* ========== Prio-Icon ========== */
+/** Sets the correct priority icon for the task */
 function setPriority(clone, task) {
   const img = clone.querySelector(".priority-img");
   if (task.priority === "urgent") setPrioIcon(img, "urgent");
@@ -70,28 +80,35 @@ function setPriority(clone, task) {
   else if (task.priority === "low") setPrioIcon(img, "low");
   else clearPrioIcon(img);
 }
+
+/** Sets the icon src/alt for a given priority */
 function setPrioIcon(img, type) {
   img.src = `assets/img/${type}-btn-icon.png`;
   img.alt = capitalize(type);
 }
+
+/** Clears the priority icon */
 function clearPrioIcon(img) {
   img.src = ""; img.alt = "";
 }
+
+/** Uppercases the first letter of a string */
 function capitalize(str) { return str.charAt(0).toUpperCase() + str.slice(1); }
 
-/* ========== Fortschritt/Subtasks ========== */
+/** Calls progress bar renderer for subtasks */
 function setProgress(clone, task) {
   renderProgressBar(task.subtasks, clone);
 }
 
-/* ========== Card-Overlay öffnen beim Klick ========== */
+/** Opens the overlay when a card is clicked */
 document.addEventListener("click", onTaskCardClick);
+
 function onTaskCardClick(e) {
   const card = e.target.closest(".task-card");
   if (card) openTaskOverlay(card.dataset.taskId);
 }
 
-/* ========== Overlay-Funktionen ========== */
+/** Opens the overlay and fills its content for a given task */
 export function openTaskOverlay(taskId) {
   showTaskOverlay();
   const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
@@ -99,10 +116,14 @@ export function openTaskOverlay(taskId) {
   setTaskOverlayContent(card, taskId);
   setTaskOverlayHandlers(taskId);
 }
+
+/** Shows the overlay and disables scroll */
 function showTaskOverlay() {
   document.getElementById("task-overlay").classList.remove("d-none");
   document.getElementById("body").classList.add('overflow-hidden');
 }
+
+/** Fills the overlay fields with the task data */
 function setTaskOverlayContent(card, taskId) {
   fillOverlayMain(card, taskId);
   dueDateGenerate(taskId, formattedDate =>
@@ -112,15 +133,21 @@ function setTaskOverlayContent(card, taskId) {
   applyOverlayCategoryStyle();
   subtaskGenerate(taskId);
 }
+
+/** Fills main overlay fields (title, desc, prio, category) */
 function fillOverlayMain(card, taskId) {
   setPopupField('popup-category', `<span class="task-label">${card.querySelector(".task-label").textContent}</span>`);
   setPopupField('popup-title', `<h2>${card.querySelector(".task-title").textContent}</h2>`);
   setPopupField('popup-description', `<div>${card.querySelector(".task-desc").textContent || ""}</div>`);
   fillOverlayPrio(card);
 }
+
+/** Sets HTML for a given popup field */
 function setPopupField(id, html) {
   document.getElementById(id).innerHTML = html;
 }
+
+/** Fills the priority info in the overlay */
 function fillOverlayPrio(card) {
   const prioImg = card.querySelector(".priority-img");
   const prio = prioImg?.alt || "";
@@ -130,12 +157,14 @@ function fillOverlayPrio(card) {
     <img src="assets/img/${prio}-btn-icon.png" alt="">
     </div>`);
 }
+
+/** Ensures label style is applied for overlay as well */
 function applyOverlayCategoryStyle() {
   const labelSpan = document.querySelector("#popup-category .task-label");
   if (labelSpan) applyCategoryStyle(labelSpan, labelSpan.textContent);
 }
 
-/* ========== AssignedTo-Overlay ========== */
+/** Generates assigned contact initials for overlay */
 function assignedToGenerate(taskId) {
   const container = document.getElementById("popup-assigned");
   container.innerHTML = "";
@@ -155,7 +184,7 @@ function assignedToGenerate(taskId) {
   });
 }
 
-/* ========== DueDate-Overlay ========== */
+/** Fills the due date field with a formatted date */
 function dueDateGenerate(taskId, callback) {
   const tasksRef = ref(db, 'tasks/');
   onValue(tasksRef, snapshot => {
@@ -172,7 +201,7 @@ function formatDate(dateString) {
   return `${day}/${month}/${year}`;
 }
 
-/* ========== Subtasks-Overlay ========== */
+/** Loads and displays the task's subtasks in the overlay */
 function subtaskGenerate(taskId) {
   const list = document.getElementById('popup-subtasks');
   list.innerHTML = "";
@@ -182,6 +211,8 @@ function subtaskGenerate(taskId) {
     renderSubtaskList(list, task, taskId);
   });
 }
+
+/** Renders the list of subtasks (checkboxes) in overlay */
 function renderSubtaskList(list, task, taskId) {
   if (!task || !task.subtasks) {
     list.innerHTML = "<li>No subtasks available</li>";
@@ -201,6 +232,8 @@ function renderSingleSubtask(subtask, index, taskId) {
     </li>
   `;
 }
+
+/** Adds change events for subtask checkboxes (to update DB + progress) */
 function setSubtaskCheckboxEvents(list, taskId) {
   list.querySelectorAll('.custom-checkbox').forEach((cb, idx) => {
     cb.addEventListener('change', () => handleSubtaskChange(cb, idx, taskId));
@@ -223,7 +256,7 @@ function updateProgressBarAndList(subtasks, taskId) {
   subtaskGenerate(taskId);
 }
 
-/* ========== Overlay-Buttons ========== */
+/** Sets up handlers for overlay buttons (close, delete, edit) */
 function setTaskOverlayHandlers(taskId) {
   setOverlayBtn("overlay-close", () => closeOverlay());
   setOverlayBtn("delete-task-btn", () => deleteTask(taskId));
@@ -243,7 +276,7 @@ function openEdit(taskId) {
   openEditTaskOverlay(taskId);
 }
 
-/* ========== Kontakte Initialen ========== */
+/** Loads and renders assigned contact initials for a task */
 async function renderAssignedContacts(contactIds, container) {
   if (!contactIds || contactIds.length === 0) {
     container.innerHTML = '';

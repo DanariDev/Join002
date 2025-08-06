@@ -4,6 +4,7 @@ import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/fir
 import { showEditForm } from "./edit-task-form.js";
 import { resetSelectedEditContacts, getSelectedEditContactIds } from "./edit-task-contacts.js";
 
+/** Opens the edit task overlay for a given task ID */
 export function openEditTaskOverlay(taskId) {
   window.currentEditTaskId = taskId;
   resetSelectedEditContacts();
@@ -11,6 +12,7 @@ export function openEditTaskOverlay(taskId) {
   setEditTaskHandlers(taskId);
 }
 
+/** Sets all event handlers for the edit overlay */
 function setEditTaskHandlers(taskId) {
   const overlay = document.getElementById("edit-task-overlay");
   const closeBtn = document.getElementById("overlay-edit-close");
@@ -41,6 +43,7 @@ function setEditTaskHandlers(taskId) {
   };
 }
 
+/** Gets the current subtask list from the edit overlay */
 function getEditSubtasks() {
   const items = document.querySelectorAll("#editing-subtask-list li");
   return Array.from(items).map((li) => ({
@@ -49,6 +52,7 @@ function getEditSubtasks() {
   }));
 }
 
+/** Closes the edit overlay and resets selected contacts */
 function closeEditOverlay() {
   resetSelectedEditContacts();
   const overlay = document.getElementById("edit-task-overlay");
@@ -58,6 +62,7 @@ function closeEditOverlay() {
   }
 }
 
+/** Shows an error message under a field or in the overlay */
 function showEditFieldError(field, message) {
   const errorDiv = document.createElement("div");
   errorDiv.className = "error-message";
@@ -70,6 +75,7 @@ function showEditFieldError(field, message) {
   }
 }
 
+/** Shows a success message at the bottom of the overlay */
 function showSuccessMessage(message) {
   const successDiv = document.createElement("div");
   successDiv.className = "success-message";
@@ -81,6 +87,7 @@ function showSuccessMessage(message) {
   }
 }
 
+/** Removes all error and success messages in the overlay */
 function clearAllEditFieldErrors() {
   document.querySelectorAll(".error-message").forEach((el) => el.remove());
   document.querySelectorAll(".success-message").forEach((el) => el.remove());

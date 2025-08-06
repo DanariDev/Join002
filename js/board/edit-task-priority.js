@@ -1,3 +1,7 @@
+/** 
+ * Initializes click handlers for all priority buttons in the edit overlay.
+ * Only one button can be active at a time.
+ */
 export function initEditPriorityButtons() {
   document.querySelectorAll("#editing-priority-buttons .all-priority-btns").forEach(btn => {
     btn.onclick = () => {
@@ -9,6 +13,9 @@ export function initEditPriorityButtons() {
   });
 }
 
+/**
+ * Returns the selected priority value ("urgent", "medium", "low") for edit overlay.
+ */
 export function getSelectedEditPriority() {
   if (document.getElementById("editing-urgent-btn").classList.contains("active")) return "urgent";
   if (document.getElementById("editing-medium-btn").classList.contains("active")) return "medium";
