@@ -4,13 +4,16 @@ import { getInitials, getRandomColor } from "./contact-style.js";
 import { getContactById, createContactHTML, updateContactHTML } from "./load-contacts.js";
 import { setupContactClickEvents } from "./open-contact.js";
 
+// Reference to the "contacts" collection in Firebase
 const contactsRef = ref(db, "contacts");
 
+// Listen for added, changed, and removed contacts in real time
 onChildAdded(contactsRef, onContactAdded);
 onChildChanged(contactsRef, onContactChanged);
 onChildRemoved(contactsRef, onContactRemoved);
 
 /* ========== Child Added ========== */
+/** Adds a new contact element to the contact list when a contact is added in Firebase */
 function onContactAdded(snapshot) {
   const contact = withId(snapshot);
   if (document.getElementById(`contact-${contact.id}`)) return;
@@ -23,11 +26,14 @@ function onContactAdded(snapshot) {
 }
 
 /* ========== Child Changed ========== */
+/** Updates a contact element when the contact data changes in Firebase */
 function onContactChanged(snapshot) {
   const c = withId(snapshot);
   updateContactHTML(c);
   updateIfCurrentContact(c);
 }
+
+/** Updates the contact panel if the currently viewed contact was changed */
 async function updateIfCurrentContact(c) {
   const card = document.getElementById("showed-current-contact");
   if (card && card.dataset.contactId === c.id) {
@@ -37,19 +43,22 @@ async function updateIfCurrentContact(c) {
 }
 
 /* ========== Child Removed ========== */
+/** Removes the contact element from the list when the contact is deleted in Firebase */
 function onContactRemoved(snapshot) {
   const id = snapshot.key;
   const el = document.getElementById(`contact-${id}`);
   if (el) el.remove();
 }
 
-/* ========== Hilfsfunktionen ========== */
+/* ========== Helper Functions ========== */
+/** Adds the Firebase ID as 'id' property to the contact object */
 function withId(snapshot) {
   let c = snapshot.val();
   c.id = snapshot.key;
   return c;
 }
 
+/** Fills the contact detail panel with the contact's information */
 function fillContactPanel(c) {
   let i = document.getElementById("current-icon");
   let n = document.getElementById("current-name");
@@ -58,6 +67,8 @@ function fillContactPanel(c) {
   if (!i || !n || !m || !p) return;
   setContactPanelFields(i, n, m, p, c);
 }
+
+/** Sets all relevant fields in the contact panel (initials, name, mail, phone) */
 function setContactPanelFields(i, n, m, p, c) {
   i.textContent = getInitials(c.name);
   i.style.backgroundColor = getRandomColor(c.name);

@@ -11,14 +11,17 @@ export function renderSortedContacts(contacts, wrapper, createContactHTML, setup
   if (setupContactClickEvents) setupContactClickEvents();
 }
 
+/** Clears all children from the given wrapper */
 function clearWrapper(wrapper) {
   wrapper.innerHTML = "";
 }
 
+/** Sorts the contacts array alphabetically by contact name */
 function sortContacts(contacts) {
   contacts.sort((a, b) => a.name.localeCompare(b.name, 'de', { sensitivity: 'base' }));
 }
 
+/** Renders contacts grouped by their first letter with dividers */
 function renderGroupedContacts(contacts, wrapper, createContactHTML) {
   let currentLetter = null;
   contacts.forEach(contact => {
@@ -31,10 +34,12 @@ function renderGroupedContacts(contacts, wrapper, createContactHTML) {
   });
 }
 
+/** Returns the uppercase first letter of the contact's name */
 function getFirstLetter(contact) {
   return contact.name[0].toUpperCase();
 }
 
+/** Creates a divider element for a given letter */
 function createDivider(letter) {
   const divider = document.createElement("div");
   divider.className = "contact-divider";

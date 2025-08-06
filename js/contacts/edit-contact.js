@@ -4,11 +4,14 @@ import { ref, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/
 import { getInitials, getRandomColor } from "./contact-style.js";
 import { checkInput } from "../multiple-application/error-message.js"
 
+/** Opens the edit contact lightbox for a given contact ID */
 export async function openEditContactLightbox(id) {
   const contact = await getContactById(id);
   if (!contact) return;
   prepareEditLightbox(id, contact);
 }
+
+/** Prepares and shows the edit contact lightbox with contact data */
 function prepareEditLightbox(id, contact) {
   const lightbox = document.getElementById("lightbox");
   if (!lightbox) return;
@@ -17,33 +20,47 @@ function prepareEditLightbox(id, contact) {
   showEditLightbox();
   setupLightboxButtons(id);
 }
+
+/** Fills the edit form in the lightbox with contact data */
 function fillEditLightbox(contact) {
   setFieldValue("edit-name", contact.name);
   setFieldValue("edit-email", contact.email);
   setFieldValue("edit-phone", contact.phone);
   setEditIcon(contact.name);
 }
+
+/** Sets a value to an input field by ID */
 function setFieldValue(id, value) {
   const el = document.getElementById(id);
   if (el) el.value = value;
 }
+
+/** Sets the initials and color in the edit icon circle */
 function setEditIcon(name) {
   const icon = document.getElementById("edit-initial-circle");
   if (!icon) return;
   icon.textContent = getInitials(name);
   icon.style.backgroundColor = getRandomColor(name);
 }
+
+/** Shows the edit lightbox and removes errors/messages */
 function showEditLightbox() {
   removeInputErrors();
   removeAllErrorMessages();
   showLightboxElements();
 }
+
+/** Removes error styling from all input fields */
 function removeInputErrors() {
   Array.from(document.getElementsByTagName('input')).forEach(e => e.classList.remove("input-error"));
 }
+
+/** Removes all error messages from the edit form */
 function removeAllErrorMessages() {
   document.querySelectorAll(".error-message").forEach(d => d.textContent = "");
 }
+
+/** Makes the lightbox and overlay visible */
 function showLightboxElements() {
   const overlay = document.getElementById("lightbox-overlay");
   const lightbox = document.getElementById("lightbox");
@@ -53,6 +70,8 @@ function showLightboxElements() {
     lightbox.classList.add("show");
   }
 }
+
+/** Sets up all buttons inside the lightbox with their handlers */
 function setupLightboxButtons(id) {
   setupBtn("saveBtn", () => saveContactChanges(id));
   setupBtn("cancelBtn", closeEditLightbox);
@@ -60,10 +79,14 @@ function setupLightboxButtons(id) {
   setupBtn("deleteBtn", () => deleteContact(id));
   setupBtn("current-delete-responsive", () => deleteContact(id));
 }
+
+/** Assigns a function to a button (by ID or class) */
 function setupBtn(id, fn, isClass = false) {
   const btn = isClass ? document.querySelector(id) : document.getElementById(id);
   if (btn) btn.onclick = fn;
 }
+
+/** Saves the edited contact fields to Firebase */
 async function saveContactChanges(id) {
   const fields = getEditFields();
   let hasError = checkInput("edit-name", "edit-email", "edit-phone", null, null, null, null);
@@ -77,6 +100,8 @@ async function saveContactChanges(id) {
     showErrorMessage("Fehler beim Speichern!");
   }
 }
+
+/** Deletes the contact from Firebase by ID */
 async function deleteContact(id) {
   try {
     await remove(ref(db, `contacts/${id}`));
@@ -87,6 +112,8 @@ async function deleteContact(id) {
     showErrorMessage("Fehler beim Löschen!");
   }
 }
+
+/** Closes the edit lightbox and overlay */
 export function closeEditLightbox() {
   const overlay = document.getElementById("lightbox-overlay");
   const lightbox = document.getElementById("lightbox");
@@ -96,12 +123,18 @@ export function closeEditLightbox() {
     lightbox.classList.remove("show");
   }
 }
+
+/** Shows a success message in the confirmation window */
 function showSuccessMessage(message = "Contact saved!") {
   showMessage(message, false);
 }
+
+/** Shows an error message in the confirmation window */
 function showErrorMessage(message) {
   showMessage(message, true);
 }
+
+/** Shows a confirmation (success/error) message for 2 seconds */
 function showMessage(message, isError) {
   const confirmation = document.querySelector(".confirmation-window");
   if (!confirmation) return;
@@ -111,6 +144,8 @@ function showMessage(message, isError) {
   confirmation.style.display = "block";
   setTimeout(() => (confirmation.style.display = "none"), 2000);
 }
+
+/** Hides the contact card and right section panel */
 export function hideContactCard() {
   const rightSection = document.getElementById("right-section");
   const contactCard = document.getElementById("showed-current-contact");
@@ -120,6 +155,8 @@ export function hideContactCard() {
     contactCard.classList.remove("show");
   }
 }
+
+/** Collects the edited fields from the edit form */
 function getEditFields() {
   return {
     name: document.getElementById("edit-name")?.value,
@@ -127,6 +164,8 @@ function getEditFields() {
     phone: document.getElementById("edit-phone")?.value,
   };
 }
+
+/** Handles closing the lightbox if clicking outside of it */
 function handleOverlayClick(e) {
   const overlay = document.getElementById("lightbox-overlay");
   const lightbox = document.getElementById("lightbox");
@@ -142,11 +181,15 @@ function handleOverlayClick(e) {
     closeEditLightbox();
   }
 }
+
+/** Opens the responsive edit/delete menu */
 function responsiveEditDeleteMenuOpen(event) {
   showResponsiveBtns();
   hideResponsiveEditBtn();
   event.stopPropagation();
 }
+
+/** Shows the responsive edit/delete buttons */
 function showResponsiveBtns() {
   document.getElementById('current-btns-responsive').classList.remove('d-none');
   document.getElementById('body').classList.add('overflow-hidden');
@@ -154,9 +197,13 @@ function showResponsiveBtns() {
     document.getElementById('current-btns-responsive').classList.add('show');
   }, 1);
 }
+
+/** Hides the responsive edit button */
 function hideResponsiveEditBtn() {
   document.getElementById('responsive-small-edit').classList.add('d-none');
 }
+
+/** Closes the responsive edit/delete menu */
 function responsiveEditDeleteMenuClose() {
   document.getElementById('current-btns-responsive').classList.remove('show');
   setTimeout(() => {
@@ -167,6 +214,12 @@ function responsiveEditDeleteMenuClose() {
 }
 
 /* === EventListener === */
+
+/** Handles click outside the lightbox to close it */
 document.addEventListener("click", handleOverlayClick);
+
+/** Handles click on responsive small edit button to open menu */
 document.getElementById('responsive-small-edit').addEventListener("click", responsiveEditDeleteMenuOpen);
+
+/** Handles click on contacts main to close responsive menu */
 document.getElementById('contacts-main').addEventListener("click", responsiveEditDeleteMenuClose);

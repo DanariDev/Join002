@@ -8,6 +8,8 @@ export function getInitials(name) {
     .join("")
     .slice(0, 2);
 }
+
+/** Returns the uppercase first letter of a word */
 function getFirstLetter(word) {
   return word[0]?.toUpperCase() || "";
 }
@@ -21,16 +23,20 @@ export function getRandomColor(name) {
   const index = Math.abs(hash) % colors.length;
   return colors[index];
 }
+
+/** Returns the color palette for initials circles */
 function getColorPalette() {
   return [
-    "#29ABE2", // Blau
+    "#29ABE2", // Blue
     "#FF7A00", // Orange
-    "#2AD300", // Grün
-    "#FF5C5C", // Rot
-    "#6E52FF", // Lila
+    "#2AD300", // Green
+    "#FF5C5C", // Red
+    "#6E52FF", // Purple
     "#FC71FF", // Pink
   ];
 }
+
+/** Generates a numeric hash from the name string */
 function getNameHash(name) {
   let hash = 0;
   for (let i = 0; i < name.length; i++) {
