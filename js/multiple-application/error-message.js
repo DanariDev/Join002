@@ -1,3 +1,8 @@
+/**
+ * Runs validation checks for all specified fields.
+ * Returns true if any validation fails, false if all pass.
+ * Can also handle login error codes for feedback.
+ */
 export function checkInput(
   nameCheckValue = null, emailCheckValue = null, phoneCheckValue = null,
   passwordCheckValue = null, passwordRepeatCheckValue = null,
@@ -13,14 +18,26 @@ export function checkInput(
   if (errorCode) incorrectDataToAuthentication(emailCheckValue, passwordCheckValue, errorCode);
   return hasError;
 }
+
+/**
+ * Removes error styling and error text from the given input and error elements.
+ */
 function resetErrors(input, errors) {
   input.classList.remove("input-error");
   errors.forEach(e => e.textContent = "");
 }
+
+/**
+ * Adds error styling and sets the error message on the given elements.
+ */
 function showError(input, errorElem, message) {
   input.classList.add("input-error");
   errorElem.forEach(e => e.textContent = message);
 }
+
+/**
+ * Validates the name field: must not be empty.
+ */
 function nameCheck(id, hasError) {
   const input = document.getElementById(id);
   const error = document.querySelectorAll(".name-error");
@@ -28,6 +45,10 @@ function nameCheck(id, hasError) {
   if (!input.value.trim()) { showError(input, error, "Please enter your name."); hasError = true; }
   return hasError;
 }
+
+/**
+ * Validates the email field: must not be empty and must be a valid email.
+ */
 function emailCheck(id, hasError) {
   const input = document.getElementById(id);
   const error = document.querySelectorAll(".email-error");
@@ -37,6 +58,10 @@ function emailCheck(id, hasError) {
   else if (!/^\S+@\S+\.\S+$/.test(value)) { showError(input, error, "Invalid email address!"); hasError = true; }
   return hasError;
 }
+
+/**
+ * Validates the phone number field: must not be empty, must contain only digits (and optional +).
+ */
 function phoneCheck(id, hasError) {
   const input = document.getElementById(id);
   const error = document.querySelectorAll(".phone-error");
@@ -46,6 +71,10 @@ function phoneCheck(id, hasError) {
   else if (!/^[+]?\d+$/.test(value)) { showError(input, error, "Invalid phone number!"); hasError = true; }
   return hasError;
 }
+
+/**
+ * Validates the password field: must not be empty and at least 6 characters long.
+ */
 function passwordCheck(id, hasError) {
   const input = document.getElementById(id);
   const error = document.querySelectorAll(".password-error");
@@ -55,6 +84,10 @@ function passwordCheck(id, hasError) {
   else if (value.length < 6) { showError(input, error, "The password must be at least 6 characters long."); hasError = true; }
   return hasError;
 }
+
+/**
+ * Validates the password repeat field: must not be empty and must match the original password.
+ */
 function passwordRepeatCheck(id, hasError) {
   const input = document.getElementById(id);
   const error = document.querySelectorAll(".repeat-error");
@@ -65,6 +98,10 @@ function passwordRepeatCheck(id, hasError) {
   else if (value !== pw) { showError(input, error, "The passwords do not match."); hasError = true; }
   return hasError;
 }
+
+/**
+ * Validates the privacy policy checkbox: must be checked.
+ */
 function privacyCheckbox(id, hasError) {
   const checkbox = document.getElementById(id);
   const error = document.querySelectorAll(".checkbox-error");
@@ -72,6 +109,11 @@ function privacyCheckbox(id, hasError) {
   if (!checkbox.checked) { showError(checkbox, error, "Please accept the privacy policy."); hasError = true; }
   return hasError;
 }
+
+/**
+ * Handles authentication errors during login.
+ * Shows appropriate error message depending on the Firebase error code.
+ */
 function incorrectDataToAuthentication(emailId, pwId, code) {
   const emailInput = document.getElementById(emailId);
   const emailError = document.querySelectorAll(".email-error");
