@@ -29,7 +29,6 @@
     padding: 0;
 }
 
-
 .initials-task {
     width: 32px;
     height: 32px;
@@ -163,7 +162,6 @@
     display: block;
 }
 
-
 #editing-contacts-selected {
     display: flex;
     align-items: center;
@@ -237,13 +235,54 @@
     z-index: 1000;
 }
 
-.contacts-dropdown-list.show {
-    display: block;
+.contacts-dropdown-item input {
+    display: none;
 }
 
-.contacts-dropdown-list div {
-
+.contacts-dropdown-item label {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #333;
+    border-radius: 4px;
     cursor: pointer;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+.contacts-dropdown-item:hover .custom-checkbox+label {
+    border: 2px solid #333;
+}
+
+.contacts-dropdown-item input:checked+label {
+    background-color: var(--clr-700);
+}
+
+.contacts-dropdown-item input:checked+label::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    color: #000000;
+}
+
+.contacts-dropdown-item:hover {
+    background-color: var(--clr-700);
+    border-radius: 15px;
+    color: white;
+}
+
+.contacts-dropdown-item.selected {
+    background-color: var(--clr-700);
+    border-radius: 15px;
+    color: white;
+}
+
+.contacts-dropdown-list.show {
+    display: block;
 }
 
 li {
@@ -287,8 +326,8 @@ option {
     padding-left: 12px;
 }
 
-@keyframes coinSpin {
 
+@keyframes coinSpin {
     20% {
         transform: rotateY(360deg);
     }

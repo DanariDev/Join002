@@ -44,7 +44,7 @@ function createAddContactRow(contact) {
   row.appendChild(createAddInitialsCircle(contact));
   row.appendChild(createAddContactName(contact));
   row.appendChild(createAddCheckbox(contact));
-  row.addEventListener("click", function(e) {
+  row.addEventListener("click", function (e) {
     e.stopPropagation();
     if (e.target.tagName !== "INPUT") {
       handleAddContactToggle(contact.id);
@@ -71,9 +71,19 @@ function createAddContactName(contact) {
 function createAddCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
+  checkbox.className = "custom-checkbox";
+  checkbox.id = `checkbox-${contact.id}`; // Eindeutige ID für die Checkbox
   checkbox.checked = selectedAddContacts.has(contact.id);
   checkbox.addEventListener("change", () => handleAddContactToggle(contact.id));
-  return checkbox;
+
+  const label = document.createElement("label");
+  label.setAttribute("for", `checkbox-${contact.id}`); // Verknüpfung mit Checkbox
+  label.className = "custom-checkbox-label"; // Optional: Eigene Klasse für Styling
+
+  const container = document.createElement("div");
+  container.appendChild(checkbox);
+  container.appendChild(label);
+  return container;
 }
 
 function handleAddContactToggle(id) {

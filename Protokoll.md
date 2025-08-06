@@ -50,17 +50,9 @@
 
 ## ❗ Offene Aufgaben summary.html: 
  
-
-
-
 ## ❗ Summary:
 
-
-
- 
 ## ❗ Offene Aufgaben add-task.html: 
-
-
 
 ## ❗ Offene Aufgaben board.html: 
  - ✅Der hintergrund sollte nicht scrollbar sein sobald man im layout eine Task öffnet oder Editiert.
@@ -68,13 +60,10 @@
 
 ✅idee: das könnte mit html "overflow: none;" über javascript verknüpft werden (vermute ich). Dann müsste allerdings das ganze beim der function zum schließen wieder auf ✅"overflow: auto;" zurück.
 
-
 - ✅Der Add-Task Button, unserer Grid colum's (to Do, In Progress usw.) versucht im responsive Layout noch ein Add-Task Formular zu öffnen, wie in unserer Desktop ansicht. 
 - ✅board-add-task-overlay.js -> ca. Zeile 32
 
 ✅(Hier sollte es genauso gelöst werden wie wir es mit dem Großen Add-Task Button taten. Wenn Responsive, weiterleitung zu Add-Task.html.)
-
-
 
 ## ❗ Offene Aufgaben contacts.html:
 - ✅Nur im Responsive Layout: Wird im Responsive Layout ein geöffneter Kontakt gelöscht, wird hier eine Custom-Fehlermeldung und Fehlermeldungen in der Konsole angezeigt.
@@ -122,7 +111,7 @@ Ich habe "versucht", als hilfestellung die ungefähre Position der fehlerquelle 
 
  
 ## ❗ Offene Aufgaben add-task.html: 
-- Style anpassungen im Formular: 
+- ✅Style anpassungen im Formular: 
 Unter der rubrik "Assigned To:", müssen die checkboxen wie im board gestylt werden.
 Hier müssen auch die kontakte wenn sie ausgewählt werden, die hintergrundfarbe wie beim hovern beibehalten.
 
@@ -134,8 +123,8 @@ Hier müssen auch die kontakte wenn sie ausgewählt werden, die hintergrundfarbe
 - Im Edit Task fenster: 
 - - Es kann ein Datum aus der vergangenheit gewählt werden.
 - - Fehlermeldungen kommen hier noch über das Html anstatt unsere "error-massage".
-- - Assigned-To fehlt es an hover farben und checkbox styling.(Übernehme ich selber 👍)
-- - Category Feld ist im Design überlagert.(Übernehme ich selber 👍)
+- - ✅ Assigned-To fehlt es an hover farben und checkbox styling.(Übernehme ich selber 👍)
+- - ✅ Category Feld ist im Design überlagert.(Übernehme ich selber 👍)
 
 
 ## ❗ Offene Aufgaben contacts.html:

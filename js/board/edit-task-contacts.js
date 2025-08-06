@@ -62,9 +62,12 @@ function createEditContactRow(contact) {
   row.appendChild(createEditInitialsCircle(contact));
   row.appendChild(createEditContactName(contact));
   row.appendChild(createEditCheckbox(contact));
+  const label = document.createElement("label");
+  label.setAttribute("for", `contact-checkbox-${contact.id}`);
+  row.appendChild(label);
   row.addEventListener("click", function (e) {
     e.stopPropagation();
-    if (e.target.tagName !== "INPUT") {
+    if (e.target.tagName !== "INPUT" && e.target.tagName !== "LABEL") {
       handleEditContactToggle(contact.id);
     }
   });
@@ -89,6 +92,7 @@ function createEditContactName(contact) {
 function createEditCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
+  checkbox.className = "custom-checkbox";
   checkbox.checked = selectedEditContacts.has(contact.id);
   checkbox.addEventListener("change", () => handleEditContactToggle(contact.id));
   return checkbox;

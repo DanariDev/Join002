@@ -63,7 +63,7 @@ function filterContacts(filter) {
 }
 
 /**
- * Creates a DOM row element for a contact in the dropdown, including initials, name, checkbox, and click handler.
+ * Creates a DOM row element for a contact in the dropdown, including initials, name, checkbox, label, and click handler.
  */
 function createContactRow(contact) {
   const row = document.createElement("div");
@@ -73,14 +73,18 @@ function createContactRow(contact) {
   }
   row.appendChild(createInitialsCircle(contact));
   row.appendChild(createContactName(contact));
-  row.appendChild(createCheckbox(contact));
-  row.addEventListener("click", function(e) {
+  const checkbox = createCheckbox(contact);
+  row.appendChild(checkbox);
+  const label = document.createElement("label");
+  label.setAttribute("for", `contact-checkbox-${contact.id}`);
+  row.appendChild(label);
+  row.addEventListener("click", function (e) {
     e.stopPropagation();
-    if (e.target.tagName !== "INPUT") {
+    if (e.target.tagName !== "INPUT" && e.target.tagName !== "LABEL") {
       handleContactToggle(contact.id);
     }
   });
-  
+
   return row;
 }
 
@@ -106,11 +110,13 @@ function createContactName(contact) {
 }
 
 /**
- * Creates a checkbox for selecting the contact, with change handler.
+ * Creates a checkbox for selecting the contact, with change handler and associated label.
  */
 function createCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
+  checkbox.className = "custom-checkbox";
+  checkbox.id = `contact-checkbox-${contact.id}`;
   checkbox.checked = selectedContacts.has(contact.id);
   checkbox.addEventListener("change", () => handleContactToggle(contact.id));
   return checkbox;
@@ -146,7 +152,6 @@ function renderSelectedInsignias() {
     container.appendChild(more);
   }
 }
-
 
 /**
  * Creates an insignia element (badge) for a selected contact with initials and color.
@@ -194,13 +199,14 @@ export function setupDropdownOpenClose() {
     }
   });
 }
+
 export function resetSelectedContacts() {
   selectedContacts.clear();
   renderContactsDropdown();
   renderSelectedInsignias();
 }
 
-function openClose(event){
+function openClose(event) {
   const panel = document.getElementById("contacts-dropdown-panel");
   event.stopPropagation();
   panel.classList.toggle("d-none");
