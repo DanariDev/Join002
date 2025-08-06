@@ -2,6 +2,11 @@ import { auth, db } from "../firebase/firebase-init.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
+/**
+ * Initializes the personalized greeting.
+ * Sets the greeting time and fetches the user's name (if not guest).
+ * Returns a Promise so other loaders can wait for greeting to finish.
+ */
 export function initGreeting() {
   return new Promise(resolve => {
     setGreetingTime();
@@ -11,6 +16,10 @@ export function initGreeting() {
     });
   });
 }
+
+/**
+ * Sets the greeting message (Good morning/afternoon/evening) based on current time.
+ */
 function setGreetingTime() {
   const field = document.querySelector("#summary-greeting-time");
   const h = new Date().getHours();
@@ -18,6 +27,11 @@ function setGreetingTime() {
   else if (h < 18) field.textContent = "Good afternoon,";
   else field.textContent = "Good evening,";
 }
+
+/**
+ * Loads and displays the current user's name,
+ * or shows nothing if guest is logged in.
+ */
 async function setGreetingName(user) {
   const nameField = document.querySelector("#summary-greeting-name");
   if (user && user.email !== "guest@example.com") {
@@ -27,6 +41,11 @@ async function setGreetingName(user) {
     nameField.textContent = "";
   }
 }
+
+/**
+ * Hides the loader overlay after a short delay,
+ * and makes the body visible.
+ */
 function hideLoader() {
   const loader = document.getElementById('summary-loader');
   setTimeout(() => {
@@ -34,6 +53,11 @@ function hideLoader() {
     document.body.classList.remove('hidden');
   }, 900);
 }
+
+/**
+ * On DOMContentLoaded, initializes greeting, task counters, and deadline.
+ * Hides loader when everything is ready.
+ */
 window.addEventListener('DOMContentLoaded', async () => {
   await initGreeting();
   if (window.initTaskCounters) await window.initTaskCounters();
