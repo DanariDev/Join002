@@ -278,6 +278,7 @@
         <div class="edit-task-form-content">
           <label class="required" for="title">Title</label>
           <input class="title-input title-size" type="text" id="editing-title" placeholder="Enter a title" required />
+          <div id="error-edit-title" class="error-message"></div>
 
           <label for="description">Description</label>
           <textarea rows="4" cols="50" class="description-input" id="editing-description"
@@ -285,6 +286,7 @@
 
           <label class="required" for="date">Due date</label>
           <input class="date-input" type="date" id="editing-date" required />
+          <div id="error-edit-due-date" class="error-message"></div>
         </div>
         <div class="grey-bar"></div>
         <div class="edit-task-form-content">
@@ -317,6 +319,7 @@
             <option value="Technical Task">Technical Task</option>
             <option value="User Story">User Story</option>
           </select>
+          <div id="error-edit-category" class="error-message"></div>
           <label for="subtask">Subtasks</label>
           <div class="subtask-wrapper">
             <input type="text" id="editing-subtask" placeholder="Enter subtask" autocomplete="off" />
