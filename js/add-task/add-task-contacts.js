@@ -1,15 +1,11 @@
 import { db } from "../firebase/firebase-init.js";
-import {
-  ref,
-  onValue,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 
 let allContacts = [];
 let selectedContacts = new Set();
 
-// ...IMPORTS und Variablen wie gehabt...
-
+/** Initializes the contact dropdown and loads all contacts from DB */
 export function initContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   if (!dropdownList) return;
@@ -23,29 +19,20 @@ export function initContactsDropdown() {
   });
 }
 
-function setupContactsListener() {
-  const contactsRef = ref(db, "contacts");
-  onValue(contactsRef, (snapshot) => {
-    allContacts = [];
-    snapshot.forEach((child) => {
-      allContacts.push({ id: child.key, ...child.val() });
-    });
-    renderContactsDropdown();
-  });
-}
-
-// --- NEU: KURZE Funktionen zum Rendern der Dropdown-Liste ---
+/** Re-renders all contacts into the dropdown list */
 function renderContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   dropdownList.innerHTML = "";
   allContacts.forEach(contact => addContactRowToDropdown(dropdownList, contact));
 }
 
+/** Adds a single contact row to the dropdown */
 function addContactRowToDropdown(dropdownList, contact) {
   const row = createContactRow(contact);
   dropdownList.appendChild(row);
 }
 
+/** Creates a single row for a contact (with initials, name, checkbox) */
 function createContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
@@ -55,12 +42,14 @@ function createContactRow(contact) {
   return row;
 }
 
+/** Adds "selected" class if the contact is selected */
 function setSelectedClass(row, contactId) {
   if (selectedContacts.has(contactId)) {
     row.classList.add("selected");
   }
 }
 
+/** Fills a row with initials, name, checkbox, and label */
 function addContactRowContent(row, contact) {
   row.appendChild(createInitialsCircle(contact));
   row.appendChild(createContactName(contact));
@@ -68,12 +57,7 @@ function addContactRowContent(row, contact) {
   row.appendChild(createContactLabel(contact));
 }
 
-function createContactLabel(contact) {
-  const label = document.createElement("label");
-  label.setAttribute("for", `contact-checkbox-${contact.id}`);
-  return label;
-}
-
+/** Adds click event to a row for toggling selection */
 function addClickHandlerToContactRow(row, contact) {
   row.addEventListener("click", function (e) {
     e.stopPropagation();
@@ -83,7 +67,7 @@ function addClickHandlerToContactRow(row, contact) {
   });
 }
 
-// --- REST wie gehabt, da kurz genug ---
+/** Creates the initials circle for the contact */
 function createInitialsCircle(contact) {
   const initials = document.createElement("div");
   initials.className = "contact-initials";
@@ -92,6 +76,7 @@ function createInitialsCircle(contact) {
   return initials;
 }
 
+/** Creates a span with the contact's name */
 function createContactName(contact) {
   const name = document.createElement("span");
   name.className = "contact-name";
@@ -99,6 +84,7 @@ function createContactName(contact) {
   return name;
 }
 
+/** Creates a checkbox for the contact row */
 function createCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -109,15 +95,14 @@ function createCheckbox(contact) {
   return checkbox;
 }
 
-function filterContacts(filter) {
-  if (!filter) return allContacts;
-  return allContacts.filter(
-    (c) =>
-      c.name.toLowerCase().includes(filter.toLowerCase()) ||
-      (c.email && c.email.toLowerCase().includes(filter.toLowerCase()))
-  );
+/** Creates a label for the contact checkbox (for accessibility) */
+function createContactLabel(contact) {
+  const label = document.createElement("label");
+  label.setAttribute("for", `contact-checkbox-${contact.id}`);
+  return label;
 }
 
+/** Toggles contact selection (add/remove) */
 function handleContactToggle(id) {
   if (selectedContacts.has(id)) {
     selectedContacts.delete(id);
@@ -128,6 +113,7 @@ function handleContactToggle(id) {
   renderSelectedInsignias();
 }
 
+/** Shows up to 3 selected contacts as insignias (+X for more) */
 function renderSelectedInsignias() {
   const container = document.getElementById("selected-contact-insignias");
   container.innerHTML = "";
@@ -143,6 +129,7 @@ function renderSelectedInsignias() {
   }
 }
 
+/** Creates an insignia (badge) for a selected contact */
 function createInsignia(contact) {
   const insignia = document.createElement("div");
   insignia.className = "contact-insignia";
@@ -152,10 +139,12 @@ function createInsignia(contact) {
   return insignia;
 }
 
+/** Returns an array of currently selected contact IDs */
 export function getSelectedContactIds() {
   return Array.from(selectedContacts);
 }
 
+/** Sets up open/close events for the dropdown panel */
 export function setupDropdownOpenClose() {
   const dropdown = document.getElementById("contacts-dropdown");
   const selected = document.getElementById("contacts-selected");
@@ -178,12 +167,14 @@ export function setupDropdownOpenClose() {
   });
 }
 
+/** Resets selection and UI for contacts (e.g., after save/clear) */
 export function resetSelectedContacts() {
   selectedContacts.clear();
   renderContactsDropdown();
   renderSelectedInsignias();
 }
 
+/** Toggles the dropdown panel open/close */
 function openClose(event) {
   const panel = document.getElementById("contacts-dropdown-panel");
   event.stopPropagation();

@@ -1,16 +1,8 @@
-// add-task-priority.js
-
 /**
- * Initializes priority buttons: sets medium as default if none active, adds click listeners to toggle active classes exclusively.
- */
-// add-task-priority.js
-
-/**
- * Initializes priority buttons: sets medium as default if none active, adds click listeners.
+ * Initializes priority buttons: sets default, adds exclusive click handlers.
  */
 export function initPriorityButtons() {
   const btns = getPriorityButtons();
-
   setDefaultPriority(btns);
 
   btns.forEach(({ id, class: activeClass }) => {
@@ -19,6 +11,7 @@ export function initPriorityButtons() {
   });
 }
 
+/** Returns all priority button IDs and their "active" classes */
 function getPriorityButtons() {
   return [
     { id: "urgent-btn", class: "urgent-btn-active" },
@@ -27,6 +20,7 @@ function getPriorityButtons() {
   ];
 }
 
+/** Sets medium priority as default if none is active */
 function setDefaultPriority(btns) {
   const noneActive = btns.every(({ id, class: activeClass }) =>
     !document.getElementById(id).classList.contains(activeClass)
@@ -36,6 +30,7 @@ function setDefaultPriority(btns) {
   }
 }
 
+/** Handles exclusive active state for priority buttons */
 function setActivePriority(btns, clickedId, activeClass) {
   btns.forEach(({ id, class: otherClass }) => {
     document.getElementById(id).classList.remove(otherClass);
@@ -44,7 +39,7 @@ function setActivePriority(btns, clickedId, activeClass) {
 }
 
 /**
- * Returns the selected priority string based on active button class.
+ * Returns the selected priority value as string ("urgent", "medium", "low")
  */
 export function getSelectedPriority() {
   if (document.getElementById("urgent-btn").classList.contains("urgent-btn-active")) return "urgent";

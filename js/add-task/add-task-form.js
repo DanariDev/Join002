@@ -1,10 +1,9 @@
-// add-task-form.js
 import { saveTaskToDB } from "./add-task-save.js";
 import { getSelectedPriority } from "./add-task-priority.js";
 import { getSelectedContactIds } from "./add-task-contacts.js";
 
 /**
- * Initializes the add-task form.
+ * Initializes the add-task form: sets up create button event handler.
  */
 export function initAddTaskForm() {
   const createBtn = document.getElementById("create-task-btn");
@@ -16,6 +15,7 @@ export function initAddTaskForm() {
   newBtn.addEventListener("click", handleFormSubmit);
 }
 
+/** Handles form submit: validates, then saves the task */
 function handleFormSubmit(event) {
   event.preventDefault();
   clearAllFieldErrors();
@@ -27,11 +27,13 @@ function handleFormSubmit(event) {
   if (valid) saveTaskToDB(collectTaskData());
 }
 
+/** Shows an error message below a form field */
 function showFieldError(field, message) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) errorDiv.textContent = message;
 }
 
+/** Validates the title field */
 function validateTitle() {
   const title = document.getElementById("title").value.trim();
   if (!title) {
@@ -41,6 +43,7 @@ function validateTitle() {
   return true;
 }
 
+/** Validates the due date field */
 function validateDueDate() {
   const dueDate = document.getElementById("due-date").value;
   if (!dueDate) {
@@ -50,6 +53,7 @@ function validateDueDate() {
   return true;
 }
 
+/** Validates the category field */
 function validateCategory() {
   const category = document.getElementById("category").value;
   if (!category) {
@@ -60,17 +64,20 @@ function validateCategory() {
   return true;
 }
 
+/** Clears the error message for a field */
 function clearFieldError(field) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) errorDiv.textContent = "";
 }
 
+/** Clears all form field error messages */
 function clearAllFieldErrors() {
   clearFieldError("title");
   clearFieldError("due-date");
 }
 
-/* --- Subtask-Logik modular --- */
+/* --- Subtask logic --- */
+/** Handles Enter key in subtask input */
 function handleSubtaskInputKey(event) {
   if (event.key === "Enter") {
     addSubtask();
@@ -78,10 +85,12 @@ function handleSubtaskInputKey(event) {
   }
 }
 
+/** Handles add subtask button click */
 function handleSubtaskButtonClick() {
   addSubtask();
 }
 
+/** Handles clicking on subtask list for editing */
 function handleSubtaskListClick(e) {
   if (e.target.tagName === "LI") {
     editSubtask(e.target);
@@ -93,6 +102,7 @@ document.getElementById("subtask").addEventListener("keydown", handleSubtaskInpu
 document.querySelector(".subtask-button").addEventListener("click", handleSubtaskButtonClick);
 document.getElementById("subtask-list").addEventListener("click", handleSubtaskListClick);
 
+/** Adds a new subtask from input */
 function addSubtask() {
   const input = document.getElementById("subtask");
   const value = input.value.trim();
@@ -104,6 +114,7 @@ function addSubtask() {
   addSubtaskIconsListeners(li);
 }
 
+/** Creates a subtask list item element */
 function createSubtaskListItem(value) {
   const li = document.createElement("li");
   li.textContent = value;
@@ -112,6 +123,7 @@ function createSubtaskListItem(value) {
   return li;
 }
 
+/** Returns HTML for subtask edit/delete icons */
 function getSubtaskIconsHTML() {
   return `<div class="subtask-icons-div">
     <img src="assets/img/edit.png" class="subtask-icon edit-subtask">
@@ -119,21 +131,25 @@ function getSubtaskIconsHTML() {
   </div>`;
 }
 
+/** Adds listeners for edit/delete icons to a subtask */
 function addSubtaskIconsListeners(li) {
   li.querySelector(".edit-subtask").addEventListener("click", iconEdit);
   li.querySelector(".delete-subtask").addEventListener("click", iconDelete);
 }
 
+/** Handler for edit icon click */
 function iconEdit(e) {
   const li = e.target.closest("li");
   if (li) editSubtask(li);
 }
 
+/** Handler for delete icon click */
 function iconDelete(e) {
   const li = e.target.closest("li");
   if (li) deleteSubtask(li);
 }
 
+/** Enables editing a subtask inline */
 function editSubtask(li) {
   const oldValue = li.firstChild.textContent || li.textContent;
   const input = document.createElement("input");
@@ -149,6 +165,7 @@ function editSubtask(li) {
   });
 }
 
+/** Finishes subtask edit and updates the DOM */
 function finishEdit(li, input, oldValue) {
   const value = input.value.trim() || oldValue;
   li.textContent = value;
@@ -157,10 +174,12 @@ function finishEdit(li, input, oldValue) {
   addSubtaskIconsListeners(li);
 }
 
+/** Deletes a subtask from the list */
 function deleteSubtask(li) {
   li.remove();
 }
 
+/** Collects all form values and returns a task object */
 function collectTaskData() {
   return {
     title: document.getElementById("title").value.trim(),
@@ -174,6 +193,7 @@ function collectTaskData() {
   };
 }
 
+/** Gets all subtasks from the DOM as objects */
 function getSubtasks() {
   const items = document.querySelectorAll("#subtask-list li");
   return Array.from(items).map(li => ({

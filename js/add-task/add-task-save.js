@@ -1,16 +1,11 @@
-// add-task-save.js
 import { db } from "../firebase/firebase-init.js";
-import {
-  ref,
-  push,
-  set,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getSelectedPriority } from "./add-task-priority.js";
 import { resetSelectedContacts } from "./add-task-contacts.js";
 import { closeBoardOverlay } from "../board/board-add-task-overlay.js"
 
 /**
- * Saves a task object to Firebase Realtime Database.
+ * Saves a task object to Firebase and resets form/UI after success.
  */
 export async function saveTaskToDB(task) {
   try {
@@ -23,12 +18,14 @@ export async function saveTaskToDB(task) {
   }
 }
 
+/** Pushes the new task object into Firebase DB */
 async function pushTaskToDB(task) {
   const tasksRef = ref(db, "tasks");
   const newTaskRef = push(tasksRef);
   await set(newTaskRef, task);
 }
 
+/** Redirects or closes overlay based on current page */
 function handleRedirects() {
   getPathElements().forEach(element => {
     if (element == 'add-task.html') {
@@ -42,10 +39,12 @@ function handleRedirects() {
   });
 }
 
+/** Splits pathname to check where we are */
 function getPathElements() {
   return window.location.pathname.split('/').filter(Boolean);
 }
 
+/** Shows success message (green) */
 function showSuccess(msg) {
   const box = document.getElementById("success-message");
   if (!box) return;
@@ -54,6 +53,7 @@ function showSuccess(msg) {
   setTimeout(() => box.classList.add("d-none"), 2500);
 }
 
+/** Shows error message (red) */
 function showError(msg) {
   const box = document.getElementById("error-message-popup");
   if (!box) return;
@@ -63,7 +63,7 @@ function showError(msg) {
 }
 
 /**
- * Resets the form and UI fields.
+ * Resets the form and all fields, errors, subtasks and contacts.
  */
 export function clearForm() {
   resetFormFields();
@@ -74,11 +74,13 @@ export function clearForm() {
   resetSelectedContacts();
 }
 
+/** Resets form fields via form.reset() */
 function resetFormFields() {
   const form = document.getElementById("add-task-form");
   if (form) form.reset();
 }
 
+/** Sets date input to today */
 function resetDateInput() {
   const dateInput = document.getElementById("due-date");
   if (dateInput) {
@@ -88,27 +90,31 @@ function resetDateInput() {
   }
 }
 
+/** Resets all priority buttons, sets medium as default */
 function resetPriorityButtons() {
   document.querySelectorAll('.all-priority-btns')
     .forEach(btn => btn.classList.remove('low-btn-active', 'medium-btn-active', 'urgent-btn-active'));
   document.getElementById('medium-btn').classList.add('medium-btn-active');
 }
 
+/** Clears the subtask list in the form */
 function clearSubtasks() {
   const subtaskList = document.getElementById("subtask-list");
   if (subtaskList) subtaskList.innerHTML = "";
 }
 
+/** Clears all field error messages */
 function clearAllErrors() {
   setErrorText('error-title', "");
   setErrorText('error-due-date', "");
   setErrorText('error-category', "");
 }
 
+/** Sets error message for a given field */
 function setErrorText(id, value) {
   const el = document.getElementById(id);
   if (el) el.innerText = value;
 }
 
-// Event: Clear-Button
+// Event: Clear-Button resets all form fields and UI
 document.getElementById('clear-btn').addEventListener('click', clearForm);
