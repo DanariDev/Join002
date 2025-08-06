@@ -53,16 +53,18 @@
 .confirmation-window {
   position: fixed;
   top: 32px;
+  left: 50%;
+  transform: translateX(-50%);
   display: none;
   background-color: var(--clr-700);
   color: white;
-  padding: 12px;
+  padding: 12px 32px;
   border-radius: 16px;
   font-size: 20px;
-  margin-left: 232px;
-  justify-self: center;
-  top: 45%;
+  z-index: 9999;
+  /* margin-left, top: 45% usw. entfernen! */
 }
+
 
 .especially-for-board {
   z-index: 9999;
