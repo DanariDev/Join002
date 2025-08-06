@@ -4,15 +4,8 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-aut
 import { getDatabase } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
 /**
- * Configuration object for Firebase initialization
- * @constant {Object} firebaseConfig
- * @property {string} apiKey - Firebase API key
- * @property {string} authDomain - Firebase authentication domain
- * @property {string} databaseURL - Firebase Realtime Database URL
- * @property {string} projectId - Firebase project ID
- * @property {string} storageBucket - Firebase storage bucket
- * @property {string} messagingSenderId - Firebase messaging sender ID
- * @property {string} appId - Firebase app ID
+ * Configuration object for Firebase initialization.
+ * Stores all project credentials and connection details.
  */
 const firebaseConfig = {
   apiKey: "AIzaSyC9E1VrPVQN6yOrmKyBj9XsqXH4OxqEJys",
@@ -25,19 +18,16 @@ const firebaseConfig = {
 };
 
 /**
- * Initializes the Firebase app with the provided configuration
- * @constant {Object} app
+ * Initializes the Firebase app with the provided configuration.
  */
 const app = initializeApp(firebaseConfig);
 
 /**
- * Firebase Authentication instance
- * @constant {Object} auth
+ * Firebase Authentication instance, used for all user authentication actions.
  */
 export const auth = getAuth(app);
 
 /**
- * Firebase Realtime Database instance
- * @constant {Object} db
+ * Firebase Realtime Database instance, used for all app data storage and queries.
  */
 export const db = getDatabase(app);

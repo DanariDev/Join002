@@ -1,3 +1,7 @@
+/**
+ * Initializes the topbar user menu:
+ * Sets up menu toggle, logout, and click-outside-to-close logic.
+ */
 export function setupTopbarMenu() {
   const userIcon = document.querySelector('.topbar-user');
   const menu = document.getElementById('menuID');
@@ -8,6 +12,9 @@ export function setupTopbarMenu() {
   setupOutsideClick(menu, userIcon);
 }
 
+/**
+ * Handles toggling the user menu when the user icon is clicked.
+ */
 function setupUserIcon(userIcon, menu) {
   userIcon.addEventListener('click', e => {
     e.stopPropagation();
@@ -15,6 +22,10 @@ function setupUserIcon(userIcon, menu) {
     menu.classList.toggle('d-flex');
   });
 }
+
+/**
+ * Handles logout: clears storage and redirects to login page.
+ */
 function setupLogoutBtn(logoutBtn) {
   logoutBtn.addEventListener('click', () => {
     localStorage.clear();
@@ -22,6 +33,10 @@ function setupLogoutBtn(logoutBtn) {
     window.location.href = 'index.html';
   });
 }
+
+/**
+ * Closes the menu if the user clicks outside of it (anywhere else on the page).
+ */
 function setupOutsideClick(menu, userIcon) {
   document.addEventListener('click', e => {
     if (!menu.contains(e.target) && !userIcon.contains(e.target)) {
