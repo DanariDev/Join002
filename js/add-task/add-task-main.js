@@ -5,11 +5,12 @@ import { setupDropdownOpenClose, initContactsDropdown } from "./add-task-contact
 
 /**
  * Initializes all modules for the add-task page on DOM ready.
+ * Calls all necessary init functions when the DOM is fully loaded.
  */
 window.addEventListener("DOMContentLoaded", () => {
   initPriorityButtons();
   setupDropdownOpenClose();
-  initContactsDropdown();         
-  initDueDateInput();      
+  initContactsDropdown();
+  initDueDateInput();
   initAddTaskForm();
 });

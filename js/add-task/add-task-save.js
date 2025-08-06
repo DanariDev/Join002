@@ -6,6 +6,8 @@ import { closeBoardOverlay } from "../board/board-add-task-overlay.js"
 
 /**
  * Saves a task object to Firebase and resets form/UI after success.
+ * @param {Object} task - The task object to save.
+ * @returns {Promise<void>}
  */
 export async function saveTaskToDB(task) {
   try {
@@ -18,14 +20,20 @@ export async function saveTaskToDB(task) {
   }
 }
 
-/** Pushes the new task object into Firebase DB */
+/**
+ * Pushes the new task object into Firebase DB.
+ * @param {Object} task - The task object to push.
+ * @returns {Promise<void>}
+ */
 async function pushTaskToDB(task) {
   const tasksRef = ref(db, "tasks");
   const newTaskRef = push(tasksRef);
   await set(newTaskRef, task);
 }
 
-/** Redirects or closes overlay based on current page */
+/**
+ * Redirects or closes overlay based on current page.
+ */
 function handleRedirects() {
   getPathElements().forEach(element => {
     if (element == 'add-task.html') {
@@ -39,12 +47,18 @@ function handleRedirects() {
   });
 }
 
-/** Splits pathname to check where we are */
+/**
+ * Splits pathname to check where we are.
+ * @returns {Array<string>} Array of path elements.
+ */
 function getPathElements() {
   return window.location.pathname.split('/').filter(Boolean);
 }
 
-/** Shows success message (green) */
+/**
+ * Shows success message (green).
+ * @param {string} msg - The message to display.
+ */
 function showSuccess(msg) {
   const box = document.getElementById("success-message");
   if (!box) return;
@@ -53,7 +67,10 @@ function showSuccess(msg) {
   setTimeout(() => box.classList.add("d-none"), 2500);
 }
 
-/** Shows error message (red) */
+/**
+ * Shows error message (red).
+ * @param {string} msg - The error message to display.
+ */
 function showError(msg) {
   const box = document.getElementById("error-message-popup");
   if (!box) return;
@@ -74,13 +91,17 @@ export function clearForm() {
   resetSelectedContacts();
 }
 
-/** Resets form fields via form.reset() */
+/**
+ * Resets form fields via form.reset().
+ */
 function resetFormFields() {
   const form = document.getElementById("add-task-form");
   if (form) form.reset();
 }
 
-/** Sets date input to today */
+/**
+ * Sets date input to today.
+ */
 function resetDateInput() {
   const dateInput = document.getElementById("due-date");
   if (dateInput) {
@@ -90,27 +111,37 @@ function resetDateInput() {
   }
 }
 
-/** Resets all priority buttons, sets medium as default */
+/**
+ * Resets all priority buttons, sets medium as default.
+ */
 function resetPriorityButtons() {
   document.querySelectorAll('.all-priority-btns')
     .forEach(btn => btn.classList.remove('low-btn-active', 'medium-btn-active', 'urgent-btn-active'));
   document.getElementById('medium-btn').classList.add('medium-btn-active');
 }
 
-/** Clears the subtask list in the form */
+/**
+ * Clears the subtask list in the form.
+ */
 function clearSubtasks() {
   const subtaskList = document.getElementById("subtask-list");
   if (subtaskList) subtaskList.innerHTML = "";
 }
 
-/** Clears all field error messages */
+/**
+ * Clears all field error messages.
+ */
 function clearAllErrors() {
   setErrorText('error-title', "");
   setErrorText('error-due-date', "");
   setErrorText('error-category', "");
 }
 
-/** Sets error message for a given field */
+/**
+ * Sets error message for a given field.
+ * @param {string} id - The element ID.
+ * @param {string} value - The error message.
+ */
 function setErrorText(id, value) {
   const el = document.getElementById(id);
   if (el) el.innerText = value;

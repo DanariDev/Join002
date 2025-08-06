@@ -15,7 +15,10 @@ export function initAddTaskForm() {
   newBtn.addEventListener("click", handleFormSubmit);
 }
 
-/** Handles form submit: validates, then saves the task */
+/**
+ * Handles form submission: validates fields, then saves the task.
+ * @param {Event} event - The submit event.
+ */
 function handleFormSubmit(event) {
   event.preventDefault();
   clearAllFieldErrors();
@@ -27,13 +30,20 @@ function handleFormSubmit(event) {
   if (valid) saveTaskToDB(collectTaskData());
 }
 
-/** Shows an error message below a form field */
+/**
+ * Shows an error message below a form field.
+ * @param {string} field - The field name.
+ * @param {string} message - The error message.
+ */
 function showFieldError(field, message) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) errorDiv.textContent = message;
 }
 
-/** Validates the title field */
+/**
+ * Validates the title field.
+ * @returns {boolean} True if valid, false otherwise.
+ */
 function validateTitle() {
   const title = document.getElementById("title").value.trim();
   if (!title) {
@@ -43,21 +53,27 @@ function validateTitle() {
   return true;
 }
 
-/** Validates the due date field */
+/**
+ * Validates the due date field.
+ * @returns {boolean} True if valid, false otherwise.
+ */
 function validateDueDate() {
   const dueDate = document.getElementById("due-date").value;
   if (!dueDate) {
     showFieldError("due-date", "Please select a due date!");
     return false;
   }
-  if(dueDate<getTodayDateString()){
+  if (dueDate < getTodayDateString()) {
     showFieldError("due-date", "Due date cannot be in the past!");
     return false;
   }
   return true;
 }
 
-/** Validates the category field */
+/**
+ * Validates the category field.
+ * @returns {boolean} True if valid, false otherwise.
+ */
 function validateCategory() {
   const category = document.getElementById("category").value;
   if (!category) {
@@ -68,21 +84,28 @@ function validateCategory() {
   return true;
 }
 
-/** Clears the error message for a field */
+/**
+ * Clears the error message for a field.
+ * @param {string} field - The field name.
+ */
 function clearFieldError(field) {
   const errorDiv = document.getElementById(`error-${field}`);
   if (errorDiv) errorDiv.textContent = "";
 }
 
-/** Clears all form field error messages */
+/**
+ * Clears all form field error messages.
+ */
 function clearAllFieldErrors() {
   clearFieldError("title");
   clearFieldError("due-date");
   clearFieldError("category");
 }
 
-/* --- Subtask logic --- */
-/** Handles Enter key in subtask input */
+/**
+ * Handles Enter key in subtask input.
+ * @param {KeyboardEvent} event - The keyboard event.
+ */
 function handleSubtaskInputKey(event) {
   if (event.key === "Enter") {
     addSubtask();
@@ -90,24 +113,30 @@ function handleSubtaskInputKey(event) {
   }
 }
 
-/** Handles add subtask button click */
+/**
+ * Handles add subtask button click.
+ */
 function handleSubtaskButtonClick() {
   addSubtask();
 }
 
-/** Handles clicking on subtask list for editing */
+/**
+ * Handles clicking on subtask list for editing.
+ * @param {MouseEvent} e - The click event.
+ */
 function handleSubtaskListClick(e) {
   if (e.target.tagName === "LI") {
     editSubtask(e.target);
   }
 }
 
-/* --- Event-Listener initialisieren --- */
 document.getElementById("subtask").addEventListener("keydown", handleSubtaskInputKey);
 document.querySelector(".subtask-button").addEventListener("click", handleSubtaskButtonClick);
 document.getElementById("subtask-list").addEventListener("click", handleSubtaskListClick);
 
-/** Adds a new subtask from input */
+/**
+ * Adds a new subtask from input to the subtask list.
+ */
 function addSubtask() {
   const input = document.getElementById("subtask");
   const value = input.value.trim();
@@ -119,7 +148,11 @@ function addSubtask() {
   addSubtaskIconsListeners(li);
 }
 
-/** Creates a subtask list item element */
+/**
+ * Creates a subtask list item element.
+ * @param {string} value - The subtask text.
+ * @returns {HTMLLIElement} The list item element.
+ */
 function createSubtaskListItem(value) {
   const li = document.createElement("li");
   li.textContent = value;
@@ -128,7 +161,10 @@ function createSubtaskListItem(value) {
   return li;
 }
 
-/** Returns HTML for subtask edit/delete icons */
+/**
+ * Returns HTML for subtask edit/delete icons.
+ * @returns {string} The icons HTML string.
+ */
 function getSubtaskIconsHTML() {
   return `<div class="subtask-icons-div">
     <img src="assets/img/edit.png" class="subtask-icon edit-subtask">
@@ -136,25 +172,37 @@ function getSubtaskIconsHTML() {
   </div>`;
 }
 
-/** Adds listeners for edit/delete icons to a subtask */
+/**
+ * Adds listeners for edit/delete icons to a subtask.
+ * @param {HTMLLIElement} li - The list item element.
+ */
 function addSubtaskIconsListeners(li) {
   li.querySelector(".edit-subtask").addEventListener("click", iconEdit);
   li.querySelector(".delete-subtask").addEventListener("click", iconDelete);
 }
 
-/** Handler for edit icon click */
+/**
+ * Handler for edit icon click.
+ * @param {MouseEvent} e - The click event.
+ */
 function iconEdit(e) {
   const li = e.target.closest("li");
   if (li) editSubtask(li);
 }
 
-/** Handler for delete icon click */
+/**
+ * Handler for delete icon click.
+ * @param {MouseEvent} e - The click event.
+ */
 function iconDelete(e) {
   const li = e.target.closest("li");
   if (li) deleteSubtask(li);
 }
 
-/** Enables editing a subtask inline */
+/**
+ * Enables editing a subtask inline.
+ * @param {HTMLLIElement} li - The list item element.
+ */
 function editSubtask(li) {
   const oldValue = li.firstChild.textContent || li.textContent;
   const input = document.createElement("input");
@@ -170,7 +218,12 @@ function editSubtask(li) {
   });
 }
 
-/** Finishes subtask edit and updates the DOM */
+/**
+ * Finishes subtask edit and updates the DOM.
+ * @param {HTMLLIElement} li - The list item element.
+ * @param {HTMLInputElement} input - The input element.
+ * @param {string} oldValue - The previous value.
+ */
 function finishEdit(li, input, oldValue) {
   const value = input.value.trim() || oldValue;
   li.textContent = value;
@@ -179,12 +232,18 @@ function finishEdit(li, input, oldValue) {
   addSubtaskIconsListeners(li);
 }
 
-/** Deletes a subtask from the list */
+/**
+ * Deletes a subtask from the list.
+ * @param {HTMLLIElement} li - The list item element.
+ */
 function deleteSubtask(li) {
   li.remove();
 }
 
-/** Collects all form values and returns a task object */
+/**
+ * Collects all form values and returns a task object.
+ * @returns {Object} The task object.
+ */
 function collectTaskData() {
   return {
     title: document.getElementById("title").value.trim(),
@@ -198,7 +257,10 @@ function collectTaskData() {
   };
 }
 
-/** Gets all subtasks from the DOM as objects */
+/**
+ * Gets all subtasks from the DOM as objects.
+ * @returns {Array<Object>} Array of subtask objects.
+ */
 function getSubtasks() {
   const items = document.querySelectorAll("#subtask-list li");
   return Array.from(items).map(li => ({
@@ -207,7 +269,10 @@ function getSubtasks() {
   }));
 }
 
-/** Gets today's date as YYYY-MM-DD string */
+/**
+ * Gets today's date as a YYYY-MM-DD string.
+ * @returns {string} Today's date in ISO format.
+ */
 function getTodayDateString() {
   const today = new Date();
   return today.toISOString().split('T')[0];
