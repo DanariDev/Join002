@@ -61,10 +61,6 @@ Ich konnte auch keinen fehler mehr festellen. Keine ahnung aber ist wohl erledig
 
 ## ❗❗❗❗❗❗❗ Offene Aufgaben: ❗❗❗❗❗❗❗
 
-## Board Leeres Feld kleine card mit no Task oder so
-
-
-
 
 ## (❗ Offene? ✅ Keine?) Aufgaben legal.html und privacy-policy.html:
 
