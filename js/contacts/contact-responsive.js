@@ -2,14 +2,26 @@ export const mediaQuery = window.matchMedia("(max-width: 1100px)");
 
 /** Handles responsive design changes */
 export function handleMediaQueryChange(e) {
-  if (e.matches){
-    document.getElementById('responsive-small-add').classList.remove('d-none');
-    document.getElementById('right-section').classList.forEach(e => { 
-      if(e == 'slide-in'){
-        document.getElementById('responsive-small-add').classList.add('d-none');
-      }
-    });
+  if (e.matches) {
+    showResponsiveAdd();
+    hideIfSlideIn();
+  } else {
+    hideResponsiveAdd();
   }
-  else
-    document.getElementById('responsive-small-add').classList.add('d-none');
+}
+
+function showResponsiveAdd() {
+  const el = document.getElementById('responsive-small-add');
+  if (el) el.classList.remove('d-none');
+}
+function hideIfSlideIn() {
+  const rightSection = document.getElementById('right-section');
+  if (!rightSection) return;
+  rightSection.classList.forEach(cls => {
+    if (cls === 'slide-in') hideResponsiveAdd();
+  });
+}
+function hideResponsiveAdd() {
+  const el = document.getElementById('responsive-small-add');
+  if (el) el.classList.add('d-none');
 }
