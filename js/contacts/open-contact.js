@@ -1,3 +1,5 @@
+// open-contact.js
+
 import { getContactById } from "./load-contacts.js";
 import { openEditContactLightbox, hideContactCard } from "./edit-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
@@ -6,85 +8,131 @@ import { ref, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase
 import { closeAllContactOverlays } from "./contacts-utils.js";
 import { mediaQuery, handleMediaQueryChange } from "./contact-responsive.js";
 
-/** Sets up all click events for contact entries, edit, and delete buttons */
+/**
+ * Sets up all click events for contacts, edit & delete buttons.
+ */
 export function setupContactClickEvents() {
-  setupEntryClick();
-  setupEditBtns();
-  setupDeleteBtns();
+  setupContactListEvents();
+  setupEditEvents();
+  setupDeleteEvents();
 }
 
-/** Adds click event to every contact list entry to open its details */
-function setupEntryClick() {
+/**
+ * Adds click event to each contact in the list to open details.
+ */
+function setupContactListEvents() {
   document.querySelectorAll(".contact-entry").forEach(el => {
-    el.addEventListener("click", () => openContactDetails(el.dataset.contactId));
+    el.onclick = null;
+    el.addEventListener("click", () =>
+      openContactDetails(el.dataset.contactId)
+    );
   });
 }
 
-/** Sets up the edit buttons for contact details */
-function setupEditBtns() {
-  setupBtn("current-edit", onEdit);
-  setupBtn("current-edit-responsive", onEdit);
+/**
+ * Sets up click events for all edit buttons.
+ */
+function setupEditEvents() {
+  setupBtn("current-edit", handleEdit);
+  setupBtn("current-edit-responsive", handleEdit);
 }
 
-/** Handler for clicking the edit button: opens edit lightbox */
-function onEdit() {
-  const id = document.getElementById("showed-current-contact").dataset.contactId;
-  openEditContactLightbox(id);
+/**
+ * Handler for edit: opens edit contact lightbox.
+ */
+function handleEdit() {
+  const id = getCurrentContactId();
+  if (id) openEditContactLightbox(id);
 }
 
-/** Sets up the delete buttons for contact details */
-function setupDeleteBtns() {
-  setupBtn("current-delete", onDelete);
-  setupBtn("current-delete-responsive", onDelete);
+/**
+ * Sets up click events for all delete buttons.
+ */
+function setupDeleteEvents() {
+  setupBtn("current-delete", handleDelete);
+  setupBtn("current-delete-responsive", handleDelete);
 }
 
-/** Handler for clicking the delete button: deletes contact */
-function onDelete() {
-  const id = document.getElementById("showed-current-contact")?.dataset.contactId;
+/**
+ * Handler for delete: removes contact from database.
+ */
+function handleDelete() {
+  const id = getCurrentContactId();
   if (id) deleteContact(id);
 }
 
-/** Adds a click event to a button by its ID */
-function setupBtn(id, fn) {
-  const el = document.getElementById(id);
-  if (el) el.addEventListener("click", fn);
+/**
+ * Gets the current contact ID from the detail card.
+ */
+function getCurrentContactId() {
+  return document.getElementById("showed-current-contact")?.dataset.contactId;
 }
 
-/** Opens the contact detail card for a specific contact */
+/**
+ * Adds a click event to a button by its ID.
+ */
+function setupBtn(id, fn) {
+  const btn = document.getElementById(id);
+  if (btn) {
+    btn.onclick = null;
+    btn.addEventListener("click", fn);
+  }
+}
+
+/**
+ * Opens the contact detail card, fills and animates it.
+ */
 async function openContactDetails(id) {
   closeAllContactOverlays();
   const contact = await getContactById(id);
   if (!contact) return;
-  const card = document.getElementById("showed-current-contact");
-  if (!card) return;
-  fillContactDetails(contact, card);
-  showContactCard(id, card);
+  setContactCardData(id, contact);
+  showContactCard();
+  setResponsiveState();
 }
 
-/** Fills the contact details in the contact detail card */
-function fillContactDetails(contact, card) {
-  setContactField("current-icon", getInitials(contact.name), getRandomColor(contact.name));
-  setContactText("current-name", contact.name);
+/**
+ * Sets contact card dataset & fills info.
+ */
+function setContactCardData(id, contact) {
+  const card = document.getElementById("showed-current-contact");
+  if (!card) return;
+  card.dataset.contactId = id;
+  fillContactDetails(contact);
+}
+
+/**
+ * Fills the contact detail card fields.
+ */
+function fillContactDetails(contact) {
+  setInitials(contact.name);
+  setContactField("current-name", contact.name);
   setContactLink("current-mail", contact.email, "mailto");
   setContactLink("current-phone", contact.phone, "tel");
 }
 
-/** Sets the icon initials and background color */
-function setContactField(id, text, color) {
-  const el = document.getElementById(id);
-  if (el) {
-    el.textContent = text;
-    el.style.backgroundColor = color;
+/**
+ * Sets the initials circle with color.
+ */
+function setInitials(name) {
+  const icon = document.getElementById("current-icon");
+  if (icon) {
+    icon.textContent = getInitials(name);
+    icon.style.backgroundColor = getRandomColor(name);
   }
 }
 
-/** Sets plain text to a given field */
-function setContactText(id, text) {
+/**
+ * Sets text for a contact detail field.
+ */
+function setContactField(id, text) {
   const el = document.getElementById(id);
   if (el) el.textContent = text;
 }
 
-/** Sets link text and href for email or phone */
+/**
+ * Sets a link field (mail/phone) in contact card.
+ */
 function setContactLink(id, value, prefix) {
   const el = document.getElementById(id);
   if (el) {
@@ -93,9 +141,12 @@ function setContactLink(id, value, prefix) {
   }
 }
 
-/** Shows the contact detail card and triggers slide-in animation */
-function showContactCard(id, card) {
+/**
+ * Shows the contact card with animation.
+ */
+function showContactCard() {
   const rightSection = document.getElementById("right-section");
+  const card = document.getElementById("showed-current-contact");
   if (rightSection && card) {
     rightSection.classList.remove("d-none");
     card.classList.remove("d-none");
@@ -103,67 +154,77 @@ function showContactCard(id, card) {
     rightSection.classList.remove("slide-in");
     void rightSection.offsetWidth;
     rightSection.classList.add("slide-in");
-    handleMediaQueryChange(mediaQuery);
-    document.getElementById('responsive-small-edit').classList.remove('d-none');
-    if (window.innerWidth <= 1100) document.body.classList.add('no-scroll');
   }
 }
 
-/** Deletes a contact from Firebase and handles UI update */
+/**
+ * Handles responsive/mobile state for the UI.
+ */
+function setResponsiveState() {
+  handleMediaQueryChange(mediaQuery);
+  document.getElementById('responsive-small-edit')?.classList.remove('d-none');
+  if (window.innerWidth <= 1100)
+    document.body.classList.add('no-scroll');
+}
+
+/**
+ * Deletes contact from Firebase and UI.
+ */
 async function deleteContact(id) {
   try {
     await remove(ref(db, `contacts/${id}`));
     hideContactCard();
     showSuccessMessage("Contact deleted!");
-    showHideResponsiveBtns(true);
+    toggleResponsiveAddBtn(true);
   } catch (error) {
     console.error("Error deleting contact:", error);
     showErrorMessage("Error deleting contact!");
   }
 }
 
-/** Shows or hides responsive edit/add buttons depending on state */
-function showHideResponsiveBtns(isDelete = false) {
-  const editBtn = document.getElementById('responsive-small-edit');
-  const addBtn = document.getElementById('responsive-small-add');
-  if (editBtn && addBtn) {
-    if (isDelete) {
-      editBtn.classList.add('d-none');
-      addBtn.classList.remove('d-none');
-    } else {
-      editBtn.classList.remove('d-none');
-      addBtn.classList.add('d-none');
-    }
-  }
+/**
+ * Shows the responsive add button after delete.
+ */
+function toggleResponsiveAddBtn(isDelete) {
+  document.getElementById('responsive-small-edit')?.classList.add('d-none');
+  document.getElementById('responsive-small-add')?.classList.remove('d-none');
 }
 
-/** Shows a green success message window */
+/**
+ * Shows a success message for 2 seconds.
+ */
 function showSuccessMessage(message) {
   showMessage(message, false);
 }
 
-/** Shows a red error message window */
+/**
+ * Shows an error message for 2 seconds.
+ */
 function showErrorMessage(message) {
   showMessage(message, true);
 }
 
-/** Displays a message (success or error) for 2 seconds */
+/**
+ * Displays a confirmation/error message.
+ */
 function showMessage(message, isError) {
-  const window = document.getElementById("confirmation-window");
-  if (!window) return;
-  window.querySelector("span").textContent = message;
-  window.classList.remove("d-none");
-  if (isError) window.classList.add("error");
-  else window.classList.remove("error");
+  const win = document.getElementById("confirmation-window");
+  if (!win) return;
+  win.querySelector("span").textContent = message;
+  win.classList.remove("d-none");
+  if (isError) win.classList.add("error");
+  else win.classList.remove("error");
   setTimeout(() => {
-    window.classList.add("d-none");
-    window.classList.remove("error");
+    win.classList.add("d-none");
+    win.classList.remove("error");
   }, 2000);
 }
 
-/** Closes the contact detail card and returns to the list (responsive) */
+/**
+ * Closes the contact card and returns to list.
+ */
 export function backToContactList() {
-  document.getElementById('right-section').classList.replace('slide-in', 'd-none');
+  document.getElementById('right-section')?.classList.replace('slide-in', 'd-none');
   handleMediaQueryChange(mediaQuery);
-  showHideResponsiveBtns();
+  document.getElementById('responsive-small-edit')?.classList.add('d-none');
 }
