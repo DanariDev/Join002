@@ -7,6 +7,8 @@ import { initBoardTaskSave } from "./board-task-save.js";
 import { initEditTaskForm } from "./edit-task-form.js";
 import { initEditContactsDropdown, setupEditDropdownOpenClose } from "./edit-task-contacts.js";
 import { initAddContactsDropdown, setupAddDropdownOpenClose } from "./add-task-contacts.js";
+import { updateColumnPlaceholders } from './board-placeholder.js';
+
 
 /** Initializes all modules and event handlers on DOM ready */
 window.addEventListener("DOMContentLoaded", onDomLoaded);
