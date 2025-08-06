@@ -1,7 +1,5 @@
-// board-placeholder.js
-
 /**
- * Insert placeholder if column is empty.
+ * Updates placeholders for empty task columns.
  */
 export function updateColumnPlaceholders() {
   showIfEmpty("to-do-tasks", "No tasks in 'To do'");
@@ -12,11 +10,12 @@ export function updateColumnPlaceholders() {
 
 /**
  * Adds placeholder text if a column has no tasks.
+ * @param {string} columnClass - The CSS class of the column.
+ * @param {string} message - The placeholder message.
  */
 function showIfEmpty(columnClass, message) {
   const col = document.querySelector(`.${columnClass}`);
   if (!col) return;
-  // Platzhalter entfernen, falls Tasks nachgeladen werden
   col.querySelectorAll('.placeholder').forEach(p => p.remove());
   if (col.children.length === 0) {
     const el = document.createElement('div');

@@ -6,7 +6,9 @@ import { renderSelectedEditInsignias as renderEditInsigniasBadges } from "./edit
 let allEditContacts = [];
 let selectedEditContacts = new Set();
 
-/** Initializes the contacts dropdown for the edit overlay */
+/**
+ * Initializes the contacts dropdown for the edit overlay.
+ */
 export function initEditContactsDropdown() {
   const dropdownList = document.getElementById("editing-contacts-dropdown-list");
   if (!dropdownList) return;
@@ -21,19 +23,27 @@ export function initEditContactsDropdown() {
   });
 }
 
-/** Sets the selected contacts by array of IDs */
+/**
+ * Sets the selected contacts by array of IDs.
+ * @param {Array<string>} ids - Array of contact IDs to select.
+ */
 export function setSelectedEditContacts(ids) {
   selectedEditContacts = new Set(ids);
   renderEditContactsDropdown();
   renderSelectedEditInsignias();
 }
 
-/** Returns an array of selected contact IDs */
+/**
+ * Returns an array of selected contact IDs.
+ * @returns {Array<string>} Array of selected contact IDs.
+ */
 export function getSelectedEditContactIds() {
   return Array.from(selectedEditContacts);
 }
 
-/** Renders all contacts as selectable rows in the dropdown */
+/**
+ * Renders all contacts as selectable rows in the dropdown.
+ */
 function renderEditContactsDropdown() {
   const dropdownList = document.getElementById("editing-contacts-dropdown-list");
   if (!dropdownList) return;
@@ -43,7 +53,11 @@ function renderEditContactsDropdown() {
   });
 }
 
-/** Creates a single row for a contact in the edit dropdown */
+/**
+ * Creates a single row for a contact in the edit dropdown.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLDivElement} The contact row element.
+ */
 function createEditContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
@@ -65,7 +79,11 @@ function createEditContactRow(contact) {
   return row;
 }
 
-/** Creates the initials circle for a contact */
+/**
+ * Creates the initials circle for a contact.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLDivElement} The initials circle element.
+ */
 function createEditInitialsCircle(contact) {
   const initials = document.createElement("div");
   initials.className = "contact-initials";
@@ -74,7 +92,11 @@ function createEditInitialsCircle(contact) {
   return initials;
 }
 
-/** Creates the name element for a contact */
+/**
+ * Creates the name element for a contact.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLSpanElement} The contact name element.
+ */
 function createEditContactName(contact) {
   const name = document.createElement("span");
   name.className = "contact-name";
@@ -82,7 +104,11 @@ function createEditContactName(contact) {
   return name;
 }
 
-/** Creates a checkbox for contact selection */
+/**
+ * Creates a checkbox for contact selection.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLInputElement} The checkbox element.
+ */
 function createEditCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -92,7 +118,10 @@ function createEditCheckbox(contact) {
   return checkbox;
 }
 
-/** Toggles a contact's selection in the edit dropdown */
+/**
+ * Toggles a contact's selection in the edit dropdown.
+ * @param {string} id - The contact ID.
+ */
 function handleEditContactToggle(id) {
   if (selectedEditContacts.has(id)) {
     selectedEditContacts.delete(id);
@@ -103,16 +132,19 @@ function handleEditContactToggle(id) {
   renderSelectedEditInsignias();
 }
 
-/** Renders the insignia badges for all selected contacts */
+/**
+ * Renders the insignia badges for all selected contacts.
+ */
 export function renderSelectedEditInsignias() {
   const container = document.getElementById("selected-editing-contact-insignias");
   if (!container) return;
-  // IDs → Kontaktobjekte
   const selectedContacts = allEditContacts.filter(c => selectedEditContacts.has(c.id));
   renderEditInsigniasBadges(selectedContacts, container);
 }
 
-/** Sets up the open/close logic for the edit contacts dropdown */
+/**
+ * Sets up the open/close logic for the edit contacts dropdown.
+ */
 export function setupEditDropdownOpenClose() {
   const dropdown = document.getElementById("editing-contacts-dropdown");
   const selected = document.getElementById("editing-contacts-selected");
@@ -138,7 +170,9 @@ export function setupEditDropdownOpenClose() {
   });
 }
 
-/** Resets all selected contacts (clears set and UI) */
+/**
+ * Resets all selected contacts (clears set and UI).
+ */
 export function resetSelectedEditContacts() {
   selectedEditContacts.clear();
   renderEditContactsDropdown();

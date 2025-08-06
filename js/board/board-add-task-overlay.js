@@ -6,7 +6,9 @@ import { clearForm } from "../add-task/add-task-save.js"
 
 const mediaQuery = window.matchMedia("(max-width: 1100px)");
 
-/** Initializes the overlay and its forms on DOMContentLoaded */
+/**
+ * Initializes the overlay and its forms on DOMContentLoaded.
+ */
 window.addEventListener("DOMContentLoaded", () => {
   initPriorityButtons();
   setupDropdownOpenClose();
@@ -15,7 +17,9 @@ window.addEventListener("DOMContentLoaded", () => {
   initAddTaskForm();
 });
 
-/** Sets up all overlay open/close events and buttons for Board */
+/**
+ * Sets up all overlay open/close events and buttons for the board.
+ */
 export function initBoardOverlay() {
   document.querySelectorAll(".add-task-btn, #add-task-button").forEach((btn) =>
     btn.addEventListener("click", handleAddTaskBtnClick)
@@ -25,7 +29,10 @@ export function initBoardOverlay() {
   addOverlayBackgroundListener();
 }
 
-/** Handles click on add-task button: opens overlay or redirects to page (mobile) */
+/**
+ * Handles click on add-task button: opens overlay or redirects to page (mobile).
+ * @param {Event} e - The click event.
+ */
 function handleAddTaskBtnClick(e) {
   e.preventDefault();
   if (mediaQuery.matches) {
@@ -35,13 +42,18 @@ function handleAddTaskBtnClick(e) {
   }
 }
 
-/** Handles click on clear/cancel: closes overlay */
+/**
+ * Handles click on clear/cancel button: closes overlay.
+ * @param {Event} e - The click event.
+ */
 function handleClearBtnClick(e) {
   e.preventDefault();
   closeBoardOverlay();
 }
 
-/** Adds click event to overlay background to close overlay when clicking outside */
+/**
+ * Adds click event to overlay background to close overlay when clicking outside.
+ */
 function addOverlayBackgroundListener() {
   document
     .getElementById("add-task-overlay")
@@ -50,39 +62,53 @@ function addOverlayBackgroundListener() {
     });
 }
 
-/** Opens the board overlay and resets priority selection */
+/**
+ * Opens the board overlay and resets priority selection.
+ */
 async function openBoardOverlay() {
   showBoardOverlay();
   resetPriorityButtons();
 }
 
-/** Shows the overlay and disables body scroll */
+/**
+ * Shows the overlay and disables body scroll.
+ */
 function showBoardOverlay() {
   document.getElementById("add-task-overlay").classList.remove("d-none");
   document.getElementById("body").classList.add('overflow-hidden');
 }
 
-/** Resets all priority buttons to default (medium selected) */
+/**
+ * Resets all priority buttons to default (medium selected).
+ */
 function resetPriorityButtons() {
   ["urgent-btn", "medium-btn", "low-btn"].forEach(resetPriorityButton);
   document.getElementById("medium-btn").classList.add("selected", "medium-btn-active");
 }
 
-/** Removes selection/highlight from a single priority button */
+/**
+ * Removes selection/highlight from a single priority button.
+ * @param {string} id - The ID of the priority button.
+ */
 function resetPriorityButton(id) {
   document
     .getElementById(id)
     .classList.remove("selected", "urgent-btn-active", "medium-btn-active", "low-btn-active");
 }
 
-/** Closes the board overlay and re-enables body scroll, clears form */
+/**
+ * Closes the board overlay, re-enables body scroll, and clears the form.
+ */
 export function closeBoardOverlay() {
   document.getElementById("add-task-overlay").classList.add("d-none");
   document.getElementById("body").classList.remove('overflow-hidden');
   clearForm();
 }
 
-/** Closes overlay when ESC is pressed */
+/**
+ * Closes the overlay when the Escape key is pressed.
+ * @param {Event} e - The keyboard event.
+ */
 document.addEventListener("keydown", function (e) {
   const overlay = document.getElementById("add-task-overlay");
   if (e.key === "Escape" && !overlay.classList.contains("d-none")) {

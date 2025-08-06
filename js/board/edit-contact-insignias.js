@@ -1,15 +1,14 @@
 import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 
 /**
- * Renders up to 3 selected contact insignias (badges) and a +X badge if more
- * @param {Array} selectedContacts - Array of selected contact objects
- * @param {HTMLElement} container - Target container for insignias
+ * Renders up to 3 selected contact insignias and a +X badge if more.
+ * @param {Array<Object>} selectedContacts - Array of selected contact objects.
+ * @param {HTMLElement} container - Target container for insignias.
  */
 export function renderSelectedEditInsignias(selectedContacts, container) {
   if (!container) return;
   container.innerHTML = "";
 
-  // Show up to 3 insignias, then +X if more
   const visible = selectedContacts.slice(0, 3);
   visible.forEach(c => {
     container.appendChild(createInsignia(c));
@@ -25,7 +24,11 @@ export function renderSelectedEditInsignias(selectedContacts, container) {
   }
 }
 
-/** Creates a single insignia for a contact */
+/**
+ * Creates a single insignia for a contact.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLDivElement} The insignia element.
+ */
 function createInsignia(contact) {
   const insignia = document.createElement("div");
   insignia.className = "contact-insignia";

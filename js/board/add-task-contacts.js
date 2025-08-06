@@ -5,7 +5,9 @@ import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 let allAddContacts = [];
 let selectedAddContacts = new Set();
 
-/** Initializes the contact dropdown for the add task overlay */
+/**
+ * Initializes the contact dropdown for the add task overlay.
+ */
 export function initAddContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   if (!dropdownList) return;
@@ -19,14 +21,20 @@ export function initAddContactsDropdown() {
   });
 }
 
-/** Renders all contacts into the add contact dropdown */
+/**
+ * Renders all contacts into the add contact dropdown.
+ */
 function renderAddContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   dropdownList.innerHTML = "";
   allAddContacts.forEach((contact) => dropdownList.appendChild(createAddContactRow(contact)));
 }
 
-/** Creates a row for a contact in the dropdown */
+/**
+ * Creates a row for a contact in the dropdown.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLDivElement} The contact row element.
+ */
 function createAddContactRow(contact) {
   const row = document.createElement("div");
   row.className = "contacts-dropdown-item";
@@ -38,14 +46,22 @@ function createAddContactRow(contact) {
   return row;
 }
 
-/** Adds initials, name, and checkbox to a row */
+/**
+ * Adds initials, name, and checkbox to a contact row.
+ * @param {HTMLDivElement} row - The contact row element.
+ * @param {Object} contact - The contact object.
+ */
 function addContactRowContent(row, contact) {
   row.appendChild(createAddInitialsCircle(contact));
   row.appendChild(createAddContactName(contact));
   row.appendChild(createAddCheckbox(contact));
 }
 
-/** Handles clicks on a contact row for selection */
+/**
+ * Handles clicks on a contact row for selection.
+ * @param {HTMLDivElement} row - The contact row element.
+ * @param {Object} contact - The contact object.
+ */
 function addContactRowClickHandler(row, contact) {
   row.addEventListener("click", function (e) {
     e.stopPropagation();
@@ -55,7 +71,11 @@ function addContactRowClickHandler(row, contact) {
   });
 }
 
-/** Creates the initials circle for the contact */
+/**
+ * Creates the initials circle for the contact.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLDivElement} The initials circle element.
+ */
 function createAddInitialsCircle(contact) {
   const initials = document.createElement("div");
   initials.className = "contact-initials";
@@ -64,7 +84,11 @@ function createAddInitialsCircle(contact) {
   return initials;
 }
 
-/** Creates the contact name element */
+/**
+ * Creates the contact name element.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLSpanElement} The contact name element.
+ */
 function createAddContactName(contact) {
   const name = document.createElement("span");
   name.className = "contact-name";
@@ -72,7 +96,11 @@ function createAddContactName(contact) {
   return name;
 }
 
-/** Creates the checkbox for the contact row */
+/**
+ * Creates the checkbox for the contact row.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLDivElement} The checkbox container element.
+ */
 function createAddCheckbox(contact) {
   const checkbox = document.createElement("input");
   checkbox.type = "checkbox";
@@ -89,7 +117,10 @@ function createAddCheckbox(contact) {
   return container;
 }
 
-/** Toggles selection of a contact in the dropdown */
+/**
+ * Toggles selection of a contact in the dropdown.
+ * @param {string} id - The contact ID.
+ */
 function handleAddContactToggle(id) {
   if (selectedAddContacts.has(id)) {
     selectedAddContacts.delete(id);
@@ -100,7 +131,9 @@ function handleAddContactToggle(id) {
   renderSelectedAddInsignias();
 }
 
-/** Renders the selected contacts as insignias (up to 3 + more counter) */
+/**
+ * Renders the selected contacts as insignias (up to 3 + more counter).
+ */
 export function renderSelectedAddInsignias() {
   const container = document.getElementById("selected-contact-insignias");
   container.innerHTML = "";
@@ -112,7 +145,11 @@ export function renderSelectedAddInsignias() {
   }
 }
 
-/** Creates an insignia (badge) for a selected contact */
+/**
+ * Creates an insignia (badge) for a selected contact.
+ * @param {Object} contact - The contact object.
+ * @returns {HTMLDivElement} The insignia element.
+ */
 function createAddInsignia(contact) {
   const insignia = document.createElement("div");
   insignia.className = "contact-insignia";
@@ -122,7 +159,11 @@ function createAddInsignia(contact) {
   return insignia;
 }
 
-/** Creates a "+X" insignia if more than 3 contacts are selected */
+/**
+ * Creates a "+X" insignia if more than 3 contacts are selected.
+ * @param {number} num - The number of additional contacts.
+ * @returns {HTMLDivElement} The more insignia element.
+ */
 function createMoreInsignia(num) {
   const more = document.createElement("div");
   more.className = "contact-insignia contact-insignia-more";
@@ -131,12 +172,17 @@ function createMoreInsignia(num) {
   return more;
 }
 
-/** Returns the IDs of all currently selected contacts */
+/**
+ * Returns the IDs of all currently selected contacts.
+ * @returns {Array<string>} Array of selected contact IDs.
+ */
 export function getSelectedAddContactIds() {
   return Array.from(selectedAddContacts);
 }
 
-/** Sets up the open/close logic for the contacts dropdown */
+/**
+ * Sets up the open/close logic for the contacts dropdown.
+ */
 export function setupAddDropdownOpenClose() {
   const dropdown = document.getElementById("contacts-dropdown");
   const selected = document.getElementById("contacts-selected");
@@ -149,27 +195,42 @@ export function setupAddDropdownOpenClose() {
   document.addEventListener("keydown", (e) => handleEscapeKey(e, panel));
 }
 
-/** Handles click to open/close the dropdown panel */
+/**
+ * Handles click to open/close the dropdown panel.
+ * @param {Event} e - The click event.
+ * @param {HTMLElement} panel - The dropdown panel element.
+ */
 function handleDropdownClick(e, panel) {
   e.stopPropagation();
   panel.classList.toggle("d-none");
 }
 
-/** Closes the dropdown if a click happens outside */
+/**
+ * Closes the dropdown if a click happens outside.
+ * @param {Event} e - The click event.
+ * @param {HTMLElement} dropdown - The dropdown container element.
+ * @param {HTMLElement} panel - The dropdown panel element.
+ */
 function handleDocumentClick(e, dropdown, panel) {
   if (!dropdown.contains(e.target)) {
     panel.classList.add("d-none");
   }
 }
 
-/** Closes the dropdown when pressing Escape */
+/**
+ * Closes the dropdown when pressing Escape.
+ * @param {Event} e - The keyboard event.
+ * @param {HTMLElement} panel - The dropdown panel element.
+ */
 function handleEscapeKey(e, panel) {
   if (e.key === "Escape") {
     panel.classList.add("d-none");
   }
 }
 
-/** Resets the selected contacts set and UI */
+/**
+ * Resets the selected contacts set and UI.
+ */
 export function resetSelectedAddContacts() {
   selectedAddContacts.clear();
   renderAddContactsDropdown();

@@ -5,8 +5,7 @@ import { setupDragAndDrop } from "./drag-drop.js";
 import { updateColumnPlaceholders } from "./board-placeholder.js";
 
 /**
- * Loads all tasks from the DB and renders them into their board columns.
- * Also sets up drag & drop after loading.
+ * Loads all tasks from the database and renders them into their board columns.
  */
 export function loadTasks() {
   const tasksRef = ref(db, 'tasks/');
@@ -18,11 +17,13 @@ export function loadTasks() {
       renderTask(task);
     });
     setupDragAndDrop();
-    updateColumnPlaceholders(); 
+    updateColumnPlaceholders();
   });
 }
 
-/** Clears all board columns before re-rendering tasks */
+/**
+ * Clears all board columns before re-rendering tasks.
+ */
 function clearColumns() {
   getCol(".to-do-tasks").innerHTML = "";
   getCol(".in-progress-tasks").innerHTML = "";
@@ -30,7 +31,11 @@ function clearColumns() {
   getCol(".done-tasks").innerHTML = "";
 }
 
-/** Gets a column element by its CSS selector */
+/**
+ * Gets a column element by its CSS selector.
+ * @param {string} selector - The CSS selector for the column.
+ * @returns {HTMLElement} The column element.
+ */
 function getCol(selector) {
   return document.querySelector(selector);
 }
