@@ -29,6 +29,9 @@ function setupSidebarStarterEvents() {
 
 /**
  * Adds a click event listener to an element by id (optionally allows null).
+ * @param {string} id - The id of the target element.
+ * @param {function} fn - The callback function to execute on click.
+ * @param {boolean} [allowNull=false] - Allow for missing element (optional).
  */
 function addClick(id, fn, allowNull = false) {
   const el = document.getElementById(id);

@@ -14,6 +14,8 @@ export function setupTopbarMenu() {
 
 /**
  * Handles toggling the user menu when the user icon is clicked.
+ * @param {HTMLElement} userIcon - The user icon element in the topbar.
+ * @param {HTMLElement} menu - The menu element to toggle.
  */
 function setupUserIcon(userIcon, menu) {
   userIcon.addEventListener('click', e => {
@@ -25,6 +27,7 @@ function setupUserIcon(userIcon, menu) {
 
 /**
  * Handles logout: clears storage and redirects to login page.
+ * @param {HTMLElement} logoutBtn - The logout button element.
  */
 function setupLogoutBtn(logoutBtn) {
   logoutBtn.addEventListener('click', () => {
@@ -36,6 +39,8 @@ function setupLogoutBtn(logoutBtn) {
 
 /**
  * Closes the menu if the user clicks outside of it (anywhere else on the page).
+ * @param {HTMLElement} menu - The menu element to close.
+ * @param {HTMLElement} userIcon - The user icon element to exclude from close logic.
  */
 function setupOutsideClick(menu, userIcon) {
   document.addEventListener('click', e => {

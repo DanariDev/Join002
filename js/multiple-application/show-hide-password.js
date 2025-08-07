@@ -14,6 +14,8 @@ function togglePasswordRepeat() {
 
 /**
  * Changes the input type and updates the icon for show/hide password state.
+ * @param {string} inputId - The id of the password input field.
+ * @param {string} iconId - The id of the show/hide icon.
  */
 function toggleInputType(inputId, iconId) {
   const input = document.getElementById(inputId);
@@ -29,6 +31,8 @@ function toggleInputType(inputId, iconId) {
 
 /**
  * Handles the password icon visibility and lock icon based on input length.
+ * @param {string} input - The id of the password input field.
+ * @param {string} icon - The id of the show/hide icon.
  */
 function passwortLength(input, icon) {
   const pwInput = document.getElementById(input);

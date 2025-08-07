@@ -42,6 +42,8 @@ async function loginUser() {
 
 /**
  * Returns the value of an input field by id.
+ * @param {string} id - The id of the input field.
+ * @returns {string} - The value of the input field.
  */
 function getInputValue(id) {
   return document.getElementById(id).value;
@@ -49,6 +51,7 @@ function getInputValue(id) {
 
 /**
  * Handles login errors and displays error messages via checkInput().
+ * @param {object} error - The error object from Firebase.
  */
 function handleLoginError(error) {
   checkInput(null, "email-input", null, "password-input", null, null, error.code);

@@ -6,6 +6,7 @@ import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-da
  * Initializes the personalized greeting.
  * Sets the greeting time and fetches the user's name (if not guest).
  * Returns a Promise so other loaders can wait for greeting to finish.
+ * @returns {Promise<void>}
  */
 export function initGreeting() {
   return new Promise(resolve => {
@@ -31,6 +32,7 @@ function setGreetingTime() {
 /**
  * Loads and displays the current user's name,
  * or shows nothing if guest is logged in.
+ * @param {object} user - The current Firebase user object.
  */
 async function setGreetingName(user) {
   const nameField = document.querySelector("#summary-greeting-name");

@@ -42,6 +42,9 @@ async function signup() {
 
 /**
  * Registers user in Firebase Auth and adds user/contact to the database.
+ * @param {string} name - The user's name.
+ * @param {string} email - The user's email address.
+ * @param {string} password - The user's password.
  */
 async function registerUser(name, email, password) {
   const cred = await createUserWithEmailAndPassword(auth, email, password);
@@ -52,6 +55,8 @@ async function registerUser(name, email, password) {
 
 /**
  * Returns initials (first two uppercase letters) from the full name.
+ * @param {string} name - The user's full name.
+ * @returns {string} - The initials.
  */
 function getInitials(name) {
   return name.split(" ").map(n => n[0]?.toUpperCase()).join("").slice(0, 2);
@@ -59,6 +64,8 @@ function getInitials(name) {
 
 /**
  * Returns the value of an input field by id.
+ * @param {string} id - The input field's id.
+ * @returns {string} - The input's value.
  */
 function getVal(id) {
   return document.getElementById(id).value;
@@ -66,6 +73,8 @@ function getVal(id) {
 
 /**
  * Shows notification box with a message and style (success/error).
+ * @param {string} message - The notification message.
+ * @param {string} [type="success"] - Notification type (success or error).
  */
 function showNotification(message, type = "success") {
   const box = document.getElementById("notification");
@@ -76,6 +85,7 @@ function showNotification(message, type = "success") {
 
 /**
  * Hides the notification box (after a delay).
+ * @param {HTMLElement} box - The notification box element.
  */
 function hideNotification(box) {
   box.classList.remove("show");

@@ -16,6 +16,7 @@ export function showUserInitials() {
 
 /**
  * Loads the user's name from the database and displays initials in the topbar.
+ * @param {string} uid - The user's unique ID from Firebase.
  */
 async function loadUserInitials(uid) {
   if (!uid) return;
@@ -28,6 +29,7 @@ async function loadUserInitials(uid) {
 
 /**
  * Generates initials from name and inserts into topbar.
+ * @param {string} name - The user's full name.
  */
 function handleInitialDisplay(name) {
   const initials = getInitials(name);
@@ -36,6 +38,8 @@ function handleInitialDisplay(name) {
 
 /**
  * Returns the first two uppercase initials from a name string.
+ * @param {string} name - The user's full name.
+ * @returns {string} - The initials (max 2 letters).
  */
 function getInitials(name) {
   return name
@@ -47,6 +51,8 @@ function getInitials(name) {
 
 /**
  * Returns the first character of a word, uppercased.
+ * @param {string} word - A single word.
+ * @returns {string} - The first uppercase letter of the word.
  */
 function getFirstLetter(word) {
   return word.charAt(0).toUpperCase();
@@ -54,6 +60,7 @@ function getFirstLetter(word) {
 
 /**
  * Inserts the given initials text into the topbar user icon.
+ * @param {string} initials - The initials to display.
  */
 function insertInitials(initials) {
   const el = document.querySelector('.topbar-user');

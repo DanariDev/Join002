@@ -2,6 +2,7 @@
  * Runs validation checks for all specified fields.
  * Returns true if any validation fails, false if all pass.
  * Can also handle login error codes for feedback.
+ * @returns {boolean} - True if there are validation errors.
  */
 export function checkInput(
   nameCheckValue = null, emailCheckValue = null, phoneCheckValue = null,
@@ -21,6 +22,8 @@ export function checkInput(
 
 /**
  * Removes error styling and error text from the given input and error elements.
+ * @param {HTMLElement} input - The input element.
+ * @param {NodeList} errors - List of error elements.
  */
 function resetErrors(input, errors) {
   input.classList.remove("input-error");
@@ -29,6 +32,9 @@ function resetErrors(input, errors) {
 
 /**
  * Adds error styling and sets the error message on the given elements.
+ * @param {HTMLElement} input - The input element.
+ * @param {NodeList} errorElem - List of error elements.
+ * @param {string} message - The error message.
  */
 function showError(input, errorElem, message) {
   input.classList.add("input-error");
@@ -37,6 +43,9 @@ function showError(input, errorElem, message) {
 
 /**
  * Validates the name field: must not be empty.
+ * @param {string} id - The id of the name input field.
+ * @param {boolean} hasError - Current error state.
+ * @returns {boolean} - Updated error state.
  */
 function nameCheck(id, hasError) {
   const input = document.getElementById(id);
@@ -48,6 +57,9 @@ function nameCheck(id, hasError) {
 
 /**
  * Validates the email field: must not be empty and must be a valid email.
+ * @param {string} id - The id of the email input field.
+ * @param {boolean} hasError - Current error state.
+ * @returns {boolean} - Updated error state.
  */
 function emailCheck(id, hasError) {
   const input = document.getElementById(id);
@@ -61,6 +73,9 @@ function emailCheck(id, hasError) {
 
 /**
  * Validates the phone number field: must not be empty, must contain only digits (and optional +).
+ * @param {string} id - The id of the phone input field.
+ * @param {boolean} hasError - Current error state.
+ * @returns {boolean} - Updated error state.
  */
 function phoneCheck(id, hasError) {
   const input = document.getElementById(id);
@@ -74,6 +89,9 @@ function phoneCheck(id, hasError) {
 
 /**
  * Validates the password field: must not be empty and at least 6 characters long.
+ * @param {string} id - The id of the password input field.
+ * @param {boolean} hasError - Current error state.
+ * @returns {boolean} - Updated error state.
  */
 function passwordCheck(id, hasError) {
   const input = document.getElementById(id);
@@ -87,6 +105,9 @@ function passwordCheck(id, hasError) {
 
 /**
  * Validates the password repeat field: must not be empty and must match the original password.
+ * @param {string} id - The id of the repeat password input field.
+ * @param {boolean} hasError - Current error state.
+ * @returns {boolean} - Updated error state.
  */
 function passwordRepeatCheck(id, hasError) {
   const input = document.getElementById(id);
@@ -101,6 +122,9 @@ function passwordRepeatCheck(id, hasError) {
 
 /**
  * Validates the privacy policy checkbox: must be checked.
+ * @param {string} id - The id of the privacy checkbox.
+ * @param {boolean} hasError - Current error state.
+ * @returns {boolean} - Updated error state.
  */
 function privacyCheckbox(id, hasError) {
   const checkbox = document.getElementById(id);
@@ -113,6 +137,9 @@ function privacyCheckbox(id, hasError) {
 /**
  * Handles authentication errors during login.
  * Shows appropriate error message depending on the Firebase error code.
+ * @param {string} emailId - The id of the email input field.
+ * @param {string} pwId - The id of the password input field.
+ * @param {string} code - The Firebase error code.
  */
 function incorrectDataToAuthentication(emailId, pwId, code) {
   const emailInput = document.getElementById(emailId);
