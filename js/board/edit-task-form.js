@@ -1,7 +1,17 @@
 import { db } from "../firebase/firebase-init.js";
-import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-import { setSelectedEditContacts, getSelectedEditContactIds } from "./edit-task-contacts.js";
-import { getSelectedEditPriority, initEditPriorityButtons } from "./edit-task-priority.js";
+import {
+  ref,
+  update,
+  get,
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import {
+  setSelectedEditContacts,
+  getSelectedEditContactIds,
+} from "./edit-task-contacts.js";
+import {
+  getSelectedEditPriority,
+  initEditPriorityButtons,
+} from "./edit-task-priority.js";
 
 /**
  * Initializes the save button handler for the edit task form.
@@ -9,6 +19,13 @@ import { getSelectedEditPriority, initEditPriorityButtons } from "./edit-task-pr
 export function initEditTaskForm() {
   const btn = document.getElementById("editing-save-btn");
   if (btn) btn.addEventListener("click", onSaveEditClick);
+}
+/**
+ * Removes all error and success messages in the overlay.
+ */
+function clearAllEditFieldErrors() {
+  document.querySelectorAll(".error-message").forEach((el) => el.remove());
+  document.querySelectorAll(".success-message").forEach((el) => el.remove());
 }
 
 /**
@@ -70,8 +87,9 @@ function setEditDateMinToday() {
  * @param {string} priority - The priority to set (urgent, medium, low).
  */
 function setEditPriority(priority) {
-  document.querySelectorAll("#editing-priority-buttons .all-priority-btns")
-    .forEach(btn => btn.classList.remove("active"));
+  document
+    .querySelectorAll("#editing-priority-buttons .all-priority-btns")
+    .forEach((btn) => btn.classList.remove("active"));
   if (priority === "urgent") activateBtn("editing-urgent-btn");
   else if (priority === "medium") activateBtn("editing-medium-btn");
   else if (priority === "low") activateBtn("editing-low-btn");
@@ -103,7 +121,7 @@ function enableSaveBtn() {
  */
 export function showEditForm(taskId) {
   const taskRef = ref(db, "tasks/" + taskId);
-  get(taskRef).then(snapshot => {
+  get(taskRef).then((snapshot) => {
     if (!snapshot.exists()) return;
     fillEditFormWithTask(snapshot.val());
     openEditOverlay();
@@ -114,7 +132,8 @@ export function showEditForm(taskId) {
  * Opens the edit task overlay and disables body scroll.
  */
 function openEditOverlay() {
-  document.getElementById("edit-task-overlay")
+  document
+    .getElementById("edit-task-overlay")
     .classList.replace("d-none", "d-flex");
   document.getElementById("body").classList.add("overflow-hidden");
 }
@@ -125,7 +144,8 @@ function openEditOverlay() {
  */
 function validateEditTitle() {
   const v = getValue("editing-title");
-  if (!v) return showEditFieldError("error-edit-title", "Please enter a title!");
+  if (!v)
+    return showEditFieldError("error-edit-title", "Please enter a title!");
   return true;
 }
 
@@ -135,11 +155,19 @@ function validateEditTitle() {
  */
 function validateEditDueDate() {
   const dueDate = getValue("editing-date");
-  if (!dueDate) return showEditFieldError("error-edit-due-date", "Please select a due date!");
+  if (!dueDate)
+    return showEditFieldError(
+      "error-edit-due-date",
+      "Please select a due date!"
+    );
   const selected = new Date(dueDate + "T00:00:00");
-  const now = new Date(); now.setHours(0, 0, 0, 0);
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
   if (selected < now)
-    return showEditFieldError("error-edit-due-date", "Due date cannot be in the past!");
+    return showEditFieldError(
+      "error-edit-due-date",
+      "Due date cannot be in the past!"
+    );
   return true;
 }
 
@@ -149,7 +177,11 @@ function validateEditDueDate() {
  */
 function validateEditCategory() {
   const v = getValue("editing-category");
-  if (!v) return showEditFieldError("error-edit-category", "Please select a category!");
+  if (!v)
+    return showEditFieldError(
+      "error-edit-category",
+      "Please select a category!"
+    );
   return true;
 }
 
@@ -162,7 +194,7 @@ function saveEditedTask() {
   const updates = collectUpdates();
   update(ref(db, "tasks/" + taskId), updates)
     .then(closeEditOverlay)
-    .catch(error => console.error("Fehler beim Speichern:", error));
+    .catch((error) => console.error("Fehler beim Speichern:", error));
 }
 
 /**
@@ -194,7 +226,8 @@ function getValue(id) {
  * Closes the edit overlay and re-enables body scroll.
  */
 function closeEditOverlay() {
-  document.getElementById("edit-task-overlay")
+  document
+    .getElementById("edit-task-overlay")
     .classList.replace("d-flex", "d-none");
   document.getElementById("body").classList.remove("overflow-hidden");
 }
@@ -207,7 +240,7 @@ function fillEditSubtasks(subtasks) {
   const list = document.getElementById("editing-subtask-list");
   if (!list) return;
   list.innerHTML = "";
-  subtasks.forEach(st => addSubtaskListItem(st.task));
+  subtasks.forEach((st) => addSubtaskListItem(st.task));
 }
 
 /**
@@ -216,7 +249,10 @@ function fillEditSubtasks(subtasks) {
  */
 function getEditSubtasks() {
   const items = document.querySelectorAll("#editing-subtask-list li");
-  return Array.from(items).map(li => ({ task: li.textContent.trim(), checked: "false" }));
+  return Array.from(items).map((li) => ({
+    task: li.textContent.trim(),
+    checked: "false",
+  }));
 }
 
 /**
@@ -247,10 +283,16 @@ function subtaskIconsHtml() {
  * Adds all subtask events (edit/delete).
  */
 function attachSubtaskEvents() {
-  document.querySelectorAll(".edit-subtask-btn").forEach(el =>
-    el.onclick = e => editEditSubtask(e.target.closest("li")));
-  document.querySelectorAll(".delete-subtask-btn").forEach(el =>
-    el.onclick = e => deleteSubtask(e.target.closest("li")));
+  document
+    .querySelectorAll(".edit-subtask-btn")
+    .forEach(
+      (el) => (el.onclick = (e) => editEditSubtask(e.target.closest("li")))
+    );
+  document
+    .querySelectorAll(".delete-subtask-btn")
+    .forEach(
+      (el) => (el.onclick = (e) => deleteSubtask(e.target.closest("li")))
+    );
 }
 
 /**
@@ -279,7 +321,9 @@ function editEditSubtask(li) {
   li.appendChild(input);
   input.focus();
   input.onblur = () => finishEditSubtask(li, input, oldValue);
-  input.onkeydown = e => { if (e.key === "Enter") finishEditSubtask(li, input, oldValue); };
+  input.onkeydown = (e) => {
+    if (e.key === "Enter") finishEditSubtask(li, input, oldValue);
+  };
 }
 
 /**
@@ -300,21 +344,28 @@ function finishEditSubtask(li, input, oldValue) {
  * Deletes a subtask from the list.
  * @param {HTMLLIElement} li - The subtask list item.
  */
-function deleteSubtask(li) { if (li) li.remove(); }
+function deleteSubtask(li) {
+  if (li) li.remove();
+}
 
 /**
  * Sets up subtask input and button handlers.
  */
 function initEditSubtaskEvents() {
   const input = document.getElementById("editing-subtask");
-  if (input) input.onkeydown = e => {
-    if (e.key === "Enter") { addEditSubtask(); e.preventDefault(); }
-  };
+  if (input)
+    input.onkeydown = (e) => {
+      if (e.key === "Enter") {
+        addEditSubtask();
+        e.preventDefault();
+      }
+    };
   const btn = document.querySelector("#edit-task-overlay .subtask-button");
   if (btn) btn.onclick = addEditSubtask;
   const list = document.getElementById("editing-subtask-list");
-  if (list) list.onclick = e => {
-    if (e.target.tagName === "LI") editEditSubtask(e.target);
-  };
+  if (list)
+    list.onclick = (e) => {
+      if (e.target.tagName === "LI") editEditSubtask(e.target);
+    };
 }
 initEditSubtaskEvents();

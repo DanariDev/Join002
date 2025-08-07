@@ -24,23 +24,60 @@ function setEditTaskHandlers(taskId) {
   const cancelBtn = document.getElementById("editing-cancel-btn");
   const saveBtn = document.getElementById("editing-save-btn");
 
+  setupOverlayCloseHandlers(overlay, closeBtn, cancelBtn);
+  setupOverlayKeyboardHandler(overlay);
+  setupEditTaskSaveHandler(saveBtn, taskId);
+}
+
+
+/**
+ * Sets click handlers for closing the edit overlay.
+ * @param {HTMLElement} overlay - The overlay element.
+ * @param {HTMLElement} closeBtn - The close button element.
+ * @param {HTMLElement} cancelBtn - The cancel button element.
+ */
+function setupOverlayCloseHandlers(overlay, closeBtn, cancelBtn) {
   closeBtn.onclick = closeEditOverlay;
   cancelBtn.onclick = closeEditOverlay;
-  overlay.onclick = (e) => { if (e.target === overlay) closeEditOverlay(); };
-  document.onkeydown = (e) => { if (e.key === "Escape" && !overlay.classList.contains("d-none")) closeEditOverlay(); };
+  overlay.onclick = (e) => {
+    if (e.target === overlay) closeEditOverlay();
+  };
+}
 
+
+/**
+ * Sets handler to close overlay when Escape is pressed.
+ * @param {HTMLElement} overlay - The overlay element.
+ */
+function setupOverlayKeyboardHandler(overlay) {
+  document.onkeydown = (e) => {
+    if (e.key === "Escape" && !overlay.classList.contains("d-none")) {
+      closeEditOverlay();
+    }
+  };
+}
+
+
+/**
+ * Sets up the save event handler for the edit overlay.
+ * @param {HTMLElement} saveBtn - The save button element.
+ * @param {string} taskId - The task ID.
+ */
+function setupEditTaskSaveHandler(saveBtn, taskId) {
   document.addEventListener("saveTask", async (e) => {
     e.preventDefault();
-    console.log("Save event triggered for taskId:", taskId);
+    // Hier später: Save-Logik statt console.log
+    // console.log("Save event triggered for taskId:", taskId);
   });
 
   saveBtn.onclick = (e) => {
     e.preventDefault();
-    console.log("Save button clicked for taskId:", taskId);
+    // console.log("Save button clicked for taskId:", taskId);
     const saveEvent = new Event("saveTask");
     document.dispatchEvent(saveEvent);
   };
 }
+
 
 /**
  * Gets the current subtask list from the edit overlay.

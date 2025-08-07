@@ -306,7 +306,12 @@ function subtaskGenerate(taskId) {
   });
 }
 
-/** Renders the list of subtasks (checkboxes) in overlay */
+/**
+ * Renders the list of subtasks (checkboxes) in the overlay.
+ * @param {HTMLElement} list - The HTML element where the subtasks will be rendered.
+ * @param {object} task - The task object containing the subtasks array.
+ * @param {string} taskId - The id of the parent task.
+ */
 function renderSubtaskList(list, task, taskId) {
   if (!task || !task.subtasks) {
     list.innerHTML = "<li>No subtasks available</li>";
@@ -315,6 +320,15 @@ function renderSubtaskList(list, task, taskId) {
   list.innerHTML = task.subtasks.map((st, i) => renderSingleSubtask(st, i, taskId)).join('');
   setSubtaskCheckboxEvents(list, taskId);
 }
+
+
+/**
+ * Renders a single subtask as a list item with checkbox.
+ * @param {object} subtask - The subtask object.
+ * @param {number} index - The index of the subtask in the array.
+ * @param {string} taskId - The id of the parent task.
+ * @returns {string} - HTML string for the subtask list item.
+ */
 function renderSingleSubtask(subtask, index, taskId) {
   const subtaskId = `subtask-${taskId}-${index}`;
   const checked = subtask.checked === true || subtask.checked === "true" ? "checked" : "";
@@ -327,12 +341,26 @@ function renderSingleSubtask(subtask, index, taskId) {
   `;
 }
 
-/** Adds change events for subtask checkboxes (to update DB + progress) */
+
+/**
+ * Adds change events for subtask checkboxes (to update DB + progress).
+ * @param {HTMLElement} list - The parent element containing the subtask checkboxes.
+ * @param {string} taskId - The id of the task.
+ */
 function setSubtaskCheckboxEvents(list, taskId) {
   list.querySelectorAll('.custom-checkbox').forEach((cb, idx) => {
     cb.addEventListener('change', () => handleSubtaskChange(cb, idx, taskId));
   });
 }
+
+
+/**
+ * Handles a checkbox change event for a subtask:
+ * Updates the subtask's checked status in the database and updates the progress bar/list.
+ * @param {HTMLInputElement} cb - The checkbox element.
+ * @param {number} idx - The index of the subtask in the list.
+ * @param {string} taskId - The id of the parent task.
+ */
 function handleSubtaskChange(cb, idx, taskId) {
   const tasksRef = ref(db, 'tasks/' + taskId);
   get(tasksRef).then(snap => {
@@ -344,6 +372,7 @@ function handleSubtaskChange(cb, idx, taskId) {
     });
   });
 }
+
 
 /**
  * Updates the progress bar and subtask list for a task.
