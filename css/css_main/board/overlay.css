@@ -15,7 +15,7 @@
 .overlay-content {
     background-color: var(--clr-200);
     border-radius: 25px;
-    padding: 2rem;
+    padding: 4rem;
     width: clamp(300px, 525px, 1200px);
     position: fixed;
     top: 50%;
@@ -65,7 +65,7 @@
     transform: translate(-50%, -40%);
     height: min-content;
     width: 80%;
-    padding: 2rem;
+    padding: 4rem;
     border-radius: 25px;
     background: var(--clr-200);
     z-index: 1000;

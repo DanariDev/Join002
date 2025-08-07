@@ -183,10 +183,6 @@
     width: calc(30px + 2vw);
   }
 
-  .summary-box span,
-  #deadline-title {
-    font-size: calc(14px + 1vw);
-  }
 
   #deadline-date {
     font-size: 16px;
@@ -235,8 +231,5 @@
     font-size: 40px;
   }
 
-  .summary-box span,
-  #deadline-title {
-    font-size: 14px;
-  }
+
 }

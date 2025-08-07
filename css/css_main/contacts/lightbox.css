@@ -57,7 +57,7 @@
     color: var(--clr-200);
     border-radius: 20px 0 0 20px;
     min-height: 400px;
-    /* z-index: 900; */
+    padding: 2rem 0 2rem 2rem;
 }
 
 #create-contact-form {
@@ -122,6 +122,7 @@ h2 {
     z-index: 900;
     max-width: 622px;
     position: relative;
+    padding: 2rem 2rem 2rem 0;
 }
 
 .edit-initial-circle {

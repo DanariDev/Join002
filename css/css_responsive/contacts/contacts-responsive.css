@@ -55,19 +55,23 @@
     border-radius: 0 0 25px 25px;
     width: 100%;
     position: static;
+    padding: 2rem;
   }
 
   .overlay-left {
     flex-direction: column;
     border-radius: 25px 25px 0 0;
     width: 100%;
+    padding: 4rem 2rem;
   }
 
-  .overlay-left, .lightbox-left {
-    min-height: 320px;
+  .overlay-left,
+  .overlay-right,
+  .lightbox-left {
+    min-height: fit-content;
   }
 
-  #create-contact-form{
+  #create-contact-form {
     margin-top: -60px;
   }
 
@@ -312,17 +316,26 @@
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 480px) {
+
   .overlay-left span,
   .lightbox-left span {
     font-size: 21px;
   }
 
-  .overlay-left h2{
+  .overlay-right {
+    padding: 2rem 0rem;
+  }
+
+  .overlay-left {
+    padding: 4rem 0rem;
+  }
+
+  .overlay-left h2 {
     font-size: 48px;
   }
 
-  .overlay-box{
+  .overlay-box {
     max-width: 320px;
   }
 }
@@ -397,12 +410,4 @@
   }
 }
 
-@media (max-height: 670px) {
-  .overlay-left{
-    min-height: 224px;
-  }
-
-  .add-initial-circle {
-    top: -35px;
-  }
-}
+@media (max-height: 670px) {}

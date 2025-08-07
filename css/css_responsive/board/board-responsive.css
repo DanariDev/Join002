@@ -89,6 +89,7 @@
       "done"
       "done-tasks";
     gap: 20px;
+    padding: 0px 0 4rem 0;
   }
 
   .to-do-field,

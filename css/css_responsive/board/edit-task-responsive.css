@@ -41,6 +41,7 @@
 @media (max-width: 800px) {
     .overlay-content {
         max-width: 320px;
+        padding: 2rem;
     }
 }
 

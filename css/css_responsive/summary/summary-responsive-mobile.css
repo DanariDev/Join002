@@ -54,12 +54,9 @@
 
   .summary-box span,
   .urgent-wrapper .summary-box span,
-  #deadline-title {
-    font-size: calc(12px + 1vw);
-  }
-
+  #deadline-title,
   #deadline-date {
-    font-size: calc(12px + 1vw);
+    font-size: 16px;
   }
 
   #summary-greeting-wrapper span {
@@ -122,12 +119,6 @@
   .urgent img,
   .urgent-wrapper .summary-box img {
     width: calc(18px + 2vw);
-  }
-
-  .summary-box span,
-  .urgent-wrapper .summary-box span,
-  #deadline-title {
-    font-size: calc(10px + 1vw);
   }
 
   #deadline-date {
