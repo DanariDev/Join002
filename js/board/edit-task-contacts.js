@@ -23,6 +23,7 @@ export function initEditContactsDropdown() {
     snapshot.forEach((child) => {
       allEditContacts.push({ id: child.key, ...child.val() });
     });
+     allEditContacts.sort((selected, compare)=> selected.name.localeCompare(compare.name));
     renderEditContactsDropdown();
     renderSelectedEditInsignias();
   });

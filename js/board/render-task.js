@@ -461,6 +461,8 @@ function collectContacts(ids, allContacts) {
     if (!c) c = findContactByName(id, allContacts);
     if (c) arr.push(c);
   });
+  console.log(arr);
+  arr.sort((selected, compare)=> selected.name.localeCompare(compare.name));
   return arr;
 }
 

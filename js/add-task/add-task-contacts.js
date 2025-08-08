@@ -18,6 +18,7 @@ export function initContactsDropdown() {
     snapshot.forEach((child) => {
       allContacts.push({ id: child.key, ...child.val() });
     });
+    allContacts.sort((selected, compare)=> selected.name.localeCompare(compare.name));
     renderContactsDropdown();
   });
 }
