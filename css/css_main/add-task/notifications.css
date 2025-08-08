@@ -13,10 +13,6 @@
     z-index: 1000;
 }
 
-.d-none {
-    display: none !important;
-}
-
 .error-message-popup {
     position: fixed;
     top: 90px;
