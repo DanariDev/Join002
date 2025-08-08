@@ -57,3 +57,4 @@
 ## ❗ Sonstiges ToDo:
 
 - Ladezeiten & Live-Update testen
+- render-task.js umfasst durch die Dokumentation über 400 Zeilen (ob das relevant sein wird, weiß ich nicht).
