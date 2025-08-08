@@ -292,7 +292,8 @@
     transform: translateY(-38px);
   }
 
-  .close-button {
+  .close-button,
+  .close-overlay-btn {
     color: white;
   }
 

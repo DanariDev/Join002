@@ -18,6 +18,10 @@
     border-radius: 8px;
     text-align: center;
     font-weight: bolder;
+    line-height: 9px;
+    padding: 6.82px 6.05px;
+    padding-top: 6.2px;
+    font-size: 15px;
 }
 
 .responsive-show {

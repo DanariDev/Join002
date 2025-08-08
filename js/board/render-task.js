@@ -230,7 +230,7 @@ function fillOverlayPrio(card) {
   setPopupField('popup-priority', `<b>Priority:</b>
     <div class="prio_spacing">
     <span>${prio}</span>
-    <img src="assets/img/${prio}-btn-icon.png" alt="">
+    <img src="assets/img/${prio.toLowerCase()}-btn-icon.png" alt="">
     </div>`);
 }
 
