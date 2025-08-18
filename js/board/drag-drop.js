@@ -87,7 +87,6 @@ function updateTaskStatus(taskId, newStatus) {
   const updates = {};
   updates['/tasks/' + taskId + '/status'] = newStatus;
   update(ref(db), updates)
-    .then(() => console.log('Task-Status wurde aktualisiert:', newStatus))
     .catch(error => {
       console.error('Fehler beim Aktualisieren:', error);
     });

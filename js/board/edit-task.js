@@ -66,13 +66,10 @@ function setupOverlayKeyboardHandler(overlay) {
 function setupEditTaskSaveHandler(saveBtn, taskId) {
   document.addEventListener("saveTask", async (e) => {
     e.preventDefault();
-    // Hier später: Save-Logik statt console.log
-    // console.log("Save event triggered for taskId:", taskId);
   });
 
   saveBtn.onclick = (e) => {
     e.preventDefault();
-    // console.log("Save button clicked for taskId:", taskId);
     const saveEvent = new Event("saveTask");
     document.dispatchEvent(saveEvent);
   };

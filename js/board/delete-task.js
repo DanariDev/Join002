@@ -16,7 +16,6 @@ export function deleteTask(taskId) {
  * Handles successful task deletion: closes overlay.
  */
 function handleDeleteSuccess() {
-  console.log('Task erfolgreich gelöscht!');
   closeTaskOverlay();
 }
 
@@ -26,7 +25,6 @@ function handleDeleteSuccess() {
  */
 function handleDeleteError(error) {
   console.error('Fehler beim Löschen des Tasks:', error);
-  alert('Fehler beim Löschen. Bitte versuchen Sie es erneut.');
 }
 
 /**

@@ -65,7 +65,7 @@ function loginAsGuest() {
   signInWithEmailAndPassword(auth, 'guest@example.com', 'guest123')
     .then(redirectToSummary)
     .catch(error => {
-      console.log('An unexpected error occurred. Error code:' + error.code);
+      console.error('An unexpected error occurred. Error code:' + error.code);
     });
 }
 
