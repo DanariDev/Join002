@@ -26,7 +26,8 @@ async function request(method, path, body) {
   const token = getToken();
   if (token) headers.Authorization = `Bearer ${token}`;
 
-  const res = await fetch(`${API_BASE}${path}`, {
+  const url = `${API_BASE}?path=${encodeURIComponent(path)}`;
+  const res = await fetch(url, {
     method,
     headers,
     body: body ? JSON.stringify(body) : undefined

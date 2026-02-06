@@ -11,6 +11,11 @@ $path = $_SERVER['PATH_INFO'] ?? parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH
 $path = preg_replace('#^/api(/index\\.php)?#', '', $path);
 $path = rtrim($path, '/');
 
+// Fallback for hosts without PATH_INFO support
+if ($path === '' && isset($_GET['path'])) {
+  $path = '/' . ltrim($_GET['path'], '/');
+}
+
 if ($method === 'OPTIONS') {
   header('Access-Control-Allow-Origin: *');
   header('Access-Control-Allow-Headers: Content-Type, Authorization');
