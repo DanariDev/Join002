@@ -368,4 +368,5 @@ function initEditSubtaskEvents() {
       if (e.target.tagName === "LI") editEditSubtask(e.target);
     };
 }
+
 initEditSubtaskEvents();
