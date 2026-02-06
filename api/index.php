@@ -42,6 +42,15 @@ switch (true) {
   case $method === 'GET' && $path === '/ping':
     json_response(['ok' => true, 'time' => date('c')]);
     break;
+  case $method === 'GET' && $path === '/health':
+    try {
+      $pdo = db();
+      $row = $pdo->query("SELECT 1 AS ok")->fetch();
+      json_response(['ok' => true, 'db' => $row ? true : false, 'time' => date('c')]);
+    } catch (Exception $e) {
+      json_response(['ok' => false, 'db' => false, 'error' => $e->getMessage()], 500);
+    }
+    break;
   case $method === 'GET' && $path === '/contacts':
     contacts_list();
     break;
