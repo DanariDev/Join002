@@ -1,4 +1,4 @@
-const API_BASE = "/api";
+const API_BASE = "/api/index.php";
 const TOKEN_KEY = "join_token";
 const USER_KEY = "join_user";
 
