@@ -1,9 +1,8 @@
-import { auth } from '../firebase/firebase-init.js';
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
 import { checkInput } from "../multiple-application/error-message.js";
+import { api, setAuth } from "../api/client.js";
 
 /**
- * Initializes Firebase login logic: sets up event listeners for user and guest login buttons.
+ * Initializes login logic: sets up event listeners for user and guest login buttons.
  */
 export function initFirebaseLogin() {
   setupUserLoginBtn();
@@ -28,15 +27,18 @@ function setupGuestLoginBtn() {
 
 /**
  * Handles user login:
- * Validates input, tries to sign in with Firebase, and handles errors.
+ * Validates input, tries to sign in via API, and handles errors.
  */
 async function loginUser() {
   const email = getInputValue('email-input');
   const password = getInputValue('password-input');
   let hasError = checkInput(null, "email-input", null, "password-input", null);
   if (hasError) return;
-  signInWithEmailAndPassword(auth, email, password)
-    .then(redirectToSummary)
+  api.login(email, password)
+    .then(({ token, user }) => {
+      setAuth(token, user);
+      redirectToSummary();
+    })
     .catch(error => handleLoginError(error));
 }
 
@@ -51,21 +53,24 @@ function getInputValue(id) {
 
 /**
  * Handles login errors and displays error messages via checkInput().
- * @param {object} error - The error object from Firebase.
+ * @param {object} error - The error object from API.
  */
 function handleLoginError(error) {
-  checkInput(null, "email-input", null, "password-input", null, null, error.code);
+  checkInput(null, "email-input", null, "password-input", null, null, error?.data?.error || "login_failed");
   console.clear();
 }
 
 /**
- * Handles guest login: logs in with a preset guest account.
+ * Handles guest login via API.
  */
 function loginAsGuest() {
-  signInWithEmailAndPassword(auth, 'guest@example.com', 'guest123')
-    .then(redirectToSummary)
-    .catch(error => {
-      console.error('An unexpected error occurred. Error code:' + error.code);
+  api.guest()
+    .then(({ token, user }) => {
+      setAuth(token, user);
+      redirectToSummary();
+    })
+    .catch(() => {
+      console.error('Guest login failed.');
     });
 }
 

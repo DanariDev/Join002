@@ -1,24 +1,25 @@
-import { db } from '../firebase/firebase-init.js';
-import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { renderTask } from "./render-task.js";
 import { setupDragAndDrop } from "./drag-drop.js";
 import { updateColumnPlaceholders } from "./board-placeholder.js";
+import { api } from "../api/client.js";
 
 /**
  * Loads all tasks from the database and renders them into their board columns.
  */
 export function loadTasks() {
-  const tasksRef = ref(db, 'tasks/');
-  onValue(tasksRef, (snapshot) => {
-    const data = snapshot.val();
-    clearColumns();
-    if (data) Object.entries(data).forEach(([id, task]) => {
-      task.id = id;
-      renderTask(task);
+  api.getTasks()
+    .then(({ tasks }) => {
+      clearColumns();
+      const list = tasks || [];
+      window.tasksById = Object.fromEntries(list.map(t => [String(t.id), t]));
+      list.forEach(task => renderTask(task));
+      setupDragAndDrop();
+      updateColumnPlaceholders();
+    })
+    .catch(() => {
+      clearColumns();
+      updateColumnPlaceholders();
     });
-    setupDragAndDrop();
-    updateColumnPlaceholders();
-  });
 }
 
 /**

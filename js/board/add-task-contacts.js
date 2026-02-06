@@ -1,6 +1,5 @@
-import { db } from "../firebase/firebase-init.js";
-import { ref, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "../contacts/contact-style.js";
+import { api } from "../api/client.js";
 
 let allAddContacts = [];
 let selectedAddContacts = new Set();
@@ -11,12 +10,8 @@ let selectedAddContacts = new Set();
 export function initAddContactsDropdown() {
   const dropdownList = document.getElementById("contacts-dropdown-list");
   if (!dropdownList) return;
-  const contactsRef = ref(db, "contacts");
-  onValue(contactsRef, (snapshot) => {
-    allAddContacts = [];
-    snapshot.forEach((child) => {
-      allAddContacts.push({ id: child.key, ...child.val() });
-    });
+  api.getContacts().then(({ contacts }) => {
+    allAddContacts = contacts || [];
     renderAddContactsDropdown();
   });
 }

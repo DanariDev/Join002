@@ -1,5 +1,4 @@
-import { db } from '../firebase/firebase-init.js';
-import { ref, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { api } from "../api/client.js";
 
 /**
  * Initializes deadline date loading: 
@@ -7,13 +6,12 @@ import { ref, get } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-da
  * and updates the UI with the formatted date.
  */
 export function initDeadlineDate() {
-  const tasksRef = ref(db, 'tasks');
-  get(tasksRef).then(snapshot => {
-    if (!snapshot.exists()) return;
-    const tasks = Object.values(snapshot.val());
-    const date = getNextUrgentDeadline(tasks);
-    updateDeadlineUI(date);
-  });
+  api.getTasks()
+    .then(({ tasks }) => {
+      const date = getNextUrgentDeadline(tasks || []);
+      updateDeadlineUI(date);
+    })
+    .catch(() => updateDeadlineUI(null));
 }
 
 /**

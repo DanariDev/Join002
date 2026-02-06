@@ -3,10 +3,9 @@
 import { getContactById } from "./load-contacts.js";
 import { openEditContactLightbox, hideContactCard } from "./edit-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
-import { db } from "../firebase/firebase-init.js";
-import { ref, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { closeAllContactOverlays } from "./contacts-utils.js";
 import { mediaQuery, handleMediaQueryChange } from "./contact-responsive.js";
+import { api } from "../api/client.js";
 
 /**
  * Sets up all click events for contact list, edit and delete buttons.
@@ -184,7 +183,7 @@ function setResponsiveState() {
  */
 async function deleteContact(id) {
   try {
-    await remove(ref(db, `contacts/${id}`));
+    await api.deleteContact(id);
     hideContactCard();
     showSuccessMessage("Contact deleted!");
     toggleResponsiveAddBtn(true);

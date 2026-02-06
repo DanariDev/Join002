@@ -16,7 +16,6 @@ async function onDomLoaded() {
   await loadContacts();
   setupContactClickEvents();
   initAddContactOverlay();
-  await importLiveUpdates();
   setupBackIcon();
   handleMediaQueryChange(mediaQuery);
 }
@@ -27,14 +26,6 @@ async function onDomLoaded() {
  */
 async function loadContacts() {
   await initContactsList();
-}
-
-/**
- * Dynamically imports the live update module for real-time contact changes.
- * @returns {Promise<void>}
- */
-async function importLiveUpdates() {
-  await import("./contacts-live-update.js");
 }
 
 /**

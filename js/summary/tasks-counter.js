@@ -1,16 +1,13 @@
-import { db } from '../firebase/firebase-init.js';
-import { ref, onValue } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js';
+import { api } from "../api/client.js";
 
 /**
  * Initializes task counters:
  * Subscribes to real-time updates from the database and updates all summary counters when tasks change.
  */
 export function initTaskCounters() {
-  const tasksRef = ref(db, 'tasks');
-  onValue(tasksRef, snapshot => {
-    if (!snapshot.exists()) return;
-    updateCounters(Object.values(snapshot.val()));
-  });
+  api.getTasks()
+    .then(({ tasks }) => updateCounters(tasks || []))
+    .catch(() => updateCounters([]));
 }
 
 /**

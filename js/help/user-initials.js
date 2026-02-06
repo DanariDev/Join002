@@ -1,40 +1,28 @@
-import { auth, db } from '../firebase/firebase-init.js';
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { api, getAuthUser, setAuth } from "../api/client.js";
 
 /**
  * Fetches and displays the user's initials in the topbar.
  * Shows "G" if guest is logged in.
  */
 export function showUserInitials() {
-  onAuthStateChanged(auth, user => {
-    if (!user) return;
-    if (user.email === 'guest@example.com') return insertInitials('G');
-    loadUserInitials(user.uid);
-  });
+  const cached = getAuthUser();
+  if (cached?.initials) return insertInitials(cached.initials);
+  if (cached?.name) return insertInitials(getInitials(cached.name));
+  api.me()
+    .then(({ user }) => {
+      if (user) {
+        setAuth(null, user);
+        insertInitials(user.initials || getInitials(user.name || ''));
+      }
+    })
+    .catch(() => {});
 }
 
 /**
  * Loads the user's name from the database and displays initials in the topbar.
  * @param {string} uid - The user's unique ID from Firebase.
  */
-async function loadUserInitials(uid) {
-  if (!uid) return;
-  const userRef = ref(db, `users/${uid}`);
-  const snapshot = await get(userRef);
-  if (!snapshot.exists()) return;
-  const name = snapshot.val().name || '';
-  handleInitialDisplay(name);
-}
-
-/**
- * Generates initials from name and inserts into topbar.
- * @param {string} name - The user's full name.
- */
-function handleInitialDisplay(name) {
-  const initials = getInitials(name);
-  insertInitials(initials || '?');
-}
+// API already returns initials or name
 
 /**
  * Returns the first two uppercase initials from a name string.

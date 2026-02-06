@@ -1,8 +1,7 @@
-import { db } from "../firebase/firebase-init.js";
-import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setupContactClickEvents } from "./open-contact.js";
 import { initContactsList } from "./load-contacts.js";
 import { checkInput } from "../multiple-application/error-message.js";
+import { api } from "../api/client.js";
 
 /**
  * Initializes all 'add contact' overlay buttons and events.
@@ -145,9 +144,7 @@ function getValue(id) {
  * @returns {Promise<void>}
  */
 async function saveContactToDb(contact) {
-  const contactsRef = ref(db, "contacts");
-  const newRef = push(contactsRef);
-  await set(newRef, contact);
+  await api.createContact(contact);
 }
 
 /**

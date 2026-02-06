@@ -1,22 +1,24 @@
-import { db } from '../firebase/firebase-init.js';
-import { ref, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { api } from "../api/client.js";
+import { updateColumnPlaceholders } from "./board-placeholder.js";
 
 /**
  * Deletes a task from Firebase by ID.
  * @param {string} taskId - The ID of the task to delete.
  */
 export function deleteTask(taskId) {
-  const taskRef = ref(db, 'tasks/' + taskId);
-  remove(taskRef)
-    .then(() => handleDeleteSuccess())
+  api.deleteTask(taskId)
+    .then(() => handleDeleteSuccess(taskId))
     .catch(error => handleDeleteError(error));
 }
 
 /**
  * Handles successful task deletion: closes overlay.
  */
-function handleDeleteSuccess() {
+function handleDeleteSuccess(taskId) {
+  const card = document.querySelector(`.task-card[data-task-id="${taskId}"]`);
+  if (card) card.remove();
   closeTaskOverlay();
+  updateColumnPlaceholders();
 }
 
 /**

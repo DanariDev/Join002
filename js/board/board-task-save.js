@@ -1,7 +1,6 @@
-import { db } from "../firebase/firebase-init.js";
-import { ref, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { loadTasks } from "./load-tasks.js";
 import { clearForm } from "../add-task/add-task-save.js";
+import { api } from "../api/client.js";
 
 /**
  * Initializes the save logic for board tasks.
@@ -42,7 +41,7 @@ function getTaskFromForm(form) {
     const description = getValue(form, "[name='description']");
     const dueDate = getValue(form, "[name='dueDate']");
     const priority = getSelectedPriority(form);
-    const status = "todo";
+    const status = "to-do";
     if (!title || !description || !dueDate || !priority) return null;
     return createTaskObj(title, description, dueDate, priority, status);
   } catch (e) {
@@ -87,7 +86,7 @@ function createTaskObj(title, description, dueDate, priority, status) {
     priority,
     status,
     subtasks: [],
-    contacts: []
+    assignedTo: []
   };
 }
 
@@ -96,8 +95,7 @@ function createTaskObj(title, description, dueDate, priority, status) {
  * @param {Object} task - The task object to save.
  */
 async function saveTaskToDB(task) {
-  const taskRef = ref(db, "tasks/");
-  await push(taskRef, task);
+  await api.createTask(task);
 }
 
 /**

@@ -1,7 +1,6 @@
-import { db } from "../firebase/firebase-init.js";
-import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { resetSelectedContacts } from "./add-task-contacts.js";
 import { closeBoardOverlay } from "../board/board-add-task-overlay.js"
+import { api } from "../api/client.js";
 
 /**
  * Saves a task object to Firebase and resets form/UI after success.
@@ -25,9 +24,7 @@ export async function saveTaskToDB(task) {
  * @returns {Promise<void>}
  */
 async function pushTaskToDB(task) {
-  const tasksRef = ref(db, "tasks");
-  const newTaskRef = push(tasksRef);
-  await set(newTaskRef, task);
+  await api.createTask(task);
 }
 
 /**

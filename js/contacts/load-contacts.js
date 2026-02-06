@@ -1,8 +1,7 @@
-import { db } from "../firebase/firebase-init.js";
-import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setupContactClickEvents } from "./open-contact.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
 import { renderSortedContacts } from "./contacts-list-utils.js";
+import { api } from "../api/client.js";
 
 /**
  * Initializes the contact list: fetches from DB and renders them.
@@ -18,10 +17,8 @@ export function initContactsList() {
  * @returns {Promise<Array<Object>>} Array of contact objects.
  */
 async function fetchContactsFromDb() {
-  const contactsRef = ref(db, "contacts");
-  const snapshot = await get(contactsRef);
-  if (!snapshot.exists()) return [];
-  return Object.entries(snapshot.val()).map(([id, data]) => ({ id, ...data }));
+  const { contacts } = await api.getContacts();
+  return contacts || [];
 }
 
 /**
@@ -80,8 +77,7 @@ export function updateContactHTML(contact) {
  * @returns {Promise<Object|null>} The contact object or null if not found.
  */
 export async function getContactById(id) {
-  const contactRef = ref(db, `contacts/${id}`);
-  const snapshot = await get(contactRef);
-  if (!snapshot.exists()) return null;
-  return { id, ...snapshot.val() };
+  const { contacts } = await api.getContacts();
+  const contact = (contacts || []).find(c => String(c.id) === String(id));
+  return contact || null;
 }

@@ -1,6 +1,4 @@
-import { auth, db } from "../firebase/firebase-init.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { api, getAuthUser, setAuth } from "../api/client.js";
 
 /**
  * Initializes the personalized greeting.
@@ -11,10 +9,7 @@ import { ref, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-da
 export function initGreeting() {
   return new Promise(resolve => {
     setGreetingTime();
-    onAuthStateChanged(auth, async user => {
-      await setGreetingName(user);
-      resolve();
-    });
+    setGreetingName().then(resolve);
   });
 }
 
@@ -34,14 +29,26 @@ function setGreetingTime() {
  * or shows nothing if guest is logged in.
  * @param {object} user - The current Firebase user object.
  */
-async function setGreetingName(user) {
+async function setGreetingName() {
   const nameField = document.querySelector("#summary-greeting-name");
-  if (user && user.email !== "guest@example.com") {
-    const snap = await get(ref(db, `users/${user.uid}`));
-    nameField.textContent = snap.exists() && snap.val().name ? snap.val().name : "Unbekannt";
-  } else {
+  const cached = getAuthUser();
+  if (cached?.email === "guest@join.local") {
     nameField.textContent = "";
+    return;
   }
+  if (cached?.name) {
+    nameField.textContent = cached.name;
+    return;
+  }
+  try {
+    const { user } = await api.me();
+    if (user) {
+      setAuth(null, user);
+      nameField.textContent = user.name || "";
+      return;
+    }
+  } catch (e) {}
+  nameField.textContent = "";
 }
 
 /**

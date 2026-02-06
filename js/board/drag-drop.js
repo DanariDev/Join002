@@ -1,5 +1,4 @@
-import { db } from '../firebase/firebase-init.js';
-import { ref, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { api } from "../api/client.js";
 
 /**
  * Sets up drag and drop events for tasks and columns.
@@ -84,10 +83,19 @@ function getStatusFromColumn(column) {
  */
 function updateTaskStatus(taskId, newStatus) {
   if (!taskId || !newStatus) return;
-  const updates = {};
-  updates['/tasks/' + taskId + '/status'] = newStatus;
-  update(ref(db), updates)
-    .catch(error => {
-      console.error('Fehler beim Aktualisieren:', error);
-    });
+  const task = window.tasksById ? window.tasksById[String(taskId)] : null;
+  if (!task) return;
+  task.status = newStatus;
+  api.updateTask(taskId, {
+    title: task.title,
+    description: task.description,
+    category: task.category,
+    dueDate: task.dueDate,
+    priority: task.priority,
+    status: task.status,
+    assignedTo: task.assignedTo || [],
+    subtasks: task.subtasks || []
+  }).catch(error => {
+    console.error('Fehler beim Aktualisieren:', error);
+  });
 }

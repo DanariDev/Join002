@@ -1,7 +1,5 @@
-import { auth, db } from '../firebase/firebase-init.js';
-import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
-import { ref, set, push } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { checkInput } from "../multiple-application/error-message.js";
+import { api, setAuth } from "../api/client.js";
 
 /**
  * Initializes registration form (e.g. sets up button event).
@@ -28,21 +26,15 @@ async function signup() {
   let hasError = checkInput("name-input", "email-input", null, "password-input", "password-repeat-input", "privacy-checkbox");
   if (hasError) return;
   try {
-    const dbWarnings = await registerUser(name, email, password);
-    if (dbWarnings.length) {
-      showNotification(
-        "Account erstellt. Profil-Daten konnten nicht gespeichert werden (Firebase-Rechte).",
-        "error"
-      );
-    } else {
-      showNotification("Registration successful!", "success");
-    }
+    const { token, user } = await registerUser(name, email, password);
+    setAuth(token, user);
+    showNotification("Registration successful!", "success");
     setTimeout(startTransitionToSummary, 1000);
   } catch (e) {
     console.clear();
-    const msg = e.code === "auth/email-already-in-use"
+    const msg = e?.data?.error === "email_exists"
       ? "This email address is already in use."
-      : "Registrierung fehlgeschlagen:\n" + e.message;
+      : "Registrierung fehlgeschlagen:\n" + (e?.message || "");
     showNotification(msg, "error");
   }
 }
@@ -54,28 +46,7 @@ async function signup() {
  * @param {string} password - The user's password.
  */
 async function registerUser(name, email, password) {
-  const cred = await createUserWithEmailAndPassword(auth, email, password);
-  const warnings = [];
-  try {
-    await set(ref(db, `users/${cred.user.uid}`), { name, email });
-  } catch (e) {
-    if (e?.code === "PERMISSION_DENIED" || e?.code === "permission-denied") {
-      warnings.push("users");
-    } else {
-      throw e;
-    }
-  }
-  try {
-    let initials = getInitials(name);
-    await set(push(ref(db, "contacts")), { name, email, initials });
-  } catch (e) {
-    if (e?.code === "PERMISSION_DENIED" || e?.code === "permission-denied") {
-      warnings.push("contacts");
-    } else {
-      throw e;
-    }
-  }
-  return warnings;
+  return await api.register(name, email, password);
 }
 
 /**
@@ -83,10 +54,6 @@ async function registerUser(name, email, password) {
  * @param {string} name - The user's full name.
  * @returns {string} - The initials.
  */
-function getInitials(name) {
-  return name.split(" ").map(n => n[0]?.toUpperCase()).join("").slice(0, 2);
-}
-
 /**
  * Returns the value of an input field by id.
  * @param {string} id - The input field's id.

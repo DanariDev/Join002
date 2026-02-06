@@ -1,9 +1,3 @@
-import { db } from "../firebase/firebase-init.js";
-import {
-  ref,
-  update,
-  get,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import {
   setSelectedEditContacts,
   getSelectedEditContactIds,
@@ -12,6 +6,7 @@ import {
   getSelectedEditPriority,
   initEditPriorityButtons,
 } from "./edit-task-priority.js";
+import { api } from "../api/client.js";
 
 /**
  * Initializes the save button handler for the edit task form.
@@ -120,12 +115,10 @@ function enableSaveBtn() {
  * @param {string} taskId - The ID of the task to load.
  */
 export function showEditForm(taskId) {
-  const taskRef = ref(db, "tasks/" + taskId);
-  get(taskRef).then((snapshot) => {
-    if (!snapshot.exists()) return;
-    fillEditFormWithTask(snapshot.val());
-    openEditOverlay();
-  });
+  const task = window.tasksById ? window.tasksById[String(taskId)] : null;
+  if (!task) return;
+  fillEditFormWithTask(task);
+  openEditOverlay();
 }
 
 /**
@@ -192,7 +185,17 @@ function saveEditedTask() {
   const taskId = window.currentEditTaskId;
   if (!taskId) return console.error("Keine TaskID!");
   const updates = collectUpdates();
-  update(ref(db, "tasks/" + taskId), updates)
+  const task = window.tasksById ? window.tasksById[String(taskId)] : null;
+  if (task) {
+    task.title = updates.title;
+    task.description = updates.description;
+    task.dueDate = updates.dueDate;
+    task.priority = updates.priority;
+    task.category = updates.category;
+    task.subtasks = updates.subtasks;
+    task.assignedTo = updates.assignedTo;
+  }
+  api.updateTask(taskId, { ...updates, status: task?.status || "to-do" })
     .then(closeEditOverlay)
     .catch((error) => console.error("Fehler beim Speichern:", error));
 }

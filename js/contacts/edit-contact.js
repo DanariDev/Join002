@@ -1,8 +1,7 @@
 import { getContactById } from "./load-contacts.js";
-import { db } from "../firebase/firebase-init.js";
-import { ref, update, remove } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "./contact-style.js";
 import { checkInput } from "../multiple-application/error-message.js";
+import { api } from "../api/client.js";
 
 /**
  * Opens the edit contact lightbox for a given contact ID.
@@ -127,7 +126,7 @@ async function saveContactChanges(id) {
   let hasError = checkInput("edit-name", "edit-email", "edit-phone", null, null, null, null);
   if (hasError) return;
   try {
-    await update(ref(db, `contacts/${id}`), fields);
+    await api.updateContact(id, fields);
     closeEditLightbox();
     showSuccessMessage();
   } catch (error) {
@@ -142,7 +141,7 @@ async function saveContactChanges(id) {
  */
 async function deleteContact(id) {
   try {
-    await remove(ref(db, `contacts/${id}`));
+    await api.deleteContact(id);
     closeEditLightbox();
     showSuccessMessage("Kontakt gelöscht!");
   } catch (error) {

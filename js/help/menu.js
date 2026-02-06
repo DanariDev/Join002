@@ -31,9 +31,12 @@ function setupUserIcon(userIcon, menu) {
  */
 function setupLogoutBtn(logoutBtn) {
   logoutBtn.addEventListener('click', () => {
-    localStorage.clear();
-    sessionStorage.clear();
-    window.location.href = 'index.html';
+    import("../api/client.js").then(({ api, clearAuth }) => {
+      api.logout().catch(() => {});
+      clearAuth();
+      sessionStorage.clear();
+      window.location.href = 'index.html';
+    });
   });
 }
 

@@ -1,10 +1,6 @@
-import { db } from "../firebase/firebase-init.js";
-import {
-  ref,
-  onValue,
-} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 import { renderSelectedEditInsignias as renderEditInsigniasBadges } from "./edit-contact-insignias.js";
+import { api } from "../api/client.js";
 
 let allEditContacts = [];
 let selectedEditContacts = new Set();
@@ -17,13 +13,9 @@ export function initEditContactsDropdown() {
     "editing-contacts-dropdown-list"
   );
   if (!dropdownList) return;
-  const contactsRef = ref(db, "contacts");
-  onValue(contactsRef, (snapshot) => {
-    allEditContacts = [];
-    snapshot.forEach((child) => {
-      allEditContacts.push({ id: child.key, ...child.val() });
-    });
-     allEditContacts.sort((selected, compare)=> selected.name.localeCompare(compare.name));
+  api.getContacts().then(({ contacts }) => {
+    allEditContacts = contacts || [];
+    allEditContacts.sort((selected, compare)=> selected.name.localeCompare(compare.name));
     renderEditContactsDropdown();
     renderSelectedEditInsignias();
   });
