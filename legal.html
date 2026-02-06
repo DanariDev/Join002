@@ -23,39 +23,43 @@
     <nav class="sidebar-nav">
       <a href="summary.html" class="nav-link nav-link-hide summary-link d-none">
         <img src="assets/img/summary.png" alt="Summary Icon" />
-        <span class="responsive-font">Summary</span>
+    <span class="responsive-font" data-i18n="common.summary">Summary</span>
       </a>
       <a href="add-task.html" class="nav-link nav-link-hide add-task-link d-none">
         <img src="assets/img/add-task.png" alt="Add Task Icon" />
-        <span class="responsive-font">Add Task</span>
+    <span class="responsive-font" data-i18n="common.addTask">Add Task</span>
       </a>
       <a href="board.html" class="nav-link nav-link-hide board-link d-none">
         <img src="assets/img/board.png" alt="Board Icon" />
-        <span class="responsive-font">Board</span>
+    <span class="responsive-font" data-i18n="common.board">Board</span>
       </a>
       <a href="contacts.html" class="nav-link nav-link-hide contacts-link d-none">
         <img src="assets/img/contacts.png" alt="Contacts Icon" />
-        <span class="responsive-font">Contacts</span>
+    <span class="responsive-font" data-i18n="common.contacts">Contacts</span>
       </a>
 
       <a href="index.html" class="nav-link log-in-link d-none" id="nav-link-unregisteredID">
         <img src="assets/img/login.png" alt="Contacts Icon" />
-        <span class="responsive-font">Log In</span>
+        <span class="responsive-font" data-i18n="common.login">Log In</span>
       </a>
     </nav>
 
     <footer class="sidebar-footer" id="sidebar-footer">
       <div class="sidebar-footer-links responsive-hide-on-mobile" id="sidebar-footer-linksID">
-        <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
-        <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
+        <a class="nav-link privacy-policy-link" href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+        <a class="nav-link legal-link" href="legal.html" data-i18n="common.legalNotice">Legal Notice</a>
       </div>
     </footer>
   </div>
 
   <div class="topbar">
-    <span class="topbar-title">Kanban Project Management Tool</span>
+    <span class="topbar-title" data-i18n="common.kanbanTitle">Kanban Project Management Tool</span>
 
     <img class="topbar-logo" src="assets/img/logo-start.png" alt="">
+    <div class="lang-toggle" data-lang-toggle>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="de">DE</button>
+    </div>
     <div class="topbar-icons d-none" id="topbar-iconsID">
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
       <div class="topbar-user"></div>
@@ -63,17 +67,17 @@
   </div>
 
   <div id="menuID" class="menu d-none">
-    <a class="d-none" href="./help.html">Help</a>
-    <a href="./legal.html">Legal Notice</a>
-    <a href="./privacy-policy.html">Privacy Policy</a>
-    <a href="./index.html" id="log-out-buttonID">Log out</a>
+    <a class="d-none" href="./help.html" data-i18n="common.help">Help</a>
+    <a href="./legal.html" data-i18n="common.legalNotice">Legal Notice</a>
+    <a href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+    <a href="./index.html" id="log-out-buttonID" data-i18n="common.logout">Log out</a>
   </div>
 
   <main class="legal-main">
-    <h1>Legal Notice</h1>
+    <h1 data-i18n="legal.title">Legal Notice</h1>
 
     <section>
-      <h2>Imprint</h2>
+      <h2 data-i18n="legal.imprint">Imprint</h2>
       <p>
         Leonard Fritzmann, Stefan Seegets, Daniel Kwiatkowski, Yama Azizi <br><br>
         Stefan Seegets<br>
@@ -85,7 +89,7 @@
    
 
     <section>
-      <h2>Acceptance of terms</h2>
+      <h2 data-i18n="legal.acceptance">Acceptance of terms</h2>
       <p>
         By accessing and using <span class="blue-print">Join</span> (Product), you acknowledge and agree to the
         following terms and conditions, and any
@@ -95,7 +99,7 @@
     </section>
 
     <section>
-      <h2>Scope and ownership of the product</h2>
+      <h2 data-i18n="legal.scope">Scope and ownership of the product</h2>
       <p>
         <span class="blue-print">Join</span> has been developed as part of a student group project in a web development
         bootcamp at the <span class="blue-print">Developer
@@ -112,7 +116,7 @@
     </section>
 
     <section>
-      <h2>Proprietary rights</h2>
+      <h2 data-i18n="legal.rights">Proprietary rights</h2>
       <p>
         Aside from the design owned by <span class="blue-print">Developer
           Akademie GmbH</span>, we, the listed students, retain all proprietary rights
@@ -122,7 +126,7 @@
     </section>
 
     <section>
-      <h2>Use of the product</h2>
+      <h2 data-i18n="legal.use">Use of the product</h2>
       <p>
         <span class="blue-print">Join</span> is intended to be used for lawful purposes only, in accordance with all
         applicable laws and regulations.
@@ -134,7 +138,7 @@
     </section>
 
     <section>
-      <h2>Disclaimer of warranties and limitation of liability</h2>
+      <h2 data-i18n="legal.disclaimer">Disclaimer of warranties and limitation of liability</h2>
       <p>
         <span class="blue-print">Join</span> is provided "as is" without warranty of any kind, whether express or
         implied, including but not limited to
@@ -148,7 +152,7 @@
     </section>
 
     <section>
-      <h2>Indemnity</h2>
+      <h2 data-i18n="legal.indemnity">Indemnity</h2>
       <p>
         You agree to indemnify, defend and hold harmless us, the listed students, the <span class="blue-print">Developer
           Akademie</span>, and our
@@ -160,7 +164,7 @@
     </section>
 
     <section>
-      <h2>Contact</h2>
+      <h2 data-i18n="legal.contact">Contact</h2>
       <p>
         For any questions or notices, please contact us at <a
           href="mailto:contact@join-app.example">contact@join-app.example</a>.
@@ -168,11 +172,15 @@
     </section>
 
     <section>
-      <p class="date">Date: May 20,2025</p>
+      <p class="date" data-i18n="legal.date">Date: May 20, 2025</p>
     </section>
   </main>
 
 </body>
+<script type="module">
+  import { initI18n } from "./js/i18n/i18n.js";
+  initI18n();
+</script>
 <script type="module" src="./js/help/main.js"></script>
 <script type="module" src="js/multiple-application/changeSidebar.js"></script>
 </html>

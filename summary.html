@@ -28,51 +28,55 @@
     <nav class="sidebar-nav">
       <a href="summary.html" class="nav-link summary-link">
         <img src="assets/img/summary.png" alt="Summary Icon" />
-        <span class="responsive-font">Summary</span>
+        <span class="responsive-font" data-i18n="common.summary">Summary</span>
       </a>
       <a href="add-task.html" class="nav-link add-task-link">
         <img src="assets/img/add-task.png" alt="Add Task Icon" />
-        <span class="responsive-font">Add Task</span>
+        <span class="responsive-font" data-i18n="common.addTask">Add Task</span>
       </a>
       <a href="board.html" class="nav-link board-link">
         <img src="assets/img/board.png" alt="Board Icon" />
-        <span class="responsive-font">Board</span>
+        <span class="responsive-font" data-i18n="common.board">Board</span>
       </a>
       <a href="contacts.html" class="nav-link contacts-link">
         <img src="assets/img/contacts.png" alt="Contacts Icon" />
-        <span class="responsive-font">Contacts</span>
+        <span class="responsive-font" data-i18n="common.contacts">Contacts</span>
       </a>
     </nav>
 
     <footer class="sidebar-footer" id="sidebar-footer">
       <div class="sidebar-footer-links responsive-hide-on-mobile">
-        <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
-        <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
+        <a class="nav-link privacy-policy-link" href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+        <a class="nav-link legal-link" href="legal.html" data-i18n="common.legalNotice">Legal Notice</a>
       </div>
     </footer>
   </div>
 
   <div class="topbar">
-    <span class="topbar-title">Kanban Project Management Tool</span>
+    <span class="topbar-title" data-i18n="common.kanbanTitle">Kanban Project Management Tool</span>
 
     <img class="topbar-logo" src="assets/img/logo-start.png" alt="">
     <div class="topbar-icons">
+      <div class="lang-toggle" data-lang-toggle>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="de">DE</button>
+      </div>
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
       <div class="topbar-user"></div>
     </div>
   </div>
 
   <div id="menuID" class="menu d-none">
-    <a class="d-none" href="./help.html">Help</a>
-    <a href="./legal.html">Legal Notice</a>
-    <a href="./privacy-policy.html">Privacy Policy</a>
-    <a href="./index.html" id="log-out-buttonID">Log out</a>
+    <a class="d-none" href="./help.html" data-i18n="common.help">Help</a>
+    <a href="./legal.html" data-i18n="common.legalNotice">Legal Notice</a>
+    <a href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+    <a href="./index.html" id="log-out-buttonID" data-i18n="common.logout">Log out</a>
   </div>
 
   <div class="summary-header">
-    <h1>Join 360</h1>
+    <h1 data-i18n="common.join360">Join 360</h1>
     <div class="summary-divider"></div>
-    <span class="summary-title">Key Metrics at a Glance</span>
+    <span class="summary-title" data-i18n="common.keyMetrics">Key Metrics at a Glance</span>
   </div>
 
   <main class="summary-main">
@@ -88,14 +92,14 @@
             <img src="assets/img/pencil-icon.png" alt="pencil-icon" />
             <div class="flex-column">
               <h2>0</h2>
-              <span>To-do</span>
+              <span data-i18n="common.toDo">To-do</span>
             </div>
           </div>
           <div id="done" class="summary-box " onclick="window.location.href='board.html'">
             <img src="assets/img/check-icon.png" alt="check-icon" />
             <div class="flex-column">
               <h2>0</h2>
-              <span>Done</span>
+              <span data-i18n="common.done">Done</span>
             </div>
           </div>
         </div>
@@ -105,13 +109,13 @@
             <img src="assets/img/urgent-icon.png" alt="urgent-icon" />
             <div class="flex-column">
               <h2>0</h2>
-              <span>Urgent</span>
+              <span data-i18n="common.urgent">Urgent</span>
             </div>
           </div>
           <div class="divider"></div>
           <div class="flex-column">
             <p id="deadline-date"></p>
-            <span id="deadline-title">Upcoming Deadline</span>
+            <span id="deadline-title" data-i18n="common.upcomingDeadline">Upcoming Deadline</span>
           </div>
         </div>
 
@@ -119,15 +123,15 @@
         <div class="display-flex" onclick="window.location.href='board.html'">
           <div id="atBoard" class="summary-box">
             <h2>0</h2>
-            <span>Tasks in Board</span>
+            <span data-i18n="common.tasksInBoard">Tasks in Board</span>
           </div>
           <div id="onProgress" class="summary-box">
             <h2>0</h2>
-            <span>Task in Progress</span>
+            <span data-i18n="common.tasksInProgress">Task in Progress</span>
           </div>
           <div id="awaitFeedback" class="summary-box">
             <h2>0</h2>
-            <span>Awaiting Feedback</span>
+            <span data-i18n="common.awaitingFeedback">Awaiting Feedback</span>
           </div>
         </div>
       </div>
@@ -141,6 +145,10 @@
 
     </div>
   </main>
+  <script type="module">
+    import { initI18n } from "./js/i18n/i18n.js";
+    initI18n();
+  </script>
   <script type="module" src="./js/summary/main.js"></script>
   <script type="module" src="js/help/main.js"></script>
 

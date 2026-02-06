@@ -1,5 +1,6 @@
 import { checkInput } from "../multiple-application/error-message.js";
 import { api, setAuth } from "../api/client.js";
+import { t } from "../i18n/i18n.js";
 
 /**
  * Initializes registration form (e.g. sets up button event).
@@ -28,13 +29,13 @@ async function signup() {
   try {
     const { token, user } = await registerUser(name, email, password);
     setAuth(token, user);
-    showNotification("Registration successful!", "success");
+    showNotification(t("common.registrationSuccess"), "success");
     setTimeout(startTransitionToSummary, 1000);
   } catch (e) {
     console.clear();
     const msg = e?.data?.error === "email_exists"
-      ? "This email address is already in use."
-      : "Registrierung fehlgeschlagen:\n" + (e?.message || "");
+      ? t("common.emailExists")
+      : t("common.registrationFailed") + "\n" + (e?.message || "");
     showNotification(msg, "error");
   }
 }

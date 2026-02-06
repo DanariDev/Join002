@@ -170,6 +170,30 @@ select:focus {
   box-shadow: var(--shadow-2);
 }
 
+.lang-toggle {
+  display: inline-flex;
+  gap: 6px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--border-200);
+  border-radius: 999px;
+  box-shadow: var(--shadow-1);
+}
+
+.lang-toggle button {
+  border: none;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: transparent;
+  color: var(--ink-700);
+}
+
+.lang-toggle button.active {
+  background: var(--brand-500);
+  color: #fff;
+}
+
 .login-page-wrapper,
 .summary-content-wrapper,
 .board-main,

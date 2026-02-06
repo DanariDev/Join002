@@ -24,39 +24,43 @@
     <nav class="sidebar-nav">
       <a href="summary.html" class="nav-link nav-link-hide summary-link d-none">
         <img src="assets/img/summary.png" alt="Summary Icon" />
-        <span class="responsive-font">Summary</span>
+        <span class="responsive-font" data-i18n="common.summary">Summary</span>
       </a>
       <a href="add-task.html" class="nav-link nav-link-hide add-task-link d-none">
         <img src="assets/img/add-task.png" alt="Add Task Icon" />
-        <span class="responsive-font">Add Task</span>
+        <span class="responsive-font" data-i18n="common.addTask">Add Task</span>
       </a>
       <a href="board.html" class="nav-link nav-link-hide board-link d-none">
         <img src="assets/img/board.png" alt="Board Icon" />
-        <span class="responsive-font">Board</span>
+        <span class="responsive-font" data-i18n="common.board">Board</span>
       </a>
       <a href="contacts.html" class="nav-link nav-link-hide contacts-link d-none">
         <img src="assets/img/contacts.png" alt="Contacts Icon" />
-        <span class="responsive-font">Contacts</span>
+        <span class="responsive-font" data-i18n="common.contacts">Contacts</span>
       </a>
 
       <a href="index.html" class="nav-link log-in-link d-none" id="nav-link-unregisteredID">
         <img src="assets/img/login.png" alt="Contacts Icon" />
-        <span class="responsive-font">Log In</span>
+        <span class="responsive-font" data-i18n="common.login">Log In</span>
       </a>
     </nav>
 
     <footer class="sidebar-footer" id="sidebar-footer">
       <div class="sidebar-footer-links responsive-hide-on-mobile" id="sidebar-footer-linksID">
-        <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
-        <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
+        <a class="nav-link privacy-policy-link" href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+        <a class="nav-link legal-link" href="legal.html" data-i18n="common.legalNotice">Legal Notice</a>
       </div>
     </footer>
   </div>
 
   <div class="topbar">
-    <span class="topbar-title">Kanban Project Management Tool</span>
+    <span class="topbar-title" data-i18n="common.kanbanTitle">Kanban Project Management Tool</span>
 
     <img class="topbar-logo" src="assets/img/logo-start.png" alt="">
+    <div class="lang-toggle" data-lang-toggle>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="de">DE</button>
+    </div>
     <div class="topbar-icons d-none" id="topbar-iconsID">
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
       <div class="topbar-user"></div>
@@ -64,25 +68,25 @@
   </div>
 
   <div id="menuID" class="menu d-none">
-    <a class="d-none" href="./help.html">Help</a>
-    <a href="./legal.html">Legal Notice</a>
-    <a href="./privacy-policy.html">Privacy Policy</a>
-    <a href="./index.html" id="log-out-buttonID">Log out</a>
+    <a class="d-none" href="./help.html" data-i18n="common.help">Help</a>
+    <a href="./legal.html" data-i18n="common.legalNotice">Legal Notice</a>
+    <a href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+    <a href="./index.html" id="log-out-buttonID" data-i18n="common.logout">Log out</a>
   </div>
 
   <main class="privacy-main">
-    <h1>Privacy Policy</h1>
+    <h1 data-i18n="privacy.title">Privacy Policy</h1>
 
-    <h2>1. Introduction</h2>
+    <h2 data-i18n="privacy.intro">1. Introduction</h2>
     <p>This Privacy Policy provides a comprehensive overview of how your personal data is collected, processed, and
       protected when using the Join Kanban Project Management Tool.</p>
 
-    <h2>2. Data Controller</h2>
+    <h2 data-i18n="privacy.dataController">2. Data Controller</h2>
     <p>The Join application is a non-commercial educational project developed at the Developer Akademie GmbH. The
       responsible data controller is:</p>
     <p>Hahnstraße 46<br>60528 Frankfurt, Germany<br>Email: contact@join-app.example</p>
 
-    <h2>3. Types of Data Collected</h2>
+    <h2 data-i18n="privacy.types">3. Types of Data Collected</h2>
     <p>Depending on your interaction with our application, we may collect the following categories of data:</p>
     <ul>
       <li><strong>Identification data:</strong> name, email address</li>
@@ -90,7 +94,7 @@
       <li><strong>Usage data:</strong> task entries, contacts, assigned priorities, subtasks, and timestamps</li>
     </ul>
 
-    <h2>4. Purposes and Legal Basis</h2>
+    <h2 data-i18n="privacy.purposes">4. Purposes and Legal Basis</h2>
     <p>Your data is collected and processed exclusively for the following legitimate purposes:</p>
     <ul>
       <li>To authenticate users and ensure secure access to the platform</li>
@@ -99,20 +103,20 @@
     </ul>
     <p>Processing is based on your explicit consent pursuant to Art. 6(1)(a) GDPR.</p>
 
-    <h2>5. Use of Firebase</h2>
+    <h2 data-i18n="privacy.firebase">5. Use of Firebase</h2>
     <p>The Join platform relies on Firebase, a service provided by Google LLC, for Authentication and Realtime Database
       services. Data may be stored on servers in the United States. We apply privacy-focused configurations and comply
       with EU-U.S. data protection frameworks.</p>
 
-    <h2>6. Cookies and Tracking</h2>
+    <h2 data-i18n="privacy.cookies">6. Cookies and Tracking</h2>
     <p>We do not use cookies, trackers, or third-party analytics tools. Your behavior on the site is not monitored or
       profiled.</p>
 
-    <h2>7. Data Retention</h2>
+    <h2 data-i18n="privacy.retention">7. Data Retention</h2>
     <p>Personal data will only be stored as long as it is necessary for the educational purpose or until you request
       deletion. Once the project ends or upon request, your data will be permanently deleted.</p>
 
-    <h2>8. User Rights</h2>
+    <h2 data-i18n="privacy.rights">8. User Rights</h2>
     <p>You have the right to:</p>
     <ul>
       <li>Access and review your stored personal data (Art. 15 GDPR)</li>
@@ -123,22 +127,26 @@
     <p>Please contact us via email to exercise these rights: <a
         href="mailto:contact@join-app.example">contact@join-app.example</a></p>
 
-    <h2>9. Data Security</h2>
+    <h2 data-i18n="privacy.security">9. Data Security</h2>
     <p>We implement state-of-the-art technical and organizational measures, including end-to-end encryption and secure
       Firebase rules, to safeguard your data against unauthorized access or misuse.</p>
 
-    <h2>10. Policy Updates</h2>
+    <h2 data-i18n="privacy.updates">10. Policy Updates</h2>
     <p>This policy may be amended to reflect legal changes or improvements in our data handling practices. Any
       modifications will be published on this page with an updated effective date.</p>
 
-    <h2>11. Contact</h2>
+    <h2 data-i18n="privacy.contact">11. Contact</h2>
     <p>Should you have any questions, concerns, or data-related requests, please reach out to us at:</p>
     <p>Email: <a href="mailto:contact@join-app.example">contact@join-app.example</a></p>
 
-    <p class="date">Effective date: July 17, 2025</p>
+    <p class="date" data-i18n="privacy.effective">Effective date: July 17, 2025</p>
   </main>
 </body>
 
+<script type="module">
+  import { initI18n } from "./js/i18n/i18n.js";
+  initI18n();
+</script>
 <script type="module" src="./js/help/main.js"></script>
 <script type="module" src="js/multiple-application/changeSidebar.js"></script>
 

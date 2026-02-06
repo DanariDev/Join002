@@ -27,35 +27,39 @@
         <nav class="sidebar-nav">
             <a href="summary.html" class="nav-link summary-link">
                 <img src="assets/img/summary.png" alt="Summary Icon" />
-                <span class="responsive-font">Summary</span>
+        <span class="responsive-font" data-i18n="common.summary">Summary</span>
             </a>
             <a href="add-task.html" class="nav-link add-task-link">
                 <img src="assets/img/add-task.png" alt="Add Task Icon" />
-                <span class="responsive-font">Add Task</span>
+        <span class="responsive-font" data-i18n="common.addTask">Add Task</span>
             </a>
             <a href="board.html" class="nav-link board-link">
                 <img src="assets/img/board.png" alt="Board Icon" />
-                <span class="responsive-font">Board</span>
+        <span class="responsive-font" data-i18n="common.board">Board</span>
             </a>
             <a href="contacts.html" class="nav-link contacts-link">
                 <img src="assets/img/contacts.png" alt="Contacts Icon" />
-                <span class="responsive-font">Contacts</span>
+        <span class="responsive-font" data-i18n="common.contacts">Contacts</span>
             </a>
         </nav>
 
         <footer class="sidebar-footer" id="sidebar-footer">
             <div class="sidebar-footer-links responsive-hide-on-mobile">
-                <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
-                <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
+                <a class="nav-link privacy-policy-link" href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+                <a class="nav-link legal-link" href="legal.html" data-i18n="common.legalNotice">Legal Notice</a>
             </div>
         </footer>
     </div>
 
     <div class="topbar">
-        <span class="topbar-title">Kanban Project Management Tool</span>
+        <span class="topbar-title" data-i18n="common.kanbanTitle">Kanban Project Management Tool</span>
 
         <img class="topbar-logo" src="assets/img/logo-start.png" alt="">
         <div class="topbar-icons">
+            <div class="lang-toggle" data-lang-toggle>
+                <button type="button" data-lang="en">EN</button>
+                <button type="button" data-lang="de">DE</button>
+            </div>
             <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon"
                     class="topbar-icon" /></a>
             <div class="topbar-user"></div>
@@ -63,10 +67,10 @@
     </div>
 
     <div id="menuID" class="menu d-none">
-        <a class="d-none" href="./help.html">Help</a>
-        <a href="./legal.html">Legal Notice</a>
-        <a href="./privacy-policy.html">Privacy Policy</a>
-        <a href="./index.html" id="log-out-buttonID">Log out</a>
+        <a class="d-none" href="./help.html" data-i18n="common.help">Help</a>
+        <a href="./legal.html" data-i18n="common.legalNotice">Legal Notice</a>
+        <a href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+        <a href="./index.html" id="log-out-buttonID" data-i18n="common.logout">Log out</a>
     </div>
 
 
@@ -82,19 +86,19 @@
         <div id="current-btns-responsive" class="current-btns-responsive d-none">
             <button id="current-edit-responsive">
                 <img src="assets/img/edit.png" alt="edit-icon">
-                Edit
+                <span data-i18n="common.edit">Edit</span>
             </button>
 
             <button id="current-delete-responsive">
                 <img src="assets/img/delete.png" alt="delete-icon" />
-                Delete
+                <span data-i18n="common.delete">Delete</span>
             </button>
         </div>
 
 
         <div id="left-section">
             <button id="add-contact-btn-big">
-                <span>Add new Contact</span>
+                <span data-i18n="common.addNewContact">Add new Contact</span>
                 <img src="assets/img/person_add.png" alt="person-icon" />
             </button>
 
@@ -106,8 +110,8 @@
                 <div class="overlay-box">
                     <div class="overlay-left">
                         <img src="assets/img/logo_dark.png" class="join-logo-left">
-                        <h2 class="add-contact-h2">Add contact</h2>
-                        <span>Tasks are better with a team!</span>
+                        <h2 class="add-contact-h2" data-i18n="common.createContact">Add contact</h2>
+                        <span data-i18n="common.betterWithTeam">Tasks are better with a team!</span>
                     </div>
                     <div class="overlay-right">
                         <span onclick="closeAddContactOverlay()" class="close-overlay-btn">✖</span>
@@ -116,24 +120,24 @@
                         </div>
                         <div id="create-contact-form">
                             <div>
-                                <input id="new-name" type="text" placeholder="Name">
+                                <input id="new-name" type="text" placeholder="Name" data-i18n-placeholder="login.name">
                                 <div class="error-message name-error"></div>
                             </div>
 
                             <div>
-                                <input id="new-email" type="email" placeholder="Email">
+                                <input id="new-email" type="email" placeholder="Email" data-i18n-placeholder="login.email">
                                 <div class="error-message email-error"></div>
                             </div>
 
                             <div>
-                                <input id="new-phone" type="tel" placeholder="Phone">
+                                <input id="new-phone" type="tel" placeholder="Phone" data-i18n-placeholder="common.phone">
                                 <div class="error-message phone-error"></div>
                             </div>
 
                             <div class="button-row">
-                                <button type="button" id="cancel-btn" onclick="closeAddContactOverlay()">Cancel
+                                <button type="button" id="cancel-btn" onclick="closeAddContactOverlay()"><span data-i18n="common.cancel">Cancel</span>
                                     ✖</button>
-                                <button id="create-contact-btn" type="submit">Create contact ✔</button>
+                        <button id="create-contact-btn" type="submit" data-i18n="common.createContact">Create contact ✔</button>
                             </div>
                         </div>
                     </div>
@@ -145,11 +149,11 @@
 
             <div class="contact-details-haeder">
                 <div class="responsive-wrapper">
-                    <h1>Contacts</h1>
+                    <h1 data-i18n="common.contactsTitle">Contacts</h1>
                     <button id="back-icon"><img src="assets/img/arrow_left.png" alt="back-icon"></button>
                 </div>
                 <div class="split-contact-header"></div>
-                <span>Better with a team</span>
+                <span data-i18n="common.betterWithTeam">Better with a team</span>
             </div>
 
 
@@ -163,25 +167,25 @@
                         <div id="current-btns" class="current-btns">
                             <button id="current-edit">
                                 <img src=" assets/img/edit.png" alt="edit-icon">
-                                Edit
+                                <span data-i18n="common.edit">Edit</span>
                             </button>
 
                             <button id="current-delete">
                                 <img src="assets/img/delete.png" alt="delete-icon" />
-                                Delete
+                                <span data-i18n="common.delete">Delete</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
                 <div class="current-bottom">
-                    <p>Contact information</p>
+                    <p data-i18n="common.contactInformation">Contact information</p>
 
                     <div class="current-information">
-                        <span>Email</span>
+                        <span data-i18n="login.email">Email</span>
                         <a id="current-mail"><span>Test@mail.de</span></a>
 
-                        <span>Phone</span>
+                        <span data-i18n="common.phone">Phone</span>
                         <a id="current-phone"><span>+49xxxxxxxxx0235</span></a>
                     </div>
                 </div>
@@ -195,30 +199,30 @@
                 <!-- Lightbox-Content -->
                 <div class="lightbox-left">
                     <img src="assets/img/logo_dark.png" class="join-logo-left">
-                    <h2 class="edit-contact-h2">Edit contact</h2>
+                    <h2 class="edit-contact-h2" data-i18n="common.edit">Edit contact</h2>
                 </div>
                 <div class="lightbox-right">
                     <div class="edit-initial-circle" id="edit-initial-circle"></div>
 
                     <div class="editing-lighbox">
                         <div>
-                            <input id="edit-name" type="text" placeholder="Name">
+                            <input id="edit-name" type="text" placeholder="Name" data-i18n-placeholder="login.name">
                             <div class="error-message name-error"></div>
                         </div>
 
                         <div>
-                            <input id="edit-email" type="email" placeholder="Email">
+                            <input id="edit-email" type="email" placeholder="Email" data-i18n-placeholder="login.email">
                             <div class="error-message email-error"></div>
                         </div>
 
                         <div>
-                            <input id="edit-phone" type="tel" placeholder="Phone">
+                            <input id="edit-phone" type="tel" placeholder="Phone" data-i18n-placeholder="common.phone">
                             <div class="error-message phone-error"></div>
                         </div>
 
                         <div class="btns-lighbox">
-                            <button id="deleteBtn">Delete ✖</button>
-                            <button id="saveBtn">Save ✔</button>
+                            <button id="deleteBtn"><span data-i18n="common.delete">Delete</span> ✖</button>
+                            <button id="saveBtn"><span data-i18n="common.save">Save</span> ✔</button>
                         </div>
                     </div>
                 </div>
@@ -230,13 +234,13 @@
 
     <div id="query-window" class="overlay-body d-none">
         <div class="overlay-window">
-            <span>Would you really like to delete this contact?</span>
-            <div class="overlay-buttons-div">
-                <button id="yes-delete-button">Yes</button>
-                <button id="cancel-delete-button">Cancel</button>
-            </div>
+        <span data-i18n="common.deleteContactQuestion">Would you really like to delete this contact?</span>
+        <div class="overlay-buttons-div">
+            <button id="yes-delete-button" data-i18n="common.yes">Yes</button>
+            <button id="cancel-delete-button" data-i18n="common.no">No</button>
         </div>
     </div>
+</div>
 
     <div id="confirmation-window" class="confirmation-window d-none">
         <span>Contact successfully saved!</span>
@@ -247,6 +251,10 @@
 
     <!-- Firebase Grundfunktionen -->
 
+    <script type="module">
+        import { initI18n } from "./js/i18n/i18n.js";
+        initI18n();
+    </script>
     <script type="module" src="./js/help/main.js"></script>
     <script type="module" src="./js/contacts/main.js"></script>
 

@@ -23,65 +23,69 @@
     <nav class="sidebar-nav">
       <a href="summary.html" class="nav-link summary-link">
         <img src="assets/img/summary.png" alt="Summary Icon" />
-        <span class="responsive-font">Summary</span>
+        <span class="responsive-font" data-i18n="common.summary">Summary</span>
       </a>
       <a href="add-task.html" class="nav-link add-task-link">
         <img src="assets/img/add-task.png" alt="Add Task Icon" />
-        <span class="responsive-font">Add Task</span>
+        <span class="responsive-font" data-i18n="common.addTask">Add Task</span>
       </a>
       <a href="board.html" class="nav-link board-link">
         <img src="assets/img/board.png" alt="Board Icon" />
-        <span class="responsive-font">Board</span>
+        <span class="responsive-font" data-i18n="common.board">Board</span>
       </a>
       <a href="contacts.html" class="nav-link contacts-link">
         <img src="assets/img/contacts.png" alt="Contacts Icon" />
-        <span class="responsive-font">Contacts</span>
+        <span class="responsive-font" data-i18n="common.contacts">Contacts</span>
       </a>
     </nav>
 
     <footer class="sidebar-footer" id="sidebar-footer">
       <div class="sidebar-footer-links responsive-hide-on-mobile">
-        <a class="nav-link privacy-policy-link" href="./privacy-policy.html">Privacy Policy</a>
-        <a class="nav-link legal-link" href="legal.html">Legal Notice</a>
+        <a class="nav-link privacy-policy-link" href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+        <a class="nav-link legal-link" href="legal.html" data-i18n="common.legalNotice">Legal Notice</a>
       </div>
     </footer>
   </div>
 
   <div class="topbar">
-    <span class="topbar-title">Kanban Project Management Tool</span>
+    <span class="topbar-title" data-i18n="common.kanbanTitle">Kanban Project Management Tool</span>
 
     <img class="topbar-logo" src="assets/img/logo-start.png" alt="">
     <div class="topbar-icons">
+      <div class="lang-toggle" data-lang-toggle>
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="de">DE</button>
+      </div>
       <a class="help-button" href="help.html"><img src="assets/img/help.png" alt="Help Icon" class="topbar-icon" /></a>
       <div class="topbar-user"></div>
     </div>
   </div>
 
   <div id="menuID" class="menu d-none">
-    <a class="d-none" href="./help.html">Help</a>
-    <a href="./legal.html">Legal Notice</a>
-    <a href="./privacy-policy.html">Privacy Policy</a>
-    <a href="./index.html" id="log-out-buttonID">Log out</a>
+    <a class="d-none" href="./help.html" data-i18n="common.help">Help</a>
+    <a href="./legal.html" data-i18n="common.legalNotice">Legal Notice</a>
+    <a href="./privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+    <a href="./index.html" id="log-out-buttonID" data-i18n="common.logout">Log out</a>
   </div>
 
   <div class="page-wrapper">
 
     <main class="add-task-main">
-      <h1>Add Task</h1>
+      <h1 data-i18n="common.addTask">Add Task</h1>
 
       <form id="add-task-form">
         <div class="add-task-form-content">
-          <label class="required" for="title">Title</label>
-          <input class="title-input title-size" type="text" id="title" placeholder="Enter a title" required />
+          <label class="required" for="title" data-i18n="common.title">Title</label>
+          <input class="title-input title-size" type="text" id="title" placeholder="Enter a title" required data-i18n-placeholder="common.title" />
           <div id="error-title" class="error-message"></div>
 
-          <label for="description">Description</label>
+          <label for="description" data-i18n="common.description">Description</label>
           <textarea rows="4" cols="50" class="description-input" id="description"
             placeholder="Enter a description"></textarea>
 
           </textarea>
           <div class="input-container">
-            <label class="required" for="due-date">Due date</label>
+            <label class="required" for="due-date" data-i18n="common.dueDate">Due date</label>
             <input type="date" id="due-date" placeholder="TT.MM.JJJJ" required>
 
 
@@ -92,25 +96,25 @@
         <div class="grey-bar"></div>
 
         <div class="add-task-form-content">
-          <label>Priority</label>
+          <label data-i18n="common.priority">Priority</label>
           <div id="priority-buttons">
-            <button type="button" id="urgent-btn" class="all-priority-btns">Urgent
+            <button type="button" id="urgent-btn" class="all-priority-btns"><span data-i18n="common.urgent">Urgent</span>
               <img src="assets/img/urgent-btn-icon.png" alt="urgent-icon" />
             </button>
-            <button type="button" id="medium-btn" class="all-priority-btns medium-btn-active">Medium
+            <button type="button" id="medium-btn" class="all-priority-btns medium-btn-active"><span data-i18n="common.medium">Medium</span>
               <img src="assets/img/medium-btn-icon.png" alt="medium-icon" />
             </button>
-            <button type="button" id="low-btn" class="all-priority-btns">Low
+            <button type="button" id="low-btn" class="all-priority-btns"><span data-i18n="common.low">Low</span>
               <img src="assets/img/low-btn-icon.png" alt="low-icon" />
             </button>
 
           </div>
 
-          <label>Assigned to</label>
+          <label data-i18n="common.assignedTo">Assigned to</label>
 
           <div class="contacts-dropdown" id="contacts-dropdown">
             <div class="contacts-dropdown-inner" id="contacts-selected">
-              Select contact(s) to assign
+              <span data-i18n="common.selectContacts">Select contact(s) to assign</span>
             </div>
             <div class="contacts-dropdown-panel d-none" id="contacts-dropdown-panel">
               <div class="contacts-dropdown-list" id="contacts-dropdown-list"></div>
@@ -119,32 +123,32 @@
           <div id="selected-contact-insignias"></div>
 
 
-          <label class="required" for="category">Category</label>
+          <label class="required" for="category" data-i18n="common.category">Category</label>
           <select id="category" required>
-            <option value="" disabled selected>Select task category</option>
-            <option value="Technical Task">Technical Task</option>
-            <option value="User Story">User Story</option>
+            <option value="" disabled selected data-i18n="common.selectCategory">Select task category</option>
+            <option value="Technical Task" data-i18n="common.technicalTask">Technical Task</option>
+            <option value="User Story" data-i18n="common.userStory">User Story</option>
           </select>
           <div id="error-category" class="error-message"></div>
 
-          <label for="subtask">Subtasks</label>
+          <label for="subtask" data-i18n="common.subtasks">Subtasks</label>
           <div class="subtask-wrapper">
-            <input type="text" id="subtask" placeholder="Add new subtask" autocomplete="off" />
+            <input type="text" id="subtask" placeholder="Add new subtask" autocomplete="off" data-i18n-placeholder="common.addSubtask" />
             <button type="button" class="subtask-button">+</button>
           </div>
 
           <ul id="subtask-list"></ul>
 
-          <span class="required-explain-responsive">This field is required</span>
+          <span class="required-explain-responsive" data-i18n="common.requiredShort">This field is required</span>
 
           <div class="add-task-create-and-clear-btn">
             <button type="reset" id="clear-btn">
-              Clear <span class="btn-cross">✖</span>
+              <span data-i18n="common.clear">Clear</span> <span class="btn-cross">✖</span>
             </button>
 
 
             <button id="create-task-btn" type="button" class="btn-create-task">
-              Create Task
+              <span data-i18n="common.createTask">Create Task</span>
               <img src="assets/img/check.png" alt="Check icon" class="btn-icon" />
             </button>
           </div>
@@ -152,11 +156,15 @@
         </div>
       </form>
 
-      <span class="required-explain">This field is required</span>
+      <span class="required-explain" data-i18n="common.required">This field is required</span>
     </main>
   </div>
 
   <!-- Firebase Grundfunktionen -->
+  <script type="module">
+    import { initI18n } from "./js/i18n/i18n.js";
+    initI18n();
+  </script>
   <script type="module" src="js/add-task/add-task-main.js"></script>
 
   <script type="module" src="./js/help/main.js"></script>

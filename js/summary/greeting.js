@@ -1,4 +1,5 @@
 import { api, getAuthUser, setAuth } from "../api/client.js";
+import { t } from "../i18n/i18n.js";
 
 /**
  * Initializes the personalized greeting.
@@ -19,9 +20,9 @@ export function initGreeting() {
 function setGreetingTime() {
   const field = document.querySelector("#summary-greeting-time");
   const h = new Date().getHours();
-  if (h < 12) field.textContent = "Good morning,";
-  else if (h < 18) field.textContent = "Good afternoon,";
-  else field.textContent = "Good evening,";
+  if (h < 12) field.textContent = t("common.goodMorning");
+  else if (h < 18) field.textContent = t("common.goodAfternoon");
+  else field.textContent = t("common.goodEvening");
 }
 
 /**

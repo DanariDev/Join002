@@ -19,7 +19,7 @@
   <div id="page-transition" class="page-transition hidden">
     <div class="loading-content">
       <div class="spinner"></div>
-      <span>Loading Dashboard...</span>
+      <span data-i18n="common.loadingDashboard">Loading Dashboard...</span>
     </div>
   </div>
 
@@ -36,22 +36,22 @@
       </a>
 
       <!-- Mittig zentrierter Titel -->
-      <h1 class="underline">Sign up</h1>
+      <h1 class="underline" data-i18n="common.signupTitle">Sign up</h1>
 
       <form id="loginForm" novalidate>
         <div class="input-wrapper">
-          <input id="name-input" class="name-input" type="text" placeholder="Name"/>
+          <input id="name-input" class="name-input" type="text" placeholder="Name" data-i18n-placeholder="login.name"/>
           <div class="error-message name-error"></div>
         </div>
 
         <div class="input-wrapper">
-          <input id="email-input" class="email-input" type="email" placeholder="Email"/>
+          <input id="email-input" class="email-input" type="email" placeholder="Email" data-i18n-placeholder="login.email"/>
           <div class="error-message email-error"></div>
         </div>
 
         <div class="input-wrapper">
           <div class="passwort-input-button-div">
-            <input type="password" class="password-input" id="password-input" placeholder="Password"/>
+            <input type="password" class="password-input" id="password-input" placeholder="Password" data-i18n-placeholder="login.password"/>
             <div id="show-hide-password" class="d-none"></div>
           </div>
           <div class="error-message password-error"></div>
@@ -59,7 +59,7 @@
 
         <div class="input-wrapper">
           <div class="passwort-repeat-input-button-div">
-            <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password"/>
+            <input id="password-repeat-input" class="password-input" type="password" placeholder="Confirm Password" data-i18n-placeholder="login.confirmPassword"/>
             <div id="show-hide-repeat-password" class="d-none"></div>
           </div>
           <div class="error-message repeat-error"></div>
@@ -67,12 +67,13 @@
 
         <label class="privacy-checkbox-label">
           <input id="privacy-checkbox" type="checkbox"/>
-          I accept the <a id="privacyPolicyFormID" href="privacy-policy.html">Privacy Policy</a>
+          <span data-i18n="login.acceptPrivacy">I accept the Privacy Policy</span>
+          <a id="privacyPolicyFormID" href="privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
         </label>
         <div class="error-message checkbox-error"></div>
 
         <div class="button-row">
-          <button type="button" id="sign-up-btn" class="btn-primary">Sign Up</button>
+          <button type="button" id="sign-up-btn" class="btn-primary" data-i18n="common.signup">Sign Up</button>
         </div>
       </form>
 
@@ -83,12 +84,21 @@
 
   <footer id="login-footer">
     <div class="footer-links">
-      <a id="privacyPolicyID" href="privacy-policy.html">Privacy Policy</a>
-      <a id="legalID" href="legal.html">Legal Notice</a>
+      <a id="privacyPolicyID" href="privacy-policy.html" data-i18n="common.privacyPolicy">Privacy Policy</a>
+      <a id="legalID" href="legal.html" data-i18n="common.legalNotice">Legal Notice</a>
     </div>
   </footer>
   <!-- Firebase Grundfunktionen -->
 
+  <div class="lang-toggle" data-lang-toggle style="position: fixed; top: 18px; right: 18px; z-index: 10;">
+    <button type="button" data-lang="en">EN</button>
+    <button type="button" data-lang="de">DE</button>
+  </div>
+
+  <script type="module">
+    import { initI18n } from "./js/i18n/i18n.js";
+    initI18n();
+  </script>
   <script type="module" src="js/register/main.js"></script>
   <script type="module" src="js/multiple-application/changeSidebarStarter.js"></script>
   <script type="module" src="js/multiple-application/show-hide-password.js"></script>
