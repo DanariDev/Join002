@@ -274,6 +274,13 @@ body.hidden > *:not(#summary-loader) {
   flex: 1;
   min-width: 0;
   /* Korrigierter Wert von 'px' */
+  cursor: pointer;
+  user-select: none;
+}
+
+.summary-box * {
+  cursor: pointer;
+  user-select: none;
 }
 
 .summary-box span {
