@@ -1,0 +1,198 @@
+/* ===== css/css_responsive/login/login-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {
+  .underline:after {
+    left: 43.5%;
+    right: 43.5%;
+  }
+}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 1100px) {
+
+  body.register-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  body.register-page .login-page-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  body.register-page footer#login-footer {
+    margin-top: auto;
+    padding: 1rem 0;
+  }
+
+  body.register-page .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+
+
+  .login-page-wrapper {
+    height: calc(100vh - 16rem);
+    justify-content: space-between;
+    padding: 10rem 0rem 0rem 0rem;
+  }
+
+  .login-box {
+    max-width: 500px;
+    width: 90%;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .sign-up-wrapper-responsive {
+    font-size: var(--fs-16);
+    color: var(--clr-700);
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 8px;
+  }
+
+  .sign-up-wrapper {
+    display: none;
+  }
+
+  #sidebar-footer {
+    display: none;
+  }
+
+  .underline:after {
+    left: 38%;
+    right: 38%;
+  }
+
+  .logo {
+    height: 80px;
+    width: 80px;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    object-fit: contain;
+  }
+
+  .passwort-input-button-div,
+  .passwort-repeat-input-button-div {
+    width: 100%;
+  }
+
+  #show-hide-password,
+  #show-hide-repeat-password {
+    justify-self: anchor-center;
+    right: -350px;
+  }
+}
+
+@media (max-width: 534px) {
+
+  #show-hide-password,
+  #show-hide-repeat-password {
+    right: 41px;
+    justify-self: auto;
+  }
+
+  .logo {
+    top: calc(-1 * (80px + 0.5rem));
+  }
+}
+
+@media (max-width: 490px) {
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 14px;
+    max-width: none;
+    width: 150px;
+  }
+
+  .underline:after {
+    left: 50%;
+    right: 36.5%;
+  }
+
+  .button-row {
+    flex-direction: column;
+    margin: 21px 5px 5px 5px;
+    align-items: center;
+    gap: 21px;
+  }
+
+  .logo {
+    top: calc(-1 * (80px + 0.5rem));
+  }
+}
+
+@media (max-width: 320px) {
+  .underline:after {
+    left: 50%;
+    right: 28.5%;
+  }
+
+  .logo {
+    top: calc(-1 * (80px + 0.5rem));
+  }
+}
+
+/* ===== css/css_responsive/login/intro-responsive.css ===== */
+@media (min-width: 1101px) {
+    .starting-logo-responsive {
+        display: none;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    .starting-logo {
+        object-fit: contain;
+        opacity: 0;
+    }
+
+    .starting-logo-responsive {
+        animation: slideToLeftCornerResponsive 1.25s 0.637s ease forwards;
+        background-color: var(--clr-700);
+        height: 100%;
+        width: 100%;
+        object-fit: none;
+        border: none;
+        box-shadow: none;
+    }
+
+    @keyframes slideToLeftCornerResponsive {
+        to {
+            width: 50px;
+            height: 120px;
+            top: 32px;
+            left: 20px;
+            transform: translate(0, 0);
+            background-color: transparent;
+            opacity: 0;
+            object-fit: none;
+        }
+    }
+
+    @keyframes slideToLeftCorner {
+        to {
+            width: 50px;
+            height: 120px;
+            top: 10px;
+            left: 20px;
+            transform: translate(0, 0);
+            background-color: transparent;
+            object-fit: contain;
+            opacity: 1;
+        }
+    }
+}
+

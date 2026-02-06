@@ -1,13 +1,10 @@
 import { loadTasks } from "./load-tasks.js";
 import { initBoardOverlay } from "./board-add-task-overlay.js";
 import { initSearch } from "./search.js";
-import { deleteTask } from "./delete-task.js";
-import { openEditTaskOverlay } from "./edit-task.js";
 import { initBoardTaskSave } from "./board-task-save.js";
 import { initEditTaskForm } from "./edit-task-form.js";
 import { initEditContactsDropdown, setupEditDropdownOpenClose } from "./edit-task-contacts.js";
 import { initAddContactsDropdown, setupAddDropdownOpenClose } from "./add-task-contacts.js";
-import { updateColumnPlaceholders } from './board-placeholder.js';
 
 /**
  * Initializes all modules and event handlers on DOM ready.
@@ -22,6 +19,7 @@ function onDomLoaded() {
   initEditModules();
   initAddTaskModules();
   initTaskOverlayOutsideClick();
+  initTaskOverlayEscClose();
 }
 
 /**
@@ -58,6 +56,13 @@ function initTaskOverlayOutsideClick() {
   const overlay = document.getElementById('task-overlay');
   if (!overlay) return;
   overlay.addEventListener('click', e => closeTaskOverlayOnClick(e, overlay));
+}
+
+/**
+ * Enables Escape key to close the task overlay.
+ */
+function initTaskOverlayEscClose() {
+  document.addEventListener('keydown', onEscKeyCloseOverlay);
 }
 
 /**

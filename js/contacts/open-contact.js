@@ -207,14 +207,14 @@ function toggleResponsiveAddBtn(isDelete) {
  * @param {string} message - Message text.
  */
 function showSuccessMessage(message) {
-  const window = document.getElementById("confirmation-window");
-  if (!window) return;
-  window.querySelector("span").textContent = message;
-  window.classList.remove("d-none");
-  window.style.display = "block";
+  const msgWindow = document.getElementById("confirmation-window");
+  if (!msgWindow) return;
+  msgWindow.querySelector("span").textContent = message;
+  msgWindow.classList.remove("d-none");
+  msgWindow.style.display = "block";
   setTimeout(() => {
-    window.classList.add("d-none");
-    window.style.display = "none";
+    msgWindow.classList.add("d-none");
+    msgWindow.style.display = "none";
   }, 2000);
 }
 
@@ -223,16 +223,16 @@ function showSuccessMessage(message) {
  * @param {string} message - Message text.
  */
 function showErrorMessage(message) {
-  const window = document.getElementById("confirmation-window");
-  if (!window) return;
-  window.querySelector("span").textContent = message;
-  window.classList.remove("d-none");
-  window.classList.add("error");
-  window.style.display = "block";
+  const msgWindow = document.getElementById("confirmation-window");
+  if (!msgWindow) return;
+  msgWindow.querySelector("span").textContent = message;
+  msgWindow.classList.remove("d-none");
+  msgWindow.classList.add("error");
+  msgWindow.style.display = "block";
   setTimeout(() => {
-    window.classList.add("d-none");
-    window.classList.remove("error");
-    window.style.display = "none";
+    msgWindow.classList.add("d-none");
+    msgWindow.classList.remove("error");
+    msgWindow.style.display = "none";
   }, 2000);
 }
 
@@ -241,20 +241,6 @@ function showErrorMessage(message) {
  * @param {string} message - The message text.
  * @param {boolean} isError - Whether it's an error message.
  */
-function showMessage(message, isError) {
-  const win = document.getElementById("confirmation-window");
-  const span = win?.querySelector("span");
-  if (!win || !span) return;
-  span.textContent = message;
-  win.classList.remove("d-none");
-  if (isError) win.classList.add("error");
-  else win.classList.remove("error");
-  setTimeout(() => {
-    win.classList.add("d-none");
-    win.classList.remove("error");
-  }, 2000);
-}
-
 /**
  * Closes the contact card and shows the contact list.
  */

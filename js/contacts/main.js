@@ -1,7 +1,6 @@
 import { initContactsList } from "./load-contacts.js";
 import { setupContactClickEvents, backToContactList } from "./open-contact.js";
 import { initAddContactOverlay } from "./create-contact.js";
-import { renderSortedContacts } from "./contacts-list-utils.js";
 import { mediaQuery, handleMediaQueryChange } from "./contact-responsive.js";
 
 /**

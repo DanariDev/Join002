@@ -28,8 +28,15 @@ async function signup() {
   let hasError = checkInput("name-input", "email-input", null, "password-input", "password-repeat-input", "privacy-checkbox");
   if (hasError) return;
   try {
-    await registerUser(name, email, password);
-    showNotification("registration successfuly!", "success");
+    const dbWarnings = await registerUser(name, email, password);
+    if (dbWarnings.length) {
+      showNotification(
+        "Account erstellt. Profil-Daten konnten nicht gespeichert werden (Firebase-Rechte).",
+        "error"
+      );
+    } else {
+      showNotification("Registration successful!", "success");
+    }
     setTimeout(startTransitionToSummary, 1000);
   } catch (e) {
     console.clear();
@@ -48,9 +55,27 @@ async function signup() {
  */
 async function registerUser(name, email, password) {
   const cred = await createUserWithEmailAndPassword(auth, email, password);
-  await set(ref(db, `users/${cred.user.uid}`), { name, email });
-  let initials = getInitials(name);
-  await set(push(ref(db, "contacts")), { name, email, initials });
+  const warnings = [];
+  try {
+    await set(ref(db, `users/${cred.user.uid}`), { name, email });
+  } catch (e) {
+    if (e?.code === "PERMISSION_DENIED" || e?.code === "permission-denied") {
+      warnings.push("users");
+    } else {
+      throw e;
+    }
+  }
+  try {
+    let initials = getInitials(name);
+    await set(push(ref(db, "contacts")), { name, email, initials });
+  } catch (e) {
+    if (e?.code === "PERMISSION_DENIED" || e?.code === "permission-denied") {
+      warnings.push("contacts");
+    } else {
+      throw e;
+    }
+  }
+  return warnings;
 }
 
 /**

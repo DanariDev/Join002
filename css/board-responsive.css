@@ -1,0 +1,443 @@
+/* ===== css/css_responsive/contacts/query-overlay-responsive.css ===== */
+@media (max-width: 1100px) {
+    .confirmation-window {
+      position: fixed;
+      top: 24px;                 /* Etwas näher am oberen Rand auf kleinen Geräten */
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      background-color: var(--clr-700);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      z-index: 9999;
+      width: auto;
+      max-width: 90vw;           /* Damit es nicht zu breit wird */
+      margin: 0;
+      box-sizing: border-box;
+      text-align: center;
+    }
+  }
+
+/* ===== css/css_responsive/board/board-responsive.css ===== */
+@media (min-width: 1920px) {
+  select#category {
+    min-height: 50px;
+    min-width: 480px;
+    font-size: calc(var(--fs-20) * 1);
+  }
+
+  .add-task-main {
+    margin: 0 auto;
+    padding: 4rem;
+  }
+
+  .board-main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 4rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  h1 {
+    font-size: 47px;
+  }
+
+  #sidebar-footer {
+    display: none;
+  }
+
+  .board-main {
+    margin-left: 0;
+    padding: 10px 10px 8vh 10px;
+  }
+
+  .board-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .board-header a {
+    text-decoration: none;
+  }
+
+  .responsive-d-none {
+    display: none;
+  }
+
+  .responsive-show {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    border-radius: 55px;
+    font-size: 36px;
+  }
+
+  #add-task-button-responsive {
+    padding: 8px 13.62px;
+  }
+
+  .search-task-field {
+    display: flex;
+    justify-content: center;
+  }
+
+  .responsive-space-between {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .add-task-button {
+    flex: 0;
+    width: 35px;
+    text-align: center;
+    padding: 5px;
+  }
+
+  #board {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "to-do"
+      "to-do-tasks"
+      "in-progress"
+      "in-progress-tasks"
+      "await"
+      "await-tasks"
+      "done"
+      "done-tasks";
+    gap: 20px;
+    padding: 0px 0 4rem 0;
+  }
+
+  .to-do-field,
+  .in-progress-field,
+  .await-field,
+  .done-field {
+    justify-content: space-between;
+  }
+
+  #form-add-task {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #add-task-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+@media (max-height: 670px) {
+  .assigned-list {
+    max-height: 100px;
+  }
+}
+
+/* ===== css/css_responsive/topbar/topbar-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 1100px) {
+
+    .topbar {
+        height: 55px;
+        padding: 1rem;
+        margin-left: 0;
+        box-shadow: 0px 4px 6px var(--clr-300);
+    }
+
+    .topbar-title {
+        display: none;
+    }
+
+    .topbar-logo {
+        display: block;
+        max-width: 50px;
+    }
+
+    .topbar-user {
+        width: 40px;
+        height: 40px;
+    }
+
+    .topbar-icons a {
+        display: none;
+        /* justify-content: space-between; */
+    }
+
+    .menu a {
+        display: flex;
+        /* padding: 6px;
+        border-radius: 16px 0px 0px 16px; */
+    }
+}
+
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
+
+/* ===== css/css_responsive/sidebar/sidebar-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 1100px) {
+
+    .legal-main {
+        padding-bottom: 10vh;
+        margin: 0;
+    }
+
+    .sidebar {
+        width: 100vw;
+        max-width: none;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        top: auto;
+        bottom: 0;
+        padding-top: 0px;
+        gap: 0;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 6px;
+        padding: 0;
+    }
+
+    .responsive-font {
+        font-size: 14px;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-link:hover {
+        background-color: #1c2b3b;
+    }
+
+    .nav-link img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sidebar-footer {
+        padding: 0;
+        display: none;
+    }
+
+    .responsive-hide-on-mobile {
+        display: none;
+    }
+
+    .responsive-show-on-mobile {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .add-task-link,
+    .board-link,
+    .contacts-link,
+    .summary-link,
+    .log-in-link,
+    .privacy-policy-link,
+    .legal-link {
+        border-radius: 20px;
+    }
+
+    .privacy-policy-link,
+    .legal-link {
+        padding: 31px 10px;
+    }
+
+    .sidebar-footer-links a {
+        margin: 0;
+    }
+
+    .unregistered-sidebar {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
+
+/* ===== css/css_responsive/board/board-overlay-responsive.css ===== */
+.edit-task-form-content {
+    gap: 8px;
+}
+
+@media (max-width: 1100px) {
+
+    #popup-due-date,
+    #popup-priority {
+        max-width: none;
+    }
+
+    .prio_spacing img {
+        max-width: 22px;
+    }
+
+    li span {
+        width: 80%;
+    }
+}
+
+/* ===== css/css_responsive/board/edit-task-responsive.css ===== */
+@media (max-width: 1100px) {
+    #edit-task-form {
+        flex-direction: column;
+        overflow: auto;
+    }
+
+    .edit-task-main {
+        max-height: 560px;
+        margin: 32px;
+    }
+
+    .edit-task-main h1 {
+        display: none;
+    }
+
+    .grey-bar {
+        display: none;
+    }
+
+    #popup-title h2 {
+        font-size: 36px;
+        font-weight: 700;
+    }
+
+    .overlay-content {
+        font-size: 16px;
+    }
+
+    #editing-cancel-btn {
+        display: none;
+    }
+
+    #editing-save-btn {
+        position: absolute;
+        top: 570px;
+        right: 16px;
+        width: 65px;
+    }
+}
+
+@media (max-width: 800px) {
+    .overlay-content {
+        max-width: 320px;
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 520px) {
+    .edit-task-cancel-and-save-btn {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #editing-priority-buttons {
+        gap: 8px;
+    }
+
+    #editing-priority-buttons button {
+        text-wrap-mode: nowrap;
+        font-size: 16px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    #editing-priority-buttons button img {
+        height: 13px;
+        width: 17.06px;
+        object-fit: contain;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 500px) {
+    .overlay-content {
+        width: 256px;
+    }
+
+    .edit-task-main h2 {
+        font-size: 40px;
+    }
+
+    .overlay-section {
+        gap: 16px;
+    }
+
+    #popup-title h2 {
+        font-size: 36px;
+        font-weight: 700;
+        margin: 4px 0;
+    }
+}
+
+@media (max-width: 450px) {
+    #editing-contacts-selected {
+        font-size: 16px;
+    }
+}
+
+
+@media (max-width: 400px) {
+    .edit-task-main {
+        padding: 4rem 2rem;
+    }
+
+    .required-explain {
+        margin-top: 2px;
+    }
+}
+
+
+@media (min-width: 1100px) {
+    .edit-task-form-content {
+        gap: 10px;
+    }
+}
+

@@ -102,7 +102,6 @@ function showLightboxElements() {
  */
 function setupLightboxButtons(id) {
   setupBtn("saveBtn", () => saveContactChanges(id));
-  setupBtn("cancelBtn", closeEditLightbox);
   setupBtn(".close-button", closeEditLightbox, true);
   setupBtn("deleteBtn", () => deleteContact(id));
   setupBtn("current-delete-responsive", () => deleteContact(id));

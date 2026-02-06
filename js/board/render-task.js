@@ -1,8 +1,7 @@
 import { openEditTaskOverlay } from "./edit-task.js";
-import { showEditForm, initEditTaskForm } from "./edit-task-form.js";
 import { getInitials, getRandomColor } from "../contacts/contact-style.js";
 import { db } from "../firebase/firebase-init.js";
-import { ref, get, onValue, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+import { ref, get, update } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { deleteTask } from "./delete-task.js";
 import { renderProgressBar } from "./progress-bar.js";
 
@@ -246,7 +245,7 @@ function applyOverlayCategoryStyle() {
  * Generates assigned contact initials for the overlay.
  * @param {string} taskId - The ID of the task.
  */
-function assignedToGenerate(taskId) {
+async function assignedToGenerate(taskId) {
   const container = document.getElementById("popup-assigned");
   container.innerHTML = "";
   const label = document.createElement("b");
@@ -256,13 +255,12 @@ function assignedToGenerate(taskId) {
   initialGroupDiv.className = "initial-group";
   container.appendChild(initialGroupDiv);
   const tasksRef = ref(db, 'tasks/' + taskId);
-  onValue(tasksRef, snapshot => {
-    const taskData = snapshot.val();
-    if (taskData && taskData.assignedTo)
-      renderAssignedContacts(taskData.assignedTo, initialGroupDiv);
-    else
-      initialGroupDiv.innerHTML = "<span>None assigned</span>";
-  });
+  const snapshot = await get(tasksRef);
+  const taskData = snapshot.val();
+  if (taskData && taskData.assignedTo)
+    renderAssignedContacts(taskData.assignedTo, initialGroupDiv);
+  else
+    initialGroupDiv.innerHTML = "<span>None assigned</span>";
 }
 
 /**
@@ -270,15 +268,14 @@ function assignedToGenerate(taskId) {
  * @param {string} taskId - The ID of the task.
  * @param {Function} callback - The callback to receive the formatted date.
  */
-function dueDateGenerate(taskId, callback) {
-  const tasksRef = ref(db, 'tasks/');
-  onValue(tasksRef, snapshot => {
-    const data = snapshot.val();
-    if (data && data[taskId]) {
-      const rawDate = data[taskId].dueDate;
-      callback(formatDate(rawDate));
-    }
-  });
+async function dueDateGenerate(taskId, callback) {
+  const tasksRef = ref(db, 'tasks/' + taskId);
+  const snapshot = await get(tasksRef);
+  const data = snapshot.val();
+  if (data) {
+    const rawDate = data.dueDate;
+    callback(formatDate(rawDate));
+  }
 }
 
 /**

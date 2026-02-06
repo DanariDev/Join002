@@ -1,7 +1,6 @@
 import { db } from "../firebase/firebase-init.js";
 import { ref, push, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { setupContactClickEvents } from "./open-contact.js";
-import { closeAllContactOverlays } from "./contacts-utils.js";
 import { initContactsList } from "./load-contacts.js";
 import { checkInput } from "../multiple-application/error-message.js";
 

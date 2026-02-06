@@ -1,0 +1,274 @@
+/* ===== css/css_responsive/sidebar/sidebar-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 1100px) {
+
+    .legal-main {
+        padding-bottom: 10vh;
+        margin: 0;
+    }
+
+    .sidebar {
+        width: 100vw;
+        max-width: none;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        top: auto;
+        bottom: 0;
+        padding-top: 0px;
+        gap: 0;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 6px;
+        padding: 0;
+    }
+
+    .responsive-font {
+        font-size: 14px;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-link:hover {
+        background-color: #1c2b3b;
+    }
+
+    .nav-link img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sidebar-footer {
+        padding: 0;
+        display: none;
+    }
+
+    .responsive-hide-on-mobile {
+        display: none;
+    }
+
+    .responsive-show-on-mobile {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .add-task-link,
+    .board-link,
+    .contacts-link,
+    .summary-link,
+    .log-in-link,
+    .privacy-policy-link,
+    .legal-link {
+        border-radius: 20px;
+    }
+
+    .privacy-policy-link,
+    .legal-link {
+        padding: 31px 10px;
+    }
+
+    .sidebar-footer-links a {
+        margin: 0;
+    }
+
+    .unregistered-sidebar {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
+
+/* ===== css/css_responsive/add-task/add-task-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1920px) {
+    select#category {
+        min-height: 50px;
+        min-width: 480px;
+        font-size: calc(var(--fs-20) * 1);
+    }
+
+    .add-task-main {
+        margin: 0 auto;
+        padding: 4rem;
+        padding-bottom: 0;
+    }
+
+    .add-task-form-content {
+        flex: 1 1 50%;
+        min-width: 480px;
+    }
+}
+
+@media (max-width: 1100px) {
+    #add-task-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .success-message {
+        text-align: center;
+    }
+}
+
+@media (max-width: 1100px) {
+
+    h1 {
+        font-size: 47px !important;
+    }
+
+    #sidebar-footer {
+        display: none;
+    }
+
+    .add-task-main {
+        margin: 0;
+        padding: 1rem;
+        padding-bottom: 71px;
+    }
+
+    input {
+        box-sizing: border-box;
+    }
+
+    .add-task-create-and-clear-btn {
+        padding: 10px;
+        gap: 32px;
+    }
+
+    .required-explain {
+        display: none;
+        font-size: var(--fs-20);
+    }
+
+    .required-explain-responsive {
+        font-size: var(--fs-20);
+        display: block;
+    }
+
+    input,
+    select,
+    textarea {
+        max-width: none;
+    }
+
+    .input-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    #urgent-btn,
+    #medium-btn,
+    #low-btn {
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    #urgent-btn,
+    #medium-btn,
+    #low-btn {
+        text-wrap-mode: nowrap;
+        font-size: 16px;
+        max-width: 180px;
+    }
+
+    .btn-create-task,
+    #clear-btn {
+        text-wrap-mode: nowrap;
+        font-size: 18px;
+    }
+
+    #urgent-btn img,
+    #medium-btn img,
+    #low-btn img {
+        height: 14px;
+        width: 18.38px;
+        object-fit: contain;
+    }
+}
+
+/* ===== css/css_responsive/topbar/topbar-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 1100px) {
+
+    .topbar {
+        height: 55px;
+        padding: 1rem;
+        margin-left: 0;
+        box-shadow: 0px 4px 6px var(--clr-300);
+    }
+
+    .topbar-title {
+        display: none;
+    }
+
+    .topbar-logo {
+        display: block;
+        max-width: 50px;
+    }
+
+    .topbar-user {
+        width: 40px;
+        height: 40px;
+    }
+
+    .topbar-icons a {
+        display: none;
+        /* justify-content: space-between; */
+    }
+
+    .menu a {
+        display: flex;
+        /* padding: 6px;
+        border-radius: 16px 0px 0px 16px; */
+    }
+}
+
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
+

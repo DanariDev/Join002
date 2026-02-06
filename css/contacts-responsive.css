@@ -1,0 +1,605 @@
+/* ===== css/css_responsive/contacts/contacts-responsive.css ===== */
+/* Media Querry Small Displays */
+.no-scroll {
+  overflow: hidden !important;
+}
+
+@media (max-width: 970px) {
+
+  .lightbox-left,
+  .lightbox-right {
+    min-height: fit-content;
+  }
+
+  .split-contact-header {
+    display: none;
+  }
+
+  .contact-details-haeder span {
+    position: relative;
+  }
+
+  .contact-details-haeder span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -24px;
+    width: 50%;
+    height: 5px;
+    background-color: var(--clr-500);
+    border-radius: 4px;
+  }
+
+  #right-section {
+    padding: 0;
+  }
+
+  #showed-current-contact {
+    padding: 5rem 0;
+  }
+
+  .editing-lighbox {
+    gap: 18px;
+  }
+
+}
+
+@media (max-width: 1100px) {
+  .overlay-box {
+    flex-direction: column;
+    height: auto;
+    width: auto;
+  }
+
+  .overlay-right {
+    flex-direction: column;
+    border-radius: 0 0 25px 25px;
+    width: 100%;
+    position: static;
+    padding: 2rem;
+  }
+
+  .overlay-left {
+    flex-direction: column;
+    border-radius: 25px 25px 0 0;
+    width: 100%;
+    padding: 4rem 2rem;
+  }
+
+  .overlay-left,
+  .overlay-right,
+  .lightbox-left {
+    min-height: fit-content;
+  }
+
+  #create-contact-form {
+    margin-top: -60px;
+  }
+
+  #create-contact-form input {
+    width: 90%;
+  }
+
+  .add-initial-circle {
+    width: 95.07px;
+    padding: .764rem 1rem;
+    position: relative;
+    top: -60px;
+  }
+
+  .edit-initial-circle {
+    max-width: 120px;
+    max-height: 120px;
+    border-radius: 100%;
+    font-size: 47px;
+    position: relative;
+    top: -128px;
+
+  }
+
+  .contact-details-haeder {
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: start;
+    gap: 8px;
+    font-size: 20px;
+  }
+
+  h1 {
+    font-size: 47px;
+  }
+
+  #current-btns {
+    display: none;
+  }
+
+  #add-contact-btn-big {
+    display: none;
+  }
+
+  #current-btns-responsive {
+    gap: 0;
+    flex-direction: column;
+    position: absolute;
+    top: 68%;
+    right: 1%;
+    transform: translateY(230%);
+    transition: transform 0.5s ease-in-out;
+    background-color: var(--clr-200);
+    z-index: 9999;
+    box-shadow: -5px 5px 10px rgba(0, 0, 0, 0.3);
+    border-radius: 25px 25px 0 25px;
+  }
+
+  #current-btns-responsive.show {
+    transform: translateY(0);
+  }
+
+  #current-edit {
+    height: 50px;
+    border-radius: 25px 25px 0 0;
+  }
+
+  #current-delete {
+    height: 50px;
+    border-radius: 0 0 0 25px;
+  }
+
+  #responsive-small-edit,
+  #responsive-small-add {
+    position: absolute;
+    top: 77%;
+    right: 10%;
+    background-color: var(--clr-700);
+    height: 56px;
+    width: 56px;
+    border: 2px solid var(--clr-200);
+    border-radius: 75px;
+    z-index: 800;
+  }
+
+  #contacts-main {
+    margin: 0;
+    height: calc(100vh - 170px);
+    padding: 1rem 1rem 0 1rem;
+  }
+
+  #right-section {
+    padding: 0;
+    position: absolute;
+    background-color: var(--clr-200);
+    height: calc(100vh - 169px);
+    width: 100vw;
+    left: 0;
+    overflow: hidden;
+  }
+
+  .split-contact-header {
+    position: absolute;
+    rotate: 90deg;
+    top: 70px;
+    left: 55px;
+    height: 90px;
+  }
+
+  #showed-current-contact {
+    padding: 5rem 1rem;
+  }
+
+  .current-top {
+    gap: 21px;
+  }
+
+  #left-section {
+    max-width: none;
+    min-width: auto;
+    width: auto;
+  }
+
+  .responsive-wrapper {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+  }
+
+  #back-icon {
+    padding: 0;
+    display: block;
+  }
+
+  #lightbox {
+    flex-direction: column;
+    height: 100%;
+    width: auto;
+    transform: translatey(100%);
+  }
+
+  .join-logo-left {
+    display: none;
+  }
+
+  #lightbox h2 {
+    font-size: var(--fs-47);
+    margin: 1rem;
+  }
+
+  #lightbox input {
+    min-width: 0;
+    margin: 0px 8px;
+  }
+
+  .lightbox-right {
+    border-radius: 0 0 20px 20px;
+    padding: 7rem 0 2rem 0;
+    min-height: fit-content;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .lightbox-left {
+    border-radius: 20px 20px 0 0;
+    padding: 4rem 0 7rem 0;
+    min-height: fit-content;
+  }
+
+  .blue-line {
+    margin: 10px 1rem;
+  }
+
+  .lightbox-left span {
+    font-size: 20px;
+    align-self: auto;
+    text-wrap-mode: nowrap;
+  }
+
+  #current-name {
+    font-size: 27px;
+  }
+
+  .current-bottom p {
+    font-size: 20px;
+  }
+
+  .current-information span,
+  #current-mail,
+  #current-phone {
+    font-size: 16px;
+  }
+
+  #current-icon {
+    height: 70px;
+    width: 70px;
+    font-size: 25px;
+  }
+
+  .current-icon,
+  #edit-icon {
+    position: fixed;
+    top: 32%;
+    border: solid;
+  }
+
+  .editing-lighbox {
+    padding: 0;
+    margin-top: -120px;
+  }
+
+  .btns-lighbox {
+    justify-content: center;
+    gap: 12px;
+  }
+
+  #lightbox.show {
+    transform: translateY(-38px);
+  }
+
+  .close-button,
+  .close-overlay-btn {
+    color: white;
+  }
+
+  #cancel-btn {
+    display: none;
+  }
+
+  .lightbox-subline {
+    height: 23px;
+  }
+
+  .editing-lighbox {
+    gap: 18px;
+  }
+
+}
+
+@media (min-width: 801px) and (max-width: 806px) {
+  h1 {
+    font-size: 57.2px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .overlay-left span,
+  .lightbox-left span {
+    font-size: 21px;
+  }
+
+  .overlay-right {
+    padding: 2rem 0rem;
+  }
+
+  .overlay-left {
+    padding: 4rem 0rem;
+  }
+
+  .overlay-left h2 {
+    font-size: 48px;
+  }
+
+  .overlay-box {
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 350px) {
+
+  .list-name {
+    font-size: 20px
+  }
+
+  .list-email {
+    font-size: 16px
+  }
+
+
+  .initial-icon {
+    height: 40px;
+    width: 40px;
+    font-size: 16px;
+  }
+
+  .current-icon,
+  #edit-icon {
+    height: 70px;
+    width: 70px;
+    padding: 1rem;
+  }
+
+  .editing-lighbox {
+    align-items: center;
+  }
+
+  #lightbox input {
+    font-size: 18px;
+    width: 80%;
+    padding: 0px 48px 0px 8px;
+    margin-left: 33px;
+    height: 40px;
+  }
+
+  #add-contact-btn-big,
+  #create-btn,
+  #saveBtn,
+  #cancel-btn,
+  #deleteBtn {
+    gap: 6px;
+  }
+
+  #add-contact-btn-big,
+  #create-btn,
+  #saveBtn,
+  #cancel-btn,
+  #deleteBtn {
+    padding: 0.8rem;
+  }
+
+  #add-contact-btn-big,
+  #create-btn,
+  #saveBtn,
+  #cancel-btn,
+  #deleteBtn {
+    font-size: 16px;
+  }
+
+  .list-contact-wrapper {
+    gap: 20px;
+    padding: 0.8rem;
+  }
+
+  #lightbox h2 {
+    font-size: 40px;
+  }
+}
+
+@media (max-height: 670px) {}
+
+/* ===== css/css_responsive/contacts/main-content-responsive.css ===== */
+@media (max-width: 1100px) {
+    #right-section.slide-in {
+        position: fixed;
+        overflow: auto;
+    }
+}
+
+/* ===== css/css_responsive/contacts/query-overlay-responsive.css ===== */
+@media (max-width: 1100px) {
+    .confirmation-window {
+      position: fixed;
+      top: 24px;                 /* Etwas näher am oberen Rand auf kleinen Geräten */
+      left: 50%;
+      transform: translateX(-50%);
+      display: none;
+      background-color: var(--clr-700);
+      color: white;
+      padding: 10px 16px;
+      border-radius: 14px;
+      font-size: 16px;
+      z-index: 9999;
+      width: auto;
+      max-width: 90vw;           /* Damit es nicht zu breit wird */
+      margin: 0;
+      box-sizing: border-box;
+      text-align: center;
+    }
+  }
+
+/* ===== css/css_responsive/topbar/topbar-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 1100px) {
+
+    .topbar {
+        height: 55px;
+        padding: 1rem;
+        margin-left: 0;
+        box-shadow: 0px 4px 6px var(--clr-300);
+    }
+
+    .topbar-title {
+        display: none;
+    }
+
+    .topbar-logo {
+        display: block;
+        max-width: 50px;
+    }
+
+    .topbar-user {
+        width: 40px;
+        height: 40px;
+    }
+
+    .topbar-icons a {
+        display: none;
+        /* justify-content: space-between; */
+    }
+
+    .menu a {
+        display: flex;
+        /* padding: 6px;
+        border-radius: 16px 0px 0px 16px; */
+    }
+}
+
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
+
+/* ===== css/css_responsive/sidebar/sidebar-responsive.css ===== */
+/* Media Querry Big Displays */
+@media (min-width: 1200px) {}
+
+/* Media Querry Small Displays */
+@media (max-width: 900px) {}
+
+
+@media (max-width: 800px) {}
+
+
+@media (max-width: 1100px) {
+
+    .legal-main {
+        padding-bottom: 10vh;
+        margin: 0;
+    }
+
+    .sidebar {
+        width: 100vw;
+        max-width: none;
+        height: auto;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        top: auto;
+        bottom: 0;
+        padding-top: 0px;
+        gap: 0;
+    }
+
+    .sidebar-logo {
+        display: none;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 6px;
+        padding: 0;
+    }
+
+    .responsive-font {
+        font-size: 14px;
+    }
+
+    .nav-link {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .nav-link:hover {
+        background-color: #1c2b3b;
+    }
+
+    .nav-link img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sidebar-footer {
+        padding: 0;
+        display: none;
+    }
+
+    .responsive-hide-on-mobile {
+        display: none;
+    }
+
+    .responsive-show-on-mobile {
+        display: flex !important;
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .add-task-link,
+    .board-link,
+    .contacts-link,
+    .summary-link,
+    .log-in-link,
+    .privacy-policy-link,
+    .legal-link {
+        border-radius: 20px;
+    }
+
+    .privacy-policy-link,
+    .legal-link {
+        padding: 31px 10px;
+    }
+
+    .sidebar-footer-links a {
+        margin: 0;
+    }
+
+    .unregistered-sidebar {
+        display: flex;
+        flex-direction: row;
+    }
+}
+
+
+@media (max-width: 490px) {}
+
+@media (max-width: 320px) {}
+

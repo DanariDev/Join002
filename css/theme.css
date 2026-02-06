@@ -1,0 +1,190 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --brand-900: #0b1b2b;
+  --brand-700: #12324f;
+  --brand-500: #0ea5a3;
+  --brand-300: #6ee7e0;
+  --accent-500: #f59e0b;
+  --ink-900: #0f172a;
+  --ink-700: #233249;
+  --ink-500: #52627a;
+  --bg-100: #f4f7fb;
+  --bg-200: #eef3f7;
+  --surface-100: #ffffff;
+  --surface-200: #f8fafc;
+  --border-200: rgba(15, 23, 42, 0.08);
+  --shadow-1: 0 6px 20px rgba(15, 23, 42, 0.08);
+  --shadow-2: 0 18px 40px rgba(15, 23, 42, 0.14);
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Manrope", sans-serif;
+  color: var(--ink-900);
+  background:
+    radial-gradient(1200px 600px at -10% -10%, rgba(14, 165, 163, 0.12), transparent 60%),
+    radial-gradient(1200px 600px at 110% 10%, rgba(245, 158, 11, 0.12), transparent 60%),
+    linear-gradient(135deg, var(--bg-100), var(--bg-200));
+  animation: pageIn 500ms ease-out;
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1, h2, h3 {
+  color: var(--ink-900);
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: var(--brand-500);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--brand-700);
+}
+
+button,
+.btn-primary,
+.btn-secondary,
+.btn-create-task,
+.add-task-btn {
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--brand-500), #22c1c3);
+  color: #fff;
+  box-shadow: var(--shadow-1);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--brand-700);
+  border: 1px solid var(--border-200);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  box-shadow: var(--shadow-2);
+}
+
+input,
+textarea,
+select {
+  border-radius: 10px;
+  border: 1px solid var(--border-200);
+  background: var(--surface-100);
+  transition: border-color 120ms ease, box-shadow 120ms ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px rgba(14, 165, 163, 0.18);
+}
+
+.sidebar {
+  background: linear-gradient(180deg, var(--brand-900), #0f2740);
+  box-shadow: 8px 0 20px rgba(15, 23, 42, 0.18);
+}
+
+.sidebar .nav-link {
+  border-radius: 10px;
+}
+
+.sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.topbar {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-1);
+}
+
+.topbar-title {
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
+.summary-box,
+.task-card,
+.overlay-content,
+.overlay-box,
+.lightbox,
+.login-box,
+.add-task-main,
+#right-section,
+#left-section {
+  background: var(--surface-100);
+  border: 1px solid var(--border-200);
+  border-radius: var(--radius-16);
+  box-shadow: var(--shadow-1);
+}
+
+.task-card {
+  transition: transform 140ms ease, box-shadow 140ms ease;
+}
+
+.task-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-2);
+}
+
+.progress-bar {
+  border-radius: 999px;
+}
+
+.summary-header .summary-divider {
+  background: linear-gradient(90deg, var(--brand-500), var(--accent-500));
+}
+
+.menu {
+  border-radius: var(--radius-12);
+  border: 1px solid var(--border-200);
+  box-shadow: var(--shadow-2);
+}
+
+.login-page-wrapper,
+.summary-content-wrapper,
+.board-main,
+#contacts-main,
+.add-task-main {
+  animation: floatIn 600ms ease;
+}
+
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

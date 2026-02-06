@@ -1,7 +1,5 @@
-export { db } from "../firebase/firebase-init.js";
-import { ref, update, get } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 import { showEditForm } from "./edit-task-form.js";
-import { resetSelectedEditContacts, getSelectedEditContactIds } from "./edit-task-contacts.js";
+import { resetSelectedEditContacts } from "./edit-task-contacts.js";
 
 /**
  * Opens the edit task overlay for a given task ID.
@@ -80,14 +78,6 @@ function setupEditTaskSaveHandler(saveBtn, taskId) {
  * Gets the current subtask list from the edit overlay.
  * @returns {Array<Object>} Array of subtask objects.
  */
-function getEditSubtasks() {
-  const items = document.querySelectorAll("#editing-subtask-list li");
-  return Array.from(items).map((li) => ({
-    task: li.textContent.trim(),
-    completed: li.dataset.completed === "true",
-  }));
-}
-
 /**
  * Closes the edit overlay and resets selected contacts.
  */
@@ -105,37 +95,3 @@ function closeEditOverlay() {
  * @param {string} field - The field ID or name.
  * @param {string} message - The error message.
  */
-function showEditFieldError(field, message) {
-  const errorDiv = document.createElement("div");
-  errorDiv.className = "error-message";
-  errorDiv.textContent = message;
-  const fieldElement = document.getElementById(field);
-  if (fieldElement) {
-    fieldElement.parentElement.appendChild(errorDiv);
-  } else {
-    document.getElementById("edit-task-overlay")?.prepend(errorDiv);
-  }
-}
-
-/**
- * Shows a success message at the bottom of the overlay.
- * @param {string} message - The success message.
- */
-function showSuccessMessage(message) {
-  const successDiv = document.createElement("div");
-  successDiv.className = "success-message";
-  successDiv.textContent = message;
-  const overlay = document.getElementById("edit-task-overlay");
-  if (overlay) {
-    overlay.appendChild(successDiv);
-    setTimeout(() => successDiv.remove(), 3000);
-  }
-}
-
-/**
- * Removes all error and success messages in the overlay.
- */
-function clearAllEditFieldErrors() {
-  document.querySelectorAll(".error-message").forEach((el) => el.remove());
-  document.querySelectorAll(".success-message").forEach((el) => el.remove());
-}
