@@ -39,6 +39,9 @@ switch (true) {
   case $method === 'POST' && $path === '/auth/logout':
     auth_logout();
     break;
+  case $method === 'GET' && $path === '/ping':
+    json_response(['ok' => true, 'time' => date('c')]);
+    break;
   case $method === 'GET' && $path === '/contacts':
     contacts_list();
     break;
