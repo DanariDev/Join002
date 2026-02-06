@@ -1,11 +1,13 @@
 /* @import url("global.css"); */
 
 .privacy-main {
-  margin-left: 22.138rem;
   padding: 4rem;
   display: flex;
   flex-direction: column;
   flex: 1;
+  max-width: 900px;
+  margin-left: calc(22.138rem + 6rem);
+  margin-right: auto;
 }
 
 .privacy-policy-link {

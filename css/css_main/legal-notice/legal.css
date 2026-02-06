@@ -1,15 +1,13 @@
 
-
 .legal-main {
-  margin-left: 22.138rem;
   padding: 4rem;
   max-width: 900px;
   background-color: var(--clr-200);
   font-family: Arial, sans-serif;
   min-height: 100vh;
+  margin-left: calc(22.138rem + 6rem);
+  margin-right: auto;
 }
-
-
 
 h2 {
   font-size: var(--fs-27);
