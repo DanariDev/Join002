@@ -380,7 +380,8 @@ option {
 }
 
 #clear-btn {
-    width: 110px;
+    min-width: 150px;
+    width: auto;
     height: 56px;
     border-radius: 10px;
     font-size: var(--fs-20);
@@ -389,6 +390,14 @@ option {
     cursor: pointer;
     transition: all 0.1s ease-in-out;
     border: 2px, solid, var(--clr-700);
+    white-space: nowrap;
+}
+
+.btn-create-task {
+    min-width: 150px;
+    width: auto;
+    padding-inline: 18px;
+    white-space: nowrap;
 }
 
 .btn-create-task:hover {
@@ -773,8 +782,8 @@ li {
   --nav-padding-bottom: 200px;
   --footer-padding-bottom: 50px;
   --link-color: rgba(255, 255, 255, 0.5);
-  --link-hover-bg: var(--clr-600);
-  --link-hover-color: var(--clr-500);
+  --link-hover-bg: rgba(255, 255, 255, 0.08);
+  --link-hover-color: #ffffff;
   --font-size: var(--fs-16);
   --font-family: 'Inter', sans-serif;
   --icon-size: 24px;

@@ -7,8 +7,8 @@
   --nav-padding-bottom: 200px;
   --footer-padding-bottom: 50px;
   --link-color: rgba(255, 255, 255, 0.5);
-  --link-hover-bg: var(--clr-600);
-  --link-hover-color: var(--clr-500);
+  --link-hover-bg: rgba(255, 255, 255, 0.08);
+  --link-hover-color: #ffffff;
   --font-size: var(--fs-16);
   --font-family: 'Inter', sans-serif;
   --icon-size: 24px;
