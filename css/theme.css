@@ -1,24 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --brand-900: #0b1b2b;
-  --brand-700: #12324f;
-  --brand-500: #0ea5a3;
-  --brand-300: #6ee7e0;
-  --accent-500: #f59e0b;
-  --ink-900: #0f172a;
-  --ink-700: #233249;
-  --ink-500: #52627a;
-  --bg-100: #f4f7fb;
-  --bg-200: #eef3f7;
+  --brand-900: #0a1b2e;
+  --brand-700: #14324a;
+  --brand-500: #1d4e89;
+  --brand-300: #86b2e5;
+  --accent-500: #d08b36;
+  --ink-900: #111827;
+  --ink-700: #1f2937;
+  --ink-500: #4b5563;
+  --bg-100: #f3f4f6;
+  --bg-200: #eef1f4;
   --surface-100: #ffffff;
-  --surface-200: #f8fafc;
-  --border-200: rgba(15, 23, 42, 0.08);
-  --shadow-1: 0 6px 20px rgba(15, 23, 42, 0.08);
-  --shadow-2: 0 18px 40px rgba(15, 23, 42, 0.14);
-  --radius-12: 12px;
-  --radius-16: 16px;
-  --radius-24: 24px;
+  --surface-200: #f9fafb;
+  --border-200: rgba(17, 24, 39, 0.08);
+  --shadow-1: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-2: 0 10px 26px rgba(15, 23, 42, 0.16);
+  --radius-12: 10px;
+  --radius-16: 12px;
+  --radius-24: 16px;
 }
 
 html {
@@ -29,10 +29,12 @@ body {
   font-family: "Manrope", sans-serif;
   color: var(--ink-900);
   background:
-    radial-gradient(1200px 600px at -10% -10%, rgba(14, 165, 163, 0.12), transparent 60%),
-    radial-gradient(1200px 600px at 110% 10%, rgba(245, 158, 11, 0.12), transparent 60%),
-    linear-gradient(135deg, var(--bg-100), var(--bg-200));
-  animation: pageIn 500ms ease-out;
+    linear-gradient(0deg, rgba(17, 24, 39, 0.03), rgba(17, 24, 39, 0.03)),
+    linear-gradient(90deg, rgba(17, 24, 39, 0.03) 1px, transparent 1px),
+    linear-gradient(rgba(17, 24, 39, 0.03) 1px, transparent 1px),
+    var(--bg-100);
+  background-size: auto, 48px 48px, 48px 48px, auto;
+  animation: pageIn 350ms ease-out;
 }
 
 @keyframes pageIn {
@@ -65,7 +67,7 @@ button,
 .btn-secondary,
 .btn-create-task,
 .add-task-btn {
-  border-radius: 10px;
+  border-radius: 8px;
   border: 1px solid transparent;
   transition: transform 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
 }
@@ -75,9 +77,9 @@ button:active {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--brand-500), #22c1c3);
+  background: var(--brand-500);
   color: #fff;
-  box-shadow: var(--shadow-1);
+  box-shadow: none;
 }
 
 .btn-secondary {
@@ -88,7 +90,7 @@ button:active {
 
 .btn-primary:hover,
 .btn-secondary:hover {
-  box-shadow: var(--shadow-2);
+  box-shadow: var(--shadow-1);
 }
 
 input,
@@ -109,8 +111,8 @@ select:focus {
 }
 
 .sidebar {
-  background: linear-gradient(180deg, var(--brand-900), #0f2740);
-  box-shadow: 8px 0 20px rgba(15, 23, 42, 0.18);
+  background: #0f1f33;
+  box-shadow: 6px 0 18px rgba(15, 23, 42, 0.18);
 }
 
 .sidebar .nav-link {
@@ -122,7 +124,7 @@ select:focus {
 }
 
 .topbar {
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(10px);
   box-shadow: var(--shadow-1);
 }
@@ -143,7 +145,7 @@ select:focus {
 #left-section {
   background: var(--surface-100);
   border: 1px solid var(--border-200);
-  border-radius: var(--radius-16);
+  border-radius: var(--radius-12);
   box-shadow: var(--shadow-1);
 }
 
@@ -152,8 +154,8 @@ select:focus {
 }
 
 .task-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-2);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-1);
 }
 
 .progress-bar {
