@@ -1,13 +1,13 @@
 /* Globale Variablen für einfache Anpassungen */
 :root {
-  --sidebar-width: 26rem;
+  --sidebar-width: 22.138rem;
   --sidebar-bg: var(--clr-700);
   --sidebar-gap: 9rem;
   --nav-padding-bottom: 200px;
   --footer-padding-bottom: 50px;
   --link-color: rgba(255, 255, 255, 0.5);
   --link-hover-bg: rgba(255, 255, 255, 0.08);
-  --link-hover-color: #ffffff;
+  --link-hover-color: #e5e7eb;
   --font-size: var(--fs-16);
   --font-family: 'Inter', sans-serif;
   --icon-size: 24px;
@@ -59,7 +59,7 @@
   font-size: var(--font-size);
   font-weight: 400;
   transition: background-color 0.2s ease;
-  padding: 8px 56px;
+  padding: 8px 40px;
   text-wrap-mode: nowrap;
 }
 
