@@ -924,7 +924,18 @@ textarea {
 }
 
 #search-input::placeholder {
-    color: #d1d1d1;
+    color: transparent;
+    background-image: linear-gradient(120deg, rgba(203, 213, 225, 0.4), rgba(226, 232, 240, 0.95), rgba(203, 213, 225, 0.4));
+    background-size: 200% 100%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    animation: placeholderShimmer 2.4s ease-in-out infinite;
+}
+
+@keyframes placeholderShimmer {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
 }
 
 .search-task-field {
