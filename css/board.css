@@ -1056,7 +1056,7 @@ li {
 .await-field,
 .done-field {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     font-weight: bold;
     gap: 3px;
