@@ -436,7 +436,20 @@ select:focus {
 
 .overlay-right,
 .lightbox-right {
+  background: linear-gradient(180deg, #f9fbfe 0%, var(--surface-200) 100%);
+}
+
+.overlay-box,
+#lightbox {
   background: linear-gradient(180deg, #ffffff 0%, var(--surface-200) 100%);
+  border: 1px solid var(--border-200);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.overlay-right,
+.lightbox-right {
+  border-left: 1px solid rgba(15, 23, 42, 0.08);
 }
 
 /* ===== Mature accents for task labels, initials, and progress ===== */
