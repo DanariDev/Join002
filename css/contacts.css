@@ -56,7 +56,7 @@
 #current-delete-responsive:hover,
 #current-edit:hover,
 #current-delete:hover {
-    color: var(--clr-500);
+    color: #0f2a47;
 }
 
 .btns-lighbox {
