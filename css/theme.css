@@ -523,3 +523,127 @@ footer a:hover {
   width: 20px;
   height: 20px;
 }
+
+/* ===== Ambient motion (subtle, always-on) ===== */
+:root {
+  --anim-float: 10s;
+  --anim-float-long: 14s;
+  --anim-sheen: 26s;
+}
+
+.sidebar {
+  overflow: hidden;
+}
+
+.sidebar::after {
+  content: "";
+  position: absolute;
+  inset: -60% 0 0 0;
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.02), rgba(110, 160, 216, 0.08), rgba(255, 255, 255, 0.02));
+  transform: translateY(-60%);
+  animation: sidebarSheen var(--anim-sheen) linear infinite;
+  pointer-events: none;
+}
+
+.topbar {
+  animation: topbarPulse var(--anim-float-long) ease-in-out infinite;
+}
+
+.task-card {
+  animation: floatSlow var(--anim-float) ease-in-out infinite;
+}
+
+.summary-box {
+  animation: floatSlow calc(var(--anim-float) + 2s) ease-in-out infinite;
+}
+
+.login-box,
+.add-task-main {
+  animation: floatSlow calc(var(--anim-float) + 4s) ease-in-out infinite;
+}
+
+.progress-bar {
+  background-size: 200% 100%;
+  animation: progressGlow 10s linear infinite;
+}
+
+.overlay-left span::after,
+.lightbox-left span::after,
+.edit-contact-h2::after {
+  animation: glowSweep 14s linear infinite;
+}
+
+.contact-insignia,
+.contact-initials,
+.current-icon,
+#current-icon,
+#edit-icon,
+.edit-initial-circle,
+.add-initial-circle,
+.initial-icon,
+#priority-buttons img,
+#editing-priority-buttons img,
+.priority-img,
+.prio_spacing img {
+  animation: iconPulse calc(var(--anim-float) + 6s) ease-in-out infinite;
+}
+
+.summary-divider {
+  position: relative;
+  overflow: hidden;
+}
+
+.summary-divider::after {
+  content: "";
+  position: absolute;
+  left: -140%;
+  top: 0;
+  width: 220%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(226, 232, 240, 0.8), transparent);
+  animation: dividerSweep 12s linear infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+@keyframes topbarPulse {
+  0%, 100% { box-shadow: var(--shadow-1); }
+  50% { box-shadow: 0 10px 26px rgba(15, 23, 42, 0.16); }
+}
+
+@keyframes progressGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes glowSweep {
+  0% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+  100% { filter: brightness(1); }
+}
+
+@keyframes iconPulse {
+  0%, 100% { filter: drop-shadow(0 0 0 rgba(226, 232, 240, 0)); }
+  50% { filter: drop-shadow(0 0 8px rgba(226, 232, 240, 0.45)); }
+}
+
+@keyframes sidebarSheen {
+  0% { transform: translateY(-60%); }
+  100% { transform: translateY(60%); }
+}
+
+@keyframes dividerSweep {
+  0% { left: -140%; }
+  100% { left: 140%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
