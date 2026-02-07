@@ -583,7 +583,7 @@ option {
 .urgent-btn-active img,
 .medium-btn-active img,
 .low-btn-active img {
-    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(226, 232, 240, 0.7));
+    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(226, 232, 240, 0.7)) !important;
 }
 
 #urgent-btn.urgent-btn-active,
