@@ -449,7 +449,7 @@ select:focus {
 
 .overlay-right,
 .lightbox-right {
-  border-left: 1px solid rgba(15, 23, 42, 0.08);
+  border-left: none;
 }
 
 /* ===== Mature accents for task labels, initials, and progress ===== */
