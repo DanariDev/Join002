@@ -557,7 +557,6 @@ footer a:hover {
   animation: floatSlow calc(var(--anim-float) + 2s) ease-in-out infinite;
 }
 
-.login-box,
 .add-task-main {
   animation: floatSlow calc(var(--anim-float) + 4s) ease-in-out infinite;
 }
