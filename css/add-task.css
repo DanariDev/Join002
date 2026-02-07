@@ -342,6 +342,7 @@ option {
     flex-wrap: wrap;
     width: 280px;
     padding-left: 16px;
+    min-height: 44px;
 }
 
 .add-task-main .assigned-initials {
