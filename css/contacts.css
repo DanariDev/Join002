@@ -388,6 +388,10 @@ h2 {
     border-radius: 4px;
 }
 
+.edit-contact-h2 {
+    color: #cbd5e1;
+}
+
 
 .lightbox-right {
     display: flex;
