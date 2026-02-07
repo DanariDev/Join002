@@ -125,7 +125,13 @@ select:focus {
 }
 
 .sidebar .nav-link:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(229, 231, 235, 0.18);
+  color: #f8fafc;
+}
+
+.sidebar-footer-links a:hover {
+  background: rgba(229, 231, 235, 0.18);
+  color: #f8fafc;
 }
 
 .topbar {
