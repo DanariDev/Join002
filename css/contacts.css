@@ -110,9 +110,8 @@
 
 #cancel-btn:hover,
 #deleteBtn:hover {
-    background-color: #0f2a47;
     border: 1px solid #cbd5e1;
-    color: #f8fafc;
+    color: #0f2a47;
     box-shadow: 0 0 10px rgba(203, 213, 225, 0.7);
 }
 
