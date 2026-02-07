@@ -57,7 +57,7 @@ option {
 
 .required:after {
     content: " *";
-    color: #ff8291;
+    color: #6ea0d8;
 }
 
 .required-explain {
@@ -67,7 +67,7 @@ option {
 
 .required-explain:before {
     content: " *";
-    color: #ff8291;
+    color: #6ea0d8;
 }
 
 .required-explain-responsive {
@@ -380,7 +380,7 @@ option {
 }
 
 #clear-btn {
-    min-width: 150px;
+    min-width: 190px;
     width: auto;
     height: 56px;
     border-radius: 10px;
@@ -592,17 +592,17 @@ option {
 }
 
 #urgent-btn.urgent-btn-active {
-    background-color: #c93939;
+    background-color: #8b2f3d;
     color: white;
 }
 
 #medium-btn.medium-btn-active {
-    background-color: #ffaa00;
+    background-color: #8a6b3a;
     color: white;
 }
 
 #low-btn.low-btn-active {
-    background-color: #5dc43e;
+    background-color: #2f6f7e;
     color: white;
 }
 

@@ -158,19 +158,19 @@
 
 #editing-urgent-btn:hover,
 #editing-urgent-btn.urgent-btn-active {
-    background-color: #c93939;
+    background-color: #8b2f3d;
     color: var(--clr-200);
 }
 
 #editing-medium-btn:hover,
 #editing-medium-btn.medium-btn-active {
-    background-color: #ffaa00;
+    background-color: #8a6b3a;
     color: var(--clr-200);
 }
 
 #editing-low-btn:hover,
 #editing-low-btn.low-btn-active {
-    background-color: #5dc43e;
+    background-color: #2f6f7e;
     color: var(--clr-200);
 }
 
@@ -1239,17 +1239,17 @@ li {
 
 /* ===== css/css_main/board/priority-buttons.css ===== */
 #editing-urgent-btn.active {
-  background-color: #c93939;
+  background-color: #8b2f3d;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 #editing-medium-btn.active {
-  background-color: #ffaa00;
+  background-color: #8a6b3a;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 #editing-low-btn.active {
-  background-color: #5dc43e;
+  background-color: #2f6f7e;
   color: white;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }

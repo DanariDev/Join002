@@ -223,7 +223,10 @@ body.hidden > *:not(#summary-loader) {
 
 .summary-divider {
   height: 59px;
-  border: 3px solid var(--clr-500);
+  border: 0;
+  width: 4px;
+  background: linear-gradient(180deg, #6ea0d8, #e2e8f0);
+  box-shadow: 0 0 8px rgba(110, 160, 216, 0.5);
   border-radius: 2px;
 }
 
@@ -368,7 +371,7 @@ body.hidden > *:not(#summary-loader) {
 }
 
 #summary-greeting-wrapper span {
-  color: var(--clr-500);
+  color: #6ea0d8;
   font-size: var(--fs-64);
   font-weight: 700;
 }
