@@ -315,7 +315,6 @@
 
 .overlay-box {
     display: flex;
-    justify-content: center;
     align-items: center;
     height: max-content;
     width: 80%;
@@ -574,6 +573,10 @@ input {
 #showed-current-contact.show {
     display: flex;
     transform: translateX(0);
+}
+
+.add-contact-h2 {
+    color: #cbd5e1;
 }
 
 /* ===== css/css_main/contacts/main-content.css ===== */
