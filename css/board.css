@@ -2016,13 +2016,13 @@ option {
 }
 
 .topbar-user {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background-color: var(--clr-200);
-  color: #29abe2;
-  font-weight: bold;
-  display: flex;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--clr-200);
+    color: #0f2a47;
+    font-weight: bold;
+    display: flex;
   align-items: center;
   justify-content: center;
   border: 3px solid #000;
