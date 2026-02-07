@@ -389,8 +389,17 @@ select:focus {
 }
 
 .list-contact-wrapper:hover {
-  background: var(--surface-200);
-  border-color: var(--border-200);
+  background: rgba(31, 79, 138, 0.12);
+  border-color: rgba(31, 79, 138, 0.25);
+  color: var(--ink-900);
+}
+
+.list-contact-wrapper:hover .list-name {
+  color: var(--ink-900);
+}
+
+.list-contact-wrapper:hover .list-email {
+  color: var(--brand-500);
 }
 
 .choosen {
