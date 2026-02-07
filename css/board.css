@@ -918,6 +918,7 @@ textarea {
     padding: 0px 12px;
     border: 1px solid var(--clr-300);
     border-radius: 10px;
+    background: linear-gradient(180deg, rgba(139, 47, 61, 0.06), rgba(248, 250, 252, 0.95));
     background-image: url("../../../assets/img/search.png");
     background-repeat: no-repeat;
     background-position: right 24px center;
@@ -930,18 +931,20 @@ textarea {
 
 #search-input:placeholder-shown {
     color: transparent;
-    background-image: linear-gradient(120deg, rgba(15, 42, 71, 0.85), rgba(226, 232, 240, 0.75), rgba(15, 42, 71, 0.85));
-    background-size: 220% 100%;
-    background-position: 0% 50%;
+    background-image:
+        linear-gradient(120deg, rgba(15, 42, 71, 0.88), rgba(15, 42, 71, 0.88)),
+        linear-gradient(120deg, rgba(15, 42, 71, 0.88), rgba(226, 232, 240, 0.85), rgba(15, 42, 71, 0.88));
+    background-size: 100% 100%, 220% 100%;
+    background-position: 0% 50%, 0% 50%;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: placeholderShimmer 2.2s linear infinite;
+    animation: placeholderShimmer 4s linear infinite;
 }
 
 @keyframes placeholderShimmer {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 220% 50%; }
+    0% { background-position: 0% 50%, 0% 50%; }
+    100% { background-position: 0% 50%, 220% 50%; }
 }
 
 .search-task-field {
