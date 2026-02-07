@@ -36,9 +36,11 @@ function handleFormSubmit(event) {
  * @param {string} field - The field name.
  * @param {string} message - The error message.
  */
-function showFieldError(field, message) {
+function showFieldError(field, key) {
   const errorDiv = document.getElementById(`error-${field}`);
-  if (errorDiv) errorDiv.textContent = message;
+  if (!errorDiv) return;
+  errorDiv.textContent = t(key);
+  errorDiv.setAttribute("data-i18n-error", key);
 }
 
 /**
@@ -48,7 +50,7 @@ function showFieldError(field, message) {
 function validateTitle() {
   const title = document.getElementById("title").value.trim();
   if (!title) {
-    showFieldError("title", t("common.errors.titleRequired"));
+    showFieldError("title", "common.errors.titleRequired");
     return false;
   }
   return true;
@@ -61,11 +63,11 @@ function validateTitle() {
 function validateDueDate() {
   const dueDate = document.getElementById("due-date").value;
   if (!dueDate) {
-    showFieldError("due-date", t("common.errors.dueDateRequired"));
+    showFieldError("due-date", "common.errors.dueDateRequired");
     return false;
   }
   if (dueDate < getTodayDateString()) {
-    showFieldError("due-date", t("common.errors.dueDatePast"));
+    showFieldError("due-date", "common.errors.dueDatePast");
     return false;
   }
   return true;
@@ -78,7 +80,7 @@ function validateDueDate() {
 function validateCategory() {
   const category = document.getElementById("category").value;
   if (!category) {
-    showFieldError("category", t("common.errors.categoryRequired"));
+    showFieldError("category", "common.errors.categoryRequired");
     return false;
   }
   clearFieldError("category");
@@ -91,7 +93,10 @@ function validateCategory() {
  */
 function clearFieldError(field) {
   const errorDiv = document.getElementById(`error-${field}`);
-  if (errorDiv) errorDiv.textContent = "";
+  if (errorDiv) {
+    errorDiv.textContent = "";
+    errorDiv.removeAttribute("data-i18n-error");
+  }
 }
 
 /**

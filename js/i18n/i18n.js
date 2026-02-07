@@ -51,6 +51,17 @@ export function applyTranslations(root = document) {
     const key = el.getAttribute("data-i18n-aria");
     el.setAttribute("aria-label", t(key));
   });
+
+  root.querySelectorAll("[data-i18n-error]").forEach(el => {
+    const key = el.getAttribute("data-i18n-error");
+    let msg = t(key);
+    const iso = el.getAttribute("data-i18n-error-date-iso");
+    if (iso) {
+      const dateStr = formatDisplayDate(iso, lang);
+      msg = msg.replace("{date}", dateStr);
+    }
+    el.textContent = msg;
+  });
 }
 
 export function initI18n() {
@@ -70,4 +81,11 @@ function updateToggle(lang) {
     if (btn.dataset.lang === lang) btn.classList.add("active");
     else btn.classList.remove("active");
   });
+}
+
+function formatDisplayDate(isoDateStr, lang) {
+  if (!isoDateStr) return "";
+  if (lang !== "de") return isoDateStr;
+  const [year, month, day] = isoDateStr.split("-");
+  return `${day}.${month}.${year}`;
 }

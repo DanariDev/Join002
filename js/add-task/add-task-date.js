@@ -43,7 +43,7 @@ function validateDate(dateInput, errorMsg) {
     if (!isoDate || isoDate < todayStr) {
       const lang = getLang();
       const dateStr = formatDisplayDate(todayStr, lang);
-      showError(errorMsg, t("common.errors.dateFromToday").replace("{date}", dateStr));
+      showError(errorMsg, "common.errors.dateFromToday", todayStr, dateStr);
     } else {
       hideError(errorMsg);
     }
@@ -66,8 +66,11 @@ function isGermanDateFormat(value) {
  * @param {HTMLElement} errorMsg - The error message element.
  * @param {string} msg - The message to display.
  */
-function showError(errorMsg, msg) {
-  if (errorMsg) errorMsg.textContent = msg;
+function showError(errorMsg, key, isoDateStr, displayDateStr) {
+  if (!errorMsg) return;
+  errorMsg.textContent = t(key).replace("{date}", displayDateStr);
+  errorMsg.setAttribute("data-i18n-error", key);
+  errorMsg.setAttribute("data-i18n-error-date-iso", isoDateStr);
 }
 
 /**
@@ -75,7 +78,10 @@ function showError(errorMsg, msg) {
  * @param {HTMLElement} errorMsg - The error message element.
  */
 function hideError(errorMsg) {
-  if (errorMsg) errorMsg.textContent = '';
+  if (!errorMsg) return;
+  errorMsg.textContent = '';
+  errorMsg.removeAttribute("data-i18n-error");
+  errorMsg.removeAttribute("data-i18n-error-date-iso");
 }
 
 /**

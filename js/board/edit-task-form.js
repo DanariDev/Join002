@@ -20,7 +20,10 @@ export function initEditTaskForm() {
  * Removes all error and success messages in the overlay.
  */
 function clearAllEditFieldErrors() {
-  document.querySelectorAll(".error-message").forEach((el) => el.remove());
+  document.querySelectorAll(".error-message").forEach((el) => {
+    el.textContent = "";
+    el.removeAttribute("data-i18n-error");
+  });
   document.querySelectorAll(".success-message").forEach((el) => el.remove());
 }
 
@@ -139,7 +142,7 @@ function openEditOverlay() {
 function validateEditTitle() {
   const v = getValue("editing-title");
   if (!v)
-    return showEditFieldError("error-edit-title", t("common.errors.titleRequired"));
+    return showEditFieldError("error-edit-title", "common.errors.titleRequired");
   return true;
 }
 
@@ -152,7 +155,7 @@ function validateEditDueDate() {
   if (!dueDate)
     return showEditFieldError(
       "error-edit-due-date",
-      t("common.errors.dueDateRequired")
+      "common.errors.dueDateRequired"
     );
   const selected = new Date(dueDate + "T00:00:00");
   const now = new Date();
@@ -160,7 +163,7 @@ function validateEditDueDate() {
   if (selected < now)
     return showEditFieldError(
       "error-edit-due-date",
-      t("common.errors.dueDatePast")
+      "common.errors.dueDatePast"
     );
   return true;
 }
@@ -174,9 +177,17 @@ function validateEditCategory() {
   if (!v)
     return showEditFieldError(
       "error-edit-category",
-      t("common.errors.categoryRequired")
+      "common.errors.categoryRequired"
     );
   return true;
+}
+
+function showEditFieldError(id, key) {
+  const el = document.getElementById(id);
+  if (!el) return false;
+  el.textContent = t(key);
+  el.setAttribute("data-i18n-error", key);
+  return false;
 }
 
 /**
