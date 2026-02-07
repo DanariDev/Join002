@@ -54,15 +54,15 @@ function setLabel(clone, task) {
 }
 
 function applyCategoryStyle(labelEl, category) {
+  labelEl.classList.remove("label-technical", "label-user");
   if (category === "Technical Task") {
     labelEl.textContent = "Technical Task";
-    labelEl.style.background = "#00c7a3";
+    labelEl.classList.add("label-technical");
   } else if (category === "User Story") {
     labelEl.textContent = "User Story";
-    labelEl.style.background = "#0038ff";
+    labelEl.classList.add("label-user");
   } else {
     labelEl.textContent = "";
-    labelEl.style.background = "transparent";
   }
 }
 
@@ -290,7 +290,6 @@ function addRestBubble(count, container) {
   const span = document.createElement('span');
   span.className = 'initials-task initials-extra';
   span.textContent = `+${count}`;
-  span.style.backgroundColor = "#878787";
   container.appendChild(span);
 }
 

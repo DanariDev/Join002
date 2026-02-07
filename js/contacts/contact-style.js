@@ -38,12 +38,12 @@ export function getRandomColor(name) {
  */
 function getColorPalette() {
   return [
-    "#29ABE2", // Blue
-    "#FF7A00", // Orange
-    "#2AD300", // Green
-    "#FF5C5C", // Red
-    "#6E52FF", // Purple
-    "#FC71FF", // Pink
+    "#2F6F7E", // Deep teal
+    "#3F5C8C", // Slate blue
+    "#7A4E3A", // Clay
+    "#4B6B4F", // Olive
+    "#6B5A7A", // Muted violet
+    "#2F3B4A", // Charcoal
   ];
 }
 
