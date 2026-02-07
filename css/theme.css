@@ -514,3 +514,12 @@ footer a:hover {
   background: linear-gradient(90deg, var(--brand-500), var(--accent-500));
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.25);
 }
+
+/* Priority icon sizing for SVGs */
+#priority-buttons img,
+#editing-priority-buttons img,
+.priority-img,
+.prio_spacing img {
+  width: 20px;
+  height: 20px;
+}
