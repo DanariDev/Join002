@@ -72,7 +72,8 @@
 }
 
 .overlay-actions button:hover {
-    color: var(--clr-500);
+    color: #0f2a47;
+    text-shadow: 0 0 6px rgba(203, 213, 225, 0.6);
 }
 
 .prio-btn {
@@ -202,9 +203,10 @@
 }
 
 #editing-cancel-btn:hover {
-    color: #ffffff;
-    background-color: var(--clr-500);
-    border-color: var(--clr-500);
+    color: #0f2a47;
+    background-color: #f8fafc;
+    border-color: #cbd5e1;
+    box-shadow: 0 0 8px rgba(203, 213, 225, 0.6);
 }
 
 #editing-save-btn {
@@ -1289,9 +1291,10 @@ li {
 }
 
 #clear-btn:hover {
-    color: var(--clr-500);
-    border-color: var(--clr-500);
-    border: 2px, solid, var(--clr-500);
+    color: #0f2a47;
+    border-color: #cbd5e1;
+    border: 2px solid #cbd5e1;
+    box-shadow: 0 0 8px rgba(203, 213, 225, 0.6);
 }
 
 .btn-create-task:hover {

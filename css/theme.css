@@ -351,6 +351,16 @@ select:focus {
   background: linear-gradient(180deg, var(--brand-500), var(--brand-900));
 }
 
+.sign-up-btn:hover {
+  background: linear-gradient(180deg, var(--brand-500), var(--brand-900));
+  border-color: #cbd5e1;
+  box-shadow: 0 0 10px rgba(203, 213, 225, 0.7);
+}
+
+footer a:hover {
+  color: var(--brand-700);
+}
+
 /* Contacts dropdown + chips */
 .contacts-dropdown,
 #contacts-selected,
