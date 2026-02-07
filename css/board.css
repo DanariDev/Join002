@@ -1236,7 +1236,7 @@ li {
 #editing-urgent-btn.active img,
 #editing-medium-btn.active img,
 #editing-low-btn.active img {
-  filter: brightness(0) invert(1);
+  filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(226, 232, 240, 0.7));
 }
 
 /* ===== css/css_main/add-task/general.css ===== */
@@ -1336,7 +1336,7 @@ li {
 .urgent-btn-active img,
 .medium-btn-active img,
 .low-btn-active img {
-    filter: brightness(0) invert(1);
+    filter: brightness(0) invert(1) drop-shadow(0 0 6px rgba(226, 232, 240, 0.7));
 }
 
 #urgent-btn.urgent-btn-active,
