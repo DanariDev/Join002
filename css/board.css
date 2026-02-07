@@ -923,14 +923,14 @@ textarea {
     background-position: right 24px center;
 }
 
-/* Shimmering placeholder (marquee-like glow) */
-#search-input::placeholder,
-#search-input::-webkit-input-placeholder,
-#search-input::-moz-placeholder,
-#search-input:-ms-input-placeholder,
-#search-input:-moz-placeholder {
+/* Shimmering placeholder (Chrome-friendly via :placeholder-shown) */
+#search-input::placeholder {
+    color: rgba(15, 42, 71, 0.8);
+}
+
+#search-input:placeholder-shown {
     color: transparent;
-    background-image: linear-gradient(120deg, rgba(15, 42, 71, 0.75), rgba(226, 232, 240, 0.7), rgba(15, 42, 71, 0.75));
+    background-image: linear-gradient(120deg, rgba(15, 42, 71, 0.85), rgba(226, 232, 240, 0.75), rgba(15, 42, 71, 0.85));
     background-size: 220% 100%;
     background-position: 0% 50%;
     -webkit-background-clip: text;
