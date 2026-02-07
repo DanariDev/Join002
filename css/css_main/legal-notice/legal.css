@@ -2,36 +2,41 @@
 .legal-main {
   padding: 4rem;
   max-width: 900px;
-  background-color: var(--clr-200);
-  font-family: Arial, sans-serif;
+  background-color: var(--surface-100);
   min-height: 100vh;
   margin-left: calc(22.138rem + 6rem);
   margin-right: auto;
 }
 
+h1 {
+  color: #0f2a47;
+  letter-spacing: -0.02em;
+}
+
 h2 {
   font-size: var(--fs-27);
   margin: 32px 0 10px 0;
+  color: #0f2a47;
 }
 
 .legal-main p {
   line-height: 1.6;
-  color: var(--clr-700);
+  color: var(--ink-700);
 }
 
 .legal-main a {
-  color: var(--clr-500);
+  color: var(--brand-500);
   text-decoration: none;
 }
 
 .legal-main a:hover {
-  text-decoration: underline;
+  color: var(--brand-700);
 }
 
 .legal-main .date {
   margin-top: 60px;
   font-weight: bold;
-  color: var(--clr-700);
+  color: var(--ink-500);
 }
 
 .legal-link{
@@ -39,5 +44,5 @@ h2 {
 }
 
 .blue-print {
-  color: var(--clr-500);
+  color: var(--brand-500);
 }

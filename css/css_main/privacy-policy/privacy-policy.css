@@ -14,11 +14,37 @@
   background-color: var(--clr-900);
 }
 
+h1 {
+  color: #0f2a47;
+  letter-spacing: -0.02em;
+}
+
 h2 {
   font-size: var(--fs-27);
   margin: 32px 0 10px 0;
+  color: #0f2a47;
 }
 
 li {
   font-size: 14px;
+}
+
+p,
+li {
+  color: var(--ink-700);
+  line-height: 1.65;
+}
+
+.privacy-main a {
+  color: var(--brand-500);
+  text-decoration: none;
+}
+
+.privacy-main a:hover {
+  color: var(--brand-700);
+}
+
+.privacy-main .date {
+  color: var(--ink-500);
+  font-weight: 600;
 }

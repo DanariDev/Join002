@@ -371,9 +371,9 @@ body.hidden > *:not(#summary-loader) {
 }
 
 #summary-greeting-wrapper span {
-  color: #6ea0d8;
-  font-size: var(--fs-64);
-  font-weight: 700;
+    color: #0f2a47;
+    font-size: var(--fs-64);
+    font-weight: 700;
 }
 
 #summary-greeting-time {
