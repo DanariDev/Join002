@@ -431,7 +431,8 @@ select:focus {
 .overlay-left span::after,
 .lightbox-left span::after,
 .edit-contact-h2::after {
-  background: linear-gradient(90deg, var(--brand-500), var(--accent-500));
+  background: linear-gradient(90deg, #6ea0d8, #e2e8f0);
+  box-shadow: 0 0 8px rgba(110, 160, 216, 0.5);
 }
 
 .overlay-right,
