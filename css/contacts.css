@@ -91,8 +91,8 @@
 
 #create-contact-btn:hover,
 #saveBtn:hover {
-    background-color: var(--clr-500);
-    border: 1px solid var(--clr-500);
+    border: 1px solid #cbd5e1;
+    box-shadow: 0 0 10px rgba(203, 213, 225, 0.8);
 }
 
 #create-btn img,
@@ -110,8 +110,10 @@
 
 #cancel-btn:hover,
 #deleteBtn:hover {
-    border: 1px solid var(--clr-500);
-    color: var(--clr-500);
+    background-color: #0f2a47;
+    border: 1px solid #cbd5e1;
+    color: #f8fafc;
+    box-shadow: 0 0 10px rgba(203, 213, 225, 0.7);
 }
 
 #responsive-small-edit,
