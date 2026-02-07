@@ -5,11 +5,11 @@
   --brand-700: #0f2a47;
   --brand-500: #1f4f8a;
   --brand-300: #7aa3d6;
-  --accent-500: #b07a2a;
+  --accent-500: #6ea0d8;
   --label-tech-from: #1f4f8a;
   --label-tech-to: #0f2a47;
-  --label-user-from: #b07a2a;
-  --label-user-to: #7a4f20;
+  --label-user-from: #6ea0d8;
+  --label-user-to: #415f86;
   --progress-track: #e1e6ee;
   --progress-track-edge: #cfd6e1;
   --initials-extra: #5d6775;
@@ -23,8 +23,8 @@
   --border-200: rgba(15, 23, 42, 0.08);
   --border-300: rgba(15, 23, 42, 0.16);
   --surface-300: #eef2f7;
-  --accent-600: #8a6220;
-  --accent-700: #6f4c16;
+  --accent-600: #5f87bf;
+  --accent-700: #3e5c83;
   --shadow-1: 0 4px 12px rgba(15, 23, 42, 0.08);
   --shadow-2: 0 12px 28px rgba(15, 23, 42, 0.16);
   --radius-12: 10px;
