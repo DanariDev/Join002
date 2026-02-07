@@ -75,7 +75,7 @@ function setPriority(clone, task) {
 }
 
 function setPrioIcon(img, type) {
-  img.src = `assets/img/${type}-btn-icon.png`;
+  img.src = `assets/img/${type}-btn-icon.svg`;
   img.alt = capitalize(type);
 }
 
@@ -136,7 +136,7 @@ function fillOverlayPrio(card) {
   setPopupField('popup-priority', `<b>Priority:</b>
     <div class="prio_spacing">
     <span>${prio}</span>
-    <img src="assets/img/${prio.toLowerCase()}-btn-icon.png" alt="">
+    <img src="assets/img/${prio.toLowerCase()}-btn-icon.svg" alt="">
     </div>`);
 }
 
