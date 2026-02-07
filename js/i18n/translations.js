@@ -79,7 +79,26 @@ export const translations = {
       ,
       registrationSuccess: "Registration successful!",
       registrationFailed: "Registration failed:",
-      emailExists: "This email address is already in use."
+      emailExists: "This email address is already in use.",
+      errors: {
+        nameRequired: "Please enter your name.",
+        emailRequired: "Please enter your email.",
+        emailInvalid: "Invalid email address!",
+        phoneRequired: "Please enter your phone number.",
+        phoneInvalid: "Invalid phone number!",
+        passwordRequired: "Please enter your password.",
+        passwordShort: "The password must be at least 6 characters long.",
+        passwordRepeatRequired: "Please re-enter the password.",
+        passwordMismatch: "The passwords do not match.",
+        privacyRequired: "Please accept the privacy policy.",
+        loginInvalid: "Invalid login credentials, please check your password and email.",
+        unexpectedError: "An unexpected error occurred. Please contact customer support.",
+        titleRequired: "Please enter a title!",
+        dueDateRequired: "Please select a due date!",
+        dueDatePast: "Due date cannot be in the past!",
+        categoryRequired: "Please select a category!",
+        dateFromToday: "Please choose a date from today ({date})!"
+      }
     },
     login: {
       email: "Email",
@@ -215,7 +234,26 @@ export const translations = {
       ,
       registrationSuccess: "Registrierung erfolgreich!",
       registrationFailed: "Registrierung fehlgeschlagen:",
-      emailExists: "Diese E-Mail-Adresse wird bereits verwendet."
+      emailExists: "Diese E-Mail-Adresse wird bereits verwendet.",
+      errors: {
+        nameRequired: "Bitte Namen eingeben.",
+        emailRequired: "Bitte E-Mail eingeben.",
+        emailInvalid: "Ungültige E-Mail-Adresse!",
+        phoneRequired: "Bitte Telefonnummer eingeben.",
+        phoneInvalid: "Ungültige Telefonnummer!",
+        passwordRequired: "Bitte Passwort eingeben.",
+        passwordShort: "Das Passwort muss mindestens 6 Zeichen lang sein.",
+        passwordRepeatRequired: "Bitte Passwort erneut eingeben.",
+        passwordMismatch: "Passwörter stimmen nicht überein.",
+        privacyRequired: "Bitte Datenschutzerklärung akzeptieren.",
+        loginInvalid: "Ungültige Login-Daten, bitte E-Mail und Passwort prüfen.",
+        unexpectedError: "Ein unerwarteter Fehler ist aufgetreten. Bitte den Support kontaktieren.",
+        titleRequired: "Bitte Titel eingeben!",
+        dueDateRequired: "Bitte ein Fälligkeitsdatum auswählen!",
+        dueDatePast: "Fälligkeitsdatum darf nicht in der Vergangenheit liegen!",
+        categoryRequired: "Bitte Kategorie auswählen!",
+        dateFromToday: "Bitte ein Datum ab heute ({date}) wählen!"
+      }
     },
     login: {
       email: "E-Mail",

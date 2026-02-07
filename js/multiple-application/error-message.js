@@ -4,6 +4,8 @@
  * Can also handle login error codes for feedback.
  * @returns {boolean} - True if there are validation errors.
  */
+import { t } from "../i18n/i18n.js";
+
 export function checkInput(
   nameCheckValue = null, emailCheckValue = null, phoneCheckValue = null,
   passwordCheckValue = null, passwordRepeatCheckValue = null,
@@ -51,7 +53,7 @@ function nameCheck(id, hasError) {
   const input = document.getElementById(id);
   const error = document.querySelectorAll(".name-error");
   resetErrors(input, error);
-  if (!input.value.trim()) { showError(input, error, "Please enter your name."); hasError = true; }
+  if (!input.value.trim()) { showError(input, error, t("common.errors.nameRequired")); hasError = true; }
   return hasError;
 }
 
@@ -66,8 +68,8 @@ function emailCheck(id, hasError) {
   const error = document.querySelectorAll(".email-error");
   resetErrors(input, error);
   const value = input.value.trim();
-  if (!value) { showError(input, error, "Please enter your email."); hasError = true; }
-  else if (!/^\S+@\S+\.\S+$/.test(value)) { showError(input, error, "Invalid email address!"); hasError = true; }
+  if (!value) { showError(input, error, t("common.errors.emailRequired")); hasError = true; }
+  else if (!/^\S+@\S+\.\S+$/.test(value)) { showError(input, error, t("common.errors.emailInvalid")); hasError = true; }
   return hasError;
 }
 
@@ -82,8 +84,8 @@ function phoneCheck(id, hasError) {
   const error = document.querySelectorAll(".phone-error");
   resetErrors(input, error);
   const value = input.value.trim();
-  if (!value) { showError(input, error, "Please enter your phone number."); hasError = true; }
-  else if (!/^[+]?\d+$/.test(value)) { showError(input, error, "Invalid phone number!"); hasError = true; }
+  if (!value) { showError(input, error, t("common.errors.phoneRequired")); hasError = true; }
+  else if (!/^[+]?\d+$/.test(value)) { showError(input, error, t("common.errors.phoneInvalid")); hasError = true; }
   return hasError;
 }
 
@@ -98,8 +100,8 @@ function passwordCheck(id, hasError) {
   const error = document.querySelectorAll(".password-error");
   resetErrors(input, error);
   const value = input.value.trim();
-  if (!value) { showError(input, error, "Please enter your password."); hasError = true; }
-  else if (value.length < 6) { showError(input, error, "The password must be at least 6 characters long."); hasError = true; }
+  if (!value) { showError(input, error, t("common.errors.passwordRequired")); hasError = true; }
+  else if (value.length < 6) { showError(input, error, t("common.errors.passwordShort")); hasError = true; }
   return hasError;
 }
 
@@ -115,8 +117,8 @@ function passwordRepeatCheck(id, hasError) {
   resetErrors(input, error);
   const value = input.value.trim();
   const pw = document.getElementById('password-input').value.trim();
-  if (!value) { showError(input, error, "Please re-enter the password."); hasError = true; }
-  else if (value !== pw) { showError(input, error, "The passwords do not match."); hasError = true; }
+  if (!value) { showError(input, error, t("common.errors.passwordRepeatRequired")); hasError = true; }
+  else if (value !== pw) { showError(input, error, t("common.errors.passwordMismatch")); hasError = true; }
   return hasError;
 }
 
@@ -130,7 +132,7 @@ function privacyCheckbox(id, hasError) {
   const checkbox = document.getElementById(id);
   const error = document.querySelectorAll(".checkbox-error");
   resetErrors(checkbox, error);
-  if (!checkbox.checked) { showError(checkbox, error, "Please accept the privacy policy."); hasError = true; }
+  if (!checkbox.checked) { showError(checkbox, error, t("common.errors.privacyRequired")); hasError = true; }
   return hasError;
 }
 
@@ -150,9 +152,9 @@ function incorrectDataToAuthentication(emailId, pwId, code) {
   resetErrors(pwInput, pwError);
   if (["auth/invalid-email", "auth/user-not-found", "auth/wrong-password", "auth/invalid-credential"].includes(code)) {
     showError(emailInput, emailError, "");
-    showError(pwInput, pwError, "Invalid login credentials, please check your password and email.");
+    showError(pwInput, pwError, t("common.errors.loginInvalid"));
   } else {
     showError(emailInput, emailError, "");
-    showError(pwInput, pwError, "An unexpected error occurred. Please contact customer support.");
+    showError(pwInput, pwError, t("common.errors.unexpectedError"));
   }
 }

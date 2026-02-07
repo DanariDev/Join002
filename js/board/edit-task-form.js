@@ -7,6 +7,7 @@ import {
   initEditPriorityButtons,
 } from "./edit-task-priority.js";
 import { api } from "../api/client.js";
+import { t } from "../i18n/i18n.js";
 
 /**
  * Initializes the save button handler for the edit task form.
@@ -138,7 +139,7 @@ function openEditOverlay() {
 function validateEditTitle() {
   const v = getValue("editing-title");
   if (!v)
-    return showEditFieldError("error-edit-title", "Please enter a title!");
+    return showEditFieldError("error-edit-title", t("common.errors.titleRequired"));
   return true;
 }
 
@@ -151,7 +152,7 @@ function validateEditDueDate() {
   if (!dueDate)
     return showEditFieldError(
       "error-edit-due-date",
-      "Please select a due date!"
+      t("common.errors.dueDateRequired")
     );
   const selected = new Date(dueDate + "T00:00:00");
   const now = new Date();
@@ -159,7 +160,7 @@ function validateEditDueDate() {
   if (selected < now)
     return showEditFieldError(
       "error-edit-due-date",
-      "Due date cannot be in the past!"
+      t("common.errors.dueDatePast")
     );
   return true;
 }
@@ -173,7 +174,7 @@ function validateEditCategory() {
   if (!v)
     return showEditFieldError(
       "error-edit-category",
-      "Please select a category!"
+      t("common.errors.categoryRequired")
     );
   return true;
 }

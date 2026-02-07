@@ -1,6 +1,7 @@
 import { saveTaskToDB } from "./add-task-save.js";
 import { getSelectedPriority } from "./add-task-priority.js";
 import { getSelectedContactIds } from "./add-task-contacts.js";
+import { t } from "../i18n/i18n.js";
 
 /**
  * Initializes the add-task form: sets up create button event handler.
@@ -47,7 +48,7 @@ function showFieldError(field, message) {
 function validateTitle() {
   const title = document.getElementById("title").value.trim();
   if (!title) {
-    showFieldError("title", "Please enter a title!");
+    showFieldError("title", t("common.errors.titleRequired"));
     return false;
   }
   return true;
@@ -60,11 +61,11 @@ function validateTitle() {
 function validateDueDate() {
   const dueDate = document.getElementById("due-date").value;
   if (!dueDate) {
-    showFieldError("due-date", "Please select a due date!");
+    showFieldError("due-date", t("common.errors.dueDateRequired"));
     return false;
   }
   if (dueDate < getTodayDateString()) {
-    showFieldError("due-date", "Due date cannot be in the past!");
+    showFieldError("due-date", t("common.errors.dueDatePast"));
     return false;
   }
   return true;
@@ -77,7 +78,7 @@ function validateDueDate() {
 function validateCategory() {
   const category = document.getElementById("category").value;
   if (!category) {
-    showFieldError("category", "Please select a category!");
+    showFieldError("category", t("common.errors.categoryRequired"));
     return false;
   }
   clearFieldError("category");

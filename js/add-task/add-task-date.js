@@ -1,6 +1,8 @@
 /**
  * Initializes the due date input: sets min/default value and adds validation handlers.
  */
+import { getLang, t } from "../i18n/i18n.js";
+
 export function initDueDateInput() {
   const dateInput = document.getElementById('due-date');
   const errorMsg = document.getElementById('error-message');
@@ -39,7 +41,9 @@ function validateDate(dateInput, errorMsg) {
   if (value) {
     const isoDate = value;
     if (!isoDate || isoDate < todayStr) {
-      showError(errorMsg, `Bitte ein Datum ab heute (${formatGermanDate(todayStr)}) wählen!`);
+      const lang = getLang();
+      const dateStr = formatDisplayDate(todayStr, lang);
+      showError(errorMsg, t("common.errors.dateFromToday").replace("{date}", dateStr));
     } else {
       hideError(errorMsg);
     }
@@ -83,6 +87,11 @@ function formatGermanDate(isoDateStr) {
   if (!isoDateStr) return '';
   const [year, month, day] = isoDateStr.split('-');
   return `${day}.${month}.${year}`;
+}
+
+function formatDisplayDate(isoDateStr, lang) {
+  if (lang === "de") return formatGermanDate(isoDateStr);
+  return isoDateStr;
 }
 
 /**
